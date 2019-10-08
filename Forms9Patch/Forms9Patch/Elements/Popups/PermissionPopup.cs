@@ -270,6 +270,7 @@ namespace Forms9Patch
             if (disposing && !_disposed)
             {
                 _disposed = true;
+                OkTapped = null;
                 _cancelButton.Tapped -= OnCancelButtonTappedAsync;
                 _okButton.Tapped -= OnOkButtonTappedAsync;
                 _okButton.Dispose();

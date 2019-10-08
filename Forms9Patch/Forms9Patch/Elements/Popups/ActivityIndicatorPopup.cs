@@ -52,7 +52,7 @@ namespace Forms9Patch
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.ActivityIndicatorPopup"/> class.
         /// </summary>
-        public ActivityIndicatorPopup()
+        public ActivityIndicatorPopup(bool retain = false, TimeSpan popAfter = default) : base(retain, popAfter)
         {
             if (Device.RuntimePlatform == Device.UWP)
                 _indicator.WidthRequest = 300;

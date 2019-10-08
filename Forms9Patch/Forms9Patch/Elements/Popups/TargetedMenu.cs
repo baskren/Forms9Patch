@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Forms9Patch
 {
@@ -23,7 +22,7 @@ namespace Forms9Patch
         static readonly Color DefaultVerticalSeparatorColor = DefaultVerticalTextColor;
 
 
-        static readonly double DefaultSeparatorThickness = 1 / Forms9Patch.Display.Scale;
+        static readonly double DefaultSeparatorThickness = 1 / Display.Scale;
 
 
 
@@ -84,13 +83,13 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for FontColor property
         /// </summary>
-        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Xamarin.Forms.Color), typeof(TargetedMenu), default(Color));
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(TargetedMenu), default(Color));
         /// <summary>
         /// Gets/Sets the FontColor property
         /// </summary>
-        public Xamarin.Forms.Color TextColor
+        public Color TextColor
         {
-            get => (Xamarin.Forms.Color)GetValue(TextColorProperty);
+            get => (Color)GetValue(TextColorProperty);
             set => SetValue(TextColorProperty, value);
         }
         #endregion TextColor property
@@ -222,14 +221,13 @@ namespace Forms9Patch
 
 
         #region VisualElements
-#pragma warning disable CC0033 // Dispose Fields Properly
         readonly Button _leftArrowButton = new Button
         {
             IsVisible = false,
             TextColor = DefaultHorizontalTextColor,
             FontSize = 24,
             TintIcon = true,
-            IconImage = new Forms9Patch.Image("Forms9Patch.Resources.menu_left.svg") { Fill = Fill.AspectFill, WidthRequest = 24, HeightRequest = 24 },
+            IconImage = new Image("Forms9Patch.Resources.menu_left.svg") { Fill = Fill.AspectFill, WidthRequest = 24, HeightRequest = 24 },
             HasTightSpacing = true,
             Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(0, 0),
             VerticalTextAlignment = TextAlignment.Center,
@@ -238,7 +236,7 @@ namespace Forms9Patch
             HorizontalOptions = LayoutOptions.Fill,
             BackgroundColor = DefaultHorizontalBackgroundColor.WithAlpha(0.05),
             Lines = 1,
-            AutoFit = AutoFit.None,
+            AutoFit = AutoFit.None
         };
         readonly BoxView _leftArrowSeparator = new BoxView { Color = DefaultHorizontalSeparatorColor, WidthRequest = DefaultSeparatorThickness, Margin = 0 };
 
@@ -248,7 +246,7 @@ namespace Forms9Patch
             TextColor = DefaultHorizontalTextColor,
             FontSize = 24,
             TintIcon = true,
-            IconImage = new Forms9Patch.Image("Forms9Patch.Resources.menu_right.svg") { Fill = Fill.AspectFill, WidthRequest = 24, HeightRequest = 24 },
+            IconImage = new Image("Forms9Patch.Resources.menu_right.svg") { Fill = Fill.AspectFill, WidthRequest = 24, HeightRequest = 24 },
             HasTightSpacing = true,
             Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(0, 0),
             VerticalTextAlignment = TextAlignment.Center,
@@ -257,7 +255,7 @@ namespace Forms9Patch
             HorizontalOptions = LayoutOptions.Fill,
             BackgroundColor = DefaultHorizontalBackgroundColor.WithAlpha(0.05),
             Lines = 1,
-            AutoFit = AutoFit.None,
+            AutoFit = AutoFit.None
         };
         // this is crazy but the stack layout doesn't give the children the correct space if it isn't included.
         readonly BoxView _rightArrowSeparator = new BoxView { Color = DefaultHorizontalSeparatorColor, WidthRequest = 0.05, Margin = 0 };
@@ -269,9 +267,8 @@ namespace Forms9Patch
             TextColor = DefaultVerticalTextColor,
             FontSize = 24,
             TintIcon = true,
-            IconImage = new Forms9Patch.Image("Forms9Patch.Resources.menu_up.svg") { Fill = Fill.AspectFill, WidthRequest = 24, HeightRequest = 24 },
+            IconImage = new Image("Forms9Patch.Resources.menu_up.svg") { Fill = Fill.AspectFill, WidthRequest = 24, HeightRequest = 24 },
             HasTightSpacing = true,
-            //Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(10, 0),
             Padding = new Thickness(0, 10),
             VerticalTextAlignment = TextAlignment.Center,
             HorizontalTextAlignment = TextAlignment.Center,
@@ -279,7 +276,7 @@ namespace Forms9Patch
             HorizontalOptions = LayoutOptions.Fill,
             BackgroundColor = DefaultVerticalBackgroundColor.WithAlpha(0.05),
             Lines = 1,
-            AutoFit = AutoFit.None,
+            AutoFit = AutoFit.None
         };
         readonly BoxView _upArrowSeparator = new BoxView { Color = DefaultVerticalSeparatorColor, HeightRequest = DefaultSeparatorThickness, Margin = 0 };
 
@@ -289,9 +286,8 @@ namespace Forms9Patch
             TextColor = DefaultVerticalTextColor,
             FontSize = 24,
             TintIcon = true,
-            IconImage = new Forms9Patch.Image("Forms9Patch.Resources.menu_down.svg") { Fill = Fill.AspectFill, WidthRequest = 24, HeightRequest = 24 },
+            IconImage = new Image("Forms9Patch.Resources.menu_down.svg") { Fill = Fill.AspectFill, WidthRequest = 24, HeightRequest = 24 },
             HasTightSpacing = true,
-            //Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(10, 0),
             Padding = new Thickness(0, 10),
             VerticalTextAlignment = TextAlignment.Center,
             HorizontalTextAlignment = TextAlignment.Center,
@@ -299,10 +295,9 @@ namespace Forms9Patch
             HorizontalOptions = LayoutOptions.Fill,
             BackgroundColor = DefaultVerticalBackgroundColor.WithAlpha(0.05),
             Lines = 1,
-            AutoFit = AutoFit.None,
+            AutoFit = AutoFit.None
         };
         readonly BoxView _downArrowSeparator = new BoxView { Color = DefaultVerticalSeparatorColor, HeightRequest = DefaultSeparatorThickness, Margin = 0 };
-#pragma warning restore CC0033 // Dispose Fields Properly
 
 
         readonly Xamarin.Forms.StackLayout _stackLayout = new Xamarin.Forms.StackLayout
@@ -461,6 +456,7 @@ namespace Forms9Patch
             if (!_disposed && disposing)
             {
                 _disposed = true;
+
                 foreach (var segment in Segments)
                     UnconfiguerButton(segment._button);
 
@@ -657,13 +653,13 @@ namespace Forms9Patch
 
 
         #region Event Handlers
-        private void OnSizeChanged(object sender, System.EventArgs e)
+        private void OnSizeChanged(object sender, EventArgs e)
             => UpdateLayout();
 
 
         bool _updatingButtonSize;
         DateTime _lastButtonSizeChangeComplete = DateTime.MinValue;
-        private void OnButtonSizeChanged(object sender, System.EventArgs e)
+        private void OnButtonSizeChanged(object sender, EventArgs e)
         {
             _lastButtonSizeChangeComplete = DateTime.MaxValue;
             if (!_updatingButtonSize)
@@ -732,8 +728,8 @@ namespace Forms9Patch
             UpdateLayout();
         }
 
-        static BindableProperty _buttonLengthProperty = BindableProperty.Create("ButtonLength", typeof(double), typeof(TargetedMenu), -1.0);
-        double ButtonLength(Forms9Patch.Button button)
+        static readonly BindableProperty _buttonLengthProperty = BindableProperty.Create("ButtonLength", typeof(double), typeof(TargetedMenu), -1.0);
+        double ButtonLength(Button button)
         {
             if (button.GetValue(_buttonLengthProperty) is double length && length > 11)
                 return length;
@@ -849,7 +845,7 @@ namespace Forms9Patch
                 var calculatedLength = 0.0;
                 for (int i = 4; i < _stackLayout.Children.Count - 4; i += 2)
                 {
-                    var button = _stackLayout.Children[i] as Forms9Patch.Button;
+                    var button = _stackLayout.Children[i] as Button;
                     var separator = _stackLayout.Children[i + 1] as BoxView;
                     button.FontSize = FontSize > 0 ? FontSize : 20;
 
@@ -913,7 +909,7 @@ namespace Forms9Patch
         /// Event fired with a menu item (segment) has been tapped
         /// </summary>
         public event SegmentedControlEventHandler SegmentTapped;
-        async void OnButtonTapped(object sender, System.EventArgs e)
+        async void OnButtonTapped(object sender, EventArgs e)
         {
             for (int i = 0; i < _segments.Count; i++)
             {
