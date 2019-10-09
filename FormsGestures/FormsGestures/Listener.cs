@@ -1891,6 +1891,7 @@ namespace FormsGestures
 
                 Listeners.Remove(this);
                 Disposing?.Invoke(this, EventArgs.Empty);
+                Disposing = null;
             }
         }
 

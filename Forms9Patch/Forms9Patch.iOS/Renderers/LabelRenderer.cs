@@ -237,7 +237,7 @@ namespace Forms9Patch.iOS
             var font = label.Font.WithSize(fontSize);
             CGSize labelSize = CGSize.Empty;
             var constraintSize = new CGSize(widthConstraint, double.PositiveInfinity);
-            if (Element is Forms9Patch.Label element)
+            if (Element is Label element)
             {
                 if (element.Text != null)
                 {
@@ -378,6 +378,20 @@ namespace Forms9Patch.iOS
             if (!_disposed && disposing)
             {
                 _disposed = true;
+
+                if (Element is Label label)
+                {
+                    try
+                    {
+                        label.RendererIndexAtPoint -= IndexAtPoint;
+                        label.RendererSizeForWidthAndFontSize -= LabelF9PSize;
+                        label.Draw -= DrawLabel;
+                    }
+#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
+                    catch (System.Exception) { }
+#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
+                }
+
                 _measureControl?.Dispose();
                 _measureControl = null;
             }

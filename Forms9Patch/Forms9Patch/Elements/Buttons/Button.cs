@@ -1110,7 +1110,16 @@ namespace Forms9Patch
                 _gestureListener.LongPressing -= OnLongPressing;
                 _gestureListener.Dispose();
                 _gestureListener = null;
+
+                SizeChanged -= OnSizeChanged;
+
                 _label.PropertyChanged -= OnLabelPropertyChanged;
+
+                if (_iconImage != null)
+                    _iconImage.SizeChanged -= OnIconImageSizeChanged;
+
+                if (_iconLabel != null)
+                    _iconLabel.SizeChanged -= OnIconLabelSizeChanged;
 
                 if (BackgroundImage is IDisposable backgroundImage)
                     backgroundImage.Dispose();

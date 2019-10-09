@@ -741,7 +741,7 @@ namespace Forms9Patch
             OutlineWidth = 1;
             Orientation = StackOrientation.Horizontal;
             _segments = new ObservableCollection<Segment>();
-            _segments.CollectionChanged += OnCollectionChanged;
+            _segments.CollectionChanged += OnSegmentsCollectionChanged;
             Children.Add(_background);
         }
 
@@ -767,17 +767,11 @@ namespace Forms9Patch
                 SegmentLongPressed = null;
 
                 Children.Remove(_background);
+                _segments.CollectionChanged -= OnSegmentsCollectionChanged;
+
                 foreach (var segment in _segments)
-                {
-                    var button = segment._button;
-                    button.PropertyChanged -= OnButtonPropertyChanged;
-                    Children.Remove(button);
-                    button.Tapped -= OnSegmentTapped;
-                    button.Selected -= OnSegmentSelected;
-                    button.LongPressing -= OnSegmentLongPressing;
-                    button.LongPressed -= OnSegmentLongPressed;
-                }
-                _segments.CollectionChanged -= OnCollectionChanged;
+                    RemoveSegment(segment);
+
                 _segments.Clear();
             }
         }
@@ -841,11 +835,11 @@ namespace Forms9Patch
 
 
         #region Collection management
-        void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        void OnSegmentsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (!P42.Utils.Environment.IsOnMainThread)
             {
-                Device.BeginInvokeOnMainThread(() => OnCollectionChanged(sender, e));
+                Device.BeginInvokeOnMainThread(() => OnSegmentsCollectionChanged(sender, e));
                 return;
             }
 
@@ -864,10 +858,19 @@ namespace Forms9Patch
                             RemoveSegment(oldItem);
                     break;
                 case NotifyCollectionChangedAction.Reset:
-                    for (int i = Children.Count - 1; i >= 0; i--)
+                    if (e.OldItems != null && e.OldItems.Count > 0)
                     {
-                        if (Children[i] is SegmentButton button)
-                            RemoveButton(button);
+                        foreach (var item in e.OldItems)
+                            if (item is Segment segment)
+                                RemoveSegment(segment);
+                    }
+                    else
+                    {
+                        for (int i = Children.Count - 1; i >= 0; i--)
+                        {
+                            if (Children[i] is SegmentButton button)
+                                RemoveButton(button);
+                        }
                     }
                     break;
             }
@@ -919,12 +922,15 @@ namespace Forms9Patch
         {
             var button = s._button;
             RemoveButton(button);
+            s.BindingContext = null;
+            s.Dispose();
         }
 
         void RemoveButton(SegmentButton button)
         {
             if (button == null)
                 return;
+
             button.PropertyChanged -= OnButtonPropertyChanged;
             Children.Remove(button);
             button.Tapped -= OnSegmentTapped;

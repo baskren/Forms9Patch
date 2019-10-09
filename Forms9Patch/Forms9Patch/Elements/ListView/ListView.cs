@@ -487,18 +487,6 @@ namespace Forms9Patch
         public event EventHandler<ItemVisibilityEventArgs> ItemDisappearing;
         #endregion
 
-        /*
-        #region Gestures
-        /// <summary>
-        /// Occurs when the panning has completed.
-        /// </summary>
-        public event EventHandler Panning;
-        /// <summary>
-        /// Occurs when the listview is panned.
-        /// </summary>
-        public event EventHandler Panned;
-        #endregion
-        */
 
         #region Scroll
         /// <summary>
@@ -566,10 +554,6 @@ namespace Forms9Patch
             _listView.Scrolling += OnScrolling;
             _listView.Scrolled += OnScrolled;
 
-            //_listener = FormsGestures.Listener.For(this);
-
-            //_listener.Panning += OnPanning;
-            //_listener.Panned += OnPanned;
 
             SelectedItems = new ObservableCollection<object>();
             SelectedItems.CollectionChanged += SelectedItemsCollectionChanged;
@@ -624,6 +608,23 @@ namespace Forms9Patch
                     ItemDisappearing = null;
                     Scrolling = null;
                     Scrolled = null;
+
+                    SwipeMenuItemTapped = null;
+                    ItemPropertyChanging = null;
+                    ItemPropertyChanged = null;
+
+                    _listView.ItemAppearing -= OnItemAppearing;
+                    _listView.ItemDisappearing -= OnItemDisappearing;
+
+                    _listView.Scrolling -= OnScrolling;
+                    _listView.Scrolled -= OnScrolled;
+
+                    SelectedItems.CollectionChanged -= SelectedItemsCollectionChanged;
+                    SelectedItems = null;
+
+                    ItemsSource = null; // this removes the group wrapper events;
+                    ItemTemplates = null;
+                    VisibilityTest = null;
 
                     _listView.Dispose();
                 }
@@ -1182,8 +1183,10 @@ namespace Forms9Patch
                 //groupWrapper.LongPressed -= OnLongPressed;
                 //groupWrapper.LongPressing -= OnLongPressing;
             }
+
             if (ItemsSource != null)
             {
+
                 groupWrapper = new GroupWrapper();
 
                 #region Gestures

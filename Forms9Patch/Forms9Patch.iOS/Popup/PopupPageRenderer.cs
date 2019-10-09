@@ -47,6 +47,9 @@ namespace Forms9Patch.iOS
 
                 _willChangeFrameNotificationObserver?.Dispose();
                 _willHideNotificationObserver?.Dispose();
+
+                _willChangeFrameNotificationObserver = null;
+                _willHideNotificationObserver = null;
             }
             base.Dispose(disposing);
         }

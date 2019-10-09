@@ -17,23 +17,12 @@ namespace Forms9Patch
     [ContentProperty(nameof(Children))]
     public abstract class Layout<T> : BaseLayout<T>, Xamarin.Forms.IViewContainer<View> where T : Xamarin.Forms.Layout<View>, new()
     {
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        protected Layout()
-        {
-            // 190723 was getting double set_Parent in Android.
-            //_xfLayout.ChildAdded += (sender, e) => OnChildAdded(e.Element);
-            //_xfLayout.ChildRemoved += (sender, e) => OnChildRemoved(e.Element);
-        }
 
         /// <summary>
         /// Called when added
         /// </summary>
         /// <param name="view"></param>
-        protected virtual void OnAdded(T view)
-        {
-        }
+        protected virtual void OnAdded(T view) { }
 
         /// <summary>
         /// Called when child is added
@@ -42,9 +31,6 @@ namespace Forms9Patch
         protected override void OnChildAdded(Element child)
         {
             base.OnChildAdded(child);
-
-            //var typedChild = child as T;
-            //if (typedChild != null)
             if (child is T typedChild)
                 OnAdded(typedChild);
         }
@@ -56,9 +42,6 @@ namespace Forms9Patch
         protected override void OnChildRemoved(Element child)
         {
             base.OnChildRemoved(child);
-
-            //var typedChild = child as T;
-            //if (typedChild != null)
             if (child is T typedChild)
                 OnRemoved(typedChild);
         }
@@ -67,9 +50,7 @@ namespace Forms9Patch
         /// Called when element is removed
         /// </summary>
         /// <param name="view"></param>
-        protected virtual void OnRemoved(T view)
-        {
-        }
+        protected virtual void OnRemoved(T view) { }
 
     }
     /// <summary>
@@ -79,19 +60,46 @@ namespace Forms9Patch
     [EditorBrowsable(EditorBrowsableState.Never)]
     public abstract class BaseLayout<T> : View<T>, ILayout, Xamarin.Forms.ILayout, Xamarin.Forms.ILayoutController where T : Xamarin.Forms.Layout<View>, new()
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        protected BaseLayout()
+        {
+            _xfLayout.LayoutChanged += OnXfLayout_LayoutChanged;
+        }
+
+        /// <summary>
+        /// Disposer
+        /// </summary>
+        bool _disposed;
+        protected override void Dispose(bool disposing)
+        {
+            if (!_disposed && disposing)
+            {
+                _disposed = true;
+                _layoutChanged = null;
+            }
+            base.Dispose(disposing);
+        }
+
+        private void OnXfLayout_LayoutChanged(object sender, EventArgs e)
+        => _layoutChanged?.Invoke(sender, e);
+
         // Frame already correctly handles IsClippedToBounds, Padding, ForceLayout, GetSizeRequest,
         /// <summary>
         /// Children of Forms9Patch.BaseLayout
         /// </summary>
         public new IList<View> Children => _xfLayout.Children;
 
+
+        event EventHandler _layoutChanged;
         /// <summary>
         /// Triggered when layout has changed
         /// </summary>
         public new event EventHandler LayoutChanged
         {
-            add => _xfLayout.LayoutChanged += value;
-            remove => _xfLayout.LayoutChanged -= value;
+            add => _layoutChanged += value;
+            remove => _layoutChanged -= value;
         }
 
         /// <summary>
@@ -144,13 +152,44 @@ namespace Forms9Patch
         // - Bounds
         // - InputTransparent
 
+        protected VisualElement()
+        {
+            _xfLayout.ChildrenReordered += OnXfLayout_ChildrenReordered;
+            _xfLayout.Focused += OnXfLayout_Focused;
+            _xfLayout.Unfocused += OnXfLayout_Unfocused;
+        }
+
+
+        bool _disposed;
+        protected override void Dispose(bool disposing)
+        {
+            if (!_disposed && disposing)
+            {
+                _disposed = true;
+                _xfLayout.ChildrenReordered -= OnXfLayout_ChildrenReordered;
+                _xfLayout.Focused -= OnXfLayout_Focused;
+                _xfLayout.Unfocused -= OnXfLayout_Unfocused;
+            }
+            base.Dispose(disposing);
+        }
+
+        private void OnXfLayout_Unfocused(object sender, FocusEventArgs e)
+            => _unfocused?.Invoke(sender, e);
+
+        private void OnXfLayout_Focused(object sender, FocusEventArgs e)
+            => _focused?.Invoke(sender, e);
+
+        private void OnXfLayout_ChildrenReordered(object sender, EventArgs e)
+            => _childrenReordered?.Invoke(sender, e);
+
+        event EventHandler _childrenReordered;
         /// <summary>
         /// Triggered when children are reordered
         /// </summary>
         public new event EventHandler ChildrenReordered
         {
-            add => _xfLayout.ChildrenReordered += value;
-            remove => _xfLayout.ChildrenReordered -= value;
+            add => _childrenReordered += value;
+            remove => _childrenReordered -= value;
         }
 
         /// <summary>
@@ -158,13 +197,14 @@ namespace Forms9Patch
         /// </summary>
         public new void Focus() => _xfLayout.Focus();
 
+        event EventHandler<FocusEventArgs> _focused;
         /// <summary>
         /// Triggered when element receives focus
         /// </summary>
         public new event EventHandler<FocusEventArgs> Focused
         {
-            add { _xfLayout.Focused += value; }
-            remove { _xfLayout.Focused -= value; }
+            add { _focused += value; }
+            remove { _focused -= value; }
         }
 
         /// <summary>
@@ -176,13 +216,15 @@ namespace Forms9Patch
             _xfLayout.Unfocus();
         }
 
+        event EventHandler<FocusEventArgs> _unfocused;
+
         /// <summary>
         /// Triggered when Unfocused
         /// </summary>
         public new event EventHandler<FocusEventArgs> Unfocused
         {
-            add { _xfLayout.Unfocused += value; }
-            remove { _xfLayout.Unfocused -= value; }
+            add { _unfocused += value; }
+            remove { _unfocused -= value; }
         }
     }
 
@@ -210,11 +252,58 @@ namespace Forms9Patch
         protected Element()
         {
             //base.Content = _xfLayout;
-            _xfLayout.ChildAdded += (s, e) => _childAdded?.Invoke(s, e);
-            _xfLayout.ChildRemoved += (s, e) => _childRemoved?.Invoke(s, e);
-            _xfLayout.DescendantAdded += (s, e) => _descendantAdded?.Invoke(s, e);
-            _xfLayout.DescendantRemoved += (s, e) => _descendantRemoved?.Invoke(s, e);
+            _xfLayout.ChildAdded += OnXfLayout_ChildAdded;
+            _xfLayout.ChildRemoved += OnXfLayout_ChildRemoved;
+            _xfLayout.DescendantAdded += OnXfLayout_DescendantAdded;
+            _xfLayout.DescendantRemoved += OnXfLayout_DescendantRemoved;
         }
+
+        bool _disposed;
+        /// <summary>
+        /// Disposed the layout and its children
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected override void Dispose(bool disposing)
+        {
+            // calling base.Dispose now so that PropertyChanged is deactivated.
+            base.Dispose(disposing);
+            if (!_disposed && disposing)
+            {
+                _disposed = true;
+
+                _xfLayout.ChildAdded -= OnXfLayout_ChildAdded;
+                _xfLayout.ChildRemoved -= OnXfLayout_ChildRemoved;
+                _xfLayout.DescendantAdded -= OnXfLayout_DescendantAdded;
+                _xfLayout.DescendantRemoved -= OnXfLayout_DescendantRemoved;
+
+                _childAdded = null;
+                _childRemoved = null;
+                _descendantAdded = null;
+                _descendantRemoved = null;
+
+                if (_xfLayout is IDisposable disposableLayout)
+                    disposableLayout.Dispose();
+                else if (_xfLayout is Xamarin.Forms.Layout<View> layout)
+                {
+                    var children = layout.Children.ToArray();
+                    layout.Children.Clear();
+                    foreach (var child in children)
+                        if (child is IDisposable disposable)
+                            disposable.Dispose();
+                }
+            }
+        }
+        private void OnXfLayout_DescendantRemoved(object s, ElementEventArgs e)
+            => _descendantRemoved?.Invoke(s, e);
+
+        private void OnXfLayout_DescendantAdded(object s, ElementEventArgs e)
+            => _descendantAdded?.Invoke(s, e);
+
+        private void OnXfLayout_ChildRemoved(object s, ElementEventArgs e)
+            => _childRemoved?.Invoke(s, e);
+
+        private void OnXfLayout_ChildAdded(object s, ElementEventArgs e)
+            => _childAdded?.Invoke(s, e);
 
         event EventHandler<ElementEventArgs> _childAdded;
         /// <summary>
@@ -262,35 +351,7 @@ namespace Forms9Patch
         /// <returns></returns>
         public new IEnumerable<Element> Descendants() => _xfLayout.Descendants();
 
-        bool _disposed;
-        /// <summary>
-        /// Disposed the layout and its children
-        /// </summary>
-        /// <param name="disposing"></param>
-        protected override void Dispose(bool disposing)
-        {
-            // calling base.Dispose now so that PropertyChanged is deactivated.
-            base.Dispose(disposing);
-            if (!_disposed && disposing)
-            {
-                _disposed = true;
-                _childAdded = null;
-                _childRemoved = null;
-                _descendantAdded = null;
-                _descendantRemoved = null;
 
-                if (_xfLayout is IDisposable disposableLayout)
-                    disposableLayout.Dispose();
-                else if (_xfLayout is Xamarin.Forms.Layout<View> layout)
-                {
-                    var children = layout.Children.ToArray();
-                    layout.Children.Clear();
-                    foreach (var child in children)
-                        if (child is IDisposable disposable)
-                            disposable.Dispose();
-                }
-            }
-        }
     }
 
     /// <summary>

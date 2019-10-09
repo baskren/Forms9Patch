@@ -266,6 +266,7 @@ namespace Forms9Patch
             if (!_disposed && disposing)
             {
                 _disposed = true;
+
                 _thisListener.Tapped -= OnTapped;
                 _thisListener.LongPressed -= OnLongPressed;
                 _thisListener.LongPressing -= OnLongPressing;
@@ -286,6 +287,22 @@ namespace Forms9Patch
                 _swipeSegmentedController.Dispose();
                 _swipePopupCancelButton.Dispose();
                 _swipePopup.Dispose();
+
+                if (BindingContext is ItemWrapper itemWrapper)
+                {
+                    itemWrapper.BaseCellView = null;
+                    itemWrapper.PropertyChanged -= OnItemPropertyChanged;
+                }
+
+                if (ContentView != null)
+                {
+                    ContentView.PropertyChanged -= OnContentViewPropertyChanged;
+                    FocusMonitor.Stop(ContentView);
+                    Children.Remove(ContentView);
+                    ContentView.BindingContext = null;
+                    if (ContentView is IDisposable contentView)
+                        contentView.Dispose();
+                }
 
             }
         }
@@ -500,7 +517,7 @@ namespace Forms9Patch
                         //_swipeFrame2.IsVisible = false;
                         //_swipeFrame3.IsVisible = false;
 
-                        System.Diagnostics.Debug.WriteLine("BaseCellView.OnPanning swipeMenu.Count=["+swipeMenu.Count+"]");
+                        System.Diagnostics.Debug.WriteLine("BaseCellView.OnPanning swipeMenu.Count=[" + swipeMenu.Count + "]");
                         if (swipeMenu.Count > 1)
                         {
                             _homeOffset -= _swipeButton2.Width * (int)side;

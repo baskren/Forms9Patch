@@ -511,7 +511,7 @@ namespace Forms9Patch
         #endregion
 
 
-        #region Constructor
+        #region Construction / Disposal
         static PopupBase()
         {
             Settings.ConfirmInitialization();
@@ -549,6 +549,50 @@ namespace Forms9Patch
 
         }
 
+
+        bool _disposed; // To detect redundant calls
+
+        /// <summary>
+        /// Clean up unmanaged objects
+        /// </summary>
+        /// <param name="disposing">Disposing.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed && disposing)
+            {
+                P42.Utils.BreadCrumbs.Add(GetType(), null);
+                _disposed = true;
+
+                Cancelled = null;
+                Popped = null;
+                AppearingAnimationBegin = null;
+                AppearingAnimationEnd = null;
+                DisappearingAnimationBegin = null;
+                DisappearingAnimationEnd = null;
+
+                if (_decorativeContainerView is VisualElement oldLayout)
+                    oldLayout.PropertyChanged -= OnContentViewPropertyChanged;
+
+                KeyboardService.HeightChanged -= OnKeyboardHeightChanged;
+                Parameter = null;
+                //_lock.Dispose();  // a potential leak?  Saw a crash on Android where _lock was disposed and then called.
+                Retain = false;
+
+                if (_decorativeContainerView is IDisposable disposable)
+                    disposable.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Releases all resource used by the <see cref="T:Forms9Patch.PopupBase"/> object.
+        /// </summary>
+        public void Dispose()
+        {
+            if (IsVisible || _isPushing || _isPushed || _isPopping)
+                return;
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
         #endregion
 
 
@@ -608,52 +652,6 @@ namespace Forms9Patch
         [Obsolete("Use CancelAsync instead")]
         public void Cancel(object trigger = null) => Task.Run(async () => await CancelAsync(trigger ?? P42.Utils.ReflectionExtensions.CallerMemberName()));
 
-        #endregion
-
-
-        #region IDisposable Support
-        bool _disposed; // To detect redundant calls
-
-        /// <summary>
-        /// Clean up unmanaged objects
-        /// </summary>
-        /// <param name="disposing">Disposing.</param>
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!_disposed && disposing)
-            {
-                P42.Utils.BreadCrumbs.Add(GetType(), null);
-                _disposed = true;
-
-                Cancelled = null;
-                Popped = null;
-                AppearingAnimationBegin = null;
-                AppearingAnimationEnd = null;
-                DisappearingAnimationBegin = null;
-                DisappearingAnimationEnd = null;
-
-                if (_decorativeContainerView is VisualElement oldLayout)
-                    oldLayout.PropertyChanged -= OnContentViewPropertyChanged;
-                KeyboardService.HeightChanged -= OnKeyboardHeightChanged;
-                Parameter = null;
-                //_lock.Dispose();  // a potential leak?  Saw a crash on Android where _lock was disposed and then called.
-                Retain = false;
-
-                if (_decorativeContainerView is IDisposable disposable)
-                    disposable.Dispose();
-            }
-        }
-
-        /// <summary>
-        /// Releases all resource used by the <see cref="T:Forms9Patch.PopupBase"/> object.
-        /// </summary>
-        public void Dispose()
-        {
-            if (IsVisible || _isPushing || _isPushed || _isPopping)
-                return;
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
         #endregion
 
 
@@ -998,7 +996,7 @@ namespace Forms9Patch
                 CloseWhenBackgroundIsClicked = CancelOnPageOverlayTouch;
 
 
-            if (_decorativeContainerView != null)
+            if (_decorativeContainerView != null && !_disposed)
             {
                 #region ILayout
                 if (propertyName == PaddingProperty.PropertyName)

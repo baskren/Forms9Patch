@@ -655,11 +655,11 @@ namespace Forms9Patch
         {
             if (!_disposed && disposing)
             {
+                _disposed = true;
                 _f9pImageData?.Dispose();
                 _f9pImageData = null;
                 _sourceRangeLists = null;
                 Source = null;
-                _disposed = true;
             }
         }
 

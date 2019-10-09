@@ -19,7 +19,7 @@ namespace Forms9Patch
         /// <returns></returns>
         public static TargetedToast Create(VisualElement target, string title, string text, TimeSpan popAfter = default)
             => new TargetedToast(target) { Title = title, Text = text, PopAfter = popAfter, IsVisible = true };
-        
+
         #endregion
 
 
@@ -166,6 +166,7 @@ namespace Forms9Patch
             if (!_disposed && disposing)
             {
                 _disposed = true;
+                _okButton.Tapped -= OnOkButtonTappedAsync;
                 _okButton.Dispose();
             }
             base.Dispose(disposing);

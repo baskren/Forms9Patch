@@ -210,10 +210,13 @@ namespace FormsGestures.Droid
             if (!_disposed && disposing)
             {
                 _disposed = true;
+
                 _nativeDetector?.Dispose();
                 _nativeDetector = null;
                 _nativeListener?.Dispose();
                 _nativeListener = null;
+
+                //_nativeGestureHandler?.Dispose();
                 _nativeGestureHandler = null;
 
             }

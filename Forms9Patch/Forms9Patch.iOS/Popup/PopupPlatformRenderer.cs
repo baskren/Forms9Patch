@@ -2,7 +2,6 @@
 using Xamarin.Forms.Platform.iOS;
 using Foundation;
 using System;
-using Forms9Patch.Elements.Popups.Core;
 
 namespace Forms9Patch.iOS
 {
@@ -10,12 +9,10 @@ namespace Forms9Patch.iOS
     [Register("Forms9PatchPopupPlatformRenderer")]
     internal class PopupPlatformRenderer : UIViewController
     {
-        private IVisualElementRenderer _renderer;
-
-        public IVisualElementRenderer Renderer => _renderer;
+        public IVisualElementRenderer Renderer { get; private set; }
 
         public PopupPlatformRenderer(IVisualElementRenderer renderer)
-            => _renderer = renderer;
+            => Renderer = renderer;
 
         public PopupPlatformRenderer(IntPtr handle) : base(handle) { }
 
@@ -25,11 +22,9 @@ namespace Forms9Patch.iOS
             if (disposing && !_disposed)
             {
                 _disposed = true;
-                var renderer = _renderer;
-                _renderer = null;
-                if (renderer is IDisposable disposable)
+                if (Renderer is IDisposable disposable)
                     disposable.Dispose();
-
+                Renderer = null;
             }
             base.Dispose(disposing);
         }
@@ -49,7 +44,7 @@ namespace Forms9Patch.iOS
         }
 
         public override UIViewController ChildViewControllerForStatusBarHidden()
-            => _renderer.ViewController;
+            => Renderer.ViewController;
 
         public override bool ShouldAutorotate()
         {

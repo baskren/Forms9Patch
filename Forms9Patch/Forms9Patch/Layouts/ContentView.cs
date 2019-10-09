@@ -333,11 +333,14 @@ namespace Forms9Patch
         {
             if (!_disposed && disposing)
             {
+                _disposed = true;
+
                 if (BackgroundImage is IDisposable backgroundImage)
                     backgroundImage.Dispose();
+                BackgroundImage = null;
                 if (Content is IDisposable content)
                     content.Dispose();
-                _disposed = true;
+                Content = null;
             }
         }
 
@@ -543,18 +546,19 @@ namespace Forms9Patch
         {
             if (!(this is SegmentButton))
                 LayoutChildIntoBoundingRegion(CurrentBackgroundImage, new Rectangle(0, 0, Width, Height));
-
-            var rect = new Rectangle(x, y, width, height);
-            if (HasShadow)
+            if (Content != null)
             {
-                var shadowPadding = ShapeBase.ShadowPadding(this);
-                rect.X += shadowPadding.Left;
-                rect.Y += shadowPadding.Top;
-                rect.Width -= shadowPadding.HorizontalThickness;
-                rect.Height -= shadowPadding.VerticalThickness;
+                var rect = new Rectangle(x, y, width, height);
+                if (HasShadow)
+                {
+                    var shadowPadding = ShapeBase.ShadowPadding(this);
+                    rect.X += shadowPadding.Left;
+                    rect.Y += shadowPadding.Top;
+                    rect.Width -= shadowPadding.HorizontalThickness;
+                    rect.Height -= shadowPadding.VerticalThickness;
+                }
+                LayoutChildIntoBoundingRegion(Content, rect);
             }
-
-            LayoutChildIntoBoundingRegion(Content, rect);
         }
 
 

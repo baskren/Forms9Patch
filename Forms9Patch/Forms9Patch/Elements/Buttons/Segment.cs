@@ -10,7 +10,7 @@ namespace Forms9Patch
     /// Model for Segment.
     /// </summary>
     [ContentProperty(nameof(HtmlText))]
-    public class Segment : Element, ISegment
+    public class Segment : Element, ISegment, IDisposable
     {
         #region Obsolete Properties
         /// <summary>
@@ -222,8 +222,8 @@ namespace Forms9Patch
         /// </remarks>
         public ICommand Command
         {
-            get => (ICommand)GetValue (CommandProperty); 
-            set => SetValue (CommandProperty, value); 
+            get => (ICommand)GetValue(CommandProperty);
+            set => SetValue(CommandProperty, value);
         }
         #endregion ICommand property
 
@@ -245,8 +245,8 @@ namespace Forms9Patch
         /// <remarks/>
         public object CommandParameter
         {
-            get => GetValue(CommandParameterProperty); 
-            set => SetValue(CommandParameterProperty, value); 
+            get => GetValue(CommandParameterProperty);
+            set => SetValue(CommandParameterProperty, value);
         }
         #endregion ICommandParameter property
 
@@ -324,42 +324,9 @@ namespace Forms9Patch
         public Segment()
         {
             _button = new SegmentButton();
-            _button.PropertyChanged += (object sender, System.ComponentModel.PropertyChangedEventArgs e) =>
-            {
-                switch (e.PropertyName)
-                {
-                    case nameof(IconImage):
-                        IconImage = _button.IconImage;
-                        break;
-                    case nameof(IconText):
-                        IconText = _button.IconText;
-                        break;
-                    case nameof(Text):
-                        Text = _button.Text;
-                        break;
-                    case nameof(HtmlText):
-                        HtmlText = _button.HtmlText;
-                        break;
-                    case nameof(TextColor):
-                        TextColor = _button.TextColor;
-                        break;
-                    case nameof(FontAttributes):
-                        FontAttributes = _button.FontAttributes;
-                        break;
-                    case nameof(IsEnabled):
-                        IsEnabled = _button.IsEnabled;
-                        break;
-                    case nameof(IsSelected):
-                        IsSelected = _button.IsSelected;
-                        break;
-                    case nameof(Orientation):
-                        Orientation = _button.Orientation;
-                        break;
-                    default:
-                        break;
-                }
-            };
+            _button.PropertyChanged += OnButtonPropertyChanged;
         }
+
 
         /// <summary>
         /// Instantiates an new Segment and sets its Text and imageSource properties
@@ -419,10 +386,73 @@ namespace Forms9Patch
                 IconImage = new Forms9Patch.Image(icon, assembly);
             }
         }
+
+        private bool _disposed;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed && disposing)
+            {
+                _disposed = true;
+
+                if (Command != null)
+                    Command.CanExecuteChanged -= CommandCanExecuteChanged;
+
+                _button.PropertyChanged -= OnButtonPropertyChanged;
+                _button.IconImage = null;
+                _button.BackgroundImage = null;
+                _button.Dispose();
+
+                IconImage?.Dispose();
+                IconImage = null;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
         #endregion Constuctor
 
 
         #region PropertyChanged responder
+        void OnButtonPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(IconImage):
+                    IconImage = _button.IconImage;
+                    break;
+                case nameof(IconText):
+                    IconText = _button.IconText;
+                    break;
+                case nameof(Text):
+                    Text = _button.Text;
+                    break;
+                case nameof(HtmlText):
+                    HtmlText = _button.HtmlText;
+                    break;
+                case nameof(TextColor):
+                    TextColor = _button.TextColor;
+                    break;
+                case nameof(FontAttributes):
+                    FontAttributes = _button.FontAttributes;
+                    break;
+                case nameof(IsEnabled):
+                    IsEnabled = _button.IsEnabled;
+                    break;
+                case nameof(IsSelected):
+                    IsSelected = _button.IsSelected;
+                    break;
+                case nameof(Orientation):
+                    Orientation = _button.Orientation;
+                    break;
+                default:
+                    break;
+            }
+        }
+
         /// <summary>
         /// Ons the property changed.
         /// </summary>
@@ -473,7 +503,7 @@ namespace Forms9Patch
                     break;
                 case nameof(Command):
                     System.Diagnostics.Debug.WriteLine("COMMAND PROPERTY CHANGED");
-                break;
+                    break;
                 default:
                     break;
             }
