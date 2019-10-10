@@ -35,35 +35,38 @@ namespace Forms9Patch.UWP
         /// <param name="html">HTML.</param>
         /// <param name="fileName">File name.</param>
         /// <param name="onComplete">On complete.</param>
-        public async void ToPng(string html, string fileName, Action<string> onComplete)
+        public void ToPng(string html, string fileName, Action<string> onComplete)
         {
-            var currentPage = Forms9Patch.PageExtensions.FindCurrentPage(Xamarin.Forms.Application.Current.MainPage);
-            var rootPageRenderer = (Xamarin.Forms.Platform.UWP.PageRenderer)Platform.GetRenderer(currentPage);
-
-            var size = new Size(8.5, 11);
-            var webView = new Windows.UI.Xaml.Controls.WebView
+            Device.BeginInvokeOnMainThread(async () =>
             {
-                DefaultBackgroundColor = Windows.UI.Colors.White,
-                Width = (size.Width - 0.5) * 72 / 2,
-                Height = 10, // (size.Height - 0.5) * 72,
+                var currentPage = Forms9Patch.PageExtensions.FindCurrentPage(Xamarin.Forms.Application.Current.MainPage);
+                var rootPageRenderer = (Xamarin.Forms.Platform.UWP.PageRenderer)Platform.GetRenderer(currentPage);
 
-            };
-            /*
-            var transform = new TranslateTransform();
-            transform.TransformPoint(new Windows.Foundation.Point(0, 0));
-            webView.RenderTransform = transform;
-            */
-            rootPageRenderer.Children.Add(webView);
-            webView.Visibility = Visibility.Visible;
+                var size = new Size(8.5, 11);
+                var webView = new Windows.UI.Xaml.Controls.WebView
+                {
+                    DefaultBackgroundColor = Windows.UI.Colors.White,
+                    Width = (size.Width - 0.5) * 72 / 2,
+                    Height = 10, // (size.Height - 0.5) * 72,
 
-            webView.SetValue(PngFileNameProperty, fileName);
-            webView.SetValue(OnCompleteProperty, onComplete);
-            webView.SetValue(HtmlStringProperty, html);
+                };
+                /*
+                var transform = new TranslateTransform();
+                transform.TransformPoint(new Windows.Foundation.Point(0, 0));
+                webView.RenderTransform = transform;
+                */
+                rootPageRenderer.Children.Add(webView);
+                webView.Visibility = Visibility.Visible;
 
-            webView.NavigationCompleted += NavigationCompleteA;
-            webView.NavigationFailed += WebView_NavigationFailed;
+                webView.SetValue(PngFileNameProperty, fileName);
+                webView.SetValue(OnCompleteProperty, onComplete);
+                webView.SetValue(HtmlStringProperty, html);
 
-            webView.NavigateToString(html);
+                webView.NavigationCompleted += NavigationCompleteA;
+                webView.NavigationFailed += WebView_NavigationFailed;
+
+                webView.NavigateToString(html);
+            });
         }
 #pragma warning restore CS1998
 
@@ -83,7 +86,7 @@ namespace Forms9Patch.UWP
             webView.NavigationCompleted -= NavigationCompleteA;
 
             System.Diagnostics.Debug.WriteLine("A contentSize=[" + contentSize + "]");
-            System.Diagnostics.Debug.WriteLine("A webView.Size=[" + webView.Width + "," + webView.Height + "]");
+            System.Diagnostics.Debug.WriteLine("A webView.Size=[" + webView.Width + "," + webView.Height + "] IsOnMainThread=[" + P42.Utils.Environment.IsOnMainThread + "]");
 
             webView.Width = contentSize.Width;
             webView.Height = contentSize.Height;
@@ -97,12 +100,10 @@ namespace Forms9Patch.UWP
 
         private async void NavigationCompleteB(Windows.UI.Xaml.Controls.WebView webView, WebViewNavigationCompletedEventArgs args)
         {
-            System.Diagnostics.Debug.WriteLine("B webView.Size=[" + webView.Width + "," + webView.Height + "]");
-
-
             using (InMemoryRandomAccessStream ms = new InMemoryRandomAccessStream())
             {
-                await webView.CapturePreviewToStreamAsync(ms);
+            System.Diagnostics.Debug.WriteLine("B webView.Size=[" + webView.Width + "," + webView.Height + "] IsOnMainThread=["+P42.Utils.Environment.IsOnMainThread+"]");
+            await webView.CapturePreviewToStreamAsync(ms);
 
                 var decoder = await BitmapDecoder.CreateAsync(ms);
 
@@ -128,13 +129,14 @@ namespace Forms9Patch.UWP
                 {
                     var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
                     encoder.SetPixelData(BitmapPixelFormat.Bgra8,
-                                     BitmapAlphaMode.Ignore,
-                                     (uint)decoder.PixelWidth, (uint)decoder.PixelHeight,
-                                     0, 0, bytes);
+                                        BitmapAlphaMode.Ignore,
+                                        (uint)decoder.PixelWidth, (uint)decoder.PixelHeight,
+                                        0, 0, bytes);
                     await encoder.FlushAsync();
                 }
 
                 var onComplete = (Action<string>)webView.GetValue(OnCompleteProperty);
+                System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": Complete[" + file.Path + "]");
                 onComplete?.Invoke(file.Path);
             }
         }
