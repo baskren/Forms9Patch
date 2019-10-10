@@ -427,14 +427,14 @@ namespace Forms9Patch
         /// Constructor for TargetedMenu
         /// </summary>
         /// <param name="target"></param>
-        public TargetedMenu(VisualElement target) : base(target) => Init();
+        public TargetedMenu(VisualElement target, bool retain = false) : base(target, retain: retain) => Init();
 
         /// <summary>
         /// Constructor for TargetedMenu at a Point
         /// </summary>
         /// <param name="target"></param>
         /// <param name="point"></param>
-        public TargetedMenu(VisualElement target, Point point) : base(target, point) => Init();
+        public TargetedMenu(VisualElement target, Point point, bool retain = false) : base(target, point, retain: retain) => Init();
 
         #endregion
 
