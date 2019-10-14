@@ -121,6 +121,7 @@
     <Compile Include="Popup\PopupPlatformRenderer.cs" />
     <Compile Include="Popup\PopupBaseRenderer.cs" />
     <Compile Include="Popup\PopupPageRenderer.cs" />
+    <Compile Include="Effects\EntryClearButtonEffect.cs" />
   </ItemGroup>
 
   <!-- NuGet Packages-->

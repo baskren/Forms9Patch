@@ -386,13 +386,16 @@ namespace Forms9Patch
                 CurrentBackgroundImage.OutlineWidth = _fallbackBackgroundImage.OutlineWidth = OutlineWidth;
             else if (propertyName == ElementShapeProperty.PropertyName)
                 CurrentBackgroundImage.ElementShape = _fallbackBackgroundImage.ElementShape = ElementShape;
-
+            else if (propertyName == MarginProperty.PropertyName)
+                CurrentBackgroundImage.Margin = _fallbackBackgroundImage.Margin = Margin;
             //this fixes a crash in ConnectionCalc.UWP when the [Calculated] button is updated
             try
             {
                 base.OnPropertyChanged(propertyName);
             }
+#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
             catch (Exception) { }
+#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
 
             if (propertyName == BackgroundColorProperty.PropertyName ||
                 propertyName == HasShadowProperty.PropertyName ||

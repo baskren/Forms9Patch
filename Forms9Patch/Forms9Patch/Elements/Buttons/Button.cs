@@ -1658,7 +1658,24 @@ namespace Forms9Patch
             var vertOption = VerticalTextAlignment.ToLayoutOptions();
             if (Orientation == StackOrientation.Horizontal)
             {
-                if (HasTightSpacing)
+                if (string.IsNullOrEmpty(_label.Text ?? _label.HtmlText))
+                {
+                    if (_iconImage != null)
+                    {
+                        _iconImage.HorizontalOptions = horzOption;
+                        _iconImage.VerticalOptions = vertOption;
+                    }
+                    if (_iconLabel != null)
+                    {
+                        _iconLabel.HorizontalTextAlignment = HorizontalTextAlignment;
+                        _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
+                        _iconLabel.HorizontalOptions = LayoutOptions.FillAndExpand;
+                        _iconLabel.VerticalOptions = LayoutOptions.Fill;
+                        _iconLabel.FontFamily = IconFontFamily;
+                    }
+                    _stackLayout.HorizontalOptions = horzOption;
+                }
+                else if (HasTightSpacing)
                 {
                     if (_iconImage != null)
                     {
@@ -1712,7 +1729,26 @@ namespace Forms9Patch
             }
             else
             {
-                if (HasTightSpacing)
+                if (string.IsNullOrEmpty(_label.Text ?? _label.HtmlText))
+                {
+                    if (_iconImage != null)
+                    {
+                        _iconImage.HorizontalOptions = horzOption;
+                        _iconImage.VerticalOptions = vertOption;
+                    }
+                    if (_iconLabel != null)
+                    {
+                        _iconLabel.VerticalTextAlignment = TextAlignment.Center;
+                        _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
+                        _iconLabel.HorizontalOptions = horzOption;
+                        _iconLabel.VerticalOptions = vertOption;
+                        _iconLabel.FontFamily = IconFontFamily;
+                    }
+                    _stackLayout.HorizontalOptions = LayoutOptions.Fill;
+                    _stackLayout.VerticalOptions = VerticalTextAlignment.ToLayoutOptions(true);
+
+                }
+                else if (HasTightSpacing)
                 {
                     if (_iconImage != null)
                     {
