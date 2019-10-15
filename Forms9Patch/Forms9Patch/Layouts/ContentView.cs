@@ -340,6 +340,8 @@ namespace Forms9Patch
                 BackgroundImage = null;
                 if (Content is IDisposable content)
                     content.Dispose();
+
+                _fallbackBackgroundImage.Dispose();
                 Content = null;
             }
         }

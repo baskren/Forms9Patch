@@ -937,7 +937,7 @@ namespace Forms9Patch
         /// <summary>
         /// The stack layout.
         /// </summary>
-        internal protected Xamarin.Forms.StackLayout _stackLayout;
+        readonly Xamarin.Forms.StackLayout _stackLayout;
         /// <summary>
         /// The image.
         /// </summary>
@@ -1669,11 +1669,11 @@ namespace Forms9Patch
                     {
                         _iconLabel.HorizontalTextAlignment = HorizontalTextAlignment;
                         _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
-                        _iconLabel.HorizontalOptions = LayoutOptions.FillAndExpand;
+                        _iconLabel.HorizontalOptions = HorizontalTextAlignment.ToLayoutOptions(true);
                         _iconLabel.VerticalOptions = LayoutOptions.Fill;
                         _iconLabel.FontFamily = IconFontFamily;
                     }
-                    _stackLayout.HorizontalOptions = horzOption;
+                    _stackLayout.HorizontalOptions = LayoutOptions.FillAndExpand;
                 }
                 else if (HasTightSpacing)
                 {
@@ -1724,6 +1724,7 @@ namespace Forms9Patch
                         _label.MinimizeHeight = false;
                     }
                     _stackLayout.HorizontalOptions = LayoutOptions.FillAndExpand;
+                    _label?.HardForceLayout();
                 }
                 _stackLayout.VerticalOptions = LayoutOptions.FillAndExpand;
             }
@@ -1746,7 +1747,6 @@ namespace Forms9Patch
                     }
                     _stackLayout.HorizontalOptions = LayoutOptions.Fill;
                     _stackLayout.VerticalOptions = VerticalTextAlignment.ToLayoutOptions(true);
-
                 }
                 else if (HasTightSpacing)
                 {
