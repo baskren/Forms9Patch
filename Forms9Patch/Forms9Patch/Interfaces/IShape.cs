@@ -67,7 +67,6 @@ namespace Forms9Patch
         /// </summary>
         ElementShape ElementShape { get; set; }
 
-
     }
 }
 

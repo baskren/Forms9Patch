@@ -388,8 +388,8 @@ namespace Forms9Patch
                 CurrentBackgroundImage.OutlineWidth = _fallbackBackgroundImage.OutlineWidth = OutlineWidth;
             else if (propertyName == ElementShapeProperty.PropertyName)
                 CurrentBackgroundImage.ElementShape = _fallbackBackgroundImage.ElementShape = ElementShape;
-            else if (propertyName == MarginProperty.PropertyName)
-                CurrentBackgroundImage.Margin = _fallbackBackgroundImage.Margin = Margin;
+            //else if (propertyName == MarginProperty.PropertyName)
+            //    CurrentBackgroundImage.Margin = _fallbackBackgroundImage.Margin = Margin;
             //this fixes a crash in ConnectionCalc.UWP when the [Calculated] button is updated
             try
             {
