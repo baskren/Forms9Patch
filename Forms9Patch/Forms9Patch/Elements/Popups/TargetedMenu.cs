@@ -457,6 +457,8 @@ namespace Forms9Patch
             {
                 _disposed = true;
 
+                SegmentTapped = null;
+
                 foreach (var segment in Segments)
                     UnconfiguerButton(segment._button);
 

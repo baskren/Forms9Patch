@@ -78,39 +78,25 @@ namespace Forms9Patch
             FontSize = 22,
             FontAttributes = FontAttributes.Bold,
             TextColor = (Color)TextColorProperty.DefaultValue,
-            //HorizontalOptions = LayoutOptions.Fill,
         };
         readonly Label _textLabel = new Label
         {
             FontSize = 16,
             TextColor = (Color)TextColorProperty.DefaultValue,
-            //HorizontalOptions = LayoutOptions.Fill,
         };
-        /*
-        readonly Button _okButton = new Button
-        {
-            //HorizontalOptions = LayoutOptions.Fill
-        };
-        */
+
+        readonly FormsGestures.Listener listener;
+
+        Forms9Patch.TargetedMenu targetedMenu;
         #endregion
 
 
-        #region Constructor
+        #region Construction / Disposal
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.Toast"/> class.
         /// </summary>
         public Toast()
         {
-            /*
-            _okButton.BackgroundColor = ButtonBackgroundColor;
-            _okButton.TextColor = ButtonTextColor;
-            _okButton.HtmlText = ButtonText;
-            */
-            //WidthRequest = 200;
-
-            //HeightRequest = 200;
-
-            //_okButton.Tapped += (s, args) => Cancel();
             Content = new StackLayout
             {
                 Children =
@@ -122,8 +108,51 @@ namespace Forms9Patch
                     },
                 }
             };
+            listener = FormsGestures.Listener.For(Content);
+            listener.LongPressing += OnListener_LongPressing;
         }
 
+        private bool _disposed;
+        protected override void Dispose(bool disposing)
+        {
+            if (!_disposed && disposing)
+            {
+                _disposed = true;
+
+                listener.LongPressing -= OnListener_LongPressing;
+                listener.Dispose();
+
+                targetedMenu.SegmentTapped -= OnTargetedMenu_SegmentTapped;
+                targetedMenu.Dispose();
+            }
+        }
+        #endregion
+
+
+        #region Gesture Handlers
+        private void OnListener_LongPressing(object sender, FormsGestures.LongPressEventArgs e)
+        {
+            if (targetedMenu == null)
+            {
+                targetedMenu = new TargetedMenu(this, true)
+                {
+                    Segments =
+                    {
+                        new Segment("Copy")
+                    }
+                };
+                targetedMenu.IsVisible = true;
+                targetedMenu.SegmentTapped += OnTargetedMenu_SegmentTapped;
+            }
+        }
+
+        private void OnTargetedMenu_SegmentTapped(object sender, SegmentedControlEventArgs e)
+        {
+            var entry = new MimeItemCollection();
+            entry.HtmlText = "<H3>" + Title + "</H3><p>" + Text + "</p>";
+            entry.PlainText = Title + "\n" + Text;
+            Forms9Patch.Clipboard.Entry = entry;
+        }
         #endregion
 
 
@@ -146,14 +175,6 @@ namespace Forms9Patch
                 _titleLabel.HtmlText = Title;
             else if (propertyName == TextProperty.PropertyName)
                 _textLabel.HtmlText = Text;
-            /*
-            else if (propertyName == ButtonTextProperty.PropertyName)
-                _okButton.HtmlText = ButtonText;
-            else if (propertyName == ButtonBackgroundColorProperty.PropertyName)
-                _okButton.BackgroundColor = ButtonBackgroundColor;
-            else if (propertyName == ButtonTextColorColorProperty.PropertyName)
-                _okButton.TextColor = ButtonTextColor;
-                */
             else if (propertyName == TextColorProperty.PropertyName)
             {
                 _textLabel.TextColor = TextColor;
@@ -161,25 +182,6 @@ namespace Forms9Patch
             }
 
         }
-        /*
-        void UpdateOKButton()
-        {
-            if (P42.Utils.Environment.IsOnMainThread)
-            {
-                if (ButtonText != null || (ButtonBackgroundColor != default(Color) && ButtonBackgroundColor != Color.Default) || (ButtonTextColor != default(Color) && ButtonTextColor != Color.Default))
-                {
-                    if (!((StackLayout)Content).Children.Contains(_okButton))
-                        ((StackLayout)Content).Children.Add(_okButton);
-                    if (ButtonTextColor != default(Color) && ButtonTextColor != Color.Default)
-                        _okButton.TextColor = Color.Blue;
-                }
-                else if (((StackLayout)Content).Children.Contains(_okButton))
-                    ((StackLayout)Content).Children.Remove(_okButton);
-            }
-            else
-                Device.BeginInvokeOnMainThread(UpdateOKButton);
-        }
-        */
         #endregion
     }
 }
