@@ -122,8 +122,11 @@ namespace Forms9Patch
                 listener.LongPressing -= OnListener_LongPressing;
                 listener.Dispose();
 
-                targetedMenu.SegmentTapped -= OnTargetedMenu_SegmentTapped;
-                targetedMenu.Dispose();
+                if (targetedMenu != null)
+                {
+                    targetedMenu.SegmentTapped -= OnTargetedMenu_SegmentTapped;
+                    targetedMenu.Dispose();
+                }
             }
         }
         #endregion
