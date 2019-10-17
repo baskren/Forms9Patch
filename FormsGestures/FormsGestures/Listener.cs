@@ -1807,7 +1807,8 @@ namespace FormsGestures
         //int _id=0;
         private Listener(VisualElement element)
         {
-            //_id = instances++;
+            P42.Utils.Debug.AddToCensus(this);
+
             _element = element;
             var inserted = false;
             for (int i = Listeners.Count - 1; i >= 0; i--)
@@ -1892,6 +1893,8 @@ namespace FormsGestures
                 Listeners.Remove(this);
                 Disposing?.Invoke(this, EventArgs.Empty);
                 Disposing = null;
+
+                P42.Utils.Debug.RemoveFromCensus(this);
             }
         }
 

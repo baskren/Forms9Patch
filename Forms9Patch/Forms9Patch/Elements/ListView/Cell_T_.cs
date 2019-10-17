@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using P42.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -65,6 +66,8 @@ namespace Forms9Patch
         /// </summary>
         public Cell()
         {
+            P42.Utils.Debug.AddToCensus(this);
+
             InstanceId = _instances++;
             View = BaseCellView;
             BaseCellView.ContentView = new TContent();
@@ -79,6 +82,9 @@ namespace Forms9Patch
             {
                 _disposed = true;
                 BaseCellView.Dispose();
+
+                P42.Utils.Debug.RemoveFromCensus(this);
+
             }
         }
 

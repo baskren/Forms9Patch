@@ -94,8 +94,10 @@ namespace Forms9Patch
 
         void UpdateHtmlText(string value)
         {
+            F9PFormattedString?.Dispose();
             if (value != null)
             {
+
                 F9PFormattedString = new HTMLMarkupString(value);
                 Text = null;
             }

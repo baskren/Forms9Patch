@@ -525,6 +525,8 @@ namespace Forms9Patch
         /// <param name="popAfter">Pop after TimeSpan.</param>
         internal PopupBase(VisualElement target = null, bool retain = false, TimeSpan popAfter = default)
         {
+            P42.Utils.Debug.AddToCensus(this);
+
             HorizontalOptions = LayoutOptions.Center;
             VerticalOptions = LayoutOptions.Center;
 
@@ -580,6 +582,8 @@ namespace Forms9Patch
 
                 if (_decorativeContainerView is IDisposable disposable)
                     disposable.Dispose();
+
+                P42.Utils.Debug.RemoveFromCensus(this);
             }
         }
 

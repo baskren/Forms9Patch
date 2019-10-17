@@ -541,6 +541,8 @@ namespace Forms9Patch
 
         void Init()
         {
+            P42.Utils.Debug.AddToCensus(this);
+
             Padding = 0;
             Margin = 0;
 
@@ -627,6 +629,8 @@ namespace Forms9Patch
                     VisibilityTest = null;
 
                     _listView.Dispose();
+
+                    P42.Utils.Debug.RemoveFromCensus(this);
                 }
                 _disposed = true;
             }

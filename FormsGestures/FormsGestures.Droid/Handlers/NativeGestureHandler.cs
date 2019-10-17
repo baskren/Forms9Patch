@@ -95,7 +95,7 @@ namespace FormsGestures.Droid
                 return;
             _onTouchListener?.Dispose();
             _onTouchListener = null;
-            if (Renderer?.View!=null)
+            if (Renderer?.View != null)
                 Renderer.View.Touch -= View_Touch;
             _deactivated = true;
             DeactivateInstancesForChildren(force);
@@ -104,7 +104,7 @@ namespace FormsGestures.Droid
             Element.SetValue(GestureHandlerProperty, null);
             Element = null;
             Listener = null;
-            
+
         }
         #endregion
 
@@ -121,6 +121,8 @@ namespace FormsGestures.Droid
         #region Constructor / Disposer
         NativeGestureHandler(VisualElement element)
         {
+            P42.Utils.Debug.AddToCensus(this);
+
             _id = instances++;
             Element = element;
             Element.Behaviors.Add(this);
@@ -140,6 +142,8 @@ namespace FormsGestures.Droid
             {
                 _disposed = true;
                 Deactivate();
+
+                P42.Utils.Debug.RemoveFromCensus(this);
             }
         }
         #endregion
@@ -224,9 +228,9 @@ namespace FormsGestures.Droid
         private void View_Touch(object sender, Android.Views.View.TouchEventArgs e)
         {
             var action = e.Event.Action;
-            if (action!= MotionEventActions.Down
+            if (action != MotionEventActions.Down
                 && action != MotionEventActions.Up)
-            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " Event=["+e.Event+"]");
+                System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " Event=[" + e.Event + "]");
             //if (sender is Android.Views.View view)
             //    _onTouchListener?.OnTouch(view, e.Event);
         }

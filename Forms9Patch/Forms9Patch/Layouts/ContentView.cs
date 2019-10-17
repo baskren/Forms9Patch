@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 using System;
+using P42.Utils;
 
 namespace Forms9Patch
 {
@@ -321,6 +322,8 @@ namespace Forms9Patch
         /// </summary>
         public ContentView()
         {
+            P42.Utils.Debug.AddToCensus(this);
+
             _f9pId = _instances++;
         }
 
@@ -343,6 +346,9 @@ namespace Forms9Patch
 
                 _fallbackBackgroundImage.Dispose();
                 Content = null;
+
+                P42.Utils.Debug.RemoveFromCensus(this);
+
             }
         }
 

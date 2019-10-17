@@ -2,6 +2,7 @@
 using SkiaSharp;
 using System.IO;
 using Xamarin.Forms;
+using P42.Utils;
 
 namespace Forms9Patch
 {
@@ -39,6 +40,8 @@ namespace Forms9Patch
 
         F9PImageData(SKBitmap skBitamp, string key)
         {
+            P42.Utils.Debug.AddToCensus(this);
+
             RangeLists = skBitamp.PatchRanges();
             if (RangeLists?.PatchesX != null && RangeLists.PatchesX.Count > 0 && RangeLists.PatchesY != null && RangeLists.PatchesY.Count > 0)
             {
@@ -55,6 +58,8 @@ namespace Forms9Patch
 
         F9PImageData(SkiaSharp.Extended.Svg.SKSvg skSvg, string key)
         {
+            P42.Utils.Debug.AddToCensus(this);
+
             _width = skSvg.CanvasSize.Width;
             _height = skSvg.CanvasSize.Height;
             SKSvg = skSvg;
@@ -78,7 +83,7 @@ namespace Forms9Patch
                         {
                             skSvg.Load(memoryStream);
                         }
-                        catch(Exception)
+                        catch (Exception)
                         {
                             Console.WriteLine("Failed to load SkiaSvg memory stream.  Key=[" + key + "]");
                             return null;
@@ -182,6 +187,9 @@ namespace Forms9Patch
                 _disposed = true;
                 SKBitmap?.Dispose();
                 SKBitmap = null;
+
+                P42.Utils.Debug.RemoveFromCensus(this);
+
             }
         }
 

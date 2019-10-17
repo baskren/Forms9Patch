@@ -80,6 +80,7 @@ namespace FormsGestures.iOS
 
         NativeGestureHandler(VisualElement element)
         {
+            P42.Utils.Debug.AddToCensus(this);
             _element = element;
             _element.Behaviors.Add(this);
         }
@@ -102,6 +103,7 @@ namespace FormsGestures.iOS
                         listener.PropertyChanged -= OnListenerPropertyChanged;
                     _listeners = null;
                 }
+                P42.Utils.Debug.RemoveFromCensus(this);
             }
         }
 

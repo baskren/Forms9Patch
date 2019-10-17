@@ -23,6 +23,8 @@ namespace FormsGestures.Droid
 
         internal OnTouchListener(NativeGestureHandler nativeGestureHandler)
         {
+            P42.Utils.Debug.AddToCensus(this);
+
             _nativeGestureHandler = nativeGestureHandler;
             _nativeListener = new NativeGestureListener(_nativeGestureHandler.Renderer.View, _nativeGestureHandler.Element);
             _nativeDetector = new NativeGestureDetector(Droid.Settings.Context, _nativeListener);
@@ -219,6 +221,7 @@ namespace FormsGestures.Droid
                 //_nativeGestureHandler?.Dispose();
                 _nativeGestureHandler = null;
 
+                P42.Utils.Debug.RemoveFromCensus(this);
             }
             base.Dispose(disposing);
 

@@ -88,13 +88,19 @@ namespace Forms9Patch
         /// <summary>
         /// Constructor for Forms9Patch.EnhancedListView
         /// </summary>
-        public EnhancedListView() : base() { }
+        public EnhancedListView()
+        {
+            P42.Utils.Debug.AddToCensus(this);
+        }
 
         /// <summary>
         /// Constructor for Forms9Patch.EnhancedListView
         /// </summary>
         /// <param name="cachingStrategy"></param>
-        public EnhancedListView(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy) { }
+        public EnhancedListView(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy)
+        {
+            P42.Utils.Debug.AddToCensus(this);
+        }
 
         private bool _disposed;
 
@@ -104,6 +110,8 @@ namespace Forms9Patch
             {
                 if (disposing)
                 {
+                    _disposed = true;
+
                     Scrolling = null;
                     Scrolled = null;
 
@@ -116,7 +124,7 @@ namespace Forms9Patch
                             disposable.Dispose();
                         }
                 }
-                _disposed = true;
+                P42.Utils.Debug.RemoveFromCensus(this);
             }
         }
 

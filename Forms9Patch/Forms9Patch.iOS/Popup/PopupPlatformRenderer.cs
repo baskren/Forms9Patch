@@ -12,9 +12,15 @@ namespace Forms9Patch.iOS
         public IVisualElementRenderer Renderer { get; private set; }
 
         public PopupPlatformRenderer(IVisualElementRenderer renderer)
-            => Renderer = renderer;
+        {
+            P42.Utils.Debug.AddToCensus(this);
+            Renderer = renderer;
+        }
 
-        public PopupPlatformRenderer(IntPtr handle) : base(handle) { }
+        public PopupPlatformRenderer(IntPtr handle) : base(handle)
+        {
+            P42.Utils.Debug.AddToCensus(this);
+        }
 
         bool _disposed;
         protected override void Dispose(bool disposing)
@@ -25,6 +31,7 @@ namespace Forms9Patch.iOS
                 if (Renderer is IDisposable disposable)
                     disposable.Dispose();
                 Renderer = null;
+                P42.Utils.Debug.RemoveFromCensus(this);
             }
             base.Dispose(disposing);
         }

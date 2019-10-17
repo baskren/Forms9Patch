@@ -202,6 +202,8 @@ namespace FormsGestures.Droid
         readonly int _id;
         internal NativeGestureListener(Android.Views.View view, Xamarin.Forms.Element element)
         {
+            P42.Utils.Debug.AddToCensus(this);
+
             _id = _instances++;
             _view = view;
             Element = element;
@@ -216,6 +218,7 @@ namespace FormsGestures.Droid
                 _disposed = true;
                 StopTapLongPress();
                 _view = null;
+                P42.Utils.Debug.RemoveFromCensus(this);
             }
             base.Dispose(disposing);
         }

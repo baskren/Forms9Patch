@@ -4,6 +4,7 @@ using FormsGestures;
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
+using P42.Utils;
 
 namespace Forms9Patch
 {
@@ -218,6 +219,8 @@ namespace Forms9Patch
         /// </summary>
         public BaseCellView()
         {
+            P42.Utils.Debug.AddToCensus(this);
+
             InstanceId = _instances++;
             Padding = 0; // new Thickness(0,1,0,1);
             ColumnSpacing = 0;
@@ -303,6 +306,8 @@ namespace Forms9Patch
                     if (ContentView is IDisposable contentView)
                         contentView.Dispose();
                 }
+
+                P42.Utils.Debug.RemoveFromCensus(this);
 
             }
         }

@@ -16,7 +16,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Button.
     /// </summary>
-    public class Button : Frame, IButton, IDisposable
+    public class Button : Frame, IButton
     {
 
 
