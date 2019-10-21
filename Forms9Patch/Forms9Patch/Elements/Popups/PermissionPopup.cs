@@ -183,6 +183,16 @@ namespace Forms9Patch
             set => SetValue(CancelTextColorProperty, value);
         }
 
+        #region PermissionState property
+        static readonly BindablePropertyKey PermissionStatePropertyKey = BindableProperty.CreateReadOnly(nameof(PermissionState), typeof(PermissionState), typeof(PermissionPopup), default(PermissionState));
+        public static readonly BindableProperty PermissionStateProperty = PermissionStatePropertyKey.BindableProperty;
+        public PermissionState PermissionState
+        {
+            get { return (PermissionState)GetValue(PermissionStateProperty); }
+            private set { SetValue(PermissionStatePropertyKey, value); }
+        }
+        #endregion
+
         #endregion
 
 
@@ -243,7 +253,7 @@ namespace Forms9Patch
                 Children =
                 {
                     _titleLabel,
-                    new Xamarin.Forms.ScrollView
+                    new ScrollView
                     {
                         Content = _textLabel
                     },
@@ -281,20 +291,6 @@ namespace Forms9Patch
 
         #endregion
 
-
-        #region Methods
-        /// <summary>
-        /// Asynchronous implementation, returns if permission was granted
-        /// </summary>
-        /// <returns></returns>
-        public async Task<bool> AffirmedAsync()
-        {
-            _okTapped = false;
-            while (_isPushing || _isPushed)
-                await Task.Delay(50);
-            return _okTapped;
-        }
-        #endregion
 
         #region Event Handlers
         bool _okTapped;

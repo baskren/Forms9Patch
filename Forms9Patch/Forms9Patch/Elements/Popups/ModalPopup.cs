@@ -56,14 +56,18 @@ namespace Forms9Patch
 
 
         #region Fields
-        Frame _frame;
+        readonly Frame _frame;
         #endregion
 
 
         #region Constructors
-        void Init()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.ModalPopup"/> class.
+        /// </summary>
+        /// <param name="popAfter">Pop after TimeSpan.</param>
+        public ModalPopup(TimeSpan popAfter = default) : base(popAfter: popAfter)
         {
-            _frame = new Forms9Patch.Frame
+            _frame = new Frame
             {
                 Padding = Padding,
                 HasShadow = HasShadow,
@@ -74,20 +78,6 @@ namespace Forms9Patch
             };
             DecorativeContainerView = _frame;
         }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:Forms9Patch.ModalPopup"/> class.
-        /// </summary>
-        /// <param name="retain">If set to <c>true</c> retain.</param>
-        /// <param name="popAfter">Pop after TimeSpan.</param>
-        public ModalPopup(bool retain = false, TimeSpan popAfter = default) : base(retain: retain, popAfter: popAfter) => Init();
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:Forms9Patch.ModalPopup"/> class.
-        /// </summary>
-        /// <param name="popAfter">Pop after TimeSpan.</param>
-        public ModalPopup(TimeSpan popAfter) : base(popAfter: popAfter) => Init();
-
         #endregion
 
 

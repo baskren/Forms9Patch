@@ -56,7 +56,7 @@ namespace Forms9Patch
                             {
                                 if (stream == null)
                                 {
-                                    Toast.Create("Cannot find EmbeddedResource", "Cannot find EmbeddedResource with Id of [" + resourceId + "] in Assembly [" + assembly + "]");
+                                    using (Toast.Create("Cannot find EmbeddedResource", "Cannot find EmbeddedResource with Id of [" + resourceId + "] in Assembly [" + assembly + "]")) { }
                                     return null;
                                 }
                                 /*    

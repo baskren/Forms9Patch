@@ -60,13 +60,6 @@ namespace Forms9Patch
         bool CancelOnBackButtonClick { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.IPopup"/> is retained after its IsVisible property is set to false.
-        /// </summary>
-        /// <value><c>true</c> if retain; otherwise, <c>false</c>.</value>
-        bool Retain { get; set; }
-
-
-        /// <summary>
         /// Gets or sets the TimeSpan before 
         /// </summary>
         /// <value>The fade at.</value>

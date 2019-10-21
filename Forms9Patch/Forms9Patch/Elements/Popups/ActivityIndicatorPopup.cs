@@ -33,7 +33,7 @@ namespace Forms9Patch
         readonly ActivityIndicator _indicator = new ActivityIndicator
         {
             BackgroundColor = Color.Transparent,
-            Color = Color.Blue,
+            Color = Color.Blue
 
         };
         #endregion
@@ -52,7 +52,8 @@ namespace Forms9Patch
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.ActivityIndicatorPopup"/> class.
         /// </summary>
-        public ActivityIndicatorPopup(bool retain = false, TimeSpan popAfter = default) : base(retain, popAfter)
+        /// <param name="popAfter"></param>
+        public ActivityIndicatorPopup(TimeSpan popAfter = default) : base(popAfter)
         {
             if (Device.RuntimePlatform == Device.UWP)
                 _indicator.WidthRequest = 300;
@@ -66,6 +67,13 @@ namespace Forms9Patch
 
         }
 
+        /// <summary>
+        /// Presents an Activity Indicator Page Overlay
+        /// </summary>
+        /// <param name="popAfter"></param>
+        /// <returns></returns>
+        public static ActivityIndicatorPopup Present(TimeSpan popAfter = default)
+            => new ActivityIndicatorPopup(popAfter) { IsVisible = true };
         #endregion
 
 

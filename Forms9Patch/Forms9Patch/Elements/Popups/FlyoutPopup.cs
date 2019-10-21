@@ -1,7 +1,5 @@
 using System;
 using Xamarin.Forms;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using FormsGestures;
 
 namespace Forms9Patch
@@ -61,15 +59,22 @@ namespace Forms9Patch
 
 
         #region Fields
-        Frame _frame;
-        FormsGestures.Listener _listener;
+#pragma warning disable IDE0069 // Disposable fields should be disposed
+        // _frame is disposed in the PopupBase via _decorativeContainerView.Dispose();
+        readonly Frame _frame;
+#pragma warning restore IDE0069 // Disposable fields should be disposed
+        Listener _listener;
         #endregion
 
 
         #region Constructor / Destructor
-        void Init()
+        /// <summary>
+        /// Construct new FlyoutPopup
+        /// </summary>
+        /// <param name="popAfter">Flyout will dissappear after popAfter</param>
+        public FlyoutPopup(TimeSpan popAfter = default) : base(popAfter: popAfter)
         {
-            _frame = new Forms9Patch.Frame
+            _frame = new Frame
             {
                 Padding = Padding,
                 HasShadow = HasShadow,
@@ -81,22 +86,9 @@ namespace Forms9Patch
             Margin = 0;
             DecorativeContainerView = _frame;
             UpdateBaseLayoutProperties();
-            _listener = FormsGestures.Listener.For(this);
+            _listener = Listener.For(this);
             _listener.Swiped += OnSwiped;
         }
-
-        /// <summary>
-        /// Construct new FlyoutPopup
-        /// </summary>
-        /// <param name="retain">Do not Dispose for faster re-rendering of complex content</param>
-        /// <param name="popAfter">Flyout will dissappear after popAfter</param>
-        public FlyoutPopup(bool retain = false, TimeSpan popAfter = default) : base(retain: retain, popAfter: popAfter) => Init();
-
-        /// <summary>
-        /// Construct new FlyoutPopup
-        /// </summary>
-        /// <param name="popAfter">Flyout will dissappear after popAfter</param>
-        public FlyoutPopup(TimeSpan popAfter) : base(popAfter: popAfter) => Init();
 
         bool _disposed;
         /// <summary>
@@ -108,8 +100,8 @@ namespace Forms9Patch
             if (!_disposed && disposing)
             {
                 _disposed = true;
-                if (_listener!=null)
-                _listener.Swiped -= OnSwiped;
+                if (_listener != null)
+                    _listener.Swiped -= OnSwiped;
                 _listener?.Dispose();
                 _listener = null;
             }

@@ -77,17 +77,17 @@ namespace Forms9Patch
         {
             FontSize = 22,
             FontAttributes = FontAttributes.Bold,
-            TextColor = (Color)TextColorProperty.DefaultValue,
+            TextColor = (Color)TextColorProperty.DefaultValue
         };
         readonly Label _textLabel = new Label
         {
             FontSize = 16,
-            TextColor = (Color)TextColorProperty.DefaultValue,
+            TextColor = (Color)TextColorProperty.DefaultValue
         };
 
         readonly FormsGestures.Listener listener;
 
-        Forms9Patch.TargetedMenu targetedMenu;
+        //Forms9Patch.TargetedMenu targetedMenu;
         #endregion
 
 
@@ -105,7 +105,7 @@ namespace Forms9Patch
                     new ScrollView
                     {
                         Content = _textLabel
-                    },
+                    }
                 }
             };
             listener = FormsGestures.Listener.For(Content);
@@ -121,40 +121,31 @@ namespace Forms9Patch
 
                 listener.LongPressing -= OnListener_LongPressing;
                 listener.Dispose();
-
-                if (targetedMenu != null)
-                {
-                    targetedMenu.SegmentTapped -= OnTargetedMenu_SegmentTapped;
-                    targetedMenu.Dispose();
-                }
             }
+            base.Dispose(disposing);
         }
         #endregion
 
 
         #region Gesture Handlers
-        private void OnListener_LongPressing(object sender, FormsGestures.LongPressEventArgs e)
+        private async void OnListener_LongPressing(object sender, FormsGestures.LongPressEventArgs e)
         {
-            if (targetedMenu == null)
+            using (var targetedMenu = new TargetedMenu(this) { Segments = { new Segment("Copy") } })
             {
-                targetedMenu = new TargetedMenu(this, true)
-                {
-                    Segments =
-                    {
-                        new Segment("Copy")
-                    }
-                };
                 targetedMenu.IsVisible = true;
                 targetedMenu.SegmentTapped += OnTargetedMenu_SegmentTapped;
+                await targetedMenu.WaitForPoppedAsync();
             }
         }
 
         private void OnTargetedMenu_SegmentTapped(object sender, SegmentedControlEventArgs e)
         {
-            var entry = new MimeItemCollection();
-            entry.HtmlText = "<H3>" + Title + "</H3><p>" + Text + "</p>";
-            entry.PlainText = Title + "\n" + Text;
-            Forms9Patch.Clipboard.Entry = entry;
+            var entry = new MimeItemCollection
+            {
+                HtmlText = "<H3>" + Title + "</H3><p>" + Text + "</p>",
+                PlainText = Title + "\n" + Text
+            };
+            Clipboard.Entry = entry;
         }
         #endregion
 

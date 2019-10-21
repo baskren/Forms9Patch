@@ -1,6 +1,5 @@
 ﻿using System;
 using Xamarin.Forms;
-using System.Runtime.CompilerServices;
 
 namespace Forms9Patch
 {
@@ -187,29 +186,8 @@ namespace Forms9Patch
         /// Initializes a new instance of the <see cref="T:Forms9Patch.BubblePopup"/> class.
         /// </summary>
         /// <param name="target">Target.</param>
-        /// <param name="retain">If set to <c>true</c> retain.</param>
         /// <param name="popAfter">Pop after TimeSpan.</param>
-        public BubblePopup(VisualElement target, bool retain = false, TimeSpan popAfter = default) : base(target, retain, popAfter) => Init();
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:Forms9Patch.BubblePopup"/> class.
-        /// </summary>
-        /// <param name="target">Target.</param>
-        /// <param name="point">Point.</param>
-        /// <param name="retain">If set to <c>true</c> retain.</param>
-        /// <param name="popAfter">Pop after TimeSpan.</param>
-        public BubblePopup(VisualElement target, Point point, bool retain = false, TimeSpan popAfter = default) : base(target, retain, popAfter)
-        {
-            Init();
-            Point = point;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:Forms9Patch.BubblePopup"/> class.
-        /// </summary>
-        /// <param name="target">Target.</param>
-        /// <param name="popAfter">Pop after TimeSpan.</param>
-        public BubblePopup(VisualElement target, TimeSpan popAfter) : base(target, popAfter: popAfter) => Init();
+        public BubblePopup(VisualElement target, TimeSpan popAfter = default) : base(target, popAfter) => Init();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.BubblePopup"/> class.
@@ -217,11 +195,12 @@ namespace Forms9Patch
         /// <param name="target">Target.</param>
         /// <param name="point">Point.</param>
         /// <param name="popAfter">Pop after TimeSpan.</param>
-        public BubblePopup(VisualElement target, Point point, TimeSpan popAfter) : base(target, popAfter: popAfter)
+        public BubblePopup(VisualElement target, Point point, TimeSpan popAfter = default) : base(target, popAfter)
         {
             Init();
             Point = point;
         }
+
         #endregion
 
 
