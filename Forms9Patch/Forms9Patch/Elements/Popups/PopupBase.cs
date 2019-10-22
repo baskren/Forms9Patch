@@ -609,7 +609,7 @@ namespace Forms9Patch
                 Device.BeginInvokeOnMainThread(async () =>
 #pragma warning restore RECS0165 // Asynchronous methods should return a Task instead of void
                 {
-                    if (_isPushing)
+                    if (_isPushing && GetType() == typeof(ActivityIndicatorPopup))
                         await PopAsync(this);
                     await WaitForPoppedAsync();
                     Dispose();
@@ -737,9 +737,9 @@ namespace Forms9Patch
         internal protected bool _isPopping;
 
 
-        bool _isPopped;
+        internal protected bool _isPopped;
 
-        bool _popAnimationComplete;
+        internal protected bool _popAnimationComplete;
 
 
         /// <summary>

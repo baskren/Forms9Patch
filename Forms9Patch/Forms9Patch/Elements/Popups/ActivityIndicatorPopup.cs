@@ -41,10 +41,12 @@ namespace Forms9Patch
 
         #region Factory
         /// <summary>
-        /// Create this instance.
+        /// Presents an Activity Indicator Page Overlay
         /// </summary>
-        public static ActivityIndicatorPopup Create()
-         => new ActivityIndicatorPopup { IsVisible = true };
+        /// <param name="popAfter"></param>
+        /// <returns></returns>
+        public static ActivityIndicatorPopup Create(TimeSpan popAfter = default)
+            => new ActivityIndicatorPopup(popAfter) { IsVisible = true };
         #endregion
 
 
@@ -64,16 +66,7 @@ namespace Forms9Patch
             HorizontalOptions = LayoutOptions.Center;
             VerticalOptions = LayoutOptions.Center;
             _indicator.IsVisible = true;
-
         }
-
-        /// <summary>
-        /// Presents an Activity Indicator Page Overlay
-        /// </summary>
-        /// <param name="popAfter"></param>
-        /// <returns></returns>
-        public static ActivityIndicatorPopup Present(TimeSpan popAfter = default)
-            => new ActivityIndicatorPopup(popAfter) { IsVisible = true };
         #endregion
 
 
