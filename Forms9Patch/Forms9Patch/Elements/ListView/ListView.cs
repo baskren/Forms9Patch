@@ -625,7 +625,7 @@ namespace Forms9Patch
                     SelectedItems = null;
 
                     ItemsSource = null; // this removes the group wrapper events;
-                    ItemTemplates = null;
+                    //ItemTemplates = null;  causes crash and is not necessary
                     VisibilityTest = null;
 
                     _listView.Dispose();
