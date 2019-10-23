@@ -625,7 +625,7 @@ namespace Forms9Patch
         /// <returns>Why the popup was popped and, if appropriate, what triggered it.</returns>
         public virtual async Task<PopupPoppedEventArgs> WaitForPoppedAsync()
         {
-            while (PopupPoppedEventArgs == null)
+            while (!_isPopped)
                 await Task.Delay(50);
             var args = PopupPoppedEventArgs;
             PopupPoppedEventArgs = null;
@@ -897,7 +897,6 @@ namespace Forms9Patch
                         await Navigation.PushPopupAsync(this);
                         PopupLayerEffect.ApplyTo(this);
                     }
-                    //_isPushing = false;
                     _semaphore.Release();
                     Recursion.Exit(GetType().ToString(), _id.ToString());
                 }
@@ -953,11 +952,7 @@ namespace Forms9Patch
                         await Navigation.RemovePopupPageAsync(this);
 
                         _semaphore.Release();
-                        // the following lines might result in a deadlock?
-                        //while (_isPushed)
-                        //    await Task.Delay(50);
                         Popped?.Invoke(this, PopupPoppedEventArgs);
-                        // end of deadlock concern
                     }
                     else
                         _semaphore.Release();
