@@ -606,19 +606,34 @@ namespace Forms9Patch
             }
             else
 #pragma warning disable RECS0165 // Asynchronous methods should return a Task instead of void
-                Device.BeginInvokeOnMainThread(async () =>
+                Device.BeginInvokeOnMainThread((Action)(async () =>
 #pragma warning restore RECS0165 // Asynchronous methods should return a Task instead of void
                 {
                     if (_isPushing && GetType() == typeof(ActivityIndicatorPopup))
                         await PopAsync(this);
-                    await WaitForPoppedAsync();
+                    await this.WaitForPoppedAsync();
                     Dispose();
-                });
+                }));
         }
         #endregion
 
 
         #region Cancelation
+        /// <summary>
+        /// Delay until the popup is popped.
+        /// </summary>
+        /// <returns>Why the popup was popped and, if appropriate, what triggered it.</returns>
+        public virtual async Task<PopupPoppedEventArgs> WaitForPoppedAsync()
+        {
+            while (PopupPoppedEventArgs == null)
+                await Task.Delay(50);
+            var args = PopupPoppedEventArgs;
+            PopupPoppedEventArgs = null;
+            return args;
+        }
+
+
+        /*
         public async Task WaitForPoppedAsync()
         {
             do
@@ -626,6 +641,7 @@ namespace Forms9Patch
                 await Task.Delay(25);
             } while (!_isPopped);
         }
+        */
 
         /// <summary>
         /// Called when back button is pressed
@@ -665,7 +681,7 @@ namespace Forms9Patch
         /// </summary>
         /// <returns>Task</returns>
         /// <param name="trigger">Optional, object or PopupEventCause that triggered cancelation.</param>
-        public async Task CancelAsync(object trigger = null)
+        public virtual async Task CancelAsync(object trigger = null)
             => await PopAsync(trigger ?? PopupPoppedCause.MethodCalled, lastAction: () => Cancelled?.Invoke(this, PopupPoppedEventArgs));
 
         /// <summary>
@@ -984,18 +1000,6 @@ namespace Forms9Patch
                 PopupPoppedEventArgs = new PopupPoppedEventArgs(PopupPoppedCause.Custom, trigger);
         }
 
-        /// <summary>
-        /// Delay until the popup is popped.
-        /// </summary>
-        /// <returns>Why the popup was popped and, if appropriate, what triggered it.</returns>
-        public virtual async Task<PopupPoppedEventArgs> DelayUntilPoppedAsync()
-        {
-            while (PopupPoppedEventArgs == null)
-                await Task.Delay(50);
-            var args = PopupPoppedEventArgs;
-            PopupPoppedEventArgs = null;
-            return args;
-        }
 
         /// <param name="propertyName">The name of the property that changed.</param>
         /// <summary>

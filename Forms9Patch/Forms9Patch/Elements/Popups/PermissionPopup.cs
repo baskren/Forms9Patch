@@ -297,12 +297,25 @@ namespace Forms9Patch
         internal async void OnOkButtonTappedAsync(object sender, EventArgs e)
         {
             _okTapped = true;
+            PermissionState = PermissionState.Ok;
             await PopAsync(_okButton, lastAction: () => OkTapped?.Invoke(this, EventArgs.Empty));
         }
 
         async void OnCancelButtonTappedAsync(object sender, EventArgs e)
             => await CancelAsync(_cancelButton);
 
+        public override Task CancelAsync(object trigger = null)
+        {
+            PermissionState = trigger == _cancelButton ? PermissionState.Rejected : PermissionState.Cancelled;
+            return base.CancelAsync(trigger);
+        }
+
+
+        protected override void OnAppearing()
+        {
+            PermissionState = PermissionState.Pending;
+            base.OnAppearing();
+        }
         #endregion
 
 
