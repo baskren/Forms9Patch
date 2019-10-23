@@ -954,7 +954,7 @@ namespace Forms9Patch
                         _semaphore.Release();
                         Popped?.Invoke(this, PopupPoppedEventArgs);
                     }
-                    else
+                    else if (!_disposed)
                         _semaphore.Release();
 
                     lastAction?.Invoke();
