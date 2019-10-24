@@ -21,9 +21,13 @@ namespace Forms9Patch
         static readonly Dictionary<string, SemaphoreSlim> _locks = new Dictionary<string, SemaphoreSlim>();
 
 #pragma warning disable 1998
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0068:Use recommended dispose pattern", Justification = "<Pending>")]
         internal static async Task<F9PImageData> FetchF9pImageData(this Xamarin.Forms.ImageSource imageSource, Image view, CancellationToken cancellationToken = new CancellationToken())
 #pragma warning restore 1998
         {
+            if (imageSource?.ImageSourceKey()?.Contains("eContainment4.Views.Resources.LegacyImages.saveinspection_icon.png") ?? false)
+                System.Diagnostics.Debug.WriteLine("FetchF9pImageData ...");
+
             F9PImageData f9pImageData = null;
 
             var key = imageSource.ImageSourceKey();
@@ -35,6 +39,9 @@ namespace Forms9Patch
                     f9pImageData = _cache[key];
                     if (f9pImageData == null)
                         throw new InvalidDataContractException();
+                    if (imageSource?.ImageSourceKey()?.Contains("eContainment4.Views.Resources.LegacyImages.saveinspection_icon.png") ?? false)
+                        System.Diagnostics.Debug.WriteLine("... from Cache.  ValidBitmap=" + f9pImageData.ValidBitmap);
+
                 }
                 else
                 {
@@ -157,26 +164,35 @@ namespace Forms9Patch
             return f9pImageData;
         }
 
-
         internal static void ReleaseF9PBitmap(this Xamarin.Forms.ImageSource imageSource, Image view)
+            => ReleaseF9PBitmap(imageSource?.ImageSourceKey(), view);
+
+        internal static void ReleaseF9PBitmap(this F9PImageData f9PImageData, Image view)
+            => ReleaseF9PBitmap(f9PImageData?.Key, view);
+
+        static void ReleaseF9PBitmap(string key, Image view)
         {
-            var key = imageSource.ImageSourceKey();
             if (key == null)
                 return;
+
             lock (_constructorLock)
             {
                 if (!_views.ContainsKey(key))
                     // this happens if there is a failure to load the view
                     return;
                 var _clientViews = _views[key];
+
                 _clientViews?.Remove(view);
                 if (_clientViews.Count > 0)
                     return;
+
+
                 _views.Remove(key);
                 if (_cache.ContainsKey(key))
                 {
                     var bitmap = _cache[key];
                     _cache.Remove(key);
+
                     bitmap.Dispose();
                     bitmap = null;
                 }

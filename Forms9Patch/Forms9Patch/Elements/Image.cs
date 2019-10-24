@@ -662,7 +662,8 @@ namespace Forms9Patch
             if (!_disposed && disposing)
             {
                 _disposed = true;
-                _f9pImageData?.Dispose();
+                //_f9pImageData?.Dispose();
+                _f9pImageData.ReleaseF9PBitmap(this);
                 _f9pImageData = null;
                 _sourceRangeLists = null;
                 Source = null;
@@ -700,7 +701,8 @@ namespace Forms9Patch
         public static implicit operator Image(string embeddedResourceId)
         {
             var assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
-            return new Image(embeddedResourceId, assembly);
+            var result = new Image(embeddedResourceId, assembly);
+            return result;
         }
         #endregion
 
@@ -739,13 +741,27 @@ namespace Forms9Patch
                 {
                     _xfImageSource.PropertyChanged += OnImageSourcePropertyChanged;
                     _f9pImageData = await _xfImageSource.FetchF9pImageData(this);
+
+                    if (Source?.ImageSourceKey()?.Contains("eContainment4.Views.Resources.LegacyImages.saveinspection_icon.png") ?? false)
+                        System.Diagnostics.Debug.WriteLine("A _f9pImageData.ValidBitmap" + _f9pImageData.ValidBitmap);
+
                     _sourceRangeLists = _f9pImageData?.RangeLists;
                 }
 
                 ((Xamarin.Forms.IImageController)this)?.SetIsLoading(false);
+
+                if (Source?.ImageSourceKey()?.Contains("eContainment4.Views.Resources.LegacyImages.saveinspection_icon.png") ?? false)
+                    System.Diagnostics.Debug.WriteLine(" Call Invalidate ...");
+
                 Invalidate();
+
+                if (Source?.ImageSourceKey()?.Contains("eContainment4.Views.Resources.LegacyImages.saveinspection_icon.png") ?? false)
+                    System.Diagnostics.Debug.WriteLine(" ... Invalidate called");
             }
             P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
+
+            if (Source?.ImageSourceKey()?.Contains("eContainment4.Views.Resources.LegacyImages.saveinspection_icon.png") ?? false)
+                System.Diagnostics.Debug.WriteLine("B _f9pImageData.ValidBitmap" + _f9pImageData.ValidBitmap);
 
         }
 
@@ -779,10 +795,12 @@ namespace Forms9Patch
 
         }
 
+
         /// <summary>
         /// Called when a property has changed
         /// </summary>
         /// <param name="propertyName"></param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Potential Code Quality Issues", "RECS0022:A catch clause that catches System.Exception and has an empty body", Justification = "<Pending>")]
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             if (!P42.Utils.Environment.IsOnMainThread)
@@ -800,7 +818,9 @@ namespace Forms9Patch
             if (propertyName == ElementShapeProperty.PropertyName)
                 ((IExtendedShape)this).ExtendedElementShape = ElementShape.ToExtendedElementShape();
             if (propertyName == SourceProperty.PropertyName)
-                SetImageSourceAsync().ConfigureAwait(false);
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                SetImageSourceAsync();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             if (
                 // VisualElement
                 propertyName == BackgroundColorProperty.PropertyName ||
@@ -886,7 +906,7 @@ namespace Forms9Patch
             var reqSize = new Size(reqW + shadowPaddingHz, reqH + shadowPaddingVt);
             var minSize = new Size(WidthRequest > 0 ? reqSize.Width : 10 + shadowPaddingHz, HeightRequest > 0 ? reqSize.Height : 10 + shadowPaddingVt);
             result = new SizeRequest(reqSize, minSize);
-            //System.Diagnostics.Debug.WriteLine(GetType() + "GetSizeRequest(" + widthConstraint + ", " + heightConstraint + ") = [" + result + "]");
+
             P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
             return result;
         }
@@ -922,6 +942,8 @@ namespace Forms9Patch
 
         internal void SharedOnPaintSurface(SKPaintSurfaceEventArgs e, SKRect rect)
         {
+            if (Source?.ImageSourceKey()?.Contains("eContainment4.Views.Resources.LegacyImages.saveinspection_icon.png") ?? false)
+                System.Diagnostics.Debug.WriteLine("SHARED ON PAINT SURFACE");
 
             var canvas = e.Surface?.Canvas;
             //canvas.ClipRect(rect, SKClipOperation.Intersect, false);
@@ -955,6 +977,9 @@ namespace Forms9Patch
             var drawOutline = DrawOutline;
             var drawImage = DrawImage;
             var drawFill = DrawFill;
+
+            if (Source?.ImageSourceKey()?.Contains("eContainment4.Views.Resources.LegacyImages.saveinspection_icon.png") ?? false)
+                System.Diagnostics.Debug.WriteLine(" drawImage " + drawImage + " _f9pImageData.ValidBitmap:" + _f9pImageData.ValidBitmap);
 
             if ((drawFill || drawOutline || separatorWidth > 0 || drawImage))// && CanvasSize != default)
             {
@@ -1015,36 +1040,105 @@ namespace Forms9Patch
                                 break;
                         }
 
-                        var shadowPaint = new SKPaint
+                        using (var shadowPaint = new SKPaint
                         {
                             Style = SKPaintStyle.Fill,
-                            Color = shadowColor,
-                        };
-
-                        var filter = SkiaSharp.SKImageFilter.CreateDropShadow(shadowX, shadowY, shadowR / 2, shadowR / 2, shadowColor, SKDropShadowImageFilterShadowMode.DrawShadowOnly);
-                        shadowPaint.ImageFilter = filter;
-                        //var filter = SkiaSharp.SKMaskFilter.CreateBlur(SKBlurStyle.Outer, 0.5f);
-                        //shadowPaint.MaskFilter = filter;
-
-                        try
+                            Color = shadowColor
+                        })
                         {
-                            var region = new SKRegion();
-                            region.SetRect(new SKRectI((int)rect.Left, (int)rect.Top, (int)rect.Right, (int)rect.Bottom));
-                            canvas.ClipRegion(region);
 
-                            if (DrawFill)
-                                canvas.DrawPath(PerimeterPath(shadowRect, outlineRadius - (drawOutline ? outlineWidth : 0)), shadowPaint);
-                            else if (DrawImage)
-                                GenerateImageLayout(canvas, perimeter, PerimeterPath(shadowRect, outlineRadius - (drawOutline ? outlineWidth : 0)), shadowPaint);
-                        }
-                        catch (Exception exception)
-                        {
-                            var properties = new Dictionary<string, string>
+                            var filter = SkiaSharp.SKImageFilter.CreateDropShadow(shadowX, shadowY, shadowR / 2, shadowR / 2, shadowColor, SKDropShadowImageFilterShadowMode.DrawShadowOnly);
+                            shadowPaint.ImageFilter = filter;
+                            //var filter = SkiaSharp.SKMaskFilter.CreateBlur(SKBlurStyle.Outer, 0.5f);
+                            //shadowPaint.MaskFilter = filter;
+
+                            try
+                            {
+                                var region = new SKRegion();
+                                region.SetRect(new SKRectI((int)rect.Left, (int)rect.Top, (int)rect.Right, (int)rect.Bottom));
+                                canvas.ClipRegion(region);
+
+                                using (var pPath = PerimeterPath(shadowRect, outlineRadius - (drawOutline ? outlineWidth : 0)))
+                                {
+                                    if (DrawFill)
+                                        canvas.DrawPath(pPath, shadowPaint);
+                                    else if (DrawImage)
+                                        GenerateImageLayout(canvas, perimeter, pPath, shadowPaint);
+                                }
+                            }
+                            catch (Exception exception)
+                            {
+                                var properties = new Dictionary<string, string>
                             {
                                 { nameof(shadowRect), JsonConvert.SerializeObject(shadowRect) },
                                 { "class", "Forms9Patch.ExtendedShapeAndImageView" },
                                 { "method", "Paint" },
                                 { "line", "888" }
+                            };
+                                //Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
+                                Analytics.TrackException?.Invoke(exception, properties);
+                                _repainting = false;
+                                P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
+                                return;
+                            }
+                            canvas.Restore();
+                        }
+                    }
+                }
+
+                if (drawFill)
+                {
+                    var fillRect = RectInsetForShape(perimeter, outlineWidth, vt, separatorWidth);
+                    using (var path = PerimeterPath(fillRect, outlineRadius - (drawOutline ? outlineWidth : 0)))
+                    {
+                        using (var fillPaint = new SKPaint
+                        {
+                            Style = SKPaintStyle.Fill,
+                            Color = backgroundColor.ToSKColor(),
+                            IsAntialias = true,
+                        })
+                        {
+                            try
+                            {
+                                canvas.DrawPath(path, fillPaint);
+                            }
+                            catch (Exception exception)
+                            {
+                                var properties = new Dictionary<string, string>
+                            {
+                                { "class", "Forms9Patch.ExtendedShapeAndImageView" },
+                                { "method", "Paint" },
+                                { "line", "917" }
+                            };
+                                //Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
+                                Analytics.TrackException?.Invoke(exception, properties);
+                                _repainting = false;
+                                P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
+                                return;
+                            }
+                        }
+                    }
+                }
+
+
+                if (drawImage)
+                {
+                    var imagePerimeter = perimeter;
+                    if (drawFill)
+                        imagePerimeter = RectInsetForShape(perimeter, outlineWidth, vt, separatorWidth);
+                    using (var path = PerimeterPath(imagePerimeter, outlineRadius - (drawOutline ? outlineWidth : 0)))
+                    {
+                        try
+                        {
+                            GenerateImageLayout(canvas, perimeter, path);
+                        }
+                        catch (Exception exception)
+                        {
+                            var properties = new Dictionary<string, string>
+                            {
+                                { "class", "Forms9Patch.ExtendedShapeAndImageView" },
+                                { "method", "Paint" },
+                                { "line", "941" }
                             };
                             //Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
                             Analytics.TrackException?.Invoke(exception, properties);
@@ -1052,69 +1146,12 @@ namespace Forms9Patch
                             P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
                             return;
                         }
-                        canvas.Restore();
-                    }
-                }
-
-                if (drawFill)
-                {
-                    var fillRect = RectInsetForShape(perimeter, outlineWidth, vt, separatorWidth);
-                    var path = PerimeterPath(fillRect, outlineRadius - (drawOutline ? outlineWidth : 0));
-                    var fillPaint = new SKPaint
-                    {
-                        Style = SKPaintStyle.Fill,
-                        Color = backgroundColor.ToSKColor(),
-                        IsAntialias = true,
-                    };
-                    try
-                    {
-                        canvas.DrawPath(path, fillPaint);
-                    }
-                    catch (Exception exception)
-                    {
-                        var properties = new Dictionary<string, string>
-                            {
-                                { "class", "Forms9Patch.ExtendedShapeAndImageView" },
-                                { "method", "Paint" },
-                                { "line", "917" }
-                            };
-                        //Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
-                        Analytics.TrackException?.Invoke(exception, properties);
-                        _repainting = false;
-                        P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
-                        return;
-                    }
-                }
-
-                if (drawImage)
-                {
-                    var imagePerimeter = perimeter;
-                    if (drawFill)
-                        imagePerimeter = RectInsetForShape(perimeter, outlineWidth, vt, separatorWidth);
-                    var path = PerimeterPath(imagePerimeter, outlineRadius - (drawOutline ? outlineWidth : 0));
-                    try
-                    {
-                        GenerateImageLayout(canvas, perimeter, path);
-                    }
-                    catch (Exception exception)
-                    {
-                        var properties = new Dictionary<string, string>
-                            {
-                                { "class", "Forms9Patch.ExtendedShapeAndImageView" },
-                                { "method", "Paint" },
-                                { "line", "941" }
-                            };
-                        //Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
-                        Analytics.TrackException?.Invoke(exception, properties);
-                        _repainting = false;
-                        P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
-                        return;
                     }
                 }
 
                 if (drawOutline)// && !drawImage)
                 {
-                    var outlinePaint = new SKPaint
+                    using (var outlinePaint = new SKPaint
                     {
                         Style = SKPaintStyle.Stroke,
                         Color = outlineColor.ToSKColor(),
@@ -1122,30 +1159,33 @@ namespace Forms9Patch
                         IsAntialias = true,
                         //StrokeJoin = SKStrokeJoin.Bevel
                         //PathEffect = SKPathEffect.CreateDash(new float[] { 20,20 }, 0)
-                    };
-                    var intPerimeter = new SKRect((int)perimeter.Left, (int)perimeter.Top, (int)perimeter.Right, (int)perimeter.Bottom);
-                    //System.Diagnostics.Debug.WriteLine("perimeter=[" + perimeter + "] [" + intPerimeter + "]");
-                    var outlineRect = RectInsetForShape(intPerimeter, outlineWidth / 2, vt, separatorWidth);
-                    var path = PerimeterPath(outlineRect, outlineRadius - (drawOutline ? outlineWidth / 2 : 0), true);
-                    try
+                    })
                     {
-                        canvas.DrawPath(path, outlinePaint);
-                    }
-                    catch (Exception exception)
-                    {
-                        var properties = new Dictionary<string, string>
+                        var intPerimeter = new SKRect((int)perimeter.Left, (int)perimeter.Top, (int)perimeter.Right, (int)perimeter.Bottom);
+                        //System.Diagnostics.Debug.WriteLine("perimeter=[" + perimeter + "] [" + intPerimeter + "]");
+                        var outlineRect = RectInsetForShape(intPerimeter, outlineWidth / 2, vt, separatorWidth);
+                        using (var path = PerimeterPath(outlineRect, outlineRadius - (drawOutline ? outlineWidth / 2 : 0), true))
+                        {
+                            try
+                            {
+                                canvas.DrawPath(path, outlinePaint);
+                            }
+                            catch (Exception exception)
+                            {
+                                var properties = new Dictionary<string, string>
                             {
                                 { "class", "Forms9Patch.ExtendedShapeAndImageView" },
                                 { "method", "Paint" },
                                 { "line", "974" }
                             };
-                        //Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
-                        Analytics.TrackException?.Invoke(exception, properties);
-                        _repainting = false;
-                        P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
-                        return;
+                                //Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
+                                Analytics.TrackException?.Invoke(exception, properties);
+                                _repainting = false;
+                                P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
+                                return;
+                            }
+                        }
                     }
-
                 }
 
 
@@ -1153,42 +1193,46 @@ namespace Forms9Patch
                 {
                     //System.Diagnostics.Debug.WriteLine("SeparatorColor: " + outlineColor.R + ", " + outlineColor.G + ", " + outlineColor.B + ", " + outlineColor.A);
                     //System.Diagnostics.Debug.WriteLine("SeparatorWidth: " + separatorWidth);
-                    var separatorPaint = new SKPaint
+                    using (var separatorPaint = new SKPaint
                     {
                         Style = SKPaintStyle.Stroke,
                         Color = outlineColor.ToSKColor(),
                         StrokeWidth = separatorWidth,
                         IsAntialias = true,
                         //PathEffect = SKPathEffect.CreateDash(new float[] { 20,20 }, 0)
-                    };
-                    var path = new SKPath();
-                    if (vt)
+                    })
                     {
-                        path.MoveTo(perimeter.Left, perimeter.Top + outlineWidth / 2);
-                        path.LineTo(perimeter.Right, perimeter.Top + outlineWidth / 2);
-                    }
-                    else
-                    {
-                        path.MoveTo(perimeter.Left + outlineWidth / 2, perimeter.Top);
-                        path.LineTo(perimeter.Left + outlineWidth / 2, perimeter.Bottom);
-                    }
-                    try
-                    {
-                        canvas.DrawPath(path, separatorPaint);
-                    }
-                    catch (Exception exception)
-                    {
-                        var properties = new Dictionary<string, string>
+                        using (var path = new SKPath())
+                        {
+                            if (vt)
+                            {
+                                path.MoveTo(perimeter.Left, perimeter.Top + outlineWidth / 2);
+                                path.LineTo(perimeter.Right, perimeter.Top + outlineWidth / 2);
+                            }
+                            else
+                            {
+                                path.MoveTo(perimeter.Left + outlineWidth / 2, perimeter.Top);
+                                path.LineTo(perimeter.Left + outlineWidth / 2, perimeter.Bottom);
+                            }
+                            try
+                            {
+                                canvas.DrawPath(path, separatorPaint);
+                            }
+                            catch (Exception exception)
+                            {
+                                var properties = new Dictionary<string, string>
                             {
                                 { "class", "Forms9Patch.ExtendedShapeAndImageView" },
                                 { "method", "Paint" },
                                 { "line", "1017" }
                             };
-                        //Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
-                        Analytics.TrackException?.Invoke(exception, properties);
-                        _repainting = false;
-                        P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
-                        return;
+                                //Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
+                                Analytics.TrackException?.Invoke(exception, properties);
+                                _repainting = false;
+                                P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
+                                return;
+                            }
+                        }
                     }
                 }
 
@@ -1198,41 +1242,46 @@ namespace Forms9Patch
                     canvas.Save();
 
                     // setup the paint
-                    var insetShadowPaint = new SKPaint
+                    using (var insetShadowPaint = new SKPaint
                     {
                         Style = SKPaintStyle.Fill,
                         Color = shadowColor,
                         IsAntialias = true,
-                    };
-                    var filter = SkiaSharp.SKImageFilter.CreateDropShadow(shadowX, shadowY, shadowR / 2, shadowR / 2, shadowColor, SKDropShadowImageFilterShadowMode.DrawShadowOnly);
-                    insetShadowPaint.ImageFilter = filter;
-
-                    // what is the mask?
-                    var maskPath = PerimeterPath(perimeter, outlineRadius);
-                    canvas.ClipPath(maskPath);
-
-                    // what is the path that will cast the shadow?
-                    // a) the button portion (which will be the hole in the larger outline, b)
-                    var shadowRect = InverseShadowInsetForShape(perimeter, vt);
-                    var path = PerimeterPath(shadowRect, outlineRadius);
-                    // b) add to it the larger outline 
-                    path.AddRect(RectInset(rect, -50));
-                    try
+                    })
                     {
-                        canvas.DrawPath(path, insetShadowPaint);
-                    }
-                    catch (Exception exception)
-                    {
-                        var properties = new Dictionary<string, string>
+                        var filter = SkiaSharp.SKImageFilter.CreateDropShadow(shadowX, shadowY, shadowR / 2, shadowR / 2, shadowColor, SKDropShadowImageFilterShadowMode.DrawShadowOnly);
+                        insetShadowPaint.ImageFilter = filter;
+
+                        // what is the mask?
+                        using (var maskPath = PerimeterPath(perimeter, outlineRadius))
+                        {
+                            canvas.ClipPath(maskPath);
+
+                            // what is the path that will cast the shadow?
+                            // a) the button portion (which will be the hole in the larger outline, b)
+                            var shadowRect = InverseShadowInsetForShape(perimeter, vt);
+                            using (var path = PerimeterPath(shadowRect, outlineRadius))
+                            {
+                                // b) add to it the larger outline 
+                                path.AddRect(RectInset(rect, -50));
+                                try
+                                {
+                                    canvas.DrawPath(path, insetShadowPaint);
+                                }
+                                catch (Exception exception)
+                                {
+                                    var properties = new Dictionary<string, string>
                             {
                                 { "class", "Forms9Patch.ExtendedShapeAndImageView" },
                                 { "method", "Paint" },
                                 { "line", "917" }
                             };
-                        //Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
-                        Analytics.TrackException?.Invoke(exception, properties);
+                                    //Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
+                                    Analytics.TrackException?.Invoke(exception, properties);
+                                }
+                            }
+                        }
                     }
-
                     canvas.Restore();
                 }
             }
@@ -1250,6 +1299,10 @@ namespace Forms9Patch
         #region Image Layout
         void GenerateImageLayout(SKCanvas canvas, SKRect fillRect, SKPath clipPath, SKPaint shadowPaint = null)
         {
+            if (_f9pImageData == null || !_f9pImageData.ValidImage)
+                return;
+
+            SKCanvas shadowCanvas = null;
             SKBitmap shadowBitmap = null;
             var workingCanvas = canvas;
 
@@ -1257,12 +1310,10 @@ namespace Forms9Patch
             {
                 var x = canvas.DeviceClipBounds;
                 shadowBitmap = new SKBitmap((int)x.Width, (int)x.Height);
-                workingCanvas = new SKCanvas(shadowBitmap);
+                shadowCanvas = new SKCanvas(shadowBitmap);
+                workingCanvas = shadowCanvas;
                 workingCanvas.Clear();
             }
-
-            if (_f9pImageData == null || !_f9pImageData.ValidImage)
-                return;
 
             P42.Utils.Recursion.Enter(GetType().ToString(), InstanceId.ToString());
 
@@ -1285,6 +1336,7 @@ namespace Forms9Patch
                             }
                         workingCanvas.Restore();
                         P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
+                        shadowCanvas?.Dispose();
                         return;
                     }
                 }
@@ -1374,7 +1426,6 @@ namespace Forms9Patch
                     paint = new SKPaint { ColorFilter = SKColorFilter.CreateBlendMode(transparency, SKBlendMode.DstIn) };
                 }
                 workingCanvas.DrawPicture(_f9pImageData.SKSvg.Picture, paint);
-                //workingCanvas.DrawPicture(_f9pImageData.SKSvg.Picture);
                 workingCanvas.Restore();
             }
             else if (_f9pImageData.ValidBitmap)
@@ -1559,14 +1610,15 @@ namespace Forms9Patch
                 workingCanvas.Restore();
 
                 if (shadowPaint != null)
-                {
-                    paint = shadowPaint;
-                    canvas.DrawBitmap(shadowBitmap, shadowBitmap.Info.Rect, paint);
-                    workingCanvas.Dispose();
-                }
+                    canvas.DrawBitmap(shadowBitmap, shadowBitmap.Info.Rect, shadowPaint);
+
+                paint?.Dispose();
             }
             else
                 Console.WriteLine("Image [" + _f9pImageData.Key + "] is neither a valid SVG or valid Bitmap.");
+
+            shadowCanvas?.Dispose();
+
             P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
         }
         #endregion

@@ -184,6 +184,9 @@ namespace Forms9Patch
         {
             if (!_disposed && disposing)
             {
+                if (Key?.Contains("eContainment4.Views.Resources.LegacyImages.saveinspection_icon.png") ?? false)
+
+                    System.Diagnostics.Debug.WriteLine("F9PImageData.Dispose key=" + Key);
                 _disposed = true;
                 SKBitmap?.Dispose();
                 SKBitmap = null;
