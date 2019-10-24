@@ -741,28 +741,12 @@ namespace Forms9Patch
                 {
                     _xfImageSource.PropertyChanged += OnImageSourcePropertyChanged;
                     _f9pImageData = await _xfImageSource.FetchF9pImageData(this);
-
-                    if (Source?.ImageSourceKey()?.Contains("eContainment4.Views.Resources.LegacyImages.saveinspection_icon.png") ?? false)
-                        System.Diagnostics.Debug.WriteLine("A _f9pImageData.ValidBitmap" + _f9pImageData.ValidBitmap);
-
                     _sourceRangeLists = _f9pImageData?.RangeLists;
                 }
-
                 ((Xamarin.Forms.IImageController)this)?.SetIsLoading(false);
-
-                if (Source?.ImageSourceKey()?.Contains("eContainment4.Views.Resources.LegacyImages.saveinspection_icon.png") ?? false)
-                    System.Diagnostics.Debug.WriteLine(" Call Invalidate ...");
-
                 Invalidate();
-
-                if (Source?.ImageSourceKey()?.Contains("eContainment4.Views.Resources.LegacyImages.saveinspection_icon.png") ?? false)
-                    System.Diagnostics.Debug.WriteLine(" ... Invalidate called");
             }
             P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
-
-            if (Source?.ImageSourceKey()?.Contains("eContainment4.Views.Resources.LegacyImages.saveinspection_icon.png") ?? false)
-                System.Diagnostics.Debug.WriteLine("B _f9pImageData.ValidBitmap" + _f9pImageData.ValidBitmap);
-
         }
 
         private async void OnImageSourcePropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -942,9 +926,6 @@ namespace Forms9Patch
 
         internal void SharedOnPaintSurface(SKPaintSurfaceEventArgs e, SKRect rect)
         {
-            if (Source?.ImageSourceKey()?.Contains("eContainment4.Views.Resources.LegacyImages.saveinspection_icon.png") ?? false)
-                System.Diagnostics.Debug.WriteLine("SHARED ON PAINT SURFACE");
-
             var canvas = e.Surface?.Canvas;
             //canvas.ClipRect(rect, SKClipOperation.Intersect, false);
 
@@ -977,9 +958,6 @@ namespace Forms9Patch
             var drawOutline = DrawOutline;
             var drawImage = DrawImage;
             var drawFill = DrawFill;
-
-            if (Source?.ImageSourceKey()?.Contains("eContainment4.Views.Resources.LegacyImages.saveinspection_icon.png") ?? false)
-                System.Diagnostics.Debug.WriteLine(" drawImage " + drawImage + " _f9pImageData.ValidBitmap:" + _f9pImageData.ValidBitmap);
 
             if ((drawFill || drawOutline || separatorWidth > 0 || drawImage))// && CanvasSize != default)
             {

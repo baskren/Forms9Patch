@@ -25,9 +25,6 @@ namespace Forms9Patch
         internal static async Task<F9PImageData> FetchF9pImageData(this Xamarin.Forms.ImageSource imageSource, Image view, CancellationToken cancellationToken = new CancellationToken())
 #pragma warning restore 1998
         {
-            if (imageSource?.ImageSourceKey()?.Contains("eContainment4.Views.Resources.LegacyImages.saveinspection_icon.png") ?? false)
-                System.Diagnostics.Debug.WriteLine("FetchF9pImageData ...");
-
             F9PImageData f9pImageData = null;
 
             var key = imageSource.ImageSourceKey();
@@ -39,9 +36,6 @@ namespace Forms9Patch
                     f9pImageData = _cache[key];
                     if (f9pImageData == null)
                         throw new InvalidDataContractException();
-                    if (imageSource?.ImageSourceKey()?.Contains("eContainment4.Views.Resources.LegacyImages.saveinspection_icon.png") ?? false)
-                        System.Diagnostics.Debug.WriteLine("... from Cache.  ValidBitmap=" + f9pImageData.ValidBitmap);
-
                 }
                 else
                 {
