@@ -323,14 +323,17 @@ namespace Forms9Patch
                 {
 
                     // STEP 1 : WHERE DOES THE CONTENT BEST FIT?
-                    var parent = Target;
+                    /*
+                    Element parent = Target;
                     while (parent != null)
                     {
                         if (parent is VisualElement ve)
-                            System.Diagnostics.Debug.WriteLine("Bounds=[" + ve.Bounds + "]");
-                        parent = parent.Parent as VisualElement;
+                            System.Diagnostics.Debug.WriteLine(">>> Type=[" + parent.GetType() + "] Bounds=[" + ve.Bounds + "]");
+                        else
+                            System.Diagnostics.Debug.WriteLine(">>> Type=[" + parent.GetType() + "]");
+                        parent = parent.Parent;
                     }
-
+                    */
                     targetBounds = Target is PopupBase popup
                         ? DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, popup.DecorativeContainerView)
                         : DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, Target);
