@@ -323,16 +323,25 @@ namespace Forms9Patch
                 {
 
                     // STEP 1 : WHERE DOES THE CONTENT BEST FIT?
+                    var parent = Target;
+                    while (parent != null)
+                    {
+                        if (parent is VisualElement ve)
+                            System.Diagnostics.Debug.WriteLine("Bounds=[" + ve.Bounds + "]");
+                        parent = parent.Parent as VisualElement;
+                    }
 
                     targetBounds = Target is PopupBase popup
                         ? DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, popup.DecorativeContainerView)
                         : DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, Target);
 
+                    /*
                     if (targetBounds.Width < 0 && targetBounds.Height < 0 && targetBounds.X < 0 && targetBounds.Y < 0)
                     {
                         P42.Utils.Recursion.Exit(GetType().ToString(), _id.ToString());
                         return;
                     }
+                    */
 
                     if (targetBounds.Right > 0 && targetBounds.Left < targetPage.Bounds.Width && targetBounds.Bottom > 0 && targetBounds.Top < targetPage.Bounds.Height)
                     {
