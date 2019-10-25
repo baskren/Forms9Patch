@@ -7,7 +7,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch FormattedString Span
     /// </summary>
-    abstract class Span : INotifyPropertyChanged, ICopiable<Span>, IDisposable
+    abstract class Span : INotifyPropertyChanged, ICopiable<Span> //, IDisposable
     {
         #region Fields
         internal string Key;
@@ -86,12 +86,13 @@ namespace Forms9Patch
         /// <param name="end">End.</param>
         protected Span(int start, int end)
         {
-            P42.Utils.Debug.AddToCensus(this);
+            //P42.Utils.Debug.AddToCensus(this);
 
             _start = start;
             _end = end;
         }
 
+        /*
         private bool _disposed;
         protected virtual void Dispose(bool disposing)
         {
@@ -108,6 +109,7 @@ namespace Forms9Patch
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+        */
         #endregion
 
         #region INotifyPropertyChanged implementation

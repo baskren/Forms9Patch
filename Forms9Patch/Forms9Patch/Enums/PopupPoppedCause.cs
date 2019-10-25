@@ -38,6 +38,10 @@ namespace Forms9Patch
         /// <summary>
         /// User supplied trigger was given to the popup's CancelAsync method
         /// </summary>
-        Custom
+        Custom,
+        /// <summary>
+        /// The popup was disposed
+        /// </summary>
+        Disposed
     }
 }

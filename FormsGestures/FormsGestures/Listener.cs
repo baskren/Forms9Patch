@@ -18,7 +18,6 @@ namespace FormsGestures
         internal static readonly List<Listener> Listeners = new List<Listener>();
 
         readonly VisualElement _element;
-
         /// <summary>
         /// VisualElement that is the focus of this Listener
         /// </summary>
@@ -1796,15 +1795,12 @@ namespace FormsGestures
         /// <returns></returns>
         public static Listener For(VisualElement element)
         {
-            //foreach (var listener in Listeners)
             for (int i = 0; i < Listeners.Count; i++)
                 if (Listeners[i].Element == element)
                     return Listeners[i];
             return new Listener(element);
         }
 
-        //static int instances = 0;
-        //int _id=0;
         private Listener(VisualElement element)
         {
             P42.Utils.Debug.AddToCensus(this);
@@ -1824,16 +1820,6 @@ namespace FormsGestures
                 Listeners.Insert(0, this);
             GestureService.For(this);
         }
-
-        /*
-        /// <summary>
-        /// Cancels the active gestures.
-        /// </summary>
-        public static void CancelActiveGestures()
-        {
-            GestureService.Cancel();
-        }
-        */
 
         bool _disposed;
         /// <summary>

@@ -38,6 +38,7 @@ namespace FormsGestures.iOS
         RotateEventArgs _previousRotateArgs;
 
         List<Listener> _listeners = new List<Listener>();
+        List<UIGestureRecognizer> _toDispose = new List<UIGestureRecognizer>();
         #endregion
 
 
@@ -56,10 +57,17 @@ namespace FormsGestures.iOS
             var listener = sender as Listener;
             //if (_listeners!=null) {
             if (_listeners.Contains(listener))
+            {
+                listener.PropertyChanged -= OnListenerPropertyChanged;
+                listener.Disposing -= RemoveListener;
                 _listeners.Remove(listener);
+            }
             if (_listeners.Count < 1)
+            {
                 // no one is listening so shut down
                 _element.SetValue(GestureHandlerProperty, null);
+                Dispose();
+            }
             //}
         }
         #endregion
@@ -94,9 +102,21 @@ namespace FormsGestures.iOS
                 {
                     UIGestureRecognizer[] array = _gestureRecognizers;
                     foreach (var uIGestureRecognizer in array)
+                    {
                         uIGestureRecognizer.View.RemoveGestureRecognizer(uIGestureRecognizer);
+                        uIGestureRecognizer.Dispose();
+                    }
                     _gestureRecognizers = null;
                 }
+                foreach (var uiGestureRecognizer in _toDispose)
+                {
+                    try
+                    {
+                        uiGestureRecognizer.Dispose();
+                    }
+                    catch (Exception) { }
+                }
+                _toDispose.Clear();
                 if (_listeners != null)
                 {
                     foreach (var listener in _listeners)
@@ -114,10 +134,10 @@ namespace FormsGestures.iOS
             GC.SuppressFinalize(this);
         }
 
-
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0067:Dispose objects before losing scope", Justification = "<Pending>")]
         internal void AttachNativeGestureHandler(Listener listener)
         {
-            NativeGestureHandler.GetInstanceForListener(listener);
+            GetInstanceForListener(listener);
             listener.PropertyChanged += OnListenerPropertyChanged;
         }
 
@@ -219,15 +239,19 @@ namespace FormsGestures.iOS
             {
                 UIGestureRecognizer[] array = _gestureRecognizers;
                 foreach (var uIGestureRecognizer in array)
+                {
                     uIGestureRecognizer.View.RemoveGestureRecognizer(uIGestureRecognizer);
+                    // the following causes everything to freeze!
+                    //uIGestureRecognizer.Dispose();
+                    _toDispose.Add(uIGestureRecognizer);
+                }
                 _gestureRecognizers = null;
             }
         }
 
         void ResetGestureRecognizers(UIView view)
         {
-            if (_view != view)
-                ClearGestureRecognizers();
+            ClearGestureRecognizers();
             _view = view;
             if (_view != null)
             {

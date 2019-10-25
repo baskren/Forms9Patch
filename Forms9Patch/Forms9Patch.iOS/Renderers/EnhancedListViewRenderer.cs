@@ -3,7 +3,6 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using Foundation;
 using UIKit;
-using System.Security.AccessControl;
 using CoreGraphics;
 
 [assembly: ExportRenderer(typeof(Forms9Patch.EnhancedListView), typeof(Forms9Patch.iOS.EnhancedListViewRenderer))]
@@ -12,10 +11,10 @@ namespace Forms9Patch.iOS
     /// <summary>
     /// List view renderer.
     /// </summary>
-    public class EnhancedListViewRenderer : Xamarin.Forms.Platform.iOS.ListViewRenderer, IScrollView
+    public class EnhancedListViewRenderer : ListViewRenderer, IScrollView
     {
 
-        ScrollDelegate ScrollDelegate = null;
+        ScrollDelegate ScrollDelegate;
 
         /// <summary>
         /// Ons the element changed.
@@ -26,13 +25,6 @@ namespace Forms9Patch.iOS
             base.OnElementChanged(e);
             if (e.OldElement is EnhancedListView oldElement)
             {
-                /*
-                oldElement.RendererScrollBy -= ScrollBy;
-                oldElement.RendererScrollTo -= ScrollTo;
-                oldElement.RendererScrollOffset -= ScrollOffset;
-                oldElement.RendererHeaderHeight -= HeaderHeight;
-                oldElement.GetScrollEnabled -= GetScrollEnabled;
-                */
                 oldElement.Renderer = null;
 
                 if (Control != null)
@@ -41,22 +33,32 @@ namespace Forms9Patch.iOS
                 {
                     ScrollDelegate.Source = null;
                     ScrollDelegate.Element = null;
+                    ScrollDelegate.Dispose();
                     ScrollDelegate = null;
                 }
             }
             if (e.NewElement is EnhancedListView newElement)
             {
-                /*
-                newElement.RendererScrollBy += ScrollBy;
-                newElement.RendererScrollTo += ScrollTo;
-                newElement.RendererScrollOffset += ScrollOffset;
-                newElement.RendererHeaderHeight += HeaderHeight;
-                */
                 newElement.Renderer = this;
 
                 ScrollDelegate = new ScrollDelegate(newElement, Control.Source);
                 Control.Delegate = ScrollDelegate;
             }
+        }
+
+        bool _disposed;
+        protected override void Dispose(bool disposing)
+        {
+            if (!_disposed && disposing)
+            {
+                _disposed = true;
+                ScrollDelegate.Source = null;
+                ScrollDelegate.Element = null;
+                ScrollDelegate?.Dispose();
+                ScrollDelegate = null;
+                Control.Delegate = null;
+            }
+            base.Dispose(disposing);
         }
 
         /// <summary>
@@ -80,21 +82,21 @@ namespace Forms9Patch.iOS
         {
             if (delta < 0 && Control.ContentOffset.Y + delta <= 0)
             {
-                Control.SetContentOffset(new CoreGraphics.CGPoint(Control.ContentOffset.X, 0), animated);
+                Control.SetContentOffset(new CGPoint(Control.ContentOffset.X, 0), animated);
                 return false;
             }
             if (delta > 0 && Control.ContentOffset.Y + delta > Control.ContentSize.Height - Control.Bounds.Height)
             {
-                Control.SetContentOffset(new CoreGraphics.CGPoint(Control.ContentOffset.X, Control.ContentSize.Height - Control.Bounds.Height), animated);
+                Control.SetContentOffset(new CGPoint(Control.ContentOffset.X, Control.ContentSize.Height - Control.Bounds.Height), animated);
                 return false;
             }
-            Control.SetContentOffset(new CoreGraphics.CGPoint(Control.ContentOffset.X, Control.ContentOffset.Y + delta), animated);
+            Control.SetContentOffset(new CGPoint(Control.ContentOffset.X, Control.ContentOffset.Y + delta), animated);
             return true;
         }
 
         public bool ScrollTo(double offset, bool animated)
         {
-            Control.SetContentOffset(new CoreGraphics.CGPoint(Control.ContentOffset.X, offset), animated);
+            Control.SetContentOffset(new CGPoint(Control.ContentOffset.X, offset), animated);
             return offset >= 0 && offset < Control.ContentSize.Height - Control.Bounds.Height;
         }
 
@@ -104,7 +106,6 @@ namespace Forms9Patch.iOS
             set
             {
                 Control.ScrollEnabled = value;
-                //System.Diagnostics.Debug.WriteLine("SCROLL ENABLED SET TO: " + value);
             }
         }
 
@@ -126,10 +127,10 @@ namespace Forms9Patch.iOS
 
     class ScrollDelegate : UITableViewDelegate
     {
-        public Forms9Patch.EnhancedListView Element;
+        public EnhancedListView Element;
         public UITableViewSource Source;
 
-        public ScrollDelegate(Forms9Patch.EnhancedListView element, UITableViewSource source) : base()
+        public ScrollDelegate(EnhancedListView element, UITableViewSource source)
         {
             Element = element;
             Source = source;

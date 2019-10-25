@@ -611,7 +611,8 @@ namespace Forms9Patch
                 {
                     if (_isPushing && GetType() == typeof(ActivityIndicatorPopup))
                         await PopAsync(this);
-                    await this.WaitForPoppedAsync();
+                    await WaitForPoppedAsync();
+                    await Task.Delay(50);
                     Dispose();
                 }));
         }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Text;
-using System.Linq;
 
 namespace Forms9Patch
 {
@@ -39,18 +38,12 @@ namespace Forms9Patch
             public List<Attribute> Attributes = new List<Attribute> { Capacity = 10 };
         }
 
-        StringBuilder _unmarkedText = new StringBuilder();
+        readonly StringBuilder _unmarkedText = new StringBuilder();
         /// <summary>
         /// Gets the unmarked text.
         /// </summary>
         /// <value>The unmarked text.</value>
-        public string UnmarkedText
-        {
-            get
-            {
-                return _unmarkedText.ToString();
-            }
-        }
+        public string UnmarkedText => _unmarkedText.ToString();
 
         bool inPreSpan;
         void ProcessHTML()
@@ -113,7 +106,7 @@ namespace Forms9Patch
                             }
                             tags.Remove(tag);
                             // remove tag off of stack
-                            processTag(tag, index);
+                            ProcessTag(tag, index);
                         }
                         else
                         {
@@ -146,7 +139,7 @@ namespace Forms9Patch
                     //var stringBuilder = new StringBuilder();
                     var j = i + 1;
                     while (j < _string.Length && _string[j] != ';')
-                        escapeCodeBuilder.Append( _string[j++]);
+                        escapeCodeBuilder.Append(_string[j++]);
 
                     if (escapeCodeBuilder.Length > 1)
                     {
@@ -420,8 +413,6 @@ namespace Forms9Patch
                                 case "clubs": unicodeInt = 0x2663; break;
                                 case "hearts": unicodeInt = 0x2665; break;
                                 case "diams": unicodeInt = 0x2666; break;
-                                default:
-                                    break;
                             }
                         }
                         i = j;
@@ -444,10 +435,10 @@ namespace Forms9Patch
             }
             if (tags.Count > 0)
                 foreach (var tag in tags)
-                    processTag(tag, index);
+                    ProcessTag(tag, index);
         }
 
-        void processTag(Tag tag, int index)
+        void ProcessTag(Tag tag, int index)
         {
             if (tag.Start >= index)
                 return;
@@ -507,8 +498,6 @@ namespace Forms9Patch
                                 span = new FontFamilySpan(tag.Start, index - 1, attr.Value);
                                 _spans.Add(span);
                                 break;
-                            default:
-                                break;
                         }
                     }
                     break;
@@ -546,14 +535,10 @@ namespace Forms9Patch
                             case nameof(id):
                                 id = attr.Value;
                                 break;
-                            default:
-                                break;
                         }
                     }
                     span = new ActionSpan(tag.Start, index - 1, id, href);
                     _spans.Add(span);
-                    break;
-                default:
                     break;
             }
             // process  attributes
@@ -607,8 +592,6 @@ namespace Forms9Patch
                                     {
                                         throw new FormatException("style=\"font-style: " + strs[1] + ";\" not supported");
                                     }
-                                    break;
-                                default:
                                     break;
                             }
                         }
