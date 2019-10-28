@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 using System.ComponentModel;
 using System.Collections.Specialized;
 using SkiaSharp;
-using P42.Utils;
 
 namespace Forms9Patch
 {
@@ -24,6 +23,7 @@ namespace Forms9Patch
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Potential Code Quality Issues", "RECS0022:A catch clause that catches System.Exception and has an empty body", Justification = "<Pending>")]
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             try
@@ -32,10 +32,10 @@ namespace Forms9Patch
             }
             catch (Exception) { }
 
-            if (propertyName == nameof(Parent) && Parent is SegmentedControl segmentedControl)
+            if (propertyName == nameof(Parent) && Parent is SegmentedControl segmentedControl && Control is SegmentedControl control)
             {
-                Control._segments.CollectionChanged += OnSegmentsCollectionChanged;
-                foreach (var segment in Control._segments)
+                control._segments.CollectionChanged += OnSegmentsCollectionChanged;
+                foreach (var segment in control._segments)
                     segment._button.PropertyChanged += OnButtonPropertyChanged;
             }
         }
@@ -71,18 +71,18 @@ namespace Forms9Patch
             {
                 var propertyName = e.PropertyName;
                 if (propertyName == Button.BackgroundColorProperty.PropertyName
-                    || propertyName == Button.BackgroundImageProperty.PropertyName
+                    || propertyName == ContentView.BackgroundImageProperty.PropertyName
                     || propertyName == Button.HasShadowProperty.PropertyName
-                    || propertyName == Button.ShadowInvertedProperty.PropertyName
+                    || propertyName == ContentView.ShadowInvertedProperty.PropertyName
                     || propertyName == Button.OutlineColorProperty.PropertyName
                     || propertyName == Button.OutlineWidthProperty.PropertyName
-                    || propertyName == Button.OutlineRadiusProperty.PropertyName
+                    || propertyName == ContentView.OutlineRadiusProperty.PropertyName
                     || (propertyName == Button.SelectedBackgroundColorProperty.PropertyName && button.IsSelected)
                     || propertyName == Button.IsSelectedProperty.PropertyName
-                    || propertyName == Button.IsEnabledProperty.PropertyName
+                    || propertyName == IsEnabledProperty.PropertyName
                     || propertyName == Button.DarkThemeProperty.PropertyName
-                    || propertyName == Button.WidthProperty.PropertyName
-                    || propertyName == Button.HeightProperty.PropertyName
+                    || propertyName == WidthProperty.PropertyName
+                    || propertyName == HeightProperty.PropertyName
                     || propertyName == Button.OrientationProperty.PropertyName
                     || propertyName == SegmentButton.ExtendedElementSeparatorWidthProperty.PropertyName
                     || propertyName == SegmentButton.ExtendedElementShapeProperty.PropertyName
@@ -111,7 +111,7 @@ namespace Forms9Patch
             if (e.Surface?.Canvas is SKCanvas canvas && e.Info.Rect is SKRectI rect)
             {
                 canvas.Clear();
-                Control.LayoutFunction(rect.Left / Display.Scale, rect.Top / Display.Scale, rect.Width / Display.Scale, rect.Height / Display.Scale, PaintSegmentButtonBackground, e);
+                Control?.LayoutFunction(rect.Left / Display.Scale, rect.Top / Display.Scale, rect.Width / Display.Scale, rect.Height / Display.Scale, PaintSegmentButtonBackground, e);
             }
         }
 
