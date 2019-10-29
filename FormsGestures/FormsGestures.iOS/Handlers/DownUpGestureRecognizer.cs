@@ -13,6 +13,7 @@ namespace FormsGestures.iOS
 
         internal DownUpGestureRecognizer(Action<DownUpGestureRecognizer, UITouch[]> downAction, Action<DownUpGestureRecognizer, UITouch[]> upAction)
         {
+            P42.Utils.Debug.AddToCensus(this);
             DownAction = downAction;
             UpAction = upAction;
         }

@@ -609,8 +609,8 @@ namespace Forms9Patch
                 Device.BeginInvokeOnMainThread((Action)(async () =>
 #pragma warning restore RECS0165 // Asynchronous methods should return a Task instead of void
                 {
-                    if (_isPushing && GetType() == typeof(ActivityIndicatorPopup))
-                        await PopAsync(this);
+                    if (GetType() == typeof(ActivityIndicatorPopup))
+                        await CancelAsync(PopupPoppedCause.Disposed);
                     await WaitForPoppedAsync();
                     await Task.Delay(50);
                     Dispose();
