@@ -323,7 +323,12 @@ namespace Forms9Patch
         public ContentView()
         {
             P42.Utils.Debug.AddToCensus(this);
-
+            if (_baseInternalChildren is null)
+            {
+                _baseInternalChildren = (ObservableCollection<Element>)P42.Utils.ReflectionExtensions.GetPropertyValue(this, "InternalChildren");
+                if (!(this is SegmentButton))
+                    _baseInternalChildren?.Insert(0, CurrentBackgroundImage);
+            }
             _f9pId = _instances++;
         }
 
@@ -480,7 +485,9 @@ namespace Forms9Patch
         {
 
             if (Content == null)
-                return new SizeRequest(Size.Zero, Size.Zero);
+                //return new SizeRequest(Size.Zero, Size.Zero);
+                //return new SizeRequest(new Size(Display.Width, Display.Height), Size.Zero);
+                return new SizeRequest(new Size(50, 50), Size.Zero);
 
             //var condition = false;// (this is Forms9Patch.Button button && button.HtmlText == "cancel");
 
