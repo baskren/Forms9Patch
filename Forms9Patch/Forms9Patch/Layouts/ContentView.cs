@@ -3,9 +3,11 @@ using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 using System;
 using P42.Utils;
+using System.ComponentModel;
 
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     /// <summary>
     /// Forms9Patch ContentView.  
     /// </summary>

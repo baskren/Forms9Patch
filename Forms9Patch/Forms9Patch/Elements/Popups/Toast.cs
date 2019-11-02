@@ -1,9 +1,10 @@
-﻿
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using System;
+using System.ComponentModel;
 
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     /// <summary>
     /// Toast Popup: Plain and simple
     /// </summary>

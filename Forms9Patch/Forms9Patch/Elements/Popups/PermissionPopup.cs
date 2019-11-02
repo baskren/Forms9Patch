@@ -1,9 +1,11 @@
 ﻿using Xamarin.Forms;
 using System;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     /// <summary>
     /// Permission popup.
     /// </summary>

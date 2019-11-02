@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Xamarin.Forms;
+using System.ComponentModel;
 
 namespace Forms9Patch
 {
     /// <summary>
     /// Forms9Patch Settings (for use by Forms9Patch PCL code).
     /// </summary>
+    [DesignTimeVisible(true)]
     public static class Settings
     {
         static Settings()

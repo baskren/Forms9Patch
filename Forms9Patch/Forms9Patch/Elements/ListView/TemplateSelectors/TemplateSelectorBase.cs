@@ -1,10 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
 using Xamarin.Forms;
 using System.Collections.Generic;
 using System.Reflection;
 
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     /// <summary>
     /// Data template selector: Used to match types of objects with the types of views that will be used to display them in a ListView.
     /// </summary>
@@ -175,14 +177,14 @@ namespace Forms9Patch
         }
 
         internal BaseCellView MakeContentView(ItemWrapper item)
-            => (item.GetType() is Type itemType &&  _contentTypes.ContainsKey(itemType))
+            => (item.GetType() is Type itemType && _contentTypes.ContainsKey(itemType))
                 ? new BaseCellView
                 {
                     ContentView = (View)Activator.CreateInstance(_contentTypes[itemType]),
                     BindingContext = item
                 }
                 : null;
-       
+
     }
 }
 

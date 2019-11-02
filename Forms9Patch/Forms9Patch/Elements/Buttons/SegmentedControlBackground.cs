@@ -1,4 +1,5 @@
 using System;
+
 using Xamarin.Forms;
 using SkiaSharp.Views.Forms;
 using System.Runtime.CompilerServices;
@@ -8,6 +9,7 @@ using SkiaSharp;
 
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     class SegmentedControlBackground : SKCanvasView
     {
         SegmentedControl Control => (SegmentedControl)Parent;

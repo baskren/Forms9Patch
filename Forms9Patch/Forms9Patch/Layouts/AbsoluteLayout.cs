@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
+﻿using System.ComponentModel;
 using Xamarin.Forms;
 using static Xamarin.Forms.AbsoluteLayout;
 
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     /// <summary>
     /// Forms9Patch.AbsoluteLayout
     /// </summary>
@@ -21,7 +20,7 @@ namespace Forms9Patch
         /// </summary>
         /// <returns>The layout bounds.</returns>
         /// <param name="bindable">Bindable.</param>
-        [TypeConverter(typeof(BoundsTypeConverter))]
+        [Xamarin.Forms.TypeConverter(typeof(BoundsTypeConverter))]
         public static Rectangle GetLayoutBounds(BindableObject bindable) => Xamarin.Forms.AbsoluteLayout.GetLayoutBounds(bindable);
 
         /// <summary>

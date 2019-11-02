@@ -1,9 +1,9 @@
 using Xamarin.Forms;
-using System;
-
+using System.ComponentModel;
 
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     /// <summary>
     /// Forms9Patch Frame layout.
     /// </summary>

@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using System.Windows.Input;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.Reflection;
 
 namespace Forms9Patch
@@ -9,6 +9,7 @@ namespace Forms9Patch
     /// <summary>
     /// Model for Segment.
     /// </summary>
+    [DesignTimeVisible(true)]
     [ContentProperty(nameof(HtmlText))]
     public class Segment : Element, ISegment, IDisposable
     {

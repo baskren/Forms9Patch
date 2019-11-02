@@ -1,9 +1,11 @@
 using System;
+using System.ComponentModel;
 using Xamarin.Forms;
 using FormsGestures;
 
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     /// <summary>
     /// A popup that enters from the side of the screen and stops at the same side.  Great for notificaitons or menus.
     /// </summary>

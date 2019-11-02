@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using Xamarin.Forms;
+using System.ComponentModel;
 
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     /// <summary>
     /// Required to enable Hardware Key Listening capability
     /// </summary>

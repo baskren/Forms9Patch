@@ -1,7 +1,9 @@
 ﻿using System;
+using System.ComponentModel;
 using Xamarin.Forms;
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     /// <summary>
     /// Activity indicator full page overlay.
     /// </summary>

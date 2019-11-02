@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Globalization;
+using System.ComponentModel;
 using Xamarin.Forms;
 
 namespace Forms9Patch
@@ -7,11 +7,12 @@ namespace Forms9Patch
     /// <summary>
     /// Depricated: Use StateButton
     /// </summary>
-    [Obsolete("Depricated: Use Forms9Patch.StateButton")]
+    [Obsolete("Obsolete: Use Forms9Patch.StateButton", true)]
     public class ImageButton : StateButton
     {
     }
 
+    [DesignTimeVisible(true)]
     /// <summary>
     /// Image button.
     /// </summary>
@@ -169,7 +170,7 @@ namespace Forms9Patch
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.StateButton"/> class.
         /// </summary>
-        public StateButton() 
+        public StateButton()
         {
             _constructing = true;
             DefaultState = new ButtonState();

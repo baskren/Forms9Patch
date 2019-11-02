@@ -1,8 +1,10 @@
 ﻿using System;
+using System.ComponentModel;
 using Xamarin.Forms;
 
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     /// <summary>
     /// Interface used to queary current state of Forms9Patch.ListView cells and the ItemSource object bound to the cells view.
     /// </summary>

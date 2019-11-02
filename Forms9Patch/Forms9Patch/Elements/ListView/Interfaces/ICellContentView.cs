@@ -1,8 +1,10 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using FormsGestures;
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     /// <summary>
     /// Interface to set the cell height for a cell that contains the content of a Forms9Patch ListView cell.
     /// </summary>

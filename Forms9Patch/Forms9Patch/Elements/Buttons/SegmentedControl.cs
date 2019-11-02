@@ -11,7 +11,7 @@ namespace Forms9Patch
     /// <summary>
     /// DEPRICATED: USE SegmentedControl
     /// </summary>
-    [Obsolete("DEPRICATED: Use SegmentedControl")]
+    [Obsolete("DEPRICATED: Use SegmentedControl", true)]
     public class MaterialSegmentedControl : SegmentedControl
     {
     }
@@ -19,6 +19,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Material Segmented Control.
     /// </summary>
+    [DesignTimeVisible(true)]
     [ContentProperty(nameof(Segments))]
     public class SegmentedControl : Forms9Patch.ManualLayout, ILabelStyle, IDisposable
     {

@@ -1,8 +1,10 @@
 ﻿using System.Linq;
+using System.ComponentModel;
 using Xamarin.Forms;
 
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     /// <summary>
     /// Adds a clear button to a Xamarin.Forms.Entry
     /// </summary>

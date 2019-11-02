@@ -1,7 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
 using System.Windows.Input;
-using P42.Utils;
 using System.ComponentModel;
 using System.Reflection;
 
@@ -10,9 +9,10 @@ namespace Forms9Patch
     /// <summary>
     /// DEPRICATED: Use Button
     /// </summary>
-    [Obsolete("Depricated: Use Forms9Patch.Button")]
+    [Obsolete("Depricated: Use Forms9Patch.Button", true)]
     public class MaterialButton : Forms9Patch.Button { }
 
+    [DesignTimeVisible(true)]
     /// <summary>
     /// Forms9Patch Button.
     /// </summary>
@@ -24,7 +24,7 @@ namespace Forms9Patch
         /// <summary>
         /// OBSOLETE: Use SelectedTextColorProperty
         /// </summary>
-        [Obsolete("Use SelectedTextColorProperty")]
+        [Obsolete("Use SelectedTextColorProperty", true)]
         public static readonly BindableProperty SelectedFontColorProperty = BindableProperty.Create(nameof(SelectedFontColor), typeof(Color), typeof(Button), Color.Default, propertyChanged: (bindable, oldValue, newValue) =>
         {
             if (bindable is Button button && newValue is Xamarin.Forms.Color color)
@@ -34,7 +34,7 @@ namespace Forms9Patch
         /// OBSOLETE: Use SelectedTextColor
         /// </summary>
         /// <value>The color of the font.</value>
-        [Obsolete("Use SelectedTextColor")]
+        [Obsolete("Use SelectedTextColor", true)]
         public Color SelectedFontColor
         {
             get => (Color)GetValue(SelectedFontColorProperty);
@@ -80,7 +80,7 @@ namespace Forms9Patch
         /// <summary>
         /// OBSOLETE: Use TrailingIconProperty
         /// </summary>
-        [Obsolete("Use TrailingIconProperty")]
+        [Obsolete("Use TrailingIconProperty", true)]
         public static readonly BindableProperty TrailingImageProperty = BindableProperty.Create(nameof(TrailingImage), typeof(bool), typeof(Button), default(bool), propertyChanged: (bindable, oldValue, newValue) =>
         {
             if (bindable is Button button && newValue is bool value)
@@ -89,7 +89,7 @@ namespace Forms9Patch
         /// <summary>
         /// OBSOLETE: Use TrailingIcon
         /// </summary>
-        [Obsolete("Use TrailingIcon")]
+        [Obsolete("Use TrailingIcon", true)]
         public bool TrailingImage
         {
             get => (bool)GetValue(TrailingImageProperty);
@@ -99,7 +99,7 @@ namespace Forms9Patch
         /// <summary>
         /// OBSOLETE: Used TintIconProperty
         /// </summary>
-        [Obsolete("Use TintIconProperty")]
+        [Obsolete("Use TintIconProperty", true)]
         public static readonly BindableProperty TintImageProperty = BindableProperty.Create(nameof(TintImage), typeof(bool), typeof(Button), true, propertyChanged: (bindable, oldValue, newValue) =>
         {
             if (bindable is Button button && newValue is bool value)
@@ -108,7 +108,7 @@ namespace Forms9Patch
         /// <summary>
         /// OBSOLETE: Use TintIcon property
         /// </summary>
-        [Obsolete("Use TintIcon")]
+        [Obsolete("Use TintIcon", true)]
         public bool TintImage
         {
             get => (bool)GetValue(TintImageProperty);
@@ -119,7 +119,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for IsEliptical property
         /// </summary>
-        [Obsolete("Use ElementShapeProperty instead.")]
+        [Obsolete("Use ElementShapeProperty instead.", true)]
         public static readonly BindableProperty IsEllipticalProperty = BindableProperty.Create(nameof(IsElliptical), typeof(bool), typeof(Button), default(bool), propertyChanged: (bindable, oldValue, newValue) =>
         {
             if (bindable is Button button && newValue is bool value)
@@ -128,7 +128,7 @@ namespace Forms9Patch
         /// <summary>
         /// Gets/Sets the IsEliptical property
         /// </summary>
-        [Obsolete("Use ElementShape property instead.")]
+        [Obsolete("Use ElementShape property instead.", true)]
         public bool IsElliptical
         {
             get { return (bool)GetValue(IsEllipticalProperty); }
@@ -139,7 +139,7 @@ namespace Forms9Patch
         /// <summary>
         /// OBSOLETE: Use TextColorProperty
         /// </summary>
-        [Obsolete("Use TextColorProperty")]
+        [Obsolete("Use TextColorProperty", true)]
         public static readonly BindableProperty FontColorProperty = BindableProperty.Create(nameof(FontColor), typeof(Color), typeof(Button), Color.Default, propertyChanged: (bindable, oldValue, newValue) =>
         {
             if (bindable is Button button && newValue is Xamarin.Forms.Color color)
@@ -149,7 +149,7 @@ namespace Forms9Patch
         /// OBSOLETE: Use TextColor
         /// </summary>
         /// <value>The color of the font.</value>
-        [Obsolete("Use TextColor")]
+        [Obsolete("Use TextColor", true)]
         public Color FontColor
         {
             get => (Color)GetValue(FontColorProperty);
@@ -168,7 +168,7 @@ namespace Forms9Patch
         /// Gets or sets the alignment of the image and text.
         /// </summary>
         /// <value>The alignment (left, center, right).</value>
-        [Obsolete("Alignment is obsolete, see HorizontalTextAlignment and VerticalTextAlignment")]
+        [Obsolete("Alignment is obsolete, see HorizontalTextAlignment and VerticalTextAlignment", true)]
         public TextAlignment Alignment
         {
             get => (TextAlignment)GetValue(AlignmentProperty);
@@ -178,7 +178,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for Fit property
         /// </summary>
-        [Obsolete("FitProperty is obsolete.  Use AutoFitProperty instead.")]
+        [Obsolete("FitProperty is obsolete.  Use AutoFitProperty instead.", true)]
         public static readonly BindableProperty FitProperty = BindableProperty.Create(nameof(Fit), typeof(LabelFit), typeof(Button), LabelFit.None, propertyChanged: (bindable, oldValue, newValue) =>
         {
             if (bindable is Label label && newValue is LabelFit fit)
@@ -196,7 +196,7 @@ namespace Forms9Patch
         /// <summary>
         /// Gets/Sets the Fit property
         /// </summary>
-        [Obsolete("Fit property is obsolete.  Use AutoFit property instead.")]
+        [Obsolete("Fit property is obsolete.  Use AutoFit property instead.", true)]
         public LabelFit Fit
         {
             get => (LabelFit)GetValue(FitProperty);

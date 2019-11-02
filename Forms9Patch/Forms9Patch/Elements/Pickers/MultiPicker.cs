@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.ComponentModel;
 using Xamarin.Forms;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     /// <summary>
     /// Multi picker.
     /// </summary>

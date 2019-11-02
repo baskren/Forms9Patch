@@ -11,6 +11,7 @@ namespace Forms9Patch
     /// MarkdownLabel Formatted string.
     /// </summary>
     [Xamarin.Forms.ContentProperty(nameof(Text))]
+    [DesignTimeVisible(true)]
     abstract class F9PFormattedString : INotifyPropertyChanged //, IDisposable //, IEquatable<F9PFormattedString>
     {
         internal ObservableCollection<Span> _spans;

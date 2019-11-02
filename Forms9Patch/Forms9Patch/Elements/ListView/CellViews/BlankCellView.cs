@@ -1,7 +1,9 @@
 ﻿using Xamarin.Forms;
+using System.ComponentModel;
 
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     /// <summary>
     /// DO NOT USE: Used by Forms9Patch.ListView as a placeholder for a cell when being dragged
     /// </summary>

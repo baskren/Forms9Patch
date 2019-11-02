@@ -1,17 +1,18 @@
 using System;
 using Xamarin.Forms;
-
+using System.ComponentModel;
 namespace Forms9Patch
 {
     /// <summary>
     /// OBSOLETE: Use ButtonState
     /// </summary>
-    [Obsolete("Use ButtonState")]
+    [Obsolete("Use ButtonState", true)]
     public class ImageButtonState : ButtonState { }
 
     /// <summary>
     /// Describes the properties of a <see cref="StateButton"/> for a given state.
     /// </summary>
+    [DesignTimeVisible(true)]
     [ContentProperty(nameof(HtmlText))]
     public class ButtonState : BindableObject, IButtonState
     {

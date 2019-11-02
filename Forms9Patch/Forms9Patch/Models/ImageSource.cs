@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Xamarin.Forms;
+using System.ComponentModel;
 
 namespace Forms9Patch
 {
     /// <summary>
     /// Forms9Patch ImageSource.
     /// </summary>
+    [DesignTimeVisible(true)]
     public class ImageSource : Xamarin.Forms.ImageSource
     {
         internal static readonly BindableProperty ImageScaleProperty = BindableProperty.CreateAttached("ImageScale", typeof(float), typeof(ImageSource), 1.0f);
@@ -164,11 +166,11 @@ namespace Forms9Patch
 			return imageSource;
 		}
 		*/
-            #endregion
+        #endregion
 
 
-            #region Path Parsing 
-            static Tuple<string, string> GetiOSBasePathAndExt(string pathString)
+        #region Path Parsing 
+        static Tuple<string, string> GetiOSBasePathAndExt(string pathString)
         {
             if (pathString == null)
                 return null;

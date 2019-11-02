@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     /// <summary>
     /// Group header template.
     /// </summary>
@@ -17,5 +19,5 @@ namespace Forms9Patch
         {
         }
 
-     }
+    }
 }

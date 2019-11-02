@@ -3,12 +3,14 @@ using Xamarin.Forms;
 using System.Linq;
 using System.Reflection;
 using P42.Utils;
+using System.ComponentModel;
 
 namespace Forms9Patch
 {
     /// <summary>
     /// Focus monitor: Helps you keep up with what VisualElement currently has focus
     /// </summary>
+    [DesignTimeVisible(true)]
     public static class FocusMonitor
     {
 #pragma warning disable IDE0044 // Add readonly modifier
@@ -128,7 +130,7 @@ namespace Forms9Patch
                         changed = true;
                     }
                     //else
-                        //System.Diagnostics.Debug.WriteLine("\t F.A value.Focus()==false");
+                    //System.Diagnostics.Debug.WriteLine("\t F.A value.Focus()==false");
                 }
                 else if (wasElement != null)
                 {

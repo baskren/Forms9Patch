@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using Forms9Patch.Elements.Popups.Core.Animations;
 using Xamarin.Forms;
@@ -6,6 +7,7 @@ using Xamarin.Forms;
 #pragma warning disable CS0618 // Type or member is obsolete
 namespace Forms9Patch.Elements.Popups.Core
 {
+    [DesignTimeVisible(true)]
     /// <summary>
     /// Foundation for Popups
     /// </summary>

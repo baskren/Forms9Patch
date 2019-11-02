@@ -1,11 +1,11 @@
 ﻿using Xamarin.Forms;
 using System;
-using P42.Utils;
-using Xamarin.Forms.Internals;
+using System.ComponentModel;
 using FormsGestures;
 
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     /// <summary>
     /// Forms9Patch.Label
     /// </summary>

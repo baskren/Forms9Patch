@@ -5,6 +5,7 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     /// <summary>
     /// Enabled StepSize control of Xamarin.Forms.Slider element
     /// </summary>

@@ -1,8 +1,10 @@
 using System;
+using System.ComponentModel;
 using Xamarin.Forms;
 
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     class SegmentButton : Forms9Patch.Button, IExtendedShape
     {
         #region ExtendedElementShapeOrientation property

@@ -1,14 +1,13 @@
 using System;
-using Xamarin.Forms;
 using System.ComponentModel;
-using FormsGestures;
+using Xamarin.Forms;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections;
-using System.Linq;
 
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     /// <summary>
     /// FormsDragNDropListView List view.
     /// </summary>

@@ -1,11 +1,12 @@
 ﻿#define _Forms9Patch_BubbleLayout_
 
-using System;
+using System.ComponentModel;
 using Xamarin.Forms;
 
 
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     /// <summary>
     /// Bubble layout.
     /// </summary>

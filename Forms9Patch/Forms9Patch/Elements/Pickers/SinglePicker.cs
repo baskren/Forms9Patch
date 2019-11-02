@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using Xamarin.Forms;
-using System;
+using System.ComponentModel;
 
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     /// <summary>
     /// Single picker.
     /// </summary>

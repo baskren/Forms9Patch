@@ -9,6 +9,7 @@ using Xamarin.Forms.Internals;
 namespace Forms9Patch
 {
 
+    [DesignTimeVisible(true)]
     internal class HeaderCell<TContent> : Cell<TContent> where TContent : View, new()
     {
         public HeaderCell()
@@ -17,6 +18,7 @@ namespace Forms9Patch
     }
 
 
+    [DesignTimeVisible(true)]
     // the non-group header version of Cell
     internal class ItemCell<TContent> : Cell<TContent> where TContent : View, new()
     {
@@ -25,6 +27,7 @@ namespace Forms9Patch
 
     }
 
+    [DesignTimeVisible(true)]
     // The purpose of this class it to:
     // - capture and manage the height of Forms9Patch.ListView cells
     // - set proper BindingContext to a cell's content view 

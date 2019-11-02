@@ -6,8 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using P42.Utils;
 
+
 namespace Forms9Patch
 {
+    [DesignTimeVisible(true)]
     /// <summary>
     /// DO NOT USE: Used by Forms9Patch.ListView as a foundation for cells.
     /// </summary>
