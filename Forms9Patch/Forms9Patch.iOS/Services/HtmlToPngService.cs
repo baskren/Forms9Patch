@@ -3,6 +3,7 @@ using System.IO;
 using CoreGraphics;
 using Foundation;
 using UIKit;
+using WebKit;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(Forms9Patch.iOS.HtmlToPngService))]
@@ -13,6 +14,8 @@ namespace Forms9Patch.iOS
     /// </summary>
     public class HtmlToPngService : IHtmlToPngPdfService
     {
+        WKWebView webView;
+
         /// <summary>
         /// Converts HTML to PNG
         /// </summary>
@@ -21,240 +24,95 @@ namespace Forms9Patch.iOS
         /// <param name="onComplete">On complete.</param>
         public void ToPng(string html, string fileName, Action<string> onComplete)
         {
-            var size = new Size(8.5, 11);
-            var webView = new UIWebView(new CGRect(0, 0, (size.Width - 0.5) * 72, (size.Height - 0.5) * 72));
-
-            var callback = new WebViewCallBack(size, fileName, onComplete);
-            webView.Delegate = callback;
-            webView.ScalesPageToFit = false;
-            webView.UserInteractionEnabled = false;
-            webView.BackgroundColor = UIColor.White;
-            webView.LoadHtmlString(html, null);
-            Device.StartTimer(TimeSpan.FromSeconds(10), () =>
+            if (NSProcessInfo.ProcessInfo.IsOperatingSystemAtLeastVersion(new NSOperatingSystemVersion(11, 0, 0)))
             {
-                if (!callback.Failed && !callback.Completed)
-                {
-                    //System.Diagnostics.Debug.WriteLine("TIMEOUT!!!");
-                    callback.LoadingFinished(webView);
-                }
-                return false;
-            });
-        }
+                var size = new Size(8.5, 11);
 
+                string jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
+                WKUserScript wkUScript = new WKUserScript((NSString)jScript, WKUserScriptInjectionTime.AtDocumentEnd, true);
+                WKUserContentController wkUController = new WKUserContentController();
+                wkUController.AddUserScript(wkUScript);
+                var configuration = new WKWebViewConfiguration
+                {
+                    UserContentController = wkUController
+                };
+                webView = new WKWebView(new CGRect(0, 0, (size.Width - 0.5) * 72, (size.Height - 0.5) * 72), configuration)
+                {
+                    NavigationDelegate = new WKUiCallback(size, fileName, onComplete),
+                    UserInteractionEnabled = false,
+                    BackgroundColor = UIColor.White
+                };
+                webView.LoadHtmlString(html, null);
+            }
+        }
     }
 
-    class WebViewCallBack : UIWebViewDelegate
+
+    class WKUiCallback : WKNavigationDelegate
     {
-        readonly string _folderPath = P42.Utils.Environment.TemporaryStoragePath;
-        readonly string _fileName;
-        readonly Action<string> _onComplete;
+        public bool Completed { get; private set; }
+
+        public bool Failed { get; private set; }
+
+        int loadCount;
         Size _size;
-        public bool Completed
-        {
-            get;
-            private set;
-        }
-        public bool Failed
-        {
-            get; private set;
-        }
+        string _filename;
+        Action<string> _onComplete;
 
-
-
-        public WebViewCallBack(Size size, string fileName, Action<string> onComplete)
+        public WKUiCallback(Size size, string fileName, Action<string> onComplete)
         {
-            _fileName = fileName;
-            _onComplete = onComplete;
             _size = size;
-            Completed = false;
-            Failed = false;
+            _filename = fileName;
+            _onComplete = onComplete;
         }
 
-        public override void LoadFailed(UIWebView webView, NSError error)
+        public override void DidStartProvisionalNavigation(WKWebView webView, WKNavigation navigation)
         {
-            base.LoadFailed(webView, error);
-            Failed = true;
-            _onComplete?.Invoke(null);
-
+            loadCount++;
         }
 
-        public override void LoadingFinished(UIWebView webView)
+        public override void DidFinishNavigation(WKWebView webView, WKNavigation navigation)
         {
-            //System.Diagnostics.Debug.WriteLine("LoadingFinished");
-
-            if (Failed || Completed)
-                return;
-            Completed = true;
-
-            var height = double.Parse(webView.EvaluateJavascript("document.body.scrollHeight"));
-
-            //var pages = 1;
-
-
-            var vertMargin = (nfloat)(0.25 * 72);
-            var horzMargin = vertMargin;
-            //var height = (nfloat)((_size.Height * pages - 0.5) * 72);
-            //var width = (nfloat)((_size.Width - 0.5) * 72);
-
-            //width = 595.2;  // A4 210mm x 297mm (~8.26" x ~11.69") (595.27pt x 841.89pt)
-            //height = 841.8; // Letter 8.5" x 11" (612px x 792pt)
-            // 1/4" = 18pt
-            //header = 18;
-            //sidespace = 18;
-
-
-            var pageMargins = new UIEdgeInsets(vertMargin, horzMargin, vertMargin, horzMargin);
-            webView.ViewPrintFormatter.ContentInsets = pageMargins;
-            //var renderer = new UIPrintPageRenderer();
-
-            /*
-			 * this only renders the first page
-			if (renderer != null)
-			{
-				UIGraphics.BeginImageContext(webView.Bounds.Size);
-				webView.Layer.RenderInContext(UIGraphics.GetCurrentContext());
-    			var image = UIGraphics.GetImageFromCurrentImageContext();
-				UIGraphics.EndImageContext();
-
-				// Write image to PNG
-				var path = Path.Combine(_folder.Path, _fileName.Replace(".pdf",".png"));
-				var data = image.AsPNG();
-				File.WriteAllBytes(path, data.ToArray());
-				var file = _folder.GetFile(_fileName.Replace(".pdf", ".png"));
-				_onComplete?.Invoke(file);
-				return;
-			}
-			this only renders the first page
-			*/
-
-            /* and same with this approach in spite of what StackOverflow says 
-			if (renderer != null)
-			{
-				UIImage image = null;
-				CGRect oldFrame = webView.Frame;
-				CGSize fullSize = webView.ScrollView.ContentSize;
-				var bodyHeight = webView.EvaluateJavascript("document.body.scrollHeight");
-				fullSize.Height = nfloat.Parse(bodyHeight);
-				UIGraphics.BeginImageContext(fullSize);
-				var resizedContext = UIGraphics.GetCurrentContext();
-				webView.Layer.RenderInContext(resizedContext);
-				image = UIGraphics.GetImageFromCurrentImageContext();
-				UIGraphics.EndImageContext();
-				var data = image.AsPNG();
-				if (data != null)
-				{
-					var path = Path.Combine(_folder.Path, _fileName + ".png");
-					File.WriteAllBytes(path, data.ToArray());
-					var file = _folder.GetFile(_fileName + ".png");
-					_onComplete?.Invoke(file);
-					return;
-				}
-				else
-					System.Diagnostics.Debug.WriteLine("{0}[{1}] data==null", P42.Utils.ReflectionExtensions.CallerString(), GetType());
-			}
-			*/
-
-
-            /* THIS WORKS!!!!
-			if (renderer != null)
-			{
-				renderer.AddPrintFormatter(webView.ViewPrintFormatter, 0);
-
-				var printableRect = new CGRect(horzMargin,
-				                               vertMargin,
-				                               width,
-				                               height);
-				var paperRect = new CGRect(0, 0, _size.Width*72, pages*_size.Height*72);
-				renderer.SetValueForKey(FromObject(paperRect), (NSString)"paperRect");
-				renderer.SetValueForKey(FromObject(printableRect), (NSString)"printableRect");
-				var data = PrintToPDFWithRenderer(renderer, paperRect);
-				if (data != null)
-				{
-					var path = Path.Combine(_folder.Path, _fileName+".pdf");
-					File.WriteAllBytes(path, data.ToArray());
-					_onComplete?.Invoke(file);
-					return;
-				}
-				else
-					System.Diagnostics.Debug.WriteLine("{0}[{1}] data==null", P42.Utils.ReflectionExtensions.CallerString(), GetType());
-			}
-			else
-				System.Diagnostics.Debug.WriteLine("{0}[{1}] renderer==null", P42.Utils.ReflectionExtensions.CallerString(), GetType());
-
-			Failed = true;
-			_onComplete?.Invoke(null);
-			*/
-
-            // BUT WHAT ABOUT PNGs???
-            UIImage image;
-
-            webView.ClipsToBounds = false;
-            webView.ScrollView.ClipsToBounds = false;
-
-
-            var size = new CGSize((_size.Width - 0.5) * 72, height);
-            UIGraphics.BeginImageContextWithOptions(size, false, UIScreen.MainScreen.Scale);
-            webView.Layer.RenderInContext(UIGraphics.GetCurrentContext());
-            image = UIGraphics.GetImageFromCurrentImageContext();
-            UIGraphics.EndImageContext();
-
-
-            /*
-			image = webView.Capture();  // bottom clipped
-			*/
-
-            //clipped on the bottom
-            /*
-			var size = new CGSize(webView.ScrollView.ContentSize.Width, height + 72);
-			UIGraphics.BeginImageContextWithOptions(size, webView.ScrollView.Opaque, UIScreen.MainScreen.Scale);
-			{
-				//CGPoint savedContentOffset = webView.ScrollView.ContentOffset;
-				//CGRect savedFrame = webView.ScrollView.Frame;
-
-				//webView.ScrollView.ContentOffset = new CGPoint(0,300);
-				webView.ScrollView.Frame = new CGRect(CGPoint.Empty,size);
-
-				webView.Layer.RenderInContext(UIGraphics.GetCurrentContext()); // blank at the bottom
-				image = UIGraphics.GetImageFromCurrentImageContext();
-
-				//webView.ScrollView.ContentOffset = savedContentOffset;
-		        //webView.ScrollView.Frame = savedFrame;
-		    }
-			UIGraphics.EndImageContext();
-			*/
-
-
-            var data = image.AsPNG();
-
-            if (data != null)
+            loadCount--;
+            Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
             {
-                var path = Path.Combine(_folderPath, _fileName + ".png");
-                File.WriteAllBytes(path, data.ToArray());
-                _onComplete?.Invoke(path);
-                return;
-            }
-            Failed = true;
-            _onComplete?.Invoke(null);
+                if (loadCount <= 0)
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        var heightString = await webView.EvaluateJavaScriptAsync("document.body.scrollHeight");
+                        var height = double.Parse(heightString.ToString());
+                        var vertMargin = (nfloat)(0.25 * 72);
+                        var horzMargin = vertMargin;
+                        var pageMargins = new UIEdgeInsets(vertMargin, horzMargin, vertMargin, horzMargin);
 
-        }
+                        webView.ViewPrintFormatter.ContentInsets = pageMargins;
+                        webView.ClipsToBounds = false;
+                        webView.ScrollView.ClipsToBounds = false;
 
-        NSData PrintToPDFWithRenderer(UIPrintPageRenderer renderer, CGRect paperRect)
-        {
-            var pdfData = new NSMutableData();
-            UIGraphics.BeginPDFContext(pdfData, paperRect, null);
+                        var image = await webView.TakeSnapshotAsync(new WKSnapshotConfiguration
+                        {
+                            //Rect = new CGRect(0, 0, (_size.Width - 0.5) * 72, height / (Display.Scale / 2.0))
+                            Rect = new CGRect(0, 0, (_size.Width - 0.5) * 72, (height / 2) + vertMargin)
+                        });
 
-            renderer.PrepareForDrawingPages(new NSRange(0, renderer.NumberOfPages));
+                        if (image.AsPNG() is NSData data)
+                        {
+                            var path = Path.Combine(P42.Utils.Environment.TemporaryStoragePath, _filename + ".png");
+                            File.WriteAllBytes(path, data.ToArray());
+                            _onComplete?.Invoke(path);
+                            webView.Dispose();
+                            return;
+                        }
 
-            //var bounds = UIGraphics.PDFContextBounds;
-
-            for (int i = 0; i < renderer.NumberOfPages; i++)
-            {
-                UIGraphics.BeginPDFPage();
-                renderer.DrawPage(i, paperRect);
-            }
-            UIGraphics.EndPDFContent();
-
-            return pdfData;
+                        Failed = true;
+                        _onComplete?.Invoke(null);
+                        webView.Dispose();
+                    });
+                    return false;
+                }
+                return true;
+            });
         }
 
     }
