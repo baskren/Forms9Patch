@@ -103,41 +103,49 @@ namespace Forms9Patch.UWP
             using (InMemoryRandomAccessStream ms = new InMemoryRandomAccessStream())
             {
             System.Diagnostics.Debug.WriteLine("B webView.Size=[" + webView.Width + "," + webView.Height + "] IsOnMainThread=["+P42.Utils.Environment.IsOnMainThread+"]");
-            await webView.CapturePreviewToStreamAsync(ms);
-
-                var decoder = await BitmapDecoder.CreateAsync(ms);
-
-                var transform = new BitmapTransform
+                try
                 {
-                    ScaledHeight = (uint)decoder.PixelHeight,
-                    ScaledWidth = (uint)decoder.PixelWidth
-                };
+                    await webView.CapturePreviewToStreamAsync(ms);
 
-                var pixelData = await decoder.GetPixelDataAsync(
-                    BitmapPixelFormat.Bgra8,
-                    BitmapAlphaMode.Straight,
-                    transform,
-                    ExifOrientationMode.RespectExifOrientation,
-                    ColorManagementMode.DoNotColorManage);
-                var bytes = pixelData.DetachPixelData();
+                    var decoder = await BitmapDecoder.CreateAsync(ms);
+
+                    var transform = new BitmapTransform
+                    {
+                        ScaledHeight = (uint)decoder.PixelHeight,
+                        ScaledWidth = (uint)decoder.PixelWidth
+                    };
+
+                    var pixelData = await decoder.GetPixelDataAsync(
+                        BitmapPixelFormat.Bgra8,
+                        BitmapAlphaMode.Straight,
+                        transform,
+                        ExifOrientationMode.RespectExifOrientation,
+                        ColorManagementMode.DoNotColorManage);
+                    var bytes = pixelData.DetachPixelData();
 
 
-                var piclib = Windows.Storage.ApplicationData.Current.TemporaryFolder;
-                var fileName = (string)webView.GetValue(PngFileNameProperty) + ".png";
-                var file = await piclib.CreateFileAsync(fileName, Windows.Storage.CreationCollisionOption.GenerateUniqueName);
-                using (var stream = await file.OpenAsync(FileAccessMode.ReadWrite))
+                    var piclib = Windows.Storage.ApplicationData.Current.TemporaryFolder;
+                    var fileName = (string)webView.GetValue(PngFileNameProperty) + ".png";
+                    var file = await piclib.CreateFileAsync(fileName, Windows.Storage.CreationCollisionOption.GenerateUniqueName);
+                    using (var stream = await file.OpenAsync(FileAccessMode.ReadWrite))
+                    {
+                        var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
+                        encoder.SetPixelData(BitmapPixelFormat.Bgra8,
+                                            BitmapAlphaMode.Ignore,
+                                            (uint)decoder.PixelWidth, (uint)decoder.PixelHeight,
+                                            0, 0, bytes);
+                        await encoder.FlushAsync();
+                    }
+
+                    var onComplete = (Action<string>)webView.GetValue(OnCompleteProperty);
+                    System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": Complete[" + file.Path + "]");
+                    onComplete?.Invoke(file.Path);
+                } 
+                catch (Exception)
                 {
-                    var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
-                    encoder.SetPixelData(BitmapPixelFormat.Bgra8,
-                                        BitmapAlphaMode.Ignore,
-                                        (uint)decoder.PixelWidth, (uint)decoder.PixelHeight,
-                                        0, 0, bytes);
-                    await encoder.FlushAsync();
+                    var onComplete = (Action<string>)webView.GetValue(OnCompleteProperty);
+                    onComplete?.Invoke(null);
                 }
-
-                var onComplete = (Action<string>)webView.GetValue(OnCompleteProperty);
-                System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": Complete[" + file.Path + "]");
-                onComplete?.Invoke(file.Path);
             }
         }
     }
