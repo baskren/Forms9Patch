@@ -9,7 +9,8 @@ namespace Forms9PatchDemo
         public App()
         {
             InitializeComponent();
-            MainPage =  new NavigationPage(new HomePage());
+            //MainPage =  new NavigationPage(new HomePage());
+            MainPage = new PngFromHtmlPage();
         }
 
         protected override void OnStart()
