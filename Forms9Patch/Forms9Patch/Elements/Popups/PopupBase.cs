@@ -634,16 +634,6 @@ namespace Forms9Patch
         }
 
 
-        /*
-        public async Task WaitForPoppedAsync()
-        {
-            do
-            {
-                await Task.Delay(25);
-            } while (!_isPopped);
-        }
-        */
-
         /// <summary>
         /// Called when back button is pressed
         /// </summary>
