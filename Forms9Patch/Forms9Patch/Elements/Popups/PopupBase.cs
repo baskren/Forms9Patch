@@ -868,8 +868,6 @@ namespace Forms9Patch
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + ReflectionExtensions.CallerMemberName());
             // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
-            //if (!Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
-            {
                 //System.Diagnostics.Debug.WriteLine("PUSH");
                 IsVisible = true;
                 //if (_isPushing || _isPushed)
@@ -898,7 +896,7 @@ namespace Forms9Patch
 #pragma warning disable RECS0165 // Asynchronous methods should return a Task instead of void
                     Device.BeginInvokeOnMainThread(async () => await PushAsync());
 #pragma warning restore RECS0165 // Asynchronous methods should return a Task instead of void
-            }
+            
         }
 
         /// <summary>
@@ -927,8 +925,6 @@ namespace Forms9Patch
         public async Task PopAsync(object trigger = null, [CallerMemberName] string callerName = "", Action lastAction = null)
         {
             // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
-            //if (Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
-            {
                 //System.Diagnostics.Debug.WriteLine(GetType() + "." + ReflectionExtensions.CallerMemberName());
                 if (P42.Utils.Environment.IsOnMainThread)
                 {
@@ -968,7 +964,7 @@ namespace Forms9Patch
 #pragma warning disable RECS0165 // Asynchronous methods should return a Task instead of void
                     Device.BeginInvokeOnMainThread(async () => await PopAsync(trigger, callerName));
 #pragma warning restore RECS0165 // Asynchronous methods should return a Task instead of void
-            }
+            
         }
 
 
