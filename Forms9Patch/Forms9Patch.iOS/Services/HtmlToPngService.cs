@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using CoreGraphics;
 using Foundation;
 using UIKit;
@@ -16,13 +17,24 @@ namespace Forms9Patch.iOS
     {
         WKWebView webView;
 
+        public async Task<HtmlToPngResult> ToPngAsync(ActivityIndicatorPopup popup, string html, string fileName)
+        {
+            HtmlToPngResult result = default;
+            ToPng(popup, html, fileName, (HtmlToPngResult x) => result = x);
+            while (result == default)
+            {
+                await Task.Delay(50);
+            }
+            return result;
+        }
+
         /// <summary>
         /// Converts HTML to PNG
         /// </summary>
         /// <param name="html">HTML.</param>
         /// <param name="fileName">File name.</param>
         /// <param name="onComplete">On complete.</param>
-        public void ToPng(string html, string fileName, Action<string> onComplete)
+        public void ToPng(ActivityIndicatorPopup popup, string html, string fileName, Action<HtmlToPngResult> onComplete)
         {
             if (NSProcessInfo.ProcessInfo.IsOperatingSystemAtLeastVersion(new NSOperatingSystemVersion(11, 0, 0)))
             {
@@ -45,6 +57,7 @@ namespace Forms9Patch.iOS
                 webView.LoadHtmlString(html, null);
             }
         }
+
     }
 
 
@@ -57,9 +70,9 @@ namespace Forms9Patch.iOS
         int loadCount;
         Size _size;
         string _filename;
-        Action<string> _onComplete;
+        Action<HtmlToPngResult> _onComplete;
 
-        public WKUiCallback(Size size, string fileName, Action<string> onComplete)
+        public WKUiCallback(Size size, string fileName, Action<HtmlToPngResult> onComplete)
         {
             _size = size;
             _filename = fileName;
@@ -80,34 +93,46 @@ namespace Forms9Patch.iOS
                 {
                     Device.BeginInvokeOnMainThread(async () =>
                     {
-                        var heightString = await webView.EvaluateJavaScriptAsync("document.body.scrollHeight");
-                        var height = double.Parse(heightString.ToString());
-                        var vertMargin = (nfloat)(0.25 * 72);
-                        var horzMargin = vertMargin;
-                        var pageMargins = new UIEdgeInsets(vertMargin, horzMargin, vertMargin, horzMargin);
-
-                        webView.ViewPrintFormatter.ContentInsets = pageMargins;
-                        webView.ClipsToBounds = false;
-                        webView.ScrollView.ClipsToBounds = false;
-
-                        var image = await webView.TakeSnapshotAsync(new WKSnapshotConfiguration
+                        try
                         {
-                            //Rect = new CGRect(0, 0, (_size.Width - 0.5) * 72, height / (Display.Scale / 2.0))
-                            Rect = new CGRect(0, 0, (_size.Width - 0.5) * 72, (height / 2) + vertMargin)
-                        });
+                            var heightString = await webView.EvaluateJavaScriptAsync("document.body.scrollHeight");
+                            var height = double.Parse(heightString.ToString());
+                            var vertMargin = (nfloat)(0.25 * 72);
+                            var horzMargin = vertMargin;
+                            var pageMargins = new UIEdgeInsets(vertMargin, horzMargin, vertMargin, horzMargin);
 
-                        if (image.AsPNG() is NSData data)
-                        {
-                            var path = Path.Combine(P42.Utils.Environment.TemporaryStoragePath, _filename + ".png");
-                            File.WriteAllBytes(path, data.ToArray());
-                            _onComplete?.Invoke(path);
-                            webView.Dispose();
-                            return;
+                            webView.ViewPrintFormatter.ContentInsets = pageMargins;
+                            webView.ClipsToBounds = false;
+                            webView.ScrollView.ClipsToBounds = false;
+
+                            var image = await webView.TakeSnapshotAsync(new WKSnapshotConfiguration
+                            {
+                                //Rect = new CGRect(0, 0, (_size.Width - 0.5) * 72, height / (Display.Scale / 2.0))
+                                Rect = new CGRect(0, 0, (_size.Width - 0.5) * 72, (height) + vertMargin)
+                            });
+
+                            if (image.AsPNG() is NSData data)
+                            {
+                                var path = Path.Combine(P42.Utils.Environment.TemporaryStoragePath, _filename + ".png");
+                                File.WriteAllBytes(path, data.ToArray());
+                                _onComplete?.Invoke(new HtmlToPngResult(false, path));
+                                return;
+                            }
+
+                            Failed = true;
+                            _onComplete?.Invoke(new HtmlToPngResult(true, "No data returned."));
                         }
-
-                        Failed = true;
-                        _onComplete?.Invoke(null);
-                        webView.Dispose();
+                        catch (Exception e)
+                        {
+                            Failed = true;
+                            _onComplete?.Invoke(new HtmlToPngResult(true, "Exception: " + e.Message + (e.InnerException != null
+                                ? "Inner exception: " + e.InnerException.Message
+                                : null)));
+                        }
+                        finally
+                        {
+                            webView.Dispose();
+                        }
                     });
                     return false;
                 }

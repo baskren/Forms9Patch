@@ -12,7 +12,18 @@ namespace Forms9Patch.Droid
 {
     public class HtmlToPngService : Java.Lang.Object, IHtmlToPngPdfService
     {
-        public void ToPng(string html, string fileName, Action<string> onComplete)
+        public async Task<HtmlToPngResult> ToPngAsync(ActivityIndicatorPopup popup, string html, string fileName)
+        {
+            HtmlToPngResult result = default;
+            ToPng(popup, html, fileName, (HtmlToPngResult x) => result = x);
+            while (result == default)
+            {
+                await Task.Delay(50);
+            }
+            return result;
+        }
+
+        public void ToPng(ActivityIndicatorPopup popup, string html, string fileName, Action<HtmlToPngResult> onComplete)
         {
             if (CanWriteExternalStorage())
             {
@@ -35,9 +46,8 @@ namespace Forms9Patch.Droid
                 webView.SetWebViewClient(new WebViewCallBack(fileName, onComplete));
             }
             else
-                onComplete.Invoke(null);
+                onComplete.Invoke(new HtmlToPngResult(true, "Cannot write External Storage."));
         }
-
 
         bool CanWriteExternalStorage()
         {
@@ -56,13 +66,13 @@ namespace Forms9Patch.Droid
     {
 
         readonly string _fileName;
-        readonly Action<string> _onComplete;
+        readonly Action<HtmlToPngResult> _onComplete;
         CustomWebView webView;
 
         readonly Java.IO.File _dir;
 
 
-        public WebViewCallBack(string fileName, Action<string> onComplete)
+        public WebViewCallBack(string fileName, Action<HtmlToPngResult> onComplete)
         {
             _dir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDocuments);
             //_dir = Android.OS.Environment.DownloadCacheDirectory;
@@ -83,8 +93,10 @@ namespace Forms9Patch.Droid
             System.Diagnostics.Debug.WriteLine("value=[" + value + "]");
             var height = Convert.ToInt32(value.ToString());
 
-            int specWidth = MeasureSpecFactory.MakeMeasureSpec(webView.ContentWidth, MeasureSpecMode.Exactly);
-            int specHeight = MeasureSpecFactory.MakeMeasureSpec(height + 36, MeasureSpecMode.Exactly);
+            System.Diagnostics.Debug.WriteLine("WebViewCallBack" + P42.Utils.ReflectionExtensions.CallerString() + ": Scale=[" + Display.Scale + "]");
+
+            int specWidth = MeasureSpecFactory.MakeMeasureSpec((int)(webView.ContentWidth * Display.Scale), MeasureSpecMode.Exactly);
+            int specHeight = MeasureSpecFactory.MakeMeasureSpec((int)((height + 36) * Display.Scale), MeasureSpecMode.Exactly);
             webView.Measure(specWidth, specHeight);
             webView.Layout(0, 0, webView.MeasuredWidth, webView.MeasuredHeight);
             System.Diagnostics.Debug.WriteLine("spec [" + specWidth + ", " + specHeight + "]");
@@ -139,7 +151,7 @@ namespace Forms9Patch.Droid
 
             Android.App.Application.Context.StartActivity(emailIntent);
             */
-            _onComplete?.Invoke(path);
+            _onComplete?.Invoke(new HtmlToPngResult(false, path));
             //_onComplete?.Invoke(tempFile.Path);
 
         }

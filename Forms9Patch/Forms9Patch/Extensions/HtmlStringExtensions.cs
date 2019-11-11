@@ -16,7 +16,7 @@ namespace Forms9Patch
 
         static IHtmlToPngPdfService _htmlService;
 
-        [Obsolete("Use ToPngAsync instead",true)]
+        [Obsolete("Use ToPngAsync instead", true)]
         public static void ToPng(this string html, string fileName, Action<string> onComplete)
         { }
 
@@ -31,10 +31,13 @@ namespace Forms9Patch
             _htmlService = _htmlService ?? DependencyService.Get<IHtmlToPngPdfService>();
             if (_htmlService == null)
                 throw new NotSupportedException("Cannot get HtmlService: must not be supported on this platform.");
+            HtmlToPngResult result = null;
             using (var indicator = ActivityIndicatorPopup.Create())
             {
-                return await _htmlService.ToPngAsync(indicator, html, fileName);
+                result = await _htmlService.ToPngAsync(indicator, html, fileName);
             }
+            await Task.Delay(50);
+            return result;
         }
 
     }
