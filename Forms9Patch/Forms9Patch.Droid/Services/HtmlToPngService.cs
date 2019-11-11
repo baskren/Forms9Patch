@@ -15,6 +15,7 @@ namespace Forms9Patch.Droid
         public async Task<HtmlToPngResult> ToPngAsync(ActivityIndicatorPopup popup, string html, string fileName)
         {
             HtmlToPngResult result = default;
+            await Task.Delay(50);
             ToPng(popup, html, fileName, (HtmlToPngResult x) => result = x);
             while (result == default)
             {
