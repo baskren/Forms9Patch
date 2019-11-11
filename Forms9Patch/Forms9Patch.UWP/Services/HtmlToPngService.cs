@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Graphics.Imaging;
@@ -28,6 +29,21 @@ namespace Forms9Patch.UWP
         DependencyProperty WebViewProperty = DependencyProperty.Register("WebView", typeof(Windows.UI.Xaml.Controls.WebView), typeof(HtmlToPngService), null);
         DependencyProperty HtmlStringProperty = DependencyProperty.Register("HtmlString", typeof(string), typeof(HtmlToPngService), null);
 
+
+        public async Task<HtmlToPngResult> ToPngAsync(ActivityIndicatorPopup popup, string html, string fileName)
+        {
+            HtmlToPngResult result = default;
+            await Task.Delay(1000);
+            ToPng(popup, html, fileName, (HtmlToPngResult x) => result = x);
+            while (result == default)
+            {
+                await Task.Delay(50);
+            }
+            return result;
+        }
+
+
+
 #pragma warning disable CS1998
         /// <summary>
         /// Converts HTML to PNG
@@ -35,27 +51,20 @@ namespace Forms9Patch.UWP
         /// <param name="html">HTML.</param>
         /// <param name="fileName">File name.</param>
         /// <param name="onComplete">On complete.</param>
-        public void ToPng(string html, string fileName, Action<string> onComplete)
+        public void ToPng(ActivityIndicatorPopup popup, string html, string fileName, Action<HtmlToPngResult> onComplete)
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
-                var currentPage = Forms9Patch.PageExtensions.FindCurrentPage(Xamarin.Forms.Application.Current.MainPage);
-                var rootPageRenderer = (Xamarin.Forms.Platform.UWP.PageRenderer)Platform.GetRenderer(currentPage);
+                  
 
                 var size = new Size(8.5, 11);
-                var webView = new Windows.UI.Xaml.Controls.WebView
-                {
-                    DefaultBackgroundColor = Windows.UI.Colors.White,
-                    Width = (size.Width - 0.5) * 72 / 2,
-                    Height = 10, // (size.Height - 0.5) * 72,
+                var renderer = (Xamarin.Forms.Platform.UWP.WebViewRenderer)Platform.GetRenderer(popup.WebView);
+                var webView = renderer.Control;
 
-                };
-                /*
-                var transform = new TranslateTransform();
-                transform.TransformPoint(new Windows.Foundation.Point(0, 0));
-                webView.RenderTransform = transform;
-                */
-                rootPageRenderer.Children.Add(webView);
+                webView.DefaultBackgroundColor = Windows.UI.Colors.White;
+                webView.Width = (size.Width - 0.5) * 72 / 2;
+                webView.Height = 10; // (size.Height - 0.5) * 72,
+
                 webView.Visibility = Visibility.Visible;
 
                 webView.SetValue(PngFileNameProperty, fileName);
@@ -82,6 +91,8 @@ namespace Forms9Patch.UWP
 
         private async void NavigationCompleteA(Windows.UI.Xaml.Controls.WebView webView, WebViewNavigationCompletedEventArgs args)
         {
+            IsMainPageChild(webView);
+
             var contentSize = await webView.WebViewContentSizeAsync();
             webView.NavigationCompleted -= NavigationCompleteA;
 
@@ -100,11 +111,14 @@ namespace Forms9Patch.UWP
 
         private async void NavigationCompleteB(Windows.UI.Xaml.Controls.WebView webView, WebViewNavigationCompletedEventArgs args)
         {
+            IsMainPageChild(webView);
+
             using (InMemoryRandomAccessStream ms = new InMemoryRandomAccessStream())
             {
             System.Diagnostics.Debug.WriteLine("B webView.Size=[" + webView.Width + "," + webView.Height + "] IsOnMainThread=["+P42.Utils.Environment.IsOnMainThread+"]");
                 try
                 {
+                    //await Task.Delay(2000);
                     await webView.CapturePreviewToStreamAsync(ms);
 
                     var decoder = await BitmapDecoder.CreateAsync(ms);
@@ -137,16 +151,29 @@ namespace Forms9Patch.UWP
                         await encoder.FlushAsync();
                     }
 
-                    var onComplete = (Action<string>)webView.GetValue(OnCompleteProperty);
+                    var onComplete = (Action<HtmlToPngResult>)webView.GetValue(OnCompleteProperty);
                     System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": Complete[" + file.Path + "]");
-                    onComplete?.Invoke(file.Path);
+                    onComplete?.Invoke(new HtmlToPngResult(false, file.Path));
                 } 
-                catch (Exception)
+                catch (Exception e)
                 {
-                    var onComplete = (Action<string>)webView.GetValue(OnCompleteProperty);
-                    onComplete?.Invoke(null);
+                    var onComplete = (Action<HtmlToPngResult>)webView.GetValue(OnCompleteProperty);
+                    onComplete?.Invoke(new HtmlToPngResult(true, e.InnerException?.Message ?? e.Message));
                 }
             }
         }
+
+        bool IsMainPageChild(Windows.UI.Xaml.Controls.WebView webView)
+        {
+            var currentPage = Forms9Patch.PageExtensions.FindCurrentPage(Xamarin.Forms.Application.Current.MainPage);
+            var rootPageRenderer = (Xamarin.Forms.Platform.UWP.PageRenderer)Platform.GetRenderer(currentPage);
+
+            var result = rootPageRenderer.Children.Contains(webView);
+
+            System.Diagnostics.Debug.WriteLine("IsMainPageChild : ["+result+"]  WebView.Parent=[" + webView.Parent + "]");
+
+            return result;
+        }
+
     }
 }

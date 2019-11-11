@@ -38,6 +38,15 @@ namespace Forms9Patch
             Color = Color.Blue
 
         };
+        internal readonly Xamarin.Forms.Grid Grid = new Xamarin.Forms.Grid
+        {
+
+        };
+
+        internal readonly Xamarin.Forms.WebView WebView = new Xamarin.Forms.WebView()
+        {
+            Opacity = 0.01
+        };
         #endregion
 
 
@@ -60,8 +69,12 @@ namespace Forms9Patch
         public ActivityIndicatorPopup(TimeSpan popAfter = default) : base(popAfter)
         {
             if (Device.RuntimePlatform == Device.UWP)
-                _indicator.WidthRequest = 300;
-            Content = _indicator;
+                Grid.WidthRequest = 300;
+
+            Grid.Children.Add(WebView);
+            Grid.Children.Add(_indicator);
+
+            Content = Grid;
 
             CancelOnPageOverlayTouch = false;
             BackgroundColor = Color.FromRgba(0, 0, 0, 1);

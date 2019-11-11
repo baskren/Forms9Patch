@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Forms9Patch
@@ -15,18 +16,25 @@ namespace Forms9Patch
 
         static IHtmlToPngPdfService _htmlService;
 
+        [Obsolete("Use ToPngAsync instead",true)]
+        public static void ToPng(this string html, string fileName, Action<string> onComplete)
+        { }
+
         /// <summary>
         /// Tos the png.
         /// </summary>
         /// <param name="html">Html.</param>
         /// <param name="fileName">File name.</param>
         /// <param name="onComplete">On complete.</param>
-        public static void ToPng(this string html, string fileName, Action<string> onComplete)
+        public static async Task<HtmlToPngResult> ToPngAsync(this string html, string fileName)
         {
             _htmlService = _htmlService ?? DependencyService.Get<IHtmlToPngPdfService>();
             if (_htmlService == null)
                 throw new NotSupportedException("Cannot get HtmlService: must not be supported on this platform.");
-            _htmlService.ToPng(html, fileName, onComplete);
+            using (var indicator = ActivityIndicatorPopup.Create())
+            {
+                return await _htmlService.ToPngAsync(indicator, html, fileName);
+            }
         }
 
     }

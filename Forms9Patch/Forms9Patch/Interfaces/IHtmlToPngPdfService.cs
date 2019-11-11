@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 namespace Forms9Patch
 {
@@ -13,19 +14,25 @@ namespace Forms9Patch
 		/// <param name="html">Html.</param>
 		/// <param name="fileName">File name.</param>
 		/// <param name="onComplete">On complete.</param>
-		void ToPng(string html, string fileName, Action<string> onComplete);
+		Task<HtmlToPngResult> ToPngAsync(ActivityIndicatorPopup popup, string html, string fileName);
 	}
 
 	/// <summary>
 	/// Pdf done arguments.
 	/// </summary>
-	public class AttachmentDoneArgs : EventArgs
+	public class HtmlToPngResult 
 	{
+        /// <summary>
+        /// Flags if the Result is an error;
+        /// </summary>
+        public bool IsError { get; private set; }
+
+
 		/// <summary>
-		/// Gets the path.
+		/// Either the path to the PNG or, if IsError, an error message
 		/// </summary>
 		/// <value>The path.</value>
-		public string Path
+		public string Result
 		{
 			get;
 			private set;
@@ -35,9 +42,10 @@ namespace Forms9Patch
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.PdfDoneArgs"/> class.
 		/// </summary>
 		/// <param name="path">Path.</param>
-		public AttachmentDoneArgs(string path)
+		internal HtmlToPngResult(bool isError, string result)
 		{
-			Path = path;
+            IsError = isError;
+            Result = result;
 		}
 	}
 }
