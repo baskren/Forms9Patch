@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class Segment
    | Forms9Patch ">
-    <meta name="generator" content="docfx 2.45.1.0">
+    <meta name="generator" content="docfx 2.47.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -99,6 +99,7 @@
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ielementcontroller">IElementController</a></div>
     <div><a class="xref" href="Forms9Patch.ISegment.html">ISegment</a></div>
     <div><a class="xref" href="Forms9Patch.IMenuItem.html">IMenuItem</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -246,17 +247,12 @@
   <h5 id="Forms9Patch_Segment_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[ContentProperty(&quot;HtmlText&quot;)]
-public class Segment : Element, INotifyPropertyChanged, IDynamicResourceHandler, IElement, INameScope, IElementController, IStyleSelectable, ISegment, IMenuItem</code></pre>
+public class Segment : Element, INotifyPropertyChanged, IDynamicResourceHandler, IElement, INameScope, IElementController, IStyleSelectable, ISegment, IMenuItem, IDisposable</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment__ctor.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L324">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_Segment__ctor_" data-uid="Forms9Patch.Segment.#ctor*"></a>
   <h4 id="Forms9Patch_Segment__ctor" data-uid="Forms9Patch.Segment.#ctor">Segment()</h4>
   <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Forms9Patch.Segment.html">Segment</a> class.</p>
@@ -266,13 +262,8 @@ public class Segment : Element, INotifyPropertyChanged, IDynamicResourceHandler,
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public Segment()</code></pre>
   </div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment__ctor_System_String_Forms9Patch_Image_.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.%23ctor(System.String%2CForms9Patch.Image)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L369">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_Segment__ctor_" data-uid="Forms9Patch.Segment.#ctor*"></a>
   <h4 id="Forms9Patch_Segment__ctor_System_String_Forms9Patch_Image_" data-uid="Forms9Patch.Segment.#ctor(System.String,Forms9Patch.Image)">Segment(String, Image)</h4>
   <div class="markdown level1 summary"><p>Instantiates an new Segment and sets its Text and imageSource properties</p>
@@ -304,13 +295,8 @@ public class Segment : Element, INotifyPropertyChanged, IDynamicResourceHandler,
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment__ctor_System_String_System_String_System_Reflection_Assembly_.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.%23ctor(System.String%2CSystem.String%2CSystem.Reflection.Assembly)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L394">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_Segment__ctor_" data-uid="Forms9Patch.Segment.#ctor*"></a>
   <h4 id="Forms9Patch_Segment__ctor_System_String_System_String_System_Reflection_Assembly_" data-uid="Forms9Patch.Segment.#ctor(System.String,System.String,System.Reflection.Assembly)">Segment(String, String, Assembly)</h4>
   <div class="markdown level1 summary"><p>Instantiates a new Segment and sets its Text and either its IconText or its IconImage, created using the provided embedded resource id</p>
@@ -350,13 +336,8 @@ public class Segment : Element, INotifyPropertyChanged, IDynamicResourceHandler,
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment__ctor_System_String_Xamarin_Forms_ImageSource_.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.%23ctor(System.String%2CXamarin.Forms.ImageSource)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L381">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_Segment__ctor_" data-uid="Forms9Patch.Segment.#ctor*"></a>
   <h4 id="Forms9Patch_Segment__ctor_System_String_Xamarin_Forms_ImageSource_" data-uid="Forms9Patch.Segment.#ctor(System.String,Xamarin.Forms.ImageSource)">Segment(String, ImageSource)</h4>
   <div class="markdown level1 summary"><p>Instantiates an new Segment and sets its Text property and sets the IconImage to a new image, created using the provided ImageSource</p>
@@ -390,13 +371,8 @@ public class Segment : Element, INotifyPropertyChanged, IDynamicResourceHandler,
   </table>
   <h3 id="fields">Fields
   </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_CommandParameterProperty.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.CommandParameterProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L234">View Source</a>
-  </span>
+  
+  
   <h4 id="Forms9Patch_Segment_CommandParameterProperty" data-uid="Forms9Patch.Segment.CommandParameterProperty">CommandParameterProperty</h4>
   <div class="markdown level1 summary"><p>Backing store for the Segment.CommandParameter bindable property.</p>
 </div>
@@ -420,13 +396,8 @@ public class Segment : Element, INotifyPropertyChanged, IDynamicResourceHandler,
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_CommandProperty.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.CommandProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L209">View Source</a>
-  </span>
+  
+  
   <h4 id="Forms9Patch_Segment_CommandProperty" data-uid="Forms9Patch.Segment.CommandProperty">CommandProperty</h4>
   <div class="markdown level1 summary"><p>Backing store for the Segment.Command bindable property.</p>
 </div>
@@ -450,13 +421,8 @@ public class Segment : Element, INotifyPropertyChanged, IDynamicResourceHandler,
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_FontAttributesProperty.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.FontAttributesProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L141">View Source</a>
-  </span>
+  
+  
   <h4 id="Forms9Patch_Segment_FontAttributesProperty" data-uid="Forms9Patch.Segment.FontAttributesProperty">FontAttributesProperty</h4>
   <div class="markdown level1 summary"><p>Backing store for the Segment.FontAttributes bindable property.</p>
 </div>
@@ -480,13 +446,8 @@ public class Segment : Element, INotifyPropertyChanged, IDynamicResourceHandler,
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_FontColorProperty.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.FontColorProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L20">View Source</a>
-  </span>
+  
+  
   <h4 id="Forms9Patch_Segment_FontColorProperty" data-uid="Forms9Patch.Segment.FontColorProperty">FontColorProperty</h4>
   <div class="markdown level1 summary"><p>OBSOLETE: Use TextColorProperty</p>
 </div>
@@ -511,13 +472,8 @@ public static readonly BindableProperty FontColorProperty</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_HtmlTextProperty.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.HtmlTextProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L104">View Source</a>
-  </span>
+  
+  
   <h4 id="Forms9Patch_Segment_HtmlTextProperty" data-uid="Forms9Patch.Segment.HtmlTextProperty">HtmlTextProperty</h4>
   <div class="markdown level1 summary"><p>Backing store for the formatted text property.</p>
 </div>
@@ -541,13 +497,8 @@ public static readonly BindableProperty FontColorProperty</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_IconImageProperty.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.IconImageProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L57">View Source</a>
-  </span>
+  
+  
   <h4 id="Forms9Patch_Segment_IconImageProperty" data-uid="Forms9Patch.Segment.IconImageProperty">IconImageProperty</h4>
   <div class="markdown level1 summary"><p>Bindable Property for the IconImage property</p>
 </div>
@@ -571,13 +522,8 @@ public static readonly BindableProperty FontColorProperty</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_IconTextProperty.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.IconTextProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L72">View Source</a>
-  </span>
+  
+  
   <h4 id="Forms9Patch_Segment_IconTextProperty" data-uid="Forms9Patch.Segment.IconTextProperty">IconTextProperty</h4>
   <div class="markdown level1 summary"><p>The icon text property backing store.</p>
 </div>
@@ -601,13 +547,8 @@ public static readonly BindableProperty FontColorProperty</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_ImageSourceProperty.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.ImageSourceProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L36">View Source</a>
-  </span>
+  
+  
   <h4 id="Forms9Patch_Segment_ImageSourceProperty" data-uid="Forms9Patch.Segment.ImageSourceProperty">ImageSourceProperty</h4>
   <div class="markdown level1 summary"><p>Backing store for the Image bindable property.</p>
 </div>
@@ -632,13 +573,8 @@ public static BindableProperty ImageSourceProperty</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_IsEnabledProperty.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.IsEnabledProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L161">View Source</a>
-  </span>
+  
+  
   <h4 id="Forms9Patch_Segment_IsEnabledProperty" data-uid="Forms9Patch.Segment.IsEnabledProperty">IsEnabledProperty</h4>
   <div class="markdown level1 summary"><p>The backing store for the is enabled property.</p>
 </div>
@@ -662,13 +598,8 @@ public static BindableProperty ImageSourceProperty</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_IsSelectedProperty.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.IsSelectedProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L177">View Source</a>
-  </span>
+  
+  
   <h4 id="Forms9Patch_Segment_IsSelectedProperty" data-uid="Forms9Patch.Segment.IsSelectedProperty">IsSelectedProperty</h4>
   <div class="markdown level1 summary"><p>The backing store for the is selected property.</p>
 </div>
@@ -692,13 +623,8 @@ public static BindableProperty ImageSourceProperty</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_OrientationProperty.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.OrientationProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L193">View Source</a>
-  </span>
+  
+  
   <h4 id="Forms9Patch_Segment_OrientationProperty" data-uid="Forms9Patch.Segment.OrientationProperty">OrientationProperty</h4>
   <div class="markdown level1 summary"><p>The backing store for the orientation property.</p>
 </div>
@@ -722,13 +648,8 @@ public static BindableProperty ImageSourceProperty</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_TextColorProperty.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.TextColorProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L124">View Source</a>
-  </span>
+  
+  
   <h4 id="Forms9Patch_Segment_TextColorProperty" data-uid="Forms9Patch.Segment.TextColorProperty">TextColorProperty</h4>
   <div class="markdown level1 summary"><p>Backing store for the Segment.TextColor bindable property.</p>
 </div>
@@ -752,13 +673,8 @@ public static BindableProperty ImageSourceProperty</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_TextProperty.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.TextProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L88">View Source</a>
-  </span>
+  
+  
   <h4 id="Forms9Patch_Segment_TextProperty" data-uid="Forms9Patch.Segment.TextProperty">TextProperty</h4>
   <div class="markdown level1 summary"><p>Backing store for the Text bindable property.</p>
 </div>
@@ -784,13 +700,8 @@ public static BindableProperty ImageSourceProperty</code></pre>
   </table>
   <h3 id="properties">Properties
   </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_Command.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.Command%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L223">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_Segment_Command_" data-uid="Forms9Patch.Segment.Command*"></a>
   <h4 id="Forms9Patch_Segment_Command" data-uid="Forms9Patch.Segment.Command">Command</h4>
   <div class="markdown level1 summary"><p>Gets or sets the command to invoke when the segment is selected.</p>
@@ -819,13 +730,8 @@ public static BindableProperty ImageSourceProperty</code></pre>
   <h5 id="Forms9Patch_Segment_Command_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This property is used to associate a command with an instance of a segment. This property is most often set in the MVVM pattern to bind callbacks back into the ViewModel. <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.isenabled#Xamarin_Forms_VisualElement_IsEnabled">IsEnabled</a> is controlled by the Command if set.</p>
 </div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_CommandParameter.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.CommandParameter%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L246">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_Segment_CommandParameter_" data-uid="Forms9Patch.Segment.CommandParameter*"></a>
   <h4 id="Forms9Patch_Segment_CommandParameter" data-uid="Forms9Patch.Segment.CommandParameter">CommandParameter</h4>
   <div class="markdown level1 summary"><p>Gets or sets the parameter to pass to the Command property.</p>
@@ -851,13 +757,8 @@ public static BindableProperty ImageSourceProperty</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_FontAttributes.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.FontAttributes%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L146">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_Segment_FontAttributes_" data-uid="Forms9Patch.Segment.FontAttributes*"></a>
   <h4 id="Forms9Patch_Segment_FontAttributes" data-uid="Forms9Patch.Segment.FontAttributes">FontAttributes</h4>
   <div class="markdown level1 summary"><p>Gets or sets the font attributes.</p>
@@ -883,13 +784,8 @@ public static BindableProperty ImageSourceProperty</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_FontColor.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.FontColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L25">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_Segment_FontColor_" data-uid="Forms9Patch.Segment.FontColor*"></a>
   <h4 id="Forms9Patch_Segment_FontColor" data-uid="Forms9Patch.Segment.FontColor">FontColor</h4>
   <div class="markdown level1 summary"><p>OBSOLETE: Use TextColor</p>
@@ -916,13 +812,8 @@ public Color FontColor { get; set; }</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_HtmlText.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.HtmlText%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L113">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_Segment_HtmlText_" data-uid="Forms9Patch.Segment.HtmlText*"></a>
   <h4 id="Forms9Patch_Segment_HtmlText" data-uid="Forms9Patch.Segment.HtmlText">HtmlText</h4>
   <div class="markdown level1 summary"><p>Gets or sets the formatted text.</p>
@@ -948,13 +839,8 @@ public Color FontColor { get; set; }</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_IconImage.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.IconImage%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L61">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_Segment_IconImage_" data-uid="Forms9Patch.Segment.IconImage*"></a>
   <h4 id="Forms9Patch_Segment_IconImage" data-uid="Forms9Patch.Segment.IconImage">IconImage</h4>
   <div class="markdown level1 summary"><p>Gets or sets the icon image for this <a class="xref" href="Forms9Patch.Segment.html">Segment</a>.  Alternative to IconText prop</p>
@@ -979,13 +865,8 @@ public Color FontColor { get; set; }</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_IconText.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.IconText%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L77">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_Segment_IconText_" data-uid="Forms9Patch.Segment.IconText*"></a>
   <h4 id="Forms9Patch_Segment_IconText" data-uid="Forms9Patch.Segment.IconText">IconText</h4>
   <div class="markdown level1 summary"><p>Gets or sets the icon text - alternative to ImageSource.</p>
@@ -1011,13 +892,8 @@ public Color FontColor { get; set; }</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_ImageSource.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.ImageSource%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L41">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_Segment_ImageSource_" data-uid="Forms9Patch.Segment.ImageSource*"></a>
   <h4 id="Forms9Patch_Segment_ImageSource" data-uid="Forms9Patch.Segment.ImageSource">ImageSource</h4>
   <div class="markdown level1 summary"><p>Gets or sets the companion image for this this <a class="xref" href="Forms9Patch.Segment.html">Segment</a> - alternative to IconText.</p>
@@ -1044,13 +920,8 @@ public ImageSource ImageSource { get; set; }</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_IsEnabled.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.IsEnabled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L166">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_Segment_IsEnabled_" data-uid="Forms9Patch.Segment.IsEnabled*"></a>
   <h4 id="Forms9Patch_Segment_IsEnabled" data-uid="Forms9Patch.Segment.IsEnabled">IsEnabled</h4>
   <div class="markdown level1 summary"><p>Gets or sets a value indicating whether this <a class="xref" href="Forms9Patch.Segment.html">Segment</a> is enabled.</p>
@@ -1076,13 +947,8 @@ public ImageSource ImageSource { get; set; }</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_IsSelected.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.IsSelected%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L182">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_Segment_IsSelected_" data-uid="Forms9Patch.Segment.IsSelected*"></a>
   <h4 id="Forms9Patch_Segment_IsSelected" data-uid="Forms9Patch.Segment.IsSelected">IsSelected</h4>
   <div class="markdown level1 summary"></div>
@@ -1107,13 +973,8 @@ public ImageSource ImageSource { get; set; }</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_Orientation.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.Orientation%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L198">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_Segment_Orientation_" data-uid="Forms9Patch.Segment.Orientation*"></a>
   <h4 id="Forms9Patch_Segment_Orientation" data-uid="Forms9Patch.Segment.Orientation">Orientation</h4>
   <div class="markdown level1 summary"><p>Gets or sets the image/lable orientation.</p>
@@ -1139,13 +1000,8 @@ public ImageSource ImageSource { get; set; }</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_Text.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.Text%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L93">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_Segment_Text_" data-uid="Forms9Patch.Segment.Text*"></a>
   <h4 id="Forms9Patch_Segment_Text" data-uid="Forms9Patch.Segment.Text">Text</h4>
   <div class="markdown level1 summary"><p>Gets or sets the text for this <a class="xref" href="Forms9Patch.Segment.html">Segment</a>.</p>
@@ -1171,13 +1027,8 @@ public ImageSource ImageSource { get; set; }</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_TextColor.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.TextColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L129">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_Segment_TextColor_" data-uid="Forms9Patch.Segment.TextColor*"></a>
   <h4 id="Forms9Patch_Segment_TextColor" data-uid="Forms9Patch.Segment.TextColor">TextColor</h4>
   <div class="markdown level1 summary"><p>Gets or sets the color of the font.</p>
@@ -1203,13 +1054,8 @@ public ImageSource ImageSource { get; set; }</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_VisualElement.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.VisualElement%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L258">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_Segment_VisualElement_" data-uid="Forms9Patch.Segment.VisualElement*"></a>
   <h4 id="Forms9Patch_Segment_VisualElement" data-uid="Forms9Patch.Segment.VisualElement">VisualElement</h4>
   <div class="markdown level1 summary"><p>Gets the visual element used to render the Segment (to support Bubble Popup).</p>
@@ -1237,13 +1083,45 @@ public ImageSource ImageSource { get; set; }</code></pre>
   </table>
   <h3 id="methods">Methods
   </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_OnPropertyChanged_System_String_.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.OnPropertyChanged(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L431">View Source</a>
-  </span>
+  
+  
+  <a id="Forms9Patch_Segment_Dispose_" data-uid="Forms9Patch.Segment.Dispose*"></a>
+  <h4 id="Forms9Patch_Segment_Dispose" data-uid="Forms9Patch.Segment.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+  
+  
+  <a id="Forms9Patch_Segment_Dispose_" data-uid="Forms9Patch.Segment.Dispose*"></a>
+  <h4 id="Forms9Patch_Segment_Dispose_System_Boolean_" data-uid="Forms9Patch.Segment.Dispose(System.Boolean)">Dispose(Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void Dispose(bool disposing)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">disposing</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="Forms9Patch_Segment_OnPropertyChanged_" data-uid="Forms9Patch.Segment.OnPropertyChanged*"></a>
   <h4 id="Forms9Patch_Segment_OnPropertyChanged_System_String_" data-uid="Forms9Patch.Segment.OnPropertyChanged(System.String)">OnPropertyChanged(String)</h4>
   <div class="markdown level1 summary"><p>Ons the property changed.</p>
@@ -1273,13 +1151,8 @@ public ImageSource ImageSource { get; set; }</code></pre>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.onpropertychanged#Xamarin_Forms_Element_OnPropertyChanged_System_String_">Element.OnPropertyChanged(String)</a></div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_SendClicked.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.SendClicked%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L492">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_Segment_SendClicked_" data-uid="Forms9Patch.Segment.SendClicked*"></a>
   <h4 id="Forms9Patch_Segment_SendClicked" data-uid="Forms9Patch.Segment.SendClicked">SendClicked()</h4>
   <div class="markdown level1 summary"><p>Programmically click the segement</p>
@@ -1289,13 +1162,8 @@ public ImageSource ImageSource { get; set; }</code></pre>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void SendClicked()</code></pre>
   </div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_Tap.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.Tap%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L484">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_Segment_Tap_" data-uid="Forms9Patch.Segment.Tap*"></a>
   <h4 id="Forms9Patch_Segment_Tap" data-uid="Forms9Patch.Segment.Tap">Tap()</h4>
   <div class="markdown level1 summary"><p>Tap this instance.</p>
@@ -1307,13 +1175,8 @@ public ImageSource ImageSource { get; set; }</code></pre>
   </div>
   <h3 id="events">Events
   </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_LongPressed.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.LongPressed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L304">View Source</a>
-  </span>
+  
+  
   <h4 id="Forms9Patch_Segment_LongPressed" data-uid="Forms9Patch.Segment.LongPressed">LongPressed</h4>
   <div class="markdown level1 summary"><p>Occurs when long pressed.</p>
 </div>
@@ -1337,13 +1200,8 @@ public ImageSource ImageSource { get; set; }</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_LongPressing.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.LongPressing%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L293">View Source</a>
-  </span>
+  
+  
   <h4 id="Forms9Patch_Segment_LongPressing" data-uid="Forms9Patch.Segment.LongPressing">LongPressing</h4>
   <div class="markdown level1 summary"><p>Occurs when long pressing.</p>
 </div>
@@ -1367,13 +1225,8 @@ public ImageSource ImageSource { get; set; }</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_Selected.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.Selected%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L282">View Source</a>
-  </span>
+  
+  
   <h4 id="Forms9Patch_Segment_Selected" data-uid="Forms9Patch.Segment.Selected">Selected</h4>
   <div class="markdown level1 summary"><p>Occurs when Segment is selected.</p>
 </div>
@@ -1397,13 +1250,8 @@ public ImageSource ImageSource { get; set; }</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment_Tapped.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment.Tapped%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L271">View Source</a>
-  </span>
+  
+  
   <h4 id="Forms9Patch_Segment_Tapped" data-uid="Forms9Patch.Segment.Tapped">Tapped</h4>
   <div class="markdown level1 summary"><p>Occurs when Segment is tapped.</p>
 </div>
@@ -1440,6 +1288,9 @@ public ImageSource ImageSource { get; set; }</code></pre>
   <div>
       <a class="xref" href="Forms9Patch.IMenuItem.html">IMenuItem</a>
   </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">System.IDisposable</a>
+  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_IsDescendentOf_Xamarin_Forms_Element_Xamarin_Forms_Element_">VisualElementExtensions.IsDescendentOf(Element, Element)</a>
@@ -1452,6 +1303,18 @@ public ImageSource ImageSource { get; set; }</code></pre>
   </div>
   <div>
       <a class="xref" href="FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_FindAncestorOfType_Xamarin_Forms_Element_System_Type_">VisualElementExtensions.FindAncestorOfType(Element, Type)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_AncestorOfBaseType__1_Xamarin_Forms_Element_">ElementExtensions.AncestorOfBaseType&lt;T&gt;(Element)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_Ancestor__1_Xamarin_Forms_Element_">ElementExtensions.Ancestor&lt;T&gt;(Element)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.Debug.html#P42_Utils_Debug_AddToCensus_System_Object_">Debug.AddToCensus(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.Debug.html#P42_Utils_Debug_RemoveFromCensus_System_Object_">Debug.RemoveFromCensus(Object)</a>
   </div>
   <div>
       <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetProperties_System_Object_">ReflectionExtensions.GetProperties(Object)</a>
@@ -1483,12 +1346,6 @@ public ImageSource ImageSource { get; set; }</code></pre>
   <div>
       <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_CallMethod_System_Object_System_String_System_Object___">ReflectionExtensions.CallMethod(Object, String, Object[])</a>
   </div>
-  <div>
-      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_AncestorOfBaseType__1_Xamarin_Forms_Element_">ElementExtensions.AncestorOfBaseType&lt;T&gt;(Element)</a>
-  </div>
-  <div>
-      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_Ancestor__1_Xamarin_Forms_Element_">ElementExtensions.Ancestor&lt;T&gt;(Element)</a>
-  </div>
 </article>
           </div>
           
@@ -1496,12 +1353,6 @@ public ImageSource ImageSource { get; set; }</code></pre>
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
-                  <li>
-                    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Segment.md&amp;value=---%0Auid%3A%20Forms9Patch.Segment%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
-                  </li>
-                  <li>
-                    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Buttons/Segment.cs/#L12" class="contribution-link">View Source</a>
-                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">

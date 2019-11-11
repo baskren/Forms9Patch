@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class Frame
    | Forms9Patch ">
-    <meta name="generator" content="docfx 2.45.1.0">
+    <meta name="generator" content="docfx 2.47.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -83,8 +83,7 @@
   
   <h1 id="Forms9Patch_Frame" data-uid="Forms9Patch.Frame" class="text-break">Class Frame
   </h1>
-  <div class="markdown level0 summary"><p>Forms9Patch Frame layout.</p>
-</div>
+  <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
@@ -117,6 +116,7 @@
     <div><a class="xref" href="Forms9Patch.IBackground.html">IBackground</a></div>
     <div><a class="xref" href="Forms9Patch.IShape.html">IShape</a></div>
     <div><a class="xref" href="Forms9Patch.IElement.html">IElement</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -218,6 +218,12 @@
     </div>
     <div>
       <a class="xref" href="Forms9Patch.ContentView.html#Forms9Patch_ContentView_BaseInternalChildren">ContentView.BaseInternalChildren</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ContentView.html#Forms9Patch_ContentView_Dispose_System_Boolean_">ContentView.Dispose(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ContentView.html#Forms9Patch_ContentView_Dispose">ContentView.Dispose()</a>
     </div>
     <div>
       <a class="xref" href="Forms9Patch.ContentView.html#Forms9Patch_ContentView_Description">ContentView.Description()</a>
@@ -731,17 +737,12 @@
   <h6><strong>Assembly</strong>: Forms9Patch.dll</h6>
   <h5 id="Forms9Patch_Frame_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Frame : ContentView, INotifyPropertyChanged, IDynamicResourceHandler, IElement, INameScope, INavigationProxy, IAnimatable, IResourcesProvider, IStyleElement, IFlowDirectionController, IPropertyPropagationController, IVisualController, ITabStopElement, IStyleSelectable, IStylable, IViewController, IVisualElementController, IElementController, IGestureController, ILayout, ILayoutController, IPaddingElement, IControlTemplated, ILayout, IBackground, IShape, IElement</code></pre>
+    <pre><code class="lang-csharp hljs">public class Frame : ContentView, INotifyPropertyChanged, IDynamicResourceHandler, IElement, INameScope, INavigationProxy, IAnimatable, IResourcesProvider, IStyleElement, IFlowDirectionController, IPropertyPropagationController, IVisualController, ITabStopElement, IStyleSelectable, IStylable, IViewController, IVisualElementController, IElementController, IGestureController, ILayout, ILayoutController, IPaddingElement, IControlTemplated, ILayout, IBackground, IShape, IElement, IDisposable</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Frame__ctor.md&amp;value=---%0Auid%3A%20Forms9Patch.Frame.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Layouts/Frame.cs/#L21">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_Frame__ctor_" data-uid="Forms9Patch.Frame.#ctor*"></a>
   <h4 id="Forms9Patch_Frame__ctor" data-uid="Forms9Patch.Frame.#ctor">Frame()</h4>
   <div class="markdown level1 summary"><p>Initializes an instance of the <a class="xref" href="Forms9Patch.Frame.html">Frame</a> class.</p>
@@ -753,13 +754,8 @@
   </div>
   <h3 id="methods">Methods
   </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Frame_OnPropertyChanged_System_String_.md&amp;value=---%0Auid%3A%20Forms9Patch.Frame.OnPropertyChanged(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Layouts/Frame.cs/#L34">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_Frame_OnPropertyChanged_" data-uid="Forms9Patch.Frame.OnPropertyChanged*"></a>
   <h4 id="Forms9Patch_Frame_OnPropertyChanged_System_String_" data-uid="Forms9Patch.Frame.OnPropertyChanged(System.String)">OnPropertyChanged(String)</h4>
   <div class="markdown level1 summary"><p>Called when a property has changed</p>
@@ -828,6 +824,9 @@
   <div>
       <a class="xref" href="Forms9Patch.IElement.html">IElement</a>
   </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">System.IDisposable</a>
+  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_IsDescendentOf_Xamarin_Forms_Element_Xamarin_Forms_Element_">VisualElementExtensions.IsDescendentOf(Element, Element)</a>
@@ -884,36 +883,6 @@
       <a class="xref" href="FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_IsInVisibleViewTree_Xamarin_Forms_VisualElement_">VisualElementExtensions.IsInVisibleViewTree(VisualElement)</a>
   </div>
   <div>
-      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetProperties_System_Object_">ReflectionExtensions.GetProperties(Object)</a>
-  </div>
-  <div>
-      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetProperty_System_Object_System_String_">ReflectionExtensions.GetProperty(Object, String)</a>
-  </div>
-  <div>
-      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_PropertyNames_System_Object_">ReflectionExtensions.PropertyNames(Object)</a>
-  </div>
-  <div>
-      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_PropertyExists_System_Object_System_String_">ReflectionExtensions.PropertyExists(Object, String)</a>
-  </div>
-  <div>
-      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_HasProperty_System_Object_System_String_">ReflectionExtensions.HasProperty(Object, String)</a>
-  </div>
-  <div>
-      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetPropertyValue_System_Object_System_String_">ReflectionExtensions.GetPropertyValue(Object, String)</a>
-  </div>
-  <div>
-      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_SetPropertyValue_System_Object_System_String_System_Object_">ReflectionExtensions.SetPropertyValue(Object, String, Object)</a>
-  </div>
-  <div>
-      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetFieldValue_System_Object_System_String_">ReflectionExtensions.GetFieldValue(Object, String)</a>
-  </div>
-  <div>
-      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_SetFieldValue_System_Object_System_String_System_Object_">ReflectionExtensions.SetFieldValue(Object, String, Object)</a>
-  </div>
-  <div>
-      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_CallMethod_System_Object_System_String_System_Object___">ReflectionExtensions.CallMethod(Object, String, Object[])</a>
-  </div>
-  <div>
       <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_AncestorOfBaseType__1_Xamarin_Forms_Element_">ElementExtensions.AncestorOfBaseType&lt;T&gt;(Element)</a>
   </div>
   <div>
@@ -958,6 +927,42 @@
   <div>
       <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_HardwareKeyUnfocus_Xamarin_Forms_VisualElement_">HardwareKeyListenerExtensions.HardwareKeyUnfocus(VisualElement)</a>
   </div>
+  <div>
+      <a class="xref" href="P42.Utils.Debug.html#P42_Utils_Debug_AddToCensus_System_Object_">Debug.AddToCensus(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.Debug.html#P42_Utils_Debug_RemoveFromCensus_System_Object_">Debug.RemoveFromCensus(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetProperties_System_Object_">ReflectionExtensions.GetProperties(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetProperty_System_Object_System_String_">ReflectionExtensions.GetProperty(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_PropertyNames_System_Object_">ReflectionExtensions.PropertyNames(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_PropertyExists_System_Object_System_String_">ReflectionExtensions.PropertyExists(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_HasProperty_System_Object_System_String_">ReflectionExtensions.HasProperty(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetPropertyValue_System_Object_System_String_">ReflectionExtensions.GetPropertyValue(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_SetPropertyValue_System_Object_System_String_System_Object_">ReflectionExtensions.SetPropertyValue(Object, String, Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetFieldValue_System_Object_System_String_">ReflectionExtensions.GetFieldValue(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_SetFieldValue_System_Object_System_String_System_Object_">ReflectionExtensions.SetFieldValue(Object, String, Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_CallMethod_System_Object_System_String_System_Object___">ReflectionExtensions.CallMethod(Object, String, Object[])</a>
+  </div>
 </article>
           </div>
           
@@ -965,12 +970,6 @@
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
-                  <li>
-                    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_Frame.md&amp;value=---%0Auid%3A%20Forms9Patch.Frame%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
-                  </li>
-                  <li>
-                    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Layouts/Frame.cs/#L10" class="contribution-link">View Source</a>
-                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">

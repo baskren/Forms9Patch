@@ -8,7 +8,7 @@
     <title>Forms9Patch Popups | Forms9Patch </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Forms9Patch Popups | Forms9Patch ">
-    <meta name="generator" content="docfx 2.45.1.0">
+    <meta name="generator" content="docfx 2.47.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -79,8 +79,7 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="forms9patch-popups">Forms9Patch Popups</h1>
 
-<p>Yet another thing missing from Xamarin Forms is a comprehensive set of popup views.  Forms9Patch has a eight (ModalPopup, BubblePopup, FlyoutPopup, Toast, TargetedToast, PermissionPopup, ActivityIndicatorPopup and TargetedMenu) popups to simplify the most common tasks.  However, this comes at a price!  In previous releases of Forms9Patch, I tried to implement the popups in a way that would require the least amount of prep work on your part.  Unfortunately, this meant a lot very ugly code, performance penalties, and (to add insult to injury) the Android implementation of version 2.3 of Xamarin.Forms broke it for the <code>Xamarin.Forms.MasterDetailPage</code>.</p>
-<p>As of Forms9Patch version 1.5.0.5,  <code>Forms9Patch.RootPage</code> is no longer needed to enable popups <strong>AND</strong> Forms9Patch popups work with pages that have been presented modally.</p>
+<p>Yet another thing missing from Xamarin Forms is a comprehensive set of popup views.  Forms9Patch has a eight (ModalPopup, BubblePopup, FlyoutPopup, Toast, TargetedToast, PermissionPopup, ActivityIndicatorPopup and TargetedMenu) popups to simplify the most common tasks.  However, this comes at a price!  Forms9Patch popups (like a number of other Forms9Patch elements) use Forms9Patch.Image - which means Forms9Patch popups are <code>IDisposable</code>.  There is an upside to this.  See the <a href="#memory-management">Memory Management</a> for more information.</p>
 <h2 id="android-note">Android Note</h2>
 <p>You will need to add the following <code>OnBackButtonPressed</code> code to your Android application's <code>MainActivity</code> in order to have popups respond to the Android hardware backbutton.</p>
 <pre><code>    public class MainActivity : FormsApplicationActivity
@@ -221,6 +220,7 @@
 <li><code>CancelButtonColor</code>: Background color for <strong>[Cancel]</strong> button.</li>
 <li><code>CancelTextColor</code>: Text color for <strong>[Cancel]</strong> button.</li>
 <li><code>CancelText</code>: Text for <strong>[Cancel]</strong> button.</li>
+<li><code>PermissionState</code>: An enum (<code>Pending</code>, <code>Ok</code>, <code>Cancelled</code>, <code>Rejected</code>) describing the state of the permission granting process.  This is very useful when the <code>PermissionPopup</code> is wrapped in a <code>using</code> block and is examined after a <code>WaitForCancelAsync()</code> call.</li>
 </ul>
 <h3 id="forms9patchpermissionpopup-unique-methods">Forms9Patch.PermissionPopup Unique Methods</h3>
 <ul>
@@ -264,6 +264,40 @@
 <ul>
 <li><code>Cancelled</code>: Called when the popup has been canceled by the user tapping outside its bounds.</li>
 </ul>
+<h2 id="memory-management">Memory Management</h2>
+<p>With all Forms9Patch popup's, the good news is the <code>using</code> keyword will make your life much easier.  Additionally, Forms9Patch popups have the <code>WaitForPoppedAsync</code> method to allow you to interact with the popup's content before disposal.</p>
+<p>Forms9Patch.Toast is the simplest example:</p>
+<pre><code>    using (Forms9Patch.Toast.Create(&quot;Updated&quot;,&quot;The list was updated.&quot;)) { }
+</code></pre>
+<p>In the above example, we're presenting a Toast and there is no need for our code to interact with its content.  As such, the <code>using</code> statement attempts to <code>Dipose()</code> our Toast as soon as it can.  This all happens because all Forms9Patch popups automatically add a <code>WaitForPoppedAsync()</code> before completing the <code>Dispose()</code>.  In other words, the popup won't be disposed until the user takes action to dismiss the popup.</p>
+<p>As a more interesting example, take a look at a sample usage of Forms9Patch.PermissionPopup:</p>
+<pre><code>    using (var permissionPopup = Forms9Patch.PermissionPopup.Create(
+        &quot;Unit Mismatch&quot;,
+        Items.Count((i) =&gt; !i.IsTemplate) &gt; 1
+            ? &quot;This entry (&quot; + operand.ToHtml() + &quot;) does not have units but the existing Cumulative Memory entries do.&quot;
+            : &quot;This entry (&quot; + operand.ToHtml() + &quot;) does not have units but the existing Cumulative Memory entry does.&quot;,
+        &quot;YES&quot;))
+    {
+        permissionPopup.Text += &quot;\n\nDo you want to apply the last Cumulative Memory entry's units [&quot; + firstItem.Value.UnitSet + &quot;] to this entry?&quot;;
+        permissionPopup.Parameter = operand;
+        permissionPopup.IsVisible = true;
+        await permissionPopup.WaitForPoppedAsync();
+        if (permissionPopup.PermissionState == PermissionState.Ok)
+        {
+            if (operand is Expression expression)
+                expression.Complete();
+            operand.ApplyUnitSet(firstItem.Value.UnitSet);
+            return true;
+        }
+    }
+</code></pre>
+<p>In the above example, you can see that we are able to manipulate <code>permissionPopup</code> and subscribe to its events.  And, because <code>await WaitForePoppedAsync()</code> is part of its <code>Dispose()</code>, our subscriptions will remain valid up until the user interaction has been completed.</p>
+<p>Please note that <code>ActivityIndicatorPopup</code> is slightly different.  That is because it can only be cancelled programmatically - not through direct user interaction.   With that in mind and for ease of use, calling <code>Dispose()</code> on an <code>ActivityIndicatorPopup</code> will first implicitly call <code>CancelAsync</code> on the <code>ActivityIndicatorPopup</code> before it is disposed.  This means you can use the asynchronous calls in the <code>using</code> block to  implicitly control the appearance / disappearance / disposal of the <code>ActivityIndicatorPopup</code>.  In the below example, the <code>Create()</code> factory method generates the <code>ActivityIndicatorPopup</code> and displays it.  Then, after the <code>GetDataAsync()</code> has completed, the <code>using</code> block calls <code>Dispose()</code> on our <code>ActivityIndicatorPopup</code> - implicitly cancelling it before the disposal.</p>
+<pre><code>    using (Forms9Patch.ActivityIndicatorPopup.Create())
+    {
+        await GetDataAsync();
+    }
+</code></pre>
 </article>
           </div>
           
@@ -271,9 +305,6 @@
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
-                  <li>
-                    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch.DocFX/guides/Popups.md/#L1" class="contribution-link">Improve this Doc</a>
-                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">

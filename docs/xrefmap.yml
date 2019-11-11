@@ -169,12 +169,12 @@ references:
   commentId: T:Forms9Patch.ActivityIndicatorPopup
   fullName: Forms9Patch.ActivityIndicatorPopup
   nameWithType: ActivityIndicatorPopup
-- uid: Forms9Patch.ActivityIndicatorPopup.#ctor
-  name: ActivityIndicatorPopup()
-  href: api/Forms9Patch.ActivityIndicatorPopup.html#Forms9Patch_ActivityIndicatorPopup__ctor
-  commentId: M:Forms9Patch.ActivityIndicatorPopup.#ctor
-  fullName: Forms9Patch.ActivityIndicatorPopup.ActivityIndicatorPopup()
-  nameWithType: ActivityIndicatorPopup.ActivityIndicatorPopup()
+- uid: Forms9Patch.ActivityIndicatorPopup.#ctor(System.TimeSpan)
+  name: ActivityIndicatorPopup(TimeSpan)
+  href: api/Forms9Patch.ActivityIndicatorPopup.html#Forms9Patch_ActivityIndicatorPopup__ctor_System_TimeSpan_
+  commentId: M:Forms9Patch.ActivityIndicatorPopup.#ctor(System.TimeSpan)
+  fullName: Forms9Patch.ActivityIndicatorPopup.ActivityIndicatorPopup(System.TimeSpan)
+  nameWithType: ActivityIndicatorPopup.ActivityIndicatorPopup(TimeSpan)
 - uid: Forms9Patch.ActivityIndicatorPopup.#ctor*
   name: ActivityIndicatorPopup
   href: api/Forms9Patch.ActivityIndicatorPopup.html#Forms9Patch_ActivityIndicatorPopup__ctor_
@@ -201,12 +201,12 @@ references:
   commentId: F:Forms9Patch.ActivityIndicatorPopup.ColorProperty
   fullName: Forms9Patch.ActivityIndicatorPopup.ColorProperty
   nameWithType: ActivityIndicatorPopup.ColorProperty
-- uid: Forms9Patch.ActivityIndicatorPopup.Create
-  name: Create()
-  href: api/Forms9Patch.ActivityIndicatorPopup.html#Forms9Patch_ActivityIndicatorPopup_Create
-  commentId: M:Forms9Patch.ActivityIndicatorPopup.Create
-  fullName: Forms9Patch.ActivityIndicatorPopup.Create()
-  nameWithType: ActivityIndicatorPopup.Create()
+- uid: Forms9Patch.ActivityIndicatorPopup.Create(System.TimeSpan)
+  name: Create(TimeSpan)
+  href: api/Forms9Patch.ActivityIndicatorPopup.html#Forms9Patch_ActivityIndicatorPopup_Create_System_TimeSpan_
+  commentId: M:Forms9Patch.ActivityIndicatorPopup.Create(System.TimeSpan)
+  fullName: Forms9Patch.ActivityIndicatorPopup.Create(System.TimeSpan)
+  nameWithType: ActivityIndicatorPopup.Create(TimeSpan)
 - uid: Forms9Patch.ActivityIndicatorPopup.Create*
   name: Create
   href: api/Forms9Patch.ActivityIndicatorPopup.html#Forms9Patch_ActivityIndicatorPopup_Create_
@@ -445,38 +445,6 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.AspectExtension.ToF9pFill
   nameWithType: AspectExtension.ToF9pFill
-- uid: Forms9Patch.AttachmentDoneArgs
-  name: AttachmentDoneArgs
-  href: api/Forms9Patch.AttachmentDoneArgs.html
-  commentId: T:Forms9Patch.AttachmentDoneArgs
-  fullName: Forms9Patch.AttachmentDoneArgs
-  nameWithType: AttachmentDoneArgs
-- uid: Forms9Patch.AttachmentDoneArgs.#ctor(System.String)
-  name: AttachmentDoneArgs(String)
-  href: api/Forms9Patch.AttachmentDoneArgs.html#Forms9Patch_AttachmentDoneArgs__ctor_System_String_
-  commentId: M:Forms9Patch.AttachmentDoneArgs.#ctor(System.String)
-  fullName: Forms9Patch.AttachmentDoneArgs.AttachmentDoneArgs(System.String)
-  nameWithType: AttachmentDoneArgs.AttachmentDoneArgs(String)
-- uid: Forms9Patch.AttachmentDoneArgs.#ctor*
-  name: AttachmentDoneArgs
-  href: api/Forms9Patch.AttachmentDoneArgs.html#Forms9Patch_AttachmentDoneArgs__ctor_
-  commentId: Overload:Forms9Patch.AttachmentDoneArgs.#ctor
-  isSpec: "True"
-  fullName: Forms9Patch.AttachmentDoneArgs.AttachmentDoneArgs
-  nameWithType: AttachmentDoneArgs.AttachmentDoneArgs
-- uid: Forms9Patch.AttachmentDoneArgs.Path
-  name: Path
-  href: api/Forms9Patch.AttachmentDoneArgs.html#Forms9Patch_AttachmentDoneArgs_Path
-  commentId: P:Forms9Patch.AttachmentDoneArgs.Path
-  fullName: Forms9Patch.AttachmentDoneArgs.Path
-  nameWithType: AttachmentDoneArgs.Path
-- uid: Forms9Patch.AttachmentDoneArgs.Path*
-  name: Path
-  href: api/Forms9Patch.AttachmentDoneArgs.html#Forms9Patch_AttachmentDoneArgs_Path_
-  commentId: Overload:Forms9Patch.AttachmentDoneArgs.Path
-  isSpec: "True"
-  fullName: Forms9Patch.AttachmentDoneArgs.Path
-  nameWithType: AttachmentDoneArgs.Path
 - uid: Forms9Patch.Audio
   name: Audio
   href: api/Forms9Patch.Audio.html
@@ -596,24 +564,12 @@ references:
   commentId: T:Forms9Patch.BubblePopup
   fullName: Forms9Patch.BubblePopup
   nameWithType: BubblePopup
-- uid: Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,System.Boolean,System.TimeSpan)
-  name: BubblePopup(VisualElement, Boolean, TimeSpan)
-  href: api/Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup__ctor_Xamarin_Forms_VisualElement_System_Boolean_System_TimeSpan_
-  commentId: M:Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,System.Boolean,System.TimeSpan)
-  fullName: Forms9Patch.BubblePopup.BubblePopup(Xamarin.Forms.VisualElement, System.Boolean, System.TimeSpan)
-  nameWithType: BubblePopup.BubblePopup(VisualElement, Boolean, TimeSpan)
 - uid: Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,System.TimeSpan)
   name: BubblePopup(VisualElement, TimeSpan)
   href: api/Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup__ctor_Xamarin_Forms_VisualElement_System_TimeSpan_
   commentId: M:Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,System.TimeSpan)
   fullName: Forms9Patch.BubblePopup.BubblePopup(Xamarin.Forms.VisualElement, System.TimeSpan)
   nameWithType: BubblePopup.BubblePopup(VisualElement, TimeSpan)
-- uid: Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,System.Boolean,System.TimeSpan)
-  name: BubblePopup(VisualElement, Point, Boolean, TimeSpan)
-  href: api/Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup__ctor_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_System_Boolean_System_TimeSpan_
-  commentId: M:Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,System.Boolean,System.TimeSpan)
-  fullName: Forms9Patch.BubblePopup.BubblePopup(Xamarin.Forms.VisualElement, Xamarin.Forms.Point, System.Boolean, System.TimeSpan)
-  nameWithType: BubblePopup.BubblePopup(VisualElement, Point, Boolean, TimeSpan)
 - uid: Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,System.TimeSpan)
   name: BubblePopup(VisualElement, Point, TimeSpan)
   href: api/Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup__ctor_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_System_TimeSpan_
@@ -892,12 +848,6 @@ references:
   commentId: F:Forms9Patch.Button._label
   fullName: Forms9Patch.Button._label
   nameWithType: Button._label
-- uid: Forms9Patch.Button._stackLayout
-  name: _stackLayout
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button__stackLayout
-  commentId: F:Forms9Patch.Button._stackLayout
-  fullName: Forms9Patch.Button._stackLayout
-  nameWithType: Button._stackLayout
 - uid: Forms9Patch.Button.Alignment
   name: Alignment
   href: api/Forms9Patch.Button.html#Forms9Patch_Button_Alignment
@@ -1044,12 +994,6 @@ references:
   commentId: F:Forms9Patch.Button.DarkThemeProperty
   fullName: Forms9Patch.Button.DarkThemeProperty
   nameWithType: Button.DarkThemeProperty
-- uid: Forms9Patch.Button.Dispose
-  name: Dispose()
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_Dispose
-  commentId: M:Forms9Patch.Button.Dispose
-  fullName: Forms9Patch.Button.Dispose()
-  nameWithType: Button.Dispose()
 - uid: Forms9Patch.Button.Dispose(System.Boolean)
   name: Dispose(Boolean)
   href: api/Forms9Patch.Button.html#Forms9Patch_Button_Dispose_System_Boolean_
@@ -3316,6 +3260,25 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ContentView.Description
   nameWithType: ContentView.Description
+- uid: Forms9Patch.ContentView.Dispose
+  name: Dispose()
+  href: api/Forms9Patch.ContentView.html#Forms9Patch_ContentView_Dispose
+  commentId: M:Forms9Patch.ContentView.Dispose
+  fullName: Forms9Patch.ContentView.Dispose()
+  nameWithType: ContentView.Dispose()
+- uid: Forms9Patch.ContentView.Dispose(System.Boolean)
+  name: Dispose(Boolean)
+  href: api/Forms9Patch.ContentView.html#Forms9Patch_ContentView_Dispose_System_Boolean_
+  commentId: M:Forms9Patch.ContentView.Dispose(System.Boolean)
+  fullName: Forms9Patch.ContentView.Dispose(System.Boolean)
+  nameWithType: ContentView.Dispose(Boolean)
+- uid: Forms9Patch.ContentView.Dispose*
+  name: Dispose
+  href: api/Forms9Patch.ContentView.html#Forms9Patch_ContentView_Dispose_
+  commentId: Overload:Forms9Patch.ContentView.Dispose
+  isSpec: "True"
+  fullName: Forms9Patch.ContentView.Dispose
+  nameWithType: ContentView.Dispose
 - uid: Forms9Patch.ContentView.ElementShape
   name: ElementShape
   href: api/Forms9Patch.ContentView.html#Forms9Patch_ContentView_ElementShape
@@ -3802,6 +3765,1364 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ElementExtensions.SetIsInNativeLayout
   nameWithType: ElementExtensions.SetIsInNativeLayout
+- uid: Forms9Patch.Elements.Popups.Core
+  name: Forms9Patch.Elements.Popups.Core
+  href: api/Forms9Patch.Elements.Popups.Core.html
+  commentId: N:Forms9Patch.Elements.Popups.Core
+  fullName: Forms9Patch.Elements.Popups.Core
+  nameWithType: Forms9Patch.Elements.Popups.Core
+- uid: Forms9Patch.Elements.Popups.Core.AllPagesPoppedEventArgs
+  name: AllPagesPoppedEventArgs
+  href: api/Forms9Patch.Elements.Popups.Core.AllPagesPoppedEventArgs.html
+  commentId: T:Forms9Patch.Elements.Popups.Core.AllPagesPoppedEventArgs
+  fullName: Forms9Patch.Elements.Popups.Core.AllPagesPoppedEventArgs
+  nameWithType: AllPagesPoppedEventArgs
+- uid: Forms9Patch.Elements.Popups.Core.AllPagesPoppedEventArgs.#ctor(System.Collections.Generic.IEnumerable{Xamarin.Forms.Page})
+  name: AllPagesPoppedEventArgs(IEnumerable<Page>)
+  href: api/Forms9Patch.Elements.Popups.Core.AllPagesPoppedEventArgs.html#Forms9Patch_Elements_Popups_Core_AllPagesPoppedEventArgs__ctor_System_Collections_Generic_IEnumerable_Xamarin_Forms_Page__
+  commentId: M:Forms9Patch.Elements.Popups.Core.AllPagesPoppedEventArgs.#ctor(System.Collections.Generic.IEnumerable{Xamarin.Forms.Page})
+  name.vb: AllPagesPoppedEventArgs(IEnumerable(Of Page))
+  fullName: Forms9Patch.Elements.Popups.Core.AllPagesPoppedEventArgs.AllPagesPoppedEventArgs(System.Collections.Generic.IEnumerable<Xamarin.Forms.Page>)
+  fullName.vb: Forms9Patch.Elements.Popups.Core.AllPagesPoppedEventArgs.AllPagesPoppedEventArgs(System.Collections.Generic.IEnumerable(Of Xamarin.Forms.Page))
+  nameWithType: AllPagesPoppedEventArgs.AllPagesPoppedEventArgs(IEnumerable<Page>)
+  nameWithType.vb: AllPagesPoppedEventArgs.AllPagesPoppedEventArgs(IEnumerable(Of Page))
+- uid: Forms9Patch.Elements.Popups.Core.AllPagesPoppedEventArgs.#ctor*
+  name: AllPagesPoppedEventArgs
+  href: api/Forms9Patch.Elements.Popups.Core.AllPagesPoppedEventArgs.html#Forms9Patch_Elements_Popups_Core_AllPagesPoppedEventArgs__ctor_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.AllPagesPoppedEventArgs.#ctor
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.AllPagesPoppedEventArgs.AllPagesPoppedEventArgs
+  nameWithType: AllPagesPoppedEventArgs.AllPagesPoppedEventArgs
+- uid: Forms9Patch.Elements.Popups.Core.AllPagesPoppedEventArgs.PoppedPages
+  name: PoppedPages
+  href: api/Forms9Patch.Elements.Popups.Core.AllPagesPoppedEventArgs.html#Forms9Patch_Elements_Popups_Core_AllPagesPoppedEventArgs_PoppedPages
+  commentId: P:Forms9Patch.Elements.Popups.Core.AllPagesPoppedEventArgs.PoppedPages
+  fullName: Forms9Patch.Elements.Popups.Core.AllPagesPoppedEventArgs.PoppedPages
+  nameWithType: AllPagesPoppedEventArgs.PoppedPages
+- uid: Forms9Patch.Elements.Popups.Core.AllPagesPoppedEventArgs.PoppedPages*
+  name: PoppedPages
+  href: api/Forms9Patch.Elements.Popups.Core.AllPagesPoppedEventArgs.html#Forms9Patch_Elements_Popups_Core_AllPagesPoppedEventArgs_PoppedPages_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.AllPagesPoppedEventArgs.PoppedPages
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.AllPagesPoppedEventArgs.PoppedPages
+  nameWithType: AllPagesPoppedEventArgs.PoppedPages
+- uid: Forms9Patch.Elements.Popups.Core.Animations
+  name: Forms9Patch.Elements.Popups.Core.Animations
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.html
+  commentId: N:Forms9Patch.Elements.Popups.Core.Animations
+  fullName: Forms9Patch.Elements.Popups.Core.Animations
+  nameWithType: Forms9Patch.Elements.Popups.Core.Animations
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base
+  name: Forms9Patch.Elements.Popups.Core.Animations.Base
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.html
+  commentId: N:Forms9Patch.Elements.Popups.Core.Animations.Base
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base
+  nameWithType: Forms9Patch.Elements.Popups.Core.Animations.Base
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation
+  name: BaseAnimation
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html
+  commentId: T:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation
+  nameWithType: BaseAnimation
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Appearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Appearing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_Appearing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Appearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Appearing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: BaseAnimation.Appearing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Appearing*
+  name: Appearing
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_Appearing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Appearing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Appearing
+  nameWithType: BaseAnimation.Appearing
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Disappearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Disappearing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_Disappearing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Disappearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Disappearing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: BaseAnimation.Disappearing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Disappearing*
+  name: Disappearing
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_Disappearing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Disappearing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Disappearing
+  nameWithType: BaseAnimation.Disappearing
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Disposing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Disposing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_Disposing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Disposing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Disposing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: BaseAnimation.Disposing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Disposing*
+  name: Disposing
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_Disposing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Disposing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Disposing
+  nameWithType: BaseAnimation.Disposing
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.DurationIn
+  name: DurationIn
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_DurationIn
+  commentId: P:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.DurationIn
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.DurationIn
+  nameWithType: BaseAnimation.DurationIn
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.DurationIn*
+  name: DurationIn
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_DurationIn_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.DurationIn
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.DurationIn
+  nameWithType: BaseAnimation.DurationIn
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.DurationOut
+  name: DurationOut
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_DurationOut
+  commentId: P:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.DurationOut
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.DurationOut
+  nameWithType: BaseAnimation.DurationOut
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.DurationOut*
+  name: DurationOut
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_DurationOut_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.DurationOut
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.DurationOut
+  nameWithType: BaseAnimation.DurationOut
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.EasingIn
+  name: EasingIn
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_EasingIn
+  commentId: P:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.EasingIn
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.EasingIn
+  nameWithType: BaseAnimation.EasingIn
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.EasingIn*
+  name: EasingIn
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_EasingIn_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.EasingIn
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.EasingIn
+  nameWithType: BaseAnimation.EasingIn
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.EasingOut
+  name: EasingOut
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_EasingOut
+  commentId: P:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.EasingOut
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.EasingOut
+  nameWithType: BaseAnimation.EasingOut
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.EasingOut*
+  name: EasingOut
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_EasingOut_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.EasingOut
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.EasingOut
+  nameWithType: BaseAnimation.EasingOut
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.GetLeftOffset(Xamarin.Forms.View,Xamarin.Forms.Page)
+  name: GetLeftOffset(View, Page)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_GetLeftOffset_Xamarin_Forms_View_Xamarin_Forms_Page_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.GetLeftOffset(Xamarin.Forms.View,Xamarin.Forms.Page)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.GetLeftOffset(Xamarin.Forms.View, Xamarin.Forms.Page)
+  nameWithType: BaseAnimation.GetLeftOffset(View, Page)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.GetLeftOffset*
+  name: GetLeftOffset
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_GetLeftOffset_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.GetLeftOffset
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.GetLeftOffset
+  nameWithType: BaseAnimation.GetLeftOffset
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.GetTopOffset(Xamarin.Forms.View,Xamarin.Forms.Page)
+  name: GetTopOffset(View, Page)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_GetTopOffset_Xamarin_Forms_View_Xamarin_Forms_Page_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.GetTopOffset(Xamarin.Forms.View,Xamarin.Forms.Page)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.GetTopOffset(Xamarin.Forms.View, Xamarin.Forms.Page)
+  nameWithType: BaseAnimation.GetTopOffset(View, Page)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.GetTopOffset*
+  name: GetTopOffset
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_GetTopOffset_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.GetTopOffset
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.GetTopOffset
+  nameWithType: BaseAnimation.GetTopOffset
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.HidePage(Xamarin.Forms.Page)
+  name: HidePage(Page)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_HidePage_Xamarin_Forms_Page_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.HidePage(Xamarin.Forms.Page)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.HidePage(Xamarin.Forms.Page)
+  nameWithType: BaseAnimation.HidePage(Page)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.HidePage*
+  name: HidePage
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_HidePage_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.HidePage
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.HidePage
+  nameWithType: BaseAnimation.HidePage
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Preparing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Preparing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_Preparing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Preparing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Preparing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: BaseAnimation.Preparing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Preparing*
+  name: Preparing
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_Preparing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Preparing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.Preparing
+  nameWithType: BaseAnimation.Preparing
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.ShowPage(Xamarin.Forms.Page)
+  name: ShowPage(Page)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_ShowPage_Xamarin_Forms_Page_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.ShowPage(Xamarin.Forms.Page)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.ShowPage(Xamarin.Forms.Page)
+  nameWithType: BaseAnimation.ShowPage(Page)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.ShowPage*
+  name: ShowPage
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_BaseAnimation_ShowPage_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.ShowPage
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.BaseAnimation.ShowPage
+  nameWithType: BaseAnimation.ShowPage
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation
+  name: FadeBackgroundAnimation
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.html
+  commentId: T:Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation
+  nameWithType: FadeBackgroundAnimation
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Appearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Appearing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_FadeBackgroundAnimation_Appearing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Appearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Appearing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: FadeBackgroundAnimation.Appearing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Appearing*
+  name: Appearing
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_FadeBackgroundAnimation_Appearing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Appearing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Appearing
+  nameWithType: FadeBackgroundAnimation.Appearing
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Disappearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Disappearing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_FadeBackgroundAnimation_Disappearing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Disappearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Disappearing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: FadeBackgroundAnimation.Disappearing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Disappearing*
+  name: Disappearing
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_FadeBackgroundAnimation_Disappearing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Disappearing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Disappearing
+  nameWithType: FadeBackgroundAnimation.Disappearing
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Disposing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Disposing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_FadeBackgroundAnimation_Disposing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Disposing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Disposing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: FadeBackgroundAnimation.Disposing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Disposing*
+  name: Disposing
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_FadeBackgroundAnimation_Disposing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Disposing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Disposing
+  nameWithType: FadeBackgroundAnimation.Disposing
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.HasBackgroundAnimation
+  name: HasBackgroundAnimation
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_FadeBackgroundAnimation_HasBackgroundAnimation
+  commentId: P:Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.HasBackgroundAnimation
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.HasBackgroundAnimation
+  nameWithType: FadeBackgroundAnimation.HasBackgroundAnimation
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.HasBackgroundAnimation*
+  name: HasBackgroundAnimation
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_FadeBackgroundAnimation_HasBackgroundAnimation_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.HasBackgroundAnimation
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.HasBackgroundAnimation
+  nameWithType: FadeBackgroundAnimation.HasBackgroundAnimation
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Preparing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Preparing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_FadeBackgroundAnimation_Preparing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Preparing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Preparing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: FadeBackgroundAnimation.Preparing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Preparing*
+  name: Preparing
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_Base_FadeBackgroundAnimation_Preparing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Preparing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.Base.FadeBackgroundAnimation.Preparing
+  nameWithType: FadeBackgroundAnimation.Preparing
+- uid: Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation
+  name: FadeAnimation
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.html
+  commentId: T:Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation
+  nameWithType: FadeAnimation
+- uid: Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Appearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Appearing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_FadeAnimation_Appearing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Appearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Appearing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: FadeAnimation.Appearing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Appearing*
+  name: Appearing
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_FadeAnimation_Appearing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Appearing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Appearing
+  nameWithType: FadeAnimation.Appearing
+- uid: Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Disappearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Disappearing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_FadeAnimation_Disappearing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Disappearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Disappearing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: FadeAnimation.Disappearing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Disappearing*
+  name: Disappearing
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_FadeAnimation_Disappearing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Disappearing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Disappearing
+  nameWithType: FadeAnimation.Disappearing
+- uid: Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Disposing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Disposing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_FadeAnimation_Disposing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Disposing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Disposing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: FadeAnimation.Disposing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Disposing*
+  name: Disposing
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_FadeAnimation_Disposing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Disposing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Disposing
+  nameWithType: FadeAnimation.Disposing
+- uid: Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.HasBackgroundAnimation
+  name: HasBackgroundAnimation
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_FadeAnimation_HasBackgroundAnimation
+  commentId: P:Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.HasBackgroundAnimation
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.HasBackgroundAnimation
+  nameWithType: FadeAnimation.HasBackgroundAnimation
+- uid: Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.HasBackgroundAnimation*
+  name: HasBackgroundAnimation
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_FadeAnimation_HasBackgroundAnimation_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.HasBackgroundAnimation
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.HasBackgroundAnimation
+  nameWithType: FadeAnimation.HasBackgroundAnimation
+- uid: Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Preparing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Preparing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_FadeAnimation_Preparing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Preparing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Preparing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: FadeAnimation.Preparing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Preparing*
+  name: Preparing
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_FadeAnimation_Preparing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Preparing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.FadeAnimation.Preparing
+  nameWithType: FadeAnimation.Preparing
+- uid: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation
+  name: MoveAnimation
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.html
+  commentId: T:Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation
+  nameWithType: MoveAnimation
+- uid: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.#ctor
+  name: MoveAnimation()
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_MoveAnimation__ctor
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.#ctor
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.MoveAnimation()
+  nameWithType: MoveAnimation.MoveAnimation()
+- uid: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.#ctor(Forms9Patch.Elements.Popups.Core.MoveAnimationOptions,Forms9Patch.Elements.Popups.Core.MoveAnimationOptions)
+  name: MoveAnimation(MoveAnimationOptions, MoveAnimationOptions)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_MoveAnimation__ctor_Forms9Patch_Elements_Popups_Core_MoveAnimationOptions_Forms9Patch_Elements_Popups_Core_MoveAnimationOptions_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.#ctor(Forms9Patch.Elements.Popups.Core.MoveAnimationOptions,Forms9Patch.Elements.Popups.Core.MoveAnimationOptions)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.MoveAnimation(Forms9Patch.Elements.Popups.Core.MoveAnimationOptions, Forms9Patch.Elements.Popups.Core.MoveAnimationOptions)
+  nameWithType: MoveAnimation.MoveAnimation(MoveAnimationOptions, MoveAnimationOptions)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.#ctor*
+  name: MoveAnimation
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_MoveAnimation__ctor_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.#ctor
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.MoveAnimation
+  nameWithType: MoveAnimation.MoveAnimation
+- uid: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Appearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Appearing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_MoveAnimation_Appearing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Appearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Appearing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: MoveAnimation.Appearing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Appearing*
+  name: Appearing
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_MoveAnimation_Appearing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Appearing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Appearing
+  nameWithType: MoveAnimation.Appearing
+- uid: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Disappearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Disappearing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_MoveAnimation_Disappearing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Disappearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Disappearing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: MoveAnimation.Disappearing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Disappearing*
+  name: Disappearing
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_MoveAnimation_Disappearing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Disappearing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Disappearing
+  nameWithType: MoveAnimation.Disappearing
+- uid: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Disposing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Disposing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_MoveAnimation_Disposing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Disposing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Disposing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: MoveAnimation.Disposing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Disposing*
+  name: Disposing
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_MoveAnimation_Disposing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Disposing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Disposing
+  nameWithType: MoveAnimation.Disposing
+- uid: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.PositionIn
+  name: PositionIn
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_MoveAnimation_PositionIn
+  commentId: P:Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.PositionIn
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.PositionIn
+  nameWithType: MoveAnimation.PositionIn
+- uid: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.PositionIn*
+  name: PositionIn
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_MoveAnimation_PositionIn_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.PositionIn
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.PositionIn
+  nameWithType: MoveAnimation.PositionIn
+- uid: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.PositionOut
+  name: PositionOut
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_MoveAnimation_PositionOut
+  commentId: P:Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.PositionOut
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.PositionOut
+  nameWithType: MoveAnimation.PositionOut
+- uid: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.PositionOut*
+  name: PositionOut
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_MoveAnimation_PositionOut_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.PositionOut
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.PositionOut
+  nameWithType: MoveAnimation.PositionOut
+- uid: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Preparing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Preparing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_MoveAnimation_Preparing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Preparing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Preparing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: MoveAnimation.Preparing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Preparing*
+  name: Preparing
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_MoveAnimation_Preparing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Preparing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.MoveAnimation.Preparing
+  nameWithType: MoveAnimation.Preparing
+- uid: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation
+  name: ScaleAnimation
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.html
+  commentId: T:Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation
+  nameWithType: ScaleAnimation
+- uid: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.#ctor
+  name: ScaleAnimation()
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_ScaleAnimation__ctor
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.#ctor
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.ScaleAnimation()
+  nameWithType: ScaleAnimation.ScaleAnimation()
+- uid: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.#ctor(Forms9Patch.Elements.Popups.Core.MoveAnimationOptions,Forms9Patch.Elements.Popups.Core.MoveAnimationOptions)
+  name: ScaleAnimation(MoveAnimationOptions, MoveAnimationOptions)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_ScaleAnimation__ctor_Forms9Patch_Elements_Popups_Core_MoveAnimationOptions_Forms9Patch_Elements_Popups_Core_MoveAnimationOptions_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.#ctor(Forms9Patch.Elements.Popups.Core.MoveAnimationOptions,Forms9Patch.Elements.Popups.Core.MoveAnimationOptions)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.ScaleAnimation(Forms9Patch.Elements.Popups.Core.MoveAnimationOptions, Forms9Patch.Elements.Popups.Core.MoveAnimationOptions)
+  nameWithType: ScaleAnimation.ScaleAnimation(MoveAnimationOptions, MoveAnimationOptions)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.#ctor*
+  name: ScaleAnimation
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_ScaleAnimation__ctor_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.#ctor
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.ScaleAnimation
+  nameWithType: ScaleAnimation.ScaleAnimation
+- uid: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Appearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Appearing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_ScaleAnimation_Appearing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Appearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Appearing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: ScaleAnimation.Appearing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Appearing*
+  name: Appearing
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_ScaleAnimation_Appearing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Appearing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Appearing
+  nameWithType: ScaleAnimation.Appearing
+- uid: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Disappearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Disappearing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_ScaleAnimation_Disappearing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Disappearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Disappearing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: ScaleAnimation.Disappearing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Disappearing*
+  name: Disappearing
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_ScaleAnimation_Disappearing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Disappearing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Disappearing
+  nameWithType: ScaleAnimation.Disappearing
+- uid: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Disposing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Disposing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_ScaleAnimation_Disposing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Disposing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Disposing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: ScaleAnimation.Disposing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Disposing*
+  name: Disposing
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_ScaleAnimation_Disposing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Disposing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Disposing
+  nameWithType: ScaleAnimation.Disposing
+- uid: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.PositionIn
+  name: PositionIn
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_ScaleAnimation_PositionIn
+  commentId: P:Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.PositionIn
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.PositionIn
+  nameWithType: ScaleAnimation.PositionIn
+- uid: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.PositionIn*
+  name: PositionIn
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_ScaleAnimation_PositionIn_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.PositionIn
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.PositionIn
+  nameWithType: ScaleAnimation.PositionIn
+- uid: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.PositionOut
+  name: PositionOut
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_ScaleAnimation_PositionOut
+  commentId: P:Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.PositionOut
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.PositionOut
+  nameWithType: ScaleAnimation.PositionOut
+- uid: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.PositionOut*
+  name: PositionOut
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_ScaleAnimation_PositionOut_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.PositionOut
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.PositionOut
+  nameWithType: ScaleAnimation.PositionOut
+- uid: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Preparing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Preparing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_ScaleAnimation_Preparing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Preparing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Preparing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: ScaleAnimation.Preparing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Preparing*
+  name: Preparing
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_ScaleAnimation_Preparing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Preparing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.Preparing
+  nameWithType: ScaleAnimation.Preparing
+- uid: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.ScaleIn
+  name: ScaleIn
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_ScaleAnimation_ScaleIn
+  commentId: P:Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.ScaleIn
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.ScaleIn
+  nameWithType: ScaleAnimation.ScaleIn
+- uid: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.ScaleIn*
+  name: ScaleIn
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_ScaleAnimation_ScaleIn_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.ScaleIn
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.ScaleIn
+  nameWithType: ScaleAnimation.ScaleIn
+- uid: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.ScaleOut
+  name: ScaleOut
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_ScaleAnimation_ScaleOut
+  commentId: P:Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.ScaleOut
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.ScaleOut
+  nameWithType: ScaleAnimation.ScaleOut
+- uid: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.ScaleOut*
+  name: ScaleOut
+  href: api/Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.html#Forms9Patch_Elements_Popups_Core_Animations_ScaleAnimation_ScaleOut_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.ScaleOut
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Animations.ScaleAnimation.ScaleOut
+  nameWithType: ScaleAnimation.ScaleOut
+- uid: Forms9Patch.Elements.Popups.Core.Converters.TypeConverters
+  name: Forms9Patch.Elements.Popups.Core.Converters.TypeConverters
+  href: api/Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.html
+  commentId: N:Forms9Patch.Elements.Popups.Core.Converters.TypeConverters
+  fullName: Forms9Patch.Elements.Popups.Core.Converters.TypeConverters
+  nameWithType: Forms9Patch.Elements.Popups.Core.Converters.TypeConverters
+- uid: Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.EasingTypeConverter
+  name: EasingTypeConverter
+  href: api/Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.EasingTypeConverter.html
+  commentId: T:Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.EasingTypeConverter
+  fullName: Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.EasingTypeConverter
+  nameWithType: EasingTypeConverter
+- uid: Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.EasingTypeConverter.ConvertFromInvariantString(System.String)
+  name: ConvertFromInvariantString(String)
+  href: api/Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.EasingTypeConverter.html#Forms9Patch_Elements_Popups_Core_Converters_TypeConverters_EasingTypeConverter_ConvertFromInvariantString_System_String_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.EasingTypeConverter.ConvertFromInvariantString(System.String)
+  fullName: Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.EasingTypeConverter.ConvertFromInvariantString(System.String)
+  nameWithType: EasingTypeConverter.ConvertFromInvariantString(String)
+- uid: Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.EasingTypeConverter.ConvertFromInvariantString*
+  name: ConvertFromInvariantString
+  href: api/Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.EasingTypeConverter.html#Forms9Patch_Elements_Popups_Core_Converters_TypeConverters_EasingTypeConverter_ConvertFromInvariantString_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.EasingTypeConverter.ConvertFromInvariantString
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.EasingTypeConverter.ConvertFromInvariantString
+  nameWithType: EasingTypeConverter.ConvertFromInvariantString
+- uid: Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.UintTypeConverter
+  name: UintTypeConverter
+  href: api/Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.UintTypeConverter.html
+  commentId: T:Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.UintTypeConverter
+  fullName: Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.UintTypeConverter
+  nameWithType: UintTypeConverter
+- uid: Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.UintTypeConverter.ConvertFromInvariantString(System.String)
+  name: ConvertFromInvariantString(String)
+  href: api/Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.UintTypeConverter.html#Forms9Patch_Elements_Popups_Core_Converters_TypeConverters_UintTypeConverter_ConvertFromInvariantString_System_String_
+  commentId: M:Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.UintTypeConverter.ConvertFromInvariantString(System.String)
+  fullName: Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.UintTypeConverter.ConvertFromInvariantString(System.String)
+  nameWithType: UintTypeConverter.ConvertFromInvariantString(String)
+- uid: Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.UintTypeConverter.ConvertFromInvariantString*
+  name: ConvertFromInvariantString
+  href: api/Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.UintTypeConverter.html#Forms9Patch_Elements_Popups_Core_Converters_TypeConverters_UintTypeConverter_ConvertFromInvariantString_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.UintTypeConverter.ConvertFromInvariantString
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.UintTypeConverter.ConvertFromInvariantString
+  nameWithType: UintTypeConverter.ConvertFromInvariantString
+- uid: Forms9Patch.Elements.Popups.Core.IPopupAnimation
+  name: IPopupAnimation
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupAnimation.html
+  commentId: T:Forms9Patch.Elements.Popups.Core.IPopupAnimation
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupAnimation
+  nameWithType: IPopupAnimation
+- uid: Forms9Patch.Elements.Popups.Core.IPopupAnimation.Appearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Appearing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupAnimation.html#Forms9Patch_Elements_Popups_Core_IPopupAnimation_Appearing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.IPopupAnimation.Appearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupAnimation.Appearing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: IPopupAnimation.Appearing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.IPopupAnimation.Appearing*
+  name: Appearing
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupAnimation.html#Forms9Patch_Elements_Popups_Core_IPopupAnimation_Appearing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.IPopupAnimation.Appearing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupAnimation.Appearing
+  nameWithType: IPopupAnimation.Appearing
+- uid: Forms9Patch.Elements.Popups.Core.IPopupAnimation.Disappearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Disappearing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupAnimation.html#Forms9Patch_Elements_Popups_Core_IPopupAnimation_Disappearing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.IPopupAnimation.Disappearing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupAnimation.Disappearing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: IPopupAnimation.Disappearing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.IPopupAnimation.Disappearing*
+  name: Disappearing
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupAnimation.html#Forms9Patch_Elements_Popups_Core_IPopupAnimation_Disappearing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.IPopupAnimation.Disappearing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupAnimation.Disappearing
+  nameWithType: IPopupAnimation.Disappearing
+- uid: Forms9Patch.Elements.Popups.Core.IPopupAnimation.Disposing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Disposing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupAnimation.html#Forms9Patch_Elements_Popups_Core_IPopupAnimation_Disposing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.IPopupAnimation.Disposing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupAnimation.Disposing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: IPopupAnimation.Disposing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.IPopupAnimation.Disposing*
+  name: Disposing
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupAnimation.html#Forms9Patch_Elements_Popups_Core_IPopupAnimation_Disposing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.IPopupAnimation.Disposing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupAnimation.Disposing
+  nameWithType: IPopupAnimation.Disposing
+- uid: Forms9Patch.Elements.Popups.Core.IPopupAnimation.Preparing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  name: Preparing(View, PopupPage)
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupAnimation.html#Forms9Patch_Elements_Popups_Core_IPopupAnimation_Preparing_Xamarin_Forms_View_Forms9Patch_Elements_Popups_Core_PopupPage_
+  commentId: M:Forms9Patch.Elements.Popups.Core.IPopupAnimation.Preparing(Xamarin.Forms.View,Forms9Patch.Elements.Popups.Core.PopupPage)
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupAnimation.Preparing(Xamarin.Forms.View, Forms9Patch.Elements.Popups.Core.PopupPage)
+  nameWithType: IPopupAnimation.Preparing(View, PopupPage)
+- uid: Forms9Patch.Elements.Popups.Core.IPopupAnimation.Preparing*
+  name: Preparing
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupAnimation.html#Forms9Patch_Elements_Popups_Core_IPopupAnimation_Preparing_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.IPopupAnimation.Preparing
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupAnimation.Preparing
+  nameWithType: IPopupAnimation.Preparing
+- uid: Forms9Patch.Elements.Popups.Core.IPopupNavigation
+  name: IPopupNavigation
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupNavigation.html
+  commentId: T:Forms9Patch.Elements.Popups.Core.IPopupNavigation
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupNavigation
+  nameWithType: IPopupNavigation
+- uid: Forms9Patch.Elements.Popups.Core.IPopupNavigation.PopAllAsync(System.Boolean)
+  name: PopAllAsync(Boolean)
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupNavigation.html#Forms9Patch_Elements_Popups_Core_IPopupNavigation_PopAllAsync_System_Boolean_
+  commentId: M:Forms9Patch.Elements.Popups.Core.IPopupNavigation.PopAllAsync(System.Boolean)
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupNavigation.PopAllAsync(System.Boolean)
+  nameWithType: IPopupNavigation.PopAllAsync(Boolean)
+- uid: Forms9Patch.Elements.Popups.Core.IPopupNavigation.PopAllAsync*
+  name: PopAllAsync
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupNavigation.html#Forms9Patch_Elements_Popups_Core_IPopupNavigation_PopAllAsync_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.IPopupNavigation.PopAllAsync
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupNavigation.PopAllAsync
+  nameWithType: IPopupNavigation.PopAllAsync
+- uid: Forms9Patch.Elements.Popups.Core.IPopupNavigation.PopAsync(System.Boolean)
+  name: PopAsync(Boolean)
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupNavigation.html#Forms9Patch_Elements_Popups_Core_IPopupNavigation_PopAsync_System_Boolean_
+  commentId: M:Forms9Patch.Elements.Popups.Core.IPopupNavigation.PopAsync(System.Boolean)
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupNavigation.PopAsync(System.Boolean)
+  nameWithType: IPopupNavigation.PopAsync(Boolean)
+- uid: Forms9Patch.Elements.Popups.Core.IPopupNavigation.PopAsync*
+  name: PopAsync
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupNavigation.html#Forms9Patch_Elements_Popups_Core_IPopupNavigation_PopAsync_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.IPopupNavigation.PopAsync
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupNavigation.PopAsync
+  nameWithType: IPopupNavigation.PopAsync
+- uid: Forms9Patch.Elements.Popups.Core.IPopupNavigation.Popped
+  name: Popped
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupNavigation.html#Forms9Patch_Elements_Popups_Core_IPopupNavigation_Popped
+  commentId: E:Forms9Patch.Elements.Popups.Core.IPopupNavigation.Popped
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupNavigation.Popped
+  nameWithType: IPopupNavigation.Popped
+- uid: Forms9Patch.Elements.Popups.Core.IPopupNavigation.PoppedAll
+  name: PoppedAll
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupNavigation.html#Forms9Patch_Elements_Popups_Core_IPopupNavigation_PoppedAll
+  commentId: E:Forms9Patch.Elements.Popups.Core.IPopupNavigation.PoppedAll
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupNavigation.PoppedAll
+  nameWithType: IPopupNavigation.PoppedAll
+- uid: Forms9Patch.Elements.Popups.Core.IPopupNavigation.PopupStack
+  name: PopupStack
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupNavigation.html#Forms9Patch_Elements_Popups_Core_IPopupNavigation_PopupStack
+  commentId: P:Forms9Patch.Elements.Popups.Core.IPopupNavigation.PopupStack
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupNavigation.PopupStack
+  nameWithType: IPopupNavigation.PopupStack
+- uid: Forms9Patch.Elements.Popups.Core.IPopupNavigation.PopupStack*
+  name: PopupStack
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupNavigation.html#Forms9Patch_Elements_Popups_Core_IPopupNavigation_PopupStack_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.IPopupNavigation.PopupStack
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupNavigation.PopupStack
+  nameWithType: IPopupNavigation.PopupStack
+- uid: Forms9Patch.Elements.Popups.Core.IPopupNavigation.PushAsync(Forms9Patch.Elements.Popups.Core.PopupPage,System.Boolean)
+  name: PushAsync(PopupPage, Boolean)
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupNavigation.html#Forms9Patch_Elements_Popups_Core_IPopupNavigation_PushAsync_Forms9Patch_Elements_Popups_Core_PopupPage_System_Boolean_
+  commentId: M:Forms9Patch.Elements.Popups.Core.IPopupNavigation.PushAsync(Forms9Patch.Elements.Popups.Core.PopupPage,System.Boolean)
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupNavigation.PushAsync(Forms9Patch.Elements.Popups.Core.PopupPage, System.Boolean)
+  nameWithType: IPopupNavigation.PushAsync(PopupPage, Boolean)
+- uid: Forms9Patch.Elements.Popups.Core.IPopupNavigation.PushAsync*
+  name: PushAsync
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupNavigation.html#Forms9Patch_Elements_Popups_Core_IPopupNavigation_PushAsync_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.IPopupNavigation.PushAsync
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupNavigation.PushAsync
+  nameWithType: IPopupNavigation.PushAsync
+- uid: Forms9Patch.Elements.Popups.Core.IPopupNavigation.Pushed
+  name: Pushed
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupNavigation.html#Forms9Patch_Elements_Popups_Core_IPopupNavigation_Pushed
+  commentId: E:Forms9Patch.Elements.Popups.Core.IPopupNavigation.Pushed
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupNavigation.Pushed
+  nameWithType: IPopupNavigation.Pushed
+- uid: Forms9Patch.Elements.Popups.Core.IPopupNavigation.RemovePageAsync(Forms9Patch.Elements.Popups.Core.PopupPage,System.Boolean)
+  name: RemovePageAsync(PopupPage, Boolean)
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupNavigation.html#Forms9Patch_Elements_Popups_Core_IPopupNavigation_RemovePageAsync_Forms9Patch_Elements_Popups_Core_PopupPage_System_Boolean_
+  commentId: M:Forms9Patch.Elements.Popups.Core.IPopupNavigation.RemovePageAsync(Forms9Patch.Elements.Popups.Core.PopupPage,System.Boolean)
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupNavigation.RemovePageAsync(Forms9Patch.Elements.Popups.Core.PopupPage, System.Boolean)
+  nameWithType: IPopupNavigation.RemovePageAsync(PopupPage, Boolean)
+- uid: Forms9Patch.Elements.Popups.Core.IPopupNavigation.RemovePageAsync*
+  name: RemovePageAsync
+  href: api/Forms9Patch.Elements.Popups.Core.IPopupNavigation.html#Forms9Patch_Elements_Popups_Core_IPopupNavigation_RemovePageAsync_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.IPopupNavigation.RemovePageAsync
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.IPopupNavigation.RemovePageAsync
+  nameWithType: IPopupNavigation.RemovePageAsync
+- uid: Forms9Patch.Elements.Popups.Core.MoveAnimationOptions
+  name: MoveAnimationOptions
+  href: api/Forms9Patch.Elements.Popups.Core.MoveAnimationOptions.html
+  commentId: T:Forms9Patch.Elements.Popups.Core.MoveAnimationOptions
+  fullName: Forms9Patch.Elements.Popups.Core.MoveAnimationOptions
+  nameWithType: MoveAnimationOptions
+- uid: Forms9Patch.Elements.Popups.Core.MoveAnimationOptions.Bottom
+  name: Bottom
+  href: api/Forms9Patch.Elements.Popups.Core.MoveAnimationOptions.html#Forms9Patch_Elements_Popups_Core_MoveAnimationOptions_Bottom
+  commentId: F:Forms9Patch.Elements.Popups.Core.MoveAnimationOptions.Bottom
+  fullName: Forms9Patch.Elements.Popups.Core.MoveAnimationOptions.Bottom
+  nameWithType: MoveAnimationOptions.Bottom
+- uid: Forms9Patch.Elements.Popups.Core.MoveAnimationOptions.Center
+  name: Center
+  href: api/Forms9Patch.Elements.Popups.Core.MoveAnimationOptions.html#Forms9Patch_Elements_Popups_Core_MoveAnimationOptions_Center
+  commentId: F:Forms9Patch.Elements.Popups.Core.MoveAnimationOptions.Center
+  fullName: Forms9Patch.Elements.Popups.Core.MoveAnimationOptions.Center
+  nameWithType: MoveAnimationOptions.Center
+- uid: Forms9Patch.Elements.Popups.Core.MoveAnimationOptions.Left
+  name: Left
+  href: api/Forms9Patch.Elements.Popups.Core.MoveAnimationOptions.html#Forms9Patch_Elements_Popups_Core_MoveAnimationOptions_Left
+  commentId: F:Forms9Patch.Elements.Popups.Core.MoveAnimationOptions.Left
+  fullName: Forms9Patch.Elements.Popups.Core.MoveAnimationOptions.Left
+  nameWithType: MoveAnimationOptions.Left
+- uid: Forms9Patch.Elements.Popups.Core.MoveAnimationOptions.Right
+  name: Right
+  href: api/Forms9Patch.Elements.Popups.Core.MoveAnimationOptions.html#Forms9Patch_Elements_Popups_Core_MoveAnimationOptions_Right
+  commentId: F:Forms9Patch.Elements.Popups.Core.MoveAnimationOptions.Right
+  fullName: Forms9Patch.Elements.Popups.Core.MoveAnimationOptions.Right
+  nameWithType: MoveAnimationOptions.Right
+- uid: Forms9Patch.Elements.Popups.Core.MoveAnimationOptions.Top
+  name: Top
+  href: api/Forms9Patch.Elements.Popups.Core.MoveAnimationOptions.html#Forms9Patch_Elements_Popups_Core_MoveAnimationOptions_Top
+  commentId: F:Forms9Patch.Elements.Popups.Core.MoveAnimationOptions.Top
+  fullName: Forms9Patch.Elements.Popups.Core.MoveAnimationOptions.Top
+  nameWithType: MoveAnimationOptions.Top
+- uid: Forms9Patch.Elements.Popups.Core.NavigationExtension
+  name: NavigationExtension
+  href: api/Forms9Patch.Elements.Popups.Core.NavigationExtension.html
+  commentId: T:Forms9Patch.Elements.Popups.Core.NavigationExtension
+  fullName: Forms9Patch.Elements.Popups.Core.NavigationExtension
+  nameWithType: NavigationExtension
+- uid: Forms9Patch.Elements.Popups.Core.NavigationExtension.PopAllPopupAsync(Xamarin.Forms.INavigation,System.Boolean)
+  name: PopAllPopupAsync(INavigation, Boolean)
+  href: api/Forms9Patch.Elements.Popups.Core.NavigationExtension.html#Forms9Patch_Elements_Popups_Core_NavigationExtension_PopAllPopupAsync_Xamarin_Forms_INavigation_System_Boolean_
+  commentId: M:Forms9Patch.Elements.Popups.Core.NavigationExtension.PopAllPopupAsync(Xamarin.Forms.INavigation,System.Boolean)
+  fullName: Forms9Patch.Elements.Popups.Core.NavigationExtension.PopAllPopupAsync(Xamarin.Forms.INavigation, System.Boolean)
+  nameWithType: NavigationExtension.PopAllPopupAsync(INavigation, Boolean)
+- uid: Forms9Patch.Elements.Popups.Core.NavigationExtension.PopAllPopupAsync*
+  name: PopAllPopupAsync
+  href: api/Forms9Patch.Elements.Popups.Core.NavigationExtension.html#Forms9Patch_Elements_Popups_Core_NavigationExtension_PopAllPopupAsync_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.NavigationExtension.PopAllPopupAsync
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.NavigationExtension.PopAllPopupAsync
+  nameWithType: NavigationExtension.PopAllPopupAsync
+- uid: Forms9Patch.Elements.Popups.Core.NavigationExtension.PopPopupAsync(Xamarin.Forms.INavigation,System.Boolean)
+  name: PopPopupAsync(INavigation, Boolean)
+  href: api/Forms9Patch.Elements.Popups.Core.NavigationExtension.html#Forms9Patch_Elements_Popups_Core_NavigationExtension_PopPopupAsync_Xamarin_Forms_INavigation_System_Boolean_
+  commentId: M:Forms9Patch.Elements.Popups.Core.NavigationExtension.PopPopupAsync(Xamarin.Forms.INavigation,System.Boolean)
+  fullName: Forms9Patch.Elements.Popups.Core.NavigationExtension.PopPopupAsync(Xamarin.Forms.INavigation, System.Boolean)
+  nameWithType: NavigationExtension.PopPopupAsync(INavigation, Boolean)
+- uid: Forms9Patch.Elements.Popups.Core.NavigationExtension.PopPopupAsync*
+  name: PopPopupAsync
+  href: api/Forms9Patch.Elements.Popups.Core.NavigationExtension.html#Forms9Patch_Elements_Popups_Core_NavigationExtension_PopPopupAsync_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.NavigationExtension.PopPopupAsync
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.NavigationExtension.PopPopupAsync
+  nameWithType: NavigationExtension.PopPopupAsync
+- uid: Forms9Patch.Elements.Popups.Core.NavigationExtension.PushPopupAsync(Xamarin.Forms.INavigation,Forms9Patch.Elements.Popups.Core.PopupPage,System.Boolean)
+  name: PushPopupAsync(INavigation, PopupPage, Boolean)
+  href: api/Forms9Patch.Elements.Popups.Core.NavigationExtension.html#Forms9Patch_Elements_Popups_Core_NavigationExtension_PushPopupAsync_Xamarin_Forms_INavigation_Forms9Patch_Elements_Popups_Core_PopupPage_System_Boolean_
+  commentId: M:Forms9Patch.Elements.Popups.Core.NavigationExtension.PushPopupAsync(Xamarin.Forms.INavigation,Forms9Patch.Elements.Popups.Core.PopupPage,System.Boolean)
+  fullName: Forms9Patch.Elements.Popups.Core.NavigationExtension.PushPopupAsync(Xamarin.Forms.INavigation, Forms9Patch.Elements.Popups.Core.PopupPage, System.Boolean)
+  nameWithType: NavigationExtension.PushPopupAsync(INavigation, PopupPage, Boolean)
+- uid: Forms9Patch.Elements.Popups.Core.NavigationExtension.PushPopupAsync*
+  name: PushPopupAsync
+  href: api/Forms9Patch.Elements.Popups.Core.NavigationExtension.html#Forms9Patch_Elements_Popups_Core_NavigationExtension_PushPopupAsync_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.NavigationExtension.PushPopupAsync
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.NavigationExtension.PushPopupAsync
+  nameWithType: NavigationExtension.PushPopupAsync
+- uid: Forms9Patch.Elements.Popups.Core.NavigationExtension.RemovePopupPageAsync(Xamarin.Forms.INavigation,Forms9Patch.Elements.Popups.Core.PopupPage,System.Boolean)
+  name: RemovePopupPageAsync(INavigation, PopupPage, Boolean)
+  href: api/Forms9Patch.Elements.Popups.Core.NavigationExtension.html#Forms9Patch_Elements_Popups_Core_NavigationExtension_RemovePopupPageAsync_Xamarin_Forms_INavigation_Forms9Patch_Elements_Popups_Core_PopupPage_System_Boolean_
+  commentId: M:Forms9Patch.Elements.Popups.Core.NavigationExtension.RemovePopupPageAsync(Xamarin.Forms.INavigation,Forms9Patch.Elements.Popups.Core.PopupPage,System.Boolean)
+  fullName: Forms9Patch.Elements.Popups.Core.NavigationExtension.RemovePopupPageAsync(Xamarin.Forms.INavigation, Forms9Patch.Elements.Popups.Core.PopupPage, System.Boolean)
+  nameWithType: NavigationExtension.RemovePopupPageAsync(INavigation, PopupPage, Boolean)
+- uid: Forms9Patch.Elements.Popups.Core.NavigationExtension.RemovePopupPageAsync*
+  name: RemovePopupPageAsync
+  href: api/Forms9Patch.Elements.Popups.Core.NavigationExtension.html#Forms9Patch_Elements_Popups_Core_NavigationExtension_RemovePopupPageAsync_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.NavigationExtension.RemovePopupPageAsync
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.NavigationExtension.RemovePopupPageAsync
+  nameWithType: NavigationExtension.RemovePopupPageAsync
+- uid: Forms9Patch.Elements.Popups.Core.PaddingSide
+  name: PaddingSide
+  href: api/Forms9Patch.Elements.Popups.Core.PaddingSide.html
+  commentId: T:Forms9Patch.Elements.Popups.Core.PaddingSide
+  fullName: Forms9Patch.Elements.Popups.Core.PaddingSide
+  nameWithType: PaddingSide
+- uid: Forms9Patch.Elements.Popups.Core.PaddingSide.All
+  name: All
+  href: api/Forms9Patch.Elements.Popups.Core.PaddingSide.html#Forms9Patch_Elements_Popups_Core_PaddingSide_All
+  commentId: F:Forms9Patch.Elements.Popups.Core.PaddingSide.All
+  fullName: Forms9Patch.Elements.Popups.Core.PaddingSide.All
+  nameWithType: PaddingSide.All
+- uid: Forms9Patch.Elements.Popups.Core.PaddingSide.Bottom
+  name: Bottom
+  href: api/Forms9Patch.Elements.Popups.Core.PaddingSide.html#Forms9Patch_Elements_Popups_Core_PaddingSide_Bottom
+  commentId: F:Forms9Patch.Elements.Popups.Core.PaddingSide.Bottom
+  fullName: Forms9Patch.Elements.Popups.Core.PaddingSide.Bottom
+  nameWithType: PaddingSide.Bottom
+- uid: Forms9Patch.Elements.Popups.Core.PaddingSide.Horizontal
+  name: Horizontal
+  href: api/Forms9Patch.Elements.Popups.Core.PaddingSide.html#Forms9Patch_Elements_Popups_Core_PaddingSide_Horizontal
+  commentId: F:Forms9Patch.Elements.Popups.Core.PaddingSide.Horizontal
+  fullName: Forms9Patch.Elements.Popups.Core.PaddingSide.Horizontal
+  nameWithType: PaddingSide.Horizontal
+- uid: Forms9Patch.Elements.Popups.Core.PaddingSide.Left
+  name: Left
+  href: api/Forms9Patch.Elements.Popups.Core.PaddingSide.html#Forms9Patch_Elements_Popups_Core_PaddingSide_Left
+  commentId: F:Forms9Patch.Elements.Popups.Core.PaddingSide.Left
+  fullName: Forms9Patch.Elements.Popups.Core.PaddingSide.Left
+  nameWithType: PaddingSide.Left
+- uid: Forms9Patch.Elements.Popups.Core.PaddingSide.Right
+  name: Right
+  href: api/Forms9Patch.Elements.Popups.Core.PaddingSide.html#Forms9Patch_Elements_Popups_Core_PaddingSide_Right
+  commentId: F:Forms9Patch.Elements.Popups.Core.PaddingSide.Right
+  fullName: Forms9Patch.Elements.Popups.Core.PaddingSide.Right
+  nameWithType: PaddingSide.Right
+- uid: Forms9Patch.Elements.Popups.Core.PaddingSide.Top
+  name: Top
+  href: api/Forms9Patch.Elements.Popups.Core.PaddingSide.html#Forms9Patch_Elements_Popups_Core_PaddingSide_Top
+  commentId: F:Forms9Patch.Elements.Popups.Core.PaddingSide.Top
+  fullName: Forms9Patch.Elements.Popups.Core.PaddingSide.Top
+  nameWithType: PaddingSide.Top
+- uid: Forms9Patch.Elements.Popups.Core.PaddingSide.Vertical
+  name: Vertical
+  href: api/Forms9Patch.Elements.Popups.Core.PaddingSide.html#Forms9Patch_Elements_Popups_Core_PaddingSide_Vertical
+  commentId: F:Forms9Patch.Elements.Popups.Core.PaddingSide.Vertical
+  fullName: Forms9Patch.Elements.Popups.Core.PaddingSide.Vertical
+  nameWithType: PaddingSide.Vertical
+- uid: Forms9Patch.Elements.Popups.Core.PopupNavigation
+  name: PopupNavigation
+  href: api/Forms9Patch.Elements.Popups.Core.PopupNavigation.html
+  commentId: T:Forms9Patch.Elements.Popups.Core.PopupNavigation
+  fullName: Forms9Patch.Elements.Popups.Core.PopupNavigation
+  nameWithType: PopupNavigation
+- uid: Forms9Patch.Elements.Popups.Core.PopupNavigation.Instance
+  name: Instance
+  href: api/Forms9Patch.Elements.Popups.Core.PopupNavigation.html#Forms9Patch_Elements_Popups_Core_PopupNavigation_Instance
+  commentId: P:Forms9Patch.Elements.Popups.Core.PopupNavigation.Instance
+  fullName: Forms9Patch.Elements.Popups.Core.PopupNavigation.Instance
+  nameWithType: PopupNavigation.Instance
+- uid: Forms9Patch.Elements.Popups.Core.PopupNavigation.Instance*
+  name: Instance
+  href: api/Forms9Patch.Elements.Popups.Core.PopupNavigation.html#Forms9Patch_Elements_Popups_Core_PopupNavigation_Instance_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupNavigation.Instance
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupNavigation.Instance
+  nameWithType: PopupNavigation.Instance
+- uid: Forms9Patch.Elements.Popups.Core.PopupNavigation.PopAllAsync(System.Boolean)
+  name: PopAllAsync(Boolean)
+  href: api/Forms9Patch.Elements.Popups.Core.PopupNavigation.html#Forms9Patch_Elements_Popups_Core_PopupNavigation_PopAllAsync_System_Boolean_
+  commentId: M:Forms9Patch.Elements.Popups.Core.PopupNavigation.PopAllAsync(System.Boolean)
+  fullName: Forms9Patch.Elements.Popups.Core.PopupNavigation.PopAllAsync(System.Boolean)
+  nameWithType: PopupNavigation.PopAllAsync(Boolean)
+- uid: Forms9Patch.Elements.Popups.Core.PopupNavigation.PopAllAsync*
+  name: PopAllAsync
+  href: api/Forms9Patch.Elements.Popups.Core.PopupNavigation.html#Forms9Patch_Elements_Popups_Core_PopupNavigation_PopAllAsync_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupNavigation.PopAllAsync
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupNavigation.PopAllAsync
+  nameWithType: PopupNavigation.PopAllAsync
+- uid: Forms9Patch.Elements.Popups.Core.PopupNavigation.PopAsync(System.Boolean)
+  name: PopAsync(Boolean)
+  href: api/Forms9Patch.Elements.Popups.Core.PopupNavigation.html#Forms9Patch_Elements_Popups_Core_PopupNavigation_PopAsync_System_Boolean_
+  commentId: M:Forms9Patch.Elements.Popups.Core.PopupNavigation.PopAsync(System.Boolean)
+  fullName: Forms9Patch.Elements.Popups.Core.PopupNavigation.PopAsync(System.Boolean)
+  nameWithType: PopupNavigation.PopAsync(Boolean)
+- uid: Forms9Patch.Elements.Popups.Core.PopupNavigation.PopAsync*
+  name: PopAsync
+  href: api/Forms9Patch.Elements.Popups.Core.PopupNavigation.html#Forms9Patch_Elements_Popups_Core_PopupNavigation_PopAsync_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupNavigation.PopAsync
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupNavigation.PopAsync
+  nameWithType: PopupNavigation.PopAsync
+- uid: Forms9Patch.Elements.Popups.Core.PopupNavigation.PopupStack
+  name: PopupStack
+  href: api/Forms9Patch.Elements.Popups.Core.PopupNavigation.html#Forms9Patch_Elements_Popups_Core_PopupNavigation_PopupStack
+  commentId: P:Forms9Patch.Elements.Popups.Core.PopupNavigation.PopupStack
+  fullName: Forms9Patch.Elements.Popups.Core.PopupNavigation.PopupStack
+  nameWithType: PopupNavigation.PopupStack
+- uid: Forms9Patch.Elements.Popups.Core.PopupNavigation.PopupStack*
+  name: PopupStack
+  href: api/Forms9Patch.Elements.Popups.Core.PopupNavigation.html#Forms9Patch_Elements_Popups_Core_PopupNavigation_PopupStack_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupNavigation.PopupStack
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupNavigation.PopupStack
+  nameWithType: PopupNavigation.PopupStack
+- uid: Forms9Patch.Elements.Popups.Core.PopupNavigation.PushAsync(Forms9Patch.Elements.Popups.Core.PopupPage,System.Boolean)
+  name: PushAsync(PopupPage, Boolean)
+  href: api/Forms9Patch.Elements.Popups.Core.PopupNavigation.html#Forms9Patch_Elements_Popups_Core_PopupNavigation_PushAsync_Forms9Patch_Elements_Popups_Core_PopupPage_System_Boolean_
+  commentId: M:Forms9Patch.Elements.Popups.Core.PopupNavigation.PushAsync(Forms9Patch.Elements.Popups.Core.PopupPage,System.Boolean)
+  fullName: Forms9Patch.Elements.Popups.Core.PopupNavigation.PushAsync(Forms9Patch.Elements.Popups.Core.PopupPage, System.Boolean)
+  nameWithType: PopupNavigation.PushAsync(PopupPage, Boolean)
+- uid: Forms9Patch.Elements.Popups.Core.PopupNavigation.PushAsync*
+  name: PushAsync
+  href: api/Forms9Patch.Elements.Popups.Core.PopupNavigation.html#Forms9Patch_Elements_Popups_Core_PopupNavigation_PushAsync_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupNavigation.PushAsync
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupNavigation.PushAsync
+  nameWithType: PopupNavigation.PushAsync
+- uid: Forms9Patch.Elements.Popups.Core.PopupNavigation.RemovePageAsync(Forms9Patch.Elements.Popups.Core.PopupPage,System.Boolean)
+  name: RemovePageAsync(PopupPage, Boolean)
+  href: api/Forms9Patch.Elements.Popups.Core.PopupNavigation.html#Forms9Patch_Elements_Popups_Core_PopupNavigation_RemovePageAsync_Forms9Patch_Elements_Popups_Core_PopupPage_System_Boolean_
+  commentId: M:Forms9Patch.Elements.Popups.Core.PopupNavigation.RemovePageAsync(Forms9Patch.Elements.Popups.Core.PopupPage,System.Boolean)
+  fullName: Forms9Patch.Elements.Popups.Core.PopupNavigation.RemovePageAsync(Forms9Patch.Elements.Popups.Core.PopupPage, System.Boolean)
+  nameWithType: PopupNavigation.RemovePageAsync(PopupPage, Boolean)
+- uid: Forms9Patch.Elements.Popups.Core.PopupNavigation.RemovePageAsync*
+  name: RemovePageAsync
+  href: api/Forms9Patch.Elements.Popups.Core.PopupNavigation.html#Forms9Patch_Elements_Popups_Core_PopupNavigation_RemovePageAsync_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupNavigation.RemovePageAsync
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupNavigation.RemovePageAsync
+  nameWithType: PopupNavigation.RemovePageAsync
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage
+  name: PopupPage
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html
+  commentId: T:Forms9Patch.Elements.Popups.Core.PopupPage
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage
+  nameWithType: PopupPage
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.#ctor
+  name: PopupPage()
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage__ctor
+  commentId: M:Forms9Patch.Elements.Popups.Core.PopupPage.#ctor
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.PopupPage()
+  nameWithType: PopupPage.PopupPage()
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.#ctor*
+  name: PopupPage
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage__ctor_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupPage.#ctor
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.PopupPage
+  nameWithType: PopupPage.PopupPage
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.Animation
+  name: Animation
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_Animation
+  commentId: P:Forms9Patch.Elements.Popups.Core.PopupPage.Animation
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.Animation
+  nameWithType: PopupPage.Animation
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.Animation*
+  name: Animation
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_Animation_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupPage.Animation
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.Animation
+  nameWithType: PopupPage.Animation
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.AnimationProperty
+  name: AnimationProperty
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_AnimationProperty
+  commentId: F:Forms9Patch.Elements.Popups.Core.PopupPage.AnimationProperty
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.AnimationProperty
+  nameWithType: PopupPage.AnimationProperty
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.BackgroundClicked
+  name: BackgroundClicked
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_BackgroundClicked
+  commentId: E:Forms9Patch.Elements.Popups.Core.PopupPage.BackgroundClicked
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.BackgroundClicked
+  nameWithType: PopupPage.BackgroundClicked
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.BackgroundInputTransparent
+  name: BackgroundInputTransparent
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_BackgroundInputTransparent
+  commentId: P:Forms9Patch.Elements.Popups.Core.PopupPage.BackgroundInputTransparent
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.BackgroundInputTransparent
+  nameWithType: PopupPage.BackgroundInputTransparent
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.BackgroundInputTransparent*
+  name: BackgroundInputTransparent
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_BackgroundInputTransparent_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupPage.BackgroundInputTransparent
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.BackgroundInputTransparent
+  nameWithType: PopupPage.BackgroundInputTransparent
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.BackgroundInputTransparentProperty
+  name: BackgroundInputTransparentProperty
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_BackgroundInputTransparentProperty
+  commentId: F:Forms9Patch.Elements.Popups.Core.PopupPage.BackgroundInputTransparentProperty
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.BackgroundInputTransparentProperty
+  nameWithType: PopupPage.BackgroundInputTransparentProperty
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.CloseWhenBackgroundIsClicked
+  name: CloseWhenBackgroundIsClicked
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_CloseWhenBackgroundIsClicked
+  commentId: P:Forms9Patch.Elements.Popups.Core.PopupPage.CloseWhenBackgroundIsClicked
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.CloseWhenBackgroundIsClicked
+  nameWithType: PopupPage.CloseWhenBackgroundIsClicked
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.CloseWhenBackgroundIsClicked*
+  name: CloseWhenBackgroundIsClicked
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_CloseWhenBackgroundIsClicked_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupPage.CloseWhenBackgroundIsClicked
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.CloseWhenBackgroundIsClicked
+  nameWithType: PopupPage.CloseWhenBackgroundIsClicked
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.CloseWhenBackgroundIsClickedProperty
+  name: CloseWhenBackgroundIsClickedProperty
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_CloseWhenBackgroundIsClickedProperty
+  commentId: F:Forms9Patch.Elements.Popups.Core.PopupPage.CloseWhenBackgroundIsClickedProperty
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.CloseWhenBackgroundIsClickedProperty
+  nameWithType: PopupPage.CloseWhenBackgroundIsClickedProperty
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.HasKeyboardOffset
+  name: HasKeyboardOffset
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_HasKeyboardOffset
+  commentId: P:Forms9Patch.Elements.Popups.Core.PopupPage.HasKeyboardOffset
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.HasKeyboardOffset
+  nameWithType: PopupPage.HasKeyboardOffset
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.HasKeyboardOffset*
+  name: HasKeyboardOffset
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_HasKeyboardOffset_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupPage.HasKeyboardOffset
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.HasKeyboardOffset
+  nameWithType: PopupPage.HasKeyboardOffset
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.HasKeyboardOffsetProperty
+  name: HasKeyboardOffsetProperty
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_HasKeyboardOffsetProperty
+  commentId: F:Forms9Patch.Elements.Popups.Core.PopupPage.HasKeyboardOffsetProperty
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.HasKeyboardOffsetProperty
+  nameWithType: PopupPage.HasKeyboardOffsetProperty
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.HasSystemPadding
+  name: HasSystemPadding
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_HasSystemPadding
+  commentId: P:Forms9Patch.Elements.Popups.Core.PopupPage.HasSystemPadding
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.HasSystemPadding
+  nameWithType: PopupPage.HasSystemPadding
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.HasSystemPadding*
+  name: HasSystemPadding
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_HasSystemPadding_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupPage.HasSystemPadding
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.HasSystemPadding
+  nameWithType: PopupPage.HasSystemPadding
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.HasSystemPaddingProperty
+  name: HasSystemPaddingProperty
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_HasSystemPaddingProperty
+  commentId: F:Forms9Patch.Elements.Popups.Core.PopupPage.HasSystemPaddingProperty
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.HasSystemPaddingProperty
+  nameWithType: PopupPage.HasSystemPaddingProperty
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.IsAnimationEnabled
+  name: IsAnimationEnabled
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_IsAnimationEnabled
+  commentId: P:Forms9Patch.Elements.Popups.Core.PopupPage.IsAnimationEnabled
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.IsAnimationEnabled
+  nameWithType: PopupPage.IsAnimationEnabled
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.IsAnimationEnabled*
+  name: IsAnimationEnabled
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_IsAnimationEnabled_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupPage.IsAnimationEnabled
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.IsAnimationEnabled
+  nameWithType: PopupPage.IsAnimationEnabled
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.IsAnimationEnabledProperty
+  name: IsAnimationEnabledProperty
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_IsAnimationEnabledProperty
+  commentId: F:Forms9Patch.Elements.Popups.Core.PopupPage.IsAnimationEnabledProperty
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.IsAnimationEnabledProperty
+  nameWithType: PopupPage.IsAnimationEnabledProperty
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.KeyboardOffset
+  name: KeyboardOffset
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_KeyboardOffset
+  commentId: P:Forms9Patch.Elements.Popups.Core.PopupPage.KeyboardOffset
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.KeyboardOffset
+  nameWithType: PopupPage.KeyboardOffset
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.KeyboardOffset*
+  name: KeyboardOffset
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_KeyboardOffset_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupPage.KeyboardOffset
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.KeyboardOffset
+  nameWithType: PopupPage.KeyboardOffset
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.KeyboardOffsetProperty
+  name: KeyboardOffsetProperty
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_KeyboardOffsetProperty
+  commentId: F:Forms9Patch.Elements.Popups.Core.PopupPage.KeyboardOffsetProperty
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.KeyboardOffsetProperty
+  nameWithType: PopupPage.KeyboardOffsetProperty
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.LayoutChildren(System.Double,System.Double,System.Double,System.Double)
+  name: LayoutChildren(Double, Double, Double, Double)
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_LayoutChildren_System_Double_System_Double_System_Double_System_Double_
+  commentId: M:Forms9Patch.Elements.Popups.Core.PopupPage.LayoutChildren(System.Double,System.Double,System.Double,System.Double)
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.LayoutChildren(System.Double, System.Double, System.Double, System.Double)
+  nameWithType: PopupPage.LayoutChildren(Double, Double, Double, Double)
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.LayoutChildren*
+  name: LayoutChildren
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_LayoutChildren_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupPage.LayoutChildren
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.LayoutChildren
+  nameWithType: PopupPage.LayoutChildren
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationBegin
+  name: OnAppearingAnimationBegin()
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_OnAppearingAnimationBegin
+  commentId: M:Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationBegin
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationBegin()
+  nameWithType: PopupPage.OnAppearingAnimationBegin()
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationBegin*
+  name: OnAppearingAnimationBegin
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_OnAppearingAnimationBegin_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationBegin
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationBegin
+  nameWithType: PopupPage.OnAppearingAnimationBegin
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationBeginAsync
+  name: OnAppearingAnimationBeginAsync()
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_OnAppearingAnimationBeginAsync
+  commentId: M:Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationBeginAsync
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationBeginAsync()
+  nameWithType: PopupPage.OnAppearingAnimationBeginAsync()
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationBeginAsync*
+  name: OnAppearingAnimationBeginAsync
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_OnAppearingAnimationBeginAsync_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationBeginAsync
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationBeginAsync
+  nameWithType: PopupPage.OnAppearingAnimationBeginAsync
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationEnd
+  name: OnAppearingAnimationEnd()
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_OnAppearingAnimationEnd
+  commentId: M:Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationEnd
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationEnd()
+  nameWithType: PopupPage.OnAppearingAnimationEnd()
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationEnd*
+  name: OnAppearingAnimationEnd
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_OnAppearingAnimationEnd_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationEnd
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationEnd
+  nameWithType: PopupPage.OnAppearingAnimationEnd
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationEndAsync
+  name: OnAppearingAnimationEndAsync()
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_OnAppearingAnimationEndAsync
+  commentId: M:Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationEndAsync
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationEndAsync()
+  nameWithType: PopupPage.OnAppearingAnimationEndAsync()
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationEndAsync*
+  name: OnAppearingAnimationEndAsync
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_OnAppearingAnimationEndAsync_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationEndAsync
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.OnAppearingAnimationEndAsync
+  nameWithType: PopupPage.OnAppearingAnimationEndAsync
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.OnBackButtonPressed
+  name: OnBackButtonPressed()
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_OnBackButtonPressed
+  commentId: M:Forms9Patch.Elements.Popups.Core.PopupPage.OnBackButtonPressed
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.OnBackButtonPressed()
+  nameWithType: PopupPage.OnBackButtonPressed()
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.OnBackButtonPressed*
+  name: OnBackButtonPressed
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_OnBackButtonPressed_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupPage.OnBackButtonPressed
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.OnBackButtonPressed
+  nameWithType: PopupPage.OnBackButtonPressed
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.OnBackgroundClicked
+  name: OnBackgroundClicked()
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_OnBackgroundClicked
+  commentId: M:Forms9Patch.Elements.Popups.Core.PopupPage.OnBackgroundClicked
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.OnBackgroundClicked()
+  nameWithType: PopupPage.OnBackgroundClicked()
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.OnBackgroundClicked*
+  name: OnBackgroundClicked
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_OnBackgroundClicked_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupPage.OnBackgroundClicked
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.OnBackgroundClicked
+  nameWithType: PopupPage.OnBackgroundClicked
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationBegin
+  name: OnDisappearingAnimationBegin()
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_OnDisappearingAnimationBegin
+  commentId: M:Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationBegin
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationBegin()
+  nameWithType: PopupPage.OnDisappearingAnimationBegin()
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationBegin*
+  name: OnDisappearingAnimationBegin
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_OnDisappearingAnimationBegin_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationBegin
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationBegin
+  nameWithType: PopupPage.OnDisappearingAnimationBegin
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationBeginAsync
+  name: OnDisappearingAnimationBeginAsync()
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_OnDisappearingAnimationBeginAsync
+  commentId: M:Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationBeginAsync
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationBeginAsync()
+  nameWithType: PopupPage.OnDisappearingAnimationBeginAsync()
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationBeginAsync*
+  name: OnDisappearingAnimationBeginAsync
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_OnDisappearingAnimationBeginAsync_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationBeginAsync
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationBeginAsync
+  nameWithType: PopupPage.OnDisappearingAnimationBeginAsync
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationEnd
+  name: OnDisappearingAnimationEnd()
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_OnDisappearingAnimationEnd
+  commentId: M:Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationEnd
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationEnd()
+  nameWithType: PopupPage.OnDisappearingAnimationEnd()
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationEnd*
+  name: OnDisappearingAnimationEnd
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_OnDisappearingAnimationEnd_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationEnd
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationEnd
+  nameWithType: PopupPage.OnDisappearingAnimationEnd
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationEndAsync
+  name: OnDisappearingAnimationEndAsync()
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_OnDisappearingAnimationEndAsync
+  commentId: M:Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationEndAsync
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationEndAsync()
+  nameWithType: PopupPage.OnDisappearingAnimationEndAsync()
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationEndAsync*
+  name: OnDisappearingAnimationEndAsync
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_OnDisappearingAnimationEndAsync_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationEndAsync
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.OnDisappearingAnimationEndAsync
+  nameWithType: PopupPage.OnDisappearingAnimationEndAsync
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.OnPropertyChanged(System.String)
+  name: OnPropertyChanged(String)
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_OnPropertyChanged_System_String_
+  commentId: M:Forms9Patch.Elements.Popups.Core.PopupPage.OnPropertyChanged(System.String)
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.OnPropertyChanged(System.String)
+  nameWithType: PopupPage.OnPropertyChanged(String)
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.OnPropertyChanged*
+  name: OnPropertyChanged
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_OnPropertyChanged_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupPage.OnPropertyChanged
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.OnPropertyChanged
+  nameWithType: PopupPage.OnPropertyChanged
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.SystemPadding
+  name: SystemPadding
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_SystemPadding
+  commentId: P:Forms9Patch.Elements.Popups.Core.PopupPage.SystemPadding
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.SystemPadding
+  nameWithType: PopupPage.SystemPadding
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.SystemPadding*
+  name: SystemPadding
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_SystemPadding_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupPage.SystemPadding
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.SystemPadding
+  nameWithType: PopupPage.SystemPadding
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.SystemPaddingProperty
+  name: SystemPaddingProperty
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_SystemPaddingProperty
+  commentId: F:Forms9Patch.Elements.Popups.Core.PopupPage.SystemPaddingProperty
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.SystemPaddingProperty
+  nameWithType: PopupPage.SystemPaddingProperty
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.SystemPaddingSides
+  name: SystemPaddingSides
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_SystemPaddingSides
+  commentId: P:Forms9Patch.Elements.Popups.Core.PopupPage.SystemPaddingSides
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.SystemPaddingSides
+  nameWithType: PopupPage.SystemPaddingSides
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.SystemPaddingSides*
+  name: SystemPaddingSides
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_SystemPaddingSides_
+  commentId: Overload:Forms9Patch.Elements.Popups.Core.PopupPage.SystemPaddingSides
+  isSpec: "True"
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.SystemPaddingSides
+  nameWithType: PopupPage.SystemPaddingSides
+- uid: Forms9Patch.Elements.Popups.Core.PopupPage.SystemPaddingSidesProperty
+  name: SystemPaddingSidesProperty
+  href: api/Forms9Patch.Elements.Popups.Core.PopupPage.html#Forms9Patch_Elements_Popups_Core_PopupPage_SystemPaddingSidesProperty
+  commentId: F:Forms9Patch.Elements.Popups.Core.PopupPage.SystemPaddingSidesProperty
+  fullName: Forms9Patch.Elements.Popups.Core.PopupPage.SystemPaddingSidesProperty
+  nameWithType: PopupPage.SystemPaddingSidesProperty
 - uid: Forms9Patch.ElementShape
   name: ElementShape
   href: api/Forms9Patch.ElementShape.html
@@ -3902,6 +5223,38 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.EmbeddedResourceFontEffect.ApplyTo
   nameWithType: EmbeddedResourceFontEffect.ApplyTo
+- uid: Forms9Patch.EntryClearButtonEffect
+  name: EntryClearButtonEffect
+  href: api/Forms9Patch.EntryClearButtonEffect.html
+  commentId: T:Forms9Patch.EntryClearButtonEffect
+  fullName: Forms9Patch.EntryClearButtonEffect
+  nameWithType: EntryClearButtonEffect
+- uid: Forms9Patch.EntryClearButtonEffect.#ctor
+  name: EntryClearButtonEffect()
+  href: api/Forms9Patch.EntryClearButtonEffect.html#Forms9Patch_EntryClearButtonEffect__ctor
+  commentId: M:Forms9Patch.EntryClearButtonEffect.#ctor
+  fullName: Forms9Patch.EntryClearButtonEffect.EntryClearButtonEffect()
+  nameWithType: EntryClearButtonEffect.EntryClearButtonEffect()
+- uid: Forms9Patch.EntryClearButtonEffect.#ctor*
+  name: EntryClearButtonEffect
+  href: api/Forms9Patch.EntryClearButtonEffect.html#Forms9Patch_EntryClearButtonEffect__ctor_
+  commentId: Overload:Forms9Patch.EntryClearButtonEffect.#ctor
+  isSpec: "True"
+  fullName: Forms9Patch.EntryClearButtonEffect.EntryClearButtonEffect
+  nameWithType: EntryClearButtonEffect.EntryClearButtonEffect
+- uid: Forms9Patch.EntryClearButtonEffect.ApplyTo(Xamarin.Forms.Entry)
+  name: ApplyTo(Entry)
+  href: api/Forms9Patch.EntryClearButtonEffect.html#Forms9Patch_EntryClearButtonEffect_ApplyTo_Xamarin_Forms_Entry_
+  commentId: M:Forms9Patch.EntryClearButtonEffect.ApplyTo(Xamarin.Forms.Entry)
+  fullName: Forms9Patch.EntryClearButtonEffect.ApplyTo(Xamarin.Forms.Entry)
+  nameWithType: EntryClearButtonEffect.ApplyTo(Entry)
+- uid: Forms9Patch.EntryClearButtonEffect.ApplyTo*
+  name: ApplyTo
+  href: api/Forms9Patch.EntryClearButtonEffect.html#Forms9Patch_EntryClearButtonEffect_ApplyTo_
+  commentId: Overload:Forms9Patch.EntryClearButtonEffect.ApplyTo
+  isSpec: "True"
+  fullName: Forms9Patch.EntryClearButtonEffect.ApplyTo
+  nameWithType: EntryClearButtonEffect.ApplyTo
 - uid: Forms9Patch.ExtendedElementShape
   name: ExtendedElementShape
   href: api/Forms9Patch.ExtendedElementShape.html
@@ -4010,12 +5363,6 @@ references:
   commentId: T:Forms9Patch.FlyoutPopup
   fullName: Forms9Patch.FlyoutPopup
   nameWithType: FlyoutPopup
-- uid: Forms9Patch.FlyoutPopup.#ctor(System.Boolean,System.TimeSpan)
-  name: FlyoutPopup(Boolean, TimeSpan)
-  href: api/Forms9Patch.FlyoutPopup.html#Forms9Patch_FlyoutPopup__ctor_System_Boolean_System_TimeSpan_
-  commentId: M:Forms9Patch.FlyoutPopup.#ctor(System.Boolean,System.TimeSpan)
-  fullName: Forms9Patch.FlyoutPopup.FlyoutPopup(System.Boolean, System.TimeSpan)
-  nameWithType: FlyoutPopup.FlyoutPopup(Boolean, TimeSpan)
 - uid: Forms9Patch.FlyoutPopup.#ctor(System.TimeSpan)
   name: FlyoutPopup(TimeSpan)
   href: api/Forms9Patch.FlyoutPopup.html#Forms9Patch_FlyoutPopup__ctor_System_TimeSpan_
@@ -4303,19 +5650,6 @@ references:
   commentId: T:Forms9Patch.Grid
   fullName: Forms9Patch.Grid
   nameWithType: Grid
-- uid: Forms9Patch.Grid.#ctor
-  name: Grid()
-  href: api/Forms9Patch.Grid.html#Forms9Patch_Grid__ctor
-  commentId: M:Forms9Patch.Grid.#ctor
-  fullName: Forms9Patch.Grid.Grid()
-  nameWithType: Grid.Grid()
-- uid: Forms9Patch.Grid.#ctor*
-  name: Grid
-  href: api/Forms9Patch.Grid.html#Forms9Patch_Grid__ctor_
-  commentId: Overload:Forms9Patch.Grid.#ctor
-  isSpec: "True"
-  fullName: Forms9Patch.Grid.Grid
-  nameWithType: Grid.Grid
 - uid: Forms9Patch.Grid.Children
   name: Children
   href: api/Forms9Patch.Grid.html#Forms9Patch_Grid_Children
@@ -5550,6 +6884,51 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.HtmlStringExtensions.ToPng
   nameWithType: HtmlStringExtensions.ToPng
+- uid: Forms9Patch.HtmlStringExtensions.ToPngAsync(System.String,System.String)
+  name: ToPngAsync(String, String)
+  href: api/Forms9Patch.HtmlStringExtensions.html#Forms9Patch_HtmlStringExtensions_ToPngAsync_System_String_System_String_
+  commentId: M:Forms9Patch.HtmlStringExtensions.ToPngAsync(System.String,System.String)
+  fullName: Forms9Patch.HtmlStringExtensions.ToPngAsync(System.String, System.String)
+  nameWithType: HtmlStringExtensions.ToPngAsync(String, String)
+- uid: Forms9Patch.HtmlStringExtensions.ToPngAsync*
+  name: ToPngAsync
+  href: api/Forms9Patch.HtmlStringExtensions.html#Forms9Patch_HtmlStringExtensions_ToPngAsync_
+  commentId: Overload:Forms9Patch.HtmlStringExtensions.ToPngAsync
+  isSpec: "True"
+  fullName: Forms9Patch.HtmlStringExtensions.ToPngAsync
+  nameWithType: HtmlStringExtensions.ToPngAsync
+- uid: Forms9Patch.HtmlToPngResult
+  name: HtmlToPngResult
+  href: api/Forms9Patch.HtmlToPngResult.html
+  commentId: T:Forms9Patch.HtmlToPngResult
+  fullName: Forms9Patch.HtmlToPngResult
+  nameWithType: HtmlToPngResult
+- uid: Forms9Patch.HtmlToPngResult.IsError
+  name: IsError
+  href: api/Forms9Patch.HtmlToPngResult.html#Forms9Patch_HtmlToPngResult_IsError
+  commentId: P:Forms9Patch.HtmlToPngResult.IsError
+  fullName: Forms9Patch.HtmlToPngResult.IsError
+  nameWithType: HtmlToPngResult.IsError
+- uid: Forms9Patch.HtmlToPngResult.IsError*
+  name: IsError
+  href: api/Forms9Patch.HtmlToPngResult.html#Forms9Patch_HtmlToPngResult_IsError_
+  commentId: Overload:Forms9Patch.HtmlToPngResult.IsError
+  isSpec: "True"
+  fullName: Forms9Patch.HtmlToPngResult.IsError
+  nameWithType: HtmlToPngResult.IsError
+- uid: Forms9Patch.HtmlToPngResult.Result
+  name: Result
+  href: api/Forms9Patch.HtmlToPngResult.html#Forms9Patch_HtmlToPngResult_Result
+  commentId: P:Forms9Patch.HtmlToPngResult.Result
+  fullName: Forms9Patch.HtmlToPngResult.Result
+  nameWithType: HtmlToPngResult.Result
+- uid: Forms9Patch.HtmlToPngResult.Result*
+  name: Result
+  href: api/Forms9Patch.HtmlToPngResult.html#Forms9Patch_HtmlToPngResult_Result_
+  commentId: Overload:Forms9Patch.HtmlToPngResult.Result
+  isSpec: "True"
+  fullName: Forms9Patch.HtmlToPngResult.Result
+  nameWithType: HtmlToPngResult.Result
 - uid: Forms9Patch.IApplicationInfoService
   name: IApplicationInfoService
   href: api/Forms9Patch.IApplicationInfoService.html
@@ -6110,22 +7489,19 @@ references:
   commentId: T:Forms9Patch.IHtmlToPngPdfService
   fullName: Forms9Patch.IHtmlToPngPdfService
   nameWithType: IHtmlToPngPdfService
-- uid: Forms9Patch.IHtmlToPngPdfService.ToPng(System.String,System.String,System.Action{System.String})
-  name: ToPng(String, String, Action<String>)
-  href: api/Forms9Patch.IHtmlToPngPdfService.html#Forms9Patch_IHtmlToPngPdfService_ToPng_System_String_System_String_System_Action_System_String__
-  commentId: M:Forms9Patch.IHtmlToPngPdfService.ToPng(System.String,System.String,System.Action{System.String})
-  name.vb: ToPng(String, String, Action(Of String))
-  fullName: Forms9Patch.IHtmlToPngPdfService.ToPng(System.String, System.String, System.Action<System.String>)
-  fullName.vb: Forms9Patch.IHtmlToPngPdfService.ToPng(System.String, System.String, System.Action(Of System.String))
-  nameWithType: IHtmlToPngPdfService.ToPng(String, String, Action<String>)
-  nameWithType.vb: IHtmlToPngPdfService.ToPng(String, String, Action(Of String))
-- uid: Forms9Patch.IHtmlToPngPdfService.ToPng*
-  name: ToPng
-  href: api/Forms9Patch.IHtmlToPngPdfService.html#Forms9Patch_IHtmlToPngPdfService_ToPng_
-  commentId: Overload:Forms9Patch.IHtmlToPngPdfService.ToPng
+- uid: Forms9Patch.IHtmlToPngPdfService.ToPngAsync(Forms9Patch.ActivityIndicatorPopup,System.String,System.String)
+  name: ToPngAsync(ActivityIndicatorPopup, String, String)
+  href: api/Forms9Patch.IHtmlToPngPdfService.html#Forms9Patch_IHtmlToPngPdfService_ToPngAsync_Forms9Patch_ActivityIndicatorPopup_System_String_System_String_
+  commentId: M:Forms9Patch.IHtmlToPngPdfService.ToPngAsync(Forms9Patch.ActivityIndicatorPopup,System.String,System.String)
+  fullName: Forms9Patch.IHtmlToPngPdfService.ToPngAsync(Forms9Patch.ActivityIndicatorPopup, System.String, System.String)
+  nameWithType: IHtmlToPngPdfService.ToPngAsync(ActivityIndicatorPopup, String, String)
+- uid: Forms9Patch.IHtmlToPngPdfService.ToPngAsync*
+  name: ToPngAsync
+  href: api/Forms9Patch.IHtmlToPngPdfService.html#Forms9Patch_IHtmlToPngPdfService_ToPngAsync_
+  commentId: Overload:Forms9Patch.IHtmlToPngPdfService.ToPngAsync
   isSpec: "True"
-  fullName: Forms9Patch.IHtmlToPngPdfService.ToPng
-  nameWithType: IHtmlToPngPdfService.ToPng
+  fullName: Forms9Patch.IHtmlToPngPdfService.ToPngAsync
+  nameWithType: IHtmlToPngPdfService.ToPngAsync
 - uid: Forms9Patch.IIsSelectedAble
   name: IIsSelectedAble
   href: api/Forms9Patch.IIsSelectedAble.html
@@ -6592,6 +7968,25 @@ references:
   commentId: F:Forms9Patch.Image.ContentPaddingProperty
   fullName: Forms9Patch.Image.ContentPaddingProperty
   nameWithType: Image.ContentPaddingProperty
+- uid: Forms9Patch.Image.Dispose
+  name: Dispose()
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image_Dispose
+  commentId: M:Forms9Patch.Image.Dispose
+  fullName: Forms9Patch.Image.Dispose()
+  nameWithType: Image.Dispose()
+- uid: Forms9Patch.Image.Dispose(System.Boolean)
+  name: Dispose(Boolean)
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image_Dispose_System_Boolean_
+  commentId: M:Forms9Patch.Image.Dispose(System.Boolean)
+  fullName: Forms9Patch.Image.Dispose(System.Boolean)
+  nameWithType: Image.Dispose(Boolean)
+- uid: Forms9Patch.Image.Dispose*
+  name: Dispose
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image_Dispose_
+  commentId: Overload:Forms9Patch.Image.Dispose
+  isSpec: "True"
+  fullName: Forms9Patch.Image.Dispose
+  nameWithType: Image.Dispose
 - uid: Forms9Patch.Image.ElementShape
   name: ElementShape
   href: api/Forms9Patch.Image.html#Forms9Patch_Image_ElementShape
@@ -7524,19 +8919,6 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.IPopup.PopAfter
   nameWithType: IPopup.PopAfter
-- uid: Forms9Patch.IPopup.Retain
-  name: Retain
-  href: api/Forms9Patch.IPopup.html#Forms9Patch_IPopup_Retain
-  commentId: P:Forms9Patch.IPopup.Retain
-  fullName: Forms9Patch.IPopup.Retain
-  nameWithType: IPopup.Retain
-- uid: Forms9Patch.IPopup.Retain*
-  name: Retain
-  href: api/Forms9Patch.IPopup.html#Forms9Patch_IPopup_Retain_
-  commentId: Overload:Forms9Patch.IPopup.Retain
-  isSpec: "True"
-  fullName: Forms9Patch.IPopup.Retain
-  nameWithType: IPopup.Retain
 - uid: Forms9Patch.IPopup.Target
   name: Target
   href: api/Forms9Patch.IPopup.html#Forms9Patch_IPopup_Target
@@ -8562,6 +9944,19 @@ references:
   commentId: F:Forms9Patch.ListView.ContentProperty
   fullName: Forms9Patch.ListView.ContentProperty
   nameWithType: ListView.ContentProperty
+- uid: Forms9Patch.ListView.Dispose(System.Boolean)
+  name: Dispose(Boolean)
+  href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_Dispose_System_Boolean_
+  commentId: M:Forms9Patch.ListView.Dispose(System.Boolean)
+  fullName: Forms9Patch.ListView.Dispose(System.Boolean)
+  nameWithType: ListView.Dispose(Boolean)
+- uid: Forms9Patch.ListView.Dispose*
+  name: Dispose
+  href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_Dispose_
+  commentId: Overload:Forms9Patch.ListView.Dispose
+  isSpec: "True"
+  fullName: Forms9Patch.ListView.Dispose
+  nameWithType: ListView.Dispose
 - uid: Forms9Patch.ListView.Editable
   name: Editable
   href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_Editable
@@ -9938,12 +11333,6 @@ references:
   commentId: T:Forms9Patch.ModalPopup
   fullName: Forms9Patch.ModalPopup
   nameWithType: ModalPopup
-- uid: Forms9Patch.ModalPopup.#ctor(System.Boolean,System.TimeSpan)
-  name: ModalPopup(Boolean, TimeSpan)
-  href: api/Forms9Patch.ModalPopup.html#Forms9Patch_ModalPopup__ctor_System_Boolean_System_TimeSpan_
-  commentId: M:Forms9Patch.ModalPopup.#ctor(System.Boolean,System.TimeSpan)
-  fullName: Forms9Patch.ModalPopup.ModalPopup(System.Boolean, System.TimeSpan)
-  nameWithType: ModalPopup.ModalPopup(Boolean, TimeSpan)
 - uid: Forms9Patch.ModalPopup.#ctor(System.TimeSpan)
   name: ModalPopup(TimeSpan)
   href: api/Forms9Patch.ModalPopup.html#Forms9Patch_ModalPopup__ctor_System_TimeSpan_
@@ -10185,19 +11574,19 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.PermissionPopup.PermissionPopup
   nameWithType: PermissionPopup.PermissionPopup
-- uid: Forms9Patch.PermissionPopup.AffirmedAsync
-  name: AffirmedAsync()
-  href: api/Forms9Patch.PermissionPopup.html#Forms9Patch_PermissionPopup_AffirmedAsync
-  commentId: M:Forms9Patch.PermissionPopup.AffirmedAsync
-  fullName: Forms9Patch.PermissionPopup.AffirmedAsync()
-  nameWithType: PermissionPopup.AffirmedAsync()
-- uid: Forms9Patch.PermissionPopup.AffirmedAsync*
-  name: AffirmedAsync
-  href: api/Forms9Patch.PermissionPopup.html#Forms9Patch_PermissionPopup_AffirmedAsync_
-  commentId: Overload:Forms9Patch.PermissionPopup.AffirmedAsync
+- uid: Forms9Patch.PermissionPopup.CancelAsync(System.Object)
+  name: CancelAsync(Object)
+  href: api/Forms9Patch.PermissionPopup.html#Forms9Patch_PermissionPopup_CancelAsync_System_Object_
+  commentId: M:Forms9Patch.PermissionPopup.CancelAsync(System.Object)
+  fullName: Forms9Patch.PermissionPopup.CancelAsync(System.Object)
+  nameWithType: PermissionPopup.CancelAsync(Object)
+- uid: Forms9Patch.PermissionPopup.CancelAsync*
+  name: CancelAsync
+  href: api/Forms9Patch.PermissionPopup.html#Forms9Patch_PermissionPopup_CancelAsync_
+  commentId: Overload:Forms9Patch.PermissionPopup.CancelAsync
   isSpec: "True"
-  fullName: Forms9Patch.PermissionPopup.AffirmedAsync
-  nameWithType: PermissionPopup.AffirmedAsync
+  fullName: Forms9Patch.PermissionPopup.CancelAsync
+  nameWithType: PermissionPopup.CancelAsync
 - uid: Forms9Patch.PermissionPopup.CancelButtonColor
   name: CancelButtonColor
   href: api/Forms9Patch.PermissionPopup.html#Forms9Patch_PermissionPopup_CancelButtonColor
@@ -10350,6 +11739,19 @@ references:
   commentId: F:Forms9Patch.PermissionPopup.OkTextProperty
   fullName: Forms9Patch.PermissionPopup.OkTextProperty
   nameWithType: PermissionPopup.OkTextProperty
+- uid: Forms9Patch.PermissionPopup.OnAppearing
+  name: OnAppearing()
+  href: api/Forms9Patch.PermissionPopup.html#Forms9Patch_PermissionPopup_OnAppearing
+  commentId: M:Forms9Patch.PermissionPopup.OnAppearing
+  fullName: Forms9Patch.PermissionPopup.OnAppearing()
+  nameWithType: PermissionPopup.OnAppearing()
+- uid: Forms9Patch.PermissionPopup.OnAppearing*
+  name: OnAppearing
+  href: api/Forms9Patch.PermissionPopup.html#Forms9Patch_PermissionPopup_OnAppearing_
+  commentId: Overload:Forms9Patch.PermissionPopup.OnAppearing
+  isSpec: "True"
+  fullName: Forms9Patch.PermissionPopup.OnAppearing
+  nameWithType: PermissionPopup.OnAppearing
 - uid: Forms9Patch.PermissionPopup.OnPropertyChanged(System.String)
   name: OnPropertyChanged(String)
   href: api/Forms9Patch.PermissionPopup.html#Forms9Patch_PermissionPopup_OnPropertyChanged_System_String_
@@ -10363,6 +11765,25 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.PermissionPopup.OnPropertyChanged
   nameWithType: PermissionPopup.OnPropertyChanged
+- uid: Forms9Patch.PermissionPopup.PermissionState
+  name: PermissionState
+  href: api/Forms9Patch.PermissionPopup.html#Forms9Patch_PermissionPopup_PermissionState
+  commentId: P:Forms9Patch.PermissionPopup.PermissionState
+  fullName: Forms9Patch.PermissionPopup.PermissionState
+  nameWithType: PermissionPopup.PermissionState
+- uid: Forms9Patch.PermissionPopup.PermissionState*
+  name: PermissionState
+  href: api/Forms9Patch.PermissionPopup.html#Forms9Patch_PermissionPopup_PermissionState_
+  commentId: Overload:Forms9Patch.PermissionPopup.PermissionState
+  isSpec: "True"
+  fullName: Forms9Patch.PermissionPopup.PermissionState
+  nameWithType: PermissionPopup.PermissionState
+- uid: Forms9Patch.PermissionPopup.PermissionStateProperty
+  name: PermissionStateProperty
+  href: api/Forms9Patch.PermissionPopup.html#Forms9Patch_PermissionPopup_PermissionStateProperty
+  commentId: F:Forms9Patch.PermissionPopup.PermissionStateProperty
+  fullName: Forms9Patch.PermissionPopup.PermissionStateProperty
+  nameWithType: PermissionPopup.PermissionStateProperty
 - uid: Forms9Patch.PermissionPopup.Text
   name: Text
   href: api/Forms9Patch.PermissionPopup.html#Forms9Patch_PermissionPopup_Text
@@ -10401,6 +11822,36 @@ references:
   commentId: F:Forms9Patch.PermissionPopup.TitleProperty
   fullName: Forms9Patch.PermissionPopup.TitleProperty
   nameWithType: PermissionPopup.TitleProperty
+- uid: Forms9Patch.PermissionState
+  name: PermissionState
+  href: api/Forms9Patch.PermissionState.html
+  commentId: T:Forms9Patch.PermissionState
+  fullName: Forms9Patch.PermissionState
+  nameWithType: PermissionState
+- uid: Forms9Patch.PermissionState.Cancelled
+  name: Cancelled
+  href: api/Forms9Patch.PermissionState.html#Forms9Patch_PermissionState_Cancelled
+  commentId: F:Forms9Patch.PermissionState.Cancelled
+  fullName: Forms9Patch.PermissionState.Cancelled
+  nameWithType: PermissionState.Cancelled
+- uid: Forms9Patch.PermissionState.Ok
+  name: Ok
+  href: api/Forms9Patch.PermissionState.html#Forms9Patch_PermissionState_Ok
+  commentId: F:Forms9Patch.PermissionState.Ok
+  fullName: Forms9Patch.PermissionState.Ok
+  nameWithType: PermissionState.Ok
+- uid: Forms9Patch.PermissionState.Pending
+  name: Pending
+  href: api/Forms9Patch.PermissionState.html#Forms9Patch_PermissionState_Pending
+  commentId: F:Forms9Patch.PermissionState.Pending
+  fullName: Forms9Patch.PermissionState.Pending
+  nameWithType: PermissionState.Pending
+- uid: Forms9Patch.PermissionState.Rejected
+  name: Rejected
+  href: api/Forms9Patch.PermissionState.html#Forms9Patch_PermissionState_Rejected
+  commentId: F:Forms9Patch.PermissionState.Rejected
+  fullName: Forms9Patch.PermissionState.Rejected
+  nameWithType: PermissionState.Rejected
 - uid: Forms9Patch.PointerDirection
   name: PointerDirection
   href: api/Forms9Patch.PointerDirection.html
@@ -10563,6 +12014,12 @@ references:
   commentId: F:Forms9Patch.PopupPoppedCause.Custom
   fullName: Forms9Patch.PopupPoppedCause.Custom
   nameWithType: PopupPoppedCause.Custom
+- uid: Forms9Patch.PopupPoppedCause.Disposed
+  name: Disposed
+  href: api/Forms9Patch.PopupPoppedCause.html#Forms9Patch_PopupPoppedCause_Disposed
+  commentId: F:Forms9Patch.PopupPoppedCause.Disposed
+  fullName: Forms9Patch.PopupPoppedCause.Disposed
+  nameWithType: PopupPoppedCause.Disposed
 - uid: Forms9Patch.PopupPoppedCause.HardwareBackButtonPressed
   name: HardwareBackButtonPressed
   href: api/Forms9Patch.PopupPoppedCause.html#Forms9Patch_PopupPoppedCause_HardwareBackButtonPressed
@@ -11024,6 +12481,25 @@ references:
   commentId: F:Forms9Patch.Segment.CommandProperty
   fullName: Forms9Patch.Segment.CommandProperty
   nameWithType: Segment.CommandProperty
+- uid: Forms9Patch.Segment.Dispose
+  name: Dispose()
+  href: api/Forms9Patch.Segment.html#Forms9Patch_Segment_Dispose
+  commentId: M:Forms9Patch.Segment.Dispose
+  fullName: Forms9Patch.Segment.Dispose()
+  nameWithType: Segment.Dispose()
+- uid: Forms9Patch.Segment.Dispose(System.Boolean)
+  name: Dispose(Boolean)
+  href: api/Forms9Patch.Segment.html#Forms9Patch_Segment_Dispose_System_Boolean_
+  commentId: M:Forms9Patch.Segment.Dispose(System.Boolean)
+  fullName: Forms9Patch.Segment.Dispose(System.Boolean)
+  nameWithType: Segment.Dispose(Boolean)
+- uid: Forms9Patch.Segment.Dispose*
+  name: Dispose
+  href: api/Forms9Patch.Segment.html#Forms9Patch_Segment_Dispose_
+  commentId: Overload:Forms9Patch.Segment.Dispose
+  isSpec: "True"
+  fullName: Forms9Patch.Segment.Dispose
+  nameWithType: Segment.Dispose
 - uid: Forms9Patch.Segment.FontAttributes
   name: FontAttributes
   href: api/Forms9Patch.Segment.html#Forms9Patch_Segment_FontAttributes
@@ -14091,6 +15567,19 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.Toast.Create
   nameWithType: Toast.Create
+- uid: Forms9Patch.Toast.Dispose(System.Boolean)
+  name: Dispose(Boolean)
+  href: api/Forms9Patch.Toast.html#Forms9Patch_Toast_Dispose_System_Boolean_
+  commentId: M:Forms9Patch.Toast.Dispose(System.Boolean)
+  fullName: Forms9Patch.Toast.Dispose(System.Boolean)
+  nameWithType: Toast.Dispose(Boolean)
+- uid: Forms9Patch.Toast.Dispose*
+  name: Dispose
+  href: api/Forms9Patch.Toast.html#Forms9Patch_Toast_Dispose_
+  commentId: Overload:Forms9Patch.Toast.Dispose
+  isSpec: "True"
+  fullName: Forms9Patch.Toast.Dispose
+  nameWithType: Toast.Dispose
 - uid: Forms9Patch.Toast.OnPropertyChanged(System.String)
   name: OnPropertyChanged(String)
   href: api/Forms9Patch.Toast.html#Forms9Patch_Toast_OnPropertyChanged_System_String_
@@ -17489,6 +18978,213 @@ references:
   isSpec: "True"
   fullName: P42.Utils.BreadCrumbs.List
   nameWithType: BreadCrumbs.List
+- uid: P42.Utils.CircularBuffer`1
+  name: CircularBuffer<T>
+  href: api/P42.Utils.CircularBuffer-1.html
+  commentId: T:P42.Utils.CircularBuffer`1
+  name.vb: CircularBuffer(Of T)
+  fullName: P42.Utils.CircularBuffer<T>
+  fullName.vb: P42.Utils.CircularBuffer(Of T)
+  nameWithType: CircularBuffer<T>
+  nameWithType.vb: CircularBuffer(Of T)
+- uid: P42.Utils.CircularBuffer`1.#ctor(System.Int32)
+  name: CircularBuffer(Int32)
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1__ctor_System_Int32_
+  commentId: M:P42.Utils.CircularBuffer`1.#ctor(System.Int32)
+  fullName: P42.Utils.CircularBuffer<T>.CircularBuffer(System.Int32)
+  fullName.vb: P42.Utils.CircularBuffer(Of T).CircularBuffer(System.Int32)
+  nameWithType: CircularBuffer<T>.CircularBuffer(Int32)
+  nameWithType.vb: CircularBuffer(Of T).CircularBuffer(Int32)
+- uid: P42.Utils.CircularBuffer`1.#ctor*
+  name: CircularBuffer
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1__ctor_
+  commentId: Overload:P42.Utils.CircularBuffer`1.#ctor
+  isSpec: "True"
+  fullName: P42.Utils.CircularBuffer<T>.CircularBuffer
+  fullName.vb: P42.Utils.CircularBuffer(Of T).CircularBuffer
+  nameWithType: CircularBuffer<T>.CircularBuffer
+  nameWithType.vb: CircularBuffer(Of T).CircularBuffer
+- uid: P42.Utils.CircularBuffer`1.Add(`0)
+  name: Add(T)
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1_Add__0_
+  commentId: M:P42.Utils.CircularBuffer`1.Add(`0)
+  fullName: P42.Utils.CircularBuffer<T>.Add(T)
+  fullName.vb: P42.Utils.CircularBuffer(Of T).Add(T)
+  nameWithType: CircularBuffer<T>.Add(T)
+  nameWithType.vb: CircularBuffer(Of T).Add(T)
+- uid: P42.Utils.CircularBuffer`1.Add*
+  name: Add
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1_Add_
+  commentId: Overload:P42.Utils.CircularBuffer`1.Add
+  isSpec: "True"
+  fullName: P42.Utils.CircularBuffer<T>.Add
+  fullName.vb: P42.Utils.CircularBuffer(Of T).Add
+  nameWithType: CircularBuffer<T>.Add
+  nameWithType.vb: CircularBuffer(Of T).Add
+- uid: P42.Utils.CircularBuffer`1.Capacity
+  name: Capacity
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1_Capacity
+  commentId: F:P42.Utils.CircularBuffer`1.Capacity
+  fullName: P42.Utils.CircularBuffer<T>.Capacity
+  fullName.vb: P42.Utils.CircularBuffer(Of T).Capacity
+  nameWithType: CircularBuffer<T>.Capacity
+  nameWithType.vb: CircularBuffer(Of T).Capacity
+- uid: P42.Utils.CircularBuffer`1.Clear
+  name: Clear()
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1_Clear
+  commentId: M:P42.Utils.CircularBuffer`1.Clear
+  fullName: P42.Utils.CircularBuffer<T>.Clear()
+  fullName.vb: P42.Utils.CircularBuffer(Of T).Clear()
+  nameWithType: CircularBuffer<T>.Clear()
+  nameWithType.vb: CircularBuffer(Of T).Clear()
+- uid: P42.Utils.CircularBuffer`1.Clear*
+  name: Clear
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1_Clear_
+  commentId: Overload:P42.Utils.CircularBuffer`1.Clear
+  isSpec: "True"
+  fullName: P42.Utils.CircularBuffer<T>.Clear
+  fullName.vb: P42.Utils.CircularBuffer(Of T).Clear
+  nameWithType: CircularBuffer<T>.Clear
+  nameWithType.vb: CircularBuffer(Of T).Clear
+- uid: P42.Utils.CircularBuffer`1.Contains(`0)
+  name: Contains(T)
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1_Contains__0_
+  commentId: M:P42.Utils.CircularBuffer`1.Contains(`0)
+  fullName: P42.Utils.CircularBuffer<T>.Contains(T)
+  fullName.vb: P42.Utils.CircularBuffer(Of T).Contains(T)
+  nameWithType: CircularBuffer<T>.Contains(T)
+  nameWithType.vb: CircularBuffer(Of T).Contains(T)
+- uid: P42.Utils.CircularBuffer`1.Contains*
+  name: Contains
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1_Contains_
+  commentId: Overload:P42.Utils.CircularBuffer`1.Contains
+  isSpec: "True"
+  fullName: P42.Utils.CircularBuffer<T>.Contains
+  fullName.vb: P42.Utils.CircularBuffer(Of T).Contains
+  nameWithType: CircularBuffer<T>.Contains
+  nameWithType.vb: CircularBuffer(Of T).Contains
+- uid: P42.Utils.CircularBuffer`1.CopyTo(`0[],System.Int32)
+  name: CopyTo(T[], Int32)
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1_CopyTo__0___System_Int32_
+  commentId: M:P42.Utils.CircularBuffer`1.CopyTo(`0[],System.Int32)
+  name.vb: CopyTo(T(), Int32)
+  fullName: P42.Utils.CircularBuffer<T>.CopyTo(T[], System.Int32)
+  fullName.vb: P42.Utils.CircularBuffer(Of T).CopyTo(T(), System.Int32)
+  nameWithType: CircularBuffer<T>.CopyTo(T[], Int32)
+  nameWithType.vb: CircularBuffer(Of T).CopyTo(T(), Int32)
+- uid: P42.Utils.CircularBuffer`1.CopyTo*
+  name: CopyTo
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1_CopyTo_
+  commentId: Overload:P42.Utils.CircularBuffer`1.CopyTo
+  isSpec: "True"
+  fullName: P42.Utils.CircularBuffer<T>.CopyTo
+  fullName.vb: P42.Utils.CircularBuffer(Of T).CopyTo
+  nameWithType: CircularBuffer<T>.CopyTo
+  nameWithType.vb: CircularBuffer(Of T).CopyTo
+- uid: P42.Utils.CircularBuffer`1.Count
+  name: Count
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1_Count
+  commentId: P:P42.Utils.CircularBuffer`1.Count
+  fullName: P42.Utils.CircularBuffer<T>.Count
+  fullName.vb: P42.Utils.CircularBuffer(Of T).Count
+  nameWithType: CircularBuffer<T>.Count
+  nameWithType.vb: CircularBuffer(Of T).Count
+- uid: P42.Utils.CircularBuffer`1.Count*
+  name: Count
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1_Count_
+  commentId: Overload:P42.Utils.CircularBuffer`1.Count
+  isSpec: "True"
+  fullName: P42.Utils.CircularBuffer<T>.Count
+  fullName.vb: P42.Utils.CircularBuffer(Of T).Count
+  nameWithType: CircularBuffer<T>.Count
+  nameWithType.vb: CircularBuffer(Of T).Count
+- uid: P42.Utils.CircularBuffer`1.GetEnumerator
+  name: GetEnumerator()
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1_GetEnumerator
+  commentId: M:P42.Utils.CircularBuffer`1.GetEnumerator
+  fullName: P42.Utils.CircularBuffer<T>.GetEnumerator()
+  fullName.vb: P42.Utils.CircularBuffer(Of T).GetEnumerator()
+  nameWithType: CircularBuffer<T>.GetEnumerator()
+  nameWithType.vb: CircularBuffer(Of T).GetEnumerator()
+- uid: P42.Utils.CircularBuffer`1.GetEnumerator*
+  name: GetEnumerator
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1_GetEnumerator_
+  commentId: Overload:P42.Utils.CircularBuffer`1.GetEnumerator
+  isSpec: "True"
+  fullName: P42.Utils.CircularBuffer<T>.GetEnumerator
+  fullName.vb: P42.Utils.CircularBuffer(Of T).GetEnumerator
+  nameWithType: CircularBuffer<T>.GetEnumerator
+  nameWithType.vb: CircularBuffer(Of T).GetEnumerator
+- uid: P42.Utils.CircularBuffer`1.IsReadOnly
+  name: IsReadOnly
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1_IsReadOnly
+  commentId: P:P42.Utils.CircularBuffer`1.IsReadOnly
+  fullName: P42.Utils.CircularBuffer<T>.IsReadOnly
+  fullName.vb: P42.Utils.CircularBuffer(Of T).IsReadOnly
+  nameWithType: CircularBuffer<T>.IsReadOnly
+  nameWithType.vb: CircularBuffer(Of T).IsReadOnly
+- uid: P42.Utils.CircularBuffer`1.IsReadOnly*
+  name: IsReadOnly
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1_IsReadOnly_
+  commentId: Overload:P42.Utils.CircularBuffer`1.IsReadOnly
+  isSpec: "True"
+  fullName: P42.Utils.CircularBuffer<T>.IsReadOnly
+  fullName.vb: P42.Utils.CircularBuffer(Of T).IsReadOnly
+  nameWithType: CircularBuffer<T>.IsReadOnly
+  nameWithType.vb: CircularBuffer(Of T).IsReadOnly
+- uid: P42.Utils.CircularBuffer`1.NextIndex
+  name: NextIndex
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1_NextIndex
+  commentId: P:P42.Utils.CircularBuffer`1.NextIndex
+  fullName: P42.Utils.CircularBuffer<T>.NextIndex
+  fullName.vb: P42.Utils.CircularBuffer(Of T).NextIndex
+  nameWithType: CircularBuffer<T>.NextIndex
+  nameWithType.vb: CircularBuffer(Of T).NextIndex
+- uid: P42.Utils.CircularBuffer`1.NextIndex*
+  name: NextIndex
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1_NextIndex_
+  commentId: Overload:P42.Utils.CircularBuffer`1.NextIndex
+  isSpec: "True"
+  fullName: P42.Utils.CircularBuffer<T>.NextIndex
+  fullName.vb: P42.Utils.CircularBuffer(Of T).NextIndex
+  nameWithType: CircularBuffer<T>.NextIndex
+  nameWithType.vb: CircularBuffer(Of T).NextIndex
+- uid: P42.Utils.CircularBuffer`1.Remove(`0)
+  name: Remove(T)
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1_Remove__0_
+  commentId: M:P42.Utils.CircularBuffer`1.Remove(`0)
+  fullName: P42.Utils.CircularBuffer<T>.Remove(T)
+  fullName.vb: P42.Utils.CircularBuffer(Of T).Remove(T)
+  nameWithType: CircularBuffer<T>.Remove(T)
+  nameWithType.vb: CircularBuffer(Of T).Remove(T)
+- uid: P42.Utils.CircularBuffer`1.Remove*
+  name: Remove
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1_Remove_
+  commentId: Overload:P42.Utils.CircularBuffer`1.Remove
+  isSpec: "True"
+  fullName: P42.Utils.CircularBuffer<T>.Remove
+  fullName.vb: P42.Utils.CircularBuffer(Of T).Remove
+  nameWithType: CircularBuffer<T>.Remove
+  nameWithType.vb: CircularBuffer(Of T).Remove
+- uid: P42.Utils.CircularBuffer`1.System#Collections#IEnumerable#GetEnumerator
+  name: IEnumerable.GetEnumerator()
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1_System_Collections_IEnumerable_GetEnumerator
+  commentId: M:P42.Utils.CircularBuffer`1.System#Collections#IEnumerable#GetEnumerator
+  name.vb: System.Collections.IEnumerable.GetEnumerator()
+  fullName: P42.Utils.CircularBuffer<T>.System.Collections.IEnumerable.GetEnumerator()
+  fullName.vb: P42.Utils.CircularBuffer(Of T).System.Collections.IEnumerable.GetEnumerator()
+  nameWithType: CircularBuffer<T>.IEnumerable.GetEnumerator()
+  nameWithType.vb: CircularBuffer(Of T).System.Collections.IEnumerable.GetEnumerator()
+- uid: P42.Utils.CircularBuffer`1.System#Collections#IEnumerable#GetEnumerator*
+  name: IEnumerable.GetEnumerator
+  href: api/P42.Utils.CircularBuffer-1.html#P42_Utils_CircularBuffer_1_System_Collections_IEnumerable_GetEnumerator_
+  commentId: Overload:P42.Utils.CircularBuffer`1.System#Collections#IEnumerable#GetEnumerator
+  isSpec: "True"
+  name.vb: System.Collections.IEnumerable.GetEnumerator
+  fullName: P42.Utils.CircularBuffer<T>.System.Collections.IEnumerable.GetEnumerator
+  fullName.vb: P42.Utils.CircularBuffer(Of T).System.Collections.IEnumerable.GetEnumerator
+  nameWithType: CircularBuffer<T>.IEnumerable.GetEnumerator
+  nameWithType.vb: CircularBuffer(Of T).System.Collections.IEnumerable.GetEnumerator
 - uid: P42.Utils.CopyingExtensions
   name: CopyingExtensions
   href: api/P42.Utils.CopyingExtensions.html
@@ -17549,12 +19245,56 @@ references:
   commentId: T:P42.Utils.Debug
   fullName: P42.Utils.Debug
   nameWithType: Debug
+- uid: P42.Utils.Debug.AddToCensus(System.Object)
+  name: AddToCensus(Object)
+  href: api/P42.Utils.Debug.html#P42_Utils_Debug_AddToCensus_System_Object_
+  commentId: M:P42.Utils.Debug.AddToCensus(System.Object)
+  fullName: P42.Utils.Debug.AddToCensus(System.Object)
+  nameWithType: Debug.AddToCensus(Object)
+- uid: P42.Utils.Debug.AddToCensus*
+  name: AddToCensus
+  href: api/P42.Utils.Debug.html#P42_Utils_Debug_AddToCensus_
+  commentId: Overload:P42.Utils.Debug.AddToCensus
+  isSpec: "True"
+  fullName: P42.Utils.Debug.AddToCensus
+  nameWithType: Debug.AddToCensus
+- uid: P42.Utils.Debug.Census
+  name: Census
+  href: api/P42.Utils.Debug.html#P42_Utils_Debug_Census
+  commentId: F:P42.Utils.Debug.Census
+  fullName: P42.Utils.Debug.Census
+  nameWithType: Debug.Census
+- uid: P42.Utils.Debug.CensusActiveCount
+  name: CensusActiveCount
+  href: api/P42.Utils.Debug.html#P42_Utils_Debug_CensusActiveCount
+  commentId: P:P42.Utils.Debug.CensusActiveCount
+  fullName: P42.Utils.Debug.CensusActiveCount
+  nameWithType: Debug.CensusActiveCount
+- uid: P42.Utils.Debug.CensusActiveCount*
+  name: CensusActiveCount
+  href: api/P42.Utils.Debug.html#P42_Utils_Debug_CensusActiveCount_
+  commentId: Overload:P42.Utils.Debug.CensusActiveCount
+  isSpec: "True"
+  fullName: P42.Utils.Debug.CensusActiveCount
+  nameWithType: Debug.CensusActiveCount
 - uid: P42.Utils.Debug.ConditionFunc
   name: ConditionFunc
   href: api/P42.Utils.Debug.html#P42_Utils_Debug_ConditionFunc
   commentId: F:P42.Utils.Debug.ConditionFunc
   fullName: P42.Utils.Debug.ConditionFunc
   nameWithType: Debug.ConditionFunc
+- uid: P42.Utils.Debug.IsCensusEnabled
+  name: IsCensusEnabled
+  href: api/P42.Utils.Debug.html#P42_Utils_Debug_IsCensusEnabled
+  commentId: F:P42.Utils.Debug.IsCensusEnabled
+  fullName: P42.Utils.Debug.IsCensusEnabled
+  nameWithType: Debug.IsCensusEnabled
+- uid: P42.Utils.Debug.IsMessagesEnabled
+  name: IsMessagesEnabled
+  href: api/P42.Utils.Debug.html#P42_Utils_Debug_IsMessagesEnabled
+  commentId: F:P42.Utils.Debug.IsMessagesEnabled
+  fullName: P42.Utils.Debug.IsMessagesEnabled
+  nameWithType: Debug.IsMessagesEnabled
 - uid: P42.Utils.Debug.Message(System.Object,System.String,System.String)
   name: Message(Object, String, String)
   href: api/P42.Utils.Debug.html#P42_Utils_Debug_Message_System_Object_System_String_System_String_
@@ -17574,6 +19314,19 @@ references:
   isSpec: "True"
   fullName: P42.Utils.Debug.Message
   nameWithType: Debug.Message
+- uid: P42.Utils.Debug.RemoveFromCensus(System.Object)
+  name: RemoveFromCensus(Object)
+  href: api/P42.Utils.Debug.html#P42_Utils_Debug_RemoveFromCensus_System_Object_
+  commentId: M:P42.Utils.Debug.RemoveFromCensus(System.Object)
+  fullName: P42.Utils.Debug.RemoveFromCensus(System.Object)
+  nameWithType: Debug.RemoveFromCensus(Object)
+- uid: P42.Utils.Debug.RemoveFromCensus*
+  name: RemoveFromCensus
+  href: api/P42.Utils.Debug.html#P42_Utils_Debug_RemoveFromCensus_
+  commentId: Overload:P42.Utils.Debug.RemoveFromCensus
+  isSpec: "True"
+  fullName: P42.Utils.Debug.RemoveFromCensus
+  nameWithType: Debug.RemoveFromCensus
 - uid: P42.Utils.DictionaryExtensions
   name: DictionaryExtensions
   href: api/P42.Utils.DictionaryExtensions.html
@@ -17644,6 +19397,64 @@ references:
   fullName.vb: P42.Utils.DictionaryExtensions.TryGetKey(Of TKey, TValue)(System.Collections.Generic.IDictionary(Of TKey, TValue), TValue, ByRef TKey)
   nameWithType: DictionaryExtensions.TryGetKey<TKey, TValue>(IDictionary<TKey, TValue>, TValue, out TKey)
   nameWithType.vb: DictionaryExtensions.TryGetKey(Of TKey, TValue)(IDictionary(Of TKey, TValue), TValue, ByRef TKey)
+- uid: P42.Utils.DiskSpace
+  name: DiskSpace
+  href: api/P42.Utils.DiskSpace.html
+  commentId: T:P42.Utils.DiskSpace
+  fullName: P42.Utils.DiskSpace
+  nameWithType: DiskSpace
+- uid: P42.Utils.DiskSpace.Free
+  name: Free
+  href: api/P42.Utils.DiskSpace.html#P42_Utils_DiskSpace_Free
+  commentId: P:P42.Utils.DiskSpace.Free
+  fullName: P42.Utils.DiskSpace.Free
+  nameWithType: DiskSpace.Free
+- uid: P42.Utils.DiskSpace.Free*
+  name: Free
+  href: api/P42.Utils.DiskSpace.html#P42_Utils_DiskSpace_Free_
+  commentId: Overload:P42.Utils.DiskSpace.Free
+  isSpec: "True"
+  fullName: P42.Utils.DiskSpace.Free
+  nameWithType: DiskSpace.Free
+- uid: P42.Utils.DiskSpace.Humanize(System.Double,System.Int32,System.Boolean)
+  name: Humanize(Double, Int32, Boolean)
+  href: api/P42.Utils.DiskSpace.html#P42_Utils_DiskSpace_Humanize_System_Double_System_Int32_System_Boolean_
+  commentId: M:P42.Utils.DiskSpace.Humanize(System.Double,System.Int32,System.Boolean)
+  fullName: P42.Utils.DiskSpace.Humanize(System.Double, System.Int32, System.Boolean)
+  nameWithType: DiskSpace.Humanize(Double, Int32, Boolean)
+- uid: P42.Utils.DiskSpace.Humanize*
+  name: Humanize
+  href: api/P42.Utils.DiskSpace.html#P42_Utils_DiskSpace_Humanize_
+  commentId: Overload:P42.Utils.DiskSpace.Humanize
+  isSpec: "True"
+  fullName: P42.Utils.DiskSpace.Humanize
+  nameWithType: DiskSpace.Humanize
+- uid: P42.Utils.DiskSpace.Size
+  name: Size
+  href: api/P42.Utils.DiskSpace.html#P42_Utils_DiskSpace_Size
+  commentId: P:P42.Utils.DiskSpace.Size
+  fullName: P42.Utils.DiskSpace.Size
+  nameWithType: DiskSpace.Size
+- uid: P42.Utils.DiskSpace.Size*
+  name: Size
+  href: api/P42.Utils.DiskSpace.html#P42_Utils_DiskSpace_Size_
+  commentId: Overload:P42.Utils.DiskSpace.Size
+  isSpec: "True"
+  fullName: P42.Utils.DiskSpace.Size
+  nameWithType: DiskSpace.Size
+- uid: P42.Utils.DiskSpace.Used
+  name: Used
+  href: api/P42.Utils.DiskSpace.html#P42_Utils_DiskSpace_Used
+  commentId: P:P42.Utils.DiskSpace.Used
+  fullName: P42.Utils.DiskSpace.Used
+  nameWithType: DiskSpace.Used
+- uid: P42.Utils.DiskSpace.Used*
+  name: Used
+  href: api/P42.Utils.DiskSpace.html#P42_Utils_DiskSpace_Used_
+  commentId: Overload:P42.Utils.DiskSpace.Used
+  isSpec: "True"
+  fullName: P42.Utils.DiskSpace.Used
+  nameWithType: DiskSpace.Used
 - uid: P42.Utils.DownloadCache
   name: DownloadCache
   href: api/P42.Utils.DownloadCache.html
@@ -18663,6 +20474,57 @@ references:
   isSpec: "True"
   fullName: P42.Utils.IJsonWriteable.WriteValue
   nameWithType: IJsonWriteable.WriteValue
+- uid: P42.Utils.Interfaces
+  name: P42.Utils.Interfaces
+  href: api/P42.Utils.Interfaces.html
+  commentId: N:P42.Utils.Interfaces
+  fullName: P42.Utils.Interfaces
+  nameWithType: P42.Utils.Interfaces
+- uid: P42.Utils.Interfaces.IDiskSpace
+  name: IDiskSpace
+  href: api/P42.Utils.Interfaces.IDiskSpace.html
+  commentId: T:P42.Utils.Interfaces.IDiskSpace
+  fullName: P42.Utils.Interfaces.IDiskSpace
+  nameWithType: IDiskSpace
+- uid: P42.Utils.Interfaces.IDiskSpace.Free
+  name: Free
+  href: api/P42.Utils.Interfaces.IDiskSpace.html#P42_Utils_Interfaces_IDiskSpace_Free
+  commentId: P:P42.Utils.Interfaces.IDiskSpace.Free
+  fullName: P42.Utils.Interfaces.IDiskSpace.Free
+  nameWithType: IDiskSpace.Free
+- uid: P42.Utils.Interfaces.IDiskSpace.Free*
+  name: Free
+  href: api/P42.Utils.Interfaces.IDiskSpace.html#P42_Utils_Interfaces_IDiskSpace_Free_
+  commentId: Overload:P42.Utils.Interfaces.IDiskSpace.Free
+  isSpec: "True"
+  fullName: P42.Utils.Interfaces.IDiskSpace.Free
+  nameWithType: IDiskSpace.Free
+- uid: P42.Utils.Interfaces.IDiskSpace.Size
+  name: Size
+  href: api/P42.Utils.Interfaces.IDiskSpace.html#P42_Utils_Interfaces_IDiskSpace_Size
+  commentId: P:P42.Utils.Interfaces.IDiskSpace.Size
+  fullName: P42.Utils.Interfaces.IDiskSpace.Size
+  nameWithType: IDiskSpace.Size
+- uid: P42.Utils.Interfaces.IDiskSpace.Size*
+  name: Size
+  href: api/P42.Utils.Interfaces.IDiskSpace.html#P42_Utils_Interfaces_IDiskSpace_Size_
+  commentId: Overload:P42.Utils.Interfaces.IDiskSpace.Size
+  isSpec: "True"
+  fullName: P42.Utils.Interfaces.IDiskSpace.Size
+  nameWithType: IDiskSpace.Size
+- uid: P42.Utils.Interfaces.IDiskSpace.Used
+  name: Used
+  href: api/P42.Utils.Interfaces.IDiskSpace.html#P42_Utils_Interfaces_IDiskSpace_Used
+  commentId: P:P42.Utils.Interfaces.IDiskSpace.Used
+  fullName: P42.Utils.Interfaces.IDiskSpace.Used
+  nameWithType: IDiskSpace.Used
+- uid: P42.Utils.Interfaces.IDiskSpace.Used*
+  name: Used
+  href: api/P42.Utils.Interfaces.IDiskSpace.html#P42_Utils_Interfaces_IDiskSpace_Used_
+  commentId: Overload:P42.Utils.Interfaces.IDiskSpace.Used
+  isSpec: "True"
+  fullName: P42.Utils.Interfaces.IDiskSpace.Used
+  nameWithType: IDiskSpace.Used
 - uid: P42.Utils.IWeakEventManager
   name: IWeakEventManager
   href: api/P42.Utils.IWeakEventManager.html
@@ -19990,6 +21852,25 @@ references:
   isSpec: "True"
   fullName: P42.Utils.StringExtensions.SubstringLast
   nameWithType: StringExtensions.SubstringLast
+- uid: P42.Utils.StringExtensions.ToHex(System.Char)
+  name: ToHex(Char)
+  href: api/P42.Utils.StringExtensions.html#P42_Utils_StringExtensions_ToHex_System_Char_
+  commentId: M:P42.Utils.StringExtensions.ToHex(System.Char)
+  fullName: P42.Utils.StringExtensions.ToHex(System.Char)
+  nameWithType: StringExtensions.ToHex(Char)
+- uid: P42.Utils.StringExtensions.ToHex(System.String)
+  name: ToHex(String)
+  href: api/P42.Utils.StringExtensions.html#P42_Utils_StringExtensions_ToHex_System_String_
+  commentId: M:P42.Utils.StringExtensions.ToHex(System.String)
+  fullName: P42.Utils.StringExtensions.ToHex(System.String)
+  nameWithType: StringExtensions.ToHex(String)
+- uid: P42.Utils.StringExtensions.ToHex*
+  name: ToHex
+  href: api/P42.Utils.StringExtensions.html#P42_Utils_StringExtensions_ToHex_
+  commentId: Overload:P42.Utils.StringExtensions.ToHex
+  isSpec: "True"
+  fullName: P42.Utils.StringExtensions.ToHex
+  nameWithType: StringExtensions.ToHex
 - uid: P42.Utils.TextCache
   name: TextCache
   href: api/P42.Utils.TextCache.html
@@ -20142,12 +22023,12 @@ references:
   isSpec: "True"
   fullName: P42.Utils.Timer.Change
   nameWithType: Timer.Change
-- uid: P42.Utils.Timer.Dispose
-  name: Dispose()
-  href: api/P42.Utils.Timer.html#P42_Utils_Timer_Dispose
-  commentId: M:P42.Utils.Timer.Dispose
-  fullName: P42.Utils.Timer.Dispose()
-  nameWithType: Timer.Dispose()
+- uid: P42.Utils.Timer.Dispose(System.Boolean)
+  name: Dispose(Boolean)
+  href: api/P42.Utils.Timer.html#P42_Utils_Timer_Dispose_System_Boolean_
+  commentId: M:P42.Utils.Timer.Dispose(System.Boolean)
+  fullName: P42.Utils.Timer.Dispose(System.Boolean)
+  nameWithType: Timer.Dispose(Boolean)
 - uid: P42.Utils.Timer.Dispose*
   name: Dispose
   href: api/P42.Utils.Timer.html#P42_Utils_Timer_Dispose_

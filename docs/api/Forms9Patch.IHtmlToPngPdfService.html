@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Interface IHtmlToPngPdfService
    | Forms9Patch ">
-    <meta name="generator" content="docfx 2.45.1.0">
+    <meta name="generator" content="docfx 2.47.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -94,21 +94,16 @@
   </div>
   <h3 id="methods">Methods
   </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_IHtmlToPngPdfService_ToPng_System_String_System_String_System_Action_System_String__.md&amp;value=---%0Auid%3A%20Forms9Patch.IHtmlToPngPdfService.ToPng(System.String%2CSystem.String%2CSystem.Action%7BSystem.String%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Interfaces/IHtmlToPngPdfService.cs/#L16">View Source</a>
-  </span>
-  <a id="Forms9Patch_IHtmlToPngPdfService_ToPng_" data-uid="Forms9Patch.IHtmlToPngPdfService.ToPng*"></a>
-  <h4 id="Forms9Patch_IHtmlToPngPdfService_ToPng_System_String_System_String_System_Action_System_String__" data-uid="Forms9Patch.IHtmlToPngPdfService.ToPng(System.String,System.String,System.Action{System.String})">ToPng(String, String, Action&lt;String&gt;)</h4>
+  
+  
+  <a id="Forms9Patch_IHtmlToPngPdfService_ToPngAsync_" data-uid="Forms9Patch.IHtmlToPngPdfService.ToPngAsync*"></a>
+  <h4 id="Forms9Patch_IHtmlToPngPdfService_ToPngAsync_Forms9Patch_ActivityIndicatorPopup_System_String_System_String_" data-uid="Forms9Patch.IHtmlToPngPdfService.ToPngAsync(Forms9Patch.ActivityIndicatorPopup,System.String,System.String)">ToPngAsync(ActivityIndicatorPopup, String, String)</h4>
   <div class="markdown level1 summary"><p>Tos the png.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void ToPng(string html, string fileName, Action&lt;string&gt; onComplete)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;HtmlToPngResult&gt; ToPngAsync(ActivityIndicatorPopup popup, string html, string fileName)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -121,6 +116,11 @@
     </thead>
     <tbody>
       <tr>
+        <td><a class="xref" href="Forms9Patch.ActivityIndicatorPopup.html">ActivityIndicatorPopup</a></td>
+        <td><span class="parametername">popup</span></td>
+        <td></td>
+      </tr>
+      <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">html</span></td>
         <td><p>Html.</p>
@@ -132,15 +132,30 @@
         <td><p>File name.</p>
 </td>
       </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
-        <td><span class="parametername">onComplete</span></td>
-        <td><p>On complete.</p>
-</td>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Forms9Patch.HtmlToPngResult.html">HtmlToPngResult</a>&gt;</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="P42.Utils.Debug.html#P42_Utils_Debug_AddToCensus_System_Object_">Debug.AddToCensus(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.Debug.html#P42_Utils_Debug_RemoveFromCensus_System_Object_">Debug.RemoveFromCensus(Object)</a>
+  </div>
   <div>
       <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetProperties_System_Object_">ReflectionExtensions.GetProperties(Object)</a>
   </div>
@@ -178,12 +193,6 @@
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
-                  <li>
-                    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_IHtmlToPngPdfService.md&amp;value=---%0Auid%3A%20Forms9Patch.IHtmlToPngPdfService%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
-                  </li>
-                  <li>
-                    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Interfaces/IHtmlToPngPdfService.cs/#L8" class="contribution-link">View Source</a>
-                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">

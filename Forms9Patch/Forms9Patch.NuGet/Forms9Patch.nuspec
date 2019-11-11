@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
         <id>Forms9Patch</id>
-        <version>1.8.1.0</version>
+        <version>2.0.0</version>
         <title>Forms9Patch</title>
         <authors>Ben Askren</authors>
         <owners>baskren</owners>
@@ -25,6 +25,7 @@ Android developers can use NinePatch bitmaps, the drawable directory naming conv
   </description>
   <summary>Simplify multi-device image, label and font management in your NetStandard, PCL, and Shared Library Xamarin.Forms mobile and UWP apps</summary>
 	<releaseNotes>
+    2.0.0.0: New: Pattern compliant IDisposible elements; Popups Dispose() will cancel popup; ListView will dispose IDisposable cell contents; Popups will dispose IDisposable contents; Image leaks fixed; Embedded fork of Rg.Plugins.Popups with fixes; Can copy Toast content by long press; DiskSpace helper static class;    Fixed: Right click on cell throws exception in UWP; UWP HtmlToPng causes crash; Button doesn't position icon correctly if label is null; Button layout not correct if TextAlignent=end; ContentView.BackgroundImage not being disposed; Bubble popup doesn't appear if target bounds cannot be found; #29 Frame doesn't appear if it has no content; #30 Doesn't work with XAML previewer; #32 iOS now uses WKWebView instead of UIWebView; 
     1.8.1.0: Build with Xamarin.Forms v4.2; New: Added PermissionPopup.AffirmedAsync() and IPopup.Parameter; Fixed: Binding for Segment.Command doesn't work; Fixed: Label is blank in weird Android ListView edge case; Added optional recursion detection and breadcrumbs; Reduced memory footprint of EmbeddedResourceExtensions;  Potentially Fixed: Issue#20 (not able to replicate issue but removed offending code);  Fixed: Issue#25 (Android crash when Visual stype property is set);
     1.8.0.5: Fixed: Android version of Label crashes on pre-M versions of Android;
     1.8.0.4: Android Fixes: Children of Forms9Patch layout elements are assigned Parent property twice; 1.8.0.3 solution to Android cell swipe issue doesn't work on hardware; Forms9Patch.ListView group header labels are not updating with correct text when BindingContext is changed; Inserted cells in Forms9Patch.ListView is not rendering content at first rendering; App crashes when compiled with Link SDK;

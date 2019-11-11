@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class MultiPicker
    | Forms9Patch ">
-    <meta name="generator" content="docfx 2.45.1.0">
+    <meta name="generator" content="docfx 2.47.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -83,8 +83,7 @@
   
   <h1 id="Forms9Patch_MultiPicker" data-uid="Forms9Patch.MultiPicker" class="text-break">Class MultiPicker
   </h1>
-  <div class="markdown level0 summary"><p>Multi picker.</p>
-</div>
+  <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
@@ -115,6 +114,7 @@
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ianimatable">IAnimatable</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.itabstopelement">ITabStopElement</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.internals.igesturecontroller">IGestureController</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.iviewcontroller">IViewController</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ivisualelementcontroller">IVisualElementController</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ielementcontroller">IElementController</a></div>
@@ -325,6 +325,12 @@
     </div>
     <div>
       <a class="xref" href="Forms9Patch.ContentView.html#Forms9Patch_ContentView_BaseInternalChildren">ContentView.BaseInternalChildren</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ContentView.html#Forms9Patch_ContentView_Dispose_System_Boolean_">ContentView.Dispose(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ContentView.html#Forms9Patch_ContentView_Dispose">ContentView.Dispose()</a>
     </div>
     <div>
       <a class="xref" href="Forms9Patch.ContentView.html#Forms9Patch_ContentView_Description">ContentView.Description()</a>
@@ -838,17 +844,12 @@
   <h6><strong>Assembly</strong>: Forms9Patch.dll</h6>
   <h5 id="Forms9Patch_MultiPicker_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class MultiPicker : SinglePicker, INotifyPropertyChanged, IDynamicResourceHandler, IElement, INameScope, INavigationProxy, IAnimatable, IResourcesProvider, IStyleElement, IFlowDirectionController, IPropertyPropagationController, IVisualController, ITabStopElement, IStyleSelectable, IStylable, IGestureController, IPaddingElement, IControlTemplated, IViewController, IVisualElementController, IElementController, ILayout, IBackground, IShape, IElement, ILayout, ILayoutController, IViewContainer&lt;View&gt;, IGridController, IElementConfiguration&lt;Grid&gt;, IElementConfiguration&lt;Grid&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public class MultiPicker : SinglePicker, INotifyPropertyChanged, IDynamicResourceHandler, IElement, INameScope, INavigationProxy, IAnimatable, IResourcesProvider, IStyleElement, IFlowDirectionController, IPropertyPropagationController, IVisualController, ITabStopElement, IStyleSelectable, IStylable, IGestureController, IPaddingElement, IControlTemplated, IDisposable, IViewController, IVisualElementController, IElementController, ILayout, IBackground, IShape, IElement, ILayout, ILayoutController, IViewContainer&lt;View&gt;, IGridController, IElementConfiguration&lt;Grid&gt;, IElementConfiguration&lt;Grid&gt;</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_MultiPicker__ctor.md&amp;value=---%0Auid%3A%20Forms9Patch.MultiPicker.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Pickers/MultiPicker.cs/#L36">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_MultiPicker__ctor_" data-uid="Forms9Patch.MultiPicker.#ctor*"></a>
   <h4 id="Forms9Patch_MultiPicker__ctor" data-uid="Forms9Patch.MultiPicker.#ctor">MultiPicker()</h4>
   <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Forms9Patch.MultiPicker.html">MultiPicker</a> class.</p>
@@ -860,13 +861,8 @@
   </div>
   <h3 id="fields">Fields
   </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_MultiPicker_SelectedItemsPropertyKey.md&amp;value=---%0Auid%3A%20Forms9Patch.MultiPicker.SelectedItemsPropertyKey%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Pickers/MultiPicker.cs/#L18">View Source</a>
-  </span>
+  
+  
   <h4 id="Forms9Patch_MultiPicker_SelectedItemsPropertyKey" data-uid="Forms9Patch.MultiPicker.SelectedItemsPropertyKey">SelectedItemsPropertyKey</h4>
   <div class="markdown level1 summary"><p>The selected items property.</p>
 </div>
@@ -892,13 +888,8 @@
   </table>
   <h3 id="properties">Properties
   </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_MultiPicker_SelectedItems.md&amp;value=---%0Auid%3A%20Forms9Patch.MultiPicker.SelectedItems%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Pickers/MultiPicker.cs/#L23">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_MultiPicker_SelectedItems_" data-uid="Forms9Patch.MultiPicker.SelectedItems*"></a>
   <h4 id="Forms9Patch_MultiPicker_SelectedItems" data-uid="Forms9Patch.MultiPicker.SelectedItems">SelectedItems</h4>
   <div class="markdown level1 summary"><p>Gets or sets the selected items.</p>
@@ -936,6 +927,9 @@
   </div>
   <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.internals.igesturecontroller">Xamarin.Forms.Internals.IGestureController</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">System.IDisposable</a>
   </div>
   <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.iviewcontroller">Xamarin.Forms.IViewController</a>
@@ -1032,36 +1026,6 @@
       <a class="xref" href="FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_IsInVisibleViewTree_Xamarin_Forms_VisualElement_">VisualElementExtensions.IsInVisibleViewTree(VisualElement)</a>
   </div>
   <div>
-      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetProperties_System_Object_">ReflectionExtensions.GetProperties(Object)</a>
-  </div>
-  <div>
-      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetProperty_System_Object_System_String_">ReflectionExtensions.GetProperty(Object, String)</a>
-  </div>
-  <div>
-      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_PropertyNames_System_Object_">ReflectionExtensions.PropertyNames(Object)</a>
-  </div>
-  <div>
-      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_PropertyExists_System_Object_System_String_">ReflectionExtensions.PropertyExists(Object, String)</a>
-  </div>
-  <div>
-      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_HasProperty_System_Object_System_String_">ReflectionExtensions.HasProperty(Object, String)</a>
-  </div>
-  <div>
-      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetPropertyValue_System_Object_System_String_">ReflectionExtensions.GetPropertyValue(Object, String)</a>
-  </div>
-  <div>
-      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_SetPropertyValue_System_Object_System_String_System_Object_">ReflectionExtensions.SetPropertyValue(Object, String, Object)</a>
-  </div>
-  <div>
-      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetFieldValue_System_Object_System_String_">ReflectionExtensions.GetFieldValue(Object, String)</a>
-  </div>
-  <div>
-      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_SetFieldValue_System_Object_System_String_System_Object_">ReflectionExtensions.SetFieldValue(Object, String, Object)</a>
-  </div>
-  <div>
-      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_CallMethod_System_Object_System_String_System_Object___">ReflectionExtensions.CallMethod(Object, String, Object[])</a>
-  </div>
-  <div>
       <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_AncestorOfBaseType__1_Xamarin_Forms_Element_">ElementExtensions.AncestorOfBaseType&lt;T&gt;(Element)</a>
   </div>
   <div>
@@ -1106,6 +1070,42 @@
   <div>
       <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_HardwareKeyUnfocus_Xamarin_Forms_VisualElement_">HardwareKeyListenerExtensions.HardwareKeyUnfocus(VisualElement)</a>
   </div>
+  <div>
+      <a class="xref" href="P42.Utils.Debug.html#P42_Utils_Debug_AddToCensus_System_Object_">Debug.AddToCensus(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.Debug.html#P42_Utils_Debug_RemoveFromCensus_System_Object_">Debug.RemoveFromCensus(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetProperties_System_Object_">ReflectionExtensions.GetProperties(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetProperty_System_Object_System_String_">ReflectionExtensions.GetProperty(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_PropertyNames_System_Object_">ReflectionExtensions.PropertyNames(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_PropertyExists_System_Object_System_String_">ReflectionExtensions.PropertyExists(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_HasProperty_System_Object_System_String_">ReflectionExtensions.HasProperty(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetPropertyValue_System_Object_System_String_">ReflectionExtensions.GetPropertyValue(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_SetPropertyValue_System_Object_System_String_System_Object_">ReflectionExtensions.SetPropertyValue(Object, String, Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetFieldValue_System_Object_System_String_">ReflectionExtensions.GetFieldValue(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_SetFieldValue_System_Object_System_String_System_Object_">ReflectionExtensions.SetFieldValue(Object, String, Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_CallMethod_System_Object_System_String_System_Object___">ReflectionExtensions.CallMethod(Object, String, Object[])</a>
+  </div>
 </article>
           </div>
           
@@ -1113,12 +1113,6 @@
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
-                  <li>
-                    <a href="https://github.com/baskren/Forms9Patch/new/dev/apiSpec/new?filename=Forms9Patch_MultiPicker.md&amp;value=---%0Auid%3A%20Forms9Patch.MultiPicker%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
-                  </li>
-                  <li>
-                    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch/Elements/Pickers/MultiPicker.cs/#L12" class="contribution-link">View Source</a>
-                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
