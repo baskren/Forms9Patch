@@ -148,6 +148,7 @@ Sometimes you simply need to ask a yes/no question.  Given some HTML formatted t
 - `CancelButtonColor`: Background color for **[Cancel]** button.
 - `CancelTextColor`: Text color for **[Cancel]** button.
 - `CancelText`: Text for **[Cancel]** button.
+- `PermissionState`: An enum (`Pending`, `Ok`, `Cancelled`, `Rejected`) describing the state of the permission granting process.  This is very useful when the `PermissionPopup` is wrapped in a `using` block and is examined after a `WaitForCancelAsync()` call.
 
 ### Forms9Patch.PermissionPopup Unique Methods
 
@@ -242,4 +243,3 @@ Please note that `ActivityIndicatorPopup` is slightly different.  That is becaus
         await GetDataAsync();
     }
 ```
-
