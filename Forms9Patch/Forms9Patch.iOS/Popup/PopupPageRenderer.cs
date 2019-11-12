@@ -38,6 +38,7 @@ namespace Forms9Patch.iOS
             {
                 _disposed = true;
                 View?.RemoveGestureRecognizer(_tapGestureRecognizer);
+                _tapGestureRecognizer?.Dispose();
 
                 if (_willChangeFrameNotificationObserver != null)
                     NSNotificationCenter.DefaultCenter.RemoveObserver(_willChangeFrameNotificationObserver);
@@ -50,6 +51,7 @@ namespace Forms9Patch.iOS
 
                 _willChangeFrameNotificationObserver = null;
                 _willHideNotificationObserver = null;
+
             }
             base.Dispose(disposing);
         }
@@ -211,5 +213,7 @@ namespace Forms9Patch.iOS
         }
 
         #endregion
+
+
     }
 }

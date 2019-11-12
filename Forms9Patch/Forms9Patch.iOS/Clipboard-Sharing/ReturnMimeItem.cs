@@ -73,6 +73,7 @@ namespace Forms9Patch.iOS
             {
                 NSPropertyListFormat propertyListFormat = new NSPropertyListFormat();
                 nsObject = NSPropertyListSerialization.PropertyListWithData(nsData, NSPropertyListReadOptions.Immutable, ref propertyListFormat, out NSError nsError);
+                nsError?.Dispose();
             }
             //System.Diagnostics.Debug.WriteLine("\t\t\t GetValueAs 3 stopwatch.Elapsed: " + stopwatch.ElapsedMilliseconds);
             stopwatch.Restart();

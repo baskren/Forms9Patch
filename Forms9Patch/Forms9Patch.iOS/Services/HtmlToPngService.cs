@@ -69,8 +69,8 @@ namespace Forms9Patch.iOS
 
         int loadCount;
         Size _size;
-        string _filename;
-        Action<HtmlToPngResult> _onComplete;
+        readonly string _filename;
+        readonly Action<HtmlToPngResult> _onComplete;
 
         public WKUiCallback(Size size, string fileName, Action<HtmlToPngResult> onComplete)
         {

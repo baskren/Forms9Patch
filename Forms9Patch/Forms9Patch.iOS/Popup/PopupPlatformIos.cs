@@ -15,10 +15,10 @@ namespace Forms9Patch.iOS
     [Preserve(AllMembers = true)]
     internal class PopupPlatformIos : IPopupPlatform
     {
-        private readonly List<UIWindow> _windows = new List<UIWindow>();
+        readonly List<UIWindow> _windows = new List<UIWindow>();
 
-        private bool IsiOS9OrNewer => UIDevice.CurrentDevice.CheckSystemVersion(9, 0);
-        private bool IsiOS13OrNewer => UIDevice.CurrentDevice.CheckSystemVersion(13, 0);
+        static bool IsiOS9OrNewer => UIDevice.CurrentDevice.CheckSystemVersion(9, 0);
+        static bool IsiOS13OrNewer => UIDevice.CurrentDevice.CheckSystemVersion(13, 0);
 
         public event EventHandler OnInitialized
         {

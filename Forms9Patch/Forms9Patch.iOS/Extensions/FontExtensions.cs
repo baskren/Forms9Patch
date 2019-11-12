@@ -113,6 +113,7 @@ namespace Forms9Patch.iOS
                         Console.WriteLine("\tdescription: " + error.Description);
                         throw new MissingMemberException("Failed to register [" + resourceId + "] font.  Error messages in console.");
                     }
+                    error?.Dispose();
                 }
                 _embeddedResourceFonts.Add(resourceId, font.PostScriptName);
                 return UIFont.FromName(font.PostScriptName, size);
