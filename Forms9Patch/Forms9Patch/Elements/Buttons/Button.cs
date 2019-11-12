@@ -207,6 +207,7 @@ namespace Forms9Patch
         /// Do not use
         /// </summary>
         [Obsolete("Content property is not supported", true)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1061:Do not hide base class methods", Justification = "We really don't want devs to have access to base class Content_set!")]
         public new VisualElement Content
         {
             get => throw new NotSupportedException("Forms9Patch.Button: Content is not a supported property.");
@@ -1095,7 +1096,6 @@ namespace Forms9Patch
             {
                 _disposed = true;
 
-                LayoutComplete = null;
                 _tapped = null;
                 _pressed = null;
                 _released = null;
@@ -1380,10 +1380,6 @@ namespace Forms9Patch
 
 
         #region Events
-        /// <summary>
-        /// Occurs when LayoutChildren is completed.
-        /// </summary>
-        public event EventHandler<bool> LayoutComplete;
 
         bool IsEnabledCore
         {
@@ -2057,29 +2053,6 @@ namespace Forms9Patch
         #endregion
 
 
-        /*
-        #region Sizing and Layout
-        /// <summary>
-        /// Layout the view
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        protected override void LayoutChildren(double x, double y, double width, double height)
-        {
-            if (HtmlText?.StartsWith("Lateral") ?? false)
-                System.Diagnostics.Debug.WriteLine(GetType() + ".");
-            base.LayoutChildren(x, y, width, height);
-            LayoutComplete?.Invoke(this, IsClipped);
-        }
-
-        public void HardForceLayout()
-            => LayoutChildren(Bounds.X, Bounds.Y, Bounds.Width, Bounds.Height);
-
-
-        #endregion
-        */
     }
 
 }

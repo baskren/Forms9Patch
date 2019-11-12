@@ -221,6 +221,7 @@ namespace FormsGestures
             {
                 RaiseEvent<DownUpEventArgs>(_down, args);
                 ExecuteCommand(DownCommand, DownCommandParameter, args);
+                ExecuteCallback(DownCallback, DownCallbackParameter, args);
                 result = args.Handled;
             }
             return result;
@@ -327,6 +328,7 @@ namespace FormsGestures
             {
                 RaiseEvent<DownUpEventArgs>(_up, args);
                 ExecuteCommand(UpCommand, UpCommandParameter, args);
+                ExecuteCallback(UpCallback, UpCallbackParameter, args);
                 result = args.Handled;
             }
             return result;
@@ -433,6 +435,7 @@ namespace FormsGestures
             {
                 RaiseEvent<TapEventArgs>(_tapping, args);
                 ExecuteCommand(TappingCommand, TappingCommandParameter, args);
+                ExecuteCallback(TappingCallback, TappingCallbackParameter, args);
                 result = args.Handled;
             }
             return result;
@@ -539,6 +542,7 @@ namespace FormsGestures
             {
                 RaiseEvent<TapEventArgs>(_tapped, args);
                 ExecuteCommand(TappedCommand, TappedCommandParameter, args);
+                ExecuteCallback(TappedCallback, TappedCallbackParameter, args);
                 result = args.Handled;
             }
             return result;
@@ -645,6 +649,7 @@ namespace FormsGestures
             {
                 RaiseEvent<TapEventArgs>(_doubleTapped, args);
                 ExecuteCommand(DoubleTappedCommand, DoubleTappedCommandParameter, args);
+                ExecuteCallback(DoubleTappedCallback, DoubleTappedCallbackParameter, args);
                 result = args.Handled;
             }
             return result;
@@ -760,6 +765,7 @@ namespace FormsGestures
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
                 RaiseEvent<LongPressEventArgs>(_longPressing, args);
                 ExecuteCommand(LongPressingCommand, LongPressingCommandParameter, args);
+                ExecuteCallback(LongPressingCallback, LongPressingCallbackParameter, args);
                 result = args.Handled;
             }
             return result;
@@ -878,6 +884,7 @@ namespace FormsGestures
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
                 RaiseEvent<LongPressEventArgs>(_longPressed, args);
                 ExecuteCommand(LongPressedCommand, LongPressedCommandParameter, args);
+                ExecuteCallback(LongPressedCallback, LongPressingCallbackParameter, args);
                 result = args.Handled;
             }
             return result;
@@ -986,6 +993,7 @@ namespace FormsGestures
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
                 RaiseEvent<PinchEventArgs>(_pinching, args);
                 ExecuteCommand(PinchingCommand, PinchingCommandParameter, args);
+                ExecuteCallback(PinchingCallback, PinchingCallbackParameter, args);
                 result = args.Handled;
             }
             return result;
@@ -1094,6 +1102,7 @@ namespace FormsGestures
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
                 RaiseEvent<PinchEventArgs>(_pinched, args);
                 ExecuteCommand(PinchedCommand, PinchedCommandParameter, args);
+                ExecuteCallback(PinchedCallback, PinchingCallbackParameter, args);
                 result = args.Handled;
             }
             return result;
@@ -1210,6 +1219,7 @@ namespace FormsGestures
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
                 RaiseEvent<PanEventArgs>(_panning, args);
                 ExecuteCommand(PanningCommand, PanningCommandParameter, args);
+                ExecuteCallback(PanningCallback, PanningCallbackParameter, args);
                 result = args.Handled;
             }
             return result;
@@ -1318,6 +1328,7 @@ namespace FormsGestures
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
                 RaiseEvent<PanEventArgs>(_panned, args);
                 ExecuteCommand(PannedCommand, PannedCommandParameter, args);
+                ExecuteCallback(PannedCallback, PannedCallbackParameter, args);
                 result = args.Handled;
             }
             return result;
@@ -1427,6 +1438,7 @@ namespace FormsGestures
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
                 RaiseEvent<SwipeEventArgs>(_swiped, args);
                 ExecuteCommand(SwipedCommand, SwipedCommandParameter, args);
+                ExecuteCallback(SwipedCallback, SwipedCallbackParameter, args);
                 result = args.Handled;
             }
             return result;
@@ -1534,6 +1546,7 @@ namespace FormsGestures
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
                 RaiseEvent<RotateEventArgs>(_rotating, args);
                 ExecuteCommand(RotatingCommand, RotatingCommandParameter, args);
+                ExecuteCallback(RotatingCallback, RotatingCallbackParameter, args);
                 result = args.Handled;
             }
             return result;
@@ -1641,6 +1654,7 @@ namespace FormsGestures
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
                 RaiseEvent<RotateEventArgs>(_rotated, args);
                 ExecuteCommand(RotatedCommand, RotatedCommandParameter, args);
+                ExecuteCallback(RotatedCallback, RotatingCallbackParameter, args);
                 result = args.Handled;
             }
             return result;
@@ -1747,6 +1761,7 @@ namespace FormsGestures
             {
                 RaiseEvent<RightClickEventArgs>(_rightClicked, args);
                 ExecuteCommand(RightClickedCommand, RightClickedCommandParameter, args);
+                ExecuteCallback(RightClickedCallback, RightClickedCallbackParameter, args);
                 result = args.Handled;
             }
             return result;

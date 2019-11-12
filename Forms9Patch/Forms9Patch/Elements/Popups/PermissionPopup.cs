@@ -301,10 +301,8 @@ namespace Forms9Patch
 
 
         #region Event Handlers
-        bool _okTapped;
         internal async void OnOkButtonTappedAsync(object sender, EventArgs e)
         {
-            _okTapped = true;
             PermissionState = PermissionState.Ok;
             await PopAsync(_okButton, lastAction: () => OkTapped?.Invoke(this, EventArgs.Empty));
         }

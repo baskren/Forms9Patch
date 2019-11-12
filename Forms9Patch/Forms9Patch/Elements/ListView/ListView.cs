@@ -11,7 +11,7 @@ namespace Forms9Patch
     /// FormsDragNDropListView List view.
     /// </summary>
     [DesignTimeVisible(true)]
-    public class ListView : Forms9Patch.Frame, IElement, IDisposable //  Forms9Patch.ManualLayout, IElement
+    public class ListView : Forms9Patch.Frame, IElement //  Forms9Patch.ManualLayout, IElement
     {
         #region Properties
 
@@ -502,7 +502,7 @@ namespace Forms9Patch
 
 
         #region Private Properties
-
+        /*
         ModalPopup _popup;
         ModalPopup Popup
         {
@@ -517,6 +517,7 @@ namespace Forms9Patch
                 return _popup;
             }
         }
+        */
 
         internal GroupWrapper BaseItemsSource { get; set; }
         #endregion
@@ -1140,7 +1141,7 @@ namespace Forms9Patch
                     break;
             }
         }
-
+        /*
         void ReevaluateSelectedItems()
         {
             // remove any SelectedItems that are not a Item.Source in the _baseItemsSource
@@ -1167,7 +1168,7 @@ namespace Forms9Patch
                     AddSelectedItem(SelectedItem);
             }
         }
-
+        */
         #endregion
 
 
@@ -1372,8 +1373,6 @@ namespace Forms9Patch
         public bool ScrollBy(double delta, bool animated = true) => _listView.ScrollBy(delta, animated);
 
 
-        int _scrollToInvocations;
-
         /// <summary>
         /// Scrolls to item in group
         /// </summary>
@@ -1403,7 +1402,6 @@ namespace Forms9Patch
 
         bool ScrollTo(DeepDataSet dataSet, ScrollToPosition position, bool animated = true)
         {
-            _scrollToInvocations++;
             if (dataSet == null)
                 return false;
             var offset = dataSet.Offset + _listView.HeaderHeight;

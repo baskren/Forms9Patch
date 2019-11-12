@@ -19,7 +19,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store key for Content
         /// </summary>
-        public static readonly new BindableProperty ContentProperty = BindableProperty.Create("Content", typeof(View), typeof(ContentView), null,
+        public static readonly new BindableProperty ContentProperty = BindableProperty.Create(nameof(Content), typeof(View), typeof(ContentView), null,
                                                                                             propertyChanging: (bindable, oldValue, newValue) =>
                                                                                             {
                                                                                                 if (oldValue is View element)
@@ -64,7 +64,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the background image property.
         /// </summary>
-        public static readonly BindableProperty BackgroundImageProperty = BindableProperty.Create("BackgroundImage", typeof(Image), typeof(ContentView), null,
+        public static readonly BindableProperty BackgroundImageProperty = BindableProperty.Create(nameof(BackgroundImage), typeof(Image), typeof(ContentView), null,
                                                                                               propertyChanging: (bindable, oldValue, newValue) =>
                                                                                               {
                                                                                                   if (bindable is ContentView contentView && !(bindable is SegmentButton))
@@ -89,7 +89,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the limit minimum size to background image size property.
         /// </summary>
-        public static readonly BindableProperty LimitMinSizeToBackgroundImageSizeProperty = BindableProperty.Create("LimitMinSizeToBackgroundImageSize", typeof(bool), typeof(ContentView), default(bool));
+        public static readonly BindableProperty LimitMinSizeToBackgroundImageSizeProperty = BindableProperty.Create(nameof(LimitMinSizeToBackgroundImageSize), typeof(bool), typeof(ContentView), default(bool));
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.ContentView"/> will limit its minimum size to
         /// background image size.

@@ -58,6 +58,7 @@ namespace Forms9Patch
 
 
         #region Fields
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "_frame is disposed via DecorativeContainerView.Dispose() in PopupBase.Dispose()")]
         readonly Frame _frame;
         #endregion
 

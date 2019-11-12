@@ -159,6 +159,7 @@ namespace Forms9Patch
 
 
         #region Fields
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "_bubbleLayout is disposed via DecorativeContainerView.Dispose in PopupBase.Dispose()")]
         internal BubbleLayout _bubbleLayout;
         #endregion
 

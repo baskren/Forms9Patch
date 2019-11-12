@@ -11,7 +11,7 @@ namespace Forms9Patch
     /// </summary>
     public static class EmbeddedResourceExtensions
     {
-        static Dictionary<Assembly, string[]> _embeddedResourceNames = new Dictionary<Assembly,string[]>();
+        static readonly Dictionary<Assembly, string[]> _embeddedResourceNames = new Dictionary<Assembly,string[]>();
 
         /// <summary>
         /// Finds the assembly that contains an embedded resource matching the resourceId

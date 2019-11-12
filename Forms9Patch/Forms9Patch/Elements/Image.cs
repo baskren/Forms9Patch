@@ -696,7 +696,7 @@ namespace Forms9Patch
         /// <param name="embeddedResourceId"></param>
         public static implicit operator Image(string embeddedResourceId)
         {
-            var assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+            var assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, Array.Empty<object>());
             var result = new Image(embeddedResourceId, assembly);
             return result;
         }

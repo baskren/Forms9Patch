@@ -83,9 +83,10 @@ namespace Forms9Patch.Elements.Popups.Core.Animations
         /// <returns></returns>
         public async override Task Appearing(View content, PopupPage page)
         {
-            var taskList = new List<Task>();
-
-            taskList.Add(base.Appearing(content, page));
+            var taskList = new List<Task>
+            {
+                base.Appearing(content, page)
+            };
 
             if (content != null)
             {
@@ -125,9 +126,10 @@ namespace Forms9Patch.Elements.Popups.Core.Animations
         /// <returns></returns>
         public async override Task Disappearing(View content, PopupPage page)
         {
-            var taskList = new List<Task>();
-
-            taskList.Add(base.Disappearing(content, page));
+            var taskList = new List<Task>
+            {
+                base.Disappearing(content, page)
+            };
 
             if (content != null)
             {

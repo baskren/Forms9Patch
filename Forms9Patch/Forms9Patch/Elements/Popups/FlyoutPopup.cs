@@ -61,10 +61,9 @@ namespace Forms9Patch
 
 
         #region Fields
-#pragma warning disable IDE0069 // Disposable fields should be disposed
-        // _frame is disposed in the PopupBase via _decorativeContainerView.Dispose();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "frame is disposed in the PopupBase via _decorativeContainerView.Dispose()")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0069:Disposable fields should be disposed", Justification = "frame is disposed in the PopupBase via _decorativeContainerView.Dispose()")]
         readonly Frame _frame;
-#pragma warning restore IDE0069 // Disposable fields should be disposed
         Listener _listener;
         #endregion
 

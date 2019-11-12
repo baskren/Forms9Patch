@@ -253,7 +253,7 @@ namespace Forms9Patch
             return result;
         }
 
-        static Dictionary<Assembly, string[]> SortedAppleResources = new Dictionary<Assembly, string[]>();
+        readonly static Dictionary<Assembly, string[]> SortedAppleResources = new Dictionary<Assembly, string[]>();
         static ImageSourceContainer BestGuessF9PResource(string reqResourcePathString, Assembly assembly)
         {
             if (assembly == null)
@@ -317,7 +317,7 @@ namespace Forms9Patch
 
 
         #region Path Resolution Support
-        static List<string> ValidImageExtensions = new List<string> {
+        readonly static List<string> ValidImageExtensions = new List<string> {
 			// these extensions can be turned into Image file on all three platforms
 			"jpg", "jpeg", "gif", "png", "bmp", "bmpf", "svg"
         };

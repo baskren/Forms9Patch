@@ -278,7 +278,7 @@ namespace Forms9Patch
 
 
         // note: Even though a items in a group source may not be unique to  (ex: Source= { a, a, "pizza", null, null }), a GroupWrapper's ItemWrappers are because they are each created from a new instance of ItemWrapper.
-
+        /*
         int SourceCount()
         {
             int sourceCount;
@@ -297,6 +297,7 @@ namespace Forms9Patch
             }
             return sourceCount;
         }
+        */
 
         int SourceIndexOf(ItemWrapper itemWrapper)
         {

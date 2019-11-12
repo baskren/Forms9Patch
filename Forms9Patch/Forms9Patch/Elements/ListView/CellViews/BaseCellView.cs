@@ -17,7 +17,7 @@ namespace Forms9Patch
     {
 
         #region debug convenience
-        bool Debug
+        static bool Debug
         {
             get
             {
@@ -308,6 +308,12 @@ namespace Forms9Patch
                     if (ContentView is IDisposable contentView)
                         contentView.Dispose();
                 }
+
+                _touchBlocker.Dispose();
+                _swipeFrame1.Dispose();
+                _swipeFrame2.Dispose();
+                _swipeFrame3.Dispose();
+                _swipePopupStackLayout.Dispose();
 
                 P42.Utils.Debug.RemoveFromCensus(this);
 
@@ -742,7 +748,7 @@ namespace Forms9Patch
                 ((ItemWrapper)BindingContext)?.OnLongPressing(this, new ItemWrapperLongPressEventArgs((ItemWrapper)BindingContext));
         }
 
-        void OnRightClicked(object sender, RightClickEventArgs e)
+        async void OnRightClicked(object sender, RightClickEventArgs e)
         {
             if (_startButtons + _endButtons > 0)
                 PutAwaySwipeButtons(true);
@@ -790,25 +796,23 @@ namespace Forms9Patch
                     if (segments.Count > 0)
                     {
 
-                        var menu = new Forms9Patch.TargetedMenu(this, e.Center)
+                        using (var menu = new Forms9Patch.TargetedMenu(this, e.Center)
                         {
                             Segments = segments
-                        };
-
-                        menu.SegmentTapped += (s, a) =>
+                        })
                         {
-                            if (a.Segment.CommandParameter is SwipeMenuItem menuItem)
+                            menu.IsVisible = true;
+                            await menu.WaitForPoppedAsync();
+                            if (menu.SelectedSegment is Segment segment)
                             {
-                                var args = new SwipeMenuItemTappedArgs((ICellSwipeMenus)ContentView, (ItemWrapper)BindingContext, menuItem);
-                                ((ICellSwipeMenus)ContentView)?.OnSwipeMenuItemButtonTapped(this.BindingContext, args);
-                                ((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, args);
+                                if (segment.CommandParameter is SwipeMenuItem menuItem)
+                                {
+                                    var args = new SwipeMenuItemTappedArgs((ICellSwipeMenus)ContentView, (ItemWrapper)BindingContext, menuItem);
+                                    ((ICellSwipeMenus)ContentView)?.OnSwipeMenuItemButtonTapped(BindingContext, args);
+                                    ((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, args);
+                                }
                             }
-                            menu.Dispose();
-                        };
-                        menu.Cancelled += (s, a) => menu.Dispose();
-
-                        menu.IsVisible = true;
-
+                        }
                     }
                 }
 
@@ -1027,26 +1031,10 @@ namespace Forms9Patch
 
 
         #region Appearing / Dissapearing Handlers
-        int _appearances;
         public void OnAppearing()
         {
             if (ContentView is ICellContentView contentView)
                 contentView.OnAppearing();
-            /*
-            if (Device.RuntimePlatform != Device.iOS)
-            {
-                if (ContentView != null)
-                    ContentView.IsVisible = false;
-                Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
-                {
-                    if (ContentView != null)
-                        ContentView.IsVisible = true;
-                    return false;
-                });
-            }
-            */
-            //System.Diagnostics.Debug.WriteLine("BaseCellView.OnAppearing _appearances=[" + (_appearances++) + "] BindingContext[" + BindingContext + "] ContentView.IsVisible[" + ContentView.IsVisible + "]");
-
         }
 
         public void OnDisappearing()

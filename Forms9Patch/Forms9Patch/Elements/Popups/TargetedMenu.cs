@@ -30,6 +30,23 @@ namespace Forms9Patch
 
         #region Properties
 
+        #region SelectedSegment property
+        static readonly BindablePropertyKey SelectedSegmentPropertyKey = BindableProperty.CreateReadOnly(nameof(SelectedSegment), typeof(Segment), typeof(TargetedMenu), default(Segment));
+        /// <summary>
+        /// SelectedSegment BindableProperty
+        /// </summary>
+        public static BindableProperty SelectedSegmentProperty => SelectedSegmentPropertyKey.BindableProperty;
+
+        /// <summary>
+        /// Returns the currently selected segment
+        /// </summary>
+        public Segment SelectedSegment
+        {
+            get => (Segment) GetValue(SelectedSegmentProperty);
+            private set => SetValue(SelectedSegmentPropertyKey, value);
+        }
+        #endregion
+
         #region Segments property
         readonly ObservableCollection<Segment> _segments = new ObservableCollection<Segment>();
         /// <summary>
@@ -187,7 +204,6 @@ namespace Forms9Patch
             set => SetValue(SoundEffectModeProperty, value);
         }
         #endregion SoundEffectMode property
-
 
         #region IcontFontFamiliy property
         /// <summary>
@@ -920,6 +936,7 @@ namespace Forms9Patch
                 var button = _segments[i]._button;
                 if (button.Equals(sender))
                 {
+                    SelectedSegment = _segments[i];
                     SegmentTapped?.Invoke(this, new SegmentedControlEventArgs(i, _segments[i]));
                     break;
                 }

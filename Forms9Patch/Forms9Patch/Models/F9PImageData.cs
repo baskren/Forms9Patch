@@ -15,10 +15,10 @@ namespace Forms9Patch
 
         public SkiaSharp.Extended.Svg.SKSvg SKSvg { get; private set; }
 
-        double _width;
+        readonly double _width;
         public double Width => _width;
 
-        double _height;
+        readonly double _height;
         public double Height => _height;
 
         public bool ValidBitmap => SKBitmap != null && _width > 0 && _height > 0;

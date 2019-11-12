@@ -35,7 +35,7 @@ namespace Forms9Patch
     internal class Cell<TContent> : ViewCell, ICell_T_Height, IDisposable where TContent : View, new()
     {
         #region debug convenience
-        protected bool Debug
+        protected static bool Debug
         {
             get
             {

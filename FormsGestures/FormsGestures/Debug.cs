@@ -5,7 +5,7 @@ namespace FormsGestures
 	/// <summary>
 	/// FormsGestures Debug Helper
 	/// </summary>
-	public class Debug
+	public static class Debug
 	{
 		/// <summary>
 		/// Currents the method.
