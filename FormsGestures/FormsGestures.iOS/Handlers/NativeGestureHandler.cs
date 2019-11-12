@@ -38,7 +38,7 @@ namespace FormsGestures.iOS
         RotateEventArgs _previousRotateArgs;
 
         List<Listener> _listeners = new List<Listener>();
-        List<UIGestureRecognizer> _toDispose = new List<UIGestureRecognizer>();
+        readonly List<UIGestureRecognizer> _toDispose = new List<UIGestureRecognizer>();
         #endregion
 
 

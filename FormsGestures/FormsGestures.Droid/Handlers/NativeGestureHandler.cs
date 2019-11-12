@@ -46,9 +46,12 @@ namespace FormsGestures.Droid
         //List<Listener> _listeners;
         internal Listener Listener;
 
+
         /// <summary>
         /// The renderer for _element
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "We don't own Renderer")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0069:Disposable fields should be disposed", Justification = "We don't own Renderer")]
         internal IVisualElementRenderer Renderer = null;
 
         /// <summary>
@@ -107,6 +110,7 @@ namespace FormsGestures.Droid
 
         }
         #endregion
+
 
         #region Get/Remove existing NativeGestureDetector
         internal static NativeGestureHandler InstanceForElement(Xamarin.Forms.Element element)
@@ -294,6 +298,7 @@ namespace FormsGestures.Droid
         }
 
         #endregion
+
 
         void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {

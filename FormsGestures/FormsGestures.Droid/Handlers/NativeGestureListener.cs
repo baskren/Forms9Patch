@@ -168,7 +168,7 @@ namespace FormsGestures.Droid
         }
 
         MotionEvent _secondToLastPan;
-        MotionEvent SecondToLastPan => _secondToLastPan;
+        //MotionEvent SecondToLastPan => _secondToLastPan;
 
 
         PanEventArgs LastPanArgs
@@ -192,7 +192,7 @@ namespace FormsGestures.Droid
             }
         }
 
-        PanEventArgs SecondToLastPanArgs => _secondToLastPanArgs;
+        //PanEventArgs SecondToLastPanArgs => _secondToLastPanArgs;
 
         #endregion
 
@@ -218,6 +218,12 @@ namespace FormsGestures.Droid
                 _disposed = true;
                 StopTapLongPress();
                 _view = null;
+                _start?.Dispose();
+                _lastPan?.Dispose();
+                _secondToLastPan?.Dispose();
+                _tappedTimerUpMotionEvent.Dispose();
+                LongPressTimer?.Dispose();
+                TappedTimer?.Dispose();
                 P42.Utils.Debug.RemoveFromCensus(this);
             }
             base.Dispose(disposing);

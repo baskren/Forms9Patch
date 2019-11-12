@@ -7,7 +7,7 @@ using System.Globalization;
 
 namespace FormsGestures.Droid
 {
-    public class OnTouchListener : Java.Lang.Object, Android.Views.View.IOnTouchListener, IDisposable
+    public class OnTouchListener : Java.Lang.Object, Android.Views.View.IOnTouchListener
     {
         #region Fields
         NativeGestureListener _nativeListener;

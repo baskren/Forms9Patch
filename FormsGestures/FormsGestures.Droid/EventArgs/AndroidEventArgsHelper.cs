@@ -45,7 +45,7 @@ namespace FormsGestures.Droid
             { 
 			view?.GetLocationInWindow (viewLocation);
             }
-            catch (System.Exception) { return new Point[] { }; }
+            catch (System.Exception) { return System.Array.Empty<Point>(); }
             var pointerCoords = new MotionEvent.PointerCoords();
 			int pointerCount = current.PointerCount;
 			var array = new Point[pointerCount];
@@ -54,7 +54,7 @@ namespace FormsGestures.Droid
 				array[i] = DIP.ToPoint((double)(pointerCoords.X+viewLocation[0]-startLocation[0]), (double)(pointerCoords.Y+viewLocation[1]-startLocation[1]));
 				//System.Diagnostics.Debug.WriteLine ("i=["+i+"] pc=["+pointerCoords.X+", "+pointerCoords.Y+"] a=["+array[i]+"]");
 			}
-
+            pointerCoords.Dispose();
 			return array;
 		}
 
@@ -75,7 +75,7 @@ namespace FormsGestures.Droid
             { 
 			view?.GetLocationInWindow (viewLocation);
             }
-            catch (System.Exception) { return new Point[] { }; }
+            catch (System.Exception) { return System.Array.Empty<Point>(); }
 
             int pointerCount = coords.Length;
 			var array = new Point[pointerCount];

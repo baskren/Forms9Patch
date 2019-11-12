@@ -18,7 +18,7 @@ namespace FormsGestures.UWP
 	class NativeGestureHandler : Behavior<VisualElement>, IDisposable
 	{
 		#region debug helpers
-		static int DebugVerbosity = 2;  // "1" (instantiation method names), "2" (usage method names), "3" (manipulation method details)
+		readonly static int DebugVerbosity = 2;  // "1" (instantiation method names), "2" (usage method names), "3" (manipulation method details)
 		void DebugMethodName(int verbosity = 0, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
 		{
 			if (DebugVerbosity >= verbosity && DebugCondition)
@@ -308,8 +308,9 @@ namespace FormsGestures.UWP
 			}
 		}
 
-
-		IVisualElementRenderer _renderer;
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0069:Disposable fields should be disposed", Justification = "we don't own _renderer")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "<Pending>")]
+        IVisualElementRenderer _renderer;
 		void SetRenderer()
 		{
 			var value = Platform.GetRenderer(_xfElement);
