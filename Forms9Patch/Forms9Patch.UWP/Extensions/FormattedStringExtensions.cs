@@ -20,7 +20,7 @@ namespace Forms9Patch.UWP
                 if (!_textDecorationsPresentSet)
                 {
                     //_textDecorationsPresent = Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Text.TextDecorations");
-                    var run = new Run();
+                    //var run = new Run();
                     try
                     {
                         _textDecorationsPresent = TestTextDecorations();

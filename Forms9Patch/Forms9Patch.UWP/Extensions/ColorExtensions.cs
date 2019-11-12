@@ -30,7 +30,7 @@ namespace Forms9Patch.UWP
             return a << 24 | r << 16 | g << 8 | b;
         }
 
-        static int MarkedPixel = 255 << 24;
+        const int MarkedPixel = 255 << 24;
 
         public static bool IsNinePatchMark(this int argb)
         {

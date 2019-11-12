@@ -24,10 +24,10 @@ namespace Forms9Patch.UWP
     /// </summary>
     public class HtmlToPngService : IHtmlToPngPdfService
     {
-        DependencyProperty PngFileNameProperty = DependencyProperty.Register("PngFileName", typeof(string), typeof(HtmlToPngService), null);
-        DependencyProperty OnCompleteProperty = DependencyProperty.Register("OnPngComplete", typeof(Action<string>), typeof(HtmlToPngService), null);
-        DependencyProperty WebViewProperty = DependencyProperty.Register("WebView", typeof(Windows.UI.Xaml.Controls.WebView), typeof(HtmlToPngService), null);
-        DependencyProperty HtmlStringProperty = DependencyProperty.Register("HtmlString", typeof(string), typeof(HtmlToPngService), null);
+        readonly static DependencyProperty PngFileNameProperty = DependencyProperty.Register("PngFileName", typeof(string), typeof(HtmlToPngService), null);
+        readonly static DependencyProperty OnCompleteProperty = DependencyProperty.Register("OnPngComplete", typeof(Action<string>), typeof(HtmlToPngService), null);
+        //readonly static DependencyProperty WebViewProperty = DependencyProperty.Register("WebView", typeof(Windows.UI.Xaml.Controls.WebView), typeof(HtmlToPngService), null);
+        readonly static DependencyProperty HtmlStringProperty = DependencyProperty.Register("HtmlString", typeof(string), typeof(HtmlToPngService), null);
 
 
         public async Task<HtmlToPngResult> ToPngAsync(ActivityIndicatorPopup popup, string html, string fileName)

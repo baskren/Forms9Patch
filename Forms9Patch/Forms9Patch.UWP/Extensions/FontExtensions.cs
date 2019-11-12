@@ -19,8 +19,8 @@ namespace Forms9Patch.UWP
 {
     static class FontExtensions
     {
-        const double lineHeightToFontSizeRatio = 1.4;
-        const double roundToNearest = 1;
+        //const double lineHeightToFontSizeRatio = 1.4;
+        //const double roundToNearest = 1;
 
         public static SharpDX.DirectWrite.FontWeight ToDxFontWeight(this Windows.UI.Text.FontWeight fontWeight)
             => DxFontWeight(fontWeight.Weight);
@@ -101,7 +101,7 @@ namespace Forms9Patch.UWP
             => GetDxFont(textBlock.FontFamily.Source, textBlock.FontWeight.ToDxFontWeight(), textBlock.FontStretch.ToDxFontStretch(), textBlock.FontStyle.ToDxFontStyle());
         
 
-        static Dictionary<string, SharpDX.DirectWrite.Font> _loadedFonts = new Dictionary<string, SharpDX.DirectWrite.Font>();
+        readonly static Dictionary<string, SharpDX.DirectWrite.Font> _loadedFonts = new Dictionary<string, SharpDX.DirectWrite.Font>();
 
         public static SharpDX.DirectWrite.Font GetDxFont(string fontFamily, SharpDX.DirectWrite.FontWeight weight , SharpDX.DirectWrite.FontStretch stretch, SharpDX.DirectWrite.FontStyle style)
         {
@@ -385,7 +385,8 @@ namespace Forms9Patch.UWP
 
     class FontCollectionLoader : CallbackBase, SharpDX.DirectWrite.FontCollectionLoader
     {
-        FontFileEnumerator _fontFileEnumerator;
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "will persist ")]
+        readonly FontFileEnumerator _fontFileEnumerator;
 
         public FontCollectionLoader(FontFile fontFile)
         {
@@ -400,7 +401,7 @@ namespace Forms9Patch.UWP
 
     class FontFileEnumerator : CallbackBase, SharpDX.DirectWrite.FontFileEnumerator
     {
-        FontFile _fontFile;
+        readonly FontFile _fontFile;
 
         public FontFileEnumerator(FontFile fontFile)
         {
@@ -429,6 +430,7 @@ namespace Forms9Patch.UWP
     class FontFileLoader : CallbackBase, SharpDX.DirectWrite.FontFileLoader
     {
         private readonly Factory _factory;
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "Will persist the duration of app life")]
         private FontFileStream _fontStream;
 
         public FontFileLoader(Factory factory)

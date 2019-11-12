@@ -19,13 +19,13 @@ namespace Forms9Patch.UWP
         #region Properties
         public override string Description => base.Description;
 
-        string _plainText;
+        readonly string _plainText;
         public override string PlainText => _plainText;
 
-        string _htmlText;
+        readonly string _htmlText;
         public override string HtmlText => _htmlText;
 
-        string _rtfText;
+        readonly string _rtfText;
 
         public override List<IMimeItem> Items
         {

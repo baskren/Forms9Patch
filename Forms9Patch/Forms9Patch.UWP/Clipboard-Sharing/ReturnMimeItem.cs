@@ -16,7 +16,7 @@ namespace Forms9Patch.UWP
         #region Properties
         public string MimeType => FormatId.FormatIdToMimeType();
 
-        object _value;
+        readonly object _value;
         public object Value => _value;
 
         private string FormatId { get; set; }

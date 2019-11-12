@@ -415,7 +415,7 @@ namespace Forms9Patch.UWP
 
 #pragma warning disable CC0091 // Use static method
 #pragma warning disable CC0057 // Unused parameters
-        public void OnCharacterReceived(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.CharacterReceivedEventArgs args)
+        public static void OnCharacterReceived(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.CharacterReceivedEventArgs args)
 #pragma warning restore CC0057 // Unused parameters
 #pragma warning restore CC0091 // Use static method
         {

@@ -152,7 +152,8 @@ namespace Forms9Patch.UWP
             }
         }
 
-
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0059:Unnecessary assignment of a value", Justification = "<Pending>")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0067:Dispose objects before losing scope", Justification = "<Pending>")]
         private static void LinkAssemblies()
         {
             Xamarin.Forms.DependencyService.Register<ApplicationInfoService>();
