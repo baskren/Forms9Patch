@@ -894,7 +894,11 @@ namespace Forms9Patch
                     await Navigation.PushPopupAsync(this);
                     PopupLayerEffect.ApplyTo(this);
                 }
-                _semaphore.Release();
+                try
+                {
+                    _semaphore.Release();
+                }
+                catch (Exception e) { }
                 Recursion.Exit(GetType().ToString(), _id.ToString());
             }
             else
@@ -945,12 +949,21 @@ namespace Forms9Patch
                     PopupLayerEffect.RemoveFrom(this);
                     base.IsAnimationEnabled = IsAnimationEnabled;
                     await Navigation.RemovePopupPageAsync(this);
-
-                    _semaphore.Release();
+                    try
+                    {
+                        _semaphore.Release();
+                    }
+                    catch (Exception e) { }
                     Popped?.Invoke(this, PopupPoppedEventArgs);
                 }
                 else if (!_disposed)
-                    _semaphore.Release();
+                {
+                    try
+                    {
+                        _semaphore.Release();
+                    }
+                    catch (Exception e) { }
+                }
 
                 lastAction?.Invoke();
                 //if (!Retain)
