@@ -8,7 +8,7 @@ using Xamarin.Forms.Platform.iOS;
 namespace Forms9Patch.iOS
 {
     [Preserve(AllMembers = true)]
-    [Register("RgPopupWindow")]
+    [Register("F9PPopupWindow")]
     internal class PopupWindow : UIWindow
     {
         public PopupWindow(IntPtr handle) : base(handle) { }
