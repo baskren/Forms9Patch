@@ -743,9 +743,14 @@ namespace Forms9Patch
         /// </summary>
         internal protected bool _isPopping;
 
-
+        /// <summary>
+        /// true if Popup is popped;
+        /// </summary>
         internal protected bool _isPopped;
 
+        /// <summary>
+        /// true if pop animation is complete
+        /// </summary>
         internal protected bool _popAnimationComplete;
 
 
@@ -868,35 +873,35 @@ namespace Forms9Patch
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + ReflectionExtensions.CallerMemberName());
             // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
-                //System.Diagnostics.Debug.WriteLine("PUSH");
-                IsVisible = true;
-                //if (_isPushing || _isPushed)
-                //    return;
-                if (P42.Utils.Environment.IsOnMainThread)
-                {
-                    BreadCrumbs.Add(GetType(), null);
-                    Recursion.Enter(GetType().ToString(), _id.ToString());
-                    //_isPushing = true;
-                    //while (_isPoping) await Task.Delay(100);
-                    //if (IsVisible)
-                    await _semaphore.WaitAsync();
+            //System.Diagnostics.Debug.WriteLine("PUSH");
+            IsVisible = true;
+            //if (_isPushing || _isPushed)
+            //    return;
+            if (P42.Utils.Environment.IsOnMainThread)
+            {
+                BreadCrumbs.Add(GetType(), null);
+                Recursion.Enter(GetType().ToString(), _id.ToString());
+                //_isPushing = true;
+                //while (_isPoping) await Task.Delay(100);
+                //if (IsVisible)
+                await _semaphore.WaitAsync();
 
-                    if (!PopupNavigation.Instance.PopupStack.Contains(this))
-                    {
-                        PopupPoppedEventArgs = null;
-                        _isPushing = true;
-                        base.IsAnimationEnabled = IsAnimationEnabled;
-                        await Navigation.PushPopupAsync(this);
-                        PopupLayerEffect.ApplyTo(this);
-                    }
-                    _semaphore.Release();
-                    Recursion.Exit(GetType().ToString(), _id.ToString());
+                if (!PopupNavigation.Instance.PopupStack.Contains(this))
+                {
+                    PopupPoppedEventArgs = null;
+                    _isPushing = true;
+                    base.IsAnimationEnabled = IsAnimationEnabled;
+                    await Navigation.PushPopupAsync(this);
+                    PopupLayerEffect.ApplyTo(this);
                 }
-                else
+                _semaphore.Release();
+                Recursion.Exit(GetType().ToString(), _id.ToString());
+            }
+            else
 #pragma warning disable RECS0165 // Asynchronous methods should return a Task instead of void
-                    Device.BeginInvokeOnMainThread(async () => await PushAsync());
+                Device.BeginInvokeOnMainThread(async () => await PushAsync());
 #pragma warning restore RECS0165 // Asynchronous methods should return a Task instead of void
-            
+
         }
 
         /// <summary>
@@ -925,46 +930,46 @@ namespace Forms9Patch
         public async Task PopAsync(object trigger = null, [CallerMemberName] string callerName = "", Action lastAction = null)
         {
             // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
-                //System.Diagnostics.Debug.WriteLine(GetType() + "." + ReflectionExtensions.CallerMemberName());
-                if (P42.Utils.Environment.IsOnMainThread)
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + ReflectionExtensions.CallerMemberName());
+            if (P42.Utils.Environment.IsOnMainThread)
+            {
+                BreadCrumbs.Add(GetType(), null);
+                Recursion.Enter(GetType(), _id);
+                _isPopping = true;
+                IsVisible = false;
+                await _semaphore.WaitAsync();
+                if (PopupNavigation.Instance.PopupStack.Contains(this) && PopupPoppedEventArgs == null)
                 {
-                    BreadCrumbs.Add(GetType(), null);
-                    Recursion.Enter(GetType(), _id);
                     _isPopping = true;
-                    IsVisible = false;
-                    await _semaphore.WaitAsync();
-                    if (PopupNavigation.Instance.PopupStack.Contains(this) && PopupPoppedEventArgs == null)
-                    {
-                        _isPopping = true;
-                        SetPopupPoppedEventArgs(trigger, callerName);
-                        PopupLayerEffect.RemoveFrom(this);
-                        base.IsAnimationEnabled = IsAnimationEnabled;
-                        await Navigation.RemovePopupPageAsync(this);
+                    SetPopupPoppedEventArgs(trigger, callerName);
+                    PopupLayerEffect.RemoveFrom(this);
+                    base.IsAnimationEnabled = IsAnimationEnabled;
+                    await Navigation.RemovePopupPageAsync(this);
 
-                        _semaphore.Release();
-                        Popped?.Invoke(this, PopupPoppedEventArgs);
-                    }
-                    else if (!_disposed)
-                        _semaphore.Release();
-
-                    lastAction?.Invoke();
-                    //if (!Retain)
-                    //    Dispose();
-
-                    while (PopupNavigation.Instance.PopupStack.Contains(this) && !_popAnimationComplete)
-                    {
-                        await Task.Delay(25);
-                    }
-
-                    //_isPopped = true;
-
-                    Recursion.Exit(GetType(), _id);
+                    _semaphore.Release();
+                    Popped?.Invoke(this, PopupPoppedEventArgs);
                 }
-                else
+                else if (!_disposed)
+                    _semaphore.Release();
+
+                lastAction?.Invoke();
+                //if (!Retain)
+                //    Dispose();
+
+                while (PopupNavigation.Instance.PopupStack.Contains(this) && !_popAnimationComplete)
+                {
+                    await Task.Delay(25);
+                }
+
+                //_isPopped = true;
+
+                Recursion.Exit(GetType(), _id);
+            }
+            else
 #pragma warning disable RECS0165 // Asynchronous methods should return a Task instead of void
-                    Device.BeginInvokeOnMainThread(async () => await PopAsync(trigger, callerName));
+                Device.BeginInvokeOnMainThread(async () => await PopAsync(trigger, callerName));
 #pragma warning restore RECS0165 // Asynchronous methods should return a Task instead of void
-            
+
         }
 
 

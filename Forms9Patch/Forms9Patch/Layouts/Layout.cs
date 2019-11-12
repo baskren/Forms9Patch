@@ -72,6 +72,10 @@ namespace Forms9Patch
         /// Disposer
         /// </summary>
         bool _disposed;
+        /// <summary>
+        /// Dispose
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (!_disposed && disposing)
@@ -152,6 +156,9 @@ namespace Forms9Patch
         // - Bounds
         // - InputTransparent
 
+        /// <summary>
+        /// Internal use only
+        /// </summary>
         protected VisualElement()
         {
             _xfLayout.ChildrenReordered += OnXfLayout_ChildrenReordered;
@@ -161,6 +168,10 @@ namespace Forms9Patch
 
 
         bool _disposed;
+        /// <summary>
+        /// Dispose
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (!_disposed && disposing)

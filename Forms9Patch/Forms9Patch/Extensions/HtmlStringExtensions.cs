@@ -16,16 +16,22 @@ namespace Forms9Patch
 
         static IHtmlToPngPdfService _htmlService;
 
+        /// <summary>
+        /// OBSOLETE
+        /// </summary>
+        /// <param name="html"></param>
+        /// <param name="fileName"></param>
+        /// <param name="onComplete"></param>
         [Obsolete("Use ToPngAsync instead", true)]
         public static void ToPng(this string html, string fileName, Action<string> onComplete)
         { }
 
         /// <summary>
-        /// Tos the png.
+        /// Converts HTML text to PNG
         /// </summary>
-        /// <param name="html">Html.</param>
-        /// <param name="fileName">File name.</param>
-        /// <param name="onComplete">On complete.</param>
+        /// <param name="html"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         public static async Task<HtmlToPngResult> ToPngAsync(this string html, string fileName)
         {
             _htmlService = _htmlService ?? DependencyService.Get<IHtmlToPngPdfService>();

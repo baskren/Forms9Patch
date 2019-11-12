@@ -3,10 +3,10 @@ using System.ComponentModel;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Assures a class has the IsSelected property.
     /// </summary>
+    [DesignTimeVisible(true)]
     public interface IIsSelectedAble
     {
         /// <summary>

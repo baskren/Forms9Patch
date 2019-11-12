@@ -7,10 +7,10 @@ using System.Collections;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// FormsDragNDropListView List view.
     /// </summary>
+    [DesignTimeVisible(true)]
     public class ListView : Forms9Patch.Frame, IElement, IDisposable //  Forms9Patch.ManualLayout, IElement
     {
         #region Properties

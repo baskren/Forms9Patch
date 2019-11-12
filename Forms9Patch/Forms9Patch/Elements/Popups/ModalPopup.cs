@@ -4,10 +4,10 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Forms9Patch Modal popup.
     /// </summary>
+    [DesignTimeVisible(true)]
     public class ModalPopup : PopupBase
     {
         #region Properties

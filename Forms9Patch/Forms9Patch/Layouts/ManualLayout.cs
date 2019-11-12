@@ -4,10 +4,10 @@ using System.ComponentModel;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Manual layout.
     /// </summary>
+    [DesignTimeVisible(true)]
     public class ManualLayout : Xamarin.Forms.Layout<View>, ILayout
     {
         static ManualLayout()

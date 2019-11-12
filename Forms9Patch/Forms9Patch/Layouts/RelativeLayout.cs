@@ -4,10 +4,10 @@ using System.ComponentModel;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Forms9Patch RelativeLayout.
     /// </summary>
+    [DesignTimeVisible(true)]
     public class RelativeLayout : Layout<Xamarin.Forms.RelativeLayout>, ILayout, IElementConfiguration<Xamarin.Forms.RelativeLayout>
     {
 

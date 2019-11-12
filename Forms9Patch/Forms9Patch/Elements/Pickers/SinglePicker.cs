@@ -4,10 +4,10 @@ using System.ComponentModel;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Single picker.
     /// </summary>
+    [DesignTimeVisible(true)]
     public class SinglePicker : Grid
     {
         #region Properties

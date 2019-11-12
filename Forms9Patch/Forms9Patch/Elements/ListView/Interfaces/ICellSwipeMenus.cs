@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Interface to implement Swipe Menus in content views for Forms9Patch ListView cells
     /// </summary>
+    [DesignTimeVisible(true)]
     public interface ICellSwipeMenus
     {
         /// <summary>

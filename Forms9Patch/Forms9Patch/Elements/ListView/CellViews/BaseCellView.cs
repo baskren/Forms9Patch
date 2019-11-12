@@ -9,10 +9,10 @@ using P42.Utils;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// DO NOT USE: Used by Forms9Patch.ListView as a foundation for cells.
     /// </summary>
+    [DesignTimeVisible(true)]
     class BaseCellView : Xamarin.Forms.Grid, IDisposable, ICellContentView  // why grid?  because you can put more than one view in the same place at the same time
     {
 

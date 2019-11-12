@@ -5,10 +5,10 @@ using Xamarin.Forms.Internals;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Group header template.
     /// </summary>
+    [DesignTimeVisible(true)]
     public class GroupHeaderTemplate : Xamarin.Forms.DataTemplate
     {
         /// <summary>

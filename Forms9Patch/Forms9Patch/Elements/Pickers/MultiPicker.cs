@@ -4,10 +4,10 @@ using System.Collections.ObjectModel;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Multi picker.
     /// </summary>
+    [DesignTimeVisible(true)]
     public class MultiPicker : SinglePicker
     {
         #region Properties

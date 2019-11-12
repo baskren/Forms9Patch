@@ -4,10 +4,10 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Describes a Swipe action button that appears when a cell is swiped 
     /// </summary>
+    [DesignTimeVisible(true)]
     public class SwipeMenuItem : BindableObject, IMenuItem
     {
         #region Properties

@@ -3,10 +3,10 @@ using System.ComponentModel;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Forms9Patch Frame layout.
     /// </summary>
+    [DesignTimeVisible(true)]
     public class Frame : Forms9Patch.ContentView
     {
         #region Constructor

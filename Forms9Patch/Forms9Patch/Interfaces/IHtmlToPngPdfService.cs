@@ -3,49 +3,49 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 namespace Forms9Patch
 {
-	/// <summary>
-	/// Html to pdf service.
-	/// </summary>
-	public interface IHtmlToPngPdfService
-	{
-		/// <summary>
-		/// Tos the png.
-		/// </summary>
-		/// <param name="html">Html.</param>
-		/// <param name="fileName">File name.</param>
-		/// <param name="onComplete">On complete.</param>
+    /// <summary>
+    /// Html to pdf service.
+    /// </summary>
+    public interface IHtmlToPngPdfService
+    {
+        /// <summary>
+        /// Html to PNG interface
+        /// </summary>
+        /// <param name="popup"></param>
+        /// <param name="html"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
 		Task<HtmlToPngResult> ToPngAsync(ActivityIndicatorPopup popup, string html, string fileName);
-	}
+    }
 
-	/// <summary>
-	/// Pdf done arguments.
-	/// </summary>
-	public class HtmlToPngResult 
-	{
+    /// <summary>
+    /// Result from HtmlToPnd process
+    /// </summary>
+	public class HtmlToPngResult
+    {
         /// <summary>
         /// Flags if the Result is an error;
         /// </summary>
         public bool IsError { get; private set; }
 
-
-		/// <summary>
-		/// Either the path to the PNG or, if IsError, an error message
-		/// </summary>
-		/// <value>The path.</value>
+        /// <summary>
+        /// Either success or error result
+        /// </summary>
 		public string Result
-		{
-			get;
-			private set;
-		}
+        {
+            get;
+            private set;
+        }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="T:Forms9Patch.PdfDoneArgs"/> class.
-		/// </summary>
-		/// <param name="path">Path.</param>
+        /// <summary>
+        /// Html to PNG result
+        /// </summary>
+        /// <param name="isError"></param>
+        /// <param name="result"></param>
 		internal HtmlToPngResult(bool isError, string result)
-		{
+        {
             IsError = isError;
             Result = result;
-		}
-	}
+        }
+    }
 }

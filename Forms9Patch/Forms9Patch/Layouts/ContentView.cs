@@ -7,10 +7,10 @@ using System.ComponentModel;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Forms9Patch ContentView.  
     /// </summary>
+    [DesignTimeVisible(true)]
     public class ContentView : Xamarin.Forms.ContentView, ILayout, IDisposable
     {
         #region Properties

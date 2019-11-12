@@ -7,10 +7,10 @@ using Xamarin.Forms;
 #pragma warning disable CS0618 // Type or member is obsolete
 namespace Forms9Patch.Elements.Popups.Core
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Foundation for Popups
     /// </summary>
+    [DesignTimeVisible(true)]
     public class PopupPage : Xamarin.Forms.ContentPage
     {
         #region Private

@@ -11,10 +11,10 @@ using Newtonsoft.Json;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Forms9Patch.Image element
     /// </summary>
+    [DesignTimeVisible(true)]
     public class Image : SKCanvasView, IImage, IImageController, IExtendedShape, IBubbleShape, IDisposable
     {
         #region Static Implementation

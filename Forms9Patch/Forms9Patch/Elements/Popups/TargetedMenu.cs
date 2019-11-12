@@ -8,10 +8,10 @@ using System.Linq;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Forms9Patch.TargetedMenu class 
     /// </summary>
+    [DesignTimeVisible(true)]
     [ContentProperty(nameof(Segments))]
     public class TargetedMenu : BubblePopup
     {

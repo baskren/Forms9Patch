@@ -3,10 +3,10 @@ using System.ComponentModel;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// The Forms9Patch Data template selector.
     /// </summary>
+    [DesignTimeVisible(true)]
     public class DataTemplateSelector : TemplateSelectorBase
     {
         /// <summary>

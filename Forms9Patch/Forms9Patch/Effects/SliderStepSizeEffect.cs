@@ -5,10 +5,10 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Enabled StepSize control of Xamarin.Forms.Slider element
     /// </summary>
+    [DesignTimeVisible(true)]
     public class SliderStepSizeEffect : RoutingEffect, INotifyPropertyChanged
     {
         static SliderStepSizeEffect()

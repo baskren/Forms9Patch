@@ -6,10 +6,10 @@ using System.ComponentModel;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Forms9Patch HTML markup string.
     /// </summary>
+    [DesignTimeVisible(true)]
     class HTMLMarkupString : F9PFormattedString
     {
         /// <summary>

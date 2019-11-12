@@ -6,10 +6,10 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Bubble layout.
     /// </summary>
+    [DesignTimeVisible(true)]
     class BubbleLayout : Forms9Patch.ContentView, IBubbleLayout
     {
         static BubbleLayout()

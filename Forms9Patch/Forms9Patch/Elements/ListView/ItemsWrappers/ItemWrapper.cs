@@ -4,10 +4,10 @@ using System.ComponentModel;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// FormsDragNDropListView Item.
     /// </summary>
+    [DesignTimeVisible(true)]
     abstract class ItemWrapper : BindableObject, IItemWrapper
     {
 

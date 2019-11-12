@@ -4,10 +4,10 @@ using System.ComponentModel;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// A simple toast that points to an element
     /// </summary>
+    [DesignTimeVisible(true)]
     public class TargetedToast : BubblePopup
     {
         #region Factory

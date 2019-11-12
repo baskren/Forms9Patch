@@ -5,10 +5,10 @@ using System.ComponentModel;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Permission popup.
     /// </summary>
+    [DesignTimeVisible(true)]
     public class PermissionPopup : BubblePopup
     {
 
@@ -187,7 +187,13 @@ namespace Forms9Patch
 
         #region PermissionState property
         static readonly BindablePropertyKey PermissionStatePropertyKey = BindableProperty.CreateReadOnly(nameof(PermissionState), typeof(PermissionState), typeof(PermissionPopup), default(PermissionState));
+        /// <summary>
+        /// PermissionState Bindable Property
+        /// </summary>
         public static readonly BindableProperty PermissionStateProperty = PermissionStatePropertyKey.BindableProperty;
+        /// <summary>
+        /// The current permission process state of the Permision Popup
+        /// </summary>
         public PermissionState PermissionState
         {
             get { return (PermissionState)GetValue(PermissionStateProperty); }
@@ -306,13 +312,20 @@ namespace Forms9Patch
         async void OnCancelButtonTappedAsync(object sender, EventArgs e)
             => await CancelAsync(_cancelButton);
 
+        /// <summary>
+        /// Cancel the PermissionPopup
+        /// </summary>
+        /// <param name="trigger"></param>
+        /// <returns></returns>
         public override Task CancelAsync(object trigger = null)
         {
             PermissionState = trigger == _cancelButton ? PermissionState.Rejected : PermissionState.Cancelled;
             return base.CancelAsync(trigger);
         }
 
-
+        /// <summary>
+        /// Called when appearing
+        /// </summary>
         protected override void OnAppearing()
         {
             PermissionState = PermissionState.Pending;

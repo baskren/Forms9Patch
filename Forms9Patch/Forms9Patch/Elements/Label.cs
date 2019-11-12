@@ -5,10 +5,10 @@ using FormsGestures;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Forms9Patch.Label
     /// </summary>
+    [DesignTimeVisible(true)]
     [ContentProperty(nameof(HtmlText))]
     public class Label : Xamarin.Forms.Label, ILabel, IElement //View, IFontElement
     {

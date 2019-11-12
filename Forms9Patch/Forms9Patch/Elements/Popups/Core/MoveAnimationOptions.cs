@@ -11,10 +11,25 @@ namespace Forms9Patch.Elements.Popups.Core
     /// </summary>
     public enum MoveAnimationOptions
     {
+        /// <summary>
+        /// Animate Center
+        /// </summary>
         Center,
+        /// <summary>
+        /// Animate Left
+        /// </summary>
         Left,
+        /// <summary>
+        /// Animate Right
+        /// </summary>
         Right,
+        /// <summary>
+        /// Animate Top
+        /// </summary>
         Top,
+        /// <summary>
+        /// Animate Bottom
+        /// </summary>
         Bottom
     }
 }

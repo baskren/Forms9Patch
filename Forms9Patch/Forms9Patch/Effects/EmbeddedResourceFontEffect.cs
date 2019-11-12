@@ -4,10 +4,10 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Enable EmbeddedResource fonts to be used with Xamarin elements
     /// </summary>
+    [DesignTimeVisible(true)]
     public class EmbeddedResourceFontEffect : Xamarin.Forms.RoutingEffect
     {
         static EmbeddedResourceFontEffect()

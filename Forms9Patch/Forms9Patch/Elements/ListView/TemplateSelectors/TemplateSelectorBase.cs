@@ -6,10 +6,10 @@ using System.Reflection;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Data template selector: Used to match types of objects with the types of views that will be used to display them in a ListView.
     /// </summary>
+    [DesignTimeVisible(true)]
     public class TemplateSelectorBase : Xamarin.Forms.DataTemplateSelector
     {
 

@@ -12,10 +12,10 @@ namespace Forms9Patch
     {
     }
 
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Image button.
     /// </summary>
+    [DesignTimeVisible(true)]
     public class StateButton : Button
     {
 

@@ -3,10 +3,10 @@ using System.ComponentModel;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// FormsDragNDropListView Group header view.
     /// </summary>
+    [DesignTimeVisible(true)]
     public class GroupHeaderView : Xamarin.Forms.ViewCell
     {
 

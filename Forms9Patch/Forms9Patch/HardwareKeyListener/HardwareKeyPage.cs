@@ -6,10 +6,10 @@ using System.ComponentModel;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Required to enable Hardware Key Listening capability
     /// </summary>
+    [DesignTimeVisible(true)]
     public class HardwareKeyPage : ContentPage
     {
         #region static implementation

@@ -11,10 +11,10 @@ using System.Linq;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Enable EmbeddedResource fonts to be used with Xamarin elements
     /// </summary>
+    [DesignTimeVisible(true)]
     internal class EnhancedListView : Xamarin.Forms.ListView, IScrollView, IDisposable
     {
         #region Properties

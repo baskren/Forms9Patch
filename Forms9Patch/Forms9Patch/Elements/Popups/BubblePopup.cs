@@ -4,10 +4,10 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Forms9Patch Bubble pop-up.
     /// </summary>
+    [DesignTimeVisible(true)]
     public class BubblePopup : PopupBase
     {
         #region Properties

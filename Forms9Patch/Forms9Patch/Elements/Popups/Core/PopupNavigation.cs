@@ -10,6 +10,10 @@ namespace Forms9Patch.Elements.Popups.Core
     /// </summary>
     public static class PopupNavigation
     {
+        /// <summary>
+        /// Sets the instance
+        /// </summary>
+        /// <param name="instance"></param>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static void SetInstance(IPopupNavigation instance) => _popupNavigation = instance;
 

@@ -4,10 +4,10 @@ using System.ComponentModel;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Toast Popup: Plain and simple
     /// </summary>
+    [DesignTimeVisible(true)]
     public class Toast : ModalPopup
     {
         #region Factory
@@ -114,6 +114,10 @@ namespace Forms9Patch
         }
 
         private bool _disposed;
+        /// <summary>
+        /// Dispose
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (!_disposed && disposing)

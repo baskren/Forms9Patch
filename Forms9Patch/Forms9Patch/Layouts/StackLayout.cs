@@ -3,10 +3,10 @@ using System.ComponentModel;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Forms9Patch StackLayout.
     /// </summary>
+    [DesignTimeVisible(true)]
     public class StackLayout : Layout<Xamarin.Forms.StackLayout>, IElementConfiguration<Xamarin.Forms.StackLayout>
     {
         /// <summary>

@@ -6,10 +6,10 @@ using Xamarin.Forms;
 using System.Collections.ObjectModel;
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Multi component picker.
     /// </summary>
+    [DesignTimeVisible(true)]
     public class MultiComponentPicker : Xamarin.Forms.ContentView
     {
         #region Properties

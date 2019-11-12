@@ -391,6 +391,10 @@ namespace Forms9Patch
         }
 
         private bool _disposed;
+        /// <summary>
+        /// Dispose
+        /// </summary>
+        /// <param name="disposing"></param>
         protected virtual void Dispose(bool disposing)
         {
             if (!_disposed && disposing)
@@ -412,6 +416,9 @@ namespace Forms9Patch
             }
         }
 
+        /// <summary>
+        /// Dispose
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);

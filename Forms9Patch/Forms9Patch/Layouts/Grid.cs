@@ -4,11 +4,11 @@ using System.ComponentModel;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
 
     /// <summary>
     /// Forms9Patch Grid layout.
     /// </summary>
+    [DesignTimeVisible(true)]
     public class Grid : Layout<Xamarin.Forms.Grid>, IGridController, IElementConfiguration<Xamarin.Forms.Grid>, IElementConfiguration<Grid>
     {
         /// <summary>

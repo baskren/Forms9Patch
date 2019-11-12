@@ -4,10 +4,10 @@ using static Xamarin.Forms.AbsoluteLayout;
 
 namespace Forms9Patch
 {
-    [DesignTimeVisible(true)]
     /// <summary>
     /// Forms9Patch.AbsoluteLayout
     /// </summary>
+    [DesignTimeVisible(true)]
     public class AbsoluteLayout : Layout<Xamarin.Forms.AbsoluteLayout>, IElementConfiguration<Xamarin.Forms.AbsoluteLayout>
     {
         /// <summary>
