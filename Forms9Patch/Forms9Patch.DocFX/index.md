@@ -67,7 +67,7 @@ Then there are Forms9Patch's extensions.  A few noteworthy ones are:
 - WebView Extensions: Print the contents of a `Xamarin.Forms.WebView` (currently iOS and Android only).
 - HtmlString Extensions: Convert HTML markup to a PNG file.
 
-And lastly is Forms9Patch's services:
+And lastly is Forms9Patch's services and effects:
 
 - Keyboard Service: Want to put away the system keyboard?  Want to be notified when the system keyboard appears or disappears?
 - Keyboard Key Listener: What to know when a shortcut key is pressed?  What about matching a shortcut key to a VisualElement so you only get the event when that VisualElement is in focus?  
@@ -76,3 +76,7 @@ And lastly is Forms9Patch's services:
 - OS Info Service: What is the version of the device's operating system?
 - Clipboard: Copy/paste text, HTML text, and multiple objects (they can be of the same or different MIME types) within your app or to other apps.
 - Inter-app Data Sharing: Notice how some apps have a **Share** icon that presents a list of applications (and, on iOS services - like **Print**) to share data?  
+- HtmlToPng: Need a png of some HTML?  
+- DiskSize: How much space is in your app's sandbox?  How much is free?  How much is used?
+- EntryClearButtonEffect: want a clear button added to your Entry element?
+- EmbeddedResourceFortEffect: use embedded resource fonts with Xamarin text elements;
