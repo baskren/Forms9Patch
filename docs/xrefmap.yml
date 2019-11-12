@@ -1433,12 +1433,6 @@ references:
   commentId: F:Forms9Patch.Button.IsSelectedProperty
   fullName: Forms9Patch.Button.IsSelectedProperty
   nameWithType: Button.IsSelectedProperty
-- uid: Forms9Patch.Button.LayoutComplete
-  name: LayoutComplete
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_LayoutComplete
-  commentId: E:Forms9Patch.Button.LayoutComplete
-  fullName: Forms9Patch.Button.LayoutComplete
-  nameWithType: Button.LayoutComplete
 - uid: Forms9Patch.Button.LineBreakMode
   name: LineBreakMode
   href: api/Forms9Patch.Button.html#Forms9Patch_Button_LineBreakMode
@@ -15179,6 +15173,32 @@ references:
   commentId: E:Forms9Patch.TargetedMenu.SegmentTapped
   fullName: Forms9Patch.TargetedMenu.SegmentTapped
   nameWithType: TargetedMenu.SegmentTapped
+- uid: Forms9Patch.TargetedMenu.SelectedSegment
+  name: SelectedSegment
+  href: api/Forms9Patch.TargetedMenu.html#Forms9Patch_TargetedMenu_SelectedSegment
+  commentId: P:Forms9Patch.TargetedMenu.SelectedSegment
+  fullName: Forms9Patch.TargetedMenu.SelectedSegment
+  nameWithType: TargetedMenu.SelectedSegment
+- uid: Forms9Patch.TargetedMenu.SelectedSegment*
+  name: SelectedSegment
+  href: api/Forms9Patch.TargetedMenu.html#Forms9Patch_TargetedMenu_SelectedSegment_
+  commentId: Overload:Forms9Patch.TargetedMenu.SelectedSegment
+  isSpec: "True"
+  fullName: Forms9Patch.TargetedMenu.SelectedSegment
+  nameWithType: TargetedMenu.SelectedSegment
+- uid: Forms9Patch.TargetedMenu.SelectedSegmentProperty
+  name: SelectedSegmentProperty
+  href: api/Forms9Patch.TargetedMenu.html#Forms9Patch_TargetedMenu_SelectedSegmentProperty
+  commentId: P:Forms9Patch.TargetedMenu.SelectedSegmentProperty
+  fullName: Forms9Patch.TargetedMenu.SelectedSegmentProperty
+  nameWithType: TargetedMenu.SelectedSegmentProperty
+- uid: Forms9Patch.TargetedMenu.SelectedSegmentProperty*
+  name: SelectedSegmentProperty
+  href: api/Forms9Patch.TargetedMenu.html#Forms9Patch_TargetedMenu_SelectedSegmentProperty_
+  commentId: Overload:Forms9Patch.TargetedMenu.SelectedSegmentProperty
+  isSpec: "True"
+  fullName: Forms9Patch.TargetedMenu.SelectedSegmentProperty
+  nameWithType: TargetedMenu.SelectedSegmentProperty
 - uid: Forms9Patch.TargetedMenu.SeparatorColor
   name: SeparatorColor
   href: api/Forms9Patch.TargetedMenu.html#Forms9Patch_TargetedMenu_SeparatorColor

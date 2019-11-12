@@ -9,6 +9,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FormsGestures", "FormsGestures", "{2C891CAB-C6FC-4BB2-BA4D-5111E0E94AC8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms9Patch", "Forms9Patch", "{2509D6A7-0AD1-49CD-A889-8E3E18D77AE5}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.NuGet\Forms9Patch.nuspec = Forms9Patch\Forms9Patch.NuGet\Forms9Patch.nuspec
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{D058C7C6-C2AA-4BD3-B734-F5AD3FBB37FC}"
 EndProject
