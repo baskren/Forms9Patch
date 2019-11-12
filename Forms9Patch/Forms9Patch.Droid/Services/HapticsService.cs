@@ -34,9 +34,11 @@ namespace Forms9Patch.Droid
             {
                 if (_attributes == null)
                 {
-                    var builder = new Android.Media.AudioAttributes.Builder();
-                    builder.SetContentType(AudioContentType.Sonification);
-                    _attributes = builder.Build();
+                    using (var builder = new Android.Media.AudioAttributes.Builder())
+                    {
+                        builder.SetContentType(AudioContentType.Sonification);
+                        _attributes = builder.Build();
+                    }
                 }
                 return _attributes;
             }

@@ -80,6 +80,7 @@ namespace Forms9Patch.Droid
                         intent.SetFlags(ActivityFlags.GrantReadUriPermission);
                         androidClipItem = new ClipData.Item(intent);
                     }
+                    file?.Dispose();
                 }
                 if (androidClipItem == null)
                     // END OF BLOCK

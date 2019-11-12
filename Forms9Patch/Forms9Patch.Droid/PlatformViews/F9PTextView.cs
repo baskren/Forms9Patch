@@ -20,52 +20,22 @@ namespace Forms9Patch.Droid
     {
         internal delegate bool BoolDelegate();
 
-        static bool _defaultTextSizeInitialized;
-        static float _defaultTextSize;
-        internal static float DefaultTextSize
+
+
+        internal static float DefaultTextSize { get; private set; }
+        internal static int DefaultTextColorArgbInt { get; private set; }
+        internal static Android.Graphics.Color DefaultTextColor { get; private set; }
+
+        static F9PTextView()
         {
-            get
+            using (var architypeTextView = new TextView(Forms9Patch.Droid.Settings.Context))
             {
-                if (!_defaultTextSizeInitialized)
-                {
-                    var systemFontSize = (new TextView(Forms9Patch.Droid.Settings.Context)).TextSize;
-                    _defaultTextSize = systemFontSize / Settings.Context.Resources.DisplayMetrics.Density;
-                    _defaultTextSizeInitialized = true;
-                }
-                return _defaultTextSize;
+                var systemFontSize = architypeTextView.TextSize;
+                DefaultTextSize = systemFontSize / Settings.Context.Resources.DisplayMetrics.Density;
+                DefaultTextColorArgbInt = architypeTextView.CurrentTextColor;
+                DefaultTextColor = new Android.Graphics.Color(DefaultTextColorArgbInt);
             }
         }
-
-        static bool _defaultTextColorArgbIntSet;
-        static int _defaultTextColorArgbInt;
-        internal static int DefaultTextColorArgbInt
-        {
-            get
-            {
-                if (!_defaultTextColorArgbIntSet)
-                {
-                    _defaultTextColorArgbInt = (new TextView(Forms9Patch.Droid.Settings.Context)).CurrentTextColor;
-                    _defaultTextColorArgbIntSet = true;
-                }
-                return _defaultTextColorArgbInt;
-            }
-        }
-
-        static bool _defaultTextColorSet;
-        static Android.Graphics.Color _defaultTextColor;
-        internal static Android.Graphics.Color DefaultTextColor
-        {
-            get
-            {
-                if (!_defaultTextColorSet)
-                {
-                    _defaultTextColor = new Android.Graphics.Color(DefaultTextColorArgbInt);
-                    _defaultTextColorSet = true;
-                }
-                return _defaultTextColor;
-            }
-        }
-
 
         #region Fields
         static int _instances;

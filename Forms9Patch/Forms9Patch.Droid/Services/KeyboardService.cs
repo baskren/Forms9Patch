@@ -131,5 +131,16 @@ namespace Forms9Patch.Droid
 
             HeightChanged?.Invoke(this, height / Display.Scale);
         }
+
+        bool _disposed;
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && !_disposed)
+            {
+                _disposed = true;
+                _startRect?.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

@@ -87,7 +87,7 @@ namespace Forms9Patch
             Margin = 0;
             DecorativeContainerView = _frame;
             UpdateBaseLayoutProperties();
-            _listener = Listener.For(this);
+            _listener = Listener.For(_frame);
             _listener.Swiped += OnSwiped;
         }
 

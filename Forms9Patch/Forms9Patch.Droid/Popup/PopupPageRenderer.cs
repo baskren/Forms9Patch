@@ -238,7 +238,7 @@ namespace Forms9Patch.Droid
         }
 
         // Fix for "CloseWhenBackgroundIsClicked not works on Android with Xamarin.Forms 2.4.0.280" #173
-        private bool IsInRegion(float x, float y, View v)
+        static bool IsInRegion(float x, float y, View v)
         {
             var mCoordBuffer = new int[2];
 

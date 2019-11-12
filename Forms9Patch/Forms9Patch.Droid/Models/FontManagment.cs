@@ -146,7 +146,7 @@ namespace Forms9Patch.Droid
 
                         // it's an Embedded Resource
                         if (!fontFamily.EndsWith(".ttf", StringComparison.OrdinalIgnoreCase) && !fontFamily.EndsWith(".otf", StringComparison.OrdinalIgnoreCase))
-                            throw new InvalidObjectException("Embedded Font file names must end with \".ttf\" or \".otf\".");
+                            throw new Exception("Embedded Font file names must end with \".ttf\" or \".otf\".");
                         // what is the assembly?
                         /*
                         var assemblyName = fontFamily.Substring(0, fontFamily.IndexOf(".Resources.Fonts."));
@@ -248,6 +248,7 @@ namespace Forms9Patch.Droid
                             inputStream.Close();
                             outputStream.Close();
                         }
+                        cachedFontDir?.Dispose();
                     }
                 }
                 var fontdirs = new string[] { "/system/fonts", "/system/font", "/data/fonts", cachedFontDir.AbsolutePath };
@@ -274,6 +275,7 @@ namespace Forms9Patch.Droid
                                 _fontFiles.Add(fontFamily, file.AbsolutePath);
                         }
                     }
+                    dir.Dispose();
                 }
 
                 return _fontFiles.Count == 0 ? null : _fontFiles;
@@ -316,7 +318,7 @@ namespace Forms9Patch.Droid
         }
 
         // Helper
-        int GetWord(byte[] array, int offset)
+        static int GetWord(byte[] array, int offset)
         {
             int b1 = array[offset] & 0xFF;
             int b2 = array[offset + 1] & 0xFF;

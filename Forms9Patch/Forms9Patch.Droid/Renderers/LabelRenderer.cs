@@ -251,7 +251,10 @@ namespace Forms9Patch.Droid
                 if (state.Lines == 0)
                 {
                     if (state.AvailHeight < MaxDim)
-                        tmpFontSize = TextPaintExtensions.ZeroLinesFit(state.JavaText, new TextPaint(control.Paint), ModelMinFontSize, tmpFontSize, state.AvailWidth, state.AvailHeight);
+                    {
+                        using (var tmpPaint = new TextPaint(control.Paint))
+                            tmpFontSize = TextPaintExtensions.ZeroLinesFit(state.JavaText, tmpPaint, ModelMinFontSize, tmpFontSize, state.AvailWidth, state.AvailHeight);
+                    }
                 }
                 else
                 {
@@ -268,7 +271,10 @@ namespace Forms9Patch.Droid
                         }
                     }
                     else if (state.AutoFit == AutoFit.Width)
-                        tmpFontSize = TextPaintExtensions.WidthFit(state.JavaText, new TextPaint(control.Paint), state.Lines, ModelMinFontSize, tmpFontSize, state.AvailWidth, state.AvailHeight);
+                    {
+                        using (var tmpPaint = new TextPaint(control.Paint))
+                            tmpFontSize = TextPaintExtensions.WidthFit(state.JavaText,tmpPaint, state.Lines, ModelMinFontSize, tmpFontSize, state.AvailWidth, state.AvailHeight);
+                    }
                 }
 
                 tmpFontSize = BoundTextSize(tmpFontSize);
@@ -290,7 +296,11 @@ namespace Forms9Patch.Droid
 
                 control.TextSize = tmpFontSize;
                 state.RenderedFontSize = tmpFontSize;
-                var layout = TextExtensions.StaticLayout(state.JavaText, new TextPaint(control.Paint), state.AvailWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+                StaticLayout layout;
+                using (var tmpPaint = new TextPaint(control.Paint))
+                {
+                    layout = TextExtensions.StaticLayout(state.JavaText, tmpPaint, state.AvailWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+                }
 
                 int lines = state.Lines;
                 if (lines == 0 && state.AutoFit == AutoFit.None)
@@ -312,7 +322,13 @@ namespace Forms9Patch.Droid
                         control.Ellipsize = state.LineBreakMode.ToEllipsize();
                     }
                     else
-                        layout = TextPaintExtensions.Truncate(state.Text, element.F9PFormattedString, new TextPaint(control.Paint), state.AvailWidth, state.AvailHeight, element.AutoFit, element.LineBreakMode, ref lines, ref text);
+                    {
+                        layout.Dispose();
+                        using (var tmpPaint = new TextPaint(control.Paint))
+                        {
+                            layout = TextPaintExtensions.Truncate(state.Text, element.F9PFormattedString, tmpPaint, state.AvailWidth, state.AvailHeight, element.AutoFit, element.LineBreakMode, ref lines, ref text);
+                        }
+                    }
                 }
                 lines = lines > 0 ? System.Math.Min(lines, layout.LineCount) : layout.LineCount;
 
@@ -323,6 +339,8 @@ namespace Forms9Patch.Droid
                     if (width > tmpWd)
                         tmpWd = System.Math.Ceiling(width);
                 }
+
+                layout.Dispose();
 
                 if (state.AutoFit == AutoFit.None && state.Lines > 0)
                     control.SetMaxLines(state.Lines);
@@ -350,9 +368,11 @@ namespace Forms9Patch.Droid
                 control.IsNativeDrawEnabled = true;
                 if (control == Control)
                 {
-                    LastDrawState = new TextControlState(state);
-                    LastDrawState.ElementHtmlText = Element.HtmlText;
-                    LastDrawState.ElementText = Element.Text;
+                    LastDrawState = new TextControlState(state)
+                    {
+                        ElementHtmlText = Element.HtmlText,
+                        ElementText = Element.Text
+                    };
                     //Control.Invalidate();
                     Control.ForceLayout();
                 }

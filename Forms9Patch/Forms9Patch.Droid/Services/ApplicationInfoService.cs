@@ -67,41 +67,43 @@ namespace Forms9Patch.Droid
                 }
                 var signatures = packageInfo.Signatures;
                 byte[] cert = signatures[0].ToByteArray();
-                var input = new MemoryStream(cert);
-                CertificateFactory cf = null;
-                try
+                using (var input = new MemoryStream(cert))
                 {
-                    cf = CertificateFactory.GetInstance("X509");
+                    CertificateFactory cf = null;
+                    try
+                    {
+                        cf = CertificateFactory.GetInstance("X509");
+                    }
+                    catch (CertificateException e)
+                    {
+                        e.PrintStackTrace();
+                    }
+                    X509Certificate c = null;
+                    try
+                    {
+                        c = (X509Certificate)cf.GenerateCertificate(input);
+                    }
+                    catch (CertificateException e)
+                    {
+                        e.PrintStackTrace();
+                    }
+                    string hexString = null;
+                    try
+                    {
+                        var md = Java.Security.MessageDigest.GetInstance("SHA1");
+                        byte[] publicKey = md.Digest(c.GetEncoded());
+                        hexString = Byte2HexFormatted(publicKey);
+                    }
+                    catch (Java.Security.NoSuchAlgorithmException e1)
+                    {
+                        e1.PrintStackTrace();
+                    }
+                    catch (CertificateEncodingException e)
+                    {
+                        e.PrintStackTrace();
+                    }
+                    return hexString;
                 }
-                catch (CertificateException e)
-                {
-                    e.PrintStackTrace();
-                }
-                X509Certificate c = null;
-                try
-                {
-                    c = (X509Certificate)cf.GenerateCertificate(input);
-                }
-                catch (CertificateException e)
-                {
-                    e.PrintStackTrace();
-                }
-                string hexString = null;
-                try
-                {
-                    var md = Java.Security.MessageDigest.GetInstance("SHA1");
-                    byte[] publicKey = md.Digest(c.GetEncoded());
-                    hexString = byte2HexFormatted(publicKey);
-                }
-                catch (Java.Security.NoSuchAlgorithmException e1)
-                {
-                    e1.PrintStackTrace();
-                }
-                catch (CertificateEncodingException e)
-                {
-                    e.PrintStackTrace();
-                }
-                return hexString;
             }
         }
 
@@ -120,19 +122,21 @@ namespace Forms9Patch.Droid
         }
         */
 
-        public static string byte2HexFormatted(byte[] arr)
+        public static string Byte2HexFormatted(byte[] arr)
         {
-            var str = new StringBuilder(arr.Length * 2);
-            for (int i = 0; i < arr.Length; i++)
+            using (var str = new StringBuilder(arr.Length * 2))
             {
-                var h = Integer.ToHexString(arr[i]);
-                int l = h.Length;
-                if (l == 1) h = "0" + h;
-                if (l > 2) h = h.Substring(l - 2, l);
-                str.Append(h.ToUpper());
-                if (i < (arr.Length - 1)) str.Append(':');
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    var h = Integer.ToHexString(arr[i]);
+                    int l = h.Length;
+                    if (l == 1) h = "0" + h;
+                    if (l > 2) h = h.Substring(l - 2, l);
+                    str.Append(h.ToUpper());
+                    if (i < (arr.Length - 1)) str.Append(':');
+                }
+                return str.ToString();
             }
-            return str.ToString();
         }
     }
 }
