@@ -19,6 +19,7 @@ namespace Forms9Patch.Droid
         /// <param name="spacingadd"></param>
         /// <param name="includepad"></param>
         /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Notifications", "XA0001:Find issues with Android API usage", Justification = "<Pending>")]
         public static Android.Text.StaticLayout StaticLayout(ICharSequence charSequence, Android.Text.TextPaint paint, int width, Android.Text.Layout.Alignment align, float spacingmult, float spacingadd, bool includepad)
         {
             var source = charSequence ?? new Java.Lang.String("");
@@ -46,6 +47,7 @@ namespace Forms9Patch.Droid
         /// <param name="spacingadd"></param>
         /// <param name="includepad"></param>
         /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Notifications", "XA0001:Find issues with Android API usage", Justification = "<Pending>")]
         public static Android.Text.StaticLayout StaticLayout(string charSequence, Android.Text.TextPaint paint, int width, Android.Text.Layout.Alignment align, float spacingmult, float spacingadd, bool includepad)
         {
             var source = charSequence ?? "";

@@ -221,7 +221,7 @@ namespace FormsGestures.Droid
                 _start?.Dispose();
                 _lastPan?.Dispose();
                 _secondToLastPan?.Dispose();
-                _tappedTimerUpMotionEvent.Dispose();
+                _tappedTimerUpMotionEvent?.Dispose();
                 LongPressTimer?.Dispose();
                 TappedTimer?.Dispose();
                 P42.Utils.Debug.RemoveFromCensus(this);

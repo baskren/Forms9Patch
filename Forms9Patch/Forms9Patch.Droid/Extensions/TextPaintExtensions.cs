@@ -1,5 +1,4 @@
-﻿using System;
-using Android.Text;
+﻿using Android.Text;
 using Java.Lang;
 using Xamarin.Forms;
 
@@ -18,7 +17,7 @@ namespace Forms9Patch.Droid
         internal static StaticLayout Truncate(string text, Forms9Patch.F9PFormattedString baseFormattedString, TextPaint paint, int availWidth, int availHeight, AutoFit fit, LineBreakMode lineBreakMode, ref int lines, ref ICharSequence textFormatted)
 #pragma warning restore IDE0060 // Remove unused parameter
         {
-            StaticLayout layout=null;
+            StaticLayout layout = null;
             var fontMetrics = paint.GetFontMetrics();
             var fontLineHeight = fontMetrics.Descent - fontMetrics.Ascent;
             var fontLeading = System.Math.Abs(fontMetrics.Bottom - fontMetrics.Descent);
@@ -91,9 +90,9 @@ namespace Forms9Patch.Droid
                     }
                 }
             }
-            layout?.Dispose();
             var result = TextExtensions.StaticLayout(textFormatted, paint, availWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
-            textFormatted?.Dispose();
+            layout?.Dispose();
+            //textFormatted?.Dispose();  // this causes Bc3.Keypad to break!
             return result;
         }
 
@@ -110,12 +109,12 @@ namespace Forms9Patch.Droid
             }
             int mid = (endLow + endHigh) / 2;
             var formattedText = baseFormattedString.ToSpannableString(EllipsePlacement.Char, 0, start, mid);
-            var layout = TextExtensions.StaticLayout(formattedText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
-            var layoutWidth = layout.GetLineWidth(0);
-            layout.Dispose();
-            if (layoutWidth > availWidth)
-                return TruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, endLow, mid, availWidth);
-            return TruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, mid, endHigh, availWidth);
+            using (var layout = TextExtensions.StaticLayout(formattedText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true))
+            {
+                if (layout.GetLineWidth(0) > availWidth)
+                    return TruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, endLow, mid, availWidth);
+                return TruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, mid, endHigh, availWidth);
+            }
         }
 
         static ICharSequence StartTruncatedFormatted(F9PFormattedString baseFormattedString, TextPaint paint, int secondToLastEnd, int start, int end, float availWidth)
@@ -129,12 +128,12 @@ namespace Forms9Patch.Droid
                 return baseFormattedString.ToSpannableString(EllipsePlacement.Start, secondToLastEnd, startHigh, end);
             int mid = (startLow + startHigh) / 2;
             var formattedText = baseFormattedString.ToSpannableString(EllipsePlacement.Start, 0, mid, end);
-            var layout = TextExtensions.StaticLayout(formattedText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
-            var layoutWidth = layout.GetLineWidth(0);
-            layout.Dispose();
-            if (layoutWidth > availWidth)
-                return StartTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, mid, startHigh, end, availWidth);
-            return StartTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, startLow, mid, end, availWidth);
+            using (var layout = TextExtensions.StaticLayout(formattedText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true))
+            {
+                if (layout.GetLineWidth(0) > availWidth)
+                    return StartTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, mid, startHigh, end, availWidth);
+                return StartTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, startLow, mid, end, availWidth);
+            }
         }
 
         static ICharSequence MidTruncatedFormatted(F9PFormattedString baseFormattedString, TextPaint paint, int secondToLastEnd, int startLastVisible, int midLastVisible, int start, int end, float availWidth)
@@ -148,12 +147,12 @@ namespace Forms9Patch.Droid
                 return baseFormattedString.ToSpannableString(EllipsePlacement.Mid, secondToLastEnd, startHigh, end, startLastVisible, midLastVisible);
             int mid = (startLow + startHigh) / 2;
             var formattedText = baseFormattedString.ToSpannableString(EllipsePlacement.Mid, 0, mid, end, startLastVisible, midLastVisible);
-            var layout = TextExtensions.StaticLayout(formattedText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
-            var layoutWidth = layout.GetLineWidth(0);
-            layout.Dispose();
-            if (layoutWidth > availWidth)
-                return MidTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, startLastVisible, midLastVisible, mid, startHigh, end, availWidth);
-            return MidTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, startLastVisible, midLastVisible, startLow, mid, end, availWidth);
+            using (var layout = TextExtensions.StaticLayout(formattedText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true))
+            {
+                if (layout.GetLineWidth(0) > availWidth)
+                    return MidTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, startLastVisible, midLastVisible, mid, startHigh, end, availWidth);
+                return MidTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, startLastVisible, midLastVisible, startLow, mid, end, availWidth);
+            }
         }
 
         static ICharSequence EndTruncatedFormatted(F9PFormattedString baseFormattedString, TextPaint paint, int secondToLastEnd, int start, int end, float availWidth)
@@ -167,12 +166,12 @@ namespace Forms9Patch.Droid
                 return baseFormattedString.ToSpannableString(EllipsePlacement.End, secondToLastEnd, start, endLow);
             int mid = (endLow + endHigh) / 2;
             var formattedText = baseFormattedString.ToSpannableString(EllipsePlacement.End, 0, start, mid);
-            var layout = TextExtensions.StaticLayout(formattedText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
-            var layoutWidth = layout.GetLineWidth(0);
-            layout.Dispose();
-            if (layoutWidth > availWidth)
-                return EndTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, endLow, mid, availWidth);
-            return EndTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, mid, endHigh, availWidth);
+            using (var layout = TextExtensions.StaticLayout(formattedText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true))
+            {
+                if (layout.GetLineWidth(0) > availWidth)
+                    return EndTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, endLow, mid, availWidth);
+                return EndTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, mid, endHigh, availWidth);
+            }
         }
 
         static string StartTruncatedLastLine(string text, TextPaint paint, int secondToLastEnd, int start, int end, float availWidth)
@@ -186,12 +185,12 @@ namespace Forms9Patch.Droid
                 return (secondToLastEnd > 0 ? text.Substring(0, secondToLastEnd).TrimEnd() + "\n" : "") + "…" + text.Substring(startHigh, end - startHigh).TrimStart();
             int mid = (startLow + startHigh) / 2;
             var lastLineText = new Java.Lang.String("…" + text.Substring(mid, end - mid).TrimStart());
-            var layout = TextExtensions.StaticLayout(lastLineText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
-            var layoutWidth = layout.GetLineWidth(0);
-            layout.Dispose();
-            if (layoutWidth > availWidth)
-                return StartTruncatedIter(text, paint, secondToLastEnd, mid, startHigh, end, availWidth);
-            return StartTruncatedIter(text, paint, secondToLastEnd, startLow, mid, end, availWidth);
+            using (var layout = TextExtensions.StaticLayout(lastLineText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true))
+            {
+                if (layout.GetLineWidth(0) > availWidth)
+                    return StartTruncatedIter(text, paint, secondToLastEnd, mid, startHigh, end, availWidth);
+                return StartTruncatedIter(text, paint, secondToLastEnd, startLow, mid, end, availWidth);
+            }
         }
 
         static string MidTruncatedLastLine(string text, TextPaint paint, int secondToLastEnd, int startLastVisible, int midLastVisible, int start, int end, float availWidth)
@@ -205,12 +204,12 @@ namespace Forms9Patch.Droid
                 return (secondToLastEnd > 0 ? text.Substring(0, secondToLastEnd).TrimEnd() + "\n" : "") + text.Substring(startLastVisible, midLastVisible - startLastVisible).TrimEnd() + "…" + text.Substring(startHigh, end - startHigh).TrimStart();
             int mid = (startLow + startHigh) / 2;
             var lastLineText = new Java.Lang.String(text.Substring(startLastVisible, midLastVisible - startLastVisible).TrimEnd() + "…" + text.Substring(mid, end - mid).TrimStart());
-            var layout = TextExtensions.StaticLayout(lastLineText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
-            var layoutWidth = layout.GetLineWidth(0);
-            layout.Dispose();
-            if (layoutWidth > availWidth)
-                return MidTruncatedIter(text, paint, secondToLastEnd, startLastVisible, midLastVisible, mid, startHigh, end, availWidth);
-            return MidTruncatedIter(text, paint, secondToLastEnd, startLastVisible, midLastVisible, startLow, mid, end, availWidth);
+            using (var layout = TextExtensions.StaticLayout(lastLineText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true))
+            {
+                if (layout.GetLineWidth(0) > availWidth)
+                    return MidTruncatedIter(text, paint, secondToLastEnd, startLastVisible, midLastVisible, mid, startHigh, end, availWidth);
+                return MidTruncatedIter(text, paint, secondToLastEnd, startLastVisible, midLastVisible, startLow, mid, end, availWidth);
+            }
         }
 
         static string EndTruncatedLastLine(string text, TextPaint paint, int secondToLastEnd, int start, int end, float availWidth)
@@ -224,12 +223,12 @@ namespace Forms9Patch.Droid
                 return (secondToLastEnd > 0 ? text.Substring(0, secondToLastEnd).TrimEnd() + "\n" : "") + text.Substring(start, endLow - start) + "…";
             int mid = (endLow + endHigh) / 2;
             var lastLineText = new Java.Lang.String(text.Substring(start, mid - start) + "…");
-            var layout = TextExtensions.StaticLayout(lastLineText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
-            var layoutWidth = layout.GetLineWidth(0);
-            layout.Dispose();
-            if (layoutWidth > availWidth)
-                return EndTruncatedIter(text, paint, secondToLastEnd, start, endLow, mid, availWidth);
-            return EndTruncatedIter(text, paint, secondToLastEnd, start, mid, endHigh, availWidth);
+            using (var layout = TextExtensions.StaticLayout(lastLineText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true))
+            {
+                if (layout.GetLineWidth(0) > availWidth)
+                    return EndTruncatedIter(text, paint, secondToLastEnd, start, endLow, mid, availWidth);
+                return EndTruncatedIter(text, paint, secondToLastEnd, start, mid, endHigh, availWidth);
+            }
         }
 
         #endregion
@@ -274,11 +273,11 @@ namespace Forms9Patch.Droid
             for (result = max; result > min; result -= step)
             {
                 paint.TextSize = result * Scale * FontScale;
-                var layout = TextExtensions.StaticLayout(text, paint, availWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
-                var layoutLineCount = layout.LineCount;
-                layout.Dispose();
-                if (layoutLineCount <= lines)
-                    return result;
+                using (var layout = TextExtensions.StaticLayout(text, paint, availWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true))
+                {
+                    if (layout.LineCount <= lines)
+                        return result;
+                }
             }
             return result;
         }
@@ -305,29 +304,24 @@ namespace Forms9Patch.Droid
 
             float mid = (max + min) / 2.0f;
             paint.TextSize = mid * Scale;
-            var layout = TextExtensions.StaticLayout(text, paint, availWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
-            var lineCount = layout.LineCount;
-            var height = layout.Height - layout.BottomPadding + layout.TopPadding;
-            if (height > availHeight)
+            using (var layout = TextExtensions.StaticLayout(text, paint, availWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true))
             {
-                layout.Dispose();
-                return ZeroLinesFit(text, paint, min, mid, availWidth, availHeight);
+                var lineCount = layout.LineCount;
+                var height = layout.Height - layout.BottomPadding + layout.TopPadding;
+                if (height > availHeight)
+                    return ZeroLinesFit(text, paint, min, mid, availWidth, availHeight);
+                if (height < availHeight)
+                    return ZeroLinesFit(text, paint, mid, max, availWidth, availHeight);
+                float maxLineWidth = 0;
+                for (int i = 0; i < lineCount; i++)
+                    if (layout.GetLineWidth(i) > maxLineWidth)
+                        maxLineWidth = layout.GetLineWidth(i);
+                if (maxLineWidth > availWidth)
+                    return ZeroLinesFit(text, paint, min, mid, availWidth, availHeight);
+                if (maxLineWidth < availWidth)
+                    return ZeroLinesFit(text, paint, mid, max, availWidth, availHeight);
+                return mid;
             }
-            if (height < availHeight)
-            {
-                layout.Dispose();
-                return ZeroLinesFit(text, paint, mid, max, availWidth, availHeight);
-            }
-            float maxLineWidth = 0;
-            for (int i = 0; i < lineCount; i++)
-                if (layout.GetLineWidth(i) > maxLineWidth)
-                    maxLineWidth = layout.GetLineWidth(i);
-            layout.Dispose();
-            if (maxLineWidth > availWidth)
-                return ZeroLinesFit(text, paint, min, mid, availWidth, availHeight);
-            if (maxLineWidth < availWidth)
-                return ZeroLinesFit(text, paint, mid, max, availWidth, availHeight);
-            return mid;
         }
         #endregion
 
