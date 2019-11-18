@@ -1035,7 +1035,7 @@ namespace Forms9Patch
                     //System.Diagnostics.Debug.WriteLine(GetType() + "." + ReflectionExtensions.CallerMemberName() + " IsVisible");
                     DecorativeContainerView.TranslationX = 0;
                     DecorativeContainerView.TranslationY = 0;
-                    if (Application.Current.MainPage == null)
+                    if (Application.Current?.MainPage == null)
                     {
                         IsVisible = false;
                         return;

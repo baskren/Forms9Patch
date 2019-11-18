@@ -32,7 +32,7 @@ namespace Forms9Patch.iOS
 
         public async Task AddAsync(PopupPage page)
         {
-            page.Parent = Application.Current.MainPage;
+            page.Parent = Application.Current?.MainPage;
 
             page.DescendantRemoved += HandleChildRemoved;
 

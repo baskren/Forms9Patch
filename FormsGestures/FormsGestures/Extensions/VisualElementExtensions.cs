@@ -82,7 +82,7 @@ namespace FormsGestures
         /// <returns></returns>
         public static Rectangle BoundsToWinCoord(this VisualElement fromElement)
         {
-            return fromElement.BoundsToEleCoord(Application.Current.MainPage);
+            return fromElement.BoundsToEleCoord(Application.Current?.MainPage);
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace FormsGestures
         /// <returns></returns>
         public static Point LocationToWinCoord(this VisualElement fromElement)
         {
-            return fromElement.LocationToEleCoord(Application.Current.MainPage);
+            return fromElement.LocationToEleCoord(Application.Current?.MainPage);
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace FormsGestures
         /// <returns></returns>
         public static Point ToWinCoord(this VisualElement fromElement, Point fromPoint)
         {
-            return fromElement.ToEleCoord(fromPoint, Application.Current.MainPage);
+            return fromElement.ToEleCoord(fromPoint, Application.Current?.MainPage);
         }
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace FormsGestures
         /// <returns></returns>
         public static Point WinToEleCoord(this VisualElement fromElement, Point fromPoint)
         {
-            return Service.CoordTransform(Application.Current.MainPage, fromPoint, fromElement);
+            return Service.CoordTransform(Application.Current?.MainPage, fromPoint, fromElement);
         }
         /// <summary>
         /// translates a rectangle from the app's window coordinates to that of this element
@@ -171,7 +171,7 @@ namespace FormsGestures
         /// <returns></returns>
         public static Rectangle WinToEleCoord(this VisualElement fromElement, Rectangle fromRectangle)
         {
-            return Service.CoordTransform(Application.Current.MainPage, fromRectangle, fromElement);
+            return Service.CoordTransform(Application.Current?.MainPage, fromRectangle, fromElement);
         }
 
         /// <summary>
@@ -264,7 +264,7 @@ namespace FormsGestures
         /// <returns></returns>
         public static List<T> FindVisualElementsWithPropertyAndOfType<T>(string propertyName) where T : VisualElement
         {
-            return FindChildrenWithPropertyAndOfType<T>(Xamarin.Forms.Application.Current.MainPage, propertyName);
+            return FindChildrenWithPropertyAndOfType<T>(Xamarin.Forms.Application.Current?.MainPage, propertyName);
         }
 
         /// <summary>
@@ -274,7 +274,7 @@ namespace FormsGestures
         /// <returns></returns>
         public static List<VisualElement> FindVisualElementsWithProperty(string propertyName)
         {
-            return FindChildrenWithPropertyAndOfType<VisualElement>(Xamarin.Forms.Application.Current.MainPage, propertyName);
+            return FindChildrenWithPropertyAndOfType<VisualElement>(Xamarin.Forms.Application.Current?.MainPage, propertyName);
         }
 
 
@@ -285,7 +285,7 @@ namespace FormsGestures
         /// <returns></returns>
         public static List<T> FindVisualElementsOfType<T>() where T : VisualElement
         {
-            return FindChildrenWithPropertyAndOfType<T>(Xamarin.Forms.Application.Current.MainPage, null);
+            return FindChildrenWithPropertyAndOfType<T>(Xamarin.Forms.Application.Current?.MainPage, null);
         }
 
         /// <summary>
@@ -294,7 +294,7 @@ namespace FormsGestures
         /// <returns>The focused.</returns>
         public static VisualElement FindFocused()
         {
-            return Xamarin.Forms.Application.Current.MainPage.FindChildWithFocus();
+            return Xamarin.Forms.Application.Current?.MainPage?.FindChildWithFocus();
         }
 
         /// <summary>
