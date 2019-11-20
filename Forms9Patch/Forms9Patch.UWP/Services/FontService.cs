@@ -61,6 +61,7 @@ namespace Forms9Patch.UWP
                 return DefaultSystemFontFamily;
 
             string localStorageFileName = null;
+            Assembly localStorageAssemby = null;
             string uri = null;
             string resourceId;
 
@@ -83,6 +84,8 @@ namespace Forms9Patch.UWP
 
             var idParts = f9pFontFamily.Split('#');
             resourceId = idParts[0];
+
+
 
             if (localStorageFileName==null)
             {
@@ -110,7 +113,8 @@ namespace Forms9Patch.UWP
                 if (targetAsmNameA == appAsmName || targetAsmNameB == appAsmName)
                 {
                     localStorageFileName = EmbeddedResourceCache.LocalStorageSubPathForEmbeddedResource(resourceId, Forms9Patch.ApplicationInfoService.Assembly);
-                    if (localStorageFileName!=null)
+                    localStorageAssemby = Forms9Patch.ApplicationInfoService.Assembly;
+                    if (localStorageFileName != null)
                         uri = EmbeddedResourceCache.ApplicationUri(resourceId, Forms9Patch.ApplicationInfoService.Assembly);
                 }
 
@@ -123,6 +127,7 @@ namespace Forms9Patch.UWP
                         if (targetAsmNameA == asmName || targetAsmNameB == asmName)
                         {
                             localStorageFileName = EmbeddedResourceCache.LocalStorageSubPathForEmbeddedResource(resourceId, asm);
+                            localStorageAssemby = asm;
                             uri = EmbeddedResourceCache.ApplicationUri(resourceId, asm);
                             break;
                         }
@@ -139,7 +144,7 @@ namespace Forms9Patch.UWP
             else
             {
                 //var cachedFilePath = System.IO.Path.Combine(P42.Utils.Environment.ApplicationDataPath, localStorageFileName);
-                var cachedFilePath = System.IO.Path.Combine(P42.Utils.EmbeddedResourceCache.FolderPath(), localStorageFileName);
+                var cachedFilePath = System.IO.Path.Combine(P42.Utils.EmbeddedResourceCache.FolderPath(localStorageAssemby), localStorageFileName);
                 fontName = TTFAnalyzer.FontFamily(cachedFilePath);
             }
             //var uwpFontFamily = "ms-appdata:///local/" + localStorageFileName.Replace('\\','/') + (string.IsNullOrWhiteSpace(fontName) ? null : "#" + fontName);

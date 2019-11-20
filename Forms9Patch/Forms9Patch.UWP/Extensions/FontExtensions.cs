@@ -123,7 +123,7 @@ namespace Forms9Patch.UWP
                     string dir = null;
                     if (fontFamilyFilePath.StartsWith("local/"))
                     {
-                        dir = ApplicationData.Current.LocalFolder.Path;
+                        dir =  ApplicationData.Current.LocalFolder.Path;
                         fontFamilyFilePath = fontFamilyFilePath.Substring(6);
                     }
                     else if (fontFamilyFilePath.StartsWith("localcache/"))
@@ -147,7 +147,7 @@ namespace Forms9Patch.UWP
                         return null;
                     }
                     var path = System.IO.Path.Combine(dir, fontFamilyFilePath.Split('#')[0]);
-
+                    path = path.Replace('/','\\');
                     var fontFile = new SharpDX.DirectWrite.FontFile(factory, path );
 
                     var loader = fontFile.Loader;
