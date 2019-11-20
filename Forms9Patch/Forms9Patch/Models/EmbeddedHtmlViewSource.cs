@@ -97,6 +97,7 @@ namespace Forms9Patch
             P42.Utils.EmbeddedResourceCache.Clear(null, assembly, embeddedResourceFolder);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
         public async Task Initialize()
         {
             if (string.IsNullOrWhiteSpace(EmbeddedResourceFolder) || string.IsNullOrWhiteSpace(HtmlDocEmbeddedResourceId))
