@@ -37,14 +37,12 @@ namespace Forms9Patch
 
         #region Fields
         Assembly Assembly;
-        bool _instantiating;
         #endregion
 
         private EmbeddedHtmlViewSource() { }
 
         private EmbeddedHtmlViewSource(string embeddedResourceFolder, string htmlDocEmbeddedResourceId, Assembly assembly = null)
         {
-            _instantiating = true;
             EmbeddedResourceFolder = embeddedResourceFolder.Trim(new[] { '.', ' ' });
             HtmlDocEmbeddedResourceId = htmlDocEmbeddedResourceId;
 
@@ -64,8 +62,6 @@ namespace Forms9Patch
             var resourceNames = Assembly.GetManifestResourceNames();
             if (!resourceNames.Contains(HtmlDocEmbeddedResourceId))
                 throw new Exception("Cannot find EmbeddedResourceId=[" + HtmlDocEmbeddedResourceId + "] in assemby [" + Assembly.FullName + "]");
-
-            _instantiating = false;
         }
 
         private bool _disposed;
