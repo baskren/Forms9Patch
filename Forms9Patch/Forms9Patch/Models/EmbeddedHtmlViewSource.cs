@@ -10,12 +10,22 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
+    /// <summary>
+    /// WebSource for EmbeddedResources
+    /// </summary>
     [DesignTimeVisible(true)]
     public class EmbeddedHtmlViewSource : Xamarin.Forms.HtmlWebViewSource, IDisposable
     {
         #region Properties
+
         #region EmbeddedResourceFolder Property
+        /// <summary>
+        /// EmbeddedResourceFolder BindableProperty
+        /// </summary>
         public static readonly BindableProperty EmbeddedResourceFolderProperty = BindableProperty.Create(nameof(EmbeddedResourceFolder), typeof(string), typeof(EmbeddedHtmlViewSource), default(string));
+        /// <summary>
+        /// The portion of the EmbeddedResource path under which lies all content for the WebViewSource
+        /// </summary>
         public string EmbeddedResourceFolder
         {
             get => (string)GetValue(EmbeddedResourceFolderProperty);
@@ -24,7 +34,13 @@ namespace Forms9Patch
         #endregion
 
         #region HtmlFileName Property
+        /// <summary>
+        /// HtmlDocEmbeddedResourceId BindableProperty
+        /// </summary>
         public static readonly BindableProperty HtmlDocEmbeddedResourceIdProperty = BindableProperty.Create(nameof(HtmlDocEmbeddedResourceId), typeof(string), typeof(EmbeddedHtmlViewSource), default(string));
+        /// <summary>
+        /// The EmbeddedResourceId of the html document to display
+        /// </summary>
         public string HtmlDocEmbeddedResourceId
         {
             get => (string)GetValue(HtmlDocEmbeddedResourceIdProperty);
@@ -38,6 +54,25 @@ namespace Forms9Patch
         #region Fields
         Assembly Assembly;
         #endregion
+
+
+        #region Construction / Disposal
+        /// <summary>
+        /// Primary method of creation
+        /// </summary>
+        /// <param name="embeddedResourceFolder"></param>
+        /// <param name="htmlDocEmbeddedResourceId"></param>
+        /// <param name="assembly"></param>
+        /// <returns></returns>
+        public static async Task<EmbeddedHtmlViewSource> Create(string embeddedResourceFolder, string htmlDocEmbeddedResourceId, Assembly assembly = null)
+        {
+            if (new EmbeddedHtmlViewSource(embeddedResourceFolder, htmlDocEmbeddedResourceId, assembly) is EmbeddedHtmlViewSource source)
+            {
+                await source.Initialize();
+                return source;
+            }
+            return null;
+        }
 
         private EmbeddedHtmlViewSource() { }
 
@@ -75,29 +110,35 @@ namespace Forms9Patch
             }
         }
 
+        /// <summary>
+        /// Disposal
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+        #endregion
 
 
-        public static async Task<EmbeddedHtmlViewSource> Create(string embeddedResourceFolder, string htmlDocEmbeddedResourceId, Assembly assembly = null)
-        {
-            if (new EmbeddedHtmlViewSource(embeddedResourceFolder, htmlDocEmbeddedResourceId, assembly) is EmbeddedHtmlViewSource source)
-            {
-                await source.Initialize();
-                return source;
-            }
-            return null;
-        }
-
+        #region Clear
+        /// <summary>
+        /// A way to clear any embedded resource files that have been cached locally.
+        /// </summary>
+        /// <param name="embeddedResourceFolder"></param>
+        /// <param name="assembly"></param>
         public static void Clear(string embeddedResourceFolder, Assembly assembly)
         {
             P42.Utils.EmbeddedResourceCache.Clear(null, assembly, embeddedResourceFolder);
         }
+        #endregion
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
+
+        #region Initialization
+        /// <summary>
+        /// A way to generate the content of EmbeddedHtmlViewSource
+        /// </summary>
+        /// <returns></returns>
         public async Task Initialize()
         {
             if (string.IsNullOrWhiteSpace(EmbeddedResourceFolder) || string.IsNullOrWhiteSpace(HtmlDocEmbeddedResourceId))
@@ -225,5 +266,7 @@ namespace Forms9Patch
 
             }
         }
+        #endregion
+
     }
 }
