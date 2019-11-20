@@ -103,34 +103,36 @@ namespace Forms9Patch
                 return;
 
             string htmlDocPath = null;
+            BaseUrl = null;
 
             Assembly = Assembly ?? EmbeddedResourceExtensions.FindAssemblyForResource(HtmlDocEmbeddedResourceId);
             if (Assembly != null)
             {
-                var htmlPaths = new List<string>();
-                var resourceNames = Assembly.GetManifestResourceNames();
-                foreach (var resourceId in resourceNames)
-                {
-                    if (resourceId.StartsWith(EmbeddedResourceFolder, StringComparison.Ordinal))
-                    {
-                        var path = await P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResourceAsync(resourceId, Assembly, EmbeddedResourceFolder);
-                        if (resourceId.EndsWith(".html", StringComparison.OrdinalIgnoreCase))
-                        {
-                            if (resourceId == HtmlDocEmbeddedResourceId)
-                                htmlDocPath = path;
-                            if (Xamarin.Forms.Device.RuntimePlatform == Device.Android)
-                                htmlPaths.Add(path);
-                        }
-                    }
-                }
 
-                if (string.IsNullOrWhiteSpace(htmlDocPath))
-                {
-                    Console.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + ": HtmlDoc [" + HtmlDocEmbeddedResourceId + "] not found in EmbeddedResourceFolder [" + EmbeddedResourceFolder + "]");
-                    return;
-                }
                 if (Xamarin.Forms.Device.RuntimePlatform == Device.Android)
                 {
+                    var htmlPaths = new List<string>();
+                    var resourceNames = Assembly.GetManifestResourceNames();
+                    foreach (var resourceId in resourceNames)
+                    {
+                        if (resourceId.StartsWith(EmbeddedResourceFolder, StringComparison.Ordinal))
+                        {
+                            var path = await P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResourceAsync(resourceId, Assembly, EmbeddedResourceFolder);
+                            if (resourceId.EndsWith(".html", StringComparison.OrdinalIgnoreCase))
+                            {
+                                if (resourceId == HtmlDocEmbeddedResourceId)
+                                    htmlDocPath = path;
+                                htmlPaths.Add(path);
+                            }
+                        }
+                    }
+
+                    if (string.IsNullOrWhiteSpace(htmlDocPath))
+                    {
+                        Console.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + ": HtmlDoc [" + HtmlDocEmbeddedResourceId + "] not found in EmbeddedResourceFolder [" + EmbeddedResourceFolder + "]");
+                        return;
+                    }
+
                     foreach (var htmlPath in htmlPaths)
                     {
                         var html = File.ReadAllText(htmlPath);
@@ -146,13 +148,80 @@ namespace Forms9Patch
                         }
                         File.WriteAllText(htmlPath, html);
                     }
-                    BaseUrl = null;
+                    Html = File.ReadAllText(htmlDocPath);
                 }
-                else
+                else if (Xamarin.Forms.Device.RuntimePlatform == Device.iOS)
                 {
+                    var resourceNames = Assembly.GetManifestResourceNames();
+                    foreach (var resourceId in resourceNames)
+                    {
+                        if (resourceId.StartsWith(EmbeddedResourceFolder, StringComparison.Ordinal))
+                        {
+                            var path = await P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResourceAsync(resourceId, Assembly, EmbeddedResourceFolder);
+                            if (resourceId.EndsWith(".html", StringComparison.OrdinalIgnoreCase))
+                            {
+                                if (resourceId == HtmlDocEmbeddedResourceId)
+                                    htmlDocPath = path;
+                            }
+                        }
+                    }
+
+                    if (string.IsNullOrWhiteSpace(htmlDocPath))
+                    {
+                        Console.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + ": HtmlDoc [" + HtmlDocEmbeddedResourceId + "] not found in EmbeddedResourceFolder [" + EmbeddedResourceFolder + "]");
+                        return;
+                    }
+
                     BaseUrl = P42.Utils.EmbeddedResourceCache.FolderPath(Assembly, EmbeddedResourceFolder);
                     Html = File.ReadAllText(htmlDocPath);
                 }
+                else
+                {
+                    htmlDocPath = await P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResourceAsync(HtmlDocEmbeddedResourceId, Assembly, EmbeddedResourceFolder);
+                    var html = File.ReadAllText(htmlDocPath);
+                    var resourceNames = Assembly.GetManifestResourceNames();
+                    foreach (var resourceId in resourceNames)
+                    {
+                        if (resourceId.StartsWith(EmbeddedResourceFolder, StringComparison.Ordinal))
+                        {
+                            var resourcePath = resourceId.Split('.');
+                            var suffix = resourcePath.LastOrDefault()?.ToLower();
+                            if (suffix == "png"
+                                || suffix == "jpg" || suffix == "jpeg"
+                                || suffix == "svg"
+                                || suffix == "gif"
+                                || suffix == "tif" || suffix == "tiff"
+                                || suffix == "pdf"
+                                || suffix == "bmp"
+                                || suffix == "ico")
+                            {
+                                var relativeSource = '"' + resourceId.Substring(EmbeddedResourceFolder.Length + 1) + '"';
+
+                                if (html.Contains(relativeSource))
+                                {
+                                    try
+                                    {
+                                        byte[] bytes;
+                                        using (var resourceStream = Assembly.GetManifestResourceStream(resourceId))
+                                        {
+                                            using (var memoryStream = new MemoryStream())
+                                            {
+                                                resourceStream.CopyTo(memoryStream);
+                                                bytes = memoryStream.ToArray();
+                                            }
+                                            string base64 = '"' + "data:" + (suffix == "pdf" ? "application/" : "image/") + suffix + ";base64," + Convert.ToBase64String(bytes) + '"';
+                                            html = html.Replace(relativeSource, base64);
+                                        }
+                                    }
+                                    catch (Exception) { }
+                                }
+                            }
+                        }
+                    }
+                    Html = html;
+                }
+
+
             }
         }
     }
