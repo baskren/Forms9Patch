@@ -111,12 +111,16 @@ namespace Forms9Patch
                 var resourceNames = Assembly.GetManifestResourceNames();
                 foreach (var resourceId in resourceNames)
                 {
-                    if (resourceId.EndsWith(".html", StringComparison.OrdinalIgnoreCase) && resourceId.StartsWith(EmbeddedResourceFolder, StringComparison.Ordinal))
+                    if (resourceId.StartsWith(EmbeddedResourceFolder, StringComparison.Ordinal))
                     {
                         var path = await P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResourceAsync(resourceId, Assembly, EmbeddedResourceFolder);
-                        if (resourceId == HtmlDocEmbeddedResourceId)
-                            htmlDocPath = path;
-                        htmlPaths.Add(path);
+                        if (resourceId.EndsWith(".html", StringComparison.OrdinalIgnoreCase))
+                        {
+                            if (resourceId == HtmlDocEmbeddedResourceId)
+                                htmlDocPath = path;
+                            if (Xamarin.Forms.Device.RuntimePlatform == Device.Android)
+                                htmlPaths.Add(path);
+                        }
                     }
                 }
 
@@ -125,24 +129,30 @@ namespace Forms9Patch
                     Console.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + ": HtmlDoc [" + HtmlDocEmbeddedResourceId + "] not found in EmbeddedResourceFolder [" + EmbeddedResourceFolder + "]");
                     return;
                 }
-
-                foreach (var htmlPath in htmlPaths)
+                if (Xamarin.Forms.Device.RuntimePlatform == Device.Android)
                 {
-                    var html = File.ReadAllText(htmlPath);
-                    foreach (var resourceId in resourceNames)
+                    foreach (var htmlPath in htmlPaths)
                     {
-                        if (resourceId.StartsWith(EmbeddedResourceFolder, StringComparison.Ordinal))
+                        var html = File.ReadAllText(htmlPath);
+                        foreach (var resourceId in resourceNames)
                         {
-                            var path = '"' + await P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResourceAsync(resourceId, Assembly, EmbeddedResourceFolder) + '"';
-                            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + ": path=[" + path + "]");
-                            var srcName = '"' + resourceId.Substring(EmbeddedResourceFolder.Length + 1) + '"';
-                            html = html.Replace(srcName, path);
+                            if (resourceId.StartsWith(EmbeddedResourceFolder, StringComparison.Ordinal))
+                            {
+                                var path = '"' + await P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResourceAsync(resourceId, Assembly, EmbeddedResourceFolder) + '"';
+                                System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + ": path=[" + path + "]");
+                                var srcName = '"' + resourceId.Substring(EmbeddedResourceFolder.Length + 1) + '"';
+                                html = html.Replace(srcName, path);
+                            }
                         }
+                        File.WriteAllText(htmlPath, html);
                     }
-                    File.WriteAllText(htmlPath, html);
+                    BaseUrl = null;
                 }
-                BaseUrl = null;
-                Html = File.ReadAllText(htmlDocPath);
+                else
+                {
+                    BaseUrl = P42.Utils.EmbeddedResourceCache.FolderPath(Assembly, EmbeddedResourceFolder);
+                    Html = File.ReadAllText(htmlDocPath);
+                }
             }
         }
     }
