@@ -95,6 +95,23 @@ namespace Forms9Patch
             get => (GroupToggleBehavior)GetValue(GroupToggleBehaviorProperty);
             set => SetValue(GroupToggleBehaviorProperty, value);
         }
+
+        #region IsSelectOnScrollEnabled Property
+        /// <summary>
+        /// BindableProperty for IsSelectOnScrollEnabled
+        /// </summary>
+        public static readonly BindableProperty IsSelectOnScrollEnabledProperty = BindableProperty.Create(nameof(IsSelectOnScrollEnabled), typeof(bool), typeof(BasePicker), true);
+        /// <summary>
+        /// Enables the ability to select an item when it is focused upon during a scroll
+        /// </summary>
+        public bool IsSelectOnScrollEnabled
+        {
+            get => (bool)GetValue(IsSelectOnScrollEnabledProperty);
+            set => SetValue(IsSelectOnScrollEnabledProperty, value);
+        }
+        #endregion
+
+
         #endregion
 
         #region Appearance
@@ -111,8 +128,10 @@ namespace Forms9Patch
             get => (int)GetValue(RowHeightProperty);
             set => SetValue(RowHeightProperty, value);
         }
-
         #endregion
+
+
+
 
         #endregion
 
@@ -279,7 +298,7 @@ namespace Forms9Patch
                 return;
             }
 
-            if (ItemsSource == null || item == null)
+            if (ItemsSource == null || ItemsSource.Count < 1 || item == null)
                 return;
 
             foreach (var i in _listView.ItemsSource)
@@ -304,7 +323,7 @@ namespace Forms9Patch
                 return;
             }
 
-            if (ItemsSource == null)
+            if (ItemsSource == null || ItemsSource.Count < 1)
                 return;
 
             var count = 0;
@@ -351,19 +370,22 @@ namespace Forms9Patch
         void OnScrolling(object sender, EventArgs e)
         {
             _scrolling = true;
-            var deepDataSet = _listView.TwoDeepDataSetAtPoint(Bounds.Center);
-            if (deepDataSet?.Index != null && deepDataSet.Index.Length == 1)
+            if (IsSelectOnScrollEnabled)
             {
-                Index = deepDataSet.Index[0];
-                SelectedItem = ItemsSource[Index];
-                //System.Diagnostics.Debug.WriteLine("BasePicker.OnScrolled: Index=[" + Index + "]");
+                var deepDataSet = _listView.TwoDeepDataSetAtPoint(Bounds.Center);
+                if (deepDataSet?.Index != null && deepDataSet.Index.Length == 1)
+                {
+                    Index = deepDataSet.Index[0];
+                    SelectedItem = ItemsSource[Index];
+                    //System.Diagnostics.Debug.WriteLine("BasePicker.OnScrolled: Index=[" + Index + "]");
+                }
             }
         }
 
         bool _scrollCompleting;
         void OnScrolled(object sender, EventArgs e)
         {
-            if (ItemsSource != null && SelectBy == SelectBy.Position && Index >= 0 && Index < ItemsSource.Count)
+            if (IsSelectOnScrollEnabled && ItemsSource != null && SelectBy == SelectBy.Position && Index >= 0 && Index < ItemsSource.Count)
             {
                 //System.Diagnostics.Debug.WriteLine("BasePicker.OnScrolled: Index=[" + Index + "]");
                 SelectedItem = ItemsSource[Index];

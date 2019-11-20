@@ -864,11 +864,13 @@ namespace Forms9Patch
             await PushAsync();
         }
 
+
         //bool _isPushing;
         /// <summary>
         /// Push the popup asynchronously
         /// </summary>
         /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Potential Code Quality Issues", "RECS0022:A catch clause that catches System.Exception and has an empty body", Justification = "<Pending>")]
         public async Task PushAsync()
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + ReflectionExtensions.CallerMemberName());
@@ -898,7 +900,7 @@ namespace Forms9Patch
                 {
                     _semaphore.Release();
                 }
-                catch (Exception e) { }
+                catch (Exception) { }
                 Recursion.Exit(GetType().ToString(), _id.ToString());
             }
             else
@@ -924,6 +926,7 @@ namespace Forms9Patch
         }
 
 
+
         /// <summary>
         /// Called to Pop a popup
         /// </summary>
@@ -931,6 +934,7 @@ namespace Forms9Patch
         /// <param name="callerName"></param>
         /// <param name="lastAction"></param>
         /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Potential Code Quality Issues", "RECS0022:A catch clause that catches System.Exception and has an empty body", Justification = "<Pending>")]
         public async Task PopAsync(object trigger = null, [CallerMemberName] string callerName = "", Action lastAction = null)
         {
             // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
@@ -953,7 +957,7 @@ namespace Forms9Patch
                     {
                         _semaphore.Release();
                     }
-                    catch (Exception e) { }
+                    catch (Exception) { }
                     Popped?.Invoke(this, PopupPoppedEventArgs);
                 }
                 else if (!_disposed)
@@ -962,7 +966,7 @@ namespace Forms9Patch
                     {
                         _semaphore.Release();
                     }
-                    catch (Exception e) { }
+                    catch (Exception) { }
                 }
 
                 lastAction?.Invoke();

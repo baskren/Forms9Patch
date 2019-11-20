@@ -86,7 +86,8 @@ namespace Forms9Patch
         #region Fields
         readonly internal BasePicker _basePicker = new BasePicker
         {
-            BackgroundColor = Color.Transparent
+            BackgroundColor = Color.Transparent,
+            IsSelectOnScrollEnabled = true
         };
 
         readonly internal Color _overlayColor = Color.FromRgb(0.85, 0.85, 0.85);

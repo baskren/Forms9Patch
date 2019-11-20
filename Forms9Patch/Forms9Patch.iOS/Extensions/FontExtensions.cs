@@ -17,7 +17,11 @@ namespace Forms9Patch.iOS
     {
         List<string> IFontFamilies.FontFamilies()
         {
-            return FontExtensions._embeddedResourceFonts.Keys.Concat(UIFont.FamilyNames).ToList();
+            var result = FontExtensions._embeddedResourceFonts.Keys.ToList();
+            foreach (var fontFamilyName in UIFont.FamilyNames)
+                result.Add(fontFamilyName);
+            //return FontExtensions._embeddedResourceFonts.Keys.Concat(UIFont.FamilyNames).ToList();
+            return result;
         }
 
         internal static List<string> FontsForFamily(string family)
@@ -129,17 +133,17 @@ namespace Forms9Patch.iOS
             return BestFont(metaFont.Family, size, metaFont.Bold, metaFont.Italic);
         }
 
-        internal static UIFont BestFont(string family, nfloat size, bool bold = false, bool italic = false, Assembly assembly=null)
+        internal static UIFont BestFont(string family, nfloat size, bool bold = false, bool italic = false, Assembly assembly = null)
         {
 
             if (family == null)
-                family = "sans-serif";
+                family = "lksjadflkjsdklf";
             if (family.ToLower() == "monospace")
                 family = "Menlo";
             if (family.ToLower() == "serif")
                 family = "Times New Roman";
             if (family.ToLower() == "sans-serif")
-                family = "Arial";
+                family = "alskjflksadjflka";
 
             if (size < 0)
                 size = (nfloat)(UIFont.LabelFontSize * Math.Abs(size));

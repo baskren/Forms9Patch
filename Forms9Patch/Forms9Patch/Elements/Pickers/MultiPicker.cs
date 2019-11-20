@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
 using Xamarin.Forms;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Forms9Patch
 {
@@ -25,6 +27,22 @@ namespace Forms9Patch
             private set => SetValue(SelectedItemsPropertyKey, value);
         }
 
+        /// <summary>
+        /// The indexes currently selected
+        /// </summary>
+        public List<int> SelectedIndexes
+        {
+            get
+            {
+                var result = new List<int>();
+                for (int i = 0; i < ItemsSource.Count; i++)
+                {
+                    if (SelectedItems.Contains(ItemsSource[i]))
+                        result.Add(i);
+                }
+                return result;
+            }
+        }
         #endregion
 
 
@@ -48,6 +66,8 @@ namespace Forms9Patch
             SelectedItems = _basePicker.SelectedItems;
 
             SelectedItems.CollectionChanged += (sender, e) => OnPropertyChanged(SelectedItemsPropertyKey.BindableProperty.PropertyName);
+
+            _basePicker.IsSelectOnScrollEnabled = false;
         }
         #endregion
 
