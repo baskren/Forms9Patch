@@ -1271,7 +1271,6 @@ namespace Forms9Patch
                 return;
 
 
-            P42.Utils.Recursion.Enter(GetType().ToString(), InstanceId.ToString());
             _noUpdate = true;
 
             var enabledLabelColor = TextColor == Color.Default ? (DarkTheme ? Color.White : Color.FromHex("#000").WithAlpha(0.5)) : TextColor;
@@ -1335,7 +1334,6 @@ namespace Forms9Patch
             }
             UpdateIconTint();
             _noUpdate = false;
-            P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
         }
 
         Color OpaqueColor
@@ -1524,8 +1522,6 @@ namespace Forms9Patch
             if (width < 1 || height < 1)
                 return isClipped;
 
-            P42.Utils.Recursion.Enter(GetType().ToString(), InstanceId.ToString());
-
             var elementWidths = Padding.HorizontalThickness + Margin.HorizontalThickness;
             var elementHeights = Padding.VerticalThickness + Margin.VerticalThickness;
             var notFirst = false;
@@ -1579,7 +1575,6 @@ namespace Forms9Patch
                         : vtFree < 0.01;
                 }
             }
-            P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
             return isClipped;
         }
 
@@ -1647,8 +1642,6 @@ namespace Forms9Patch
                 Device.BeginInvokeOnMainThread(SetOrienations);
                 return;
             }
-
-            P42.Utils.Recursion.Enter(GetType().ToString(), InstanceId.ToString());
 
             var horzOption = HorizontalTextAlignment.ToLayoutOptions();
             var vertOption = VerticalTextAlignment.ToLayoutOptions();
@@ -1798,7 +1791,6 @@ namespace Forms9Patch
                 }
             }
             _stackLayout.Orientation = Orientation;
-            P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
         }
 
 

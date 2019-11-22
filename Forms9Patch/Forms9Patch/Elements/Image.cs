@@ -717,7 +717,6 @@ namespace Forms9Patch
 
         async Task SetImageSourceAsync()
         {
-            P42.Utils.Recursion.Enter(GetType().ToString(), InstanceId.ToString());
             if (Source != _xfImageSource)
             {
                 // release the previous
@@ -742,7 +741,6 @@ namespace Forms9Patch
                 ((IImageController)this)?.SetIsLoading(false);
                 Invalidate();
             }
-            P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
         }
 
         private async void OnImageSourcePropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -763,7 +761,6 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnBindingContextChanged()
         {
-            P42.Utils.Recursion.Enter(GetType().ToString(), InstanceId.ToString());
             base.OnBindingContextChanged();
             if (_xfImageSource != null)
             {
@@ -771,8 +768,6 @@ namespace Forms9Patch
                 if (Device.RuntimePlatform == Device.Android)
                     Invalidate();
             }
-            P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
-
         }
 
 
@@ -851,7 +846,6 @@ namespace Forms9Patch
         [Obsolete("Ugh")]
         public override SizeRequest GetSizeRequest(double widthConstraint, double heightConstraint)
         {
-            P42.Utils.Recursion.Enter(GetType().ToString(), InstanceId.ToString());
             //System.Diagnostics.Debug.WriteLine(GetType() + "GetSizeRequest(" + widthConstraint + ", " + heightConstraint + ") ENTER");
 #pragma warning disable CS0618 // Type or member is obsolete
             var result = base.GetSizeRequest(widthConstraint, heightConstraint);
@@ -885,10 +879,7 @@ namespace Forms9Patch
             //result = new SizeRequest(new Size(reqW + shadowPaddingHz, reqH + shadowPaddingVt), new Size(10 + shadowPaddingHz, 10 + shadowPaddingVt));
             var reqSize = new Size(reqW + shadowPaddingHz, reqH + shadowPaddingVt);
             var minSize = new Size(WidthRequest > 0 ? reqSize.Width : 10 + shadowPaddingHz, HeightRequest > 0 ? reqSize.Height : 10 + shadowPaddingVt);
-            result = new SizeRequest(reqSize, minSize);
-
-            P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
-            return result;
+            return new SizeRequest(reqSize, minSize);
         }
 
         /*
@@ -931,8 +922,6 @@ namespace Forms9Patch
 
             if (canvas == null)
                 return;
-            //canvas.Clear();
-            P42.Utils.Recursion.Enter(GetType().ToString(), InstanceId.ToString());
 
             var hz = ((IExtendedShape)this).ExtendedElementShapeOrientation == StackOrientation.Horizontal;
             var vt = !hz;
@@ -1052,7 +1041,6 @@ namespace Forms9Patch
                                 //Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
                                 Analytics.TrackException?.Invoke(exception, properties);
                                 _repainting = false;
-                                P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
                                 return;
                             }
                             canvas.Restore();
@@ -1087,7 +1075,6 @@ namespace Forms9Patch
                                 //Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
                                 Analytics.TrackException?.Invoke(exception, properties);
                                 _repainting = false;
-                                P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
                                 return;
                             }
                         }
@@ -1117,7 +1104,6 @@ namespace Forms9Patch
                             //Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
                             Analytics.TrackException?.Invoke(exception, properties);
                             _repainting = false;
-                            P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
                             return;
                         }
                     }
@@ -1155,7 +1141,6 @@ namespace Forms9Patch
                                 //Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
                                 Analytics.TrackException?.Invoke(exception, properties);
                                 _repainting = false;
-                                P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
                                 return;
                             }
                         }
@@ -1203,7 +1188,6 @@ namespace Forms9Patch
                                 //Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
                                 Analytics.TrackException?.Invoke(exception, properties);
                                 _repainting = false;
-                                P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
                                 return;
                             }
                         }
@@ -1263,9 +1247,6 @@ namespace Forms9Patch
             if (!_repainting)
                 _lastPaint = DateTime.Now;
             _repainting = false;
-
-            P42.Utils.Recursion.Enter(GetType().ToString(), InstanceId.ToString());
-
         }
         #endregion
 
@@ -1289,8 +1270,6 @@ namespace Forms9Patch
                 workingCanvas.Clear();
             }
 
-            P42.Utils.Recursion.Enter(GetType().ToString(), InstanceId.ToString());
-
             if (_f9pImageData.ValidSVG)
             {
                 workingCanvas.Save();
@@ -1309,7 +1288,6 @@ namespace Forms9Patch
                                 workingCanvas.DrawPicture(_f9pImageData.SKSvg.Picture);
                             }
                         workingCanvas.Restore();
-                        P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
                         shadowCanvas?.Dispose();
                         return;
                     }
@@ -1592,8 +1570,6 @@ namespace Forms9Patch
                 Console.WriteLine("Image [" + _f9pImageData.Key + "] is neither a valid SVG or valid Bitmap.");
 
             shadowCanvas?.Dispose();
-
-            P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
         }
         #endregion
 
