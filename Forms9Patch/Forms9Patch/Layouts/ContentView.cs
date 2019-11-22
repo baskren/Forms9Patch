@@ -501,7 +501,7 @@ namespace Forms9Patch
             if (double.IsInfinity(widthConstraint) || double.IsNaN(widthConstraint))
                 widthConstraint = Forms9Patch.Display.Width;
 
-            System.Diagnostics.Debug.WriteLine("ContentView" + P42.Utils.ReflectionExtensions.CallerString() + ": ============================================");
+            //System.Diagnostics.Debug.WriteLine("ContentView" + P42.Utils.ReflectionExtensions.CallerString() + ": ============================================");
             //System.Diagnostics.Debug.WriteLine("ContentView.OnSizeRequest(" + widthConstraint + ", " + heightConstraint + ")");
             //var result = base.OnSizeRequest(widthConstraint, heightConstraint);
             var availWidth = widthConstraint;
