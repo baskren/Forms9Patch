@@ -976,7 +976,7 @@ namespace Forms9Patch
         public Button()
         {
             _constructing = true;
-            Padding = new Thickness(8, 2, 8, 2);
+            Padding = new Thickness(8, 4, 8, 4);
             OutlineRadius = 2;
             _label = new Label
             {
@@ -2006,8 +2006,9 @@ namespace Forms9Patch
         internal protected void SendTapped()
         {
             P42.Utils.BreadCrumbs.Add(GetType(), Text ?? HtmlText);
-            if (GroupToggleBehavior == GroupToggleBehavior.None || IsSelected)
-                Command?.Execute(CommandParameter);
+            // The following is already handled by the OnPropertyChanged for IsSelectedProperty 
+            //if (GroupToggleBehavior == GroupToggleBehavior.None || IsSelected)
+            //    Command?.Execute(CommandParameter);
             _tapped?.Invoke(this, EventArgs.Empty);
         }
 

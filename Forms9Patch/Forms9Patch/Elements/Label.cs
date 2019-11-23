@@ -285,6 +285,8 @@ namespace Forms9Patch
         public Label()
         {
             _id = instances++;
+
+            //SizeChanged += OnSizeChanged;
         }
 
         /// <summary>
@@ -294,6 +296,7 @@ namespace Forms9Patch
         public Label(string text) : this()
         {
             HtmlText = text;
+
         }
         #endregion
 
@@ -373,6 +376,7 @@ namespace Forms9Patch
 
         #region for use by Button and Autofit
         internal bool MinimizeHeight;
+        bool _sizeAllocated;
 
         //internal Action SizeAndAlign;
         internal Func<double, double, Size> RendererSizeForWidthAndFontSize;
@@ -404,10 +408,13 @@ namespace Forms9Patch
         {
             IsDynamicallySized = true;
             SizeRequest result;
-            //if (!_sizeAllocated && Draw != null && Device.RuntimePlatform == Device.UWP)
-            //    result = Draw.Invoke(widthConstraint, heightConstraint);
-            //else
-            result = base.GetSizeRequest(widthConstraint, heightConstraint);
+
+            // the next three lines are required to get the SegmentedControl in the EmbeddedResourceFontEffectPage to render correctly in iOS
+            // but it appears to be over doing it a bit on Android ... worth more evaluation
+            if (!_sizeAllocated && Draw != null && Device.RuntimePlatform == Device.iOS)// && Device.RuntimePlatform == Device.UWP)
+                result = Draw.Invoke(widthConstraint, heightConstraint);
+            else
+                result = base.GetSizeRequest(widthConstraint, heightConstraint);
             return result;
         }
 
@@ -435,7 +442,7 @@ namespace Forms9Patch
         protected override void OnSizeAllocated(double width, double height)
         {
             base.OnSizeAllocated(width, height);
-            //_sizeAllocated = true;
+            _sizeAllocated = true;
             Draw?.Invoke(width, height);
         }
 
@@ -456,9 +463,12 @@ namespace Forms9Patch
 #pragma warning restore CS0618 // Type or member is obsolete
 #pragma warning restore CS0672 // Member overrides obsolete member
 
+        /*
         private void OnSizeChanged(object sender, EventArgs e)
         {
+            System.Diagnostics.Debug.WriteLine("Label" + P42.Utils.ReflectionExtensions.CallerString() + ": size=[" + Bounds.Size + "]");
         }
+        */
 
         /// <summary>
         /// Because InvalidateMeasure doesn't always work
@@ -483,7 +493,7 @@ namespace Forms9Patch
 
         private void OnDown(object sender, DownUpEventArgs e)
         {
-            if (Device.RuntimePlatform == Device.Android && e.NumberOfTouches == 1)
+            //if (Device.RuntimePlatform == Device.Android && e.NumberOfTouches == 1)
             {
                 var index = IndexAtPoint(e.Touches[0]);
                 foreach (var span in F9PFormattedString._spans)

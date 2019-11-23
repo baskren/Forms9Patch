@@ -42,7 +42,7 @@ namespace Forms9Patch
         /// </summary>
         public Segment SelectedSegment
         {
-            get => (Segment) GetValue(SelectedSegmentProperty);
+            get => (Segment)GetValue(SelectedSegmentProperty);
             private set => SetValue(SelectedSegmentPropertyKey, value);
         }
         #endregion
@@ -87,7 +87,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for FontSize property
         /// </summary>
-        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), typeof(double), typeof(TargetedMenu), -1.0);
+        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), typeof(double), typeof(TargetedMenu), 14.0);
         /// <summary>
         /// Gets/Sets the FontSize property
         /// </summary>
@@ -788,15 +788,25 @@ namespace Forms9Patch
         double _forewardLength;
         double _backwardLength;
 
-
+        bool _pendingUpdateRequest;
+        bool _updating;
         void UpdateLayout()
         {
             if (_updatingCollection)
                 return;
+
             if (P42.Utils.Environment.IsOnMainThread)
             {
                 if (Width < 0 || !IsVisible || Segments.Count < 1)
                     return;
+
+                if (_updating)
+                {
+                    _pendingUpdateRequest = true;
+                    return;
+                }
+                _updating = true;
+                _pendingUpdateRequest = false;
 
                 HorizontalOptions = LayoutOptions.Center;
                 VerticalOptions = LayoutOptions.Center;
@@ -823,8 +833,10 @@ namespace Forms9Patch
                 _downArrowButton.IsVisible = false;
                 _downArrowSeparator.IsVisible = false;
 
-                _leftArrowButton.IconImage.HeightRequest = _leftArrowButton.IconImage.WidthRequest = FontSize;
-                _rightArrowButton.IconImage.HeightRequest = _rightArrowButton.IconImage.WidthRequest = FontSize;
+                _leftArrowButton.IconImage.HeightRequest = FontSize * .8;
+                _leftArrowButton.IconImage.WidthRequest = 2 * FontSize;
+                _rightArrowButton.IconImage.HeightRequest = FontSize * .8;
+                _rightArrowButton.IconImage.WidthRequest = 2 * FontSize;
                 _upArrowButton.IconImage.HeightRequest = _upArrowButton.IconImage.WidthRequest = 2 * FontSize;
                 _downArrowButton.IconImage.HeightRequest = _downArrowButton.IconImage.WidthRequest = 2 * FontSize;
 
@@ -901,9 +913,13 @@ namespace Forms9Patch
                     _stackLayout.HeightRequest = -1;
                 }
                 else if (Device.RuntimePlatform == Device.iOS)
-                    _stackLayout.HeightRequest = 34;
+                    _stackLayout.HeightRequest = 28;
                 else if (Device.RuntimePlatform != Device.UWP)
                     _stackLayout.HeightRequest = 28;
+
+                _updating = false;
+                if (_pendingUpdateRequest)
+                    UpdateLayout();
             }
             else
                 Device.BeginInvokeOnMainThread(UpdateLayout);
@@ -956,7 +972,7 @@ namespace Forms9Patch
             {
                 foreach (var child in _stackLayout.Children)
                     if (child is Button button)
-                        button.Padding = new Thickness(29, 5);
+                        button.Padding = new Thickness(29, 1);
                 UpdateLayout();
             }
             _firstAppearance = false;

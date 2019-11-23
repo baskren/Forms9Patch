@@ -501,8 +501,8 @@ namespace Forms9Patch
             if (double.IsInfinity(widthConstraint) || double.IsNaN(widthConstraint))
                 widthConstraint = Forms9Patch.Display.Width;
 
-            //System.Diagnostics.Debug.WriteLine("ContentView" + P42.Utils.ReflectionExtensions.CallerString() + ": ============================================");
-            //System.Diagnostics.Debug.WriteLine("ContentView.OnSizeRequest(" + widthConstraint + ", " + heightConstraint + ")");
+            System.Diagnostics.Debug.WriteLine("ContentView" + P42.Utils.ReflectionExtensions.CallerString() + ": ===================" + Content + "=========================");
+            System.Diagnostics.Debug.WriteLine("ContentView.OnSizeRequest(" + widthConstraint + ", " + heightConstraint + ")");
             //var result = base.OnSizeRequest(widthConstraint, heightConstraint);
             var availWidth = widthConstraint;
             var availHeight = heightConstraint;
@@ -576,6 +576,7 @@ namespace Forms9Patch
             availWidth -= (Margin.HorizontalThickness + Padding.HorizontalThickness + shadowPadding.HorizontalThickness);
             availHeight -= (Margin.VerticalThickness + Padding.VerticalThickness + shadowPadding.VerticalThickness);
             var result = Content.Measure(availWidth, availHeight, MeasureFlags.IncludeMargins);
+            System.Diagnostics.Debug.WriteLine("ContentView" + P42.Utils.ReflectionExtensions.CallerString() + ": Content.Measure [" + result + "]");
             if (LimitMinSizeToBackgroundImageSize && BackgroundImage != null && BackgroundImage.SourceImageSize != Size.Zero)
             {
                 var reqW = Math.Max(result.Request.Width, BackgroundImage.SourceImageSize.Width) + BackgroundImage.Margin.HorizontalThickness;
@@ -583,9 +584,11 @@ namespace Forms9Patch
                 var minW = Math.Max(result.Minimum.Width, BackgroundImage.SourceImageSize.Width) + BackgroundImage.Margin.HorizontalThickness;
                 var minH = Math.Max(result.Minimum.Height, BackgroundImage.SourceImageSize.Height) + BackgroundImage.Margin.VerticalThickness;
                 result = new SizeRequest(new Size(reqW, reqH), new Size(minW, minH));
+                System.Diagnostics.Debug.WriteLine("ContentView" + P42.Utils.ReflectionExtensions.CallerString() + ": BackgroundImageSize [" + result + "]");
             }
             result = new SizeRequest(new Size(result.Request.Width + shadowPadding.HorizontalThickness, result.Request.Height + shadowPadding.VerticalThickness),
                                      new Size(result.Minimum.Width + shadowPadding.HorizontalThickness, result.Minimum.Height + shadowPadding.VerticalThickness));
+            System.Diagnostics.Debug.WriteLine("ContentView" + P42.Utils.ReflectionExtensions.CallerString() + ": result+shadow [" + result + "]");
             return result;
         }
 

@@ -738,7 +738,7 @@ namespace Forms9Patch
         {
             P42.Utils.Debug.AddToCensus(this);
 
-            IgnoreChildren = true;
+            IgnoreChildren = false;
             base.Padding = new Thickness(0);
             OutlineRadius = 2;
             OutlineWidth = 1;
