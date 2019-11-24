@@ -92,6 +92,18 @@ namespace Forms9Patch.Droid
         #endregion
 
 
+        public override string ToString()
+        {
+            var result = "{ ";
+            result += ElementHtmlText ?? ElementText;
+            result += ", (" + AvailWidth + "," + AvailHeight + "), ";
+            result += ", tsz:" + TextSize + ", ";
+            result += ", fit:" + AutoFit + ", ";
+            result += ", brk:" + LineBreakMode;
+            return result;
+        }
+
+
         #region Equality Methods
         public override bool Equals(object obj)
         {

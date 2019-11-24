@@ -751,14 +751,17 @@ namespace Forms9Patch
         static readonly BindableProperty _buttonLengthProperty = BindableProperty.Create("ButtonLength", typeof(double), typeof(TargetedMenu), -1.0);
         double ButtonLength(Button button)
         {
-            if (button.GetValue(_buttonLengthProperty) is double length && length > 11)
-                return length;
+            P42.Utils.Debug.Message(button, "ENTER");
+            //if (button.GetValue(_buttonLengthProperty) is double length && length > 11)
+            //    return length;
             var size = button.Measure(double.PositiveInfinity, double.PositiveInfinity, MeasureFlags.IncludeMargins);
             var result = Math.Ceiling(Orientation == StackOrientation.Horizontal
                 ? size.Request.Width
                 : size.Request.Height);
-            if (result > 11)
-                button.SetValue(_buttonLengthProperty, result);
+            //if (result > 11)
+            //    button.SetValue(_buttonLengthProperty, result);
+            //System.Diagnostics.Debug.WriteLine("TargetedMenu" + P42.Utils.ReflectionExtensions.CallerString() + ": Length: " + result);
+            P42.Utils.Debug.Message(button, "EXIT result:" + result);
             return result;
         }
 
@@ -805,6 +808,8 @@ namespace Forms9Patch
                     _pendingUpdateRequest = true;
                     return;
                 }
+
+                P42.Utils.Debug.Message("Segment A", "ENTER");
                 _updating = true;
                 _pendingUpdateRequest = false;
 
@@ -920,6 +925,9 @@ namespace Forms9Patch
                 _updating = false;
                 if (_pendingUpdateRequest)
                     UpdateLayout();
+
+                P42.Utils.Debug.Message("Segment A", "EXIT");
+
             }
             else
                 Device.BeginInvokeOnMainThread(UpdateLayout);

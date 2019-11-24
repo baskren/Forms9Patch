@@ -198,8 +198,8 @@ namespace Forms9Patch.Droid
                 && _lastMeasureResult.Value.Request.Width > 0
                 && _lastMeasureResult.Value.Request.Height > 0
                 && _lastMeasureState.RenderedFontSize >= _currentMeasureState.TextSize
-                && _lastMeasureResult.Value.Request.Width <= _currentMeasureState.AvailWidth
-                && _lastMeasureResult.Value.Request.Height <= _currentMeasureState.AvailHeight
+                && _lastMeasureResult.Value.Request.Width == _currentMeasureState.AvailWidth
+                && _lastMeasureResult.Value.Request.Height == _currentMeasureState.AvailHeight
                 )
             {
                 return _lastMeasureResult.Value;
@@ -210,8 +210,8 @@ namespace Forms9Patch.Droid
                 && _lastDrawResult.Value.Request.Width > 0
                 && _lastDrawResult.Value.Request.Height > 0
                 && LastDrawState.RenderedFontSize >= _currentDrawState.TextSize
-                && _lastDrawResult.Value.Request.Width <= _currentMeasureState.AvailWidth
-                && _lastDrawResult.Value.Request.Height <= _currentMeasureState.AvailWidth)
+                && _lastDrawResult.Value.Request.Width == _currentMeasureState.AvailWidth
+                && _lastDrawResult.Value.Request.Height == _currentMeasureState.AvailWidth)
             {
                 return _lastDrawResult.Value;
             }
@@ -404,7 +404,9 @@ namespace Forms9Patch.Droid
                 LineBreakMode = e.NewElement.LineBreakMode,
                 SyncFontSize = (float)e.NewElement.SynchronizedFontSize,
                 AvailHeight = MaxDim,
-                AvailWidth = MaxDim
+                AvailWidth = MaxDim,
+                ElementHtmlText = Element?.HtmlText,
+                ElementText = Element?.Text
             };
 
             if (e.OldElement != null)
@@ -605,8 +607,11 @@ namespace Forms9Patch.Droid
             {
                 if (element.F9PFormattedString != null)
                 {
+                    _currentDrawState.ElementHtmlText = element.HtmlText;
+                    _currentDrawState.Text = null;
                     _currentDrawState.TextFormatted = element.F9PFormattedString.ToSpannableString(noBreakSpace: element.LineBreakMode == LineBreakMode.CharacterWrap);
                     control.TextFormatted = _currentDrawState.TextFormatted;
+
                 }
                 else
                 {
@@ -615,6 +620,8 @@ namespace Forms9Patch.Droid
                         text = text.Replace(' ', '\u00A0');
                     _currentDrawState.Text = text;
                     control.Text = _currentDrawState.Text;
+                    _currentDrawState.ElementHtmlText = null;
+                    //_currentDrawState.TextFormatted = null;
                 }
             }
             return true;
