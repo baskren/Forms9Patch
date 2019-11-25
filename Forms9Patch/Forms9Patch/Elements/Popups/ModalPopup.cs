@@ -4,6 +4,30 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
+    public class ModalPopup : BubblePopup
+    {
+        /// <summary>
+        /// No longer supported
+        /// </summary>
+        public static readonly BindableProperty LocationProperty = null;
+        /// <summary>
+        /// No longer supported
+        /// </summary>
+        [Obsolete("No longer supported", true)]
+        public Point Location
+        {
+            get => throw new NotSupportedException("ModalPopup.Location no longer supported");
+            set => throw new NotSupportedException("ModalPopup.Location no longer supported");
+        }
+
+        public ModalPopup(TimeSpan popAfter = default) : base(null, popAfter: popAfter)
+        {
+
+        }
+    }
+
+
+    /*
     /// <summary>
     /// Forms9Patch Modal popup.
     /// </summary>
@@ -42,16 +66,6 @@ namespace Forms9Patch
             set => SetValue(LocationProperty, value);
         }
 
-        /*
-		public double TranslationX {
-			get { return (double)GetValue (TranslationXProperty); }
-			set { SetValue (TranslationXProperty, value); }
-		}
-		public double TranslationY {
-			get { return (double)GetValue (TranslationYProperty); }
-			set { SetValue (TranslationYProperty, value); }
-		}
-		*/
         #endregion
 
         #endregion
@@ -205,5 +219,6 @@ namespace Forms9Patch
         }
         #endregion
     }
+    */
 }
 

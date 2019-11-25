@@ -180,23 +180,6 @@ namespace Forms9Patch
         }
         #endregion CancelOnBackButtonClick
 
-        /*
-        #region Retain
-        /// <summary>
-        /// The retain property.
-        /// </summary>
-        public static readonly BindableProperty RetainProperty = BindableProperty.Create(nameof(Retain), typeof(bool), typeof(PopupBase), default(bool));
-        /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.PopupBase"/> is retained after it is hidden.
-        /// </summary>
-        /// <value><c>true</c> if retain; otherwise, <c>false</c>.</value>
-        public bool Retain
-        {
-            get => (bool)GetValue(RetainProperty);
-            set => SetValue(RetainProperty, value);
-        }
-        #endregion Retain
-        */
 
         #region PopAfter property
         /// <summary>
@@ -452,7 +435,17 @@ namespace Forms9Patch
                     oldLayout.PropertyChanged -= OnContentViewPropertyChanged;
                 _decorativeContainerView = (ILayout)value;
                 if (_decorativeContainerView is VisualElement newLayout)
+                {
+                    _decorativeContainerView.Padding = Padding;
+                    _decorativeContainerView.BackgroundColor = (BackgroundColor == Color.Default || BackgroundColor == default ? Color.White : BackgroundColor);
+                    _decorativeContainerView.HasShadow = HasShadow;
+                    _decorativeContainerView.ShadowInverted = ShadowInverted;
+                    _decorativeContainerView.OutlineColor = OutlineColor;
+                    _decorativeContainerView.OutlineWidth = OutlineWidth;
+                    _decorativeContainerView.OutlineRadius = OutlineRadius;
+                    _decorativeContainerView.ElementShape = ElementShape;
                     newLayout.PropertyChanged += OnContentViewPropertyChanged;
+                }
                 Content = _decorativeContainerView as View;
                 _decorativeContainerView.IgnoreChildren = false;
 

@@ -285,8 +285,6 @@ namespace Forms9Patch
         public Label()
         {
             _id = instances++;
-
-            //SizeChanged += OnSizeChanged;
         }
 
         /// <summary>
@@ -296,7 +294,6 @@ namespace Forms9Patch
         public Label(string text) : this()
         {
             HtmlText = text;
-
         }
         #endregion
 
@@ -310,6 +307,11 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
+            //if (propertyName == WidthProperty.PropertyName)
+            //P42.Utils.Debug.Message(this, "Width: " + Width);
+            //else if (propertyName == HeightProperty.PropertyName)
+            //P42.Utils.Debug.Message(this, " Height: " + Height);
+
             if (!P42.Utils.Environment.IsOnMainThread)
             {
                 Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
@@ -355,6 +357,7 @@ namespace Forms9Patch
                 || propertyName == TextProperty.PropertyName
                )
                 InvalidateMeasure();
+
         }
 
         internal void InternalInvalidateMeasure()
@@ -390,9 +393,11 @@ namespace Forms9Patch
         /// <param name="fontSize">Font size.</param>
         public Size SizeForWidthAndFontSize(double width, double fontSize)
         {
+            //P42.Utils.Debug.Message(this, "ENTER width:" + width + " fontSize:" + fontSize);
             if (width <= 0)
                 return Size.Zero;
             var result = (RendererSizeForWidthAndFontSize?.Invoke(width, fontSize) ?? Size.Zero);
+            //P42.Utils.Debug.Message(this, "EXIT result:" + result);
             return result;
         }
 
@@ -408,6 +413,7 @@ namespace Forms9Patch
         {
             IsDynamicallySized = true;
             SizeRequest result;
+            //P42.Utils.Debug.Message(this, "ENTER widthConstraint:" + widthConstraint + " heightConstraint:" + heightConstraint);
 
             // the next three lines are required to get the SegmentedControl in the EmbeddedResourceFontEffectPage to render correctly in iOS
             // but it appears to be over doing it a bit on Android ... worth more evaluation
@@ -415,6 +421,7 @@ namespace Forms9Patch
                 result = Draw.Invoke(widthConstraint, heightConstraint);
             else
                 result = base.GetSizeRequest(widthConstraint, heightConstraint);
+            //P42.Utils.Debug.Message(this, "EXIT result:" + result);
             return result;
         }
 
@@ -427,7 +434,9 @@ namespace Forms9Patch
         /// <returns></returns>
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
+            //P42.Utils.Debug.Message(this, "ENTER widthConstraint:" + widthConstraint + " heightConstraint:" + heightConstraint);
             var result = base.OnMeasure(widthConstraint, heightConstraint);
+            //P42.Utils.Debug.Message(this, "EXIT result:" + result);
             return result;
         }
 
@@ -441,9 +450,11 @@ namespace Forms9Patch
         /// <param name="height"></param>
         protected override void OnSizeAllocated(double width, double height)
         {
+            //P42.Utils.Debug.Message(this, "ENTER width:" + width + " height:" + height);
             base.OnSizeAllocated(width, height);
             _sizeAllocated = true;
             Draw?.Invoke(width, height);
+            //P42.Utils.Debug.Message(this, "EXIT");
         }
 
 
@@ -457,18 +468,21 @@ namespace Forms9Patch
         /// <returns></returns>
         protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
         {
+            //P42.Utils.Debug.Message(this, "ENTER widthConstraint:" + widthConstraint + " heightConstraint:" + heightConstraint);
             var result = base.OnSizeRequest(widthConstraint, heightConstraint);
+            //P42.Utils.Debug.Message(this, "EXIT result:" + result);
             return result;
         }
 #pragma warning restore CS0618 // Type or member is obsolete
 #pragma warning restore CS0672 // Member overrides obsolete member
 
-        /*
+
         private void OnSizeChanged(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Label" + P42.Utils.ReflectionExtensions.CallerString() + ": size=[" + Bounds.Size + "]");
+            //System.Diagnostics.Debug.WriteLine("Label" + P42.Utils.ReflectionExtensions.CallerString() + ": size=[" + Bounds.Size + "]");
+            //P42.Utils.Debug.Message(this, " size:" + Bounds.Size);
         }
-        */
+
 
         /// <summary>
         /// Because InvalidateMeasure doesn't always work

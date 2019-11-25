@@ -18,6 +18,11 @@ namespace Forms9Patch.Droid
     /// </summary>
     public class LabelRenderer : ViewRenderer<Label, F9PTextView>
     {
+        static LabelRenderer()
+        {
+            Forms9Patch.Label.DefaultFontSize = F9PTextView.DefaultTextSize;
+        }
+
         #region BindableProperties
         #region LastDrawState property
         /// <summary>
@@ -108,8 +113,12 @@ namespace Forms9Patch.Droid
                 || Control == null
                 || Element == null
                 || _disposed)
+            {
+                //P42.Utils.Debug.Message(Element, "Size.Zero");
                 return Size.Zero;
+            }
 
+            //P42.Utils.Debug.Message(Element, "ENTER: widthConstraint:" + widthConstraint + " fontSize:" + fontSize);
             var displayScale = (float)Resources.DisplayMetrics.DensityDpi / (float)Android.Util.DisplayMetricsDensity.Default;
             _currentMeasureState = new TextControlState(_currentDrawState)
             {
@@ -122,7 +131,10 @@ namespace Forms9Patch.Droid
             _lastMeasureResult = InternalLayout(_measureControl, _currentMeasureState);
             _lastMeasureState = new TextControlState(_currentMeasureState);
 
-            return new Size(_lastMeasureResult.Value.Request.Width / displayScale, _lastMeasureResult.Value.Request.Height / displayScale);
+
+            var result = new Size(_lastMeasureResult.Value.Request.Width / displayScale, _lastMeasureResult.Value.Request.Height / displayScale);
+            //P42.Utils.Debug.Message(Element, "EXIT result: " + result);
+            return result;
         }
 
         SizeRequest DrawLabel(double width, double height)
@@ -135,7 +147,12 @@ namespace Forms9Patch.Droid
                 || width < 0
                 || height < 0
                 )
+            {
+                //P42.Utils.Debug.Message(Element, "Size.Zero");
                 return new SizeRequest(Size.Zero);
+            }
+
+            //P42.Utils.Debug.Message(Element, "ENTER: width:" + width + " height:" + height);
             var displayScale = (float)Resources.DisplayMetrics.DensityDpi / (float)Android.Util.DisplayMetricsDensity.Default;
             if (double.IsInfinity(width) || width > MaxDim)
                 width = MaxDim;
@@ -145,6 +162,7 @@ namespace Forms9Patch.Droid
             _currentDrawState.AvailWidth = (int)System.Math.Floor(width * displayScale);
             _currentDrawState.AvailHeight = (int)System.Math.Floor(height * displayScale);
             _lastDrawResult = InternalLayout(Control, _currentDrawState);
+            //P42.Utils.Debug.Message(Element, "EXIT result: " + _lastDrawResult);
             return _lastDrawResult.Value;
         }
 
@@ -176,7 +194,10 @@ namespace Forms9Patch.Droid
                 || Control == null
                 || Element == null
                 || _disposed)
+            {
+                //P42.Utils.Debug.Message(Element, "Size.Zero");
                 return new SizeRequest(Size.Zero);
+            }
 
             var width = MeasureSpec.GetSize(widthConstraint);
             if (MeasureSpec.GetMode(widthConstraint) == Android.Views.MeasureSpecMode.Unspecified)
@@ -185,7 +206,11 @@ namespace Forms9Patch.Droid
             if (MeasureSpec.GetMode(heightConstraint) == Android.Views.MeasureSpecMode.Unspecified)
                 height = MaxDim;
             if (width <= 0 || height <= 0)
+            {
+                //P42.Utils.Debug.Message(Element, "Size.Zero");
                 return new SizeRequest(Size.Zero);
+            }
+            //P42.Utils.Debug.Message(Element, "ENTER: width:" + width + " height:" + height);
 
             _currentMeasureState = new TextControlState(_currentDrawState)
             {
@@ -202,6 +227,7 @@ namespace Forms9Patch.Droid
                 && _lastMeasureResult.Value.Request.Height == _currentMeasureState.AvailHeight
                 )
             {
+                //P42.Utils.Debug.Message(Element, "EXIT A _lastMeasureResult.Value: " + _lastMeasureResult.Value);
                 return _lastMeasureResult.Value;
             }
 
@@ -213,12 +239,16 @@ namespace Forms9Patch.Droid
                 && _lastDrawResult.Value.Request.Width == _currentMeasureState.AvailWidth
                 && _lastDrawResult.Value.Request.Height == _currentMeasureState.AvailWidth)
             {
+                //P42.Utils.Debug.Message(Element, "EXIT _lastDrawResult.Value: " + _lastDrawResult.Value);
                 return _lastDrawResult.Value;
             }
+
+            //P42.Utils.Debug.Message(Element, _currentMeasureState.ToString());
 
             _measureControl = _measureControl ?? new F9PTextView(Settings.Context);
             _lastMeasureResult = InternalLayout(_measureControl, _currentMeasureState);
             _lastMeasureState = new TextControlState(_currentMeasureState);
+            //P42.Utils.Debug.Message(Element, "EXIT _lastMeasureResult.Value: " + _lastMeasureResult.Value);
             return _lastMeasureResult.Value;
         }
 
@@ -273,7 +303,7 @@ namespace Forms9Patch.Droid
                     else if (state.AutoFit == AutoFit.Width)
                     {
                         using (var tmpPaint = new TextPaint(control.Paint))
-                            tmpFontSize = TextPaintExtensions.WidthFit(state.JavaText,tmpPaint, state.Lines, ModelMinFontSize, tmpFontSize, state.AvailWidth, state.AvailHeight);
+                            tmpFontSize = TextPaintExtensions.WidthFit(state.JavaText, tmpPaint, state.Lines, ModelMinFontSize, tmpFontSize, state.AvailWidth, state.AvailHeight);
                     }
                 }
 

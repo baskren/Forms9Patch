@@ -81,7 +81,7 @@ namespace Forms9Patch
                 HasShadow = HasShadow,
                 OutlineColor = OutlineColor,
                 OutlineWidth = OutlineWidth,
-                OutlineRadius = 0,
+                OutlineRadius = OutlineRadius,
                 BackgroundColor = BackgroundColor
             };
             Margin = 0;

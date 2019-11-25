@@ -772,7 +772,7 @@ namespace Forms9Patch
         /// <summary>
         /// The lines property.
         /// </summary>
-        public static readonly BindableProperty LinesProperty = BindableProperty.Create(nameof(Lines), typeof(int), typeof(Button), 0);
+        public static readonly BindableProperty LinesProperty = BindableProperty.Create(nameof(Lines), typeof(int), typeof(Button), 1);
         /// <summary>
         /// Gets or sets the lines.
         /// </summary>
@@ -976,7 +976,7 @@ namespace Forms9Patch
         public Button()
         {
             _constructing = true;
-            Padding = new Thickness(8, 4, 8, 4);
+            Padding = new Thickness(8, 2, 8, 2);
             OutlineRadius = 2;
             _label = new Label
             {
@@ -1493,9 +1493,37 @@ namespace Forms9Patch
         #endregion
 
 
+        #region Layout
+        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
+        {
+            //P42.Utils.Debug.Message(this, "ENTER widthConstraint:" + widthConstraint + " heightConstraint:" + heightConstraint);
+            var result = base.OnMeasure(widthConstraint, heightConstraint);
+            //P42.Utils.Debug.Message(this, "EXIT result:" + result);
+            return result;
+        }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            //P42.Utils.Debug.Message(_label, " size:" + Bounds.Size);
+            base.OnSizeAllocated(width, height);
+        }
+
+        protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
+        {
+            //P42.Utils.Debug.Message(this, "ENTER widthConstraint:" + widthConstraint + " heightConstraint:" + heightConstraint);
+            var result = base.OnSizeRequest(widthConstraint, heightConstraint);
+            //P42.Utils.Debug.Message(this, "EXIT result:" + result);
+            return result;
+        }
+        #endregion
+
+
         #region Change Handlers
         private void OnSizeChanged(object sender, EventArgs e)
-            => IsClipped = CheckIsClipped();
+        {
+            //P42.Utils.Debug.Message(_label, " size: " + Bounds.Size);
+            IsClipped = CheckIsClipped();
+        }
 
         private void OnIconLabelSizeChanged(object sender, EventArgs e)
             => IsClipped = CheckIsClipped();
@@ -1504,7 +1532,10 @@ namespace Forms9Patch
             => IsClipped = CheckIsClipped();
 
         private void OnLabelSizeChanged(object sender, EventArgs e)
-            => IsClipped = CheckIsClipped();
+        {
+            //P42.Utils.Debug.Message(_label, " _label.size: " + _label.Bounds.Size);
+            IsClipped = CheckIsClipped();
+        }
 
         /// <summary>
         /// Test if the segment contents are clipped
