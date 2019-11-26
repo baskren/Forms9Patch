@@ -4,6 +4,7 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
+    /*
     public class ModalPopup : BubblePopup
     {
         /// <summary>
@@ -25,9 +26,9 @@ namespace Forms9Patch
 
         }
     }
+    */
 
 
-    /*
     /// <summary>
     /// Forms9Patch Modal popup.
     /// </summary>
@@ -219,6 +220,6 @@ namespace Forms9Patch
         }
         #endregion
     }
-    */
+
 }
 

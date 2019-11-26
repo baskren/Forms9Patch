@@ -976,7 +976,7 @@ namespace Forms9Patch
         public Button()
         {
             _constructing = true;
-            Padding = new Thickness(8, 2, 8, 2);
+            Padding = new Thickness(8, 6, 8, 6);
             OutlineRadius = 2;
             _label = new Label
             {

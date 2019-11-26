@@ -279,6 +279,34 @@ namespace Forms9Patch
             set => Point = new Point(double.NegativeInfinity, double.PositiveInfinity);
         }
 
+        protected Thickness Available(double width, double height, Rectangle targetBounds)
+        {
+            if (Target != null)
+            {
+                var targetPage = this;
+                if (targetBounds.Right > 0 && targetBounds.Left < targetPage.Bounds.Width && targetBounds.Bottom > 0 && targetBounds.Top < targetPage.Bounds.Height)
+                {
+                    var availL = targetBounds.Left - Margin.Left - PointerLength;
+                    var availR = width - targetBounds.Right - Margin.Right - PointerLength;
+                    var availT = targetBounds.Top - Margin.Top - PointerLength;
+                    var availB = height - targetBounds.Bottom - Margin.Bottom - PointerLength;
+
+                    if (WidthRequest > 0 && HorizontalOptions.Alignment != LayoutAlignment.Fill)
+                    {
+                        availL = Math.Min(availL, WidthRequest);
+                        availR = Math.Min(availR, WidthRequest);
+                    }
+                    if (HeightRequest > 0 && VerticalOptions.Alignment != LayoutAlignment.Fill)
+                    {
+                        availT = Math.Min(availT, HeightRequest);
+                        availB = Math.Min(availB, HeightRequest);
+                    }
+                    return new Thickness(availL, availT, availR, availB);
+                }
+            }
+            return new Thickness(0, 0, 0, 0);
+        }
+
         //Using the below check seems to fail to render correct size on some pop-ups!
         //Rectangle _lastBounds = Rectangle.Zero;  
         //Rectangle _lastTargetBounds = Rectangle.Zero;
@@ -321,51 +349,19 @@ namespace Forms9Patch
                 Page targetPage = this;
                 var targetBounds = Rectangle.Zero;
 
-                if (Target != null && PointerDirection != PointerDirection.None)
+                if (Target is VisualElement target && PointerDirection != PointerDirection.None)
                 {
-
-                    // STEP 1 : WHERE DOES THE CONTENT BEST FIT?
-                    /*
-                    Element parent = Target;
-                    while (parent != null)
-                    {
-                        if (parent is VisualElement ve)
-                            System.Diagnostics.Debug.WriteLine(">>> Type=[" + parent.GetType() + "] Bounds=[" + ve.Bounds + "]");
-                        else
-                            System.Diagnostics.Debug.WriteLine(">>> Type=[" + parent.GetType() + "]");
-                        parent = parent.Parent;
-                    }
-                    */
                     targetBounds = Target is PopupBase popup
-                        ? DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, popup.DecorativeContainerView)
-                        : DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, Target);
+                            ? DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, popup.DecorativeContainerView)
+                            : DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, Target);
 
-                    /*
-                    if (targetBounds.Width < 0 && targetBounds.Height < 0 && targetBounds.X < 0 && targetBounds.Y < 0)
+                    if (Available(width, height, targetBounds) is Thickness available && !available.IsEmpty())
                     {
-                        return;
-                    }
-                    */
-
-                    if (targetBounds.Right > 0 && targetBounds.Left < targetPage.Bounds.Width && targetBounds.Bottom > 0 && targetBounds.Top < targetPage.Bounds.Height)
-                    {
-                        var availL = targetBounds.Left - Margin.Left - PointerLength;
-                        var availR = width - targetBounds.Right - Margin.Right - PointerLength;
-                        var availT = targetBounds.Top - Margin.Top - PointerLength;
-                        var availB = height - targetBounds.Bottom - Margin.Bottom - PointerLength;
 
                         if (WidthRequest > 0 && HorizontalOptions.Alignment != LayoutAlignment.Fill)
-                        {
-                            availL = Math.Min(availL, WidthRequest);
-                            availR = Math.Min(availR, WidthRequest);
                             hzModal = Math.Min(hzModal, WidthRequest);
-                        }
                         if (HeightRequest > 0 && VerticalOptions.Alignment != LayoutAlignment.Fill)
-                        {
-                            availT = Math.Min(availT, HeightRequest);
-                            availB = Math.Min(availB, HeightRequest);
                             vtModal = Math.Min(vtModal, HeightRequest);
-                        }
 
                         double hzExtra = -1, vtExtra = -1;
                         var hzPointerDir = PointerDirection.None;
@@ -374,25 +370,25 @@ namespace Forms9Patch
                         var hzSizeRequest = new SizeRequest();
                         if (PreferredPointerDirection != PointerDirection.None)
                         {
-                            if (PreferredPointerDirection.DownAllowed() && availT > vtAvail)
+                            if (PreferredPointerDirection.DownAllowed() && available.Top > vtAvail)
                             {
                                 vtPointerDir = PointerDirection.Down;
-                                vtAvail = availT;
+                                vtAvail = available.Top;
                             }
-                            if (PreferredPointerDirection.UpAllowed() && availB > vtAvail)
+                            if (PreferredPointerDirection.UpAllowed() && available.Bottom > vtAvail)
                             {
                                 vtPointerDir = PointerDirection.Up;
-                                vtAvail = availB;
+                                vtAvail = available.Bottom;
                             }
-                            if (PreferredPointerDirection.LeftAllowed() && availR > hzAvail)
+                            if (PreferredPointerDirection.LeftAllowed() && available.Right > hzAvail)
                             {
                                 hzPointerDir = PointerDirection.Left;
-                                hzAvail = availR;
+                                hzAvail = available.Right;
                             }
-                            if (PreferredPointerDirection.RightAllowed() && availL > hzAvail)
+                            if (PreferredPointerDirection.RightAllowed() && available.Left > hzAvail)
                             {
                                 hzPointerDir = PointerDirection.Right;
-                                hzAvail = availL;
+                                hzAvail = available.Left;
                             }
                             if (vtAvail > 0)
                             {
@@ -445,25 +441,25 @@ namespace Forms9Patch
                             vtPointerDir = PointerDirection.None;
                             vtSizeRequest = new SizeRequest();
                             hzSizeRequest = new SizeRequest();
-                            if (PointerDirection.DownAllowed() && availT > vtAvail)
+                            if (PointerDirection.DownAllowed() && available.Top > vtAvail)
                             {
                                 vtPointerDir = PointerDirection.Down;
-                                vtAvail = availT;
+                                vtAvail = available.Top;
                             }
-                            if (PointerDirection.UpAllowed() && availB > vtAvail)
+                            if (PointerDirection.UpAllowed() && available.Bottom > vtAvail)
                             {
                                 vtPointerDir = PointerDirection.Up;
-                                vtAvail = availB;
+                                vtAvail = available.Bottom;
                             }
-                            if (PointerDirection.LeftAllowed() && availR > hzAvail)
+                            if (PointerDirection.LeftAllowed() && available.Right > hzAvail)
                             {
                                 hzPointerDir = PointerDirection.Left;
-                                hzAvail = availR;
+                                hzAvail = available.Right;
                             }
-                            if (PointerDirection.RightAllowed() && availL > hzAvail)
+                            if (PointerDirection.RightAllowed() && available.Left > hzAvail)
                             {
                                 hzPointerDir = PointerDirection.Right;
-                                hzAvail = availL;
+                                hzAvail = available.Left;
                             }
 
                             if (vtAvail > 0)

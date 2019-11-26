@@ -291,7 +291,7 @@ namespace Forms9Patch
             VerticalTextAlignment = TextAlignment.Center,
             HorizontalTextAlignment = TextAlignment.Center,
             VerticalOptions = LayoutOptions.Fill,
-            HorizontalOptions = LayoutOptions.Fill,
+            HorizontalOptions = LayoutOptions.Center,
             BackgroundColor = DefaultVerticalBackgroundColor.WithAlpha(0.05),
             Lines = 1,
             AutoFit = AutoFit.None
@@ -310,7 +310,7 @@ namespace Forms9Patch
             VerticalTextAlignment = TextAlignment.Center,
             HorizontalTextAlignment = TextAlignment.Center,
             VerticalOptions = LayoutOptions.Fill,
-            HorizontalOptions = LayoutOptions.Fill,
+            HorizontalOptions = LayoutOptions.Center,
             BackgroundColor = DefaultVerticalBackgroundColor.WithAlpha(0.05),
             Lines = 1,
             AutoFit = AutoFit.None
@@ -460,12 +460,12 @@ namespace Forms9Patch
         #region Disposal
         bool _disposed;
         static Thickness _hzSegmentPadding = // Device.RuntimePlatform == Device.UWP
-            //        ? new Thickness(8, 4, 8, 0)
-            //        : 
+                                             //        ? new Thickness(8, 4, 8, 0)
+                                             //        : 
             Device.RuntimePlatform == Device.Android
                         ? new Thickness(8, 0)
                         : new Thickness(4, 0);
-        static Thickness _vtSegmentPadding = new Thickness(28, 4); //  Device.RuntimePlatform == Device.UWP ? new Thickness(28, 4, 28, 8) : new Thickness(28, 4);
+        static Thickness _vtSegmentPadding = new Thickness(28, 8); //  Device.RuntimePlatform == Device.UWP ? new Thickness(28, 4, 28, 8) : new Thickness(28, 4);
         /// <summary>
         /// Instance is being disposed
         /// </summary>
@@ -767,9 +767,33 @@ namespace Forms9Patch
         }
 
         double AvailableSpace()
-            => Math.Floor(Orientation == StackOrientation.Horizontal
-            ? Width - _bubbleLayout.Padding.HorizontalThickness - _bubbleLayout.Margin.HorizontalThickness - Padding.HorizontalThickness - Margin.HorizontalThickness - 2 * OutlineWidth - _stackLayout.Padding.HorizontalThickness - _stackLayout.Margin.HorizontalThickness
-            : Height - _upArrowButton.Padding.VerticalThickness - _upArrowButton.Margin.VerticalThickness - Padding.VerticalThickness - Margin.VerticalThickness - 2 * OutlineWidth - _stackLayout.Padding.VerticalThickness - _stackLayout.Margin.VerticalThickness);
+        {
+            var targetPage = this;
+            var targetBounds = Target is PopupBase popup
+                    ? DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, popup.DecorativeContainerView)
+                    : DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, Target);
+
+            if (base.Available(Width, Height, targetBounds) is Thickness available && !available.IsEmpty())
+            {
+                var maxHz = Math.Max(available.Left, available.Right);
+                var maxVt = Math.Max(available.Top, available.Bottom);
+                if (Orientation == StackOrientation.Horizontal)
+                {
+                    if (maxVt > 40)
+                        return Math.Floor(Width - _bubbleLayout.Padding.HorizontalThickness - _bubbleLayout.Margin.HorizontalThickness - Padding.HorizontalThickness - Margin.HorizontalThickness - 2 * OutlineWidth - _stackLayout.Padding.HorizontalThickness - _stackLayout.Margin.HorizontalThickness);
+                    if (maxHz > 200)
+                        return Math.Floor(maxHz - _bubbleLayout.Padding.HorizontalThickness - _bubbleLayout.Margin.HorizontalThickness - Padding.HorizontalThickness - Margin.HorizontalThickness - 2 * OutlineWidth - _stackLayout.Padding.HorizontalThickness - _stackLayout.Margin.HorizontalThickness);
+                }
+                else
+                {
+                    if (maxVt > 120)
+                        return Math.Floor(maxVt - _upArrowButton.Padding.VerticalThickness - _upArrowButton.Margin.VerticalThickness - Padding.VerticalThickness - Margin.VerticalThickness - 2 * OutlineWidth - _stackLayout.Padding.VerticalThickness - _stackLayout.Margin.VerticalThickness);
+                }
+            }
+            return Orientation == StackOrientation.Horizontal
+                ? Math.Floor(Width - _bubbleLayout.Padding.HorizontalThickness - _bubbleLayout.Margin.HorizontalThickness - Padding.HorizontalThickness - Margin.HorizontalThickness - 2 * OutlineWidth - _stackLayout.Padding.HorizontalThickness - _stackLayout.Margin.HorizontalThickness)
+                : Math.Floor(Height - _upArrowButton.Padding.VerticalThickness - _upArrowButton.Margin.VerticalThickness - Padding.VerticalThickness - Margin.VerticalThickness - 2 * OutlineWidth - _stackLayout.Padding.VerticalThickness - _stackLayout.Margin.VerticalThickness);
+        }
 
         void SetSeparatorThickness(BoxView separator)
         {
@@ -794,6 +818,7 @@ namespace Forms9Patch
 
         bool _pendingUpdateRequest;
         bool _updating;
+        bool _layoutRendered;
         void UpdateLayout()
         {
             if (_updatingCollection)
@@ -810,7 +835,9 @@ namespace Forms9Patch
                     return;
                 }
 
-                //P42.Utils.Debug.Message("Segment A", "ENTER");
+                _layoutRendered = true;
+
+                System.Diagnostics.Debug.WriteLine("TargetedMenu" + P42.Utils.ReflectionExtensions.CallerString() + ": ENTER");
                 _updating = true;
                 _pendingUpdateRequest = false;
 
@@ -843,8 +870,10 @@ namespace Forms9Patch
                 _leftArrowButton.IconImage.WidthRequest = 2 * FontSize;
                 _rightArrowButton.IconImage.HeightRequest = FontSize * .8;
                 _rightArrowButton.IconImage.WidthRequest = 2 * FontSize;
-                _upArrowButton.IconImage.HeightRequest = _upArrowButton.IconImage.WidthRequest = 2 * FontSize;
-                _downArrowButton.IconImage.HeightRequest = _downArrowButton.IconImage.WidthRequest = 2 * FontSize;
+                _upArrowButton.IconImage.HeightRequest = FontSize * .8;
+                _upArrowButton.IconImage.WidthRequest = 2 * FontSize;
+                _downArrowButton.IconImage.HeightRequest = FontSize * .8;
+                _downArrowButton.IconImage.WidthRequest = 2 * FontSize;
 
                 var backwardButton = Orientation == StackOrientation.Horizontal ? _leftArrowButton : _upArrowButton;
                 var backwardSeparator = Orientation == StackOrientation.Horizontal ? _leftArrowSeparator : _upArrowSeparator;
@@ -888,7 +917,8 @@ namespace Forms9Patch
                     button.FontSize = FontSize > 0 ? FontSize : 20;
 
                     var thisButtonAdds = ButtonLength(button) + _stackLayout.Spacing + SeparatorThickness + 2 + _stackLayout.Spacing;
-                    if (segmentIndex < Segments.Count && pageLength + thisButtonAdds + _forewardLength >= AvailableSpace())
+                    if (segmentIndex < Segments.Count
+                        && pageLength + thisButtonAdds + _forewardLength >= AvailableSpace())
                     {
                         if (pageIndex == _currentPage)
                             calculatedLength = pageLength + _forewardLength;
@@ -909,8 +939,7 @@ namespace Forms9Patch
                     segmentIndex++;
                 }
 
-                forewardSeparator.IsVisible = false;
-                forewardButton.IsVisible = forewardArrowShouldBeVisible;
+                forewardSeparator.IsVisible = forewardButton.IsVisible = forewardArrowShouldBeVisible;
 
                 if (Orientation == StackOrientation.Vertical)
                 {
@@ -927,7 +956,7 @@ namespace Forms9Patch
                 if (_pendingUpdateRequest)
                     UpdateLayout();
 
-                //P42.Utils.Debug.Message("Segment A", "EXIT");
+                System.Diagnostics.Debug.WriteLine("TargetedMenu" + P42.Utils.ReflectionExtensions.CallerString() + ": EXIT");
 
             }
             else
@@ -976,6 +1005,7 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnAppearingAnimationEnd()
         {
+            System.Diagnostics.Debug.WriteLine("TargetedMenu" + P42.Utils.ReflectionExtensions.CallerString() + ": ENTER");
             base.OnAppearingAnimationEnd();
             if (_firstAppearance && Device.RuntimePlatform == Device.Android && Orientation == StackOrientation.Vertical)
             {
@@ -985,6 +1015,9 @@ namespace Forms9Patch
                 UpdateLayout();
             }
             _firstAppearance = false;
+            if (_layoutRendered)
+                UpdateLayout();
+            System.Diagnostics.Debug.WriteLine("TargetedMenu" + P42.Utils.ReflectionExtensions.CallerString() + ": EXIT");
         }
         #endregion
     }
