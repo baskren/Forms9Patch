@@ -94,6 +94,9 @@ namespace Forms9Patch.iOS
         {
             if (Element is Forms9Patch.Label element)
             {
+                if (element.Text == "back")
+                    System.Diagnostics.Debug.WriteLine("");
+
                 var tmpFontSize = BoundTextSize(element.FontSize);
 
                 if (tmpFontSize < 0)
@@ -192,10 +195,14 @@ namespace Forms9Patch.iOS
                         control.Center = new CGPoint(control.Center.X, state.AvailHeight - reqHeight / 2);
                 }
                 SizeRequest result;
-                if (UIDevice.CurrentDevice.CheckSystemVersion(11, 3))
-                    result = new SizeRequest(new Size(Math.Ceiling(reqWidth), Math.Ceiling(reqHeight)), new Size(10, Math.Ceiling(state.Font.LineHeight)));
-                else
-                    result = new SizeRequest(new Size(Math.Ceiling(reqWidth * 1.25), Math.Ceiling(reqHeight * 1.25)), new Size(10, Math.Ceiling(state.Font.LineHeight)));
+                //if (UIDevice.CurrentDevice.CheckSystemVersion(11, 3))
+                result = new SizeRequest(new Size(Math.Ceiling(reqWidth), Math.Ceiling(reqHeight)), new Size(10, Math.Ceiling(state.Font.LineHeight)));
+                //else
+                //    result = new SizeRequest(new Size(Math.Ceiling(reqWidth * 1.25), Math.Ceiling(reqHeight * 1.25)), new Size(10, Math.Ceiling(state.Font.LineHeight)));
+
+                if (Element.Text == "back")
+                    System.Diagnostics.Debug.WriteLine("SCALE: " + Display.Scale);
+
                 return result;
             }
             return new SizeRequest(Size.Zero);
@@ -606,6 +613,8 @@ namespace Forms9Patch.iOS
 #pragma warning restore CS0618 // Type or member is obsolete
                 if (element.FontSize > 0 && textSize > element.FontSize)
                     return (nfloat)element.FontSize;
+                if (Math.Abs(element.FontSize - -1) < 0.0001 && textSize > Label.DefaultFontSize)
+                    return (System.nfloat)Label.DefaultFontSize;
                 if (textSize < ModelMinFontSize)
                     textSize = ModelMinFontSize;
             }
