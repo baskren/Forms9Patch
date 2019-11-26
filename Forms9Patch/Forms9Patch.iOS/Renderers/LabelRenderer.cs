@@ -20,6 +20,7 @@ namespace Forms9Patch.iOS
 
         static LabelRenderer()
         {
+            //if (UIDevice.CurrentDevice.CheckSystemVersion(11, 4))
             Forms9Patch.Label.DefaultFontSize = UIFont.LabelFontSize;
         }
 
@@ -190,7 +191,11 @@ namespace Forms9Patch.iOS
                     else if (element.VerticalTextAlignment == TextAlignment.End)
                         control.Center = new CGPoint(control.Center.X, state.AvailHeight - reqHeight / 2);
                 }
-                var result = new SizeRequest(new Size(Math.Ceiling(reqWidth), Math.Ceiling(reqHeight)), new Size(10, Math.Ceiling(state.Font.LineHeight)));
+                SizeRequest result;
+                if (UIDevice.CurrentDevice.CheckSystemVersion(11, 3))
+                    result = new SizeRequest(new Size(Math.Ceiling(reqWidth), Math.Ceiling(reqHeight)), new Size(10, Math.Ceiling(state.Font.LineHeight)));
+                else
+                    result = new SizeRequest(new Size(Math.Ceiling(reqWidth * 1.25), Math.Ceiling(reqHeight * 1.25)), new Size(10, Math.Ceiling(state.Font.LineHeight)));
                 return result;
             }
             return new SizeRequest(Size.Zero);
