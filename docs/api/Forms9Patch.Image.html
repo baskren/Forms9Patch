@@ -1950,13 +1950,13 @@ When a button with end caps is resized, the resizing occurs only in the middle o
   
   
   <a id="Forms9Patch_Image_ClearEmbeddedResourceCache_" data-uid="Forms9Patch.Image.ClearEmbeddedResourceCache*"></a>
-  <h4 id="Forms9Patch_Image_ClearEmbeddedResourceCache_System_String_" data-uid="Forms9Patch.Image.ClearEmbeddedResourceCache(System.String)">ClearEmbeddedResourceCache(String)</h4>
+  <h4 id="Forms9Patch_Image_ClearEmbeddedResourceCache_System_String_System_Reflection_Assembly_" data-uid="Forms9Patch.Image.ClearEmbeddedResourceCache(System.String,System.Reflection.Assembly)">ClearEmbeddedResourceCache(String, Assembly)</h4>
   <div class="markdown level1 summary"><p>Apps run faster when Embedded Resources image don't have to be extracted EVERY SINGLE TIME.  This clears the cache of these images.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void ClearEmbeddedResourceCache(string resourceId = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public static void ClearEmbeddedResourceCache(string resourceId = null, Assembly assembly = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1971,8 +1971,12 @@ When a button with end caps is resized, the resizing occurs only in the middle o
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">resourceId</span></td>
-        <td><p>The ResourceId of the image.  If null, all cahced images are cleared.</p>
-</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.reflection.assembly">Assembly</a></td>
+        <td><span class="parametername">assembly</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>

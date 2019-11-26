@@ -74,7 +74,6 @@ namespace Forms9Patch
         public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create(nameof(HtmlText), typeof(string), typeof(Label), propertyChanging: (bindable, oldValue, newValue) =>
         {
             if (bindable is Label label && newValue is string value)
-                //if (Device.RuntimePlatform != Device.UWP && bindable is Label label && newValue is string value)
                 label.UpdateHtmlText(value);
         });
         /// <summary>
@@ -84,12 +83,7 @@ namespace Forms9Patch
         public string HtmlText
         {
             get => (string)GetValue(HtmlTextProperty);
-            set
-            {
-                //if (Device.RuntimePlatform == Device.UWP)
-                //    UpdateHtmlText(value);
-                SetValue(HtmlTextProperty, value);
-            }
+            set => SetValue(HtmlTextProperty, value);
         }
 
         void UpdateHtmlText(string value)
@@ -417,7 +411,7 @@ namespace Forms9Patch
 
             // the next three lines are required to get the SegmentedControl in the EmbeddedResourceFontEffectPage to render correctly in iOS
             // but it appears to be over doing it a bit on Android ... worth more evaluation
-            if (!_sizeAllocated && Draw != null && Device.RuntimePlatform == Device.iOS)// && Device.RuntimePlatform == Device.UWP)
+            if (!_sizeAllocated && Draw != null && Device.RuntimePlatform == Device.iOS)
                 result = Draw.Invoke(widthConstraint, heightConstraint);
             else
                 result = base.GetSizeRequest(widthConstraint, heightConstraint);

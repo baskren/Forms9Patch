@@ -35,7 +35,8 @@ namespace Forms9Patch
         /// <summary>
         /// Apps run faster when Embedded Resources image don't have to be extracted EVERY SINGLE TIME.  This clears the cache of these images.
         /// </summary>
-        /// <param name="resourceId">The ResourceId of the image.  If null, all cahced images are cleared.</param>
+        /// <param name="resourceId"></param>
+        /// <param name="assembly"></param>
         public static void ClearEmbeddedResourceCache(string resourceId = null, Assembly assembly = null) => P42.Utils.EmbeddedResourceCache.Clear(resourceId, assembly, EmbeddedResourceImageCacheFolderName);
         #endregion
 

@@ -757,10 +757,6 @@ namespace Forms9Patch
             _isPopped = false;
             _popAnimationComplete = false;
             AppearingAnimationBegin?.Invoke(this, EventArgs.Empty);
-            if (Device.RuntimePlatform == Device.UWP)
-            {
-                //var mainPage = 
-            }
             _isPushing = true;
             base.OnAppearingAnimationBegin();
             Recursion.Exit(GetType().ToString(), _id.ToString());

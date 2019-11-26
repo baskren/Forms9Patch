@@ -247,7 +247,7 @@ namespace Forms9Patch
             TintIcon = true,
             IconImage = new Image("Forms9Patch.Resources.menu_left.svg") { Fill = Fill.AspectFill, WidthRequest = 24, HeightRequest = 24 },
             HasTightSpacing = true,
-            Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(0, 0),
+            Padding = new Thickness(0, 0), //Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(0, 0),
             VerticalTextAlignment = TextAlignment.Center,
             HorizontalTextAlignment = TextAlignment.Center,
             VerticalOptions = LayoutOptions.Fill,
@@ -266,7 +266,7 @@ namespace Forms9Patch
             TintIcon = true,
             IconImage = new Image("Forms9Patch.Resources.menu_right.svg") { Fill = Fill.AspectFill, WidthRequest = 24, HeightRequest = 24 },
             HasTightSpacing = true,
-            Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(0, 0),
+            Padding = new Thickness(0, 0), // Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(0, 0),
             VerticalTextAlignment = TextAlignment.Center,
             HorizontalTextAlignment = TextAlignment.Center,
             VerticalOptions = LayoutOptions.Fill,
@@ -459,12 +459,13 @@ namespace Forms9Patch
 
         #region Disposal
         bool _disposed;
-        static Thickness _hzSegmentPadding = Device.RuntimePlatform == Device.UWP
-                    ? new Thickness(8, 4, 8, 0)
-                    : Device.RuntimePlatform == Device.Android
+        static Thickness _hzSegmentPadding = // Device.RuntimePlatform == Device.UWP
+            //        ? new Thickness(8, 4, 8, 0)
+            //        : 
+            Device.RuntimePlatform == Device.Android
                         ? new Thickness(8, 0)
                         : new Thickness(4, 0);
-        static Thickness _vtSegmentPadding = Device.RuntimePlatform == Device.UWP ? new Thickness(28, 4, 28, 8) : new Thickness(28, 4);
+        static Thickness _vtSegmentPadding = new Thickness(28, 4); //  Device.RuntimePlatform == Device.UWP ? new Thickness(28, 4, 28, 8) : new Thickness(28, 4);
         /// <summary>
         /// Instance is being disposed
         /// </summary>

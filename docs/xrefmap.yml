@@ -1541,6 +1541,19 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.Button.OnLongPressing
   nameWithType: Button.OnLongPressing
+- uid: Forms9Patch.Button.OnMeasure(System.Double,System.Double)
+  name: OnMeasure(Double, Double)
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_OnMeasure_System_Double_System_Double_
+  commentId: M:Forms9Patch.Button.OnMeasure(System.Double,System.Double)
+  fullName: Forms9Patch.Button.OnMeasure(System.Double, System.Double)
+  nameWithType: Button.OnMeasure(Double, Double)
+- uid: Forms9Patch.Button.OnMeasure*
+  name: OnMeasure
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_OnMeasure_
+  commentId: Overload:Forms9Patch.Button.OnMeasure
+  isSpec: "True"
+  fullName: Forms9Patch.Button.OnMeasure
+  nameWithType: Button.OnMeasure
 - uid: Forms9Patch.Button.OnPropertyChanged(System.String)
   name: OnPropertyChanged(String)
   href: api/Forms9Patch.Button.html#Forms9Patch_Button_OnPropertyChanged_System_String_
@@ -1567,6 +1580,32 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.Button.OnPropertyChanging
   nameWithType: Button.OnPropertyChanging
+- uid: Forms9Patch.Button.OnSizeAllocated(System.Double,System.Double)
+  name: OnSizeAllocated(Double, Double)
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_OnSizeAllocated_System_Double_System_Double_
+  commentId: M:Forms9Patch.Button.OnSizeAllocated(System.Double,System.Double)
+  fullName: Forms9Patch.Button.OnSizeAllocated(System.Double, System.Double)
+  nameWithType: Button.OnSizeAllocated(Double, Double)
+- uid: Forms9Patch.Button.OnSizeAllocated*
+  name: OnSizeAllocated
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_OnSizeAllocated_
+  commentId: Overload:Forms9Patch.Button.OnSizeAllocated
+  isSpec: "True"
+  fullName: Forms9Patch.Button.OnSizeAllocated
+  nameWithType: Button.OnSizeAllocated
+- uid: Forms9Patch.Button.OnSizeRequest(System.Double,System.Double)
+  name: OnSizeRequest(Double, Double)
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_OnSizeRequest_System_Double_System_Double_
+  commentId: M:Forms9Patch.Button.OnSizeRequest(System.Double,System.Double)
+  fullName: Forms9Patch.Button.OnSizeRequest(System.Double, System.Double)
+  nameWithType: Button.OnSizeRequest(Double, Double)
+- uid: Forms9Patch.Button.OnSizeRequest*
+  name: OnSizeRequest
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_OnSizeRequest_
+  commentId: Overload:Forms9Patch.Button.OnSizeRequest
+  isSpec: "True"
+  fullName: Forms9Patch.Button.OnSizeRequest
+  nameWithType: Button.OnSizeRequest
 - uid: Forms9Patch.Button.OnTapped(System.Object,FormsGestures.TapEventArgs)
   name: OnTapped(Object, TapEventArgs)
   href: api/Forms9Patch.Button.html#Forms9Patch_Button_OnTapped_System_Object_FormsGestures_TapEventArgs_
@@ -5153,6 +5192,108 @@ references:
   commentId: F:Forms9Patch.ElementShape.Square
   fullName: Forms9Patch.ElementShape.Square
   nameWithType: ElementShape.Square
+- uid: Forms9Patch.EmbeddedHtmlViewSource
+  name: EmbeddedHtmlViewSource
+  href: api/Forms9Patch.EmbeddedHtmlViewSource.html
+  commentId: T:Forms9Patch.EmbeddedHtmlViewSource
+  fullName: Forms9Patch.EmbeddedHtmlViewSource
+  nameWithType: EmbeddedHtmlViewSource
+- uid: Forms9Patch.EmbeddedHtmlViewSource.Clear(System.String,System.Reflection.Assembly)
+  name: Clear(String, Assembly)
+  href: api/Forms9Patch.EmbeddedHtmlViewSource.html#Forms9Patch_EmbeddedHtmlViewSource_Clear_System_String_System_Reflection_Assembly_
+  commentId: M:Forms9Patch.EmbeddedHtmlViewSource.Clear(System.String,System.Reflection.Assembly)
+  fullName: Forms9Patch.EmbeddedHtmlViewSource.Clear(System.String, System.Reflection.Assembly)
+  nameWithType: EmbeddedHtmlViewSource.Clear(String, Assembly)
+- uid: Forms9Patch.EmbeddedHtmlViewSource.Clear*
+  name: Clear
+  href: api/Forms9Patch.EmbeddedHtmlViewSource.html#Forms9Patch_EmbeddedHtmlViewSource_Clear_
+  commentId: Overload:Forms9Patch.EmbeddedHtmlViewSource.Clear
+  isSpec: "True"
+  fullName: Forms9Patch.EmbeddedHtmlViewSource.Clear
+  nameWithType: EmbeddedHtmlViewSource.Clear
+- uid: Forms9Patch.EmbeddedHtmlViewSource.Create(System.String,System.String,System.Reflection.Assembly)
+  name: Create(String, String, Assembly)
+  href: api/Forms9Patch.EmbeddedHtmlViewSource.html#Forms9Patch_EmbeddedHtmlViewSource_Create_System_String_System_String_System_Reflection_Assembly_
+  commentId: M:Forms9Patch.EmbeddedHtmlViewSource.Create(System.String,System.String,System.Reflection.Assembly)
+  fullName: Forms9Patch.EmbeddedHtmlViewSource.Create(System.String, System.String, System.Reflection.Assembly)
+  nameWithType: EmbeddedHtmlViewSource.Create(String, String, Assembly)
+- uid: Forms9Patch.EmbeddedHtmlViewSource.Create*
+  name: Create
+  href: api/Forms9Patch.EmbeddedHtmlViewSource.html#Forms9Patch_EmbeddedHtmlViewSource_Create_
+  commentId: Overload:Forms9Patch.EmbeddedHtmlViewSource.Create
+  isSpec: "True"
+  fullName: Forms9Patch.EmbeddedHtmlViewSource.Create
+  nameWithType: EmbeddedHtmlViewSource.Create
+- uid: Forms9Patch.EmbeddedHtmlViewSource.Dispose
+  name: Dispose()
+  href: api/Forms9Patch.EmbeddedHtmlViewSource.html#Forms9Patch_EmbeddedHtmlViewSource_Dispose
+  commentId: M:Forms9Patch.EmbeddedHtmlViewSource.Dispose
+  fullName: Forms9Patch.EmbeddedHtmlViewSource.Dispose()
+  nameWithType: EmbeddedHtmlViewSource.Dispose()
+- uid: Forms9Patch.EmbeddedHtmlViewSource.Dispose(System.Boolean)
+  name: Dispose(Boolean)
+  href: api/Forms9Patch.EmbeddedHtmlViewSource.html#Forms9Patch_EmbeddedHtmlViewSource_Dispose_System_Boolean_
+  commentId: M:Forms9Patch.EmbeddedHtmlViewSource.Dispose(System.Boolean)
+  fullName: Forms9Patch.EmbeddedHtmlViewSource.Dispose(System.Boolean)
+  nameWithType: EmbeddedHtmlViewSource.Dispose(Boolean)
+- uid: Forms9Patch.EmbeddedHtmlViewSource.Dispose*
+  name: Dispose
+  href: api/Forms9Patch.EmbeddedHtmlViewSource.html#Forms9Patch_EmbeddedHtmlViewSource_Dispose_
+  commentId: Overload:Forms9Patch.EmbeddedHtmlViewSource.Dispose
+  isSpec: "True"
+  fullName: Forms9Patch.EmbeddedHtmlViewSource.Dispose
+  nameWithType: EmbeddedHtmlViewSource.Dispose
+- uid: Forms9Patch.EmbeddedHtmlViewSource.EmbeddedResourceFolder
+  name: EmbeddedResourceFolder
+  href: api/Forms9Patch.EmbeddedHtmlViewSource.html#Forms9Patch_EmbeddedHtmlViewSource_EmbeddedResourceFolder
+  commentId: P:Forms9Patch.EmbeddedHtmlViewSource.EmbeddedResourceFolder
+  fullName: Forms9Patch.EmbeddedHtmlViewSource.EmbeddedResourceFolder
+  nameWithType: EmbeddedHtmlViewSource.EmbeddedResourceFolder
+- uid: Forms9Patch.EmbeddedHtmlViewSource.EmbeddedResourceFolder*
+  name: EmbeddedResourceFolder
+  href: api/Forms9Patch.EmbeddedHtmlViewSource.html#Forms9Patch_EmbeddedHtmlViewSource_EmbeddedResourceFolder_
+  commentId: Overload:Forms9Patch.EmbeddedHtmlViewSource.EmbeddedResourceFolder
+  isSpec: "True"
+  fullName: Forms9Patch.EmbeddedHtmlViewSource.EmbeddedResourceFolder
+  nameWithType: EmbeddedHtmlViewSource.EmbeddedResourceFolder
+- uid: Forms9Patch.EmbeddedHtmlViewSource.EmbeddedResourceFolderProperty
+  name: EmbeddedResourceFolderProperty
+  href: api/Forms9Patch.EmbeddedHtmlViewSource.html#Forms9Patch_EmbeddedHtmlViewSource_EmbeddedResourceFolderProperty
+  commentId: F:Forms9Patch.EmbeddedHtmlViewSource.EmbeddedResourceFolderProperty
+  fullName: Forms9Patch.EmbeddedHtmlViewSource.EmbeddedResourceFolderProperty
+  nameWithType: EmbeddedHtmlViewSource.EmbeddedResourceFolderProperty
+- uid: Forms9Patch.EmbeddedHtmlViewSource.HtmlDocEmbeddedResourceId
+  name: HtmlDocEmbeddedResourceId
+  href: api/Forms9Patch.EmbeddedHtmlViewSource.html#Forms9Patch_EmbeddedHtmlViewSource_HtmlDocEmbeddedResourceId
+  commentId: P:Forms9Patch.EmbeddedHtmlViewSource.HtmlDocEmbeddedResourceId
+  fullName: Forms9Patch.EmbeddedHtmlViewSource.HtmlDocEmbeddedResourceId
+  nameWithType: EmbeddedHtmlViewSource.HtmlDocEmbeddedResourceId
+- uid: Forms9Patch.EmbeddedHtmlViewSource.HtmlDocEmbeddedResourceId*
+  name: HtmlDocEmbeddedResourceId
+  href: api/Forms9Patch.EmbeddedHtmlViewSource.html#Forms9Patch_EmbeddedHtmlViewSource_HtmlDocEmbeddedResourceId_
+  commentId: Overload:Forms9Patch.EmbeddedHtmlViewSource.HtmlDocEmbeddedResourceId
+  isSpec: "True"
+  fullName: Forms9Patch.EmbeddedHtmlViewSource.HtmlDocEmbeddedResourceId
+  nameWithType: EmbeddedHtmlViewSource.HtmlDocEmbeddedResourceId
+- uid: Forms9Patch.EmbeddedHtmlViewSource.HtmlDocEmbeddedResourceIdProperty
+  name: HtmlDocEmbeddedResourceIdProperty
+  href: api/Forms9Patch.EmbeddedHtmlViewSource.html#Forms9Patch_EmbeddedHtmlViewSource_HtmlDocEmbeddedResourceIdProperty
+  commentId: F:Forms9Patch.EmbeddedHtmlViewSource.HtmlDocEmbeddedResourceIdProperty
+  fullName: Forms9Patch.EmbeddedHtmlViewSource.HtmlDocEmbeddedResourceIdProperty
+  nameWithType: EmbeddedHtmlViewSource.HtmlDocEmbeddedResourceIdProperty
+- uid: Forms9Patch.EmbeddedHtmlViewSource.Initialize
+  name: Initialize()
+  href: api/Forms9Patch.EmbeddedHtmlViewSource.html#Forms9Patch_EmbeddedHtmlViewSource_Initialize
+  commentId: M:Forms9Patch.EmbeddedHtmlViewSource.Initialize
+  fullName: Forms9Patch.EmbeddedHtmlViewSource.Initialize()
+  nameWithType: EmbeddedHtmlViewSource.Initialize()
+- uid: Forms9Patch.EmbeddedHtmlViewSource.Initialize*
+  name: Initialize
+  href: api/Forms9Patch.EmbeddedHtmlViewSource.html#Forms9Patch_EmbeddedHtmlViewSource_Initialize_
+  commentId: Overload:Forms9Patch.EmbeddedHtmlViewSource.Initialize
+  isSpec: "True"
+  fullName: Forms9Patch.EmbeddedHtmlViewSource.Initialize
+  nameWithType: EmbeddedHtmlViewSource.Initialize
 - uid: Forms9Patch.EmbeddedResourceExtensions
   name: EmbeddedResourceExtensions
   href: api/Forms9Patch.EmbeddedResourceExtensions.html
@@ -7930,12 +8071,12 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.Image.ClearDownloadCache
   nameWithType: Image.ClearDownloadCache
-- uid: Forms9Patch.Image.ClearEmbeddedResourceCache(System.String)
-  name: ClearEmbeddedResourceCache(String)
-  href: api/Forms9Patch.Image.html#Forms9Patch_Image_ClearEmbeddedResourceCache_System_String_
-  commentId: M:Forms9Patch.Image.ClearEmbeddedResourceCache(System.String)
-  fullName: Forms9Patch.Image.ClearEmbeddedResourceCache(System.String)
-  nameWithType: Image.ClearEmbeddedResourceCache(String)
+- uid: Forms9Patch.Image.ClearEmbeddedResourceCache(System.String,System.Reflection.Assembly)
+  name: ClearEmbeddedResourceCache(String, Assembly)
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image_ClearEmbeddedResourceCache_System_String_System_Reflection_Assembly_
+  commentId: M:Forms9Patch.Image.ClearEmbeddedResourceCache(System.String,System.Reflection.Assembly)
+  fullName: Forms9Patch.Image.ClearEmbeddedResourceCache(System.String, System.Reflection.Assembly)
+  nameWithType: Image.ClearEmbeddedResourceCache(String, Assembly)
 - uid: Forms9Patch.Image.ClearEmbeddedResourceCache*
   name: ClearEmbeddedResourceCache
   href: api/Forms9Patch.Image.html#Forms9Patch_Image_ClearEmbeddedResourceCache_
@@ -9819,6 +9960,19 @@ references:
   commentId: F:Forms9Patch.Label.SynchronizedFontSizeProperty
   fullName: Forms9Patch.Label.SynchronizedFontSizeProperty
   nameWithType: Label.SynchronizedFontSizeProperty
+- uid: Forms9Patch.Label.ToString
+  name: ToString()
+  href: api/Forms9Patch.Label.html#Forms9Patch_Label_ToString
+  commentId: M:Forms9Patch.Label.ToString
+  fullName: Forms9Patch.Label.ToString()
+  nameWithType: Label.ToString()
+- uid: Forms9Patch.Label.ToString*
+  name: ToString
+  href: api/Forms9Patch.Label.html#Forms9Patch_Label_ToString_
+  commentId: Overload:Forms9Patch.Label.ToString
+  isSpec: "True"
+  fullName: Forms9Patch.Label.ToString
+  nameWithType: Label.ToString
 - uid: Forms9Patch.LabelFit
   name: LabelFit
   href: api/Forms9Patch.LabelFit.html
@@ -11340,32 +11494,6 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ModalPopup.ModalPopup
   nameWithType: ModalPopup.ModalPopup
-- uid: Forms9Patch.ModalPopup.Content
-  name: Content
-  href: api/Forms9Patch.ModalPopup.html#Forms9Patch_ModalPopup_Content
-  commentId: P:Forms9Patch.ModalPopup.Content
-  fullName: Forms9Patch.ModalPopup.Content
-  nameWithType: ModalPopup.Content
-- uid: Forms9Patch.ModalPopup.Content*
-  name: Content
-  href: api/Forms9Patch.ModalPopup.html#Forms9Patch_ModalPopup_Content_
-  commentId: Overload:Forms9Patch.ModalPopup.Content
-  isSpec: "True"
-  fullName: Forms9Patch.ModalPopup.Content
-  nameWithType: ModalPopup.Content
-- uid: Forms9Patch.ModalPopup.LayoutChildren(System.Double,System.Double,System.Double,System.Double)
-  name: LayoutChildren(Double, Double, Double, Double)
-  href: api/Forms9Patch.ModalPopup.html#Forms9Patch_ModalPopup_LayoutChildren_System_Double_System_Double_System_Double_System_Double_
-  commentId: M:Forms9Patch.ModalPopup.LayoutChildren(System.Double,System.Double,System.Double,System.Double)
-  fullName: Forms9Patch.ModalPopup.LayoutChildren(System.Double, System.Double, System.Double, System.Double)
-  nameWithType: ModalPopup.LayoutChildren(Double, Double, Double, Double)
-- uid: Forms9Patch.ModalPopup.LayoutChildren*
-  name: LayoutChildren
-  href: api/Forms9Patch.ModalPopup.html#Forms9Patch_ModalPopup_LayoutChildren_
-  commentId: Overload:Forms9Patch.ModalPopup.LayoutChildren
-  isSpec: "True"
-  fullName: Forms9Patch.ModalPopup.LayoutChildren
-  nameWithType: ModalPopup.LayoutChildren
 - uid: Forms9Patch.ModalPopup.Location
   name: Location
   href: api/Forms9Patch.ModalPopup.html#Forms9Patch_ModalPopup_Location
@@ -11385,19 +11513,6 @@ references:
   commentId: F:Forms9Patch.ModalPopup.LocationProperty
   fullName: Forms9Patch.ModalPopup.LocationProperty
   nameWithType: ModalPopup.LocationProperty
-- uid: Forms9Patch.ModalPopup.OnPropertyChanged(System.String)
-  name: OnPropertyChanged(String)
-  href: api/Forms9Patch.ModalPopup.html#Forms9Patch_ModalPopup_OnPropertyChanged_System_String_
-  commentId: M:Forms9Patch.ModalPopup.OnPropertyChanged(System.String)
-  fullName: Forms9Patch.ModalPopup.OnPropertyChanged(System.String)
-  nameWithType: ModalPopup.OnPropertyChanged(String)
-- uid: Forms9Patch.ModalPopup.OnPropertyChanged*
-  name: OnPropertyChanged
-  href: api/Forms9Patch.ModalPopup.html#Forms9Patch_ModalPopup_OnPropertyChanged_
-  commentId: Overload:Forms9Patch.ModalPopup.OnPropertyChanged
-  isSpec: "True"
-  fullName: Forms9Patch.ModalPopup.OnPropertyChanged
-  nameWithType: ModalPopup.OnPropertyChanged
 - uid: Forms9Patch.MultiComponentPicker
   name: MultiComponentPicker
   href: api/Forms9Patch.MultiComponentPicker.html
@@ -11511,6 +11626,19 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.MultiPicker.MultiPicker
   nameWithType: MultiPicker.MultiPicker
+- uid: Forms9Patch.MultiPicker.SelectedIndexes
+  name: SelectedIndexes
+  href: api/Forms9Patch.MultiPicker.html#Forms9Patch_MultiPicker_SelectedIndexes
+  commentId: P:Forms9Patch.MultiPicker.SelectedIndexes
+  fullName: Forms9Patch.MultiPicker.SelectedIndexes
+  nameWithType: MultiPicker.SelectedIndexes
+- uid: Forms9Patch.MultiPicker.SelectedIndexes*
+  name: SelectedIndexes
+  href: api/Forms9Patch.MultiPicker.html#Forms9Patch_MultiPicker_SelectedIndexes_
+  commentId: Overload:Forms9Patch.MultiPicker.SelectedIndexes
+  isSpec: "True"
+  fullName: Forms9Patch.MultiPicker.SelectedIndexes
+  nameWithType: MultiPicker.SelectedIndexes
 - uid: Forms9Patch.MultiPicker.SelectedItems
   name: SelectedItems
   href: api/Forms9Patch.MultiPicker.html#Forms9Patch_MultiPicker_SelectedItems
@@ -19315,12 +19443,12 @@ references:
   commentId: F:P42.Utils.Debug.IsMessagesEnabled
   fullName: P42.Utils.Debug.IsMessagesEnabled
   nameWithType: Debug.IsMessagesEnabled
-- uid: P42.Utils.Debug.Message(System.Object,System.String,System.String)
-  name: Message(Object, String, String)
-  href: api/P42.Utils.Debug.html#P42_Utils_Debug_Message_System_Object_System_String_System_String_
-  commentId: M:P42.Utils.Debug.Message(System.Object,System.String,System.String)
-  fullName: P42.Utils.Debug.Message(System.Object, System.String, System.String)
-  nameWithType: Debug.Message(Object, String, String)
+- uid: P42.Utils.Debug.Message(System.Object,System.String)
+  name: Message(Object, String)
+  href: api/P42.Utils.Debug.html#P42_Utils_Debug_Message_System_Object_System_String_
+  commentId: M:P42.Utils.Debug.Message(System.Object,System.String)
+  fullName: P42.Utils.Debug.Message(System.Object, System.String)
+  nameWithType: Debug.Message(Object, String)
 - uid: P42.Utils.Debug.Message(System.String,System.String)
   name: Message(String, String)
   href: api/P42.Utils.Debug.html#P42_Utils_Debug_Message_System_String_System_String_
@@ -19577,24 +19705,24 @@ references:
   isSpec: "True"
   fullName: P42.Utils.EmbeddedResourceCache.ApplicationUri
   nameWithType: EmbeddedResourceCache.ApplicationUri
-- uid: P42.Utils.EmbeddedResourceCache.Clear(System.DateTime,System.String,System.String)
-  name: Clear(DateTime, String, String)
-  href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_Clear_System_DateTime_System_String_System_String_
-  commentId: M:P42.Utils.EmbeddedResourceCache.Clear(System.DateTime,System.String,System.String)
-  fullName: P42.Utils.EmbeddedResourceCache.Clear(System.DateTime, System.String, System.String)
-  nameWithType: EmbeddedResourceCache.Clear(DateTime, String, String)
-- uid: P42.Utils.EmbeddedResourceCache.Clear(System.String,System.String)
-  name: Clear(String, String)
-  href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_Clear_System_String_System_String_
-  commentId: M:P42.Utils.EmbeddedResourceCache.Clear(System.String,System.String)
-  fullName: P42.Utils.EmbeddedResourceCache.Clear(System.String, System.String)
-  nameWithType: EmbeddedResourceCache.Clear(String, String)
-- uid: P42.Utils.EmbeddedResourceCache.Clear(System.TimeSpan,System.String,System.String)
-  name: Clear(TimeSpan, String, String)
-  href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_Clear_System_TimeSpan_System_String_System_String_
-  commentId: M:P42.Utils.EmbeddedResourceCache.Clear(System.TimeSpan,System.String,System.String)
-  fullName: P42.Utils.EmbeddedResourceCache.Clear(System.TimeSpan, System.String, System.String)
-  nameWithType: EmbeddedResourceCache.Clear(TimeSpan, String, String)
+- uid: P42.Utils.EmbeddedResourceCache.Clear(System.DateTime,System.String,System.Reflection.Assembly,System.String)
+  name: Clear(DateTime, String, Assembly, String)
+  href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_Clear_System_DateTime_System_String_System_Reflection_Assembly_System_String_
+  commentId: M:P42.Utils.EmbeddedResourceCache.Clear(System.DateTime,System.String,System.Reflection.Assembly,System.String)
+  fullName: P42.Utils.EmbeddedResourceCache.Clear(System.DateTime, System.String, System.Reflection.Assembly, System.String)
+  nameWithType: EmbeddedResourceCache.Clear(DateTime, String, Assembly, String)
+- uid: P42.Utils.EmbeddedResourceCache.Clear(System.String,System.Reflection.Assembly,System.String)
+  name: Clear(String, Assembly, String)
+  href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_Clear_System_String_System_Reflection_Assembly_System_String_
+  commentId: M:P42.Utils.EmbeddedResourceCache.Clear(System.String,System.Reflection.Assembly,System.String)
+  fullName: P42.Utils.EmbeddedResourceCache.Clear(System.String, System.Reflection.Assembly, System.String)
+  nameWithType: EmbeddedResourceCache.Clear(String, Assembly, String)
+- uid: P42.Utils.EmbeddedResourceCache.Clear(System.TimeSpan,System.String,System.Reflection.Assembly,System.String)
+  name: Clear(TimeSpan, String, Assembly, String)
+  href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_Clear_System_TimeSpan_System_String_System_Reflection_Assembly_System_String_
+  commentId: M:P42.Utils.EmbeddedResourceCache.Clear(System.TimeSpan,System.String,System.Reflection.Assembly,System.String)
+  fullName: P42.Utils.EmbeddedResourceCache.Clear(System.TimeSpan, System.String, System.Reflection.Assembly, System.String)
+  nameWithType: EmbeddedResourceCache.Clear(TimeSpan, String, Assembly, String)
 - uid: P42.Utils.EmbeddedResourceCache.Clear*
   name: Clear
   href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_Clear_
@@ -19602,12 +19730,12 @@ references:
   isSpec: "True"
   fullName: P42.Utils.EmbeddedResourceCache.Clear
   nameWithType: EmbeddedResourceCache.Clear
-- uid: P42.Utils.EmbeddedResourceCache.FolderPath(System.String)
-  name: FolderPath(String)
-  href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_FolderPath_System_String_
-  commentId: M:P42.Utils.EmbeddedResourceCache.FolderPath(System.String)
-  fullName: P42.Utils.EmbeddedResourceCache.FolderPath(System.String)
-  nameWithType: EmbeddedResourceCache.FolderPath(String)
+- uid: P42.Utils.EmbeddedResourceCache.FolderPath(System.Reflection.Assembly,System.String)
+  name: FolderPath(Assembly, String)
+  href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_FolderPath_System_Reflection_Assembly_System_String_
+  commentId: M:P42.Utils.EmbeddedResourceCache.FolderPath(System.Reflection.Assembly,System.String)
+  fullName: P42.Utils.EmbeddedResourceCache.FolderPath(System.Reflection.Assembly, System.String)
+  nameWithType: EmbeddedResourceCache.FolderPath(Assembly, String)
 - uid: P42.Utils.EmbeddedResourceCache.FolderPath*
   name: FolderPath
   href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_FolderPath_
@@ -19641,12 +19769,12 @@ references:
   isSpec: "True"
   fullName: P42.Utils.EmbeddedResourceCache.GetStreamAsync
   nameWithType: EmbeddedResourceCache.GetStreamAsync
-- uid: P42.Utils.EmbeddedResourceCache.List(System.String)
-  name: List(String)
-  href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_List_System_String_
-  commentId: M:P42.Utils.EmbeddedResourceCache.List(System.String)
-  fullName: P42.Utils.EmbeddedResourceCache.List(System.String)
-  nameWithType: EmbeddedResourceCache.List(String)
+- uid: P42.Utils.EmbeddedResourceCache.List(System.Reflection.Assembly,System.String)
+  name: List(Assembly, String)
+  href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_List_System_Reflection_Assembly_System_String_
+  commentId: M:P42.Utils.EmbeddedResourceCache.List(System.Reflection.Assembly,System.String)
+  fullName: P42.Utils.EmbeddedResourceCache.List(System.Reflection.Assembly, System.String)
+  nameWithType: EmbeddedResourceCache.List(Assembly, String)
 - uid: P42.Utils.EmbeddedResourceCache.List*
   name: List
   href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_List_
@@ -19667,6 +19795,19 @@ references:
   isSpec: "True"
   fullName: P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource
   nameWithType: EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource
+- uid: P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResourceAsync(System.String,System.Reflection.Assembly,System.String)
+  name: LocalStorageFullPathForEmbeddedResourceAsync(String, Assembly, String)
+  href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_LocalStorageFullPathForEmbeddedResourceAsync_System_String_System_Reflection_Assembly_System_String_
+  commentId: M:P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResourceAsync(System.String,System.Reflection.Assembly,System.String)
+  fullName: P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResourceAsync(System.String, System.Reflection.Assembly, System.String)
+  nameWithType: EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResourceAsync(String, Assembly, String)
+- uid: P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResourceAsync*
+  name: LocalStorageFullPathForEmbeddedResourceAsync
+  href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_LocalStorageFullPathForEmbeddedResourceAsync_
+  commentId: Overload:P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResourceAsync
+  isSpec: "True"
+  fullName: P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResourceAsync
+  nameWithType: EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResourceAsync
 - uid: P42.Utils.EmbeddedResourceCache.LocalStorageSubPathForEmbeddedResource(System.String,System.Reflection.Assembly,System.String)
   name: LocalStorageSubPathForEmbeddedResource(String, Assembly, String)
   href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_LocalStorageSubPathForEmbeddedResource_System_String_System_Reflection_Assembly_System_String_
