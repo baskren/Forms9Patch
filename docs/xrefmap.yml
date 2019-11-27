@@ -583,6 +583,19 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.BubblePopup.BubblePopup
   nameWithType: BubblePopup.BubblePopup
+- uid: Forms9Patch.BubblePopup.Available(System.Double,System.Double,Xamarin.Forms.Rectangle)
+  name: Available(Double, Double, Rectangle)
+  href: api/Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup_Available_System_Double_System_Double_Xamarin_Forms_Rectangle_
+  commentId: M:Forms9Patch.BubblePopup.Available(System.Double,System.Double,Xamarin.Forms.Rectangle)
+  fullName: Forms9Patch.BubblePopup.Available(System.Double, System.Double, Xamarin.Forms.Rectangle)
+  nameWithType: BubblePopup.Available(Double, Double, Rectangle)
+- uid: Forms9Patch.BubblePopup.Available*
+  name: Available
+  href: api/Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup_Available_
+  commentId: Overload:Forms9Patch.BubblePopup.Available
+  isSpec: "True"
+  fullName: Forms9Patch.BubblePopup.Available
+  nameWithType: BubblePopup.Available
 - uid: Forms9Patch.BubblePopup.Content
   name: Content
   href: api/Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup_Content
@@ -11494,6 +11507,32 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ModalPopup.ModalPopup
   nameWithType: ModalPopup.ModalPopup
+- uid: Forms9Patch.ModalPopup.Content
+  name: Content
+  href: api/Forms9Patch.ModalPopup.html#Forms9Patch_ModalPopup_Content
+  commentId: P:Forms9Patch.ModalPopup.Content
+  fullName: Forms9Patch.ModalPopup.Content
+  nameWithType: ModalPopup.Content
+- uid: Forms9Patch.ModalPopup.Content*
+  name: Content
+  href: api/Forms9Patch.ModalPopup.html#Forms9Patch_ModalPopup_Content_
+  commentId: Overload:Forms9Patch.ModalPopup.Content
+  isSpec: "True"
+  fullName: Forms9Patch.ModalPopup.Content
+  nameWithType: ModalPopup.Content
+- uid: Forms9Patch.ModalPopup.LayoutChildren(System.Double,System.Double,System.Double,System.Double)
+  name: LayoutChildren(Double, Double, Double, Double)
+  href: api/Forms9Patch.ModalPopup.html#Forms9Patch_ModalPopup_LayoutChildren_System_Double_System_Double_System_Double_System_Double_
+  commentId: M:Forms9Patch.ModalPopup.LayoutChildren(System.Double,System.Double,System.Double,System.Double)
+  fullName: Forms9Patch.ModalPopup.LayoutChildren(System.Double, System.Double, System.Double, System.Double)
+  nameWithType: ModalPopup.LayoutChildren(Double, Double, Double, Double)
+- uid: Forms9Patch.ModalPopup.LayoutChildren*
+  name: LayoutChildren
+  href: api/Forms9Patch.ModalPopup.html#Forms9Patch_ModalPopup_LayoutChildren_
+  commentId: Overload:Forms9Patch.ModalPopup.LayoutChildren
+  isSpec: "True"
+  fullName: Forms9Patch.ModalPopup.LayoutChildren
+  nameWithType: ModalPopup.LayoutChildren
 - uid: Forms9Patch.ModalPopup.Location
   name: Location
   href: api/Forms9Patch.ModalPopup.html#Forms9Patch_ModalPopup_Location
@@ -11513,6 +11552,19 @@ references:
   commentId: F:Forms9Patch.ModalPopup.LocationProperty
   fullName: Forms9Patch.ModalPopup.LocationProperty
   nameWithType: ModalPopup.LocationProperty
+- uid: Forms9Patch.ModalPopup.OnPropertyChanged(System.String)
+  name: OnPropertyChanged(String)
+  href: api/Forms9Patch.ModalPopup.html#Forms9Patch_ModalPopup_OnPropertyChanged_System_String_
+  commentId: M:Forms9Patch.ModalPopup.OnPropertyChanged(System.String)
+  fullName: Forms9Patch.ModalPopup.OnPropertyChanged(System.String)
+  nameWithType: ModalPopup.OnPropertyChanged(String)
+- uid: Forms9Patch.ModalPopup.OnPropertyChanged*
+  name: OnPropertyChanged
+  href: api/Forms9Patch.ModalPopup.html#Forms9Patch_ModalPopup_OnPropertyChanged_
+  commentId: Overload:Forms9Patch.ModalPopup.OnPropertyChanged
+  isSpec: "True"
+  fullName: Forms9Patch.ModalPopup.OnPropertyChanged
+  nameWithType: ModalPopup.OnPropertyChanged
 - uid: Forms9Patch.MultiComponentPicker
   name: MultiComponentPicker
   href: api/Forms9Patch.MultiComponentPicker.html
@@ -15683,6 +15735,19 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ThicknessExtension.Description
   nameWithType: ThicknessExtension.Description
+- uid: Forms9Patch.ThicknessExtension.IsEmpty(Xamarin.Forms.Thickness)
+  name: IsEmpty(Thickness)
+  href: api/Forms9Patch.ThicknessExtension.html#Forms9Patch_ThicknessExtension_IsEmpty_Xamarin_Forms_Thickness_
+  commentId: M:Forms9Patch.ThicknessExtension.IsEmpty(Xamarin.Forms.Thickness)
+  fullName: Forms9Patch.ThicknessExtension.IsEmpty(Xamarin.Forms.Thickness)
+  nameWithType: ThicknessExtension.IsEmpty(Thickness)
+- uid: Forms9Patch.ThicknessExtension.IsEmpty*
+  name: IsEmpty
+  href: api/Forms9Patch.ThicknessExtension.html#Forms9Patch_ThicknessExtension_IsEmpty_
+  commentId: Overload:Forms9Patch.ThicknessExtension.IsEmpty
+  isSpec: "True"
+  fullName: Forms9Patch.ThicknessExtension.IsEmpty
+  nameWithType: ThicknessExtension.IsEmpty
 - uid: Forms9Patch.Toast
   name: Toast
   href: api/Forms9Patch.Toast.html
