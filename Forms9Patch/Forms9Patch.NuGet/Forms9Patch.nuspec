@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
         <id>Forms9Patch</id>
-        <version>2.1.1</version>
+        <version>2.1.2</version>
         <title>Forms9Patch</title>
         <authors>Ben Askren</authors>
         <owners>baskren</owners>
@@ -25,6 +25,7 @@ Android developers can use NinePatch bitmaps, the drawable directory naming conv
   </description>
   <summary>Simplify multi-device image, label and font management in your NetStandard, PCL, and Shared Library Xamarin.Forms mobile and UWP apps</summary>
 	<releaseNotes>
+    2.1.2.0: Fixed: Targeted Menu cell size too small (Android); Bold and italics tags not working on iOS Forms9Patch.Label.HtmlText when using default font;  Crash when presenting TargetedMenu without Target on iOS;
     2.1.1.0: Fixed: Button text is clipped on iOS versions earlier than 11.3;  TargetedMenu in vertical orientation is displayed modally (instead of paginating) if menu is longer than space available; TargetedMenu renders on wrong page and next pagination is broken if last appearance did not end on first page; Back and forward buttons are not aligned and sized correctly when TargetedMenu is in vertical orientation; Button padding is not sufficient; Modal popup doesn't respond dynamically to Padding changes;
     2.1.0.0: New: EmbeddedHtmlViewSource (for using EmbeddedResource files as a source to a WebView).  Fixed: Layouts not sized to fit content smaller than 40px; Crash if F9P service is called before Xamarin.Forms.Application.Current is set; EmbeddedResource fonts are broken on UWP;  Android TargetedMenu is broken; CornerRadius of FlyoutPopup is not initiated correctly; Extra padding intermittantly appears in layouts;
     2.0.2.0: Fixed: Android crash when FormsGestures.Listener is disposed; Android Label not rendered in some edge cases;
