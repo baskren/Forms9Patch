@@ -148,15 +148,13 @@ namespace FormsGestures.iOS
         void RendererDisconnect()
         {
             ClearGestureRecognizers();
-            IVisualElementRenderer renderer = Platform.GetRenderer(_element);
-            if (renderer != null)
+            if (_element != null && Platform.GetRenderer(_element) is IVisualElementRenderer renderer)
                 renderer.ElementChanged -= OnRendererElementChanged;
         }
 
         void RendererConnect()
         {
-            IVisualElementRenderer renderer = Platform.GetRenderer(_element);
-            if (renderer != null)
+            if (_element != null && Platform.GetRenderer(_element) is IVisualElementRenderer renderer)
             {
                 renderer.ElementChanged += OnRendererElementChanged;
                 ResetGestureRecognizers(renderer?.NativeView);

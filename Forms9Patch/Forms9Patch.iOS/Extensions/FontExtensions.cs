@@ -137,13 +137,13 @@ namespace Forms9Patch.iOS
         {
 
             if (family == null)
-                family = "lksjadflkjsdklf";
+                family = ".AppleSystemUIFont";
             if (family.ToLower() == "monospace")
                 family = "Menlo";
             if (family.ToLower() == "serif")
                 family = "Times New Roman";
             if (family.ToLower() == "sans-serif")
-                family = "alskjflksadjflka";
+                family = ".AppleSystemUIFont";
 
             if (size < 0)
                 size = (nfloat)(UIFont.LabelFontSize * Math.Abs(size));
@@ -231,6 +231,16 @@ namespace Forms9Patch.iOS
 
             if (bestAttemptFont != null)
             {
+                if (bold || italic)
+                {
+                    if (bestAttemptFont.FontDescriptor.CreateWithTraits(
+                        (bold ? UIFontDescriptorSymbolicTraits.Bold : UIFontDescriptorSymbolicTraits.ClassUnknown)
+                        |
+                        (italic ? UIFontDescriptorSymbolicTraits.Italic : UIFontDescriptorSymbolicTraits.ClassUnknown)
+                        ) is UIFontDescriptor descriptor)
+                        bestAttemptFont = UIFont.FromDescriptor(descriptor, size);
+                }
+
                 // we have a match but is wasn't cached - so let's cache it for future reference
                 lock (dictionary)
                 {

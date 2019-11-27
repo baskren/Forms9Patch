@@ -63,61 +63,66 @@ namespace Forms9Patch.iOS
         public async Task RemoveAsync(PopupPage page)
         {
             //await Task.Delay(50);
-
-            page.DescendantRemoved -= HandleChildRemoved;
-
-            if (XFPlatform.GetRenderer(page) is IVisualElementRenderer renderer && renderer.ViewController is UIViewController viewController)
+            if (page != null)
             {
-                if (!viewController.IsBeingDismissed && viewController.View?.Window is UIWindow window)
+                page.DescendantRemoved -= HandleChildRemoved;
+
+                if (XFPlatform.GetRenderer(page) is IVisualElementRenderer renderer && renderer.ViewController is UIViewController viewController)
                 {
-                    await window.RootViewController.DismissViewControllerAsync(false);
-                    DisposeModelAndChildrenRenderers(page);
-                    window.RootViewController.Dispose();
-                    window.RootViewController = null;
-                    page.Parent = null;
-                    window.Hidden = true;
+                    if (!viewController.IsBeingDismissed && viewController.View?.Window is UIWindow window)
+                    {
+                        await window.RootViewController.DismissViewControllerAsync(false);
+                        DisposeModelAndChildrenRenderers(page);
+                        window.RootViewController.Dispose();
+                        window.RootViewController = null;
+                        page.Parent = null;
+                        window.Hidden = true;
 
-                    if (IsiOS13OrNewer && _windows.Contains(window))
-                        _windows.Remove(window);
+                        if (IsiOS13OrNewer && _windows.Contains(window))
+                            _windows.Remove(window);
 
-                    window.Dispose();
-                    window = null;
+                        window.Dispose();
+                        window = null;
 
-                    if (UIApplication.SharedApplication.KeyWindow.WindowLevel == -1)
-                        UIApplication.SharedApplication.KeyWindow.WindowLevel = UIWindowLevel.Normal;
+                        if (UIApplication.SharedApplication.KeyWindow.WindowLevel == -1)
+                            UIApplication.SharedApplication.KeyWindow.WindowLevel = UIWindowLevel.Normal;
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("!!!! CRASH AVERTED !!!!");
+                        DisposeModelAndChildrenRenderers(page);
+                        page.Parent = null;
+                    }
                 }
-                else
-                {
-                    System.Diagnostics.Debug.WriteLine("!!!! CRASH AVERTED !!!!");
-                    DisposeModelAndChildrenRenderers(page);
-                    page.Parent = null;
-                }
+                page.Parent = null;
             }
-            page.Parent = null;
         }
 
         private void DisposeModelAndChildrenRenderers(VisualElement view)
         {
-            IVisualElementRenderer renderer;
-            foreach (VisualElement child in view.Descendants())
+            if (view != null)
             {
-                renderer = XFPlatform.GetRenderer(child);
-                XFPlatform.SetRenderer(child, null);
+                IVisualElementRenderer renderer;
+                foreach (VisualElement child in view.Descendants())
+                {
+                    renderer = XFPlatform.GetRenderer(child);
+                    XFPlatform.SetRenderer(child, null);
 
+                    if (renderer != null)
+                    {
+                        renderer.NativeView.RemoveFromSuperview();
+                        renderer.Dispose();
+                    }
+                }
+
+                renderer = XFPlatform.GetRenderer(view);
                 if (renderer != null)
                 {
                     renderer.NativeView.RemoveFromSuperview();
                     renderer.Dispose();
                 }
+                XFPlatform.SetRenderer(view, null);
             }
-
-            renderer = XFPlatform.GetRenderer(view);
-            if (renderer != null)
-            {
-                renderer.NativeView.RemoveFromSuperview();
-                renderer.Dispose();
-            }
-            XFPlatform.SetRenderer(view, null);
         }
 
         private void HandleChildRemoved(object sender, ElementEventArgs e)

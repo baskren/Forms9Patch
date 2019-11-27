@@ -94,9 +94,6 @@ namespace Forms9Patch.iOS
         {
             if (Element is Forms9Patch.Label element)
             {
-                if (element.Text == "back")
-                    System.Diagnostics.Debug.WriteLine("");
-
                 var tmpFontSize = BoundTextSize(element.FontSize);
 
                 if (tmpFontSize < 0)

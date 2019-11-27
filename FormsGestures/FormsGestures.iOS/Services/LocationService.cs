@@ -15,12 +15,12 @@ namespace FormsGestures.iOS
 
         public Point CoordTransform(VisualElement fromElement, Point p, VisualElement toElement)
         {
-            IVisualElementRenderer toRenderer = Platform.GetRenderer(toElement);
-            IVisualElementRenderer fromRenderer = Platform.GetRenderer(fromElement);
-            if (toRenderer != null && fromRenderer != null)
+            if (fromElement != null && Platform.GetRenderer(fromElement) is IVisualElementRenderer fromRenderer && fromRenderer.NativeView != null)
             {
-                if (fromRenderer.NativeView != null && toRenderer.NativeView != null)
+                if (toElement != null && Platform.GetRenderer(toElement) is IVisualElementRenderer toRenderer && toRenderer.NativeView != null)
+                {
                     return fromRenderer.NativeView.ConvertPointToView(new CoreGraphics.CGPoint(p.X, p.Y), toRenderer.NativeView).ToPoint();
+                }
             }
             return new Point(double.NegativeInfinity, double.NegativeInfinity);
         }

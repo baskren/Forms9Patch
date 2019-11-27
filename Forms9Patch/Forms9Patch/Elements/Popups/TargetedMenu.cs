@@ -769,25 +769,28 @@ namespace Forms9Patch
         double AvailableSpace()
         {
             var targetPage = this;
-            var targetBounds = Target is PopupBase popup
-                    ? DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, popup.DecorativeContainerView)
-                    : DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, Target);
-
-            if (base.Available(Width, Height, targetBounds) is Thickness available && !available.IsEmpty())
+            if (Target is VisualElement target)
             {
-                var maxHz = Math.Max(available.Left, available.Right);
-                var maxVt = Math.Max(available.Top, available.Bottom);
-                if (Orientation == StackOrientation.Horizontal)
+                var targetBounds = target is PopupBase popup
+                        ? DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, popup.DecorativeContainerView)
+                        : DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, Target);
+
+                if (base.Available(Width, Height, targetBounds) is Thickness available && !available.IsEmpty())
                 {
-                    if (maxVt > 40)
-                        return Math.Floor(Width - _bubbleLayout.Padding.HorizontalThickness - _bubbleLayout.Margin.HorizontalThickness - Padding.HorizontalThickness - Margin.HorizontalThickness - 2 * OutlineWidth - _stackLayout.Padding.HorizontalThickness - _stackLayout.Margin.HorizontalThickness);
-                    if (maxHz > 200)
-                        return Math.Floor(maxHz - _bubbleLayout.Padding.HorizontalThickness - _bubbleLayout.Margin.HorizontalThickness - Padding.HorizontalThickness - Margin.HorizontalThickness - 2 * OutlineWidth - _stackLayout.Padding.HorizontalThickness - _stackLayout.Margin.HorizontalThickness);
-                }
-                else
-                {
-                    if (maxVt > 120)
-                        return Math.Floor(maxVt - _upArrowButton.Padding.VerticalThickness - _upArrowButton.Margin.VerticalThickness - Padding.VerticalThickness - Margin.VerticalThickness - 2 * OutlineWidth - _stackLayout.Padding.VerticalThickness - _stackLayout.Margin.VerticalThickness);
+                    var maxHz = Math.Max(available.Left, available.Right);
+                    var maxVt = Math.Max(available.Top, available.Bottom);
+                    if (Orientation == StackOrientation.Horizontal)
+                    {
+                        if (maxVt > 40)
+                            return Math.Floor(Width - _bubbleLayout.Padding.HorizontalThickness - _bubbleLayout.Margin.HorizontalThickness - Padding.HorizontalThickness - Margin.HorizontalThickness - 2 * OutlineWidth - _stackLayout.Padding.HorizontalThickness - _stackLayout.Margin.HorizontalThickness);
+                        if (maxHz > 200)
+                            return Math.Floor(maxHz - _bubbleLayout.Padding.HorizontalThickness - _bubbleLayout.Margin.HorizontalThickness - Padding.HorizontalThickness - Margin.HorizontalThickness - 2 * OutlineWidth - _stackLayout.Padding.HorizontalThickness - _stackLayout.Margin.HorizontalThickness);
+                    }
+                    else
+                    {
+                        if (maxVt > 120)
+                            return Math.Floor(maxVt - _upArrowButton.Padding.VerticalThickness - _upArrowButton.Margin.VerticalThickness - Padding.VerticalThickness - Margin.VerticalThickness - 2 * OutlineWidth - _stackLayout.Padding.VerticalThickness - _stackLayout.Margin.VerticalThickness);
+                    }
                 }
             }
             return Orientation == StackOrientation.Horizontal
@@ -1011,7 +1014,7 @@ namespace Forms9Patch
             {
                 foreach (var child in _stackLayout.Children)
                     if (child is Button button)
-                        button.Padding = new Thickness(29, 1);
+                        button.Padding = _vtSegmentPadding;
                 UpdateLayout();
             }
             _firstAppearance = false;
