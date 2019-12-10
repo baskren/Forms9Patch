@@ -2037,10 +2037,9 @@ namespace Forms9Patch
         internal protected void SendTapped()
         {
             P42.Utils.BreadCrumbs.Add(GetType(), Text ?? HtmlText);
-            // The following is already handled by the OnPropertyChanged for IsSelectedProperty 
-            //if (GroupToggleBehavior == GroupToggleBehavior.None || IsSelected)
-            //    Command?.Execute(CommandParameter);
             _tapped?.Invoke(this, EventArgs.Empty);
+            if (GroupToggleBehavior == GroupToggleBehavior.None)
+                Command?.Execute(CommandParameter);
         }
 
         #endregion
