@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using Foundation;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
@@ -6,11 +8,15 @@ using Xamarin.Forms.Platform.iOS;
 [assembly: Dependency(typeof(Forms9Patch.iOS.WebViewExtensionsService))]
 namespace Forms9Patch.iOS
 {
+
     /// <summary>
     /// Web view extensions service.
     /// </summary>
-    public class WebViewExtensionsService : IWebViewExtensionService
+    public class WebViewExtensionsService : UIPrintInteractionControllerDelegate, IWebViewExtensionService
     {
+        //UIView AppleViewToPrint;
+        //WebView ViewToPrint;
+
         /// <summary>
         /// Print the specified viewToPrint and jobName.
         /// </summary>
@@ -18,25 +24,35 @@ namespace Forms9Patch.iOS
         /// <param name="jobName">Job name.</param>
         public void Print(WebView viewToPrint, string jobName)
         {
-            var appleViewToPrint = Platform.CreateRenderer(viewToPrint).NativeView;
-
             var printInfo = UIPrintInfo.PrintInfo;
 
-            printInfo.OutputType = UIPrintInfoOutputType.General;
             printInfo.JobName = jobName;
-            printInfo.Orientation = UIPrintInfoOrientation.Portrait;
             printInfo.Duplex = UIPrintInfoDuplex.None;
+            printInfo.OutputType = UIPrintInfoOutputType.General;
 
             var printController = UIPrintInteractionController.SharedPrintController;
-
-            printController.PrintInfo = printInfo;
             printController.ShowsPageRange = true;
-            printController.PrintFormatter = appleViewToPrint.ViewPrintFormatter;
+            printController.ShowsPaperSelectionForLoadedPapers = true;
+            printController.PrintInfo = printInfo;
+            printController.Delegate = this;
+
+            if (viewToPrint.Source is HtmlWebViewSource htmlSource)
+                printController.PrintFormatter = new UIMarkupTextPrintFormatter(htmlSource.Html);
+            else if (viewToPrint.Source is UrlWebViewSource urlSource
+                && urlSource.Url is string url
+                && !string.IsNullOrWhiteSpace(url)
+                && Foundation.NSUrl.FromString(url) is Foundation.NSUrl candidateUrl
+                && candidateUrl.Scheme != null)
+            {
+                var printData = Foundation.NSData.FromUrl(candidateUrl);
+                printController.PrintingItem = printData;
+            }
+            else
+                printController.PrintFormatter = Platform.CreateRenderer(viewToPrint).NativeView.ViewPrintFormatter;
 
             printController.Present(true, (printInteractionController, completed, error) =>
             {
                 System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": PRESENTED completed[" + completed + "] error[" + error + "]");
-                printInteractionController.PrintInfo = printInfo;
             });
         }
 
@@ -46,7 +62,7 @@ namespace Forms9Patch.iOS
         /// <returns><c>true</c>, if print was caned, <c>false</c> otherwise.</returns>
         public bool CanPrint()
         {
-            return true;
+            return UIPrintInteractionController.PrintingAvailable;
         }
 
     }
