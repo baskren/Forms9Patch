@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Foundation;
 using UIKit;
 using Xamarin.Forms.Platform.iOS;
@@ -9,7 +10,7 @@ namespace Forms9Patch.iOS
     {
         static MetaFont MathMetaFont;
 
-        internal static NSAttributedString ToNSAttributedString(this F9PFormattedString formattedString, UIFont baseFont, UIColor baseColor) //, EllipsePlacement ellipsePlacement = EllipsePlacement.None, int secondToLastEnd = -1, int lastLineStart = 0, int lastLineEnd = -1, int startLastVisible = -1, int midLastVisible = -1, bool twice=false) {
+        internal static NSAttributedString ToNSAttributedString(this F9PFormattedString formattedString, UIFont baseFont, UIColor baseColor, double lineHeight) //, EllipsePlacement ellipsePlacement = EllipsePlacement.None, int secondToLastEnd = -1, int lastLineStart = 0, int lastLineEnd = -1, int startLastVisible = -1, int midLastVisible = -1, bool twice=false) {
         {
             var text = formattedString?.Text;
             if (string.IsNullOrEmpty(text))
@@ -20,6 +21,8 @@ namespace Forms9Patch.iOS
             var result = new NSMutableAttributedString(text);
 
             result.AddAttribute(UIStringAttributeKey.Font, baseFont, new NSRange(0, text.Length));
+            if (lineHeight > 0 && Math.Abs(lineHeight - 1.0) > 0.01)
+                result.AddAttribute(UIStringAttributeKey.ParagraphStyle, new NSMutableParagraphStyle { LineHeightMultiple = new nfloat(lineHeight) }, new NSRange(0, text.Length));
             result.AddAttribute(UIStringAttributeKey.ForegroundColor, baseColor, new NSRange(0, text.Length));
 
             #region Layout font-spans (MetaFonts)

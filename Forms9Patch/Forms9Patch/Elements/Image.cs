@@ -2180,6 +2180,9 @@ namespace Forms9Patch
             return result;
         }
 
+        bool IImageController.GetLoadAsAnimation() => false;
+
+
         #endregion
 
     }

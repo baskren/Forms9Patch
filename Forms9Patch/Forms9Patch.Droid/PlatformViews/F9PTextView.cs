@@ -25,6 +25,8 @@ namespace Forms9Patch.Droid
         internal static float DefaultTextSize { get; private set; }
         internal static int DefaultTextColorArgbInt { get; private set; }
         internal static Android.Graphics.Color DefaultTextColor { get; private set; }
+        internal static float DefaultLineSpacingExtra { get; private set; }
+        internal static float DefaultLineSpacingMultiplier { get; private set; }
 
         static F9PTextView()
         {
@@ -34,6 +36,8 @@ namespace Forms9Patch.Droid
                 DefaultTextSize = systemFontSize / Settings.Context.Resources.DisplayMetrics.Density;
                 DefaultTextColorArgbInt = architypeTextView.CurrentTextColor;
                 DefaultTextColor = new Android.Graphics.Color(DefaultTextColorArgbInt);
+                DefaultLineSpacingExtra = architypeTextView.LineSpacingExtra;
+                DefaultLineSpacingMultiplier = architypeTextView.LineSpacingMultiplier;
             }
         }
 

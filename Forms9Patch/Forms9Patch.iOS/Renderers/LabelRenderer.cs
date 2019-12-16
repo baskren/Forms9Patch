@@ -258,7 +258,7 @@ namespace Forms9Patch.iOS
                 else if (element?.HtmlText != null)
                 {
                     var color = element.TextColor;
-                    label.AttributedText = element.F9PFormattedString.ToNSAttributedString(font, color.ToUIColor(Color.Black));
+                    label.AttributedText = element.F9PFormattedString.ToNSAttributedString(font, color.ToUIColor(Color.Black), element.LineHeight);
                     labelSize = label.AttributedText.GetBoundingRect(constraintSize, NSStringDrawingOptions.UsesLineFragmentOrigin, null).Size;
                 }
             }
@@ -370,10 +370,7 @@ namespace Forms9Patch.iOS
                 UpdateFont();
                 UpdateHorizontalAlignment();
                 UpdateLineBreakMode();
-                if (e.NewElement.HtmlText != null)
-                    UpdateAttributedText();
-                else
-                    UpdateText();
+                UpdateStrings();
                 e.NewElement.RendererIndexAtPoint += IndexAtPoint;
                 e.NewElement.RendererSizeForWidthAndFontSize += LabelF9PSize;
                 e.NewElement.Draw += DrawLabel;
@@ -430,14 +427,12 @@ namespace Forms9Patch.iOS
                 UpdateFont();
                 LayoutSubviews();
             }
-            else if (e.PropertyName == Label.TextProperty.PropertyName)
+            else if (e.PropertyName == Label.TextProperty.PropertyName
+                || e.PropertyName == Label.HtmlTextProperty.PropertyName
+                || e.PropertyName == Label.LineHeightProperty.PropertyName
+                )
             {
-                UpdateText();
-                LayoutSubviews();
-            }
-            else if (e.PropertyName == Label.HtmlTextProperty.PropertyName)
-            {
-                UpdateAttributedText();
+                UpdateStrings();
                 LayoutSubviews();
             }
             else if (e.PropertyName == Label.VerticalTextAlignmentProperty.PropertyName)
@@ -485,10 +480,7 @@ namespace Forms9Patch.iOS
                 var font = label.ToUIFont();
                 _currentDrawState.FontPointSize = font.PointSize;
                 _currentDrawState.FontDescriptor = font.FontDescriptor;
-                if (label.HtmlText != null)
-                    UpdateAttributedText();
-                else
-                    UpdateText();
+                UpdateStrings();
             }
         }
 
@@ -519,6 +511,14 @@ namespace Forms9Patch.iOS
             }
         }
 
+        void UpdateStrings()
+        {
+            if (Element is Forms9Patch.Label element && element.HtmlText != null)
+                UpdateAttributedText();
+            else
+                UpdateText();
+        }
+
         void UpdateText()
         {
             if (Element is Forms9Patch.Label element)
@@ -528,7 +528,16 @@ namespace Forms9Patch.iOS
                     ? null
                     : new NSString(element.Text);
                 if (Control is UILabel control)
-                    control.Text = _currentDrawState.Text;
+                {
+                    if (string.IsNullOrEmpty(_currentDrawState.Text) || element.LineHeight <= 0 || Math.Abs(element.LineHeight - 1) < 0.01)
+                        control.Text = _currentDrawState.Text;
+                    else
+                    {
+                        var attributedString = new NSMutableAttributedString(_currentDrawState.Text);
+                        attributedString.AddAttribute(UIStringAttributeKey.ParagraphStyle, new NSMutableParagraphStyle { LineHeightMultiple = new nfloat(element.LineHeight) }, new NSRange(0, _currentDrawState.Text.Length));
+                        control.AttributedText = attributedString;
+                    }
+                }
             }
         }
 
@@ -540,7 +549,7 @@ namespace Forms9Patch.iOS
                 _currentDrawState.Text = null;
                 _currentDrawState.AttributedString = element?.HtmlText is null
                     ? null
-                    : element.F9PFormattedString.ToNSAttributedString(_currentDrawState.Font, color.ToUIColor(Color.Black));
+                    : element.F9PFormattedString.ToNSAttributedString(_currentDrawState.Font, color.ToUIColor(Color.Black), element.LineHeight);
                 if (Control is UILabel control)
                     control.AttributedText = _currentDrawState.AttributedString;
             }
@@ -557,10 +566,7 @@ namespace Forms9Patch.iOS
                         control.TextColor = _defaultTextColor;
                     else
                         control.TextColor = color.ToUIColor();
-                    if (label.HtmlText != null)
-                        UpdateAttributedText();
-                    else
-                        UpdateText();
+                    UpdateStrings();
                 }
             });
         }

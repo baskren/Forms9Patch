@@ -65,6 +65,7 @@ namespace Forms9Patch.Droid
         public float RenderedFontSize = -1;
         public string ElementHtmlText;
         public string ElementText;
+        public float LineHeight = -1;
         #endregion
 
 
@@ -88,6 +89,7 @@ namespace Forms9Patch.Droid
             RenderedFontSize = source.RenderedFontSize;
             ElementHtmlText = source.ElementHtmlText;
             ElementText = source.ElementText;
+            LineHeight = source.LineHeight;
         }
         #endregion
 
@@ -139,7 +141,8 @@ namespace Forms9Patch.Droid
                 && a.AutoFit == b.AutoFit
                 && a.LineBreakMode == b.LineBreakMode
                 && a._javaText == b._javaText
-                && a.Typeface == b.Typeface;
+                && a.Typeface == b.Typeface
+                && System.Math.Abs(a.LineHeight - b.LineHeight) < 0.01;
             /*
             if (System.Math.Abs(a.TextSize - b.TextSize) > 0.1)
             {

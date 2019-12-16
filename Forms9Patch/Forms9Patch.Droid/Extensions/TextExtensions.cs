@@ -27,6 +27,10 @@ namespace Forms9Patch.Droid
             if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.M)
             {
                 var builder = Android.Text.StaticLayout.Builder.Obtain(source, 0, source.Length(), paint, width).SetAlignment(align).SetLineSpacing(spacingadd, spacingmult).SetIncludePad(includepad);
+                if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.P)
+                {
+                    builder.SetUseLineSpacingFromFallbacks(true);
+                }
                 var layout = builder.Build();
                 //P42.Utils.Debug.Message(source.ToString(), "EXIT");
                 return layout;
@@ -55,6 +59,10 @@ namespace Forms9Patch.Droid
             if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.M)
             {
                 var builder = Android.Text.StaticLayout.Builder.Obtain(source, 0, source.Length, paint, width).SetAlignment(align).SetLineSpacing(spacingadd, spacingmult).SetIncludePad(includepad);
+                if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.P)
+                {
+                    builder.SetUseLineSpacingFromFallbacks(true);
+                }
                 var layout = builder.Build();
                 //P42.Utils.Debug.Message(source, "EXIT");
                 return layout;
