@@ -104,7 +104,7 @@
     <Compile Include="Services\ApplicationInfoService.cs" />
     <Compile Include="Services\DescendentBounds.cs" />
     <Compile Include="Services\FontService.cs" />
-    <Compile Include="Services\HtmlToPngService.cs" />
+    <Compile Include="Services\ToPngService.cs" />
     <Compile Include="Services\KeyboardService.cs" />
     <Compile Include="Services\OsInfoService.cs" />
     <Compile Include="Services\StatusBarService.cs" />
@@ -130,7 +130,7 @@
       <Version>4.4.0.991265</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>12.0.2</Version>
+      <Version>12.0.3</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views.Forms">
       <Version>1.68.1</Version>

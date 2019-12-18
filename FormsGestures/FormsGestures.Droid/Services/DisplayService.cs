@@ -10,8 +10,14 @@ using Android.Content;
 [assembly: Dependency(typeof(FormsGestures.Droid.DisplayService))]
 namespace FormsGestures.Droid
 {
-    class DisplayService : IDisplayService
+
+    public class DisplayService : IDisplayService
     {
+
+        public static DisplayService Current;
+
+
+
         Java.Lang.Ref.WeakReference _displayMetricsReference;
         Android.Util.DisplayMetrics DisplayMetrics
         {
@@ -71,6 +77,7 @@ namespace FormsGestures.Droid
         public DisplayService()
         {
             Settings.Init();
+            Current = this;
         }
     }
 }

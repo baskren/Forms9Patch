@@ -127,7 +127,7 @@
       <Version>1.68.1</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>12.0.2</Version>
+      <Version>12.0.3</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Svg">
       <Version>1.60.0</Version>

@@ -6,7 +6,7 @@ namespace Forms9Patch
     /// <summary>
     /// Html to pdf service.
     /// </summary>
-    public interface IHtmlToPngPdfService
+    public interface IToPngService
     {
         /// <summary>
         /// Html to PNG interface
@@ -15,13 +15,23 @@ namespace Forms9Patch
         /// <param name="html"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-		Task<HtmlToPngResult> ToPngAsync(ActivityIndicatorPopup popup, string html, string fileName);
+		Task<ToPngResult> ToPngAsync(ActivityIndicatorPopup popup, string html, string fileName);
+
+        /// <summary>
+        /// WebView to PNG interface
+        /// </summary>
+        /// <param name="popup"></param>
+        /// <param name="webView"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        Task<ToPngResult> ToPngAsync(ActivityIndicatorPopup popup, WebView webView, string fileName);
     }
+
 
     /// <summary>
     /// Result from HtmlToPnd process
     /// </summary>
-	public class HtmlToPngResult
+	public class ToPngResult
     {
         /// <summary>
         /// Flags if the Result is an error;
@@ -42,7 +52,7 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="isError"></param>
         /// <param name="result"></param>
-		internal HtmlToPngResult(bool isError, string result)
+		internal ToPngResult(bool isError, string result)
         {
             IsError = isError;
             Result = result;

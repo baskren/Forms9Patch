@@ -95,7 +95,7 @@ namespace Forms9Patch.iOS
                 var s3 = new DescendentBounds();
                 var s4 = new FontService();
                 var s5 = new HapticService();
-                var s6 = new HtmlToPngService();
+                var s6 = new ToPngService();
                 var s7 = new KeyboardService();
                 var s8 = new OsInfoService();
                 var s9 = new WebViewExtensionsService();

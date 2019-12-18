@@ -69,8 +69,14 @@ namespace Forms9Patch.Droid
                 }
 
 
-
-                Forms9Patch.Droid.Settings.Activity.StartActivity(Intent.CreateChooser(intent, "Share ..."));
+                try
+                {
+                    Forms9Patch.Droid.Settings.Activity.StartActivity(Intent.CreateChooser(intent, "Share ..."));
+                }
+                catch (Exception e)
+                {
+                    using (Forms9Patch.Toast.Create("Sharing Failure", e.Message)) { }
+                }
             }
         }
     }

@@ -12,8 +12,8 @@ namespace Forms9Patch.iOS
         {
             if (Control != null)
             {
-                Control.Opaque = false;
-                Control.BackgroundColor = UIColor.Clear;
+                //Control.Opaque = false;
+                //Control.BackgroundColor = UIColor.Clear;
             }
         }
 

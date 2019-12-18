@@ -71,6 +71,8 @@ namespace Forms9Patch.Droid
             IsInitialized = true;
             Activity = Activity ?? Context as Android.App.Activity;
             Context = Activity as Android.Content.Context;
+            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Lollipop)
+                Android.Webkit.WebView.EnableSlowWholeDocumentDraw();
             // these don't work because we get the notification AFTER Xamarin did ... and it runs through all of the subscribers anyway.
             //Xamarin.Forms.Platform.Android.FormsAppCompatActivity.BackPressed += OnBackPressed;
             //Xamarin.Forms.Platform.Android.FormsApplicationActivity.BackPressed += OnBackPressed;

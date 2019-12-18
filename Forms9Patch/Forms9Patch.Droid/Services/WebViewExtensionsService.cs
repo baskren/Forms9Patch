@@ -20,12 +20,16 @@ namespace Forms9Patch.Droid
                     droidWebView = xfWebViewRenderer.Control;
                 if (droidWebView != null)
                 {
+                    droidWebView.Settings.JavaScriptEnabled = true;
+                    droidWebView.Settings.DomStorageEnabled = true;
+                    droidWebView.SetLayerType(Android.Views.LayerType.Software, null);
                     // Only valid for API 19+
                     var version = Android.OS.Build.VERSION.SdkInt;
 
                     if (version >= Android.OS.BuildVersionCodes.Kitkat)
                     {
-                        jobName = jobName ?? Forms9Patch.ApplicationInfoService.Name;
+                        if (string.IsNullOrWhiteSpace(jobName))
+                            jobName = Forms9Patch.ApplicationInfoService.Name;
                         var printMgr = (PrintManager)Settings.Context.GetSystemService(Context.PrintService);
                         printMgr.Print(jobName, droidWebView.CreatePrintDocumentAdapter(jobName), null);
 
@@ -56,6 +60,10 @@ namespace Forms9Patch.Droid
                     }
                 }
             }
+        }
+
+        public void ToPngAsync(WebView xfWebView, ActivityIndicatorPopup popup, string fileName)
+        {
 
         }
 

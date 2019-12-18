@@ -76,7 +76,7 @@
     <Compile Include="Services\ApplicationInfoService.cs" />
     <Compile Include="Services\DescendentBounds.cs" />
     <Compile Include="Services\FontService.cs" />
-    <Compile Include="Services\HtmlToPngService.cs" />
+    <Compile Include="Services\ToPngService.cs" />
     <Compile Include="Services\KeyboardService.cs" />
     <Compile Include="Services\OsInfoService.cs" />
     <Compile Include="Services\WebViewExtensionsService.cs" />
@@ -91,6 +91,7 @@
     <Compile Include="Popup\RgGestureDetectorListener.cs" />
     <Compile Include="Popup\PlatformExtension.cs" />
     <Compile Include="Effects\EntryClearButtonEffect.cs" />
+    <Compile Include="Permissions\WriteExternalStorage.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
@@ -98,7 +99,7 @@
       <Version>4.4.0.991265</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>12.0.2</Version>
+      <Version>12.0.3</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views.Forms">
       <Version>1.68.1</Version>
@@ -147,6 +148,7 @@
   </ItemGroup-->
   <ItemGroup>
     <Folder Include="Popup\" />
+    <Folder Include="Permissions\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <PropertyGroup>
