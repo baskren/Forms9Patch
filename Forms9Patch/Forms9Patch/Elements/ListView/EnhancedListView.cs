@@ -81,7 +81,7 @@ namespace Forms9Patch
 
         #region Events
         public event EventHandler Scrolling;
-        public event EventHandler Scrolled;
+        public new event EventHandler Scrolled;
         #endregion
 
 
@@ -114,7 +114,7 @@ namespace Forms9Patch
                     _disposed = true;
 
                     Scrolling = null;
-                    Scrolled = null;
+                    //Scrolled = null;
 
                     var items = TemplatedItems.ToArray();
 
@@ -197,7 +197,7 @@ namespace Forms9Patch
             Scrolling?.Invoke(this, args);
             //System.Diagnostics.Debug.WriteLine("EnhancedListView.OnScrolling: offset=[" + ScrollOffset + "]");
         }
-
+        
         internal void OnScrolled(object sender, EventArgs args)
         {
             //Listener.CancelActiveGestures();  // this breaks UWP listview scrolling!!!
@@ -206,7 +206,7 @@ namespace Forms9Patch
             Scrolled?.Invoke(this, args);
             //System.Diagnostics.Debug.WriteLine("EnhancedListView.OnScrolled: offset=[" + ScrollOffset + "]");
         }
-
+        
 
 
         #endregion

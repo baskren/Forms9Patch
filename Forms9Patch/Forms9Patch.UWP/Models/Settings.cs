@@ -160,7 +160,7 @@ namespace Forms9Patch.UWP
             Xamarin.Forms.DependencyService.Register<DescendentBounds>();
             Xamarin.Forms.DependencyService.Register<InstalledFont>();
             Xamarin.Forms.DependencyService.Register<FontService>();
-            Xamarin.Forms.DependencyService.Register<HtmlToPngService>();
+            Xamarin.Forms.DependencyService.Register<Forms9Patch.UWP.ToPngService>();
             Xamarin.Forms.DependencyService.Register<KeyboardService>();
             Xamarin.Forms.DependencyService.Register<OsInfoService>();
             Xamarin.Forms.DependencyService.Register<WebViewExtensionsService>();

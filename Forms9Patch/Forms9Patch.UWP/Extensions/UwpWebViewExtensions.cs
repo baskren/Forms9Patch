@@ -22,5 +22,10 @@ namespace Forms9Patch.UWP
             return new SizeI(contentWidth, contentHeight);
         }
 
+        public static async Task<string> GetHtml(this Windows.UI.Xaml.Controls.WebView webView)
+        {
+            string html = await webView.InvokeScriptAsync("eval", new string[] { "document.documentElement.outerHTML;" });
+            return html;
+        }
     }
 }

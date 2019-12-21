@@ -1508,6 +1508,7 @@ namespace Forms9Patch
             base.OnSizeAllocated(width, height);
         }
 
+        /*
         protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
         {
             //P42.Utils.Debug.Message(this, "ENTER widthConstraint:" + widthConstraint + " heightConstraint:" + heightConstraint);
@@ -1515,6 +1516,7 @@ namespace Forms9Patch
             //P42.Utils.Debug.Message(this, "EXIT result:" + result);
             return result;
         }
+        */
         #endregion
 
 

@@ -1,17 +1,11 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Xamarin.Forms;
-using Android.Content;
 using Android.Webkit;
 using Android.Graphics;
 using Android.Views;
 using System.Threading.Tasks;
 using Xamarin.Forms.Platform.Android;
 using System.Reflection;
-using System.Collections.Generic;
-using Android.Runtime;
-using System.Linq;
-using Java.Lang;
 
 [assembly: Dependency(typeof(Forms9Patch.Droid.ToPngService))]
 namespace Forms9Patch.Droid

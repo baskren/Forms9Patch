@@ -185,7 +185,7 @@ namespace Forms9Patch.UWP
             get
             {
                 if (_scrollViewer != null)
-                    return _scrollViewer.VerticalScrollMode != ScrollMode.Disabled;
+                    return _scrollViewer.VerticalScrollMode != Windows.UI.Xaml.Controls.ScrollMode.Disabled;
                 return true;
             }
             set
@@ -193,9 +193,9 @@ namespace Forms9Patch.UWP
                 if (_scrollViewer!=null)
                 {
                     if (value)
-                        _scrollViewer.VerticalScrollMode = ScrollMode.Enabled;
+                        _scrollViewer.VerticalScrollMode = Windows.UI.Xaml.Controls.ScrollMode.Enabled;
                     else
-                        _scrollViewer.VerticalScrollMode = ScrollMode.Disabled;
+                        _scrollViewer.VerticalScrollMode = Windows.UI.Xaml.Controls.ScrollMode.Disabled;
                 }
             }
         }
