@@ -39,10 +39,10 @@ namespace Forms9Patch.UWP
                     nativeWebView.Name = jobName ?? "Forms9Patch.WebViewPrint";
 
                     // Initalize common helper class and register for printing
-                    var printHelper = new WebViewPrintHelper(nativeWebView);
+                    var printHelper = new WebViewPrintHelper(nativeWebView, jobName);
                     printHelper.RegisterForPrinting();
                     await printHelper.Init();
-                    bool showprint = await PrintManager.ShowPrintUIAsync(jobName);
+                    bool showprint = await PrintManager.ShowPrintUIAsync();
 
                     //printHelper.UnregisterForPrinting();
 

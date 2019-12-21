@@ -15,16 +15,13 @@ namespace Forms9Patch.UWP
         WebView _webView;
         WebView _sourceWebView;
 
-        public WebViewPrintHelper(WebView webView) : base()
+        public WebViewPrintHelper(WebView webView, string jobName) : base(jobName)
         {
             _sourceWebView = webView;
         }
 
         public override async Task Init()
         {
-            //_webView = _sourceWebView;
-
-            
             var contentSize = await _sourceWebView.WebViewContentSizeAsync();
             _webView = new WebView
             {
@@ -36,13 +33,14 @@ namespace Forms9Patch.UWP
             };
 
             RootPanel.Children.Insert(0, _webView);
+            //PrintPanel.Children.Insert(0, _webView);
 
 
             var html = await _sourceWebView.GetHtml();
             _webView.NavigationCompleted += _webView_NavigationCompleted; ;
             _webView.NavigateToString(html);
 
-            
+            PrintContent = _webView;
         }
 
         private void _webView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
@@ -59,88 +57,70 @@ namespace Forms9Patch.UWP
 
         async Task<IEnumerable<UIElement>> GenerateWebViewPagesAsync(Windows.Foundation.Size paperSize)
         {
+            System.Diagnostics.Debug.WriteLine("GenerateWebViewPagesAsync: {" + paperSize.Width + "," +paperSize.Height+ "}" );
             var contentSize = await _webView.WebViewContentSizeAsync();
+            _webView.Width = contentSize.Width;
+            _webView.Height = contentSize.Height;
+
+            var printArea = new Windows.Foundation.Size(paperSize.Width * (1 - 2 * ApplicationContentMarginLeft), paperSize.Height * (1 - 2 * ApplicationContentMarginTop));
 
             // how many pages will there be?
-            var scale = paperSize.Width / contentSize.Width;
-            var scaledHeight = (contentSize.Height * scale);
-            var pageCount = scaledHeight / paperSize.Height;
+            var scale = printArea.Width / contentSize.Width;
+            var scaledHeight = contentSize.Height * scale;
+            var pageCount = scaledHeight / printArea.Height;
             pageCount += (pageCount > (int)pageCount) ? 1 : 0;
 
             // create the pages
             var pages = new List<UIElement>();
             for (int i = 0; i < (int)pageCount; i++)
             {
-                var rect = GenerateWebViewPage(contentSize, paperSize, i);
-                pages.Add(rect);
+                var panel = GenerateWebViewPanel(paperSize, i);
+                pages.Add(panel);
             }
 
             return pages;
         }
 
 
-        UIElement GenerateWebViewPage(SizeI contentSize, Windows.Foundation.Size paperSize, int pageNumber)
+        UIElement GenerateWebViewPanel(Windows.Foundation.Size paperSize, int pageNumber)
         {
+            var printArea = new Windows.Foundation.Size(paperSize.Width * (1 - 2 * ApplicationContentMarginLeft), paperSize.Height * (1 - 2 * ApplicationContentMarginTop));
 
-            var scale = paperSize.Width / contentSize.Width;
-            var scaledHeight = (contentSize.Height * scale);
+            var scale = printArea.Width / _webView.Width;
+            var scaledHeight = _webView.Height * scale;
 
-            var translateY = -paperSize.Height * pageNumber;
-            System.Diagnostics.Debug.WriteLine("\t\t translateY: " + translateY);
+            var translateY = -printArea.Height * pageNumber;
 
             var rect = new Windows.UI.Xaml.Shapes.Rectangle
             {
+                Tag = new TranslateTransform { Y = translateY },
+                Margin = new Windows.UI.Xaml.Thickness(ApplicationContentMarginLeft * paperSize.Width, ApplicationContentMarginTop * paperSize.Height, ApplicationContentMarginLeft * paperSize.Width, ApplicationContentMarginTop * paperSize.Height),
+            };
+            var panel = new Windows.UI.Xaml.Controls.Grid
+            {
                 Height = paperSize.Height,
                 Width = paperSize.Width,
-                Margin = new Windows.UI.Xaml.Thickness(48),
-                Tag = new TranslateTransform { Y = translateY },
-                
+                Children = { rect },
             };
 
             rect.Loaded += (s, e) =>
             {
                 var sRect = s as Windows.UI.Xaml.Shapes.Rectangle;
                 System.Diagnostics.Debug.WriteLine("rect.Loaded: rect: {" + sRect.Width + "," +sRect.Height+ "}  e: " + e.OriginalSource?.ToString());
-                var brush = GetWebViewBrush(contentSize);
+                var brush = new WebViewBrush
+                {
+                    SourceName = _webView.Name,
+                    Stretch = Stretch.Uniform,
+                };
+                brush.Redraw();
                 brush.Stretch = Stretch.UniformToFill;
                 brush.AlignmentY = AlignmentY.Top;
                 brush.Transform = rect.Tag as TranslateTransform;
                 rect.Fill = brush;
             };
             rect.Visibility = Visibility.Visible;
-            return rect;
+            return panel;
         }
-
-        WebViewBrush GetWebViewBrush(SizeI contentSize)
-        {
-            
-            // resize width to content
-            var originalWebViewWidth = _webView.Width;
-            _webView.Width = contentSize.Width;
-
-            // resize height to content
-            var originalWebViewHeight = _webView.Height;
-            _webView.Height = contentSize.Height;
-
-            // create brush
-            var originalWebViewVisibility = _webView.Visibility;
-            _webView.Visibility = Visibility.Visible;
-            
-            var brush = new WebViewBrush
-            {
-                SourceName = _webView.Name,
-                Stretch = Stretch.Uniform,
-            };
-            brush.Redraw();
-            
-            // reset, return
-            _webView.Width = originalWebViewWidth;
-            _webView.Height = originalWebViewHeight;
-            _webView.Visibility = originalWebViewVisibility;
-            
-            return brush;
-        }
-
 
 
     }

@@ -74,6 +74,7 @@ namespace Forms9Patch.UWP
             }
         }
 
+       
         protected Windows.UI.Xaml.Controls.Page RootPage
         {
             get
@@ -86,22 +87,26 @@ namespace Forms9Patch.UWP
 
         protected Windows.UI.Xaml.Controls.Panel RootPanel => RootPage?.Content as Panel;
 
+        protected UIElement PrintContent;
+
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="scenarioPage">The scenario page constructing us</param>
-        public PrintHelper()
+        public PrintHelper(string jobName)
         {
+            JobName = jobName;
+
             printPreviewPages = new List<UIElement>();
             // Start these tasks early because we know we're going to need the
             // streams in PrintTaskRequested.
-            RandomAccessStreamReference wideMarginsIconReference = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/wideMargins.svg"));
+            RandomAccessStreamReference wideMarginsIconReference = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Forms9Patch.UWP/Assets/wideMargins.svg"));
             wideMarginsIconTask = wideMarginsIconReference.OpenReadAsync().AsTask();
 
-            RandomAccessStreamReference moderateMarginsIconReference = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/moderateMargins.svg"));
+            RandomAccessStreamReference moderateMarginsIconReference = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Forms9Patch.UWP/Assets/moderateMargins.svg"));
             moderateMarginsIconTask = moderateMarginsIconReference.OpenReadAsync().AsTask();
 
-            RandomAccessStreamReference narrowMarginsIconReference = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/narrowMargins.svg"));
+            RandomAccessStreamReference narrowMarginsIconReference = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Forms9Patch.UWP/Assets/narrowMargins.svg"));
             narrowMarginsIconTask = narrowMarginsIconReference.OpenReadAsync().AsTask();
         }
 
@@ -110,6 +115,7 @@ namespace Forms9Patch.UWP
         /// </summary>
         public virtual void RegisterForPrinting()
         {
+
             printDocument = new PrintDocument();
             printDocumentSource = printDocument.DocumentSource;
             printDocument.Paginate += CreatePrintPreviewPages;
@@ -143,15 +149,16 @@ namespace Forms9Patch.UWP
                     PrintCanvas.Children.Clear();
                     RootPanel?.Children.Remove(PrintCanvas);
                 }
+
+                if (PrintContent != null)
+                    RootPanel?.Children.Remove(PrintContent);
             });
         }
 
         public string JobName { get; private set; }
 
-        public async Task ShowPrintUIAsync(string jobName)
+        public async Task ShowPrintUIAsync()
         {
-            JobName = jobName;
-
             // Catch and print out any errors reported
             try
             {
@@ -200,6 +207,7 @@ namespace Forms9Patch.UWP
                 displayedOptions.Clear();
                 displayedOptions.Add(Windows.Graphics.Printing.StandardPrintTaskOptions.Copies);
                 displayedOptions.Add(Windows.Graphics.Printing.StandardPrintTaskOptions.Orientation);
+                displayedOptions.Add(Windows.Graphics.Printing.StandardPrintTaskOptions.PrintQuality);
                 displayedOptions.Add(Windows.Graphics.Printing.StandardPrintTaskOptions.MediaSize);
                 displayedOptions.Add(Windows.Graphics.Printing.StandardPrintTaskOptions.Collation);
                 displayedOptions.Add(Windows.Graphics.Printing.StandardPrintTaskOptions.Duplex);
@@ -292,10 +300,14 @@ namespace Forms9Patch.UWP
 
             if (invalidatePreview)
             {
-                await scenarioPage.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                //await PrintPage.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                //{
+                Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                 {
+
                     printDocument.InvalidatePreview();
                 });
+                //});
             }
         }
 
@@ -308,6 +320,9 @@ namespace Forms9Patch.UWP
         /// <param name="e">Paginate Event  </param>
         public virtual async void CreatePrintPreviewPages(object sender, PaginateEventArgs e)
         {
+            var paperSize = e.PrintTaskOptions.GetPageDescription(0).PageSize;
+            System.Diagnostics.Debug.WriteLine("CreatePrintPreviewPages: {" + paperSize.Width + "," + paperSize.Height + "}");
+
             //lock (printPreviewPages)
             await _semaphoreSlim.WaitAsync();
             {
@@ -322,6 +337,8 @@ namespace Forms9Patch.UWP
 
                 // Get the page description to deterimine how big the page is
                 PrintPageDescription pageDescription = printingOptions.GetPageDescription(0);
+
+
 
                 if (await GeneratePagesAsync(pageDescription) is List<UIElement> pages)
                 {
@@ -357,10 +374,11 @@ namespace Forms9Patch.UWP
         /// <param name="e">Arguments containing the preview requested page</param>
         protected virtual async void GetPrintPreviewPage(object sender, GetPreviewPageEventArgs e)
         {
+            System.Diagnostics.Debug.WriteLine("GetPrintPreviewPage: " + e.PageNumber);
+
             await _semaphoreSlim.WaitAsync();
 
             PrintDocument printDoc = (PrintDocument)sender;
-            System.Diagnostics.Debug.WriteLine("GetPrintPreviewPage: " + e.PageNumber);
             printDoc.SetPreviewPage(e.PageNumber, printPreviewPages[e.PageNumber - 1]);
             _semaphoreSlim.Release();
         }
@@ -374,6 +392,9 @@ namespace Forms9Patch.UWP
         /// <param name="e">Add page event arguments containing a print task options reference</param>
         protected virtual void AddPrintPages(object sender, AddPagesEventArgs e)
         {
+            var paperSize = e.PrintTaskOptions.GetPageDescription(0).PageSize;
+            System.Diagnostics.Debug.WriteLine("AddPrintPages: {" + paperSize.Width + "," + paperSize.Height + "}");
+
             // Loop over all of the preview pages and add each one to  add each page to be printied
             for (int i = 0; i < printPreviewPages.Count; i++)
             {
