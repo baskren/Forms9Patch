@@ -32,20 +32,20 @@ namespace Forms9Patch.UWP
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
-                if (Platform.GetRenderer(webView) is Xamarin.Forms.Platform.UWP.WebViewRenderer renderer && renderer.Control is Windows.UI.Xaml.Controls.WebView nativeWebView)
+                if (string.IsNullOrWhiteSpace(jobName))
+                    jobName = Forms9Patch.ApplicationInfoService.Name;
+                WebViewPrintHelper printHelper = null;
+                if (Platform.GetRenderer(webView) is WebViewRenderer renderer && renderer.Control is Windows.UI.Xaml.Controls.WebView nativeWebView)
+                    printHelper = new WebViewPrintHelper(nativeWebView, jobName);
+                else if (webView.Source is HtmlWebViewSource htmlSource && !string.IsNullOrWhiteSpace(htmlSource.Html))
+                    printHelper = new WebViewPrintHelper(htmlSource.Html, htmlSource.BaseUrl, jobName);
+                else if (webView.Source is UrlWebViewSource urlSource && !string.IsNullOrWhiteSpace(urlSource.Url))
+                    printHelper = new WebViewPrintHelper(urlSource.Url, jobName);
+                if (printHelper!=null)
                 {
-                    if (string.IsNullOrWhiteSpace(jobName))
-                        jobName = Forms9Patch.ApplicationInfoService.Name;
-                    nativeWebView.Name = jobName ?? "Forms9Patch.WebViewPrint";
-
-                    // Initalize common helper class and register for printing
-                    var printHelper = new WebViewPrintHelper(nativeWebView, jobName);
                     printHelper.RegisterForPrinting();
                     await printHelper.Init();
                     bool showprint = await PrintManager.ShowPrintUIAsync();
-
-                    //printHelper.UnregisterForPrinting();
-
                 }
             });
         }

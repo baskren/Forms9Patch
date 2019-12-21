@@ -14,33 +14,81 @@ namespace Forms9Patch.UWP
     {
         WebView _webView;
         WebView _sourceWebView;
+        string Html;
+        string BaseUrl;
+        string Url;
 
-        public WebViewPrintHelper(WebView webView, string jobName) : base(jobName)
+        const string LocalScheme = "ms-appx-web:///";
+        const string BaseInsertionScript = @"
+var head = document.getElementsByTagName('head')[0];
+var bases = head.getElementsByTagName('base');
+if(bases.length == 0){
+    head.innerHTML = 'baseTag' + head.innerHTML;
+}";
+
+        internal WebViewPrintHelper(WebView webView, string jobName) : base(jobName)
         {
             _sourceWebView = webView;
         }
 
+        internal WebViewPrintHelper(string html, string baseUri, string jobName): base(jobName)
+        {
+            Html = html;
+            BaseUrl = baseUri;
+            if (string.IsNullOrEmpty(BaseUrl))
+                BaseUrl = LocalScheme;
+        }
+
+        internal WebViewPrintHelper(string url, string jobName) : base(jobName)
+        {
+            Url = url;
+        }
+
         public override async Task Init()
         {
-            var contentSize = await _sourceWebView.WebViewContentSizeAsync();
             _webView = new WebView
             {
                 Name = "SpecialSuperDuperWebViewAtLarge",
                 DefaultBackgroundColor = Windows.UI.Colors.White,
-                Width = contentSize.Width,
-                Height = contentSize.Height,
-                Visibility = Visibility.Visible
+                Visibility = Visibility.Visible,
             };
-
             RootPanel.Children.Insert(0, _webView);
-            //PrintPanel.Children.Insert(0, _webView);
-
-
-            var html = await _sourceWebView.GetHtml();
-            _webView.NavigationCompleted += _webView_NavigationCompleted; ;
-            _webView.NavigateToString(html);
-
             PrintContent = _webView;
+            _webView.NavigationCompleted += _webView_NavigationCompleted; ;
+
+            if (_sourceWebView!=null)
+            {
+                var contentSize = await _sourceWebView.WebViewContentSizeAsync();
+                _webView.Width = contentSize.Width;
+                _webView.Height = contentSize.Height;
+                Html = await _sourceWebView.GetHtml();
+                _webView.NavigateToString(Html);
+            }
+            else if (!string.IsNullOrWhiteSpace(Html))
+            {
+                _webView.Width = 96 * 8;
+                _webView.Height = 96 * 10.5;
+                var baseTag = $"<base href=\"{BaseUrl}\"></base>";
+                string htmlWithBaseTag;
+                var internalWebView = new Windows.UI.Xaml.Controls.WebView();
+                internalWebView.NavigationCompleted += async (sender, args) =>
+                {
+                    var script = BaseInsertionScript.Replace("baseTag", baseTag);
+                    await sender.InvokeScriptAsync("eval", new[] { script });
+                    htmlWithBaseTag = await sender.InvokeScriptAsync("eval", new[] { "document.documentElement.outerHTML;" });
+                    _webView.NavigateToString(!string.IsNullOrEmpty(htmlWithBaseTag) ? htmlWithBaseTag : Html);
+                };
+                internalWebView.NavigateToString(Html);
+            }
+            else if (!string.IsNullOrWhiteSpace(Url))
+            {
+                _webView.Width = 96 * 8;
+                _webView.Height = 96 * 10.5;
+                Uri uri = new Uri(Url, UriKind.RelativeOrAbsolute);
+                if (!uri.IsAbsoluteUri)
+                    uri = new Uri(LocalScheme + Url, UriKind.RelativeOrAbsolute);
+                _webView.Source = uri;
+            }
         }
 
         private void _webView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
