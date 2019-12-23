@@ -279,6 +279,13 @@ namespace Forms9Patch
             set => Point = new Point(double.NegativeInfinity, double.PositiveInfinity);
         }
 
+        /// <summary>
+        /// How much space is available for a popup of width and height?
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="targetBounds"></param>
+        /// <returns></returns>
         protected Thickness Available(double width, double height, Rectangle targetBounds)
         {
             if (Target != null)

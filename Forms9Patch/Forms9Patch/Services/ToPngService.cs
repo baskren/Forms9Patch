@@ -46,6 +46,12 @@ namespace Forms9Patch
             return result;
         }
 
+        /// <summary>
+        /// Creates a PNG from the contents of a Xamarin.Forms.WebView
+        /// </summary>
+        /// <param name="webView"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         public static async Task<ToPngResult> ToPngAsync(this Xamarin.Forms.WebView webView, string fileName)
         {
             _platformToPngService = _platformToPngService ?? DependencyService.Get<IToPngService>();

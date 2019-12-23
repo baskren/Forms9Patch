@@ -16,6 +16,11 @@ namespace Forms9Patch
             return "[Thickness:" + thickness.Left + "," + thickness.Top + "," + thickness.Right + "," + thickness.Bottom + "]";
         }
 
+        /// <summary>
+        /// Is the Thickness empty?
+        /// </summary>
+        /// <param name="thickness"></param>
+        /// <returns></returns>
         public static bool IsEmpty(this Xamarin.Forms.Thickness thickness)
         {
             if (thickness.Left == 0.0 && thickness.Top == 0.0 && thickness.Right == 0.0)

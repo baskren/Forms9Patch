@@ -364,6 +364,10 @@ namespace Forms9Patch
         public static explicit operator string(Label label)
             => label?.HtmlText ?? label?.Text;
 
+        /// <summary>
+        /// String representation of Label
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return (string)this;
