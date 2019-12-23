@@ -216,6 +216,9 @@
       <a class="xref" href="Forms9Patch.ContentView.html#Forms9Patch_ContentView_OnChildMeasureInvalidated">ContentView.OnChildMeasureInvalidated()</a>
     </div>
     <div>
+      <a class="xref" href="Forms9Patch.ContentView.html#Forms9Patch_ContentView_OnSizeRequest_System_Double_System_Double_">ContentView.OnSizeRequest(Double, Double)</a>
+    </div>
+    <div>
       <a class="xref" href="Forms9Patch.ContentView.html#Forms9Patch_ContentView_LayoutChildren_System_Double_System_Double_System_Double_System_Double_">ContentView.LayoutChildren(Double, Double, Double, Double)</a>
     </div>
     <div>
@@ -262,6 +265,9 @@
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout.onchildmeasureinvalidated#Xamarin_Forms_Layout_OnChildMeasureInvalidated_System_Object_System_EventArgs_">Layout.OnChildMeasureInvalidated(Object, EventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout.onsizeallocated#Xamarin_Forms_Layout_OnSizeAllocated_System_Double_System_Double_">Layout.OnSizeAllocated(Double, Double)</a>
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout.updatechildrenlayout#Xamarin_Forms_Layout_UpdateChildrenLayout">Layout.UpdateChildrenLayout()</a>
@@ -439,6 +445,9 @@
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.onchildrenreordered#Xamarin_Forms_VisualElement_OnChildrenReordered">VisualElement.OnChildrenReordered()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.onmeasure#Xamarin_Forms_VisualElement_OnMeasure_System_Double_System_Double_">VisualElement.OnMeasure(Double, Double)</a>
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.sizeallocated#Xamarin_Forms_VisualElement_SizeAllocated_System_Double_System_Double_">VisualElement.SizeAllocated(Double, Double)</a>
@@ -664,6 +673,9 @@
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.setvalue#Xamarin_Forms_BindableObject_SetValue_Xamarin_Forms_BindablePropertyKey_System_Object_">BindableObject.SetValue(BindablePropertyKey, Object)</a>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.BindableObject.Dispatcher</span>
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.bindingcontext#Xamarin_Forms_BindableObject_BindingContext">BindableObject.BindingContext</a>
@@ -3752,55 +3764,6 @@ public bool TrailingImage { get; set; }</code></pre>
   </table>
   
   
-  <a id="Forms9Patch_Button_OnMeasure_" data-uid="Forms9Patch.Button.OnMeasure*"></a>
-  <h4 id="Forms9Patch_Button_OnMeasure_System_Double_System_Double_" data-uid="Forms9Patch.Button.OnMeasure(System.Double,System.Double)">OnMeasure(Double, Double)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><span class="parametername">widthConstraint</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><span class="parametername">heightConstraint</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.sizerequest">SizeRequest</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.onmeasure#Xamarin_Forms_VisualElement_OnMeasure_System_Double_System_Double_">VisualElement.OnMeasure(Double, Double)</a></div>
-  
-  
   <a id="Forms9Patch_Button_OnPropertyChanged_" data-uid="Forms9Patch.Button.OnPropertyChanged*"></a>
   <h4 id="Forms9Patch_Button_OnPropertyChanged_System_String_" data-uid="Forms9Patch.Button.OnPropertyChanged(System.String)">OnPropertyChanged(String)</h4>
   <div class="markdown level1 summary"><p>Call this method from a child class to notify that a change happened on a property.</p>
@@ -3867,89 +3830,6 @@ public bool TrailingImage { get; set; }</code></pre>
   <h5 id="Forms9Patch_Button_OnPropertyChanging_System_String__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>A Button triggers this by itself. An inheritor only need to call this for properties without BindableProperty as backend store.</p>
 </div>
-  
-  
-  <a id="Forms9Patch_Button_OnSizeAllocated_" data-uid="Forms9Patch.Button.OnSizeAllocated*"></a>
-  <h4 id="Forms9Patch_Button_OnSizeAllocated_System_Double_System_Double_" data-uid="Forms9Patch.Button.OnSizeAllocated(System.Double,System.Double)">OnSizeAllocated(Double, Double)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected override void OnSizeAllocated(double width, double height)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><span class="parametername">width</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><span class="parametername">height</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout.onsizeallocated#Xamarin_Forms_Layout_OnSizeAllocated_System_Double_System_Double_">Layout.OnSizeAllocated(Double, Double)</a></div>
-  
-  
-  <a id="Forms9Patch_Button_OnSizeRequest_" data-uid="Forms9Patch.Button.OnSizeRequest*"></a>
-  <h4 id="Forms9Patch_Button_OnSizeRequest_System_Double_System_Double_" data-uid="Forms9Patch.Button.OnSizeRequest(System.Double,System.Double)">OnSizeRequest(Double, Double)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><span class="parametername">widthConstraint</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><span class="parametername">heightConstraint</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.sizerequest">SizeRequest</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="Forms9Patch.ContentView.html#Forms9Patch_ContentView_OnSizeRequest_System_Double_System_Double_">ContentView.OnSizeRequest(Double, Double)</a></div>
   
   
   <a id="Forms9Patch_Button_OnTapped_" data-uid="Forms9Patch.Button.OnTapped*"></a>

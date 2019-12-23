@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -103,10 +103,6 @@
       <Project>{00E0CDDC-B671-4876-8E78-927C50D2596A}</Project>
       <Name>FormsGestures.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\leakquest\leakquest.csproj">
-      <Project>{BA12E67E-1CDD-40BE-A278-E337A5AEA776}</Project>
-      <Name>leakquest</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj">
       <Project>{49621984-BABA-4864-9065-D9C8B645828F}</Project>
       <Name>MimeSharp</Name>
@@ -124,5 +120,5 @@
       <Name>P42.Utils.Droid</Name>
     </ProjectReference>
   </ItemGroup>
- <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

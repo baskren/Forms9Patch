@@ -1554,19 +1554,6 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.Button.OnLongPressing
   nameWithType: Button.OnLongPressing
-- uid: Forms9Patch.Button.OnMeasure(System.Double,System.Double)
-  name: OnMeasure(Double, Double)
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_OnMeasure_System_Double_System_Double_
-  commentId: M:Forms9Patch.Button.OnMeasure(System.Double,System.Double)
-  fullName: Forms9Patch.Button.OnMeasure(System.Double, System.Double)
-  nameWithType: Button.OnMeasure(Double, Double)
-- uid: Forms9Patch.Button.OnMeasure*
-  name: OnMeasure
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_OnMeasure_
-  commentId: Overload:Forms9Patch.Button.OnMeasure
-  isSpec: "True"
-  fullName: Forms9Patch.Button.OnMeasure
-  nameWithType: Button.OnMeasure
 - uid: Forms9Patch.Button.OnPropertyChanged(System.String)
   name: OnPropertyChanged(String)
   href: api/Forms9Patch.Button.html#Forms9Patch_Button_OnPropertyChanged_System_String_
@@ -1593,32 +1580,6 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.Button.OnPropertyChanging
   nameWithType: Button.OnPropertyChanging
-- uid: Forms9Patch.Button.OnSizeAllocated(System.Double,System.Double)
-  name: OnSizeAllocated(Double, Double)
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_OnSizeAllocated_System_Double_System_Double_
-  commentId: M:Forms9Patch.Button.OnSizeAllocated(System.Double,System.Double)
-  fullName: Forms9Patch.Button.OnSizeAllocated(System.Double, System.Double)
-  nameWithType: Button.OnSizeAllocated(Double, Double)
-- uid: Forms9Patch.Button.OnSizeAllocated*
-  name: OnSizeAllocated
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_OnSizeAllocated_
-  commentId: Overload:Forms9Patch.Button.OnSizeAllocated
-  isSpec: "True"
-  fullName: Forms9Patch.Button.OnSizeAllocated
-  nameWithType: Button.OnSizeAllocated
-- uid: Forms9Patch.Button.OnSizeRequest(System.Double,System.Double)
-  name: OnSizeRequest(Double, Double)
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_OnSizeRequest_System_Double_System_Double_
-  commentId: M:Forms9Patch.Button.OnSizeRequest(System.Double,System.Double)
-  fullName: Forms9Patch.Button.OnSizeRequest(System.Double, System.Double)
-  nameWithType: Button.OnSizeRequest(Double, Double)
-- uid: Forms9Patch.Button.OnSizeRequest*
-  name: OnSizeRequest
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_OnSizeRequest_
-  commentId: Overload:Forms9Patch.Button.OnSizeRequest
-  isSpec: "True"
-  fullName: Forms9Patch.Button.OnSizeRequest
-  nameWithType: Button.OnSizeRequest
 - uid: Forms9Patch.Button.OnTapped(System.Object,FormsGestures.TapEventArgs)
   name: OnTapped(Object, TapEventArgs)
   href: api/Forms9Patch.Button.html#Forms9Patch_Button_OnTapped_System_Object_FormsGestures_TapEventArgs_
@@ -7010,73 +6971,6 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.HardwareKeyPage.OnDisappearing
   nameWithType: HardwareKeyPage.OnDisappearing
-- uid: Forms9Patch.HtmlStringExtensions
-  name: HtmlStringExtensions
-  href: api/Forms9Patch.HtmlStringExtensions.html
-  commentId: T:Forms9Patch.HtmlStringExtensions
-  fullName: Forms9Patch.HtmlStringExtensions
-  nameWithType: HtmlStringExtensions
-- uid: Forms9Patch.HtmlStringExtensions.ToPng(System.String,System.String,System.Action{System.String})
-  name: ToPng(String, String, Action<String>)
-  href: api/Forms9Patch.HtmlStringExtensions.html#Forms9Patch_HtmlStringExtensions_ToPng_System_String_System_String_System_Action_System_String__
-  commentId: M:Forms9Patch.HtmlStringExtensions.ToPng(System.String,System.String,System.Action{System.String})
-  name.vb: ToPng(String, String, Action(Of String))
-  fullName: Forms9Patch.HtmlStringExtensions.ToPng(System.String, System.String, System.Action<System.String>)
-  fullName.vb: Forms9Patch.HtmlStringExtensions.ToPng(System.String, System.String, System.Action(Of System.String))
-  nameWithType: HtmlStringExtensions.ToPng(String, String, Action<String>)
-  nameWithType.vb: HtmlStringExtensions.ToPng(String, String, Action(Of String))
-- uid: Forms9Patch.HtmlStringExtensions.ToPng*
-  name: ToPng
-  href: api/Forms9Patch.HtmlStringExtensions.html#Forms9Patch_HtmlStringExtensions_ToPng_
-  commentId: Overload:Forms9Patch.HtmlStringExtensions.ToPng
-  isSpec: "True"
-  fullName: Forms9Patch.HtmlStringExtensions.ToPng
-  nameWithType: HtmlStringExtensions.ToPng
-- uid: Forms9Patch.HtmlStringExtensions.ToPngAsync(System.String,System.String)
-  name: ToPngAsync(String, String)
-  href: api/Forms9Patch.HtmlStringExtensions.html#Forms9Patch_HtmlStringExtensions_ToPngAsync_System_String_System_String_
-  commentId: M:Forms9Patch.HtmlStringExtensions.ToPngAsync(System.String,System.String)
-  fullName: Forms9Patch.HtmlStringExtensions.ToPngAsync(System.String, System.String)
-  nameWithType: HtmlStringExtensions.ToPngAsync(String, String)
-- uid: Forms9Patch.HtmlStringExtensions.ToPngAsync*
-  name: ToPngAsync
-  href: api/Forms9Patch.HtmlStringExtensions.html#Forms9Patch_HtmlStringExtensions_ToPngAsync_
-  commentId: Overload:Forms9Patch.HtmlStringExtensions.ToPngAsync
-  isSpec: "True"
-  fullName: Forms9Patch.HtmlStringExtensions.ToPngAsync
-  nameWithType: HtmlStringExtensions.ToPngAsync
-- uid: Forms9Patch.HtmlToPngResult
-  name: HtmlToPngResult
-  href: api/Forms9Patch.HtmlToPngResult.html
-  commentId: T:Forms9Patch.HtmlToPngResult
-  fullName: Forms9Patch.HtmlToPngResult
-  nameWithType: HtmlToPngResult
-- uid: Forms9Patch.HtmlToPngResult.IsError
-  name: IsError
-  href: api/Forms9Patch.HtmlToPngResult.html#Forms9Patch_HtmlToPngResult_IsError
-  commentId: P:Forms9Patch.HtmlToPngResult.IsError
-  fullName: Forms9Patch.HtmlToPngResult.IsError
-  nameWithType: HtmlToPngResult.IsError
-- uid: Forms9Patch.HtmlToPngResult.IsError*
-  name: IsError
-  href: api/Forms9Patch.HtmlToPngResult.html#Forms9Patch_HtmlToPngResult_IsError_
-  commentId: Overload:Forms9Patch.HtmlToPngResult.IsError
-  isSpec: "True"
-  fullName: Forms9Patch.HtmlToPngResult.IsError
-  nameWithType: HtmlToPngResult.IsError
-- uid: Forms9Patch.HtmlToPngResult.Result
-  name: Result
-  href: api/Forms9Patch.HtmlToPngResult.html#Forms9Patch_HtmlToPngResult_Result
-  commentId: P:Forms9Patch.HtmlToPngResult.Result
-  fullName: Forms9Patch.HtmlToPngResult.Result
-  nameWithType: HtmlToPngResult.Result
-- uid: Forms9Patch.HtmlToPngResult.Result*
-  name: Result
-  href: api/Forms9Patch.HtmlToPngResult.html#Forms9Patch_HtmlToPngResult_Result_
-  commentId: Overload:Forms9Patch.HtmlToPngResult.Result
-  isSpec: "True"
-  fullName: Forms9Patch.HtmlToPngResult.Result
-  nameWithType: HtmlToPngResult.Result
 - uid: Forms9Patch.IApplicationInfoService
   name: IApplicationInfoService
   href: api/Forms9Patch.IApplicationInfoService.html
@@ -7631,25 +7525,6 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.IFontFamilies.FontFamilies
   nameWithType: IFontFamilies.FontFamilies
-- uid: Forms9Patch.IHtmlToPngPdfService
-  name: IHtmlToPngPdfService
-  href: api/Forms9Patch.IHtmlToPngPdfService.html
-  commentId: T:Forms9Patch.IHtmlToPngPdfService
-  fullName: Forms9Patch.IHtmlToPngPdfService
-  nameWithType: IHtmlToPngPdfService
-- uid: Forms9Patch.IHtmlToPngPdfService.ToPngAsync(Forms9Patch.ActivityIndicatorPopup,System.String,System.String)
-  name: ToPngAsync(ActivityIndicatorPopup, String, String)
-  href: api/Forms9Patch.IHtmlToPngPdfService.html#Forms9Patch_IHtmlToPngPdfService_ToPngAsync_Forms9Patch_ActivityIndicatorPopup_System_String_System_String_
-  commentId: M:Forms9Patch.IHtmlToPngPdfService.ToPngAsync(Forms9Patch.ActivityIndicatorPopup,System.String,System.String)
-  fullName: Forms9Patch.IHtmlToPngPdfService.ToPngAsync(Forms9Patch.ActivityIndicatorPopup, System.String, System.String)
-  nameWithType: IHtmlToPngPdfService.ToPngAsync(ActivityIndicatorPopup, String, String)
-- uid: Forms9Patch.IHtmlToPngPdfService.ToPngAsync*
-  name: ToPngAsync
-  href: api/Forms9Patch.IHtmlToPngPdfService.html#Forms9Patch_IHtmlToPngPdfService_ToPngAsync_
-  commentId: Overload:Forms9Patch.IHtmlToPngPdfService.ToPngAsync
-  isSpec: "True"
-  fullName: Forms9Patch.IHtmlToPngPdfService.ToPngAsync
-  nameWithType: IHtmlToPngPdfService.ToPngAsync
 - uid: Forms9Patch.IIsSelectedAble
   name: IIsSelectedAble
   href: api/Forms9Patch.IIsSelectedAble.html
@@ -8556,6 +8431,23 @@ references:
   commentId: F:Forms9Patch.Image.TintColorProperty
   fullName: Forms9Patch.Image.TintColorProperty
   nameWithType: Image.TintColorProperty
+- uid: Forms9Patch.Image.Xamarin#Forms#IImageController#GetLoadAsAnimation
+  name: IImageController.GetLoadAsAnimation()
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image_Xamarin_Forms_IImageController_GetLoadAsAnimation
+  commentId: M:Forms9Patch.Image.Xamarin#Forms#IImageController#GetLoadAsAnimation
+  name.vb: Xamarin.Forms.IImageController.GetLoadAsAnimation()
+  fullName: Forms9Patch.Image.Xamarin.Forms.IImageController.GetLoadAsAnimation()
+  nameWithType: Image.IImageController.GetLoadAsAnimation()
+  nameWithType.vb: Image.Xamarin.Forms.IImageController.GetLoadAsAnimation()
+- uid: Forms9Patch.Image.Xamarin#Forms#IImageController#GetLoadAsAnimation*
+  name: IImageController.GetLoadAsAnimation
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image_Xamarin_Forms_IImageController_GetLoadAsAnimation_
+  commentId: Overload:Forms9Patch.Image.Xamarin#Forms#IImageController#GetLoadAsAnimation
+  isSpec: "True"
+  name.vb: Xamarin.Forms.IImageController.GetLoadAsAnimation
+  fullName: Forms9Patch.Image.Xamarin.Forms.IImageController.GetLoadAsAnimation
+  nameWithType: Image.IImageController.GetLoadAsAnimation
+  nameWithType.vb: Image.Xamarin.Forms.IImageController.GetLoadAsAnimation
 - uid: Forms9Patch.Image.Xamarin#Forms#IImageController#SetIsLoading(System.Boolean)
   name: IImageController.SetIsLoading(Boolean)
   href: api/Forms9Patch.Image.html#Forms9Patch_Image_Xamarin_Forms_IImageController_SetIsLoading_System_Boolean_
@@ -9428,6 +9320,31 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.IText.Text
   nameWithType: IText.Text
+- uid: Forms9Patch.IToPngService
+  name: IToPngService
+  href: api/Forms9Patch.IToPngService.html
+  commentId: T:Forms9Patch.IToPngService
+  fullName: Forms9Patch.IToPngService
+  nameWithType: IToPngService
+- uid: Forms9Patch.IToPngService.ToPngAsync(Forms9Patch.ActivityIndicatorPopup,System.String,System.String)
+  name: ToPngAsync(ActivityIndicatorPopup, String, String)
+  href: api/Forms9Patch.IToPngService.html#Forms9Patch_IToPngService_ToPngAsync_Forms9Patch_ActivityIndicatorPopup_System_String_System_String_
+  commentId: M:Forms9Patch.IToPngService.ToPngAsync(Forms9Patch.ActivityIndicatorPopup,System.String,System.String)
+  fullName: Forms9Patch.IToPngService.ToPngAsync(Forms9Patch.ActivityIndicatorPopup, System.String, System.String)
+  nameWithType: IToPngService.ToPngAsync(ActivityIndicatorPopup, String, String)
+- uid: Forms9Patch.IToPngService.ToPngAsync(Forms9Patch.ActivityIndicatorPopup,Xamarin.Forms.WebView,System.String)
+  name: ToPngAsync(ActivityIndicatorPopup, WebView, String)
+  href: api/Forms9Patch.IToPngService.html#Forms9Patch_IToPngService_ToPngAsync_Forms9Patch_ActivityIndicatorPopup_Xamarin_Forms_WebView_System_String_
+  commentId: M:Forms9Patch.IToPngService.ToPngAsync(Forms9Patch.ActivityIndicatorPopup,Xamarin.Forms.WebView,System.String)
+  fullName: Forms9Patch.IToPngService.ToPngAsync(Forms9Patch.ActivityIndicatorPopup, Xamarin.Forms.WebView, System.String)
+  nameWithType: IToPngService.ToPngAsync(ActivityIndicatorPopup, WebView, String)
+- uid: Forms9Patch.IToPngService.ToPngAsync*
+  name: ToPngAsync
+  href: api/Forms9Patch.IToPngService.html#Forms9Patch_IToPngService_ToPngAsync_
+  commentId: Overload:Forms9Patch.IToPngService.ToPngAsync
+  isSpec: "True"
+  fullName: Forms9Patch.IToPngService.ToPngAsync
+  nameWithType: IToPngService.ToPngAsync
 - uid: Forms9Patch.IWebViewExtensionService
   name: IWebViewExtensionService
   href: api/Forms9Patch.IWebViewExtensionService.html
@@ -15863,6 +15780,79 @@ references:
   commentId: F:Forms9Patch.Toast.TitleProperty
   fullName: Forms9Patch.Toast.TitleProperty
   nameWithType: Toast.TitleProperty
+- uid: Forms9Patch.ToPngResult
+  name: ToPngResult
+  href: api/Forms9Patch.ToPngResult.html
+  commentId: T:Forms9Patch.ToPngResult
+  fullName: Forms9Patch.ToPngResult
+  nameWithType: ToPngResult
+- uid: Forms9Patch.ToPngResult.IsError
+  name: IsError
+  href: api/Forms9Patch.ToPngResult.html#Forms9Patch_ToPngResult_IsError
+  commentId: P:Forms9Patch.ToPngResult.IsError
+  fullName: Forms9Patch.ToPngResult.IsError
+  nameWithType: ToPngResult.IsError
+- uid: Forms9Patch.ToPngResult.IsError*
+  name: IsError
+  href: api/Forms9Patch.ToPngResult.html#Forms9Patch_ToPngResult_IsError_
+  commentId: Overload:Forms9Patch.ToPngResult.IsError
+  isSpec: "True"
+  fullName: Forms9Patch.ToPngResult.IsError
+  nameWithType: ToPngResult.IsError
+- uid: Forms9Patch.ToPngResult.Result
+  name: Result
+  href: api/Forms9Patch.ToPngResult.html#Forms9Patch_ToPngResult_Result
+  commentId: P:Forms9Patch.ToPngResult.Result
+  fullName: Forms9Patch.ToPngResult.Result
+  nameWithType: ToPngResult.Result
+- uid: Forms9Patch.ToPngResult.Result*
+  name: Result
+  href: api/Forms9Patch.ToPngResult.html#Forms9Patch_ToPngResult_Result_
+  commentId: Overload:Forms9Patch.ToPngResult.Result
+  isSpec: "True"
+  fullName: Forms9Patch.ToPngResult.Result
+  nameWithType: ToPngResult.Result
+- uid: Forms9Patch.ToPngService
+  name: ToPngService
+  href: api/Forms9Patch.ToPngService.html
+  commentId: T:Forms9Patch.ToPngService
+  fullName: Forms9Patch.ToPngService
+  nameWithType: ToPngService
+- uid: Forms9Patch.ToPngService.ToPng(System.String,System.String,System.Action{System.String})
+  name: ToPng(String, String, Action<String>)
+  href: api/Forms9Patch.ToPngService.html#Forms9Patch_ToPngService_ToPng_System_String_System_String_System_Action_System_String__
+  commentId: M:Forms9Patch.ToPngService.ToPng(System.String,System.String,System.Action{System.String})
+  name.vb: ToPng(String, String, Action(Of String))
+  fullName: Forms9Patch.ToPngService.ToPng(System.String, System.String, System.Action<System.String>)
+  fullName.vb: Forms9Patch.ToPngService.ToPng(System.String, System.String, System.Action(Of System.String))
+  nameWithType: ToPngService.ToPng(String, String, Action<String>)
+  nameWithType.vb: ToPngService.ToPng(String, String, Action(Of String))
+- uid: Forms9Patch.ToPngService.ToPng*
+  name: ToPng
+  href: api/Forms9Patch.ToPngService.html#Forms9Patch_ToPngService_ToPng_
+  commentId: Overload:Forms9Patch.ToPngService.ToPng
+  isSpec: "True"
+  fullName: Forms9Patch.ToPngService.ToPng
+  nameWithType: ToPngService.ToPng
+- uid: Forms9Patch.ToPngService.ToPngAsync(System.String,System.String)
+  name: ToPngAsync(String, String)
+  href: api/Forms9Patch.ToPngService.html#Forms9Patch_ToPngService_ToPngAsync_System_String_System_String_
+  commentId: M:Forms9Patch.ToPngService.ToPngAsync(System.String,System.String)
+  fullName: Forms9Patch.ToPngService.ToPngAsync(System.String, System.String)
+  nameWithType: ToPngService.ToPngAsync(String, String)
+- uid: Forms9Patch.ToPngService.ToPngAsync(Xamarin.Forms.WebView,System.String)
+  name: ToPngAsync(WebView, String)
+  href: api/Forms9Patch.ToPngService.html#Forms9Patch_ToPngService_ToPngAsync_Xamarin_Forms_WebView_System_String_
+  commentId: M:Forms9Patch.ToPngService.ToPngAsync(Xamarin.Forms.WebView,System.String)
+  fullName: Forms9Patch.ToPngService.ToPngAsync(Xamarin.Forms.WebView, System.String)
+  nameWithType: ToPngService.ToPngAsync(WebView, String)
+- uid: Forms9Patch.ToPngService.ToPngAsync*
+  name: ToPngAsync
+  href: api/Forms9Patch.ToPngService.html#Forms9Patch_ToPngService_ToPngAsync_
+  commentId: Overload:Forms9Patch.ToPngService.ToPngAsync
+  isSpec: "True"
+  fullName: Forms9Patch.ToPngService.ToPngAsync
+  nameWithType: ToPngService.ToPngAsync
 - uid: Forms9Patch.WebViewExtensions
   name: WebViewExtensions
   href: api/Forms9Patch.WebViewExtensions.html
@@ -19610,6 +19600,25 @@ references:
   fullName.vb: P42.Utils.DictionaryExtensions.TryGetKey(Of TKey, TValue)(System.Collections.Generic.IDictionary(Of TKey, TValue), TValue, ByRef TKey)
   nameWithType: DictionaryExtensions.TryGetKey<TKey, TValue>(IDictionary<TKey, TValue>, TValue, out TKey)
   nameWithType.vb: DictionaryExtensions.TryGetKey(Of TKey, TValue)(IDictionary(Of TKey, TValue), TValue, ByRef TKey)
+- uid: P42.Utils.DirectoryExtensions
+  name: DirectoryExtensions
+  href: api/P42.Utils.DirectoryExtensions.html
+  commentId: T:P42.Utils.DirectoryExtensions
+  fullName: P42.Utils.DirectoryExtensions
+  nameWithType: DirectoryExtensions
+- uid: P42.Utils.DirectoryExtensions.AssureExists(System.String)
+  name: AssureExists(String)
+  href: api/P42.Utils.DirectoryExtensions.html#P42_Utils_DirectoryExtensions_AssureExists_System_String_
+  commentId: M:P42.Utils.DirectoryExtensions.AssureExists(System.String)
+  fullName: P42.Utils.DirectoryExtensions.AssureExists(System.String)
+  nameWithType: DirectoryExtensions.AssureExists(String)
+- uid: P42.Utils.DirectoryExtensions.AssureExists*
+  name: AssureExists
+  href: api/P42.Utils.DirectoryExtensions.html#P42_Utils_DirectoryExtensions_AssureExists_
+  commentId: Overload:P42.Utils.DirectoryExtensions.AssureExists
+  isSpec: "True"
+  fullName: P42.Utils.DirectoryExtensions.AssureExists
+  nameWithType: DirectoryExtensions.AssureExists
 - uid: P42.Utils.DiskSpace
   name: DiskSpace
   href: api/P42.Utils.DiskSpace.html
@@ -22039,6 +22048,19 @@ references:
   isSpec: "True"
   fullName: P42.Utils.StringExtensions.RemoveLast
   nameWithType: StringExtensions.RemoveLast
+- uid: P42.Utils.StringExtensions.RemoveWhitespace(System.String)
+  name: RemoveWhitespace(String)
+  href: api/P42.Utils.StringExtensions.html#P42_Utils_StringExtensions_RemoveWhitespace_System_String_
+  commentId: M:P42.Utils.StringExtensions.RemoveWhitespace(System.String)
+  fullName: P42.Utils.StringExtensions.RemoveWhitespace(System.String)
+  nameWithType: StringExtensions.RemoveWhitespace(String)
+- uid: P42.Utils.StringExtensions.RemoveWhitespace*
+  name: RemoveWhitespace
+  href: api/P42.Utils.StringExtensions.html#P42_Utils_StringExtensions_RemoveWhitespace_
+  commentId: Overload:P42.Utils.StringExtensions.RemoveWhitespace
+  isSpec: "True"
+  fullName: P42.Utils.StringExtensions.RemoveWhitespace
+  nameWithType: StringExtensions.RemoveWhitespace
 - uid: P42.Utils.StringExtensions.ReplaceIllegalCharacters(System.String)
   name: ReplaceIllegalCharacters(String)
   href: api/P42.Utils.StringExtensions.html#P42_Utils_StringExtensions_ReplaceIllegalCharacters_System_String_
@@ -22097,6 +22119,19 @@ references:
   isSpec: "True"
   fullName: P42.Utils.StringExtensions.ToHex
   nameWithType: StringExtensions.ToHex
+- uid: P42.Utils.StringExtensions.UnicodeToHtmlEscapes(System.String)
+  name: UnicodeToHtmlEscapes(String)
+  href: api/P42.Utils.StringExtensions.html#P42_Utils_StringExtensions_UnicodeToHtmlEscapes_System_String_
+  commentId: M:P42.Utils.StringExtensions.UnicodeToHtmlEscapes(System.String)
+  fullName: P42.Utils.StringExtensions.UnicodeToHtmlEscapes(System.String)
+  nameWithType: StringExtensions.UnicodeToHtmlEscapes(String)
+- uid: P42.Utils.StringExtensions.UnicodeToHtmlEscapes*
+  name: UnicodeToHtmlEscapes
+  href: api/P42.Utils.StringExtensions.html#P42_Utils_StringExtensions_UnicodeToHtmlEscapes_
+  commentId: Overload:P42.Utils.StringExtensions.UnicodeToHtmlEscapes
+  isSpec: "True"
+  fullName: P42.Utils.StringExtensions.UnicodeToHtmlEscapes
+  nameWithType: StringExtensions.UnicodeToHtmlEscapes
 - uid: P42.Utils.TextCache
   name: TextCache
   href: api/P42.Utils.TextCache.html

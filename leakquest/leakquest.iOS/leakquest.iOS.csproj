@@ -172,10 +172,6 @@
       <IsAppExtension>false</IsAppExtension>
       <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
-    <ProjectReference Include="..\leakquest\leakquest.csproj">
-      <Project>{BA12E67E-1CDD-40BE-A278-E337A5AEA776}</Project>
-      <Name>leakquest</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
