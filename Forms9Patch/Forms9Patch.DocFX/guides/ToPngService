@@ -1,0 +1,107 @@
+# ToPng and Print Services
+
+Often I need to do one of the following:
+
+ - Convert some HTML to a PNG
+ - Take the content of a Xamarin.Forms.WebView and turn it into a PNG
+ - Print the contents of a Xamarin.Forms.WebView
+ - (Bonus) Print some HTML
+
+I've had to do this enough times that I finally broke down and added it to Forms9Patch.
+
+## Convert HTML to a PNG
+
+Usage is as follows:
+
+```c-sharp
+    if (await Forms9Patch.ToPngService.ToPngAsync(_htmlEditor.Text, "myHtmlPage") is ToPngResult result)
+    {
+        if (result.IsError)
+        {
+            using (Forms9Patch.Toast.Create("PNG error", result.Result)) { }
+        }
+        else
+        {
+            var entry = new Forms9Patch.MimeItemCollection();
+            if (result.Result.Contains(".pdf"))
+                entry.AddBytesFromFile("application/pdf", result.Result);
+            else if (result.Result.Contains(".png"))
+                entry.AddBytesFromFile("image/png", result.Result);
+
+            if (e.Segment.Text == shareButtonText)
+                Forms9Patch.Sharing.Share(entry, _destinationSelector);
+            else if (e.Segment.Text == copyButtonText)
+                Forms9Patch.Clipboard.Entry = entry;
+        }
+    }
+```        
+
+In the above example, we are putting the PNG onto the clipboard.  Xamarin.Essentials.Sharing could also be used.
+
+
+## Xamarin.Forms.WebView to a PNG
+
+Below, we take the contents of a Xamarin.Forms.WebView and Share it as a PNG:
+
+```c-sharp
+if (myWebView.ToPngAsync("output.png") is ToPngResult result)
+{
+    if (result.IsError)
+        {
+            using (Forms9Patch.Toast.Create("PNG error", result.Result)) { }
+        }
+        else
+        {
+            await Xamarin.Essentials.Share.RequestAsync(new Xamarin.Essentials.ShareFileRequest
+            {
+                Title = "myWebView sharing title",
+                File = new Xamarin.Forms.ShareFile(result.Result, "image/png")
+            });
+        }
+}
+```
+
+## Verifying that Printing is available
+
+Before printing, you should verify that printing is available on your device.  To do so, call:
+
+```c-sharp
+if (Forms9Patch.WebViewExtensions.CanPrint)
+{
+    // do some printing here
+}
+```
+
+## Print the contents of a Xamarin.Forms.WebView
+
+Here is a pseudo-code example:
+
+```c-sharp
+    var myWebView = new Xamarin.Forms.WebView();
+    myWebView.Source = new HtmlWebViewSource { Html = "some HTML text here" };
+    ...
+
+    myWebView.Print("my_print_job_name");
+```
+
+PLEASE NOTE: iOS sometimes places the page breaks in weird places.  I have a [StackOverflow Bounty](https://stackoverflow.com/questions/59273274/uiprintinteractioncontroller-breaking-single-page-into-multiple-pages-when-it-sh) on why this happens and how to fix it.
+
+## Print an HTML in Xamarin.Forms
+
+This is sort of a hack (only because I haven't had the time to make it prettier)!
+
+```c-sharp
+    var myHtml = "some html here!";
+    var tmpWebView = new Xamarin.Forms.WebView
+    {
+        Source = new HtmlWebViewSource { Html = myHtml };
+    }
+    tmpWebView.Print("my_print_job_name");
+```
+
+What's different between this example and the previous?  Actually, nothing of substance!   That is because the Xamarin.Forms.WebView that you're trying to print does not have to be in a Layout.  In other words, it doesn't have to have a parent.  Knowing that, you can instantiate a WebView and print it - without displaying the WebView in your app.
+
+
+## Using EmbeddedResource as a source for a Xamarin.Forms.WebView
+
+This is sort of an experimental feature but I've found it useful.  As such the documentation is sparse.  It allow you to put HTML content in a folder in your app's EmbeddedResources folder and then use it as a source for a WebView.  It also supports putting all of the HTML content into a zip file.  Please take a look at the source code to see how it works.
