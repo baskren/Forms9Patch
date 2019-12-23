@@ -171,14 +171,16 @@ namespace Forms9Patch.UWP
                 using (Forms9Patch.Toast.Create(null, "Error printing: " + e.Message + ", hr=" + e.HResult)) { }
             }
         }
-        
+
         /// <summary>
         /// Method that will generate print content for the scenario
         /// For scenarios 1-4: it will create the first page from which content will flow
         /// Scenario 5 uses a different approach
         /// </summary>
         /// <param name="page">The page to print</param>
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public virtual async Task Init()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             //CreatePrintPreviewPages()
             throw new NotImplementedException();
@@ -255,7 +257,9 @@ namespace Forms9Patch.UWP
             });
         }
 
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         async void OnPrintDetailOptionChanged(PrintTaskOptionDetails sender, PrintTaskOptionChangedEventArgs args)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             bool invalidatePreview = false;
 
@@ -409,7 +413,9 @@ namespace Forms9Patch.UWP
         }
 
 
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         protected virtual async Task<IEnumerable<UIElement>> GeneratePagesAsync(PrintPageDescription pageDescription)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             return null;
         }

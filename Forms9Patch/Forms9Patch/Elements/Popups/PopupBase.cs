@@ -587,9 +587,11 @@ namespace Forms9Patch
             }
         }
 
+
         /// <summary>
         /// Releases all resource used by the <see cref="T:Forms9Patch.PopupBase"/> object.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1063:Implement IDisposable Correctly", Justification = "Disposal handled in Device.BeginInvokeOnMainThread block")]
         public void Dispose()
         {
             if (_isPopped || (!_isPushing && !_isPushed))
