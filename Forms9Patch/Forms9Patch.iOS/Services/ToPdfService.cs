@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using CoreGraphics;
 using Foundation;
@@ -8,15 +9,12 @@ using WebKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: Dependency(typeof(Forms9Patch.iOS.ToPngService))]
+[assembly: Dependency(typeof(Forms9Patch.iOS.ToPdfService))]
 namespace Forms9Patch.iOS
 {
-    /// <summary>
-    /// HTML to PDF service.
-    /// </summary>
-    public class ToPngService : IToPngService
+    public class ToPdfService : UIPrintInteractionControllerDelegate, IToPdfService
     {
-        const string LocalStorageFolderName = "Forms9Patch.ToPngService";
+        const string LocalStorageFolderName = "Forms9Patch.ToPdfService";
 
         public static string FolderPath()
         {
@@ -26,47 +24,37 @@ namespace Forms9Patch.iOS
             return root;
         }
 
-        static ToPngService()
+        static ToPdfService()
         {
             var path = FolderPath();
             Directory.Delete(path, true);
         }
 
+
+        public bool IsAvailable => UIPrintInteractionController.PrintingAvailable;
+
         /// <summary>
-        /// Produces PNG from some HTML
+        /// Produces PDF from some HTML
         /// </summary>
         /// <param name="popup"></param>
         /// <param name="html"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public async Task<ToFileResult> ToPngAsync(ActivityIndicatorPopup popup, string html, string fileName)
+        public async Task<ToFileResult> ToPdfAsync(ActivityIndicatorPopup popup, string html, string fileName)
         {
             var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
-            ToPng(taskCompletionSource, html, fileName);
+            ToPdf(taskCompletionSource, html, fileName);
             return await taskCompletionSource.Task;
         }
 
-        /// <summary>
-        /// Produces PNG from a WebView
-        /// </summary>
-        /// <param name="popup"></param>
-        /// <param name="webView"></param>
-        /// <param name="fileName"></param>
-        /// <returns></returns>
-        public async Task<ToFileResult> ToPngAsync(ActivityIndicatorPopup popup, WebView webView, string fileName)
+        public async Task<ToFileResult> ToPdfAsync(ActivityIndicatorPopup popup, WebView webView, string fileName)
         {
             var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
-            ToPng(taskCompletionSource, webView, fileName);
+            ToPdf(taskCompletionSource, webView, fileName);
             return await taskCompletionSource.Task;
         }
 
-        /// <summary>
-        /// Produces PNG from HTML
-        /// </summary>
-        /// <param name="taskCompletionSource"></param>
-        /// <param name="html"></param>
-        /// <param name="fileName"></param>
-        public void ToPng(TaskCompletionSource<ToFileResult> taskCompletionSource, string html, string fileName)
+        public void ToPdf(TaskCompletionSource<ToFileResult> taskCompletionSource, string html, string fileName)
         {
             if (NSProcessInfo.ProcessInfo.IsOperatingSystemAtLeastVersion(new NSOperatingSystemVersion(11, 0, 0)))
             {
@@ -90,15 +78,14 @@ namespace Forms9Patch.iOS
             }
         }
 
-
         /// <summary>
-        /// Produces PNG from a Xamarin.Forms.WebView
+        /// Produces PDF from a Xamarin.Forms.WebView
         /// </summary>
         /// <param name="taskCompletionSource"></param>
         /// <param name="xfWebView"></param>
         /// <param name="fileName"></param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0067:Dispose objects before losing scope", Justification = "Disposal happens in WKUiCallback")]
-        public void ToPng(TaskCompletionSource<ToFileResult> taskCompletionSource, WebView xfWebView, string fileName)
+        public void ToPdf(TaskCompletionSource<ToFileResult> taskCompletionSource, WebView xfWebView, string fileName)
         {
             if (Platform.CreateRenderer(xfWebView) is WkWebViewRenderer renderer)
             {
@@ -121,18 +108,12 @@ namespace Forms9Patch.iOS
                 webView.ClipsToBounds = false;
                 webView.ScrollView.ClipsToBounds = false;
 
-                var snapshotConfig = new WKSnapshotConfiguration
+                if (webView.CreatePdfFile(webView.ViewPrintFormatter) is NSMutableData data)
                 {
-                    Rect = new CGRect(0, 0, width, height)
-                };
-
-                var image = await webView.TakeSnapshotAsync(snapshotConfig);
-
-                if (image.AsPNG() is NSData data)
-                {
-                    var path = Path.Combine(ToPngService.FolderPath(), filename + ".png");
-                    File.WriteAllBytes(path, data.ToArray());
+                    var path = System.IO.Path.Combine(ToPngService.FolderPath(), filename + ".pdf");
+                    System.IO.File.WriteAllBytes(path, data.ToArray());
                     taskCompletionSource.SetResult(new ToFileResult(false, path));
+                    data.Dispose();
                     return;
                 }
                 taskCompletionSource.SetResult(new ToFileResult(true, "No data returned."));
@@ -149,47 +130,43 @@ namespace Forms9Patch.iOS
             }
 
         }
+
     }
 
-
-    class WKNavigationCompleteCallback : WKNavigationDelegate
+    class PdfRenderer : UIPrintPageRenderer
     {
-        public bool Completed { get; private set; }
-
-        int loadCount;
-        readonly string _filename;
-        readonly TaskCompletionSource<ToFileResult> _taskCompletionSource;
-        readonly Func<WKWebView, string, TaskCompletionSource<ToFileResult>, Task> _action;
-
-        public WKNavigationCompleteCallback(string fileName, TaskCompletionSource<ToFileResult> taskCompletionSource, Func<WKWebView, string, TaskCompletionSource<ToFileResult>, Task> action)
+        public NSMutableData PrintToPdf()
         {
-            _filename = fileName;
-            _taskCompletionSource = taskCompletionSource;
-            _action = action;
-        }
-
-        public override void DidStartProvisionalNavigation(WKWebView webView, WKNavigation navigation)
-        {
-            loadCount++;
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Potential Code Quality Issues", "RECS0165:Asynchronous methods should return a Task instead of void", Justification = "Needed for BeginInvokeOnMainThread")]
-        public override void DidFinishNavigation(WKWebView webView, WKNavigation navigation)
-        {
-            loadCount--;
-            Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
+            var pdfData = new NSMutableData();
+            UIGraphics.BeginPDFContext(pdfData, PaperRect, null);
+            PrepareForDrawingPages(new NSRange(0, NumberOfPages));
+            var rect = UIGraphics.PDFContextBounds;
+            for (int i = 0; i < NumberOfPages; i++)
             {
-                if (loadCount <= 0)
-                {
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        _action?.Invoke(webView, _filename, _taskCompletionSource);
-                    });
-                    return false;
-                }
-                return true;
-            });
-
+                UIGraphics.BeginPDFPage();
+                DrawPage(i, rect);
+            }
+            UIGraphics.EndPDFContent();
+            return pdfData;
         }
     }
+
+    static class WKWebViewExtensions
+    {
+        public static NSMutableData CreatePdfFile(this WebKit.WKWebView webView, UIViewPrintFormatter printFormatter)
+        {
+            var bounds = webView.Bounds;
+            webView.Bounds = new CoreGraphics.CGRect(bounds.X, bounds.Y, bounds.Width, webView.ScrollView.ContentSize.Height);
+            var pdfPageFrame = new CoreGraphics.CGRect(0, 0, webView.Bounds.Width, webView.Bounds.Height);
+            var renderer = new PdfRenderer();
+            renderer.AddPrintFormatter(printFormatter, 0);
+            renderer.SetValueForKey(NSValue.FromCGRect(UIScreen.MainScreen.Bounds), new NSString("paperRect"));
+            renderer.SetValueForKey(NSValue.FromCGRect(pdfPageFrame), new NSString("printableRect"));
+            webView.Bounds = bounds;
+            return renderer.PrintToPdf();
+        }
+
+    }
+
+
 }

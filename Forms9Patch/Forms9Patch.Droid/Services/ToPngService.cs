@@ -14,27 +14,27 @@ namespace Forms9Patch.Droid
     public class ToPngService : Java.Lang.Object, IToPngService
     {
 
-        public async Task<ToPngResult> ToPngAsync(ActivityIndicatorPopup popup, string html, string fileName)
+        public async Task<ToFileResult> ToPngAsync(ActivityIndicatorPopup popup, string html, string fileName)
         {
             if (!await Permissions.WriteExternalStorage.ConfirmOrRequest())
-                return new ToPngResult(true, "Write External Stoarge permission must be granted for PNG images to be available.");
-            var taskCompletionSource = new TaskCompletionSource<ToPngResult>();
+                return new ToFileResult(true, "Write External Stoarge permission must be granted for PNG images to be available.");
+            var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
             ToPng(taskCompletionSource, html, fileName);
             return await taskCompletionSource.Task;
         }
 
-        public async Task<ToPngResult> ToPngAsync(ActivityIndicatorPopup popup, Xamarin.Forms.WebView webView, string fileName)
+        public async Task<ToFileResult> ToPngAsync(ActivityIndicatorPopup popup, Xamarin.Forms.WebView webView, string fileName)
         {
             if (!await Permissions.WriteExternalStorage.ConfirmOrRequest())
-                return new ToPngResult(true, "Write External Stoarge permission must be granted for PNG images to be available.");
-            var taskCompletionSource = new TaskCompletionSource<ToPngResult>();
+                return new ToFileResult(true, "Write External Stoarge permission must be granted for PNG images to be available.");
+            var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
             ToPng(taskCompletionSource, webView, fileName);
             return await taskCompletionSource.Task;
         }
 
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0067:Dispose objects before losing scope", Justification = "CustomWebView is disposed in Callback.Compete")]
-        public void ToPng(TaskCompletionSource<ToPngResult> taskCompletionSource, string html, string fileName)
+        public void ToPng(TaskCompletionSource<ToFileResult> taskCompletionSource, string html, string fileName)
         {
             var size = new Size(8.5, 11);
             var externalPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
@@ -60,7 +60,7 @@ namespace Forms9Patch.Droid
             }
         }
 
-        public void ToPng(TaskCompletionSource<ToPngResult> taskCompletionSource, Xamarin.Forms.WebView xfWebView, string fileName)
+        public void ToPng(TaskCompletionSource<ToFileResult> taskCompletionSource, Xamarin.Forms.WebView xfWebView, string fileName)
         {
             if (Platform.CreateRendererWithContext(xfWebView, Settings.Context) is IVisualElementRenderer renderer)
             {
@@ -97,10 +97,10 @@ namespace Forms9Patch.Droid
     {
 
         readonly string _fileName;
-        readonly TaskCompletionSource<ToPngResult> _taskCompletionSource;
+        readonly TaskCompletionSource<ToFileResult> _taskCompletionSource;
 
 
-        public WebViewCallBack(TaskCompletionSource<ToPngResult> taskCompletionSource, string fileName)
+        public WebViewCallBack(TaskCompletionSource<ToFileResult> taskCompletionSource, string fileName)
         {
             _fileName = fileName;
             _taskCompletionSource = taskCompletionSource;
@@ -109,7 +109,7 @@ namespace Forms9Patch.Droid
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Potential Code Quality Issues", "RECS0165:Asynchronous methods should return a Task instead of void", Justification = "Needed to invoke async code on main thread.")]
         public override void OnPageFinished(Android.Webkit.WebView view, string url)
         {
-            Device.BeginInvokeOnMainThread(async () =>
+            Device.BeginInvokeOnMainThread((System.Action)(async () =>
             {
                 var widthString = await view.EvaluateJavaScriptAsync("document.documentElement.offsetWidth");
                 var width = double.Parse(widthString.ToString());
@@ -172,12 +172,12 @@ namespace Forms9Patch.Droid
                             }
                             stream.Flush();
                             stream.Close();
-                            _taskCompletionSource.SetResult(new ToPngResult(false, path));
+                            _taskCompletionSource.SetResult(new ToFileResult((bool)false, (string)path));
                             view.Dispose();
                         }
                     }
                 }
-            });
+            }));
 
         }
     }

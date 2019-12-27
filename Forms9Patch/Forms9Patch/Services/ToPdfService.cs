@@ -7,24 +7,15 @@ namespace Forms9Patch
     /// <summary>
     /// Html string extensions.
     /// </summary>
-    public static class ToPngService
+    public static class ToPdfService
     {
-        static ToPngService()
+        static ToPdfService()
         {
             Settings.ConfirmInitialization();
         }
 
-        static IToPngService _platformToPngService;
+        static IToPdfService _platformToPdfService;
 
-        /// <summary>
-        /// OBSOLETE
-        /// </summary>
-        /// <param name="html"></param>
-        /// <param name="fileName"></param>
-        /// <param name="onComplete"></param>
-        [Obsolete("Use ToPngAsync instead", true)]
-        public static void ToPng(this string html, string fileName, Action<string> onComplete)
-        { }
 
         /// <summary>
         /// Converts HTML text to PNG
@@ -32,15 +23,15 @@ namespace Forms9Patch
         /// <param name="html"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public static async Task<ToFileResult> ToPngAsync(this string html, string fileName)
+        public static async Task<ToFileResult> ToPdfAsync(this string html, string fileName)
         {
-            _platformToPngService = _platformToPngService ?? DependencyService.Get<IToPngService>();
-            if (_platformToPngService == null)
+            _platformToPdfService = _platformToPdfService ?? DependencyService.Get<IToPdfService>();
+            if (_platformToPdfService == null)
                 throw new NotSupportedException("Cannot get HtmlService: must not be supported on this platform.");
             ToFileResult result = null;
             using (var indicator = ActivityIndicatorPopup.Create())
             {
-                result = await _platformToPngService.ToPngAsync(indicator, html, fileName);
+                result = await _platformToPdfService.ToPdfAsync(indicator, html, fileName);
             }
             await Task.Delay(50);
             return result;
@@ -52,15 +43,15 @@ namespace Forms9Patch
         /// <param name="webView"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public static async Task<ToFileResult> ToPngAsync(this Xamarin.Forms.WebView webView, string fileName)
+        public static async Task<ToFileResult> ToPdfAsync(this Xamarin.Forms.WebView webView, string fileName)
         {
-            _platformToPngService = _platformToPngService ?? DependencyService.Get<IToPngService>();
-            if (_platformToPngService == null)
+            _platformToPdfService = _platformToPdfService ?? DependencyService.Get<IToPdfService>();
+            if (_platformToPdfService == null)
                 throw new NotSupportedException("Cannot get HtmlService: must not be supported on this platform.");
             ToFileResult result = null;
             using (var indicator = ActivityIndicatorPopup.Create())
             {
-                result = await _platformToPngService.ToPngAsync(indicator, webView, fileName);
+                result = await _platformToPdfService.ToPdfAsync(indicator, webView, fileName);
             }
             await Task.Delay(50);
             return result;
