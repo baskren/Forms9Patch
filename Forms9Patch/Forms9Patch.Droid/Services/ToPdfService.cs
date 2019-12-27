@@ -113,152 +113,21 @@ namespace Forms9Patch.Droid
                 var attributes = builder.Build();
 
                 var adapter = webView.CreatePrintDocumentAdapter(Guid.NewGuid().ToString());
-                /*
-
-
-                IntPtr klass = JNIEnv.FindClass("android/print/PdfLayoutResultCallback");
-                IntPtr constructor = JNIEnv.GetMethodID(klass, "<init>", "void(V)");
-                var Foo = Java.Lang.Object.GetObject<Java.Lang.Class>(klass, JniHandleOwnership.TransferGlobalRef);
-
-                //var instance = JNIEnv.StartCreateInstance(klass, )
-                */
 
                 var layoutResultCallback = new PdfLayoutResultCallback();
                 layoutResultCallback.Adapter = adapter;
                 layoutResultCallback.TaskCompletionSource = taskCompletionSource;
                 layoutResultCallback.FileName = fileName;
                 adapter.OnLayout(null, attributes, null, layoutResultCallback, null);
-
-                /*
-                var adapter = new PdfDocumentAdapterX(taskCompletionSource, fileName);
-                adapter.OnLayout(null, attributes, null, null, null);
-                */
-
-                System.Diagnostics.Debug.WriteLine("ToPdfService" + P42.Utils.ReflectionExtensions.CallerString() + ": ");
-            }
-
-
-
-        }
-
-    }
-
-    /*
-    class PdfDocumentAdapterX : PrintDocumentAdapter
-    {
-        //readonly string Path;
-        public TaskCompletionSource<ToFileResult> TaskCompletionSource { get; private set; }
-        public string FileName { get; private set; }
-        //public PrintDocumentAdapter Adapter { get; set; }
-
-        public PdfDocumentAdapterX(TaskCompletionSource<ToFileResult> taskCompletionSource, string fileName)
-        {
-            TaskCompletionSource = taskCompletionSource;
-            FileName = fileName;
-        }
-
-        public override void OnLayout(PrintAttributes oldAttributes, PrintAttributes newAttributes, CancellationSignal cancellationSignal, LayoutResultCallback callback, Bundle extras)
-        {
-            if (cancellationSignal?.IsCanceled ?? false)
-            {
-                TaskCompletionSource.SetResult(new ToFileResult(true, "PDF Layout Cancelled"));
-                callback?.OnLayoutCancelled();
-            }
-            else
-            {
-                PrintDocumentInfo.Builder builder = new PrintDocumentInfo.Builder("print_output.pdf");
-                var info = builder.SetContentType(Android.Print.PrintContentType.Document)  //Android.Print.PrintDocumentInfo.ContentTypeDocument)
-                       .SetPageCount(PrintDocumentInfo.PageCountUnknown)
-                       .Build();
-                //callback.OnLayoutFailed(builder.Build(),
-                //        !oldAttributes.Equals(newAttributes));
-                //callback.OnLayoutFailed("layout failed");
-                callback?.OnLayoutFinished(info, !oldAttributes.Equals(newAttributes));
-
-                using (var _dir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDocuments))
-                {
-                    if (!_dir.Exists())
-                        _dir.Mkdir();
-
-                    var path = _dir.Path + "/" + FileName + ".pdf";
-                    var file = new Java.IO.File(path);
-                    int iter = 0;
-                    while (file.Exists())
-                    {
-                        iter++;
-                        path = _dir.Path + "/" + FileName + "_" + iter.ToString("D3") + ".pdf";
-                        file = new Java.IO.File(path);
-                    }
-                    file.CreateNewFile();
-
-                    var fileDescriptor = ParcelFileDescriptor.Open(file, ParcelFileMode.ReadWrite);
-
-                    OnWrite(new Android.Print.PageRange[] { PageRange.AllPages }, fileDescriptor, new CancellationSignal(), null);
-                }
-
-            }
-        }
-
-        public override void OnWrite(PageRange[] pages, ParcelFileDescriptor destination, CancellationSignal cancellationSignal, WriteResultCallback callback)
-        {
-            Java.IO.InputStream inputStream = null;
-            Java.IO.OutputStream outputStream = null;
-            try
-            {
-                Java.IO.File file = new Java.IO.File(FileName);
-                inputStream = new Java.IO.FileInputStream(file);
-                outputStream = new Java.IO.FileOutputStream(destination.FileDescriptor);
-
-                byte[] buf = new byte[16384];
-                int size;
-
-                while ((size = inputStream.Read(buf)) >= 0 && !(cancellationSignal?.IsCanceled ?? false))
-                {
-                    outputStream.Write(buf, 0, size);
-                    System.Diagnostics.Debug.WriteLine("PdfDocumentAdapter" + P42.Utils.ReflectionExtensions.CallerString() + ": [" + size + "] Bytes Written ");
-                }
-
-                if (cancellationSignal?.IsCanceled ?? false)
-                {
-                    TaskCompletionSource.SetResult(new ToFileResult(true, "PDF Write Cancelled"));
-                    callback?.OnWriteCancelled();
-                }
-                else
-                {
-                    TaskCompletionSource.SetResult(new ToFileResult(false, destination.ToString()));
-                    callback?.OnWriteFinished(new PageRange[] { PageRange.AllPages });
-                }
-            }
-            catch (Java.Lang.Exception e)
-            {
-                TaskCompletionSource.SetResult(new ToFileResult(true, e.Message));
-                callback?.OnWriteFailed(e.Message);
-                //Logger.logError(e);
-                System.Console.WriteLine("Forms9Patch.Droid.PdfDocumentAdapter threw exception: " + e.Message);
-            }
-            finally
-            {
-                try
-                {
-                    inputStream.Close();
-                    outputStream.Close();
-                }
-                catch (Java.IO.IOException e)
-                {
-                    //Logger.logError(e);
-                    System.Console.WriteLine("Forms9Patch.Droid.PdfDocumentAdapter threw exception: " + e.Message);
-                }
             }
         }
     }
-    */
+
 }
 
 
 namespace Android.Print
 {
-
-
     [Register("android/print/PdfLayoutResultCallback")]
     public class PdfLayoutResultCallback : PrintDocumentAdapter.LayoutResultCallback
     {
@@ -271,7 +140,7 @@ namespace Android.Print
 
         public PdfLayoutResultCallback() : base(IntPtr.Zero, JniHandleOwnership.DoNotTransfer)
         {
-            if (!(base.Handle != IntPtr.Zero))
+            if (!(Handle != IntPtr.Zero))
             {
                 unsafe
                 {
@@ -295,7 +164,6 @@ namespace Android.Print
             TaskCompletionSource.SetResult(new ToFileResult(true, error.ToString()));
         }
 
-        //[Android.Runtime.Register("onLayoutFinished", "(Landroid/print/PrintDocumentInfo;Z)V", "GetOnLayoutFinished_Landroid_print_PrintDocumentInfo_ZHandler")]
         public override void OnLayoutFinished(PrintDocumentInfo info, bool changed)
         {
             using (var _dir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDocuments))
@@ -340,7 +208,7 @@ namespace Android.Print
 
         public PdfWriteResultCallback(TaskCompletionSource<ToFileResult> taskCompletionSource, string path) : base(IntPtr.Zero, JniHandleOwnership.DoNotTransfer)
         {
-            if (!(base.Handle != IntPtr.Zero))
+            if (!(Handle != IntPtr.Zero))
             {
                 unsafe
                 {
