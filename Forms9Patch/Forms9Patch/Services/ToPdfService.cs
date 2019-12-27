@@ -16,6 +16,19 @@ namespace Forms9Patch
 
         static IToPdfService _platformToPdfService;
 
+        /// <summary>
+        /// Returns true if PDF generation is available on this device
+        /// </summary>
+        public static bool IsAvailable
+        {
+            get
+            {
+                _platformToPdfService = _platformToPdfService ?? DependencyService.Get<IToPdfService>();
+                if (_platformToPdfService == null)
+                    return false;
+                return _platformToPdfService.IsAvailable;
+            }
+        }
 
         /// <summary>
         /// Converts HTML text to PNG

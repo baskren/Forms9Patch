@@ -27,6 +27,7 @@
     <WarningLevel>4</WarningLevel>
 <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
 <LangVersion>7.3</LangVersion>
+<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -36,6 +37,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>7.3</LangVersion>
+<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -92,6 +94,8 @@
     <Compile Include="Popup\PlatformExtension.cs" />
     <Compile Include="Effects\EntryClearButtonEffect.cs" />
     <Compile Include="Permissions\WriteExternalStorage.cs" />
+    <Compile Include="Services\ToPdfService.cs" />
+    <Compile Include="Extensions\AndroidWebViewExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
