@@ -98,6 +98,8 @@ namespace Forms9Patch.UWP
                 Control?.UpdateLineBreakMode(Element);
             else if (e.PropertyName == Forms9Patch.Label.HorizontalTextAlignmentProperty.PropertyName)
                 UpdateHorizontalAlign(Control);
+            else if (e.PropertyName == Xamarin.Forms.Label.LineHeightProperty.PropertyName)
+                UpdateLineHeight(Control);
             #endregion
 
             base.OnElementPropertyChanged(sender, e);
@@ -133,6 +135,15 @@ namespace Forms9Patch.UWP
 			}
 		}
 
+
+        void UpdateLineHeight(TextBlock control)
+        {
+            if (control == null)
+                return;
+            if (Element.LineHeight >= 0)
+                control.LineHeight = Element.LineHeight * control.FontSize;
+            ForceLayout();
+        }
 
         void UpdateSynchrnoizedFontSize(TextBlock control)
         {

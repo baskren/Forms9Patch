@@ -40,7 +40,7 @@ namespace Forms9Patch
             ToFileResult result = null;
             using (var indicator = ActivityIndicatorPopup.Create())
             {
-                result = await _platformToPngService.ToPngAsync(indicator, html, fileName);
+                result = await _platformToPngService.ToPngAsync(html, fileName);
             }
             await Task.Delay(50);
             return result;
@@ -60,7 +60,7 @@ namespace Forms9Patch
             ToFileResult result = null;
             using (var indicator = ActivityIndicatorPopup.Create())
             {
-                result = await _platformToPngService.ToPngAsync(indicator, webView, fileName);
+                result = await _platformToPngService.ToPngAsync(webView, fileName);
             }
             await Task.Delay(50);
             return result;

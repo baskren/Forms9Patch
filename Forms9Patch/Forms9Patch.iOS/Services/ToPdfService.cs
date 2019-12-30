@@ -40,14 +40,14 @@ namespace Forms9Patch.iOS
         /// <param name="html"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public async Task<ToFileResult> ToPdfAsync(ActivityIndicatorPopup popup, string html, string fileName)
+        public async Task<ToFileResult> ToPdfAsync(string html, string fileName)
         {
             var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
             ToPdf(taskCompletionSource, html, fileName);
             return await taskCompletionSource.Task;
         }
 
-        public async Task<ToFileResult> ToPdfAsync(ActivityIndicatorPopup popup, WebView webView, string fileName)
+        public async Task<ToFileResult> ToPdfAsync(WebView webView, string fileName)
         {
             var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
             ToPdf(taskCompletionSource, webView, fileName);

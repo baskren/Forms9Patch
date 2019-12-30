@@ -75,7 +75,7 @@ namespace Forms9Patch.UWP
         }
 
        
-        protected Windows.UI.Xaml.Controls.Page RootPage
+        internal static Windows.UI.Xaml.Controls.Page RootPage
         {
             get
             {
@@ -85,7 +85,7 @@ namespace Forms9Patch.UWP
             }
         }
 
-        protected Windows.UI.Xaml.Controls.Panel RootPanel => RootPage?.Content as Panel;
+        internal static Windows.UI.Xaml.Controls.Panel RootPanel => RootPage?.Content as Panel;
 
         protected UIElement PrintContent;
 
@@ -417,7 +417,7 @@ namespace Forms9Patch.UWP
         protected virtual async Task<IEnumerable<UIElement>> GeneratePagesAsync(PrintPageDescription pageDescription)
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
-            return null;
+            throw new NotImplementedException();
         }
  
     }

@@ -38,6 +38,8 @@ namespace Forms9Patch
             Color = Color.Blue
 
         };
+
+        /*
         internal readonly Xamarin.Forms.Grid Grid = new Xamarin.Forms.Grid
         {
 
@@ -47,6 +49,7 @@ namespace Forms9Patch
         {
             Opacity = 0.01
         };
+        */
         #endregion
 
 
@@ -68,6 +71,7 @@ namespace Forms9Patch
         /// <param name="popAfter"></param>
         public ActivityIndicatorPopup(TimeSpan popAfter = default) : base(popAfter)
         {
+            /*
             if (Device.RuntimePlatform == Device.UWP)
                 Grid.WidthRequest = 300;
 
@@ -75,6 +79,11 @@ namespace Forms9Patch
             Grid.Children.Add(_indicator);
 
             Content = Grid;
+            */
+
+            if (Device.RuntimePlatform == Device.UWP)
+                _indicator.WidthRequest = 300;
+            Content = _indicator;
 
             CancelOnPageOverlayTouch = false;
             BackgroundColor = Color.FromRgba(0, 0, 0, 1);

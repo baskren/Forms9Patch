@@ -39,7 +39,7 @@ namespace Forms9Patch.iOS
         /// <param name="html"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public async Task<ToFileResult> ToPngAsync(ActivityIndicatorPopup popup, string html, string fileName)
+        public async Task<ToFileResult> ToPngAsync(string html, string fileName)
         {
             var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
             ToPng(taskCompletionSource, html, fileName);
@@ -53,7 +53,7 @@ namespace Forms9Patch.iOS
         /// <param name="webView"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public async Task<ToFileResult> ToPngAsync(ActivityIndicatorPopup popup, WebView webView, string fileName)
+        public async Task<ToFileResult> ToPngAsync(WebView webView, string fileName)
         {
             var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
             ToPng(taskCompletionSource, webView, fileName);

@@ -17,7 +17,7 @@ namespace Forms9Patch.Droid
     public class ToPngService : Java.Lang.Object, IToPngService
     {
 
-        public async Task<ToFileResult> ToPngAsync(ActivityIndicatorPopup popup, string html, string fileName)
+        public async Task<ToFileResult> ToPngAsync(string html, string fileName)
         {
             if (!await Permissions.WriteExternalStorage.ConfirmOrRequest())
                 return new ToFileResult(true, "Write External Stoarge permission must be granted for PNG images to be available.");
@@ -26,7 +26,7 @@ namespace Forms9Patch.Droid
             return await taskCompletionSource.Task;
         }
 
-        public async Task<ToFileResult> ToPngAsync(ActivityIndicatorPopup popup, Xamarin.Forms.WebView webView, string fileName)
+        public async Task<ToFileResult> ToPngAsync(Xamarin.Forms.WebView webView, string fileName)
         {
             if (!await Permissions.WriteExternalStorage.ConfirmOrRequest())
                 return new ToFileResult(true, "Write External Stoarge permission must be granted for PNG images to be available.");

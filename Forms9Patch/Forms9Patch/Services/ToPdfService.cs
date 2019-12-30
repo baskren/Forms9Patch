@@ -44,7 +44,7 @@ namespace Forms9Patch
             ToFileResult result = null;
             using (var indicator = ActivityIndicatorPopup.Create())
             {
-                result = await _platformToPdfService.ToPdfAsync(indicator, html, fileName);
+                result = await _platformToPdfService.ToPdfAsync(html, fileName);
             }
             await Task.Delay(50);
             return result;
@@ -64,7 +64,7 @@ namespace Forms9Patch
             ToFileResult result = null;
             using (var indicator = ActivityIndicatorPopup.Create())
             {
-                result = await _platformToPdfService.ToPdfAsync(indicator, webView, fileName);
+                result = await _platformToPdfService.ToPdfAsync(webView, fileName);
             }
             await Task.Delay(50);
             return result;

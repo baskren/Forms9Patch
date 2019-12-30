@@ -44,11 +44,14 @@ if(bases.length == 0){
             Url = url;
         }
 
+        int instanceCount = 0;
+
         public override async Task Init()
         {
+
             _webView = new WebView
             {
-                Name = "SpecialSuperDuperWebViewAtLarge",
+                Name = "PrintWebView" + (instanceCount++).ToString("D3"),
                 DefaultBackgroundColor = Windows.UI.Colors.White,
                 Visibility = Visibility.Visible,
             };

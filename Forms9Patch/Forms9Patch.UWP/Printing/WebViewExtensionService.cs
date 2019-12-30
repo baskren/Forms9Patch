@@ -50,5 +50,16 @@ namespace Forms9Patch.UWP
             });
         }
 
+        public void Print(string html, string jobName)
+        {
+            var webView = new Xamarin.Forms.WebView
+            {
+                Source = new HtmlWebViewSource
+                {
+                    Html = html
+                }
+            };
+            Print(webView, jobName);
+        }
     }
 }
