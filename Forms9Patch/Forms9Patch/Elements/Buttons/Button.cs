@@ -1159,10 +1159,12 @@ namespace Forms9Patch
                     if (ToggleBehavior && GroupToggleBehavior == GroupToggleBehavior.None
                         || GroupToggleBehavior == GroupToggleBehavior.Multiselect
                         || GroupToggleBehavior == GroupToggleBehavior.Radio && !IsSelected)
+
                         IsSelected = !IsSelected;
-                    else
+
+                    //else
                     {
-                        Opacity = 0.5;
+                        //Opacity = 0.5;
                         Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
                         {
                             Opacity += 0.1;
@@ -1193,6 +1195,7 @@ namespace Forms9Patch
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "OnDown");
             e.Handled = IsEnabled && IsVisible;
+            Opacity = 0.5;
         }
 
         /// <summary>

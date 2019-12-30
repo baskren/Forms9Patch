@@ -29,6 +29,20 @@ namespace Forms9Patch
         }
 
         /// <summary>
+        /// Print HTML string
+        /// </summary>
+        /// <param name="html"></param>
+        /// <param name="jobName"></param>
+        public static void Print(this string html, string jobName)
+        {
+            _service = _service ?? DependencyService.Get<IWebViewExtensionService>();
+            if (_service == null)
+                throw new NotSupportedException("Cannot get IWebViewService: must not be supported on this platform.");
+            _service.Print(html, jobName ?? ApplicationInfoService.Name);
+        }
+
+
+        /// <summary>
         /// Gets a value indicating whether this <see cref="T:Forms9Patch.WebViewExtensions"/> can print.
         /// </summary>
         /// <value><c>true</c> if can print; otherwise, <c>false</c>.</value>
