@@ -121,6 +121,42 @@
       "version": ""
     },
     {
+      "type": "Conceptual",
+      "source_relative_path": "guides/PrintService.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/PrintService.html",
+          "hash": "R+V7tQGQK1tPnJCT7KTCQA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/ToPdfService.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/ToPdfService.html",
+          "hash": "DZUaShs+GVLXFXA/1DaeZQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/ToPngService.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/ToPngService.html",
+          "hash": "vAFj+Jjlpzz66YWy34ef2Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "type": "Resource",
       "source_relative_path": "guides/images/Buttons/SegmentedControl.png",
       "output": {
@@ -1442,15 +1478,12 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Toc",
       "source_relative_path": "guides/toc.yml",
       "output": {
         ".html": {
           "relative_path": "guides/toc.html",
-          "hash": "0Q9nD2YcIg47Ehqm4cQtXw=="
+          "hash": "Umm0wJTEfZyZ6dNZmZ0J4Q=="
         }
       },
       "is_incremental": false,
@@ -2586,6 +2619,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "obj/api/Forms9Patch.IPrintService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Forms9Patch.IPrintService.html",
+          "hash": "qlHlWU3yEv/KZnusiAg28g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "obj/api/Forms9Patch.ISegment.yml",
       "output": {
         ".html": {
@@ -2634,11 +2679,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "obj/api/Forms9Patch.IToPngService.yml",
+      "source_relative_path": "obj/api/Forms9Patch.IToPdfService.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Forms9Patch.IToPngService.html",
-          "hash": "GSN3SsPFGiFWC5Dz5cbsKw=="
+          "relative_path": "api/Forms9Patch.IToPdfService.html",
+          "hash": "IetNnQhqhRu8yvFlBlFaCw=="
         }
       },
       "is_incremental": false,
@@ -2646,11 +2691,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "obj/api/Forms9Patch.IWebViewExtensionService.yml",
+      "source_relative_path": "obj/api/Forms9Patch.IToPngService.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Forms9Patch.IWebViewExtensionService.html",
-          "hash": "XkALOFAmqoixN4HBapJsaQ=="
+          "relative_path": "api/Forms9Patch.IToPngService.html",
+          "hash": "uKKmCtByA2mgEVrzJ38lGw=="
         }
       },
       "is_incremental": false,
@@ -3066,6 +3111,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "obj/api/Forms9Patch.PrintService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Forms9Patch.PrintService.html",
+          "hash": "Zh+mFEAPeqWIqK5LZcIhMA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "obj/api/Forms9Patch.Proximity.yml",
       "output": {
         ".html": {
@@ -3378,11 +3435,23 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "obj/api/Forms9Patch.ToPngResult.yml",
+      "source_relative_path": "obj/api/Forms9Patch.ToFileResult.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Forms9Patch.ToPngResult.html",
-          "hash": "1gEc9UyH638wxy4r/8WRug=="
+          "relative_path": "api/Forms9Patch.ToFileResult.html",
+          "hash": "u8qd5ay8+dnPkZvMio17CQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Forms9Patch.ToPdfService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Forms9Patch.ToPdfService.html",
+          "hash": "9K8I+RC0jAj+tzAuk0rzaQ=="
         }
       },
       "is_incremental": false,
@@ -3394,7 +3463,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.ToPngService.html",
-          "hash": "WPUh9qrrlH3xtpt3IIXpjA=="
+          "hash": "WIvqxYgUZ9qyUVNBtCC45g=="
         }
       },
       "is_incremental": false,
@@ -3414,23 +3483,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "obj/api/Forms9Patch.WebViewExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Forms9Patch.WebViewExtensions.html",
-          "hash": "MF9VAZunDgSyJhb+31BhvA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "obj/api/Forms9Patch.yml",
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.html",
-          "hash": "VxpQFPiPtdY0PyEnzlt0Qw=="
+          "hash": "5HPrGfsxWFelZkgbbXBmLg=="
         }
       },
       "is_incremental": false,
@@ -4246,7 +4303,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "Uwkmq/RQVkiO5ZGwTFfdiw=="
+          "hash": "Ngw/TGj48rBt3NRcOTXwgw=="
         }
       },
       "is_incremental": false,
@@ -4276,13 +4333,6 @@
         "full_build_reason_code": "ForceRebuild"
       },
       "processors": {
-        "ResourceDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
@@ -4290,16 +4340,23 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
-        "ManagedReferenceDocumentProcessor": {
+        "ResourceDocumentProcessor": {
           "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
-          "total_file_count": 226,
+          "total_file_count": 0,
           "skipped_file_count": 0
         },
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 15,
+          "total_file_count": 18,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 228,
           "skipped_file_count": 0
         }
       }

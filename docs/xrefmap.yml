@@ -8985,6 +8985,44 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.IPopup.VerticalOptions
   nameWithType: IPopup.VerticalOptions
+- uid: Forms9Patch.IPrintService
+  name: IPrintService
+  href: api/Forms9Patch.IPrintService.html
+  commentId: T:Forms9Patch.IPrintService
+  fullName: Forms9Patch.IPrintService
+  nameWithType: IPrintService
+- uid: Forms9Patch.IPrintService.CanPrint
+  name: CanPrint()
+  href: api/Forms9Patch.IPrintService.html#Forms9Patch_IPrintService_CanPrint
+  commentId: M:Forms9Patch.IPrintService.CanPrint
+  fullName: Forms9Patch.IPrintService.CanPrint()
+  nameWithType: IPrintService.CanPrint()
+- uid: Forms9Patch.IPrintService.CanPrint*
+  name: CanPrint
+  href: api/Forms9Patch.IPrintService.html#Forms9Patch_IPrintService_CanPrint_
+  commentId: Overload:Forms9Patch.IPrintService.CanPrint
+  isSpec: "True"
+  fullName: Forms9Patch.IPrintService.CanPrint
+  nameWithType: IPrintService.CanPrint
+- uid: Forms9Patch.IPrintService.Print(System.String,System.String)
+  name: Print(String, String)
+  href: api/Forms9Patch.IPrintService.html#Forms9Patch_IPrintService_Print_System_String_System_String_
+  commentId: M:Forms9Patch.IPrintService.Print(System.String,System.String)
+  fullName: Forms9Patch.IPrintService.Print(System.String, System.String)
+  nameWithType: IPrintService.Print(String, String)
+- uid: Forms9Patch.IPrintService.Print(Xamarin.Forms.WebView,System.String)
+  name: Print(WebView, String)
+  href: api/Forms9Patch.IPrintService.html#Forms9Patch_IPrintService_Print_Xamarin_Forms_WebView_System_String_
+  commentId: M:Forms9Patch.IPrintService.Print(Xamarin.Forms.WebView,System.String)
+  fullName: Forms9Patch.IPrintService.Print(Xamarin.Forms.WebView, System.String)
+  nameWithType: IPrintService.Print(WebView, String)
+- uid: Forms9Patch.IPrintService.Print*
+  name: Print
+  href: api/Forms9Patch.IPrintService.html#Forms9Patch_IPrintService_Print_
+  commentId: Overload:Forms9Patch.IPrintService.Print
+  isSpec: "True"
+  fullName: Forms9Patch.IPrintService.Print
+  nameWithType: IPrintService.Print
 - uid: Forms9Patch.ISegment
   name: ISegment
   href: api/Forms9Patch.ISegment.html
@@ -9320,24 +9358,62 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.IText.Text
   nameWithType: IText.Text
+- uid: Forms9Patch.IToPdfService
+  name: IToPdfService
+  href: api/Forms9Patch.IToPdfService.html
+  commentId: T:Forms9Patch.IToPdfService
+  fullName: Forms9Patch.IToPdfService
+  nameWithType: IToPdfService
+- uid: Forms9Patch.IToPdfService.IsAvailable
+  name: IsAvailable
+  href: api/Forms9Patch.IToPdfService.html#Forms9Patch_IToPdfService_IsAvailable
+  commentId: P:Forms9Patch.IToPdfService.IsAvailable
+  fullName: Forms9Patch.IToPdfService.IsAvailable
+  nameWithType: IToPdfService.IsAvailable
+- uid: Forms9Patch.IToPdfService.IsAvailable*
+  name: IsAvailable
+  href: api/Forms9Patch.IToPdfService.html#Forms9Patch_IToPdfService_IsAvailable_
+  commentId: Overload:Forms9Patch.IToPdfService.IsAvailable
+  isSpec: "True"
+  fullName: Forms9Patch.IToPdfService.IsAvailable
+  nameWithType: IToPdfService.IsAvailable
+- uid: Forms9Patch.IToPdfService.ToPdfAsync(System.String,System.String)
+  name: ToPdfAsync(String, String)
+  href: api/Forms9Patch.IToPdfService.html#Forms9Patch_IToPdfService_ToPdfAsync_System_String_System_String_
+  commentId: M:Forms9Patch.IToPdfService.ToPdfAsync(System.String,System.String)
+  fullName: Forms9Patch.IToPdfService.ToPdfAsync(System.String, System.String)
+  nameWithType: IToPdfService.ToPdfAsync(String, String)
+- uid: Forms9Patch.IToPdfService.ToPdfAsync(Xamarin.Forms.WebView,System.String)
+  name: ToPdfAsync(WebView, String)
+  href: api/Forms9Patch.IToPdfService.html#Forms9Patch_IToPdfService_ToPdfAsync_Xamarin_Forms_WebView_System_String_
+  commentId: M:Forms9Patch.IToPdfService.ToPdfAsync(Xamarin.Forms.WebView,System.String)
+  fullName: Forms9Patch.IToPdfService.ToPdfAsync(Xamarin.Forms.WebView, System.String)
+  nameWithType: IToPdfService.ToPdfAsync(WebView, String)
+- uid: Forms9Patch.IToPdfService.ToPdfAsync*
+  name: ToPdfAsync
+  href: api/Forms9Patch.IToPdfService.html#Forms9Patch_IToPdfService_ToPdfAsync_
+  commentId: Overload:Forms9Patch.IToPdfService.ToPdfAsync
+  isSpec: "True"
+  fullName: Forms9Patch.IToPdfService.ToPdfAsync
+  nameWithType: IToPdfService.ToPdfAsync
 - uid: Forms9Patch.IToPngService
   name: IToPngService
   href: api/Forms9Patch.IToPngService.html
   commentId: T:Forms9Patch.IToPngService
   fullName: Forms9Patch.IToPngService
   nameWithType: IToPngService
-- uid: Forms9Patch.IToPngService.ToPngAsync(Forms9Patch.ActivityIndicatorPopup,System.String,System.String)
-  name: ToPngAsync(ActivityIndicatorPopup, String, String)
-  href: api/Forms9Patch.IToPngService.html#Forms9Patch_IToPngService_ToPngAsync_Forms9Patch_ActivityIndicatorPopup_System_String_System_String_
-  commentId: M:Forms9Patch.IToPngService.ToPngAsync(Forms9Patch.ActivityIndicatorPopup,System.String,System.String)
-  fullName: Forms9Patch.IToPngService.ToPngAsync(Forms9Patch.ActivityIndicatorPopup, System.String, System.String)
-  nameWithType: IToPngService.ToPngAsync(ActivityIndicatorPopup, String, String)
-- uid: Forms9Patch.IToPngService.ToPngAsync(Forms9Patch.ActivityIndicatorPopup,Xamarin.Forms.WebView,System.String)
-  name: ToPngAsync(ActivityIndicatorPopup, WebView, String)
-  href: api/Forms9Patch.IToPngService.html#Forms9Patch_IToPngService_ToPngAsync_Forms9Patch_ActivityIndicatorPopup_Xamarin_Forms_WebView_System_String_
-  commentId: M:Forms9Patch.IToPngService.ToPngAsync(Forms9Patch.ActivityIndicatorPopup,Xamarin.Forms.WebView,System.String)
-  fullName: Forms9Patch.IToPngService.ToPngAsync(Forms9Patch.ActivityIndicatorPopup, Xamarin.Forms.WebView, System.String)
-  nameWithType: IToPngService.ToPngAsync(ActivityIndicatorPopup, WebView, String)
+- uid: Forms9Patch.IToPngService.ToPngAsync(System.String,System.String)
+  name: ToPngAsync(String, String)
+  href: api/Forms9Patch.IToPngService.html#Forms9Patch_IToPngService_ToPngAsync_System_String_System_String_
+  commentId: M:Forms9Patch.IToPngService.ToPngAsync(System.String,System.String)
+  fullName: Forms9Patch.IToPngService.ToPngAsync(System.String, System.String)
+  nameWithType: IToPngService.ToPngAsync(String, String)
+- uid: Forms9Patch.IToPngService.ToPngAsync(Xamarin.Forms.WebView,System.String)
+  name: ToPngAsync(WebView, String)
+  href: api/Forms9Patch.IToPngService.html#Forms9Patch_IToPngService_ToPngAsync_Xamarin_Forms_WebView_System_String_
+  commentId: M:Forms9Patch.IToPngService.ToPngAsync(Xamarin.Forms.WebView,System.String)
+  fullName: Forms9Patch.IToPngService.ToPngAsync(Xamarin.Forms.WebView, System.String)
+  nameWithType: IToPngService.ToPngAsync(WebView, String)
 - uid: Forms9Patch.IToPngService.ToPngAsync*
   name: ToPngAsync
   href: api/Forms9Patch.IToPngService.html#Forms9Patch_IToPngService_ToPngAsync_
@@ -9345,38 +9421,6 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.IToPngService.ToPngAsync
   nameWithType: IToPngService.ToPngAsync
-- uid: Forms9Patch.IWebViewExtensionService
-  name: IWebViewExtensionService
-  href: api/Forms9Patch.IWebViewExtensionService.html
-  commentId: T:Forms9Patch.IWebViewExtensionService
-  fullName: Forms9Patch.IWebViewExtensionService
-  nameWithType: IWebViewExtensionService
-- uid: Forms9Patch.IWebViewExtensionService.CanPrint
-  name: CanPrint()
-  href: api/Forms9Patch.IWebViewExtensionService.html#Forms9Patch_IWebViewExtensionService_CanPrint
-  commentId: M:Forms9Patch.IWebViewExtensionService.CanPrint
-  fullName: Forms9Patch.IWebViewExtensionService.CanPrint()
-  nameWithType: IWebViewExtensionService.CanPrint()
-- uid: Forms9Patch.IWebViewExtensionService.CanPrint*
-  name: CanPrint
-  href: api/Forms9Patch.IWebViewExtensionService.html#Forms9Patch_IWebViewExtensionService_CanPrint_
-  commentId: Overload:Forms9Patch.IWebViewExtensionService.CanPrint
-  isSpec: "True"
-  fullName: Forms9Patch.IWebViewExtensionService.CanPrint
-  nameWithType: IWebViewExtensionService.CanPrint
-- uid: Forms9Patch.IWebViewExtensionService.Print(Xamarin.Forms.WebView,System.String)
-  name: Print(WebView, String)
-  href: api/Forms9Patch.IWebViewExtensionService.html#Forms9Patch_IWebViewExtensionService_Print_Xamarin_Forms_WebView_System_String_
-  commentId: M:Forms9Patch.IWebViewExtensionService.Print(Xamarin.Forms.WebView,System.String)
-  fullName: Forms9Patch.IWebViewExtensionService.Print(Xamarin.Forms.WebView, System.String)
-  nameWithType: IWebViewExtensionService.Print(WebView, String)
-- uid: Forms9Patch.IWebViewExtensionService.Print*
-  name: Print
-  href: api/Forms9Patch.IWebViewExtensionService.html#Forms9Patch_IWebViewExtensionService_Print_
-  commentId: Overload:Forms9Patch.IWebViewExtensionService.Print
-  isSpec: "True"
-  fullName: Forms9Patch.IWebViewExtensionService.Print
-  nameWithType: IWebViewExtensionService.Print
 - uid: Forms9Patch.KeyboardService
   name: KeyboardService
   href: api/Forms9Patch.KeyboardService.html
@@ -12186,6 +12230,44 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.PopupPoppedEventArgs.Trigger
   nameWithType: PopupPoppedEventArgs.Trigger
+- uid: Forms9Patch.PrintService
+  name: PrintService
+  href: api/Forms9Patch.PrintService.html
+  commentId: T:Forms9Patch.PrintService
+  fullName: Forms9Patch.PrintService
+  nameWithType: PrintService
+- uid: Forms9Patch.PrintService.CanPrint
+  name: CanPrint
+  href: api/Forms9Patch.PrintService.html#Forms9Patch_PrintService_CanPrint
+  commentId: P:Forms9Patch.PrintService.CanPrint
+  fullName: Forms9Patch.PrintService.CanPrint
+  nameWithType: PrintService.CanPrint
+- uid: Forms9Patch.PrintService.CanPrint*
+  name: CanPrint
+  href: api/Forms9Patch.PrintService.html#Forms9Patch_PrintService_CanPrint_
+  commentId: Overload:Forms9Patch.PrintService.CanPrint
+  isSpec: "True"
+  fullName: Forms9Patch.PrintService.CanPrint
+  nameWithType: PrintService.CanPrint
+- uid: Forms9Patch.PrintService.Print(System.String,System.String)
+  name: Print(String, String)
+  href: api/Forms9Patch.PrintService.html#Forms9Patch_PrintService_Print_System_String_System_String_
+  commentId: M:Forms9Patch.PrintService.Print(System.String,System.String)
+  fullName: Forms9Patch.PrintService.Print(System.String, System.String)
+  nameWithType: PrintService.Print(String, String)
+- uid: Forms9Patch.PrintService.Print(Xamarin.Forms.WebView,System.String)
+  name: Print(WebView, String)
+  href: api/Forms9Patch.PrintService.html#Forms9Patch_PrintService_Print_Xamarin_Forms_WebView_System_String_
+  commentId: M:Forms9Patch.PrintService.Print(Xamarin.Forms.WebView,System.String)
+  fullName: Forms9Patch.PrintService.Print(Xamarin.Forms.WebView, System.String)
+  nameWithType: PrintService.Print(WebView, String)
+- uid: Forms9Patch.PrintService.Print*
+  name: Print
+  href: api/Forms9Patch.PrintService.html#Forms9Patch_PrintService_Print_
+  commentId: Overload:Forms9Patch.PrintService.Print
+  isSpec: "True"
+  fullName: Forms9Patch.PrintService.Print
+  nameWithType: PrintService.Print
 - uid: Forms9Patch.Proximity
   name: Proximity
   href: api/Forms9Patch.Proximity.html
@@ -15780,38 +15862,76 @@ references:
   commentId: F:Forms9Patch.Toast.TitleProperty
   fullName: Forms9Patch.Toast.TitleProperty
   nameWithType: Toast.TitleProperty
-- uid: Forms9Patch.ToPngResult
-  name: ToPngResult
-  href: api/Forms9Patch.ToPngResult.html
-  commentId: T:Forms9Patch.ToPngResult
-  fullName: Forms9Patch.ToPngResult
-  nameWithType: ToPngResult
-- uid: Forms9Patch.ToPngResult.IsError
+- uid: Forms9Patch.ToFileResult
+  name: ToFileResult
+  href: api/Forms9Patch.ToFileResult.html
+  commentId: T:Forms9Patch.ToFileResult
+  fullName: Forms9Patch.ToFileResult
+  nameWithType: ToFileResult
+- uid: Forms9Patch.ToFileResult.IsError
   name: IsError
-  href: api/Forms9Patch.ToPngResult.html#Forms9Patch_ToPngResult_IsError
-  commentId: P:Forms9Patch.ToPngResult.IsError
-  fullName: Forms9Patch.ToPngResult.IsError
-  nameWithType: ToPngResult.IsError
-- uid: Forms9Patch.ToPngResult.IsError*
+  href: api/Forms9Patch.ToFileResult.html#Forms9Patch_ToFileResult_IsError
+  commentId: P:Forms9Patch.ToFileResult.IsError
+  fullName: Forms9Patch.ToFileResult.IsError
+  nameWithType: ToFileResult.IsError
+- uid: Forms9Patch.ToFileResult.IsError*
   name: IsError
-  href: api/Forms9Patch.ToPngResult.html#Forms9Patch_ToPngResult_IsError_
-  commentId: Overload:Forms9Patch.ToPngResult.IsError
+  href: api/Forms9Patch.ToFileResult.html#Forms9Patch_ToFileResult_IsError_
+  commentId: Overload:Forms9Patch.ToFileResult.IsError
   isSpec: "True"
-  fullName: Forms9Patch.ToPngResult.IsError
-  nameWithType: ToPngResult.IsError
-- uid: Forms9Patch.ToPngResult.Result
+  fullName: Forms9Patch.ToFileResult.IsError
+  nameWithType: ToFileResult.IsError
+- uid: Forms9Patch.ToFileResult.Result
   name: Result
-  href: api/Forms9Patch.ToPngResult.html#Forms9Patch_ToPngResult_Result
-  commentId: P:Forms9Patch.ToPngResult.Result
-  fullName: Forms9Patch.ToPngResult.Result
-  nameWithType: ToPngResult.Result
-- uid: Forms9Patch.ToPngResult.Result*
+  href: api/Forms9Patch.ToFileResult.html#Forms9Patch_ToFileResult_Result
+  commentId: P:Forms9Patch.ToFileResult.Result
+  fullName: Forms9Patch.ToFileResult.Result
+  nameWithType: ToFileResult.Result
+- uid: Forms9Patch.ToFileResult.Result*
   name: Result
-  href: api/Forms9Patch.ToPngResult.html#Forms9Patch_ToPngResult_Result_
-  commentId: Overload:Forms9Patch.ToPngResult.Result
+  href: api/Forms9Patch.ToFileResult.html#Forms9Patch_ToFileResult_Result_
+  commentId: Overload:Forms9Patch.ToFileResult.Result
   isSpec: "True"
-  fullName: Forms9Patch.ToPngResult.Result
-  nameWithType: ToPngResult.Result
+  fullName: Forms9Patch.ToFileResult.Result
+  nameWithType: ToFileResult.Result
+- uid: Forms9Patch.ToPdfService
+  name: ToPdfService
+  href: api/Forms9Patch.ToPdfService.html
+  commentId: T:Forms9Patch.ToPdfService
+  fullName: Forms9Patch.ToPdfService
+  nameWithType: ToPdfService
+- uid: Forms9Patch.ToPdfService.IsAvailable
+  name: IsAvailable
+  href: api/Forms9Patch.ToPdfService.html#Forms9Patch_ToPdfService_IsAvailable
+  commentId: P:Forms9Patch.ToPdfService.IsAvailable
+  fullName: Forms9Patch.ToPdfService.IsAvailable
+  nameWithType: ToPdfService.IsAvailable
+- uid: Forms9Patch.ToPdfService.IsAvailable*
+  name: IsAvailable
+  href: api/Forms9Patch.ToPdfService.html#Forms9Patch_ToPdfService_IsAvailable_
+  commentId: Overload:Forms9Patch.ToPdfService.IsAvailable
+  isSpec: "True"
+  fullName: Forms9Patch.ToPdfService.IsAvailable
+  nameWithType: ToPdfService.IsAvailable
+- uid: Forms9Patch.ToPdfService.ToPdfAsync(System.String,System.String)
+  name: ToPdfAsync(String, String)
+  href: api/Forms9Patch.ToPdfService.html#Forms9Patch_ToPdfService_ToPdfAsync_System_String_System_String_
+  commentId: M:Forms9Patch.ToPdfService.ToPdfAsync(System.String,System.String)
+  fullName: Forms9Patch.ToPdfService.ToPdfAsync(System.String, System.String)
+  nameWithType: ToPdfService.ToPdfAsync(String, String)
+- uid: Forms9Patch.ToPdfService.ToPdfAsync(Xamarin.Forms.WebView,System.String)
+  name: ToPdfAsync(WebView, String)
+  href: api/Forms9Patch.ToPdfService.html#Forms9Patch_ToPdfService_ToPdfAsync_Xamarin_Forms_WebView_System_String_
+  commentId: M:Forms9Patch.ToPdfService.ToPdfAsync(Xamarin.Forms.WebView,System.String)
+  fullName: Forms9Patch.ToPdfService.ToPdfAsync(Xamarin.Forms.WebView, System.String)
+  nameWithType: ToPdfService.ToPdfAsync(WebView, String)
+- uid: Forms9Patch.ToPdfService.ToPdfAsync*
+  name: ToPdfAsync
+  href: api/Forms9Patch.ToPdfService.html#Forms9Patch_ToPdfService_ToPdfAsync_
+  commentId: Overload:Forms9Patch.ToPdfService.ToPdfAsync
+  isSpec: "True"
+  fullName: Forms9Patch.ToPdfService.ToPdfAsync
+  nameWithType: ToPdfService.ToPdfAsync
 - uid: Forms9Patch.ToPngService
   name: ToPngService
   href: api/Forms9Patch.ToPngService.html
@@ -15853,38 +15973,6 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ToPngService.ToPngAsync
   nameWithType: ToPngService.ToPngAsync
-- uid: Forms9Patch.WebViewExtensions
-  name: WebViewExtensions
-  href: api/Forms9Patch.WebViewExtensions.html
-  commentId: T:Forms9Patch.WebViewExtensions
-  fullName: Forms9Patch.WebViewExtensions
-  nameWithType: WebViewExtensions
-- uid: Forms9Patch.WebViewExtensions.CanPrint
-  name: CanPrint
-  href: api/Forms9Patch.WebViewExtensions.html#Forms9Patch_WebViewExtensions_CanPrint
-  commentId: P:Forms9Patch.WebViewExtensions.CanPrint
-  fullName: Forms9Patch.WebViewExtensions.CanPrint
-  nameWithType: WebViewExtensions.CanPrint
-- uid: Forms9Patch.WebViewExtensions.CanPrint*
-  name: CanPrint
-  href: api/Forms9Patch.WebViewExtensions.html#Forms9Patch_WebViewExtensions_CanPrint_
-  commentId: Overload:Forms9Patch.WebViewExtensions.CanPrint
-  isSpec: "True"
-  fullName: Forms9Patch.WebViewExtensions.CanPrint
-  nameWithType: WebViewExtensions.CanPrint
-- uid: Forms9Patch.WebViewExtensions.Print(Xamarin.Forms.WebView,System.String)
-  name: Print(WebView, String)
-  href: api/Forms9Patch.WebViewExtensions.html#Forms9Patch_WebViewExtensions_Print_Xamarin_Forms_WebView_System_String_
-  commentId: M:Forms9Patch.WebViewExtensions.Print(Xamarin.Forms.WebView,System.String)
-  fullName: Forms9Patch.WebViewExtensions.Print(Xamarin.Forms.WebView, System.String)
-  nameWithType: WebViewExtensions.Print(WebView, String)
-- uid: Forms9Patch.WebViewExtensions.Print*
-  name: Print
-  href: api/Forms9Patch.WebViewExtensions.html#Forms9Patch_WebViewExtensions_Print_
-  commentId: Overload:Forms9Patch.WebViewExtensions.Print
-  isSpec: "True"
-  fullName: Forms9Patch.WebViewExtensions.Print
-  nameWithType: WebViewExtensions.Print
 - uid: FormsGestures
   name: FormsGestures
   href: api/FormsGestures.html

@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>ToPng | Forms9Patch </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="ToPng | Forms9Patch ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="topng">ToPng</h1>
+
+<p>Often I need to do one of the following:</p>
+<ul>
+<li>Convert some HTML to a PNG</li>
+<li>Take the content of a Xamarin.Forms.WebView and turn it into a PNG</li>
+</ul>
+<p>I've had to do this enough times that I finally broke down and added it to Forms9Patch.</p>
+<h2 id="convert-html-to-a-png">Convert HTML to a PNG</h2>
+<p>Usage is as follows:</p>
+<pre><code class="lang-c-sharp">    if (await Forms9Patch.ToPngService.ToPngAsync(_htmlEditor.Text, &quot;myHtmlPage&quot;) is ToFileResult result)
+    {
+        if (result.IsError)
+        {
+            using (Forms9Patch.Toast.Create(&quot;PNG error&quot;, result.Result)) { }
+        }
+        else
+        {
+            var entry = new Forms9Patch.MimeItemCollection();
+            entry.AddBytesFromFile(&quot;image/png&quot;, result.Result);
+
+            if (e.Segment.Text == shareButtonText)
+                Forms9Patch.Sharing.Share(entry, _destinationSelector);
+            else if (e.Segment.Text == copyButtonText)
+                Forms9Patch.Clipboard.Entry = entry;
+        }
+    }
+</code></pre>
+<p>In the above example, we are putting the PNG onto the clipboard.  Xamarin.Essentials.Sharing could also be used.</p>
+<h2 id="xamarinformswebview-to-a-png">Xamarin.Forms.WebView to a PNG</h2>
+<p>Below, we take the contents of a Xamarin.Forms.WebView and Share it as a PNG:</p>
+<pre><code class="lang-c-sharp">if (await myWebView.ToPngAsync(&quot;output.png&quot;) is ToFileResult result)
+{
+    if (result.IsError)
+        {
+            using (Forms9Patch.Toast.Create(&quot;PNG error&quot;, result.Result)) { }
+        }
+        else
+        {
+            await Xamarin.Essentials.Share.RequestAsync(new Xamarin.Essentials.ShareFileRequest
+            {
+                Title = &quot;myWebView sharing title&quot;,
+                File = new Xamarin.Forms.ShareFile(result.Result, &quot;image/png&quot;)
+            });
+        }
+}
+</code></pre>
+<h2 id="using-embeddedresource-as-a-source-for-a-xamarinformswebview">Using EmbeddedResource as a source for a Xamarin.Forms.WebView</h2>
+<p>This is sort of an experimental feature but I've found it useful.  As such the documentation is sparse.  It allow you to put HTML content in a folder in your app's EmbeddedResources folder and then use it as a source for a WebView.   A much nicer solution than using platform specific approach provided by Xamarin.  It also supports putting all of the HTML content into a zip file.  Please take a look at the source code to see how it works.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2018 <strong>42nd Parallel</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

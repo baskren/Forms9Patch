@@ -163,7 +163,7 @@ namespace Forms9Patch.UWP
             Xamarin.Forms.DependencyService.Register<Forms9Patch.UWP.ToPngService>();
             Xamarin.Forms.DependencyService.Register<KeyboardService>();
             Xamarin.Forms.DependencyService.Register<OsInfoService>();
-            Xamarin.Forms.DependencyService.Register<WebViewExtensionsService>();
+            Xamarin.Forms.DependencyService.Register<PrintService>();
             Xamarin.Forms.DependencyService.Register<Settings>();
             Xamarin.Forms.DependencyService.Register<PopupPlatformUWP>();
             Xamarin.Forms.DependencyService.Register<SharingService>();

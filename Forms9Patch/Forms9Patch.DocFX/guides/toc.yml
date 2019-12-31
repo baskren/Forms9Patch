@@ -16,5 +16,9 @@
   href: Popups.md
 - name: Custom Fonts
   href: CustomFonts.md
-- name: Printing and exporting PNGs from HTML and WebViews
-  href: ToPngService
+- name: Generating PNGs from HTML or WebView content
+  href: ToPngService.md
+- name: Generating PDFs from HTML or WebView content
+  href: ToPdfService.md
+- name: Printing HTML or WebView content
+  href: PrintService.md

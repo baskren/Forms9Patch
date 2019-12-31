@@ -14,7 +14,7 @@ namespace Forms9Patch.UWP
 	/// <summary>
 	/// Web view extensions service.
 	/// </summary>
-	public class PrintService : IWebViewExtensionService
+	public class PrintService : IPrintService
 	{
 
 

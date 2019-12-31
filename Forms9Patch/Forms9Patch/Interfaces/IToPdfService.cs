@@ -11,7 +11,6 @@ namespace Forms9Patch
         /// <summary>
         /// Html to PNG interface
         /// </summary>
-        /// <param name="popup"></param>
         /// <param name="html"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
@@ -20,7 +19,6 @@ namespace Forms9Patch
         /// <summary>
         /// WebView to PNG interface
         /// </summary>
-        /// <param name="popup"></param>
         /// <param name="webView"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
