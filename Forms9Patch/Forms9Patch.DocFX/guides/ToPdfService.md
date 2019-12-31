@@ -20,7 +20,8 @@ Usage is as follows:
         }
         else
         {
-            var entry = new Forms9Patch.MimeItemCollection();                entry.AddBytesFromFile("application/pdf", result.Result);
+            var entry = new Forms9Patch.MimeItemCollection();
+            entry.AddBytesFromFile("application/pdf", result.Result);
 
             if (e.Segment.Text == shareButtonText)
                 Forms9Patch.Sharing.Share(entry, _destinationSelector);

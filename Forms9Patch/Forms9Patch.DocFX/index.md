@@ -21,7 +21,7 @@ Android developers can use NinePatch bitmaps, the drawable directory naming conv
 
 ## So, what exactly is Forms9Patch
 
-Forms9Patch is a package of VisualElements plus a suite of Extensions, Services, and Effects.
+Forms9Patch is a package of VisualElements plus a suite of Services, and Effects.
 
 ### Visual Elements
 
@@ -66,14 +66,9 @@ Forms9Patch's pop-up elements can be thought of as Forms9Patch layout elements (
 - `Forms9Patch.Toast`: a convenience element that presents a title, a message and an optional confirmation button.
 - `Forms9Patch.PermissionPopup`: a convenience element that presents a title, a message, and an accept and a decline button.
 - `Forms9Patch.TargetedToast`: similar to `Forms9Patch.Toast` but enhanced to point to a `Xamarin.Forms.VisualElement`.
+- `Forms9Patch.TargetedMenu`: A horizontal or vertical popup menu that can point to a `VisualElement`.
 
-### Extensions, Services, and Effects
-
-Then there are Forms9Patch's extensions.  A few noteworthy ones are:
-
-- Color Extensions: Blend two colors, change a color's opacity, convert between Xamarin.Forms.Color and string representations.
-- WebView Extensions: Print the contents of a `Xamarin.Forms.WebView` (currently iOS and Android only).
-- HtmlString Extensions: Convert HTML markup to a PNG file.
+### Services, and Effects
 
 And lastly is Forms9Patch's services and effects:
 
