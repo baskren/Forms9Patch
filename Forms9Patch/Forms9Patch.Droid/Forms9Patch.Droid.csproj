@@ -81,7 +81,7 @@
     <Compile Include="Services\ToPngService.cs" />
     <Compile Include="Services\KeyboardService.cs" />
     <Compile Include="Services\OsInfoService.cs" />
-    <Compile Include="Services\WebViewExtensionsService.cs" />
+    <Compile Include="Services\PrintService.cs" />
     <Compile Include="Models\Popup.cs" />
     <Compile Include="Services\AudioService.cs" />
     <Compile Include="Services\HapticsService.cs" />

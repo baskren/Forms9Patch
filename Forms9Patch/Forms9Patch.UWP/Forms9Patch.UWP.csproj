@@ -196,7 +196,7 @@
     <Compile Include="Services\ToPngService.cs" />
     <Compile Include="Services\KeyboardService.cs" />
     <Compile Include="Services\OsInfoService.cs" />
-    <Compile Include="Printing\WebViewExtensionService.cs" />
+    <Compile Include="Printing\PrintService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\moderateMargins.svg" />

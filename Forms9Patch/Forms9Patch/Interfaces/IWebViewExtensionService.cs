@@ -5,7 +5,7 @@ namespace Forms9Patch
     /// <summary>
     /// Print service.
     /// </summary>
-    public interface IWebViewExtensionService
+    public interface IPrintService
     {
         /// <summary>
         /// Print the specified webView and jobName.

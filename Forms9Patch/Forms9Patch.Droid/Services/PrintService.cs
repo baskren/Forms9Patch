@@ -7,10 +7,10 @@ using Android.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: Dependency(typeof(Forms9Patch.Droid.WebViewExtensionsService))]
+[assembly: Dependency(typeof(Forms9Patch.Droid.PrintService))]
 namespace Forms9Patch.Droid
 {
-    public class WebViewExtensionsService : IWebViewExtensionService
+    public class PrintService : IPrintService
     {
         Forms9Patch.ActivityIndicatorPopup _activityIndicatorPopup;
         IVisualElementRenderer _existingRenderer;

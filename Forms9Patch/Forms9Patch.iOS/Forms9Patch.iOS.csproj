@@ -108,7 +108,7 @@
     <Compile Include="Services\KeyboardService.cs" />
     <Compile Include="Services\OsInfoService.cs" />
     <Compile Include="Services\StatusBarService.cs" />
-    <Compile Include="Services\WebViewExtensionsService.cs" />
+    <Compile Include="Services\PrintService.cs" />
     <Compile Include="Reachability.cs" />
     <Compile Include="UIViewContentMode.cs" />
     <Compile Include="Services\HapticService.cs" />

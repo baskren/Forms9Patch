@@ -5,14 +5,14 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: Dependency(typeof(Forms9Patch.iOS.WebViewExtensionsService))]
+[assembly: Dependency(typeof(Forms9Patch.iOS.PrintService))]
 namespace Forms9Patch.iOS
 {
 
     /// <summary>
     /// Web view extensions service.
     /// </summary>
-    public class WebViewExtensionsService : UIPrintInteractionControllerDelegate, IWebViewExtensionService
+    public class PrintService : UIPrintInteractionControllerDelegate, IPrintService
     {
         //UIView AppleViewToPrint;
         //WebView ViewToPrint;

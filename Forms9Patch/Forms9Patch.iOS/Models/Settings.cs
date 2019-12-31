@@ -98,7 +98,7 @@ namespace Forms9Patch.iOS
                 var s6 = new ToPngService();
                 var s7 = new KeyboardService();
                 var s8 = new OsInfoService();
-                var s9 = new WebViewExtensionsService();
+                var s9 = new PrintService();
 #pragma warning restore IDE0059 // Unnecessary assignment of a value
 #pragma warning restore IDE0067 // Dispose objects before losing scope
             }

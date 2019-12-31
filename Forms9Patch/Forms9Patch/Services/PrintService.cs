@@ -6,14 +6,14 @@ namespace Forms9Patch
     /// <summary>
     /// Extensions to XF WebView
     /// </summary>
-    public static class WebViewExtensions
+    public static class PrintService
     {
-        static WebViewExtensions()
+        static PrintService()
         {
             Settings.ConfirmInitialization();
         }
 
-        static IWebViewExtensionService _service;
+        static IPrintService _service;
 
         /// <summary>
         /// Print the specified webview and jobName.
@@ -22,7 +22,7 @@ namespace Forms9Patch
         /// <param name="jobName">Job name.</param>
         public static void Print(this WebView webview, string jobName)
         {
-            _service = _service ?? DependencyService.Get<IWebViewExtensionService>();
+            _service = _service ?? DependencyService.Get<IPrintService>();
             if (_service == null)
                 throw new NotSupportedException("Cannot get IWebViewService: must not be supported on this platform.");
             _service.Print(webview, jobName ?? ApplicationInfoService.Name);
@@ -35,7 +35,7 @@ namespace Forms9Patch
         /// <param name="jobName"></param>
         public static void Print(this string html, string jobName)
         {
-            _service = _service ?? DependencyService.Get<IWebViewExtensionService>();
+            _service = _service ?? DependencyService.Get<IPrintService>();
             if (_service == null)
                 throw new NotSupportedException("Cannot get IWebViewService: must not be supported on this platform.");
             _service.Print(html, jobName ?? ApplicationInfoService.Name);
@@ -50,7 +50,7 @@ namespace Forms9Patch
         {
             get
             {
-                _service = _service ?? DependencyService.Get<IWebViewExtensionService>();
+                _service = _service ?? DependencyService.Get<IPrintService>();
                 if (_service == null)
                     return false;
                 return _service.CanPrint();
