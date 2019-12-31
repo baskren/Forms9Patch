@@ -95,7 +95,8 @@
         }
         else
         {
-            var entry = new Forms9Patch.MimeItemCollection();                entry.AddBytesFromFile(&quot;application/pdf&quot;, result.Result);
+            var entry = new Forms9Patch.MimeItemCollection();
+            entry.AddBytesFromFile(&quot;application/pdf&quot;, result.Result);
 
             if (e.Segment.Text == shareButtonText)
                 Forms9Patch.Sharing.Share(entry, _destinationSelector);

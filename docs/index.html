@@ -89,7 +89,7 @@
 </ul>
 <p>Android developers can use NinePatch bitmaps, the drawable directory naming convention, Html.FromHtml, and a bunch of complex file manipulations to address the image issue.  Likewise, iOS developers can use ResizeableImageWithCapInsets, the @2x, @3x, @4x file naming convention, and some 3rd party libraries for this purpose.  Custom fonts are a bit more complicated and label layouts take things up another notch.   Forms9Patch enhances Xamarin Forms to make multi-resolution / multi-screen image management, custom fonts, and HTML text formatting easy for NetStandard, PCL and Shared Library applications for iOS, Android and UWP.</p>
 <h2 id="so-what-exactly-is-forms9patch">So, what exactly is Forms9Patch</h2>
-<p>Forms9Patch is a package of VisualElements plus a suite of Extensions, Services, and Effects.</p>
+<p>Forms9Patch is a package of VisualElements plus a suite of Services, and Effects.</p>
 <h3 id="visual-elements">Visual Elements</h3>
 <p>Forms9Patch VisualElements is based upon three core elements from which five layouts, three buttons, and a number of pop-ups are built upon. The three core elements are:</p>
 <ul>
@@ -138,14 +138,9 @@
 <li><code>Forms9Patch.Toast</code>: a convenience element that presents a title, a message and an optional confirmation button.</li>
 <li><code>Forms9Patch.PermissionPopup</code>: a convenience element that presents a title, a message, and an accept and a decline button.</li>
 <li><code>Forms9Patch.TargetedToast</code>: similar to <code>Forms9Patch.Toast</code> but enhanced to point to a <code>Xamarin.Forms.VisualElement</code>.</li>
+<li><code>Forms9Patch.TargetedMenu</code>: A horizontal or vertical popup menu that can point to a <code>VisualElement</code>.</li>
 </ul>
-<h3 id="extensions-services-and-effects">Extensions, Services, and Effects</h3>
-<p>Then there are Forms9Patch's extensions.  A few noteworthy ones are:</p>
-<ul>
-<li>Color Extensions: Blend two colors, change a color's opacity, convert between Xamarin.Forms.Color and string representations.</li>
-<li>WebView Extensions: Print the contents of a <code>Xamarin.Forms.WebView</code> (currently iOS and Android only).</li>
-<li>HtmlString Extensions: Convert HTML markup to a PNG file.</li>
-</ul>
+<h3 id="services-and-effects">Services, and Effects</h3>
 <p>And lastly is Forms9Patch's services and effects:</p>
 <ul>
 <li>Keyboard Service: Want to put away the system keyboard?  Want to be notified when the system keyboard appears or disappears?</li>
