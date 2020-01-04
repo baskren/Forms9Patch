@@ -224,60 +224,63 @@ namespace Forms9Patch.Droid
                     return _fontFiles;
                 var context = Settings.Context;
                 var fontAssetFileNames = context.Assets.List("Fonts");
-                var cachedFontDir = new File(CustomFontDirRoot + "/AssetFonts");
-                // move any Android Asset Fonts to the Applications CustomFontDirRoot
-                if (fontAssetFileNames != null)
+                using (var cachedFontDir = new File(CustomFontDirRoot + "/AssetFonts"))
                 {
-                    foreach (var fontAssetFileName in fontAssetFileNames)
+                    if (!cachedFontDir.Exists())
+                        cachedFontDir.Mkdir();
+                    // move any Android Asset Fonts to the Applications CustomFontDirRoot
+                    if (fontAssetFileNames != null)
                     {
-                        if (!cachedFontDir.Exists())
-                            cachedFontDir.Mkdir();
-                        var cachedFontFile = new File(cachedFontDir.AbsolutePath, fontAssetFileName);
-                        if (!cachedFontFile.Exists())
+                        foreach (var fontAssetFileName in fontAssetFileNames)
                         {
-                            // copy into CustomFontDirRoot
-                            var inputStream = context.Assets.Open("Fonts/" + fontAssetFileName);
-                            var outputStream = new FileOutputStream(cachedFontFile);
-                            const int bufferSize = 1024;
-                            var buffer = new byte[bufferSize];
-                            int length = -1;
-                            while ((length = inputStream.Read(buffer, 0, bufferSize)) > 0)
+                            using (var cachedFontFile = new File(cachedFontDir.AbsolutePath, fontAssetFileName))
                             {
-                                outputStream.Write(buffer, 0, length);
+                                if (!cachedFontFile.Exists())
+                                {
+                                    // copy into CustomFontDirRoot
+                                    var inputStream = context.Assets.Open("Fonts/" + fontAssetFileName);
+                                    var outputStream = new FileOutputStream(cachedFontFile);
+                                    const int bufferSize = 1024;
+                                    var buffer = new byte[bufferSize];
+                                    int length = -1;
+                                    while ((length = inputStream.Read(buffer, 0, bufferSize)) > 0)
+                                    {
+                                        outputStream.Write(buffer, 0, length);
+                                    }
+                                    inputStream.Close();
+                                    outputStream.Close();
+                                }
                             }
-                            inputStream.Close();
-                            outputStream.Close();
                         }
-                        cachedFontDir?.Dispose();
                     }
-                }
-                var fontdirs = new string[] { "/system/fonts", "/system/font", "/data/fonts", cachedFontDir.AbsolutePath };
-                _fontFiles = new Dictionary<string, string>();
-                var analyzer = new TTFAnalyzer();
+                    var fontdirs = new string[] { "/system/fonts", "/system/font", "/data/fonts", cachedFontDir.AbsolutePath };
+                    _fontFiles = new Dictionary<string, string>();
+                    var analyzer = new TTFAnalyzer();
 
-                foreach (var fontdir in fontdirs)
-                {
-                    var dir = new File(fontdir);
-                    if (!dir.Exists())
-                        continue;
-
-                    File[] files = dir.ListFiles();
-
-                    if (files == null)
-                        continue;
-
-                    foreach (var file in files)
+                    foreach (var fontdir in fontdirs)
                     {
-                        if (analyzer.FontAttributes(file.AbsolutePath) == "Regular")
+                        using (var dir = new File(fontdir))
                         {
-                            String fontFamily = analyzer.FontFamily(file.AbsolutePath);
-                            if (fontFamily != null && !_fontFiles.ContainsKey(fontFamily))
-                                _fontFiles.Add(fontFamily, file.AbsolutePath);
+                            if (!dir.Exists())
+                                continue;
+
+                            File[] files = dir.ListFiles();
+
+                            if (files == null)
+                                continue;
+
+                            foreach (var file in files)
+                            {
+                                if (analyzer.FontAttributes(file.AbsolutePath) == "Regular")
+                                {
+                                    var fontFamily = analyzer.FontFamily(file.AbsolutePath);
+                                    if (fontFamily != null && !_fontFiles.ContainsKey(fontFamily))
+                                        _fontFiles.Add(fontFamily, file.AbsolutePath);
+                                }
+                            }
                         }
                     }
-                    dir.Dispose();
                 }
-
                 return _fontFiles.Count == 0 ? null : _fontFiles;
             }
         }
