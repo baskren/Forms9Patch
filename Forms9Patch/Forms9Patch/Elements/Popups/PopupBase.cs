@@ -936,28 +936,35 @@ namespace Forms9Patch
                 Recursion.Enter(GetType(), _id);
                 _isPopping = true;
                 IsVisible = false;
-                await _semaphore.WaitAsync();
-                if (PopupNavigation.Instance.PopupStack.Contains(this) && PopupPoppedEventArgs == null)
+                try
                 {
-                    _isPopping = true;
-                    SetPopupPoppedEventArgs(trigger, callerName);
-                    PopupLayerEffect.RemoveFrom(this);
-                    base.IsAnimationEnabled = IsAnimationEnabled;
-                    await Navigation.RemovePopupPageAsync(this);
-                    try
+                    await _semaphore.WaitAsync();
+                    if (PopupNavigation.Instance.PopupStack.Contains(this) && PopupPoppedEventArgs == null)
                     {
-                        _semaphore.Release();
+                        _isPopping = true;
+                        SetPopupPoppedEventArgs(trigger, callerName);
+                        PopupLayerEffect.RemoveFrom(this);
+                        base.IsAnimationEnabled = IsAnimationEnabled;
+                        await Navigation.RemovePopupPageAsync(this);
+                        try
+                        {
+                            _semaphore.Release();
+                        }
+                        catch (Exception) { }
+                        Popped?.Invoke(this, PopupPoppedEventArgs);
                     }
-                    catch (Exception) { }
-                    Popped?.Invoke(this, PopupPoppedEventArgs);
+                    else if (!_disposed)
+                    {
+                        try
+                        {
+                            _semaphore.Release();
+                        }
+                        catch (Exception) { }
+                    }
                 }
-                else if (!_disposed)
+                catch (ObjectDisposedException)
                 {
-                    try
-                    {
-                        _semaphore.Release();
-                    }
-                    catch (Exception) { }
+                    return;
                 }
 
                 lastAction?.Invoke();
