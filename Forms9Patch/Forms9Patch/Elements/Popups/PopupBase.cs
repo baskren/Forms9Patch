@@ -971,7 +971,7 @@ namespace Forms9Patch
                 //if (!Retain)
                 //    Dispose();
 
-                while (PopupNavigation.Instance.PopupStack.Contains(this) && !_popAnimationComplete)
+                while (/*PopupNavigation.Instance.PopupStack.Contains(this) && */!_popAnimationComplete)
                 {
                     await Task.Delay(25);
                 }
