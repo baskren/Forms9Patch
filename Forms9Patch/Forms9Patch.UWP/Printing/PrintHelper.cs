@@ -219,17 +219,27 @@ namespace Forms9Patch.UWP
 
                 // Create a new list option
                 PrintCustomItemListOptionDetails margins = printDetailedOptions.CreateItemListOption("Margins", "Margins");
-                margins.AddItem("WideMargins", "Wide", "Each margin is 20% of the paper size", await wideMarginsIconTask);
-                margins.AddItem("ModerateMargins", "Moderate", "Each margin is 10% of the paper size", await moderateMarginsIconTask);
-                margins.AddItem("NarrowMargins", "Narrow", "Each margin is 5% of the paper size", await narrowMarginsIconTask);
-
+                /*
+                if (Forms9Patch.OsInfoService.Version >= new Version(10, 0, 17134, 0))
+                {
+                    margins.AddItem("WideMargins", "Wide", "Each margin is 20% of the paper size", await wideMarginsIconTask);
+                    margins.AddItem("ModerateMargins", "Moderate", "Each margin is 10% of the paper size", await moderateMarginsIconTask);
+                    margins.AddItem("NarrowMargins", "Narrow", "Each margin is 5% of the paper size", await narrowMarginsIconTask);
+                    // App tells the user some more information about what the feature means.
+                    margins.Description = "The space between the content of your document and the edge of the paper";
+                }
+                else
+                */
+                {
+                    margins.AddItem("WideMargins", "Wide");
+                    margins.AddItem("ModerateMargins", "Moderate");
+                    margins.AddItem("NarrowMargins", "Narrow");
+                }
                 // The default is ModerateMargins
                 ApplicationContentMarginTop = 0.1;
                 ApplicationContentMarginLeft = 0.1;
                 margins.TrySetValue("ModerateMargins");
 
-                // App tells the user some more information about what the feature means.
-                margins.Description = "The space between the content of your document and the edge of the paper";
 
                 // Add the custom option to the option list
                 displayedOptions.Add("Margins");
@@ -289,16 +299,19 @@ namespace Forms9Patch.UWP
                         ApplicationContentMarginLeft = 0.05;
                         break;
                 }
-
-                if (marginsValue == "NarrowMargins")
+                /*
+                if (Forms9Patch.OsInfoService.Version >= new Version(10, 0, 17134, 0))
                 {
-                    marginsOption.WarningText = "Narrow margins may not be supported by some printers";
+                    if (marginsValue == "NarrowMargins")
+                    {
+                        marginsOption.WarningText = "Narrow margins may not be supported by some printers";
+                    }
+                    else
+                    {
+                        marginsOption.WarningText = "";
+                    }
                 }
-                else
-                {
-                    marginsOption.WarningText = "";
-                }
-
+                */
                 invalidatePreview = true;
             }
 
