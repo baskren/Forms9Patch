@@ -86,7 +86,6 @@ namespace Forms9Patch
         #region Fields
         readonly internal BasePicker _basePicker = new BasePicker
         {
-            BackgroundColor = Color.Transparent,
             IsSelectOnScrollEnabled = true
         };
 
@@ -132,6 +131,8 @@ namespace Forms9Patch
             Padding = new Thickness(0, 0, 0, 0);
 
             _basePicker._listView.SelectedCellBackgroundColor = Color.Transparent;
+            _basePicker.ItemTemplates.RemoveFactoryDefaults();
+            _basePicker.ItemTemplates.Add(typeof(string), typeof(SinglePickerCellContentView));
 
             _upperGradient.StartColor = _overlayColor;
             _upperGradient.EndColor = _overlayColor.WithAlpha(0.5);
@@ -216,7 +217,110 @@ namespace Forms9Patch
                 if (ItemsSource != null && ItemsSource.Count > Index)
                     SelectedItem = ItemsSource[Index];
             }
-
         }
     }
+
+
+
+    #region Cell Template
+    class SinglePickerCellContentView : Grid, ICellContentView, IIsSelectedAble
+    {
+        #region Properties
+        public double CellHeight { get; set; }
+
+        public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create(nameof(IsSelected), typeof(bool), typeof(MultiPickerCellContentView), default(bool));
+        public bool IsSelected
+        {
+            get => (bool)GetValue(IsSelectedProperty);
+            set => SetValue(IsSelectedProperty, value);
+        }
+
+        #endregion
+
+
+        #region Fields
+        /*
+        readonly Label checkLabel = new Label
+        {
+            Text = "✓",
+            TextColor = Color.Blue,
+            VerticalTextAlignment = TextAlignment.Center,
+            HorizontalTextAlignment = TextAlignment.Center,
+            IsVisible = false
+        };
+        */
+        protected readonly Label itemLabel = new Label
+        {
+            TextColor = Color.Black,
+            VerticalTextAlignment = TextAlignment.Center,
+            HorizontalTextAlignment = TextAlignment.Start
+        };
+
+        #endregion
+
+
+        #region Constructors
+        public SinglePickerCellContentView()
+        {
+            CellHeight = 50;
+            Padding = new Thickness(5, 1, 5, 1);
+            ColumnDefinitions = new ColumnDefinitionCollection
+            {
+                new ColumnDefinition { Width = new GridLength(0,GridUnitType.Absolute)},
+                new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star)}
+            };
+            RowDefinitions = new RowDefinitionCollection
+            {
+                new RowDefinition { Height = new GridLength(CellHeight - Padding.VerticalThickness, GridUnitType.Absolute)}
+            };
+            IgnoreChildren = true;
+            ColumnSpacing = 0;
+
+            Children.Add(itemLabel, 1, 0);
+        }
+        #endregion
+
+
+        #region Change management
+        protected override void OnBindingContextChanged()
+        {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(OnBindingContextChanged);
+                return;
+            }
+
+            base.OnBindingContextChanged();
+            if (BindingContext != null)
+                itemLabel.Text = BindingContext.ToString();
+            else
+                itemLabel.Text = null;
+
+            var parent = Parent;
+            while (parent != null)
+            {
+                if (parent is BasePicker picker)
+                {
+                    itemLabel.TextColor = picker.TextColor;
+                    return;
+                }
+                parent = parent.Parent;
+            }
+
+        }
+
+        #endregion
+
+
+        #region Appearing / Disappearing Event Handlers
+        public virtual void OnAppearing() { }
+
+        public virtual void OnDisappearing() { }
+        #endregion
+
+
+
+    }
+    #endregion
+
 }

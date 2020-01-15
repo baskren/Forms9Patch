@@ -575,10 +575,8 @@ namespace FormsGestures.iOS
             if (!_waitingForTapsToFinish && HandlesTapped)
             {
                 _waitingForTapsToFinish = true;
-                Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
+                Device.StartTimer(Settings.TappedThreshold, () =>
                 {
-                    if (DateTime.Now - _lastTap < Settings.TappedThreshold)
-                        return true;
                     Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                     {
                         if (_listeners == null)

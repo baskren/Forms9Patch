@@ -130,6 +130,14 @@ namespace Forms9Patch
         }
         #endregion
 
+        #region TextColor property
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(BasePicker), default(Color));
+        public Color TextColor
+        {
+            get { return (Color)GetValue(TextColorProperty); }
+            set { SetValue(TextColorProperty, value); }
+        }
+        #endregion
 
 
 
@@ -161,7 +169,6 @@ namespace Forms9Patch
         /// </summary>
         internal BasePicker()
         {
-            BackgroundColor = Color.Transparent;
             _listView.RowHeight = RowHeight;
             _listView.GroupToggleBehavior = GroupToggleBehavior;
             _listView.BackgroundColor = Color.Transparent;

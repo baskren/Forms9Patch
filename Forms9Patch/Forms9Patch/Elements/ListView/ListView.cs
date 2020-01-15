@@ -791,7 +791,8 @@ namespace Forms9Patch
                     UpdateBaseItemsSource();
                 else if (propertyName == ItemTemplatesProperty.PropertyName)
                     _listView.ItemTemplate = ItemTemplates;
-
+                else if (propertyName == BackgroundColorProperty.PropertyName)
+                    _listView.BackgroundColor = BackgroundColor;
                 #endregion Xamarin.Forms.ItemsView analogs
 
                 #endregion Xamarin.Forms.ListView analogs

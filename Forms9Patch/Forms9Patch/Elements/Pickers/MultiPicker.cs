@@ -77,23 +77,12 @@ namespace Forms9Patch
 
 
     #region Cell Template
-    class MultiPickerCellContentView : Grid, ICellContentView, IIsSelectedAble
+    class MultiPickerCellContentView : SinglePickerCellContentView
     {
-        #region Properties
-        public double CellHeight { get; set; }
-
-        public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create(nameof(IsSelected), typeof(bool), typeof(MultiPickerCellContentView), default(bool));
-        public bool IsSelected
-        {
-            get => (bool)GetValue(IsSelectedProperty);
-            set => SetValue(IsSelectedProperty, value);
-        }
-
-        #endregion
 
 
         #region Fields
-        readonly Label checkLabel = new Label
+        protected readonly Label checkLabel = new Label
         {
             Text = "✓",
             TextColor = Color.Blue,
@@ -101,55 +90,23 @@ namespace Forms9Patch
             HorizontalTextAlignment = TextAlignment.Center,
             IsVisible = false
         };
-        readonly Label itemLabel = new Label
-        {
-            TextColor = Color.Black,
-            VerticalTextAlignment = TextAlignment.Center,
-            HorizontalTextAlignment = TextAlignment.Start
-        };
-
         #endregion
 
 
         #region Constructors
         public MultiPickerCellContentView()
         {
-            CellHeight = 50;
-            Padding = new Thickness(5, 1, 5, 1);
             ColumnDefinitions = new ColumnDefinitionCollection
             {
                 new ColumnDefinition { Width = new GridLength(30,GridUnitType.Absolute)},
                 new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star)}
             };
-            RowDefinitions = new RowDefinitionCollection
-            {
-                new RowDefinition { Height = new GridLength(CellHeight - Padding.VerticalThickness, GridUnitType.Absolute)}
-            };
-            IgnoreChildren = true;
-            ColumnSpacing = 0;
-
-            Children.Add(itemLabel, 1, 0);
             Children.Add(checkLabel, 0, 0);
         }
         #endregion
 
 
         #region Change management
-        protected override void OnBindingContextChanged()
-        {
-            if (!P42.Utils.Environment.IsOnMainThread)
-            {
-                Device.BeginInvokeOnMainThread(OnBindingContextChanged);
-                return;
-            }
-
-            base.OnBindingContextChanged();
-            if (BindingContext != null)
-                itemLabel.Text = BindingContext.ToString();
-            else
-                itemLabel.Text = null;
-        }
-
         protected override void OnPropertyChanged(string propertyName = null)
         {
             if (!P42.Utils.Environment.IsOnMainThread)
@@ -168,9 +125,9 @@ namespace Forms9Patch
 
 
         #region Appearing / Disappearing Event Handlers
-        public virtual void OnAppearing() { }
+        public override void OnAppearing() { }
 
-        public virtual void OnDisappearing() { }
+        public override void OnDisappearing() { }
         #endregion
 
 

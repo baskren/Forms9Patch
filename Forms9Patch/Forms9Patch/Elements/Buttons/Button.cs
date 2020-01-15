@@ -1152,6 +1152,7 @@ namespace Forms9Patch
         #region Gesture event responders
         bool HandleTap()
         {
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             if (IsEnabled && IsVisible)
             {
                 if (!(this is StateButton))
@@ -1184,7 +1185,11 @@ namespace Forms9Patch
         /// Tap this instance.
         /// </summary>
         public void Tap()
-            => HandleTap();
+        {
+
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
+            HandleTap();
+        }
 
         /// <summary>
         /// Called when button is pressed down
@@ -1193,7 +1198,7 @@ namespace Forms9Patch
         /// <param name="e"></param>
         protected virtual void OnDown(object sender, FormsGestures.DownUpEventArgs e)
         {
-            //System.Diagnostics.Debug.WriteLine(GetType() + "OnDown");
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             e.Handled = IsEnabled && IsVisible;
             Opacity = 0.5;
         }
@@ -1205,7 +1210,7 @@ namespace Forms9Patch
         /// <param name="e"></param>
         protected virtual void OnUp(object sender, FormsGestures.DownUpEventArgs e)
         {
-            //System.Diagnostics.Debug.WriteLine(GetType() + "OnUp");
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             if (!IsLongPressEnabled)
                 e.Handled = HandleTap();
         }
@@ -1217,7 +1222,7 @@ namespace Forms9Patch
         /// <param name="e"></param>
         protected virtual void OnTapped(object sender, FormsGestures.TapEventArgs e)
         {
-            //System.Diagnostics.Debug.WriteLine(GetType() + "OnTapped");
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             if (IsLongPressEnabled)
                 e.Handled = HandleTap();
             else
