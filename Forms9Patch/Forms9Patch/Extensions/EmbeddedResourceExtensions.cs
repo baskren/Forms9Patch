@@ -21,7 +21,25 @@ namespace Forms9Patch
         /// <returns></returns>
         public static Assembly FindAssemblyForResource(string resourceId, Assembly assembly = null)
         {
-            if (assembly != null)
+            if (assembly==null)
+            {
+                if (resourceId.IndexOf(".Resources.", StringComparison.Ordinal) is int index && index > 0)
+                {
+                    var assemblyName = resourceId.Substring(0, index);
+                    if (ReflectionExtensions.GetAssemblyByName(assemblyName) is Assembly asmA
+                        && FindAssemblyForResource(resourceId, asmA) is Assembly)
+                        return asmA;
+                }
+                assembly = Xamarin.Forms.Application.Current?.GetType().Assembly;
+                if (FindAssemblyForResource(resourceId, assembly) is Assembly)
+                    return assembly;
+                foreach (var asmB in ReflectionExtensions.GetAssemblies())
+                {
+                    if (!asmB.IsDynamic && FindAssemblyForResource(resourceId, asmB) is Assembly)
+                        return asmB;
+                }
+            }
+            else
             {
                 if (_embeddedResourceNames.TryGetValue(assembly, out string[] names))
                     return names.Contains(resourceId) ? assembly : null;
@@ -31,34 +49,6 @@ namespace Forms9Patch
                     _embeddedResourceNames[assembly] = names;
                     return names.Contains(resourceId) ? assembly : null;
                 }
-                return null;
-            }
-            //if (assembly?.GetManifestResourceNames().Contains(resourceId) ?? false)
-            //    return assembly;
-
-
-            if (resourceId.IndexOf(".Resources.", StringComparison.Ordinal) is int index && index > 0)
-            {
-                var assemblyName = resourceId.Substring(0, index);
-                assembly = ReflectionExtensions.GetAssemblyByName(assemblyName);
-                //if (assembly?.GetManifestResourceNames().Contains(resourceId) ?? false)
-                //    return assembly;
-                if (FindAssemblyForResource(resourceId, assembly) is Assembly)
-                    return assembly;
-            }
-
-
-            assembly = Xamarin.Forms.Application.Current?.GetType().Assembly;
-            //if (assembly?.GetManifestResourceNames().Contains(resourceId) ?? false)
-            //    return assembly;
-            if (FindAssemblyForResource(resourceId, assembly) is Assembly)
-                return assembly;
-            foreach (var assm in ReflectionExtensions.GetAssemblies())
-            {
-                //if (!assm.IsDynamic && assm.GetManifestResourceNames().Contains(resourceId))
-                //    return assm;
-                if (!assm.IsDynamic && FindAssemblyForResource(resourceId, assm) is Assembly)
-                    return assm;
             }
             return null;
         }
