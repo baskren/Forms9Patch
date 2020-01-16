@@ -623,6 +623,22 @@ namespace Forms9Patch
         #endregion OutlineColor
 
 
+        #region BorderColor
+        /// <summary>
+        /// Backing store for Button's BorderColor property
+        /// </summary>
+        public static new readonly BindableProperty BorderColorProperty = BindableProperty.Create(nameof(BorderColor), typeof(Color), typeof(Button), Color.Default);
+        /// <summary>
+        /// controls value of .BorderColor property
+        /// </summary>
+        public new Color BorderColor
+        {
+            get => (Color)GetValue(BorderColorProperty);
+            set => SetValue(BorderColorProperty, value);
+        }
+        #endregion
+
+
         // OutlineRadius inherited
 
         #region OutlineWidth
@@ -640,7 +656,20 @@ namespace Forms9Patch
         }
         #endregion OutlineWidth
 
-
+        #region BorderWidth
+        /// <summary>
+        /// Backing store for Button's BorderWidth property
+        /// </summary>
+        public static new readonly BindableProperty BorderWidthProperty = BindableProperty.Create(nameof(BorderWidth), typeof(float), typeof(Button), -1f);
+        /// <summary>
+        /// controls value of .BorderWidth property
+        /// </summary>
+        public new float BorderWidth
+        {
+            get => (float)GetValue(BorderWidthProperty);
+            set => SetValue(BorderWidthProperty, value);
+        }
+        #endregion
 
 
         // ElementShape inherited from Forms9Patch.Frame
@@ -1285,7 +1314,13 @@ namespace Forms9Patch
             if (IsSelected && SelectedTextColor.A > 0)
                 enabledLabelColor = SelectedTextColor;
 
-            base.OutlineWidth = OutlineWidth < 0 ? (BackgroundImage?.Source != null ? 0 : (BackgroundColor.A > 0 ? 0 : 1)) : (OutlineColor == Color.Transparent ? 0 : OutlineWidth);
+            base.OutlineWidth = OutlineWidth < 0
+                ? (BackgroundImage?.Source != null
+                    ? 0
+                    : (BackgroundColor.A > 0 ? 0 : 1))
+                : (OutlineColor == Color.Transparent
+                    ? 0
+                    : OutlineWidth);
 
             if (IsEnabled)
             {
@@ -1858,6 +1893,10 @@ namespace Forms9Patch
 
             if (propertyName == SelectedBackgroundColorProperty.PropertyName && IsSelected)
                 UpdateElements();
+            else if (propertyName == BorderColorProperty.PropertyName)
+                OutlineColor = BorderColor;
+            else if (propertyName == BorderWidthProperty.PropertyName)
+                OutlineWidth = BorderWidth;
 
             base.OnPropertyChanged(propertyName);
 

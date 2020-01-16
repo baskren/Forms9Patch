@@ -234,8 +234,8 @@ namespace Forms9Patch
         /// <value>The width of the boarder.</value>
         public float BorderWidth
         {
-            get => (float)GetValue(OutlineWidthProperty);
-            set => SetValue(OutlineWidthProperty, value);
+            get => (float)GetValue(BorderWidthProperty);
+            set => SetValue(BorderWidthProperty, value);
         }
         #endregion OutlineWidth property
 

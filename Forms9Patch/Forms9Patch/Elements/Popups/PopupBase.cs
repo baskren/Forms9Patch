@@ -297,7 +297,7 @@ namespace Forms9Patch
         /// <summary>
         /// The boarder color property.
         /// </summary>
-        public static readonly BindableProperty BorderColorProperty = ShapeBase.OutlineColorProperty;
+        public static readonly BindableProperty BorderColorProperty = ShapeBase.BorderColorProperty;
         /// <summary>
         /// Gets or sets the color of the boarder.
         /// </summary>
@@ -327,7 +327,7 @@ namespace Forms9Patch
         /// <summary>
         /// The boarder radius property.
         /// </summary>
-        public static readonly BindableProperty BorderRadiusProperty = ShapeBase.OutlineRadiusProperty;
+        public static readonly BindableProperty BorderRadiusProperty = ShapeBase.BorderRadiusProperty;
         /// <summary>
         /// Gets or sets the boarder radius.
         /// </summary>
@@ -356,15 +356,15 @@ namespace Forms9Patch
         /// <summary>
         /// The boarder width property.
         /// </summary>
-        public static readonly BindableProperty BorderWidthProperty = ShapeBase.OutlineWidthProperty;
+        public static readonly BindableProperty BorderWidthProperty = ShapeBase.BorderWidthProperty;
         /// <summary>
         /// Gets or sets the width of the boarder.
         /// </summary>
         /// <value>The width of the boarder.</value>
         public float BorderWidth
         {
-            get => (float)GetValue(OutlineWidthProperty);
-            set => SetValue(OutlineWidthProperty, value);
+            get => (float)GetValue(BorderWidthProperty);
+            set => SetValue(BorderWidthProperty, value);
         }
         #endregion OutlineWidth property
 

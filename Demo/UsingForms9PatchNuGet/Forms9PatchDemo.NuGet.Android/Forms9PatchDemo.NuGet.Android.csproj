@@ -130,7 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forms9PatchDemo.NuGet\Forms9PatchDemo.NuGet.csproj">
-      <Project>{DCD06B24-AA50-46BB-85C6-ABCB82DC0C5D}</Project>
+      <Project>{69EF951B-37E1-48ED-812F-F9C29F7E2B32}</Project>
       <Name>Forms9PatchDemo.NuGet</Name>
     </ProjectReference>
   </ItemGroup>
