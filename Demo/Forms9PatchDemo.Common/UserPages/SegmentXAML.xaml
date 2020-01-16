@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="Forms9PatchDemo.SegmentXAML"
+	xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+	xmlns:local="clr-namespace:Forms9PatchDemo;assembly=Forms9PatchDemo"
+	>
+	<ContentPage.Content>
+
+	<f9p:SegmentedControl 
+			BackgroundColor="White" 
+			WidthRequest="100"  
+			Padding="1" 
+			FontSize="12" 
+			TextColor="#0076FF" 
+			OutlineColor="#CCC" 
+			GroupToggleBehavior="Radio"
+  			OutlineWidth="1" 
+			SeparatorWidth="1" 
+			OutlineRadius="3" 
+			HorizontalOptions="End">
+    		<f9p:Segment Text="Playing" Orientation="Vertical" IsSelected="{Binding IsPlaying}"/>
+     		<f9p:Segment Text="Resting" Orientation="Vertical"/>
+	</f9p:SegmentedControl>
+		
+	</ContentPage.Content>
+</ContentPage>

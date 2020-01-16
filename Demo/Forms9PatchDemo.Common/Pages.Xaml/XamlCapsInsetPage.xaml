@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+	xmlns:local="clr-namespace:Forms9PatchDemo;assembly=Forms9PatchDemo"
+	x:Class="Forms9PatchDemo.XamlCapsInsetPage"
+	Padding="5, 20, 5, 5"
+    BackgroundColor="White"
+	>
+	<StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+		<Label Text="Welcome to Xamarin Forms!" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" />
+		<Grid WidthRequest="530">
+			<Forms9Patch:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.button}" CapInsets="12,12,12,12"/>
+			<!--BoxView BackgroundColor="Aqua"/-->
+		</Grid>
+	</StackLayout>
+</ContentPage>

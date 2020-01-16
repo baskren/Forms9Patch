@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="Forms9PatchDemo.NinePatchButtonPage"
+	xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+	xmlns:local="clr-namespace:Forms9PatchDemo;assembly=Forms9PatchDemo"
+	BackgroundColor = "Gray"
+	Padding = "40"
+	>
+	<StackLayout>
+		<f9p:StateButton ToggleBehavior="true" HeightRequest="80" Alignment="Start">
+
+			<f9p:StateButton.DefaultState>
+				<f9p:ButtonState Text="Toggle Default State" TextColor="White">
+					<f9p:ButtonState.BackgroundImage>
+						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.button}"/>
+					</f9p:ButtonState.BackgroundImage> 
+					<f9p:ButtonState.IconImage>
+						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.ArrowR}"/>
+					</f9p:ButtonState.IconImage>
+				</f9p:ButtonState>
+			</f9p:StateButton.DefaultState>
+
+			<f9p:StateButton.SelectedState>
+				<f9p:ButtonState TextColor="Red" Text="Selected" >
+					<f9p:ButtonState.BackgroundImage>
+						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.image}"/>
+					</f9p:ButtonState.BackgroundImage> 
+				</f9p:ButtonState>
+			</f9p:StateButton.SelectedState>
+
+		</f9p:StateButton>
+
+
+		<f9p:StateButton ToggleBehavior="true" HeightRequest="80" Alignment="Center" TrailingIcon="true">
+
+			<f9p:StateButton.DefaultState>
+				<f9p:ButtonState Text="Toggle w/o SelectedState" >
+					<f9p:ButtonState.BackgroundImage>
+						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.button}"/>
+					</f9p:ButtonState.BackgroundImage> 
+					<f9p:ButtonState.IconImage>
+						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.ArrowR}"/>
+					</f9p:ButtonState.IconImage>
+				</f9p:ButtonState>
+			</f9p:StateButton.DefaultState>
+
+			<f9p:StateButton.SelectedState>
+				<f9p:ButtonState Text="Pizza Cheese and a small coke" >
+				</f9p:ButtonState>
+			</f9p:StateButton.SelectedState>
+			
+		</f9p:StateButton>
+
+
+		<f9p:StateButton ToggleBehavior="false" HeightRequest="80" Alignment="End">
+
+			<f9p:StateButton.DefaultState>
+				<f9p:ButtonState Text="Not Toggle" >
+					<f9p:ButtonState.BackgroundImage>
+						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.button}"/>
+					</f9p:ButtonState.BackgroundImage> 
+					<f9p:ButtonState.IconImage>
+						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.ArrowR}"/>
+					</f9p:ButtonState.IconImage>
+				</f9p:ButtonState>
+			</f9p:StateButton.DefaultState>
+
+		</f9p:StateButton>
+	</StackLayout>
+</ContentPage>

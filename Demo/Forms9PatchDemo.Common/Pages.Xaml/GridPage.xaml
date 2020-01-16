@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:local="clr-namespace:Forms9PatchDemo" 
+    xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+    x:Class="Forms9PatchDemo.GridPage"> 
+    <f9p:Grid Margin="30" BackgroundColor="Navy">
+      <f9p:Grid.RowDefinitions>
+        <RowDefinition Height="2*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="200" />
+      </f9p:Grid.RowDefinitions>
+      <f9p:Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+      </f9p:Grid.ColumnDefinitions>
+      <Label Text="Top Left" Grid.Row="0" Grid.Column="0" BackgroundColor = "Lime" />
+      <Label Text="Top Right" Grid.Row="0" Grid.Column="1" BackgroundColor = "Olive" />
+      <Label Text="Bottom Left" Grid.Row="1" Grid.Column="0" BackgroundColor = "Teal" />
+      <Label Text="Bottom Right" Grid.Row="1" Grid.Column="1" BackgroundColor = "Fuchsia" />
+    </f9p:Grid>
+    
+</ContentPage>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   fill-opacity="1"
+   color-rendering="auto"
+   color-interpolation="auto"
+   text-rendering="auto"
+   stroke="black"
+   stroke-linecap="square"
+   stroke-miterlimit="10"
+   shape-rendering="auto"
+   stroke-opacity="1"
+   fill="black"
+   stroke-dasharray="none"
+   font-weight="normal"
+   stroke-width="1"
+   font-family="'Dialog'"
+   font-style="normal"
+   stroke-linejoin="miter"
+   font-size="12"
+   stroke-dashoffset="0"
+   image-rendering="auto"
+   version="1.1"
+   id="svg9"
+   sodipodi:docname="ballot_box_with_check.svg"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06">
+  <metadata
+     id="metadata13">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1390"
+     inkscape:window-height="987"
+     id="namedview11"
+     showgrid="false"
+     inkscape:zoom="2.36"
+     inkscape:cx="50"
+     inkscape:cy="33.050847"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg9" />
+  <!--Unicode Character 'BALLOT BOX WITH CHECK' (U+2611)-->
+  <defs
+     id="genericDefs" />
+  <path
+     d="M 100.10138,99.940555 H -4.9747999e-8 V 4.484002e-6 H 100.10138 Z M 93.508336,93.347564 V 6.4322192 H 6.5930486 V 93.347564 Z M 35.698792,73.407698 Q 43.73906,55.477885 51.779328,42.492816 59.819597,29.507804 65.970395,22.392173 q 6.150798,-7.11563 7.517687,-7.879491 1.366831,-0.763804 5.788993,-1.567803 4.422105,-0.804055 7.477435,-0.804055 1.206055,0 1.206055,0.72361 0,0.964832 -3.055331,3.77894 -12.060374,11.256376 -22.91475,29.266577 -10.854377,18.010202 -18.010202,35.77918 -1.849276,4.663385 -3.256301,5.869439 -1.407083,1.205998 -5.990022,1.205998 -4.341716,0 -5.346742,-0.522582 -1.005084,-0.522639 -3.175913,-3.899523 -3.939718,-6.19105 -9.567934,-12.542876 -3.939717,-4.422105 -3.939717,-5.94977 0,-1.849276 2.814051,-4.060357 2.814108,-2.211081 5.869438,-2.211081 2.733663,0 6.552798,3.497524 3.819134,3.497524 7.758852,10.331795 z"
+     id="path3"
+     inkscape:connector-curvature="0"
+     style="stroke:none;stroke-width:1;fill:#00ff00" />
+</svg>

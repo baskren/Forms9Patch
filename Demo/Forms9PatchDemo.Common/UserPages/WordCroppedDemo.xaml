@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:Forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+    x:Class="Forms9PatchDemo.WordCroppedDemo">
+
+    <StackLayout
+        Margin="0,40,0,0">
+        <Forms9Patch:Label
+            x:Name="ChiStrLabel"
+            BackgroundColor="Pink"
+            Lines="3"
+            AutoFit="Lines" />
+        <BoxView
+            Color="Blue"
+            HeightRequest="68.57142857" />
+        <Label
+            x:Name="EnStrLabel"
+            BackgroundColor="AliceBlue" />
+        <Label
+            x:Name="ChiStrSize"
+            BackgroundColor="Beige" />
+        <Label
+            x:Name="EnStrSize"
+            BackgroundColor="Coral" />
+    </StackLayout>
+</ContentPage>

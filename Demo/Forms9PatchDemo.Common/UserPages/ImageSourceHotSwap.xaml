@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms9="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+             x:Class="Forms9PatchDemo.ImageSourceHotSwap">
+
+    <ScrollView>
+        <StackLayout>
+
+            <forms9:Image x:Name="Image" HeightRequest="{Binding Width, Source={Reference Image}, Mode=OneWay}" BackgroundColor="Azure" Fill="AspectFill" HasShadow="True" >
+                <forms9:Image.Source>
+                    <UriImageSource x:Name="_uriImageSource1" Uri="{Binding .}"/>
+                </forms9:Image.Source>
+            </forms9:Image>
+
+            <Image HeightRequest="{Binding Width, Source={Reference Image}, Mode=OneWay}" BackgroundColor="Azure" Aspect="AspectFill" >
+                <Image.Source>
+                    <UriImageSource x:Name="_uriImageSource2" Uri="{Binding .}"/>
+                </Image.Source>
+            </Image>
+
+            <Label Text="{Binding .}"/>
+            
+            <Button Text="Change source" Clicked="Button_Clicked"/>
+            
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

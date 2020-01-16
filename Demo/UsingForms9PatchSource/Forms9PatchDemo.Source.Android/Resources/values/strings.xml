@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Forms9PatchDemo</string>
+	<string name="ApplicationName">Forms9PatchDemo</string>
+	<string name="Hello">Hello</string>
+	<string name="forms9patch_copy_paste_authority">org.fortysecondparallel.forms9patchdemo.f9pcopypaste</string>
+</resources>

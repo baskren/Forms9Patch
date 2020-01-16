@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+             mc:Ignorable="d"
+             x:Class="Forms9PatchDemo.ButtonCommand">
+    <Grid Margin="10,44,10,20">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="60" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0"
+               Text="{Binding Title}"
+               FontSize="Title"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"/>
+
+        <Button Grid.Row="1"
+                Text="Regular Button"
+                Command="{Binding RegularButtonCommand}"
+                WidthRequest="100"/>
+
+        <f9p:Button Grid.Row="2"
+                    Text="F9P Button"
+                    Command="{Binding F9PButtonCommand}"
+                    WidthRequest="100"/>
+    </Grid>
+</ContentPage>

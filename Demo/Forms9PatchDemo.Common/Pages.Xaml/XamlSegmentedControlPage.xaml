@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+xmlns="http://xamarin.com/schemas/2014/forms" 
+xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+x:Class="Forms9PatchDemo.XamlSegmentedControlPage"
+xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+xmlns:local="clr-namespace:Forms9PatchDemo;assembly=Forms9PatchDemo"
+BackgroundColor = "Gray"
+Padding = "40"
+>
+	<ContentPage.Content>
+		<StackLayout>
+			<Label Text="SegmentedControl Example" TextColor="Black"/>
+			<f9p:SegmentedControl BackgroundColor="White" FontSize="16" TextColor="#0076FF" Orientation="Vertical" OutlineColor="#CCC" OutlineWidth="0" SeparatorWidth="1" OutlineRadius="6" Padding="5" GroupToggleBehavior="Multiselect">
+				<f9p:Segment><![CDATA[Pause <b>5</b>]]></f9p:Segment>
+				<f9p:Segment><![CDATA[Pause <b>10</b>]]></f9p:Segment>
+                <f9p:Segment> <![CDATA[Pause <b>15</b>]]> </f9p:Segment>
+				<f9p:Segment Text="Cancel" TextColor="Red"/>
+				<f9p:Segment Text="Launch" FontAttributes="Bold"/>
+			</f9p:SegmentedControl>
+			<f9p:SegmentedControl BackgroundColor="White" Padding="5"	FontSize="16" TextColor="#0076FF" OutlineColor="#CCC" OutlineWidth="0" SeparatorWidth="1" OutlineRadius="6" >
+                <f9p:Segment Text="A" Orientation="Vertical">
+                    <f9p:Segment.IconImage>
+                        <f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.ArrowR}"/>
+                    </f9p:Segment.IconImage>
+                   
+                </f9p:Segment>
+                <f9p:Segment Text="B" Orientation="Vertical">
+                    <f9p:Segment.IconImage>
+                        <f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.Info}"/>
+                    </f9p:Segment.IconImage>
+                </f9p:Segment>
+                <f9p:Segment Text="PIZZA"/>
+			</f9p:SegmentedControl>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <!-- NAVIGATION -->
+    <ItemGroup>
+		<EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\App.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+			<Link>App.Xaml</Link>
+		</EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\App.xaml.cs">
+	      <DependentUpon>App.xaml</DependentUpon>
+	      <Link>App.xaml.cs</Link>
+	    </Compile>
+        <Compile Include="$(Forms9PatchDemoSourceDir)\HomePage.cs" Link="HomePage.cs" />
+		<EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Shell.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+			<Link>Shell.xaml</Link>
+		</EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\Shell.xaml.cs">
+	      <DependentUpon>Shell.xaml</DependentUpon>
+	      <Link>Shell.xaml.cs</Link>
+	    </Compile>
+    </ItemGroup>
+    <!-- CODE PAGES -->
+    <ItemGroup>
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\BubblePopupTestPage.cs" Link="Pages.Code\BubblePopupTestPage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\ButtonAndSegmentAlignments.cs" Link="Pages.Code\ButtonAndSegmentAlignments.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\ButtonCodePage.cs" Link="Pages.Code\ButtonCodePage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\ClipboardTest.cs" Link="Pages.Code\ClipboardTest.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\CustomFontEffectPage.cs" Link="Pages.Code\CustomFontEffectPage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\ExternalEmbeddedResourceImage.cs" Link="Pages.Code\ExternalEmbeddedResourceImage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\FlyoutDemo.cs" Link="Pages.Code\FlyoutDemo.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\FontSizeTest.cs" Link="Pages.Code\FontSizeTest.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\HardwareKeyPage.cs" Link="Pages.Code\HardwareKeyPage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\HardwareKeyPage1.cs" Link="Pages.Code\HardwareKeyPage1.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\HtmlButtonsPage.cs" Link="Pages.Code\HtmlButtonsPage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\HtmlLabelPage.cs" Link="Pages.Code\HtmlLabelPage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\HtmlLink.cs" Link="Pages.Code\HtmlLink.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\ImageCodePage.cs" Link="Pages.Code\ImageCodePage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\KeyboardHeight.cs" Link="Pages.Code\KeyboardHeight.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\LabelAutoFitPage.cs" Link="Pages.Code\LabelAutoFitPage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\LayoutCodePage.cs" Link="Pages.Code\LayoutCodePage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\ListViewSandbox.cs" Link="Pages.Code\ListViewSandbox.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\ModalPopupTestPage.cs" Link="Pages.Code\ModalPopupTestPage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\GestureTestPage.cs" Link="Pages.Code\GestureTestPage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\PickerInPopup.cs" Link="Pages.Code\PickerInPopup.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\PopupsPage.cs" Link="Pages.Code\PopupsPage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\PngFromHtml.cs" Link="Pages.Code\PngFromHtml.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\SegmentedControlCrowding.cs" Link="Pages.Code\SegmentedControlCrowding.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\SegmentSelectedBackgroundPage.cs" Link="Pages.Code\SegmentSelectedBackgroundPage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\SingleButton.cs" Link="Pages.Code\SingleButton.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\SimpleLabelFitting.cs" Link="Pages.Code\SimpleLabelFitting.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\SingleSegmentedControl.cs" Link="Pages.Code\SingleSegmentedControl.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\StateButton.cs" Link="Pages.Code\StateButton.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\SvgInCell.cs" Link="Pages.Code\SvgInCell.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\SVG_ButtonBackgroundImage.cs" Link="Pages.Code\SVG_ButtonBackgroundImage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\UnconstrainedLabelAutoFitPage.cs" Link="Pages.Code\UnconstrainedLabelAutoFitPage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\VariableWidthButton.cs" Link="Pages.Code\VariableWidthButton.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\AbsoluteLayoutExplorationCode.cs" Link="UserPages\AbsoluteLayoutExplorationCode.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\BackgroundImageOpacityPage.cs" Link="UserPages\BackgroundImageOpacityPage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\br.cs" Link="UserPages\br.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\ButtonInFrame.cs" Link="UserPages\ButtonInFrame.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\ButtonTapped.cs" Link="UserPages\ButtonTapped.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\ChatListPage.cs" Link="UserPages\ChatListPage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\CustomFontEffectPage.cs" Link="UserPages\CustomFontEffectPage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\DataForBinding.cs" Link="UserPages\DataForBinding.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\HeapDemoPage.cs" Link="UserPages\HeapDemoPage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\JHGamerPage.cs" Link="UserPages\JHGamerPage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\LabelGetSize.cs" Link="UserPages\LabelGetSize.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\ListViewWithF9PLabelInCells.cs" Link="UserPages\ListViewWithF9PLabelInCells.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\ModalPopupOnMasterDetailPage.cs" Link="UserPages\ModalPopupOnMasterDetailPage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\ModalPopupWithNavigationPages.cs" Link="UserPages\ModalPopupWithNavigationPages.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\NestedBubblePopupPage.cs" Link="UserPages\NestedBubblePopupPage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\SegmentNavPage1.cs" Link="UserPages\SegmentNavPage1.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\SegmentNavPage2.cs" Link="UserPages\SegmentNavPage2.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\SegmentNavPage3.cs" Link="UserPages\SegmentNavPage3.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\UserHomePage.cs" Link="UserPages\UserHomePage.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\ZenmekPage.cs" Link="UserPages\ZenmekPage.cs" />
+    </ItemGroup>
+    <!-- EMBEDDED RESOURCE FONTS -->
+    <ItemGroup>
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\Fonts\CPMono_v07_Bold.otf" Link="Resources\Fonts\CPMono_v07_Bold.otf" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\Fonts\luximb.ttf" Link="Resources\Fonts\luximb.ttf" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\Fonts\MaterialIcons-Regular.ttf" Link="Resources\Fonts\MaterialIcons-Regular.ttf" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\Fonts\Pacifico.ttf" Link="Resources\Fonts\Pacifico.ttf" />
+    </ItemGroup>
+    <!-- EMBEDDED RESOURCE GIFs -->
+    <ItemGroup>
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\water.gif" Link="Resources\water.gif" />
+    </ItemGroup>
+    <!-- EMBEDDED RESOURCE JPEGSs -->
+    <ItemGroup>
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\balloons.jpg" Link="Resources\balloons.jpg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\balloons1.jpg" Link="Resources\balloons1.jpg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\balloons2.jpg" Link="Resources\balloons2.jpg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\balloons3.jpg" Link="Resources\balloons3.jpg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\balloons4.jpg" Link="Resources\balloons4.jpg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\balloons5.jpg" Link="Resources\balloons5.jpg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\balloons6.jpg" Link="Resources\balloons6.jpg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\balloons7.jpg" Link="Resources\balloons7.jpg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\balloons8.jpg" Link="Resources\balloons8.jpg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\balloons9.jpg" Link="Resources\balloons9.jpg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\cat.jpg" Link="Resources\cat.jpg" />
+    </ItemGroup>
+    <!-- EMBEDDED RESOURCE PNGs -->
+    <ItemGroup>
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\100x100.png" Link="Resources\100x100.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\150x150.png" Link="Resources\150x150.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\200x200.png" Link="Resources\200x200.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\236-baby.png" Link="Resources\236-baby.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\236-lincoln.png" Link="Resources\236-lincoln.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\50x50.png" Link="Resources\50x50.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\adsBttn29.png" Link="Resources\adsBttn29.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\adult1.jpeg" Link="Resources\adult1.jpeg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\adult2.jpeg" Link="Resources\adult2.jpeg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\adult3.jpeg" Link="Resources\adult3.jpeg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\ArrowR.png" Link="Resources\ArrowR.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\ArrowR%401½x.png" Link="Resources\ArrowR%401½x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\ArrowR%402x.png" Link="Resources\ArrowR%402x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\ArrowR%403x.png" Link="Resources\ArrowR%403x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\ArrowR%40¾x.png" Link="Resources\ArrowR%40¾x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\blackrocks.png" Link="Resources\blackrocks.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\bluebutton.9.png" Link="Resources\bluebutton.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\bluebuttontrimmedtransp.9.png" Link="Resources\bluebuttontrimmedtransp.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\btnRedH.9.png" Link="Resources\btnRedH.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\btnRedH%402x.9.png" Link="Resources\btnRedH%402x.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\btnRedH%403x.9.png" Link="Resources\btnRedH%403x.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\bubble.9.png" Link="Resources\bubble.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\BubbleExternal.9.png" Link="Resources\BubbleExternal.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\BubbleExternal%402x.9.png" Link="Resources\BubbleExternal%402x.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\BubbleExternal%403x.9.png" Link="Resources\BubbleExternal%403x.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\BubbleInternal%402x.9.png" Link="Resources\BubbleInternal%402x.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\BubbleInternal%403x.9.png" Link="Resources\BubbleInternal%403x.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\BubbleInternal.9.png" Link="Resources\BubbleInternal.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\button.9.png" Link="Resources\button.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\button%401½x.9.png" Link="Resources\button%401½x.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\button%402x.9.png" Link="Resources\button%402x.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\button%403x.9.png" Link="Resources\button%403x.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\button%404x.9.png" Link="Resources\button%404x.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\button%40¾x.9.png" Link="Resources\button%40¾x.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\button_01_default.png" Link="Resources\button_01_default.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\button_01_pressing.png" Link="Resources\button_01_pressing.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\delay.png" Link="Resources\delay.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\delay%402x.png" Link="Resources\delay%402x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\delay%403x.png" Link="Resources\delay%403x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\Delete.png" Link="Resources\Delete.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\Delete%402x.png" Link="Resources\Delete%402x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\Delete%403x.png" Link="Resources\Delete%403x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\Exit.png" Link="Resources\Exit.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\Exit%402x.png" Link="Resources\Exit%402x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\Exit%403x.png" Link="Resources\Exit%403x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\ghosts.png" Link="Resources\ghosts.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\grey_up.png" Link="Resources\grey_up.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\icon_home_active%401x.png" Link="Resources\icon_home_active%401x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\icon_home_active%402x.png" Link="Resources\icon_home_active%402x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\icon_home_active%403x.png" Link="Resources\icon_home_active%403x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\image.9.png" Link="Resources\image.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\image.png" Link="Resources\image.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\image%401½x.9.png" Link="Resources\image%401½x.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\image%401½x.png" Link="Resources\image%401½x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\image%402x.9.png" Link="Resources\image%402x.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\image%402x.png" Link="Resources\image%402x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\image%403x.9.png" Link="Resources\image%403x.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\image%403x.png" Link="Resources\image%403x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\image%404x.9.png" Link="Resources\image%404x.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\image%404x.png" Link="Resources\image%404x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\image%40¾x.9.png" Link="Resources\image%40¾x.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\image%40¾x.png" Link="Resources\image%40¾x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\Info.png" Link="Resources\Info.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\Info%401½x.png" Link="Resources\Info%401½x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\Info%402x.png" Link="Resources\Info%402x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\Info%403x.png" Link="Resources\Info%403x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\Info%40¾x.png" Link="Resources\Info%40¾x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\kid1.jpeg" Link="Resources\kid1.jpeg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\kid2.jpeg" Link="Resources\kid2.jpeg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\kid3.jpeg" Link="Resources\kid3.jpeg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\ltblueUp.png" Link="Resources\ltblueUp.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\ltblueUp%402x.png" Link="Resources\ltblueUp%402x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\printerIcon.png" Link="Resources\printerIcon.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\PopupDM.png" Link="Resources\PopupDM.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\ProjectProposal.pdf" Link="Resources\ProjectProposal.pdf" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\redButton.9.png" Link="Resources\redButton.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\redGridBox.png" Link="Resources\redGridBox.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\redGridBox9.9.png" Link="Resources\redGridBox9.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\redribbon.png" Link="Resources\redribbon.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\redButton%401½x.9.png" Link="Resources\redButton%401½x.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\redButton%402x.9.png" Link="Resources\redButton%402x.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\redButton%403x.9.png" Link="Resources\redButton%403x.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\redButton%404x.9.png" Link="Resources\redButton%404x.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\redButton%40¾x.9.png" Link="Resources\redButton%40¾x.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\redribbon%402x.png" Link="Resources\redribbon%402x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\redribbon%403x.png" Link="Resources\redribbon%403x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\red_up.9.png" Link="Resources\red_up.9.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\shareIcon.png" Link="Resources\shareIcon.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\tick.png" Link="Resources\tick.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\tick%402x.png" Link="Resources\tick%402x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\tick%403x.png" Link="Resources\tick%403x.png" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\tree.png" Link="Resources\tree.png" />
+    </ItemGroup>
+    <!-- EMBEDDED RESOURCE SVGs -->
+    <ItemGroup>
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\ballot_box.svg" Link="Resources\ballot_box.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\ballot_box_with_x.svg" Link="Resources\ballot_box_with_x.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\ballot_box_with_check.svg" Link="Resources\ballot_box_with_check.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\CameraImage.svg" Link="Resources\CameraImage.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\CameraScanIcon.svg" Link="Resources\CameraScanIcon.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\blueWhiteGradient.svg" Link="Resources\blueWhiteGradient.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\greenWhiteGradient.svg" Link="Resources\greenWhiteGradient.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\G000.svg" Link="Resources\G000.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\G025.svg" Link="Resources\G025.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\G050.svg" Link="Resources\G050.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\G075.svg" Link="Resources\G075.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\G100.svg" Link="Resources\G100.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\HW_I-70S_(DC_1961).svg" Link="Resources\HW_I-70S_(DC_1961).svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\HW_Louisiana_635_(2008).svg" Link="Resources\HW_Louisiana_635_(2008).svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\HW_OH-112_(1967).svg" Link="Resources\HW_OH-112_(1967).svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\HW_PA-333_(1962).svg" Link="Resources\HW_PA-333_(1962).svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\HW_US_20_(IA).svg" Link="Resources\HW_US_20_(IA).svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\Keypad4.svg" Link="Resources\Keypad4.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\R000.svg" Link="Resources\R000.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\R025.svg" Link="Resources\R025.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\R050.svg" Link="Resources\R050.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\R075.svg" Link="Resources\R075.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\R100.svg" Link="Resources\R100.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\redWhiteGradient.svg" Link="Resources\redWhiteGradient.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\SvgSample.svg" Link="Resources\SvgSample.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\Y000.svg" Link="Resources\Y000.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\Y025.svg" Link="Resources\Y025.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\Y050.svg" Link="Resources\Y050.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\Y075.svg" Link="Resources\Y075.svg" />
+        <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Resources\Y100.svg" Link="Resources\Y100.svg" />
+    </ItemGroup>
+</Project>

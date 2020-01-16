@@ -7,6 +7,3 @@
 [submodule "MimeSharp"]
 	path = MimeSharp
 	url = https://github.com/baskren/MimeSharp
-[submodule "Forms9PatchDemo.NuGet"]
-	path = Forms9PatchDemo.NuGet
-	url = https://github.com/baskren/Forms9PatchDemo

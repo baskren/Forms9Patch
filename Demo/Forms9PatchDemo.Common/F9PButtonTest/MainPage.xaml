@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+             xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+             x:Class="F9PButtonTest.MainPage">
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" 
+            iOS="0,20,0,0">
+        </OnPlatform>
+    </ContentPage.Padding>
+    
+    <StackLayout>
+        <f9p:Label Text="{Binding MsgText}" HorizontalOptions="StartAndExpand" VerticalOptions="Start" Margin="2,2,2,20" /> 
+        
+        <cv:CarouselViewControl Grid.Row="2" x:Name="Carousel" Position="0" ShowArrows="False" ShowIndicators="False" InterPageSpacing="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <cv:CarouselViewControl.ItemTemplate>
+                <DataTemplate />
+            </cv:CarouselViewControl.ItemTemplate>
+        </cv:CarouselViewControl>
+    </StackLayout>
+
+</ContentPage>

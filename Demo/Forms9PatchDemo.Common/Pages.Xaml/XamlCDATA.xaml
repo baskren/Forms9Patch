@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:Forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Forms9PatchDemo.XamlCDATA"
+             Padding="20"
+             >
+    <StackLayout>
+        <Forms9Patch:Label>
+            Example of Forms9Patch markup text.
+        </Forms9Patch:Label>
+        <BoxView HeightRequest="1" Color="Black"></BoxView>
+        <Forms9Patch:Label x:Name="PhoneLabel" >
+            <![CDATA[This is a phone number link: <a id="link1" href="tel:+353015546889">015546889</a> ]]>
+        </Forms9Patch:Label>
+        <BoxView HeightRequest="1" Color="Black"></BoxView>
+        <Forms9Patch:Label x:Name="EmailLabel">
+            <![CDATA[This is an email link: <a id="link2" href="mailto:email@hotmail.com">email@hotmail.com</a> ]]>
+        </Forms9Patch:Label>
+        <Forms9Patch:Label VerticalOptions="EndAndExpand" VerticalTextAlignment="End" HorizontalTextAlignment="Center">
+            <![CDATA[<b>NOTE:</b> Will <i>not</i> work in iOS Simulator.]]>
+        </Forms9Patch:Label>
+    </StackLayout>
+</ContentPage>

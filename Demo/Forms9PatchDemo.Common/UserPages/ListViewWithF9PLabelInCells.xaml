@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="Forms9PatchDemo.XamlPageWithListViewWithF9PLabelInCells"
+	xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+	xmlns:local="clr-namespace:Forms9PatchDemo;assembly=Forms9PatchDemo"
+	BackgroundColor = "White"
+	>
+	<ContentPage.Content>
+		<ListView x:Name="listView">
+			<ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <f9p:Frame OutlineColor="Gray" OutlineWidth="1" HorizontalOptions="FillAndExpand" OutlineRadius="4" Padding="8,12,8,0" Margin="0, 3, 0, 6" BackgroundColor="{Binding BackgroundColor}">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="{Binding StatusIcon}" VerticalOptions="Start" Margin="0,3,0,0" />
+                                <f9p:Label HtmlText="{Binding Content}" TextColor="{Binding TextColor}" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" ActionTagTapped="Handle_ActionTagTapped"/>
+                            </StackLayout>
+                        </f9p:Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+		</ListView>		
+	</ContentPage.Content>
+</ContentPage>

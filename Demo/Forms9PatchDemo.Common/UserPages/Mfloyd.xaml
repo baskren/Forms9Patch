@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:Forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+    x:Class="Forms9PatchDemo.Mfloyd">
+    
+    <ContentPage.Content>
+                <Forms9Patch:AbsoluteLayout x:Name="mainAbsoluteLayout" 
+                        VerticalOptions="Center"
+                        Margin="20,10,20,10"
+                        BackgroundColor="Silver"
+                        WidthRequest="50000"
+                        HeightRequest="50000">
+            <Forms9Patch:Label x:Name="LinkedInLabel2"
+                               WidthRequest="50000"
+                               HeightRequest="50000"
+                               Text="Connect with LinkedIn"
+                               BackgroundColor="#0077B5"
+                               TextColor="White"
+                               HorizontalTextAlignment="Start"
+                               VerticalTextAlignment="Center"
+                               Fit="None" Lines="0"
+                               FontSize="100"
+                               AbsoluteLayout.LayoutFlags="All"
+                               AbsoluteLayout.LayoutBounds="0.5,0.2,0.8,0.1"/>
+            <Forms9Patch:Grid x:Name="LinkedInGrid"
+                  ColumnSpacing="0"
+                  AbsoluteLayout.LayoutFlags="All"
+                  AbsoluteLayout.LayoutBounds="0.5,0.6,0.8,0.1">
+                <Forms9Patch:Grid.RowDefinitions>
+                    <RowDefinition Height = "*" />
+                </Forms9Patch:Grid.RowDefinitions >
+                <Forms9Patch:Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width = "Auto"/>
+                </Forms9Patch:Grid.ColumnDefinitions >
+                <BoxView x:Name="MarginBoxViewLinkedIn"
+                         BackgroundColor="#0077B5"
+                         Margin="0,0,0,0"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="FillAndExpand"
+                         Grid.Row="0" Grid.Column="0"/>
+                <BoxView x:Name="LinkedInImageBoxView"
+                         BackgroundColor="#0077B5"
+                         Margin="0,0,0,0"
+                         VerticalOptions="FillAndExpand"
+                         Grid.Row="0" Grid.Column="2"/>
+                <Forms9Patch:Label x:Name="LinkedInLabel"
+                                   WidthRequest="50000"
+                                   HeightRequest="50000"
+                                   Text="Connect with LinkedIn"
+                                   BackgroundColor="#0077B5"
+                                   TextColor="White"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalOptions="FillAndExpand"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="Center"
+                                   Fit="Width" Lines="1"
+                               FontSize="100"
+                                   Grid.Row="0" Grid.Column="1">
+                </Forms9Patch:Label>
+            </Forms9Patch:Grid>
+        </Forms9Patch:AbsoluteLayout>
+
+    </ContentPage.Content>
+</ContentPage>

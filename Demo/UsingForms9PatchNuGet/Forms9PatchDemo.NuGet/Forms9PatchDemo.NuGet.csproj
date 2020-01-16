@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <RootNamespace>Forms9PatchDemo</RootNamespace>
+    <AssemblyName>Forms9PatchDemo</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+		<DefineConstants>TRACE;DEBUG</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<DefineConstants>TRACE;RELEASE;</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="Forms9Patch" Version="2.2.3" />
+  </ItemGroup>
+
+
+    <!-- LOAD PROJECT CONTENT -->
+	<PropertyGroup>
+		<Forms9PatchDemoSourceDir>..\..\Forms9PatchDemo.Common</Forms9PatchDemoSourceDir>
+	</PropertyGroup>
+
+	<Import Project="$(Forms9PatchDemoSourceDir)\Forms9PatchDemo.targets" />
+	<Import Project="$(Forms9PatchDemoSourceDir)\Forms9PatchDemoXaml.targets" />
+
+</Project>

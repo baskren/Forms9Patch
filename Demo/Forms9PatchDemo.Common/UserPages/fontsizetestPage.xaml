@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Forms9PatchDemo"
+             xmlns:forms9patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+             Title="Woot"
+             BackgroundColor="#252525"
+             Padding="0,60,0,0"
+             x:Class="Forms9PatchDemo.fontsizetestPage">
+    
+
+    
+    <StackLayout 
+        VerticalOptions="FillAndExpand"
+        BackgroundColor="Purple"
+        >
+        <forms9patch:Label Text="Change Status"
+                           Margin="20,0,20,0"
+                            FontSize="60"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Start"
+                            TextColor="Red"
+                            VerticalTextAlignment="Center"
+                            HorizontalOptions="Fill"
+                            Lines="0"
+                            AutoFit="Width"/>
+        <forms9patch:Label Text="Reset Password"
+                           Margin="20,0,20,0"
+                            FontSize="Large"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Start"
+                            TextColor="Red"
+                            VerticalTextAlignment="Center"
+                            HorizontalOptions="Fill"
+                            Lines="0"
+                            AutoFit="Width"/>
+        <forms9patch:Frame Margin="10"
+                           Padding="3"
+                           OutlineColor="Transparent"
+                           HasShadow="False"
+                           BackgroundColor="Red" />
+        <forms9patch:Label Text="Terms of Use"
+                           Margin="20,0,20,0"
+                            FontSize="Large"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Start"
+                            TextColor="Red"
+                            VerticalTextAlignment="Center"
+                            HorizontalOptions="Fill"
+                            Lines="1"
+                            AutoFit="Width"/>
+        <forms9patch:Label Text="Privacy Policy"
+                           Margin="20,0,20,0"
+                            FontSize="Large"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Start"
+                            TextColor="Red"
+                            VerticalTextAlignment="Center"
+                            HorizontalOptions="Fill"
+                            Lines="1"
+                            AutoFit="Width"/>
+    </StackLayout>
+</ContentPage>

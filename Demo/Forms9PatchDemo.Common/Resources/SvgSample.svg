@@ -1,0 +1,10 @@
+<svg version="1.1"
+     baseProfile="full"
+     width="200" height="200"
+     xmlns="http://www.w3.org/2000/svg">
+
+  <circle cx="100" cy="100" r="100" fill="green" />
+
+  <text x="100" y="120" font-size="60" text-anchor="middle" fill="white">SVG#1</text>
+
+</svg>

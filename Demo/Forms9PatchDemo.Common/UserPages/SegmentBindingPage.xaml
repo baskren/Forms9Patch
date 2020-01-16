@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="Forms9PatchDemo.SegmentBindingPage"
+	xmlns:local="clr-namespace:Forms9PatchDemo" 
+	xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+	>
+	<Grid x:Name="gridRoot" HorizontalOptions="Fill" VerticalOptions="Fill">
+		<Grid x:Name="gridBody" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,90,0,0">
+			<StackLayout Padding="4" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+				<ListView x:Name="tblPlayers" HasUnevenRows="true" SeparatorVisibility="None" 
+					BackgroundColor="Transparent" Margin="4" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+					<ListView.ItemTemplate>
+						<DataTemplate>
+							<ViewCell Height="60">
+							<StackLayout Orientation="Horizontal" Padding="10,10,10,10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+								<StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+									<StackLayout Orientation="Horizontal" BackgroundColor="#b6995b" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+										<f9p:Label Margin="5,0,0,0" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" TextColor="White" BackgroundColor="Transparent" FontSize="16" 
+											Text="{Binding PlayerButton}"/>
+
+
+										<f9p:SegmentedControl BackgroundColor="White" WidthRequest="100"
+												Padding="1" FontSize="12" TextColor="#0076FF" OutlineColor="#CCC" GroupToggleBehavior="Radio"
+												OutlineWidth="1" SeparatorWidth="1" OutlineRadius="3" HorizontalOptions="End">
+											<f9p:Segment Text="Playing" Orientation="Vertical" IsSelected="{Binding IsPlaying}"/>
+											<f9p:Segment Text="Resting" Orientation="Vertical"/>
+										</f9p:SegmentedControl>
+											
+									</StackLayout>
+								</StackLayout>
+								</StackLayout>
+							</ViewCell>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
+			</StackLayout>
+		</Grid>
+	</Grid>
+</ContentPage>

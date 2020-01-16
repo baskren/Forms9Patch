@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="Forms9PatchDemo.XamlHtmlLabelsAndButtonsPage"
+	xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+	xmlns:local="clr-namespace:Forms9PatchDemo;assembly=Forms9PatchDemo"
+	BackgroundColor = "Gray"
+	Padding = "20"
+    Visual="Material"
+	>
+	<ContentPage.Content>
+		<StackLayout>
+			<Label Text="HTML Markuped Label Examples" TextColor="Black" FontAttributes="Bold"	/>
+
+			<f9p:Button
+                x:Name="TightSpacingButton"
+				BackgroundColor="White"
+				FontSize="16"
+				Text="HasTightSpacing"
+				ToggleBehavior="true"
+				BindingContext="{x:Reference msc}"
+				IsSelected="{Binding HasTightSpacing, Mode=OneWayToSource}"
+				/>
+			<f9p:Button
+                x:Name="TrailingIconButton"
+				BackgroundColor="White"
+				FontSize="16"
+				Text="Trailing Icon"
+				ToggleBehavior="true"
+				BindingContext="{x:Reference msc}"
+				IsSelected="{Binding TrailingIcon, Mode=OneWayToSource}"
+			/>
+			<f9p:SegmentedControl
+                x:Name="TextAlignmentControl"
+				BackgroundColor="White"
+				FontSize="16"
+			>
+                <f9p:Segment Text="Start" x:Name="StartSegment"/>
+                <f9p:Segment Text="Center" x:Name="CenterSegment"/>
+                <f9p:Segment Text="End" x:Name="EndSegment"/>
+            </f9p:SegmentedControl>
+			
+			<f9p:Label TextColor="Black">
+				plain &lt;b&gt;bold&lt;/b&gt; &lt;i&gt;italic&lt;/i&gt;
+			</f9p:Label>
+
+			<f9p:SegmentedControl 
+				x:Name="msc"
+				BackgroundColor="White" 
+				FontSize="16" 
+				TextColor="#0076FF" 
+				Orientation="Vertical" 
+				OutlineColor="#CCC" 
+				OutlineWidth="0" 
+				SeparatorWidth="1" 
+				OutlineRadius="6" 
+				Padding="5"
+				>
+
+				<f9p:Segment>
+                   
+                    Pause &lt;b&gt;5&lt;/b&gt;
+                    <f9p:Segment.IconImage>
+                        <f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.ArrowR}"/>
+                    </f9p:Segment.IconImage>
+                </f9p:Segment>
+				<f9p:Segment>
+                    Pause &lt;b&gt;10&lt;/b&gt;
+                    <f9p:Segment.IconImage>
+                        <f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.Info}"/>
+                    </f9p:Segment.IconImage>
+                </f9p:Segment>
+				<f9p:Segment IconText="#">Pause &lt;b&gt;15&lt;/b&gt;</f9p:Segment>
+
+				<f9p:Segment TextColor="Red">&lt;u&gt;Cancel&lt;/u&gt;</f9p:Segment>
+				<f9p:Segment HtmlText="&lt;s&gt;Launch&lt;/s&gt;" FontAttributes="Bold" IsEnabled="false"/>
+			</f9p:SegmentedControl>
+
+
+
+			<f9p:StateButton ToggleBehavior="true" HeightRequest="80" Alignment="Start" x:Name="StateButton">
+
+				<f9p:StateButton.DefaultState>
+					<f9p:ButtonState HtmlText="&lt;i&gt;Toggle&lt;/i&gt; Default State" TextColor="White">
+						<f9p:ButtonState.BackgroundImage>
+							<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.button}"/>
+						</f9p:ButtonState.BackgroundImage> 
+						<f9p:ButtonState.IconImage>
+							<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.ArrowR}"/>
+						</f9p:ButtonState.IconImage>
+					</f9p:ButtonState>
+				</f9p:StateButton.DefaultState>
+
+				<f9p:StateButton.SelectedState>
+					<f9p:ButtonState TextColor="Red" HtmlText="&lt;i&gt;&lt;b&gt;Selected&lt;/b&gt;&lt;/i&gt;" >
+						<f9p:ButtonState.BackgroundImage>
+							<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.image}"/>
+						</f9p:ButtonState.BackgroundImage> 
+					</f9p:ButtonState>
+				</f9p:StateButton.SelectedState>
+
+			</f9p:StateButton>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

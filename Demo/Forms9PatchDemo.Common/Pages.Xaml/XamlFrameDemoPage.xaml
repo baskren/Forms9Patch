@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+    xmlns:local="clr-namespace:Forms9PatchDemo;assembly=Forms9PatchDemo"
+    x:Class="Forms9PatchDemo.XamlFrameDemoPage"
+    Padding="5, 20, 5, 5">
+    <StackLayout>
+        <f9p:Frame
+            Padding="5"
+            OutlineColor="Blue"
+            OutlineWidth="3"
+            OutlineRadius="10"
+            BackgroundColor="Gray">
+            <Label
+                Text="Forms9Patch.Frame OutlineWidth+OutlineRadius"
+                TextColor="White"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                FontSize="14" />
+        </f9p:Frame>
+        <f9p:Frame
+            Margin="10,10,10,0"
+            Padding="4,6,4,6"
+            BackgroundColor="#ffffc0"
+            OutlineRadius="5"
+            HasShadow="true">
+            <f9p:Label
+                Text="Render Me" />
+        </f9p:Frame>
+        <f9p:ContentView
+            Margin="10,10,10,0"
+            Padding="4,6,4,6"
+            BackgroundColor="#ffffc0"
+            OutlineRadius="5"
+            HasShadow="true">
+        </f9p:ContentView>
+        <f9p:ContentView
+            Margin="10,10,10,0"
+            HeightRequest="100"
+            Padding="4,6,4,6"
+            BackgroundColor="#ffffc0"
+            OutlineRadius="5"
+            HasShadow="true">
+        </f9p:ContentView>
+        <f9p:Frame
+            Margin="0,0,10,0"
+            Padding="10,6,10,6"
+            OutlineColor="Transparent"
+            HasShadow="False"
+            BackgroundColor="Crimson"
+            OutlineRadius="10">
+            <f9p:Label
+                TextColor="White"
+                HtmlText="My Text" />
+        </f9p:Frame>
+    </StackLayout>
+</ContentPage>

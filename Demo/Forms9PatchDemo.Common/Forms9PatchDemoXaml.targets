@@ -1,0 +1,259 @@
+<Project DefaultTargets = "Build"
+    xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+
+
+	<!-- IMAGE RESOURCE EXTENSION (Required to use Forms9Patch.ImageSource from Xaml) -->
+	<ItemGroup>
+		<Compile Include="$(Forms9PatchDemoSourceDir)\Extensions\ImageResourceExtension.cs" Link="Extensions\ImageResourceExtension.cs" />
+	</ItemGroup>
+
+
+	<!-- XAML PAGES -->
+	<ItemGroup>
+
+		<EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Pages.Xaml\GridPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+			<Link>Pages.Xaml\GridPage.xaml</Link>
+		</EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Xaml\GridPage.xaml.cs">
+	      <DependentUpon>Pages.Xaml\GridPage.xaml</DependentUpon>
+	      <Link>Pages.Xaml\GridPage.xaml.cs</Link>
+	    </Compile>
+
+		<EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Pages.Xaml\XamlCapsInsetPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+			<Link>Pages.Xaml\XamlCapsInsetPage.xaml</Link>
+		</EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Xaml\XamlCapsInsetPage.xaml.cs">
+	      <DependentUpon>Pages.Xaml\XamlCapsInsetPage.xaml</DependentUpon>
+	      <Link>Pages.Xaml\XamlCapsInsetPage.xaml.cs</Link>
+	    </Compile>
+
+	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Pages.Xaml\XamlCDATA.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>Pages.Xaml\XamlCDATA.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Xaml\XamlCDATA.xaml.cs">
+	      <DependentUpon>Pages.Xaml\XamlCDATA.xaml</DependentUpon>
+	      <Link>Pages.Xaml\XamlCDATA.xaml.cs</Link>
+	    </Compile>
+
+		<EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Pages.Xaml\XamlContentViewDemoPage.xaml" >
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+			<Link>Pages.Xaml\XamlContentViewDemoPage.xaml</Link>
+		</EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Xaml\XamlContentViewDemoPage.xaml.cs">
+	      <DependentUpon>Pages.Xaml\XamlContentViewDemoPage.xaml</DependentUpon>
+	      <Link>Pages.Xaml\XamlContentViewDemoPage.xaml.cs</Link>
+	    </Compile>
+
+	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Pages.Xaml\XamlFrameDemoPage.xaml" >
+		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>Pages.Xaml\XamlFrameDemoPage.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Xaml\XamlFrameDemoPage.xaml.cs">
+	      <DependentUpon>Pages.Xaml\XamlFrameDemoPage.xaml</DependentUpon>
+	      <Link>Pages.Xaml\XamlFrameDemoPage.xaml.cs</Link>
+	    </Compile>
+
+	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Pages.Xaml\XamlHtmlLabelsAndButtonsPage.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>Pages.Xaml\XamlHtmlLabelsAndButtonsPage.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Xaml\XamlHtmlLabelsAndButtonsPage.xaml.cs">
+	      <DependentUpon>Pages.Xaml\XamlHtmlLabelsAndButtonsPage.xaml</DependentUpon>
+	      <Link>Pages.Xaml\XamlHtmlLabelsAndButtonsPage.xaml.cs</Link>
+	    </Compile>
+
+	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Pages.Xaml\XamlImagesPage.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>Pages.Xaml\XamlImagesPage.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Xaml\XamlImagesPage.xaml.cs">
+	      <DependentUpon>Pages.Xaml\XamlImagesPage.xaml</DependentUpon>
+	      <Link>Pages.Xaml\XamlImagesPage.xaml.cs</Link>
+	    </Compile>
+
+	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Pages.Xaml\XamlNinePatchButtonPage.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>Pages.Xaml\XamlNinePatchButtonPage.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Xaml\XamlNinePatchButtonPage.xaml.cs">
+	      <DependentUpon>Pages.Xaml\XamlNinePatchButtonPage.xaml</DependentUpon>
+	      <Link>Pages.Xaml\XamlNinePatchButtonPage.xaml.cs</Link>
+	    </Compile>
+
+	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Pages.Xaml\XamlSegmentedControlPage.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>Pages.Xaml\XamlSegmentedControlPage.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Xaml\XamlSegmentedControlPage.xaml.cs">
+	      <DependentUpon>Pages.Xaml\XamlSegmentedControlPage.xaml</DependentUpon>
+	      <Link>Pages.Xaml\XamlSegmentedControlPage.xaml.cs</Link>
+	    </Compile>
+
+	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Pages.Xaml\XamlSingleStateButtonPage.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>Pages.Xaml\XamlSingleStateButtonPage.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Xaml\XamlSingleStateButtonPage.xaml.cs">
+	      <DependentUpon>Pages.Xaml\XamlSingleStateButtonPage.xaml</DependentUpon>
+	      <Link>Pages.Xaml\XamlSingleStateButtonPage.xaml.cs</Link>
+	    </Compile>
+
+	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\Pages.Xaml\XamlStateButtonsPage.xaml" >
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>Pages.Xaml\XamlStateButtonsPage.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Xaml\XamlStateButtonsPage.xaml.cs">
+	      <DependentUpon>Pages.Xaml\XamlStateButtonsPage.xaml</DependentUpon>
+	      <Link>Pages.Xaml\XamlStateButtonsPage.xaml.cs</Link>
+	    </Compile>
+
+
+
+
+		<EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\UserPages\ButtonCommand.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>UserPages\ButtonCommand.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\ButtonCommand.xaml.cs">
+	      <DependentUpon>UserPages\ButtonCommand.xaml</DependentUpon>
+	      <Link>UserPages\ButtonCommand.xaml.cs</Link>
+	    </Compile>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\ButtonCommandModel.cs">
+	      <Link>UserPages\ButtonCommandModel.cs</Link>
+	    </Compile>
+
+		<EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\UserPages\fontsizetestPage.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>UserPages\fontsizetestPage.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\fontsizetestPage.xaml.cs">
+	      <DependentUpon>UserPages\fontsizetestPage.xaml</DependentUpon>
+	      <Link>UserPages\fontsizetestPage.xaml.cs</Link>
+	    </Compile>
+
+	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\UserPages\Burkhart.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>UserPages\Burkhart.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\Burkhart.xaml.cs">
+	      <DependentUpon>UserPages\Burkhart.xaml</DependentUpon>
+	      <Link>UserPages\Burkhart.xaml.cs</Link>
+	    </Compile>
+
+	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\UserPages\ImageSourceHotSwap.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>UserPages\ImageSourceHotSwap.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\ImageSourceHotSwap.xaml.cs">
+	      <DependentUpon>UserPages\ImageSourceHotSwap.xaml</DependentUpon>
+	      <Link>UserPages\ImageSourceHotSwap.xaml.cs</Link>
+	    </Compile>
+
+
+
+	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\UserPages\Mfloyd.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>UserPages\Mfloyd.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\Mfloyd.xaml.cs">
+	      <DependentUpon>UserPages\Mfloyd.xaml</DependentUpon>
+	      <Link>UserPages\Mfloyd.xaml.cs</Link>
+	    </Compile>
+
+	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\UserPages\SegmentXAML.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>UserPages\SegmentXAML.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\SegmentXAML.xaml.cs">
+	      <DependentUpon>UserPages\SegmentXAML.xaml</DependentUpon>
+	      <Link>UserPages\SegmentXAML.xaml.cs</Link>
+	    </Compile>
+
+	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\UserPages\SegmentBindingPage.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>UserPages\SegmentBindingPage.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\SegmentBindingPage.xaml.cs">
+	      <DependentUpon>UserPages\SegmentBindingPage.xaml</DependentUpon>
+	      <Link>UserPages\SegmentBindingPage.xaml.cs</Link>
+	    </Compile>
+
+	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\UserPages\StretchIssuePage.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>UserPages\StretchIssuePage.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\StretchIssuePage.xaml.cs">
+	      <DependentUpon>UserPages\StretchIssuePage.xaml</DependentUpon>
+	      <Link>UserPages\StretchIssuePage.xaml.cs</Link>
+	    </Compile>
+
+	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\UserPages\ListViewWithF9PLabelInCells.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>UserPages\ListViewWithF9PLabelInCells.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\ListViewWithF9PLabelInCells.xaml.cs">
+	      <DependentUpon>UserPages\ListViewWithF9PLabelInCells.xaml</DependentUpon>
+	      <Link>UserPages\ListViewWithF9PLabelInCells.xaml.cs</Link>
+	    </Compile>
+
+	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\UserPages\WordCroppedDemo.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>UserPages\WordCroppedDemo.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\WordCroppedDemo.xaml.cs">
+	      <DependentUpon>UserPages\WordCroppedDemo.xaml</DependentUpon>
+	      <Link>UserPages\WordCroppedDemo.xaml.cs</Link>
+	    </Compile>
+
+	</ItemGroup>
+
+
+	<!-- F9PButtonTest -->
+	<ItemGroup>
+
+	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\F9PButtonTest\MainPage.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>F9PButtonTest\MainPage.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\F9PButtonTest\MainPage.xaml.cs">
+	      <DependentUpon>F9PButtonTest\MainPage.xaml</DependentUpon>
+	      <Link>F9PButtonTest\MainPage.xaml.cs</Link>
+	    </Compile>
+
+	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\F9PButtonTest\Views\Buttons1.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>F9PButtonTest\Views\Buttons1.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\F9PButtonTest\Views\Buttons1.xaml.cs">
+	      <DependentUpon>F9PButtonTest\Views\Buttons1.xaml</DependentUpon>
+	      <Link>F9PButtonTest\Views\Buttons1.xaml.cs</Link>
+	    </Compile>
+
+	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\F9PButtonTest\Views\Buttons2.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>F9PButtonTest\Views\Buttons2.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\F9PButtonTest\Views\Buttons2.xaml.cs">
+	      <DependentUpon>F9PButtonTest\Views\Buttons2.xaml</DependentUpon>
+	      <Link>F9PButtonTest\Views\Buttons2.xaml.cs</Link>
+	    </Compile>
+
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\F9PButtonTest\Model\InfoMsg.cs">
+	      <Link>F9PButtonTest\Model\InfoMsg.cs</Link>
+	    </Compile>
+
+	</ItemGroup>
+
+
+	<Target Name="Compile">
+		<Message Text="Completed Forms9PatchDemoXaml.targets"/>
+    	<Message Text="CompileConstants=[$(CompileConstants)]"/>
+	</Target>
+
+
+
+</Project>
