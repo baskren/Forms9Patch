@@ -23,6 +23,9 @@
     </ItemGroup>
     <!-- CODE PAGES -->
     <ItemGroup>
+        <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\FlyoutGestureFail\FlyoutGestureFail.cs" Link="UserPages\FlyoutGestureFail\FlyoutGestureFail.cs" />
+
+
         <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\BubblePopupTestPage.cs" Link="Pages.Code\BubblePopupTestPage.cs" />
         <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\ButtonAndSegmentAlignments.cs" Link="Pages.Code\ButtonAndSegmentAlignments.cs" />
         <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\ButtonCodePage.cs" Link="Pages.Code\ButtonCodePage.cs" />

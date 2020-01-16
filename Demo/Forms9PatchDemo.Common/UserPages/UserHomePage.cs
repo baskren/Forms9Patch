@@ -131,6 +131,12 @@ namespace Forms9PatchDemo
                     new TableSection("Code") {
 
                         new TextCell {
+                            Text = "Flyout Gesture Fail (Andorid)",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(FlyoutGestureFail)
+                        },
+
+                        new TextCell {
                             Text = "CODE: F9P Label in Xamarin.ListView",
                             Command = navigateCommand,
                             CommandParameter = typeof(ListViewWithF9PLabelInCells)
