@@ -27,6 +27,21 @@ namespace FormsGestures
 		Rectangle CoordTransform(VisualElement fromElement, Rectangle r, VisualElement toElement);
 
         //bool HasRenderer(VisualElement element);
+
+        /// <summary>
+        /// Returns point within view in DIP Screen Coordinates
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        Point PointInWindowCoord(VisualElement element, Point point);
+
+        /// <summary>
+        /// Returns bounds of view in DIP Screen Coordinates
+        /// </summary>
+        /// <param name="element"></param>
+        /// <returns></returns>
+        Rectangle BoundsInWindowCoord(VisualElement element);
     }
 }
 

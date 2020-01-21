@@ -459,10 +459,6 @@ namespace FormsGestures.iOS
 
 
         #region Touch events
-        CoreGraphics.CGPoint ViewLocationInWindow(UIView view)
-        {
-            return view.ConvertPointToView(CoreGraphics.CGPoint.Empty, null);
-        }
 
         int touchCount;
         CoreGraphics.CGPoint _viewLocationAtOnDown;
@@ -480,7 +476,7 @@ namespace FormsGestures.iOS
             if (touchCount == 0)
             {
                 //System.Diagnostics.Debug.WriteLine("onDown set _viewLocationAtOnDown");
-                _viewLocationAtOnDown = ViewLocationInWindow(gr.View);
+                _viewLocationAtOnDown = gr.View.LocationInNativeCoord();
             }
             touchCount++;
             //System.Diagnostics.Debug.WriteLine("\tNativeGestureHandler.onDown _touchCount=["+_touchCount+"] _viewLocation=["+_viewLocationAtOnDown+"]");
@@ -547,7 +543,7 @@ namespace FormsGestures.iOS
                 return;
 
             if (touchCount == 0)
-                _viewLocationAtOnDown = ViewLocationInWindow(gr.View);
+                _viewLocationAtOnDown = gr.View.LocationInNativeCoord();
 
             _numberOfTaps++;
             _lastTap = DateTime.Now;
@@ -615,7 +611,7 @@ namespace FormsGestures.iOS
             if (touchCount == 0)
             {
                 //System.Diagnostics.Debug.WriteLine("onLongPressed set _viewLocationAtOnDown");
-                _viewLocationAtOnDown = ViewLocationInWindow(gr.View);
+                _viewLocationAtOnDown = gr.View.LocationInNativeCoord();
             }
             if (gr.State == UIGestureRecognizerState.Ended || gr.State == UIGestureRecognizerState.Cancelled || gr.State == UIGestureRecognizerState.Failed)
             {
@@ -682,7 +678,7 @@ namespace FormsGestures.iOS
             {
                 //System.Diagnostics.Debug.WriteLine("new _viewLocationAtOnDown");
                 //System.Diagnostics.Debug.WriteLine("onPanned set _viewLocationAtOnDown");
-                _viewLocationAtOnDown = ViewLocationInWindow(gr.View);
+                _viewLocationAtOnDown = gr.View.LocationInNativeCoord();
                 touchCount++;
             }
             //System.Diagnostics.Debug.WriteLine("NativeGestureHandler.onPanned");
@@ -813,7 +809,7 @@ namespace FormsGestures.iOS
             if (touchCount == 0)
             {
                 //System.Diagnostics.Debug.WriteLine("onPinchAndRotate set _viewLocationAtOnDown");
-                _viewLocationAtOnDown = ViewLocationInWindow(gr.View);
+                _viewLocationAtOnDown = gr.View.LocationInNativeCoord();
                 touchCount++;
             }
             bool handled = false;

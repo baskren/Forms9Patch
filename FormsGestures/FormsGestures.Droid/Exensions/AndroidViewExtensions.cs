@@ -4,16 +4,21 @@
 //  *
 //  *******************************************************************/
 using System;
+using Android.Graphics;
+using Android.OS;
 using Android.Views;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
+
 namespace FormsGestures.Droid
 {
     public static class AndroidViewExtensions
     {
-        public static bool TouchUpViewHeirarchy(this View view, MotionEvent e)
+        public static bool TouchUpViewHeirarchy(this Android.Views.View view, MotionEvent e)
         {
             if (view == null)
                 return true;
-            if (!(view.Parent is View parent))
+            if (!(view.Parent is Android.Views.View parent))
                 return true;
 
             // If the number of pointers is the same and we don't need to perform any fancy
@@ -33,6 +38,37 @@ namespace FormsGestures.Droid
             e.OffsetLocation(offsetX, offsetY);
             return handled;
         }
+
+        public static Android.Graphics.Point LocationInNativeCoord(this Android.Views.View view)
+        {
+            var p = new int[2];
+            view.GetLocationOnScreen(p);
+            return new Android.Graphics.Point(p[0], p[1]);
+        }
+
+        public static Xamarin.Forms.Point LocationInDipCoord(this Android.Views.View view)
+        {
+            var location = LocationInNativeCoord(view);
+            return new Xamarin.Forms.Point(location.X / Display.Scale, location.Y / Display.Scale);
+        }
+
+
+        public static Android.Graphics.Rect BoundsInNativeCoord(this Android.Views.View view)
+        {
+            var location = LocationInNativeCoord(view);
+            return new Rect(location.X, location.Y, view.Width, view.Height);
+        }
+
+        public static Xamarin.Forms.Rectangle BoundsInDipCoord(this Android.Views.View view)
+        {
+            var rect = BoundsInNativeCoord(view);
+            return new Xamarin.Forms.Rectangle(
+                rect.Left / Display.Scale,
+                rect.Top / Display.Scale,
+                rect.Width() / Display.Scale,
+                rect.Height() / Display.Scale);
+        }
+
 
     }
 }

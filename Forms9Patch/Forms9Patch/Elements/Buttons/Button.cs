@@ -207,7 +207,7 @@ namespace Forms9Patch
         /// Do not use
         /// </summary>
         [Obsolete("Content property is not supported", true)]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1061:Do not hide base class methods", Justification = "We really don't want devs to have access to base class Content_set!")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1061:Do not hide base class methods", Justification = "We really don't want devs to have access to base class set_Children!")]
         public new VisualElement Content
         {
             get => throw new NotSupportedException("Forms9Patch.Button: Content is not a supported property.");
@@ -1191,16 +1191,6 @@ namespace Forms9Patch
                         || GroupToggleBehavior == GroupToggleBehavior.Radio && !IsSelected)
 
                         IsSelected = !IsSelected;
-
-                    //else
-                    {
-                        //Opacity = 0.5;
-                        Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
-                        {
-                            Opacity += 0.1;
-                            return Opacity < 1.0;
-                        });
-                    }
                 }
                 SendTapped();
                 Haptics.Feedback(HapticEffect, HapticEffectMode);
@@ -1210,13 +1200,20 @@ namespace Forms9Patch
             return false;
         }
 
+        void AnimateRelease()
+        {
+            Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
+            {
+                Opacity += 0.1;
+                return Opacity < 1.0;
+            });
+        }
+
         /// <summary>
         /// Tap this instance.
         /// </summary>
         public void Tap()
         {
-
-            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             HandleTap();
         }
 
@@ -1227,7 +1224,6 @@ namespace Forms9Patch
         /// <param name="e"></param>
         protected virtual void OnDown(object sender, FormsGestures.DownUpEventArgs e)
         {
-            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             e.Handled = IsEnabled && IsVisible;
             Opacity = 0.5;
         }
@@ -1239,8 +1235,36 @@ namespace Forms9Patch
         /// <param name="e"></param>
         protected virtual void OnUp(object sender, FormsGestures.DownUpEventArgs e)
         {
-            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
-            if (!IsLongPressEnabled)
+            /*
+            var popup = new Elements.Popups.Core.PopupPage
+            {
+                InputTransparent = true,
+                HasSystemPadding = false,
+                Content = new BoxView
+                {
+                    Margin = 0,
+                    TranslationX = e.ViewPosition.X,
+                    TranslationY = e.ViewPosition.Y,
+                    WidthRequest = e.ViewPosition.Width,
+                    HeightRequest = e.ViewPosition.Height,
+                    HorizontalOptions = LayoutOptions.Start,
+                    VerticalOptions = LayoutOptions.Start,
+                    Color = Color.Pink
+                },
+                Padding = 0,
+                IsVisible = true,
+            };
+            Elements.Popups.Core.PopupNavigation.Instance.PushAsync(popup);
+
+            Device.StartTimer(TimeSpan.FromSeconds(2), () =>
+             {
+                 Elements.Popups.Core.PopupNavigation.Instance.PopAsync();
+                 return false;
+             });
+             */
+            AnimateRelease();
+
+            if (!IsLongPressEnabled && !e.Cancelled && e.IsInView)
                 e.Handled = HandleTap();
         }
 
@@ -1251,7 +1275,6 @@ namespace Forms9Patch
         /// <param name="e"></param>
         protected virtual void OnTapped(object sender, FormsGestures.TapEventArgs e)
         {
-            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             if (IsLongPressEnabled)
                 e.Handled = HandleTap();
             else
@@ -1265,11 +1288,21 @@ namespace Forms9Patch
         /// <param name="e"></param>
         protected virtual void OnLongPressed(object sender, FormsGestures.LongPressEventArgs e)
         {
-            //System.Diagnostics.Debug.WriteLine(GetType() + "OnLongPressed");
-            if (IsEnabled && IsVisible && IsLongPressEnabled)
+            if (IsEnabled && IsVisible)
             {
-                _longPressed?.Invoke(this, EventArgs.Empty);
-                e.Handled = true;
+                AnimateRelease();
+                if (e.IsInView)
+                {
+                    if (IsLongPressEnabled)
+                    {
+                        _longPressed?.Invoke(this, EventArgs.Empty);
+                        e.Handled = true;
+                    }
+                    else
+                    {
+                        e.Handled = HandleTap();
+                    }
+                }
             }
         }
 
@@ -1280,12 +1313,26 @@ namespace Forms9Patch
         /// <param name="e"></param>
         protected virtual void OnLongPressing(object sender, FormsGestures.LongPressEventArgs e)
         {
-            //System.Diagnostics.Debug.WriteLine(GetType() + "OnLongPressing");
-            if (IsEnabled && IsVisible && IsLongPressEnabled)
+            if (IsEnabled && IsVisible && IsLongPressEnabled && e.IsInView)
             {
+                AnimateLongPress();
                 _longPressing?.Invoke(this, EventArgs.Empty);
                 e.Handled = true;
             }
+        }
+
+        void AnimateLongPress()
+        {
+            var flashColor = BackgroundColor.Luminosity < Color.LightGray.Luminosity
+                ? Color.White
+                : Color.Gray;
+            var bias = 1.0;
+            Device.StartTimer(TimeSpan.FromMilliseconds(20), () =>
+            {
+                bias -= 0.1;
+                base.BackgroundColor = BackgroundColor.RgbaBlend(flashColor, bias);
+                return bias > 0;
+            });
         }
 
         #endregion
@@ -1331,8 +1378,8 @@ namespace Forms9Patch
                     if (SelectedBackgroundColor.A > 0)
                         base.BackgroundColor = SelectedBackgroundColor;
                     else
-                        base.BackgroundColor = BackgroundColor.A > 0 ? BackgroundColor.RgbBlend(Color.FromHex("#000"), 0.25) : Color.FromHex(DarkTheme ? "#FFF" : "#000").WithAlpha(0.2);
-                    base.OutlineColor = BackgroundColor.A > 0 ? OutlineColor.RgbBlend(Color.FromHex("#000"), 0.25) : base.BackgroundColor.A > 0 ? base.BackgroundColor : enabledLabelColor;
+                        base.BackgroundColor = BackgroundColor.A > 0 ? BackgroundColor.RgbHybridBlend(Color.FromHex("#000"), 0.25) : Color.FromHex(DarkTheme ? "#FFF" : "#000").WithAlpha(0.2);
+                    base.OutlineColor = BackgroundColor.A > 0 ? OutlineColor.RgbHybridBlend(Color.FromHex("#000"), 0.25) : base.BackgroundColor.A > 0 ? base.BackgroundColor : enabledLabelColor;
                 }
                 else
                 {
@@ -1361,10 +1408,10 @@ namespace Forms9Patch
                     if (IsSelected)
                     {
                         if (SelectedBackgroundColor.A > 0)
-                            base.BackgroundColor = SelectedBackgroundColor.RgbBlend(Color.FromHex("#000"), 0.25);
+                            base.BackgroundColor = SelectedBackgroundColor.RgbHybridBlend(Color.FromHex("#000"), 0.25);
                         else
-                            base.BackgroundColor = BackgroundColor.A > 0 ? BackgroundColor.RgbBlend(Color.FromHex("#000"), 0.25) : Color.FromHex(DarkTheme ? "#FFF" : "#000").WithAlpha(0.2);
-                        base.OutlineColor = BackgroundColor.A > 0 ? OutlineColor.RgbBlend(Color.FromHex("#000"), 0.25) : base.BackgroundColor.A > 0 ? base.BackgroundColor : enabledLabelColor; // _label.TextColor;
+                            base.BackgroundColor = BackgroundColor.A > 0 ? BackgroundColor.RgbHybridBlend(Color.FromHex("#000"), 0.25) : Color.FromHex(DarkTheme ? "#FFF" : "#000").WithAlpha(0.2);
+                        base.OutlineColor = BackgroundColor.A > 0 ? OutlineColor.RgbHybridBlend(Color.FromHex("#000"), 0.25) : base.BackgroundColor.A > 0 ? base.BackgroundColor : enabledLabelColor; // _label.TextColor;
                     }
                     else
                     {

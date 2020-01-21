@@ -22,8 +22,10 @@ namespace Forms9Patch.Droid
                 var elementLocation = new int[2];
                 var pageLocation = new int[2];
 
-                pageNativeView.GetLocationInWindow(pageLocation);
-                elementNativeView.GetLocationInWindow(elementLocation);
+                //pageNativeView.GetLocationInWindow(pageLocation);
+                //elementNativeView.GetLocationInWindow(elementLocation);
+                pageNativeView.GetLocationOnScreen(pageLocation);
+                elementNativeView.GetLocationOnScreen(elementLocation);
                 /*
                 System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": Orientation[" + ((Android.Views.IWindowManager)Droid.Settings.Context.GetSystemService(Android.Content.Context.WindowService)).DefaultDisplay.Rotation + "]");
                 System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": pageLocation[" + string.Join(",", pageLocation) + "]");

@@ -25,7 +25,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Forms9PatchDemo</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.p42Forms9PatchDemo</string>
+	<string>com.p42.Forms9PatchDemo</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>

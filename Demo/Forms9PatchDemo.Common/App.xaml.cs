@@ -11,6 +11,7 @@ namespace Forms9PatchDemo
             InitializeComponent();
 
             MainPage = new NavigationPage(new HomePage());
+            //MainPage = new VariableWidthButton();
         }
 
         protected override void OnStart()

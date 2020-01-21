@@ -1,5 +1,6 @@
 using System;
 using Xamarin.Forms;
+using static Android.Views.MotionEvent;
 
 namespace FormsGestures
 {
@@ -11,6 +12,9 @@ namespace FormsGestures
         {
             return new Point(dipX / (double)DIP.Density, dipY / (double)DIP.Density);
         }
+
+        public static Point ToPoint(PointerCoords pointerCoords)
+            => ToPoint(pointerCoords.X, pointerCoords.Y);
 
         public static Rectangle ToRectangle(double dipX, double dipY, double dipWidth, double dipHeight)
         {

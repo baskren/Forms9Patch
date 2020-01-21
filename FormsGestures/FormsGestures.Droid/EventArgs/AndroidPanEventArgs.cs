@@ -5,10 +5,11 @@ namespace FormsGestures.Droid
 {
 	public class AndroidPanEventArgs : PanEventArgs
 	{
-		public AndroidPanEventArgs(MotionEvent previous, MotionEvent current, PanEventArgs prevArgs, global::Android.Views.View view, int[] startLocation) {
+		public AndroidPanEventArgs(MotionEvent previous, MotionEvent current, PanEventArgs prevArgs, global::Android.Views.View view, int[] startLocation, Listener listener) {
+			Listener = listener;
 			Cancelled = (current.Action == MotionEventActions.Cancel);
-			ViewPosition = AndroidEventArgsHelper.GetViewPosition(view);
-			Touches = AndroidEventArgsHelper.GetTouches(current,view, startLocation);
+			ViewPosition = FormsGestures.VisualElementExtensions.BoundsInWindowCoord(listener.Element);
+			Touches = AndroidEventArgsHelper.GetTouches(current,view, startLocation, listener);
 			CalculateDistances(prevArgs);
 			Velocity = GetVelocity(previous, current);
 		}

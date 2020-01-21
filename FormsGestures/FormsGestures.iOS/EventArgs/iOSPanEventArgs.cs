@@ -11,7 +11,7 @@ namespace FormsGestures.iOS
 		public iOSPanEventArgs(UIPanGestureRecognizer gr, PanEventArgs previous, CoreGraphics.CGPoint locationAtStart)
 		{
 			Cancelled = (gr.State == UIGestureRecognizerState.Cancelled || gr.State == UIGestureRecognizerState.Failed);
-			ViewPosition = iOSEventArgsHelper.GetViewPosition(gr.View.Frame);
+			ViewPosition = gr.View.BoundsInDipCoord();
 			Touches = iOSEventArgsHelper.GetTouches(gr, locationAtStart);
 			base.CalculateDistances(previous);
 			Velocity = GetVelocity(gr);

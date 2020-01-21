@@ -34,9 +34,19 @@ namespace Forms9PatchDemo
                             CommandParameter = typeof(UserPagesHomePage)
                         },
                         new TextCell {
-                            Text = "Variable Width Button",
+                            Text = "Detailed Gesture Test Page",
                             Command = navigateCommand,
-                            CommandParameter = typeof(VariableWidthButton)
+                            CommandParameter = typeof(VariableWidthButtonPage)
+                        },
+                        new TextCell {
+                            Text = "Detailed Gesture Test Master Detail Page A",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(VariableWidthButtonMasterDetailPageA)
+                        },
+                        new TextCell {
+                            Text = "Detailed Gesture Test Master Detail Page B",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(VariableWidthButtonMasterDetailPageB)
                         },
                     },
 

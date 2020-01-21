@@ -12,7 +12,7 @@ namespace FormsGestures.iOS
 		public iOSDownUpEventArgs(DownUpGestureRecognizer gr, UITouch[] triggeringTouches, CoreGraphics.CGPoint viewLocationAtStart)
 		{
 			Cancelled = (gr.State == UIGestureRecognizerState.Cancelled || gr.State == UIGestureRecognizerState.Failed);
-			ViewPosition = iOSEventArgsHelper.GetViewPosition(gr.View.Frame);
+            ViewPosition = gr.View.BoundsInDipCoord();
 			Touches = iOSEventArgsHelper.GetTouches(gr, viewLocationAtStart);
 			TriggeringTouches = GetTriggeringTouches(gr, triggeringTouches, viewLocationAtStart);
 		}

@@ -1770,7 +1770,12 @@ namespace FormsGestures
 
 
         #region Command / Event executors
-        void RaiseEvent<T>(EventHandler<T> handler, T args) where T : BaseGestureEventArgs => handler?.Invoke(this, args);
+        void RaiseEvent<T>(EventHandler<T> handler, T args, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
+            where T : BaseGestureEventArgs
+        {
+            args.Event = callerName.Substring(2);
+            handler?.Invoke(this, args);
+        }
 
         static void ExecuteCommand(ICommand command, object parameter, BaseGestureEventArgs args)
         {

@@ -8,6 +8,11 @@ namespace FormsGestures
     /// </summary>
     public class BaseGestureEventArgs : EventArgs
     {
+        /// <summary>
+        /// Name of event that has been triggered
+        /// </summary>
+        public string Event { get; internal set; }
+
         Point _center;
 
         /// <summary>
@@ -34,7 +39,7 @@ namespace FormsGestures
         /// <summary>
         /// all of the touch points that make up this touch event
         /// </summary>
-		public virtual Point[] Touches { get; protected set; }
+		public virtual Point[] Touches { get; internal set; }
 
         /// <summary>
         /// Number of touches in touch event
@@ -58,7 +63,7 @@ namespace FormsGestures
                         num2 += Touches[i].X;
                         num3 += Touches[i].Y;
                     }
-                    _center = new Point(num2 / (double)num, num3 / (double)num);
+                    _center = new Point(num2 / num, num3 / num);
                 }
                 return _center;
             }
@@ -81,7 +86,7 @@ namespace FormsGestures
                 {
                     Touches = new Point[source.Touches.Length];
                     for (int i = 0; i < source.Touches.Length; i++)
-                        Touches[i] = Listener.Element.ToEleCoord(source.Touches[i], newListener.Element);
+                        Touches[i] = Listener.Element.PointInElementCoord(source.Touches[i], newListener.Element);
                     ViewPosition = VisualElementExtensions.CoordTransform(Listener.Element, source.ViewPosition, newListener.Element);
                 }
                 else
@@ -145,5 +150,14 @@ namespace FormsGestures
             ViewPosition = other.ViewPosition;
             Touches = other.Touches;
         }
+
+        public bool Contains(Point p)
+        {
+            var rect = new Rectangle(Point.Zero, Listener.Element.Bounds.Size);
+            return rect.Contains(p);
+        }
+
+        public bool IsInView
+            => Contains(Center);
     }
 }

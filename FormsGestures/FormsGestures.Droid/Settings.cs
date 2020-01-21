@@ -19,6 +19,10 @@ namespace FormsGestures.Droid
 
         }
 
+        public static Android.App.Activity Activity { get; private set; }
+
+
+
         static double _msUntilTapped = 300;
         /// <summary>
         /// Gets or sets the tapped threshold.
@@ -54,11 +58,14 @@ namespace FormsGestures.Droid
         /// </summary>
         /// <returns>The init.</returns>
         /// <param name="context">Context.</param>
-        public static void Init(Android.Content.Context context = null)
+        public static void Init(Android.App.Activity activity = null)
         {
             if (_context != null)
                 return;
-            Context = context;
+
+            Activity = activity;
+            Context = Activity as Android.Content.Context;
+
             P42.Utils.Droid.Settings.Init(Context);
         }
 

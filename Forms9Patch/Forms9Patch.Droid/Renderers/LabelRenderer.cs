@@ -133,7 +133,7 @@ namespace Forms9Patch.Droid
 
 
             var result = new Size(_lastMeasureResult.Value.Request.Width / displayScale, _lastMeasureResult.Value.Request.Height / displayScale);
-            P42.Utils.Debug.Message(Element, "EXIT result: " + result);
+            //P42.Utils.Debug.Message(Element, "EXIT result: " + result);
             return result;
         }
 
@@ -419,8 +419,8 @@ namespace Forms9Patch.Droid
                     //Control.Invalidate();
                     Control.ForceLayout();
                 }
-                if (control == Control)
-                    System.Diagnostics.Debug.WriteLine("LabelRenderer" + P42.Utils.ReflectionExtensions.CallerString() + ": result: " + result);
+                //if (control == Control)
+                //    System.Diagnostics.Debug.WriteLine("LabelRenderer" + P42.Utils.ReflectionExtensions.CallerString() + ": result: " + result);
                 return result;
             }
             return new SizeRequest(Size.Zero);

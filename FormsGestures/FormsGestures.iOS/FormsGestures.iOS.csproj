@@ -63,6 +63,7 @@
     <Compile Include="Services\GestureService.cs" />
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Extensions\UIViewExtensions.cs" />
   </ItemGroup>
   <!-- XF Nuget Project References -->
   <ItemGroup>

@@ -65,7 +65,7 @@ namespace Forms9Patch.Droid
 
             var decoreView = activity.Window.DecorView;
             var decoreHeight = decoreView.Height;
-            var decoreWidht = decoreView.Width;
+            var decoreWidth = decoreView.Width;
 
             var visibleRect = new Rect();
             decoreView.GetWindowVisibleDisplayFrame(visibleRect);
@@ -116,7 +116,7 @@ namespace Forms9Patch.Droid
                 {
                     Left = Context.FromPixels(visibleRect.Left),
                     Top = Context.FromPixels(visibleRect.Top),
-                    Right = Context.FromPixels(decoreWidht - visibleRect.Right),
+                    Right = Context.FromPixels(decoreWidth - visibleRect.Right),
                     Bottom = Context.FromPixels(decoreHeight - visibleRect.Bottom - keyboardHeight)
                 };
             }
