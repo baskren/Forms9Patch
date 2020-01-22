@@ -473,7 +473,7 @@ namespace FormsGestures.iOS
 				((UIButton)control).SendActionForControlEvents (UIControlEvent.TouchDown);
 				*/
             bool handled = false;
-            if (touchCount == 0)
+            //if (touchCount == 0)
             {
                 //System.Diagnostics.Debug.WriteLine("onDown set _viewLocationAtOnDown");
                 _viewLocationAtOnDown = gr.View.LocationInNativeCoord();
@@ -674,6 +674,7 @@ namespace FormsGestures.iOS
         {
             if (!_element.IsVisible)
                 return;
+            
             if (touchCount == 0)
             {
                 //System.Diagnostics.Debug.WriteLine("new _viewLocationAtOnDown");

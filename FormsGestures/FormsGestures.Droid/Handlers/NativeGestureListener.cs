@@ -177,7 +177,7 @@ namespace FormsGestures.Droid
 
 
         #region LongPress Timer
-v        void LongPressingTimerStop()
+        void LongPressingTimerStop()
         {
             if (LongPressTimer != null)
             {

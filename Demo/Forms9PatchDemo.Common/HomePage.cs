@@ -48,6 +48,12 @@ namespace Forms9PatchDemo
                             Command = navigateCommand,
                             CommandParameter = typeof(VariableWidthButtonMasterDetailPageB)
                         },
+                        new TextCell {
+                            Text = "Gestures Test Page",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(GestureTestPage)
+                        },
+
                     },
 
                     new TableSection("XAML") {
@@ -195,12 +201,6 @@ namespace Forms9PatchDemo
                             Text = "PopupsPage",
                             Command = navigateCommand,
                             CommandParameter = typeof(PopupsPage)
-                        },
-
-                        new TextCell {
-                            Text = "Gestures Test Page",
-                            Command = navigateCommand,
-                            CommandParameter = typeof(GestureTestPage)
                         },
 
                         new TextCell {

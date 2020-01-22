@@ -52,7 +52,7 @@ namespace FormsGestures
         /// calculates the distance traversed since last sample
         /// </summary>
         /// <param name="previous"></param>
-		protected void CalculateDistances(PanEventArgs previous)
+		protected void CalculateDistances(PanEventArgs previous, Point locationAtStart)
         {
             if (previous == null)
             {
@@ -60,14 +60,22 @@ namespace FormsGestures
                 TotalDistance = new Point(0.0, 0.0);
                 return;
             }
+            var viewOffset = ViewPosition.Location.Subtract(previous.ViewPosition.Location);
             if (Touches.Length != previous.Touches.Length)
             {
                 DeltaDistance = new Point(0.0, 0.0);
                 TotalDistance = previous.TotalDistance;
                 return;
             }
-            DeltaDistance = Center.Subtract(previous.Center);
-            TotalDistance = previous.TotalDistance.Add(DeltaDistance);
+            DeltaDistance = Center.Subtract(previous.Center).Add(viewOffset);
+            //TotalDistance = previous.TotalDistance.Add(DeltaDistance);
+            TotalDistance = ViewPosition.Location.Subtract(locationAtStart).Add(DeltaDistance);
+            /*
+            System.Diagnostics.Debug.WriteLine("[PanEventArgs."
+            + P42.Utils.ReflectionExtensions.CallerMemberName() + ":"
+            + P42.Utils.ReflectionExtensions.CallerLineNumber()
+            + "] TotalDistance: " + TotalDistance);
+            */
         }
 
         internal PanEventArgs Diff(PanEventArgs lastArgs)

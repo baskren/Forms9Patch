@@ -10,7 +10,7 @@ namespace FormsGestures.Droid
 			Cancelled = (current.Action == MotionEventActions.Cancel);
 			ViewPosition = FormsGestures.VisualElementExtensions.BoundsInWindowCoord(listener.Element);
 			Touches = AndroidEventArgsHelper.GetTouches(current,view, startLocation, listener);
-			CalculateDistances(prevArgs);
+			CalculateDistances(prevArgs, new Point(startLocation[0], startLocation[1]));
 			Velocity = GetVelocity(previous, current);
 		}
 
