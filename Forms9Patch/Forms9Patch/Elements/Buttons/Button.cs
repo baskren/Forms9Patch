@@ -1235,7 +1235,7 @@ namespace Forms9Patch
         /// <param name="e"></param>
         protected virtual void OnUp(object sender, FormsGestures.DownUpEventArgs e)
         {
-            
+            /*
             var popup = new Elements.Popups.Core.PopupPage
             {
                 IsAnimationEnabled = false,
@@ -1263,7 +1263,7 @@ namespace Forms9Patch
                  Elements.Popups.Core.PopupNavigation.Instance.RemovePageAsync(popup);
                  return false;
              });
-             
+             */
             AnimateRelease();
 
             if (!IsLongPressEnabled && !e.Cancelled && e.IsInView)
