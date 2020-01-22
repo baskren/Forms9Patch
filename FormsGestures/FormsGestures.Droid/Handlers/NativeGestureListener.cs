@@ -22,6 +22,18 @@ namespace FormsGestures.Droid
         bool _pinching;
         bool _rotating;
 
+        int _upFires;
+        int _numberOfTaps;
+
+        System.Timers.Timer TappedTimer;
+        int _tappedTimerNumberOfTaps;
+
+        int _downFires;
+        DateTime _onDownDateTime = DateTime.MinValue;
+
+
+        System.Timers.Timer LongPressTimer;
+
         //static bool _cancelled;
 
         PanEventArgs _lastPanArgs;
@@ -32,106 +44,38 @@ namespace FormsGestures.Droid
 
 
         #region Properties
+        bool HandlesTest(Func<Listener, bool> test)
+        {
+                var handler = NativeGestureHandler.InstanceForElement(Element);
+                while (handler != null)
+                {
+                    if (handler.Listener != null && test(handler.Listener))
+                        return true;
+                    handler = NativeGestureHandler.InstanceForElement(handler.Element?.Parent);
+                }
+                return false;
+        }
         public bool HandlesPressTapEvents => HandlesTapped || HandlesDoubleTapped || HandlesLongPresses;
 
-        public bool HandlesTapped
-        {
-            get
-            {
-                var handler = NativeGestureHandler.InstanceForElement(Element);
-                while (handler != null)
-                {
-                    var listener = handler.Listener;
-                    if (listener != null && listener.HandlesTapped)
-                        return true;
-                    handler = NativeGestureHandler.InstanceForElement(handler.Element?.Parent);
-                }
-                return false;
-            }
-        }
+        public bool HandlesTapped 
+            => HandlesTest(listener => listener.HandlesTapped);
 
-        public bool HandlesDoubleTapped
-        {
-            get
-            {
-                var handler = NativeGestureHandler.InstanceForElement(Element);
-                while (handler != null)
-                {
-                    var listener = handler.Listener;
-                    if (listener != null && listener.HandlesDoubleTapped)
-                        return true;
-                    handler = NativeGestureHandler.InstanceForElement(handler.Element?.Parent);
-                }
-                return false;
-            }
-        }
+        public bool HandlesDoubleTapped 
+            => HandlesTest(listener => listener.HandlesDoubleTapped);
 
-        public bool HandlesPan
-        {
-            get
-            {
-                var handler = NativeGestureHandler.InstanceForElement(Element);
-                while (handler != null)
-                {
-                    var listener = handler.Listener;
-                    if (listener != null && (listener.HandlesPanned || listener.HandlesPanning))
-                        return true;
-                    handler = NativeGestureHandler.InstanceForElement(handler.Element?.Parent);
-                }
-                return false;
-            }
-        }
+        public bool HandlesPan 
+            => HandlesTest(listener => listener.HandlesPanned || listener.HandlesPanning);
 
-
-        public bool HandlesMove
-        {
-            get
-            {
-                var handler = NativeGestureHandler.InstanceForElement(Element);
-                while (handler != null)
-                {
-                    var listener = handler.Listener;
-                    if (listener != null && (listener.HandlesPanned || listener.HandlesPanning || listener.HandlesPinched || listener.HandlesPinching || listener.HandlesSwiped || listener.HandlesRotated || listener.HandlesRotating))
-                        return true;
-                    handler = NativeGestureHandler.InstanceForElement(handler.Element?.Parent);
-                }
-                return false;
-            }
-        }
+        public bool HandlesMove 
+            => HandlesTest(listener => listener.HandlesPanned || listener.HandlesPanning || listener.HandlesPinched || listener.HandlesPinching || listener.HandlesSwiped || listener.HandlesRotated || listener.HandlesRotating);
 
         public bool HandlesSwiped
-        {
-            get
-            {
-                var handler = NativeGestureHandler.InstanceForElement(Element);
-                while (handler != null)
-                {
-                    var listener = handler.Listener;
-                    if (listener != null && listener.HandlesSwiped)
-                        return true;
-                    handler = NativeGestureHandler.InstanceForElement(handler.Element?.Parent);
-                }
-                return false;
-            }
-        }
+             => HandlesTest(listener => listener.HandlesSwiped);
 
         public bool HandlesLongPresses
-        {
-            get
-            {
-                var handler = NativeGestureHandler.InstanceForElement(Element);
-                while (handler != null)
-                {
-                    var listener = handler.Listener;
-                    if (listener != null && (listener.HandlesLongPressed || listener.HandlesLongPressing))
-                        return true;
-                    handler = NativeGestureHandler.InstanceForElement(handler.Element?.Parent);
-                }
-                return false;
-            }
-        }
+             => HandlesTest(listener => listener.HandlesLongPressed || listener.HandlesLongPressing);
 
-        bool RendererDisposed => Xamarin.Forms.Platform.Android.Platform.GetRenderer(Element as VisualElement) == null;
+        bool RendererDisposed => Element==null || Xamarin.Forms.Platform.Android.Platform.GetRenderer(Element as VisualElement) == null;
 
         MotionEvent _start;
         MotionEvent Start
@@ -233,9 +177,7 @@ namespace FormsGestures.Droid
 
 
         #region LongPress Timer
-        System.Timers.Timer LongPressTimer;
-
-        void LongPressingTimerStop()
+v        void LongPressingTimerStop()
         {
             if (LongPressTimer != null)
             {
@@ -294,9 +236,6 @@ namespace FormsGestures.Droid
 
 
         #region Tapped Timer
-        System.Timers.Timer TappedTimer;
-        int _tappedTimerNumberOfTaps;
-
         void TappedTimerStop()
         {
             if (TappedTimer != null)
@@ -389,8 +328,6 @@ namespace FormsGestures.Droid
 
 
         #region Down / Up / 'ed events
-        int _downFires;
-        DateTime _onDownDateTime = DateTime.MinValue;
         public override bool OnDown(MotionEvent e)
         {
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("OnDown [{0}]",_id);
@@ -445,8 +382,6 @@ namespace FormsGestures.Droid
             return true;
         }
 
-        int _upFires;
-        int _numberOfTaps;
         public bool OnUp(MotionEvent ev)
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture) );

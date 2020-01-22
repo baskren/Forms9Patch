@@ -10,13 +10,14 @@ namespace FormsGestures.UWP
 {
     class UwpDownUpArgs : DownUpEventArgs
     {
-        public UwpDownUpArgs(FrameworkElement element, PointerRoutedEventArgs args)
+        public UwpDownUpArgs(FrameworkElement uwpElement, PointerRoutedEventArgs args)
         {
             Cancelled = false;
-            ViewPosition = element.GetXfViewFrame();
-            //var currentPoint = args.GetCurrentPoint(null);
-            var currentPoint = args.GetCurrentPoint(element);
-            Touches = new Xamarin.Forms.Point[] { currentPoint.Position.ToXfPoint() };
+            ViewPosition = uwpElement.GetXfViewFrame();
+            var currentPoint = args.GetCurrentPoint(uwpElement);
+            var point = currentPoint.Position.ToXfPoint();
+            System.Diagnostics.Debug.WriteLine("UwpDownUpArgs point[" + point + "]");
+            Touches = new Xamarin.Forms.Point[] { point };
             TriggeringTouches = new[] { 0 };
         }
 

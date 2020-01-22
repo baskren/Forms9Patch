@@ -47,7 +47,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.UWP", "FormsG
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Using Forms9Patch Source", "Using Forms9Patch Source", "{A50BDEC4-4C25-48F3-84C7-58395A1BBCCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.Source", "Demo\UsingForms9PatchSource\Forms9PatchDemo.Source\Forms9PatchDemo.Source.csproj", "{CB785589-9453-4183-B2F8-59469EFCBA49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms9PatchDemo.Source", "Demo\UsingForms9PatchSource\Forms9PatchDemo.Source\Forms9PatchDemo.Source.csproj", "{CB785589-9453-4183-B2F8-59469EFCBA49}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.Source.iOS", "Demo\UsingForms9PatchSource\Forms9PatchDemo.Source.iOS\Forms9PatchDemo.Source.iOS.csproj", "{6E550633-367E-41D1-A426-904785CCE2CA}"
 EndProject
@@ -293,6 +293,7 @@ Global
 		{1D0CE227-36B2-472B-B4C1-BD366598171E}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{30CE6E80-8241-4E5B-A026-55BBE1319487}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{30CE6E80-8241-4E5B-A026-55BBE1319487}.Debug|Any CPU.Build.0 = Debug|x86
+		{30CE6E80-8241-4E5B-A026-55BBE1319487}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{30CE6E80-8241-4E5B-A026-55BBE1319487}.Debug|iPhone.ActiveCfg = Debug|x86
 		{30CE6E80-8241-4E5B-A026-55BBE1319487}.Debug|iPhone.Build.0 = Debug|x86
 		{30CE6E80-8241-4E5B-A026-55BBE1319487}.Debug|iPhoneSimulator.ActiveCfg = Debug|x86

@@ -10,6 +10,18 @@ namespace FormsGestures.UWP
 {
     public static class FrameworkElementExtensions
     {
+        public static Xamarin.Forms.Point GetCurrentPointerPosition(this FrameworkElement element)
+        {
+            var pointerPositionInScreenCoord = Windows.UI.Core.CoreWindow.GetForCurrentThread().PointerPosition;
+            var pointerPositionInAppWindowX = pointerPositionInScreenCoord.X - Window.Current.Bounds.X;
+            var pointerPositionInAppWindowY = pointerPositionInScreenCoord.Y - Window.Current.Bounds.Y;
+            var transform = element.TransformToVisual(Window.Current.Content);
+            var elementOrigin = transform.TransformPoint(Xamarin.Forms.Point.Zero.ToUwpPoint());
+            var pointerPositionInElementCoordX = pointerPositionInAppWindowX - elementOrigin.X;
+            var pointerPositionInElementCoordY = pointerPositionInAppWindowY - elementOrigin.Y;
+            return new Xamarin.Forms.Point(pointerPositionInElementCoordX, pointerPositionInElementCoordY);
+        }
+
         public static Xamarin.Forms.Rectangle GetXfViewFrame(this FrameworkElement frameworkElement)
         {
             if (frameworkElement is FrameworkElement element)
@@ -18,7 +30,7 @@ namespace FormsGestures.UWP
                 var point = transform.TransformPoint(new Windows.Foundation.Point(0, 0));
                 //var xfPoint = new Xamarin.Forms.Point(point.X / Display.Scale, point.Y / Display.Scale);
                 var xfPoint = point.ToXfPoint();
-                var xfSize = new Xamarin.Forms.Size(element.ActualWidth / Display.Scale, element.ActualHeight / Display.Scale);
+                var xfSize = new Xamarin.Forms.Size(element.ActualWidth, element.ActualHeight);
                 return new Xamarin.Forms.Rectangle(xfPoint, xfSize);
             }
             return Xamarin.Forms.Rectangle.Zero;

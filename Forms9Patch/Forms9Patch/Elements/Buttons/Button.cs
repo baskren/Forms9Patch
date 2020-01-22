@@ -1235,9 +1235,10 @@ namespace Forms9Patch
         /// <param name="e"></param>
         protected virtual void OnUp(object sender, FormsGestures.DownUpEventArgs e)
         {
-            /*
+            
             var popup = new Elements.Popups.Core.PopupPage
             {
+                IsAnimationEnabled = false,
                 InputTransparent = true,
                 HasSystemPadding = false,
                 Content = new BoxView
@@ -1256,12 +1257,13 @@ namespace Forms9Patch
             };
             Elements.Popups.Core.PopupNavigation.Instance.PushAsync(popup);
 
-            Device.StartTimer(TimeSpan.FromSeconds(2), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(0.5), () =>
              {
-                 Elements.Popups.Core.PopupNavigation.Instance.PopAsync();
+                 //Elements.Popups.Core.PopupNavigation.Instance.PopAsync();
+                 Elements.Popups.Core.PopupNavigation.Instance.RemovePageAsync(popup);
                  return false;
              });
-             */
+             
             AnimateRelease();
 
             if (!IsLongPressEnabled && !e.Cancelled && e.IsInView)
