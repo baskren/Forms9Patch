@@ -41,9 +41,9 @@ namespace FormsGestures
         /// </summary>
         /// <param name="previous"></param>
 		protected void CalculateScales(PinchEventArgs previous) {
-			if (previous != null && Touches.Length > 1 && previous.Touches.Length > 1) {
+			if (previous != null && WindowTouches.Length > 1 && previous.WindowTouches.Length > 1) {
 				Distance = GetDistance (previous);
-			} else if (Touches.Length > 1) {
+			} else if (WindowTouches.Length > 1) {
 				Distance = GetDistance ();
 			} else if (previous != null)
 				Distance = previous.Distance;
@@ -54,7 +54,7 @@ namespace FormsGestures
 				TotalScale = 1.0;
 				return;
 			}
-			if (Touches.Length != previous.Touches.Length) {
+			if (WindowTouches.Length != previous.WindowTouches.Length) {
 				DeltaScale = 1.0;
 				TotalScale = previous.TotalScale;
 				return;
@@ -64,15 +64,15 @@ namespace FormsGestures
 		}
 
 		double GetDistance(PinchEventArgs previous) {
-            var deltaX = (previous.Touches[1].X + Touches[1].X)/2.0 - (previous.Touches[0].X+Touches[0].X)/2.0;
-            var deltaY = (previous.Touches[1].Y + Touches[1].Y)/2.0 - (previous.Touches[0].Y+Touches[0].Y)/2.0;
+            var deltaX = (previous.WindowTouches[1].X + WindowTouches[1].X)/2.0 - (previous.WindowTouches[0].X+ WindowTouches[0].X)/2.0;
+            var deltaY = (previous.WindowTouches[1].Y + WindowTouches[1].Y)/2.0 - (previous.WindowTouches[0].Y+ WindowTouches[0].Y)/2.0;
 			var distance = Math.Sqrt (deltaX * deltaX + deltaY * deltaY);
 			return distance;
 		}
 
 		double GetDistance() {
-            var deltaX = Touches[1].X - Touches[0].X;
-            var deltaY = Touches[1].Y - Touches[0].Y;
+            var deltaX = WindowTouches[1].X - WindowTouches[0].X;
+            var deltaY = WindowTouches[1].Y - WindowTouches[0].Y;
 			var distance = Math.Sqrt (deltaX * deltaX + deltaY * deltaY);
 			//System.Diagnostics.Debug.WriteLine ("x1=["+ Touches[1].X +"] x0=["+ Touches[0].X +"] y1=["+ Touches[1].Y +"] y0=["+ Touches[0].Y +"]");
 			//System.Diagnostics.Debug.WriteLine ("dx="+deltaX+" dy="+deltaY+" Dist="+distance);
@@ -83,8 +83,9 @@ namespace FormsGestures
 			return new PinchEventArgs {
 				Cancelled = Cancelled,
 				Handled = Handled,
-				ViewPosition = ViewPosition,
-				Touches = Touches,
+				ElementPosition = ElementPosition,
+				ElementTouches = ElementTouches,
+                WindowTouches = WindowTouches,
 				Listener = Listener,
 				Distance = Distance,
 				TotalScale = TotalScale,

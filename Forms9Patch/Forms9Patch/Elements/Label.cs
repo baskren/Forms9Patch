@@ -507,7 +507,7 @@ namespace Forms9Patch
         {
             //if (Device.RuntimePlatform == Device.Android && e.NumberOfTouches == 1)
             {
-                var index = IndexAtPoint(e.Touches[0]);
+                var index = IndexAtPoint(e.ElementTouches[0]);
                 foreach (var span in F9PFormattedString._spans)
                 {
                     if (span is ActionSpan actionSpan)
@@ -530,7 +530,7 @@ namespace Forms9Patch
                 return;
             if (e.NumberOfTouches == 1)
             {
-                var index = IndexAtPoint(e.Touches[0]);
+                var index = IndexAtPoint(e.ElementTouches[0]);
                 foreach (var span in F9PFormattedString._spans)
                 {
                     if (span is ActionSpan actionSpan)

@@ -1266,7 +1266,7 @@ namespace Forms9Patch
              */
             AnimateRelease();
 
-            if (!IsLongPressEnabled && !e.Cancelled && e.IsInView)
+            if (!IsLongPressEnabled && !e.Cancelled && e.TouchCenterInView)
                 e.Handled = HandleTap();
         }
 
@@ -1293,7 +1293,7 @@ namespace Forms9Patch
             if (IsEnabled && IsVisible)
             {
                 AnimateRelease();
-                if (e.IsInView)
+                if (e.TouchCenterInView)
                 {
                     if (IsLongPressEnabled)
                     {
@@ -1315,7 +1315,7 @@ namespace Forms9Patch
         /// <param name="e"></param>
         protected virtual void OnLongPressing(object sender, FormsGestures.LongPressEventArgs e)
         {
-            if (IsEnabled && IsVisible && IsLongPressEnabled && e.IsInView)
+            if (IsEnabled && IsVisible && IsLongPressEnabled && e.TouchCenterInView)
             {
                 AnimateLongPress();
                 _longPressing?.Invoke(this, EventArgs.Empty);

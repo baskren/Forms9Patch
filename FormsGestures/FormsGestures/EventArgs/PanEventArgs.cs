@@ -52,7 +52,7 @@ namespace FormsGestures
         /// calculates the distance traversed since last sample
         /// </summary>
         /// <param name="previous"></param>
-		protected void CalculateDistances(PanEventArgs previous, Point locationAtStart)
+		protected void CalculateDistances(BaseGestureEventArgs previous) //, Point locationAtStart)
         {
             if (previous == null)
             {
@@ -60,22 +60,19 @@ namespace FormsGestures
                 TotalDistance = new Point(0.0, 0.0);
                 return;
             }
-            var viewOffset = ViewPosition.Location.Subtract(previous.ViewPosition.Location);
-            if (Touches.Length != previous.Touches.Length)
+            DeltaDistance = Center(WindowTouches).Subtract(Center(previous.WindowTouches));
+            if (previous is PanEventArgs previousPan)
             {
-                DeltaDistance = new Point(0.0, 0.0);
-                TotalDistance = previous.TotalDistance;
-                return;
+                if (WindowTouches.Length != previous.WindowTouches.Length)
+                {
+                    DeltaDistance = new Point(0.0, 0.0);
+                    TotalDistance = previousPan.TotalDistance;
+                    return;
+                }
+                TotalDistance = previousPan.TotalDistance.Add(DeltaDistance);
             }
-            DeltaDistance = Center.Subtract(previous.Center).Add(viewOffset);
-            //TotalDistance = previous.TotalDistance.Add(DeltaDistance);
-            TotalDistance = ViewPosition.Location.Subtract(locationAtStart).Add(DeltaDistance);
-            /*
-            System.Diagnostics.Debug.WriteLine("[PanEventArgs."
-            + P42.Utils.ReflectionExtensions.CallerMemberName() + ":"
-            + P42.Utils.ReflectionExtensions.CallerLineNumber()
-            + "] TotalDistance: " + TotalDistance);
-            */
+            else
+                TotalDistance = DeltaDistance;
         }
 
         internal PanEventArgs Diff(PanEventArgs lastArgs)
@@ -84,8 +81,9 @@ namespace FormsGestures
             {
                 Cancelled = Cancelled,
                 Handled = Handled,
-                ViewPosition = ViewPosition,
-                Touches = Touches,
+                ElementPosition = ElementPosition,
+                ElementTouches = ElementTouches,
+                WindowTouches = WindowTouches,
                 Listener = Listener,
                 Velocity = Velocity,
                 TotalDistance = TotalDistance,

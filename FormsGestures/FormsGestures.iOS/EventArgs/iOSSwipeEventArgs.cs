@@ -5,23 +5,24 @@ namespace FormsGestures.iOS
 {
 	public class iOSSwipeEventArgs : SwipeEventArgs
 	{
-		public iOSSwipeEventArgs(UISwipeGestureRecognizer gr, CoreGraphics.CGPoint locationAtStart)
+		public iOSSwipeEventArgs(UISwipeGestureRecognizer gr)
 		{
-			Initialize(gr,locationAtStart);
+			Initialize(gr);
 			Direction = GetDirection(gr);
 		}
 
-		public iOSSwipeEventArgs(UIPanGestureRecognizer gr, Direction direction, CoreGraphics.CGPoint locationAtStart)
+		public iOSSwipeEventArgs(UIPanGestureRecognizer gr, Direction direction)
 		{
-			Initialize(gr,locationAtStart);
+			Initialize(gr);
 			Direction = direction;
 		}
 
-		private void Initialize(UIGestureRecognizer gr, CoreGraphics.CGPoint locationAtStart)
+		private void Initialize(UIGestureRecognizer gr)
 		{
 			Cancelled = (gr.State == UIGestureRecognizerState.Cancelled || gr.State == UIGestureRecognizerState.Failed);
-			ViewPosition = gr.View.BoundsInDipCoord();
-			Touches = iOSEventArgsHelper.GetTouches(gr,locationAtStart);
+			ElementPosition = gr.View.BoundsInFormsCoord();
+			ElementTouches = iOSEventArgsHelper.GetTouches(gr, gr.View);
+			WindowTouches = iOSEventArgsHelper.GetTouches(gr, null);
 		}
 
 		private Direction GetDirection(UISwipeGestureRecognizer gr)

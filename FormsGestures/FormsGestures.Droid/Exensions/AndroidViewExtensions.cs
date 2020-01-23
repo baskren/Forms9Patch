@@ -3,12 +3,9 @@
 //  * AndroidViewExtensions.cs copyright 2017 ben, 42nd Parallel - ALL RIGHTS RESERVED.
 //  *
 //  *******************************************************************/
-using System;
 using Android.Graphics;
-using Android.OS;
 using Android.Views;
 using Xamarin.Forms;
-using Xamarin.Forms.Platform.Android;
 
 namespace FormsGestures.Droid
 {
@@ -46,23 +43,23 @@ namespace FormsGestures.Droid
             return new Android.Graphics.Point(p[0], p[1]);
         }
 
-        public static Xamarin.Forms.Point LocationInDipCoord(this Android.Views.View view)
+        public static Xamarin.Forms.Point LocationInFormsCoord(this Android.Views.View view)
         {
             var location = LocationInNativeCoord(view);
             return new Xamarin.Forms.Point(location.X / Display.Scale, location.Y / Display.Scale);
         }
 
 
-        public static Android.Graphics.Rect BoundsInNativeCoord(this Android.Views.View view)
+        public static Rect BoundsInNativeCoord(this Android.Views.View view)
         {
             var location = LocationInNativeCoord(view);
             return new Rect(location.X, location.Y, view.Width, view.Height);
         }
 
-        public static Xamarin.Forms.Rectangle BoundsInDipCoord(this Android.Views.View view)
+        public static Rectangle BoundsInFormsCoord(this Android.Views.View view)
         {
             var rect = BoundsInNativeCoord(view);
-            return new Xamarin.Forms.Rectangle(
+            return new Rectangle(
                 rect.Left / Display.Scale,
                 rect.Top / Display.Scale,
                 rect.Width() / Display.Scale,

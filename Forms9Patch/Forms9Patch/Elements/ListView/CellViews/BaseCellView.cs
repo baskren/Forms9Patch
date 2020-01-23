@@ -796,7 +796,7 @@ namespace Forms9Patch
                     if (segments.Count > 0)
                     {
 
-                        using (var menu = new Forms9Patch.TargetedMenu(this, e.Center)
+                        using (var menu = new Forms9Patch.TargetedMenu(this, e.Center(e.WindowTouches))
                         {
                             Segments = segments
                         })

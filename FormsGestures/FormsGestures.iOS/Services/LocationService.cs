@@ -1,9 +1,8 @@
 ﻿using FormsGestures.iOS;
-using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: Xamarin.Forms.Dependency(typeof(LocationService))]
+[assembly: Dependency(typeof(LocationService))]
 namespace FormsGestures.iOS
 {
     /// <summary>
@@ -17,10 +16,10 @@ namespace FormsGestures.iOS
         {
             if (fromElement != null && Platform.GetRenderer(fromElement) is IVisualElementRenderer fromRenderer && fromRenderer.NativeView != null)
             {
-                var windowToPoint = fromRenderer.NativeView.LocationInDipCoord();
+                var windowToPoint = fromRenderer.NativeView.LocationInFormsCoord();
                 if (toElement != null && Platform.GetRenderer(toElement) is IVisualElementRenderer toRenderer && toRenderer.NativeView != null)
                 {
-                    var windowToDestination = toRenderer.NativeView.LocationInDipCoord();
+                    var windowToDestination = toRenderer.NativeView.LocationInFormsCoord();
                     var delta = new Point(p.X + windowToPoint.X - windowToDestination.X, p.Y + windowToPoint.Y - windowToDestination.Y);
                     return delta;
                 }
@@ -38,7 +37,7 @@ namespace FormsGestures.iOS
         {
             if (element != null && Platform.GetRenderer(element) is IVisualElementRenderer renderer && renderer.NativeView != null)
             {
-                var origin = renderer.NativeView.LocationInDipCoord();
+                var origin = renderer.NativeView.LocationInFormsCoord();
                 return origin.Add(point);
             }
             return new Point(double.NegativeInfinity, double.NegativeInfinity);
@@ -47,7 +46,7 @@ namespace FormsGestures.iOS
         public Rectangle BoundsInWindowCoord(VisualElement element)
         {
             if (element != null && Platform.GetRenderer(element) is IVisualElementRenderer renderer && renderer.NativeView != null)
-                return renderer.NativeView.BoundsInDipCoord();
+                return renderer.NativeView.BoundsInFormsCoord();
             return new Rectangle(new Point(double.NegativeInfinity, double.NegativeInfinity), element.Bounds.Size);
         }
 

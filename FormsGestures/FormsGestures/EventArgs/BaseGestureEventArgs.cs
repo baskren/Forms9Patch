@@ -32,43 +32,39 @@ namespace FormsGestures
 		public virtual bool Cancelled { get; internal set; }
 
         /// <summary>
-        /// current position of view 
+        /// current position of VisualElement in Window coordinates
         /// </summary>
-		public virtual Rectangle ViewPosition { get; protected set; }
+		public virtual Rectangle ElementPosition { get; protected set; }
 
         /// <summary>
-        /// all of the touch points that make up this touch event
+        /// Set of touch points, in VisualElement coordinates, that make up this event
         /// </summary>
-		public virtual Point[] Touches { get; internal set; }
+		public virtual Point[] ElementTouches { get; internal set; }
+
+        /// <summary>
+        /// Set of touch points, in Window coordinates, that make up this touch event
+        /// </summary>
+        public virtual Point[] WindowTouches { get; internal set; }
 
         /// <summary>
         /// Number of touches in touch event
         /// </summary>
-		public virtual int NumberOfTouches => Touches.Length;
+		public virtual int NumberOfTouches => WindowTouches.Length;
 
         /// <summary>
-        /// center of touch event
+        /// center of a set of touch points
         /// </summary>
-        public virtual Point Center
+        public virtual Point Center(Point[] touches)
         {
-            get
+            var num = touches.Length;
+            var num2 = 0.0;
+            var num3 = 0.0;
+            for (int i = 0; i < num; i++)
             {
-                if (_center.IsEmpty)
-                {
-                    var num = Touches.Length;
-                    var num2 = 0.0;
-                    var num3 = 0.0;
-                    for (int i = 0; i < num; i++)
-                    {
-                        num2 += Touches[i].X;
-                        num3 += Touches[i].Y;
-                    }
-                    _center = new Point(num2 / num, num3 / num);
-                }
-                return _center;
+                num2 += touches[i].X;
+                num3 += touches[i].Y;
             }
-
-            protected set { _center = value; }
+            return new Point(num2 / num, num3 / num);
         }
 
         /// <summary>
@@ -84,15 +80,20 @@ namespace FormsGestures
                 Cancelled = source.Cancelled;
                 if (Listener != null)
                 {
-                    Touches = new Point[source.Touches.Length];
-                    for (int i = 0; i < source.Touches.Length; i++)
-                        Touches[i] = Listener.Element.PointInElementCoord(source.Touches[i], newListener.Element);
-                    ViewPosition = VisualElementExtensions.CoordTransform(Listener.Element, source.ViewPosition, newListener.Element);
+                    WindowTouches = new Point[source.WindowTouches.Length];
+                    ElementTouches = new Point[source.WindowTouches.Length];
+                    for (int i = 0; i < source.WindowTouches.Length; i++)
+                    {
+                        WindowTouches[i] = source.WindowTouches[i];
+                        ElementTouches[i] = Listener.Element.PointInElementCoord(source.ElementTouches[i], newListener.Element);
+                    }
+                    ElementPosition = VisualElementExtensions.CoordTransform(Listener.Element, source.ElementPosition, newListener.Element);
                 }
                 else
                 {
-                    Touches = (Point[])source.Touches.Clone();
-                    ViewPosition = source.ViewPosition;
+                    WindowTouches = (Point[])source.WindowTouches.Clone();
+                    ElementTouches = (Point[])source.ElementTouches.Clone();
+                    ElementPosition = source.ElementPosition;
                 }
             }
         }
@@ -118,12 +119,12 @@ namespace FormsGestures
         {
             if (other == null)
                 return false;
-            if (Touches == null && other.Touches == null)
+            if (WindowTouches == null && other.WindowTouches == null)
                 return true;
-            if (Touches.Length != other.Touches.Length)
+            if (WindowTouches.Length != other.WindowTouches.Length)
                 return false;
-            for (int i = 0; i < Touches.Length; i++)
-                if (!Equals(Touches[i], other?.Touches[i]))
+            for (int i = 0; i < WindowTouches.Length; i++)
+                if (!Equals(WindowTouches[i], other?.WindowTouches[i]))
                     return false;
             return true;
         }
@@ -134,7 +135,7 @@ namespace FormsGestures
         /// <returns></returns>
 		public override int GetHashCode()
         {
-            return Touches.GetHashCode();
+            return WindowTouches.GetHashCode();
         }
 
         /// <summary>
@@ -147,17 +148,16 @@ namespace FormsGestures
             _center = other._center;
             Listener = other.Listener;
             Cancelled = other.Cancelled;
-            ViewPosition = other.ViewPosition;
-            Touches = other.Touches;
+            ElementPosition = other.ElementPosition;
+            ElementTouches = other.ElementTouches;
+            WindowTouches = other.WindowTouches;
         }
 
         public bool Contains(Point p)
-        {
-            var rect = new Rectangle(Point.Zero, Listener.Element.Bounds.Size);
-            return rect.Contains(p);
-        }
+            => ElementPosition.Contains(p);
+        
 
-        public bool IsInView
-            => Contains(Center);
+        public bool TouchCenterInView
+            => Contains(Center(WindowTouches));
     }
 }

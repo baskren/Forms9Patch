@@ -106,7 +106,7 @@ namespace Forms9PatchDemo
             var listener = FormsGestures.Listener.For(f9pLabel);
             listener.Tapped += (object sender, FormsGestures.TapEventArgs e) =>
             {
-                System.Diagnostics.Debug.WriteLine("Point=[" + e.Touches[0] + "] Index=[" + f9pLabel.IndexAtPoint(e.Touches[0]) + "]");
+                System.Diagnostics.Debug.WriteLine("Point=[" + e.ElementTouches[0] + "] Index=[" + f9pLabel.IndexAtPoint(e.ElementTouches[0]) + "]");
             };
             #endregion
 

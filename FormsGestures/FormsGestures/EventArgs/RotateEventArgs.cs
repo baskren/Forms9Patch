@@ -40,8 +40,8 @@ namespace FormsGestures
         /// </summary>
         /// <param name="previous"></param>
 		protected void CalculateAngles(RotateEventArgs previous) {
-			if (Touches.Length > 1)
-				Angle = GetAngle();
+			if (WindowTouches.Length > 1)
+				Angle = GetAngle(WindowTouches);
 			else if (previous != null)
 				Angle = previous.Angle;
 			else
@@ -51,7 +51,7 @@ namespace FormsGestures
 				TotalAngle = 0.0;
 				return;
 			}
-			if (Touches.Length != previous.Touches.Length) {
+			if (WindowTouches.Length != previous.WindowTouches.Length) {
 				DeltaAngle = 0.0;
 				TotalAngle = previous.TotalAngle;
 				return;
@@ -59,21 +59,34 @@ namespace FormsGestures
 			DeltaAngle = Angle - previous.Angle;
 			DeltaAngle += (DeltaAngle > 180) ? -360 : (DeltaAngle < -180) ? +360 : 0;
 			TotalAngle = previous.TotalAngle + DeltaAngle;
-		}
+            System.Diagnostics.Debug.WriteLine("detalAngle=["+DeltaAngle.ToString("N2")+"]");
 
-		double GetAngle() {
-            var x = Touches[1].X - Touches[0].X;
-            var y = Touches[1].Y - Touches[0].Y;
+        }
+
+		double GetAngle(Xamarin.Forms.Point[] touches) {
+            var x = touches[1].X - touches[0].X;
+            var y = touches[1].Y - touches[0].Y;
             var num = Math.Atan2(y, x);
-			return num * 180.0 / 3.1415926535897931;
+			var result = num * 180.0 / Math.PI;
+            /*
+			System.Diagnostics.Debug.WriteLine("[RotateEventArgs."
+                + P42.Utils.ReflectionExtensions.CallerMemberName() + ":"
+                + P42.Utils.ReflectionExtensions.CallerLineNumber()
+                + "] result = " + result.ToString("N3") + " T0=["+Touches[0].ToString("N3")+"] T1=["+Touches[1].ToString("N3")+"]"  );
+                */
+
+            System.Diagnostics.Debug.WriteLine("angle=["+result.ToString("N2")+"]");
+
+            return result;
 		}
 
 		internal RotateEventArgs Diff(RotateEventArgs lastArgs) {
 			return new RotateEventArgs {
 				Cancelled = Cancelled,
 				Handled = Handled,
-				ViewPosition = ViewPosition,
-				Touches = Touches,
+				ElementPosition = ElementPosition,
+				ElementTouches = ElementTouches,
+                WindowTouches = WindowTouches,
 				Listener = Listener,
 				Angle = Angle,
 				TotalAngle = TotalAngle,

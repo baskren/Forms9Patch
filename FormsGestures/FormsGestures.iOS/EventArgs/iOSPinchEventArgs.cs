@@ -5,12 +5,13 @@ namespace FormsGestures.iOS
 {
 	public class iOSPinchEventArgs : PinchEventArgs
 	{
-		public iOSPinchEventArgs(UIGestureRecognizer gr, PinchEventArgs previous, CoreGraphics.CGPoint locationAtStart)
+		public iOSPinchEventArgs(UIGestureRecognizer gr, PinchEventArgs previous)
 		{
 			Cancelled = (gr.State == UIGestureRecognizerState.Cancelled || gr.State == UIGestureRecognizerState.Failed);
-			ViewPosition = gr.View.BoundsInDipCoord();
-			Touches = iOSEventArgsHelper.GetTouches(gr, 2, previous, locationAtStart);
-			base.CalculateScales(previous);
+			ElementPosition = gr.View.BoundsInFormsCoord();
+			ElementTouches = iOSEventArgsHelper.GetTouches(gr, gr.View, 2, previous);
+			WindowTouches = iOSEventArgsHelper.GetTouches(gr, null, 2, previous);
+			CalculateScales(previous);
 		}
 	}
 }

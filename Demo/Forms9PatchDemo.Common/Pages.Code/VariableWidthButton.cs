@@ -135,7 +135,7 @@ namespace Forms9PatchDemo
             _xfButton.WidthRequest = _slider.Value;
             _f9pButton.WidthRequest = _slider.Value;
 
-            
+
             _xfButton.Clicked += (s, e) => FlashBox(Color.Green);
             _f9pButton.Clicked += (s, e) => FlashBox(Color.Green);
             _f9pButton.LongPressing += (s, e) => FlashBox(Color.Yellow);
@@ -231,7 +231,7 @@ namespace Forms9PatchDemo
                 _stack?.Children.Clear();
                 if (_grid == null)
                 {
-                    _grid =  new Xamarin.Forms.Grid
+                    _grid = new Xamarin.Forms.Grid
                     {
                         BackgroundColor = Color.LightGreen,
                         RowDefinitions = new RowDefinitionCollection
@@ -248,7 +248,7 @@ namespace Forms9PatchDemo
                             new RowDefinition{Height = 40 },
                             new RowDefinition{Height = 40 },
                         },
-                            ColumnDefinitions = new ColumnDefinitionCollection
+                        ColumnDefinitions = new ColumnDefinitionCollection
                         {
                             new ColumnDefinition{ Width = new GridLength(2, GridUnitType.Star) },
                             new ColumnDefinition{ Width = GridLength.Star }
@@ -262,9 +262,9 @@ namespace Forms9PatchDemo
                 _grid.Children.Add(_slider, 0, 2, row, ++row);
                 _grid.Children.Add(new Xamarin.Forms.Label { Text = "Content in ScrollView" }, 0, 1, row, row + 1);
                 _grid.Children.Add(_inScrollViewSwitch, 1, 2, row, ++row);
-                _grid.Children.Add(new Xamarin.Forms.Label { Text = "Long Press Enabled" }, 0, 1, row, row+1);
+                _grid.Children.Add(new Xamarin.Forms.Label { Text = "Long Press Enabled" }, 0, 1, row, row + 1);
                 _grid.Children.Add(_longPressEnabledSwitch, 1, 2, row, ++row);
-                _grid.Children.Add(new Xamarin.Forms.Label { Text = "Dark Background" }, 0, 1, row, row+1);
+                _grid.Children.Add(new Xamarin.Forms.Label { Text = "Dark Background" }, 0, 1, row, row + 1);
                 _grid.Children.Add(_darkBackgroundSwitch, 1, 2, row, ++row);
                 _grid.Children.Add(new Xamarin.Forms.Label { Text = "Page Padding" }, 0, 1, row, row + 1);
                 _grid.Children.Add(_pagePadding, 1, 2, row, ++row);
@@ -303,19 +303,19 @@ namespace Forms9PatchDemo
 
         void SetupTouchEvents(FormsGestures.Listener listener)
         {
-            listener.Down += (s, e) => ShowTouch(listener.Element, e);
-            listener.Up += (s, e) => ShowTouch(listener.Element, e);
-            listener.Tapping += (s, e) => ShowTouch(listener.Element, e);
-            listener.Tapped += (s, e) => ShowTouch(listener.Element, e);
-            listener.DoubleTapped += (s, e) => ShowTouch(listener.Element, e);
-            listener.LongPressing += (s, e) => ShowTouch(listener.Element, e);
-            listener.LongPressed += (s, e) => ShowTouch(listener.Element, e);
+            listener.Down += ShowTouch;
+            listener.Up += ShowTouch;
+            listener.Tapping += ShowTouch;
+            listener.Tapped += ShowTouch;
+            listener.DoubleTapped += ShowTouch;
+            listener.LongPressing += ShowTouch;
+            listener.LongPressed += ShowTouch;
         }
 
-        void ShowTouch(VisualElement layout, FormsGestures.BaseGestureEventArgs e)
+        void ShowTouch(object sender, FormsGestures.BaseGestureEventArgs e)
         {
-            var point = FormsGestures.VisualElementExtensions.PointInWindowCoord(layout, e.Center);
-            if (e.Event== nameof(FormsGestures.Listener.Down) && _touchType1.SelectedSegments.Any(s => s.Text == e.Event))
+            var point = e.WindowTouches[0];
+            if (e.Event == nameof(FormsGestures.Listener.Down) && _touchType1.SelectedSegments.Any(s => s.Text == e.Event))
                 PopBox(point, Color.Red);
             else if (e.Event == nameof(FormsGestures.Listener.Up) && _touchType1.SelectedSegments.Any(s => s.Text == e.Event))
                 PopBox(point, Color.Blue);

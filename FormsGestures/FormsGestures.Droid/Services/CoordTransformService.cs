@@ -4,7 +4,7 @@ using FormsGestures.Droid;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: Xamarin.Forms.Dependency(typeof(CoordTransformService))]
+[assembly: Dependency(typeof(CoordTransformService))]
 namespace FormsGestures.Droid
 {
     /// <summary>
@@ -18,29 +18,39 @@ namespace FormsGestures.Droid
 
         public Point CoordTransform(VisualElement fromElement, Point p, VisualElement toElement)
         {
+            if (toElement == null)
+                return PointInWindowCoord(fromElement, p);
+            /*
             System.Diagnostics.Debug.WriteLine("    [CoordTransformService."
                 + P42.Utils.ReflectionExtensions.CallerMemberName() + ":"
                 + P42.Utils.ReflectionExtensions.CallerLineNumber()
                 + "] point["+p+"]");
+                */
             if (fromElement != null && Platform.GetRenderer(fromElement) is IVisualElementRenderer fromRenderer && fromRenderer.View != null)
             {
-                var windowToPoint = fromRenderer.View.LocationInDipCoord();
+                var windowToPoint = fromRenderer.View.LocationInFormsCoord();
+                /*
                 System.Diagnostics.Debug.WriteLine("    [CoordTransformService."
                     + P42.Utils.ReflectionExtensions.CallerMemberName() + ":"
                     + P42.Utils.ReflectionExtensions.CallerLineNumber()
                     + "] windowToPoint["+windowToPoint+"] ["+fromRenderer+"]");
+                    */
                 if (toElement != null && Platform.GetRenderer(toElement) is IVisualElementRenderer toRenderer && toRenderer.View != null)
                 {
-                    var windowToDestination = toRenderer.View.LocationInDipCoord();
+                    var windowToDestination = toRenderer.View.LocationInFormsCoord();
+                    /*
                     System.Diagnostics.Debug.WriteLine("    [CoordTransformService."
                         + P42.Utils.ReflectionExtensions.CallerMemberName() + ":"
                         + P42.Utils.ReflectionExtensions.CallerLineNumber()
                         + "] windowToDestination["+windowToDestination+"] ["+toRenderer+"]");
+                        */
                     var delta = new Point(p.X + windowToPoint.X - windowToDestination.X, p.Y + windowToPoint.Y - windowToDestination.Y);
+                    /*
                     System.Diagnostics.Debug.WriteLine("    [CoordTransformService."
                         + P42.Utils.ReflectionExtensions.CallerMemberName() + ":"
                         + P42.Utils.ReflectionExtensions.CallerLineNumber()
                         + "] delta["+delta+"]");
+                        */
                     return delta;
                 }
             }
@@ -56,7 +66,7 @@ namespace FormsGestures.Droid
         public Point PointInWindowCoord(VisualElement element, Point point)
         {
             if (element != null && Platform.GetRenderer(element) is IVisualElementRenderer renderer && renderer.View != null)
-                return point.Add(renderer.View.LocationInDipCoord());
+                return point.Add(renderer.View.LocationInFormsCoord());
             return new Point(double.NegativeInfinity, double.NegativeInfinity);
         }
 
@@ -64,7 +74,7 @@ namespace FormsGestures.Droid
         {
             var point = new Point(double.NegativeInfinity, double.NegativeInfinity);
             if (element != null && Platform.GetRenderer(element) is IVisualElementRenderer renderer && renderer.View != null)
-                point = renderer.View.LocationInDipCoord();
+                point = renderer.View.LocationInFormsCoord();
             return new Rectangle(point, element.Bounds.Size);
         }
 

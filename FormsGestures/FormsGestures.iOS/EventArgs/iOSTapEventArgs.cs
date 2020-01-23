@@ -4,11 +4,12 @@ namespace FormsGestures.iOS
 {
 	public class iOSTapEventArgs : TapEventArgs
 	{
-		public iOSTapEventArgs(UITapGestureRecognizer gr, int numberOfTaps, CoreGraphics.CGPoint locationAtStart)
+		public iOSTapEventArgs(UITapGestureRecognizer gr, int numberOfTaps)
 		{
 			Cancelled = (gr.State == UIGestureRecognizerState.Cancelled || gr.State == UIGestureRecognizerState.Failed);
-			ViewPosition = gr.View.BoundsInDipCoord();
-			Touches = iOSEventArgsHelper.GetTouches(gr, locationAtStart);
+			ElementPosition = gr.View.BoundsInFormsCoord();
+			ElementTouches = iOSEventArgsHelper.GetTouches(gr, gr.View);
+			WindowTouches = iOSEventArgsHelper.GetTouches(gr, null);
 			NumberOfTaps = numberOfTaps;
 		}
 	}

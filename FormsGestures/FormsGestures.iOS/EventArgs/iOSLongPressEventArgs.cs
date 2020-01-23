@@ -1,15 +1,15 @@
-using System;
 using UIKit;
 
 namespace FormsGestures.iOS
 {
 	public class iOSLongPressEventArgs : LongPressEventArgs
 	{
-		public iOSLongPressEventArgs(UILongPressGestureRecognizer gr, long duration, CoreGraphics.CGPoint locationAtStart)
+		public iOSLongPressEventArgs(UILongPressGestureRecognizer gr, long duration)
 		{
 			Cancelled = (gr.State == UIGestureRecognizerState.Cancelled || gr.State == UIGestureRecognizerState.Failed);
-			ViewPosition = gr.View.BoundsInDipCoord();
-			Touches = iOSEventArgsHelper.GetTouches(gr, locationAtStart);
+			ElementPosition = gr.View.BoundsInFormsCoord();
+			ElementTouches = iOSEventArgsHelper.GetTouches(gr, gr.View);
+			WindowTouches = iOSEventArgsHelper.GetTouches(gr, null);
 			Duration = duration;
 		}
 	}
