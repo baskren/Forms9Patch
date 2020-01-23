@@ -31,21 +31,44 @@ namespace FormsGestures.Droid
 			return GetTouches(coords, view, listener);
 		}
 
+        
+        public static Point[] GetRawTouches(MotionEvent current)
+        {
+			var offsetX = current.RawX/Display.Scale - current.GetX();
+			var offsetY = current.RawY/Display.Scale - current.GetY();
+
+			var result = new Point[current.PointerCount];
+			MotionEvent.PointerCoords touch = new MotionEvent.PointerCoords();
+            for(int i=0;i< current.PointerCount;i++)
+            {
+				current.GetPointerCoords(i, touch);
+				var point = new Point(touch.X + offsetX, touch.Y + offsetY);
+				result[i] = point;
+            }
+			return result;
+        }
+        
+
 		public static Point[] GetTouches(MotionEvent.PointerCoords[] pointerCoords, Android.Views.View sourceView, Listener listener)
         {
-			var listenerViewLocation = listener!=null
-                ? VisualElementExtensions.LocationInWindowCoord(listener.Element)
-                : Point.Zero;
-			var touchViewLocation = AndroidViewExtensions.LocationInFormsCoord(sourceView);
-			Point delta = touchViewLocation.Subtract(listenerViewLocation);
+			Point delta = Point.Zero;
+
+			if (listener?.Element != null
+				&& Xamarin.Forms.Platform.Android.Platform.GetRenderer(listener?.Element) is Xamarin.Forms.Platform.Android.IVisualElementRenderer renderer
+				&& renderer.View != sourceView
+                )
+			{
+				var listenerViewLocation = listener != null
+					? VisualElementExtensions.LocationInWindowCoord(listener.Element)
+					: Point.Zero;
+				var touchViewLocation = AndroidViewExtensions.LocationInFormsCoord(sourceView);
+				delta = touchViewLocation.Subtract(listenerViewLocation);
+			}
 
 			var pointerCount = pointerCoords.Length;
 			var array = new Point[pointerCount];
 			for (int i = 0; i < pointerCount; i++)
-			{
-				array[i] = DIP.ToPoint(pointerCoords[i]);
-				array[i] = array[i].Add(delta);
-			}
+				array[i] = new Point(pointerCoords[i].X + delta.X, pointerCoords[i].Y + delta.Y);
 			return array;
 		}
 

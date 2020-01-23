@@ -10,6 +10,7 @@ namespace FormsGestures.Droid
 			ElementPosition = VisualElementExtensions.BoundsInWindowCoord(listener.Element);
 			ElementTouches = AndroidEventArgsHelper.GetTouches(coords, previous, view, listener);
 			WindowTouches = AndroidEventArgsHelper.GetTouches(coords, previous, view, null);
+			//WindowTouches = AndroidEventArgsHelper.GetRawTouches(current);
 			CalculateScales(previous);
 		}
 	}
