@@ -11,6 +11,7 @@ namespace FormsGestures.Droid
 			Cancelled = current.Action == MotionEventActions.Cancel;
 			ElementPosition = listener.Element.BoundsInWindowCoord();
 			ElementTouches = AndroidEventArgsHelper.GetTouches(current, view, listener);
+			WindowTouches = AndroidEventArgsHelper.GetTouches(current, view, null);
 			TriggeringTouches = new [] { current.ActionIndex };
 		}
 	}

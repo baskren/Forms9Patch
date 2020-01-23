@@ -31,44 +31,21 @@ namespace FormsGestures.Droid
 			return GetTouches(coords, view, listener);
 		}
 
-		public static Point[] GetTouches(MotionEvent.PointerCoords[] pointerCoords, Android.Views.View view, Listener listener) {
-			//System.Diagnostics.Debug.WriteLine("===============================");
-
-			var listenerViewLocation = VisualElementExtensions.LocationInWindowCoord(listener.Element);
-			var touchViewLocation = AndroidViewExtensions.LocationInFormsCoord(view);
-			var delta = touchViewLocation.Subtract(listenerViewLocation);
-
-            /*
-			System.Diagnostics.Debug.WriteLine("[GetTouches.B."
-	            + P42.Utils.ReflectionExtensions.CallerMemberName() + ":"
-	            + P42.Utils.ReflectionExtensions.CallerLineNumber()
-	            + "] lvl[" + listenerViewLocation + "] ["+listener.Element+"] Bounds["+listener.Element.Bounds+"]");
-			System.Diagnostics.Debug.WriteLine("[GetTouches.B."
-				+ P42.Utils.ReflectionExtensions.CallerMemberName() + ":"
-				+ P42.Utils.ReflectionExtensions.CallerLineNumber()
-				+ "] tvl[" + touchViewLocation + "] ["+view+"]");
-			System.Diagnostics.Debug.WriteLine("[GetTouches.B."
-				+ P42.Utils.ReflectionExtensions.CallerMemberName() + ":"
-				+ P42.Utils.ReflectionExtensions.CallerLineNumber()
-				+ "] delta[" + delta + "]");
-            */
+		public static Point[] GetTouches(MotionEvent.PointerCoords[] pointerCoords, Android.Views.View sourceView, Listener listener)
+        {
+			var listenerViewLocation = listener!=null
+                ? VisualElementExtensions.LocationInWindowCoord(listener.Element)
+                : Point.Zero;
+			var touchViewLocation = AndroidViewExtensions.LocationInFormsCoord(sourceView);
+			Point delta = touchViewLocation.Subtract(listenerViewLocation);
 
 			var pointerCount = pointerCoords.Length;
 			var array = new Point[pointerCount];
 			for (int i = 0; i < pointerCount; i++)
 			{
-                /*
-				System.Diagnostics.Debug.WriteLine("[GetTouches.B."
-					+ P42.Utils.ReflectionExtensions.CallerMemberName() + ":"
-					+ P42.Utils.ReflectionExtensions.CallerLineNumber()
-					+ "] poitnerCoord[" + pointerCoords[i] + "]");
-                    */
 				array[i] = DIP.ToPoint(pointerCoords[i]);
 				array[i] = array[i].Add(delta);
 			}
-
-			//System.Diagnostics.Debug.WriteLine("===============================");
-
 			return array;
 		}
 

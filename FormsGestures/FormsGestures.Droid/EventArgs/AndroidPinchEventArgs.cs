@@ -9,6 +9,7 @@ namespace FormsGestures.Droid
 			Cancelled = (current.Action == MotionEventActions.Cancel);
 			ElementPosition = VisualElementExtensions.BoundsInWindowCoord(listener.Element);
 			ElementTouches = AndroidEventArgsHelper.GetTouches(coords, previous, view, listener);
+			WindowTouches = AndroidEventArgsHelper.GetTouches(coords, previous, view, null);
 			CalculateScales(previous);
 		}
 	}
