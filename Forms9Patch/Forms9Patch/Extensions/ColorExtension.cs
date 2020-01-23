@@ -30,7 +30,7 @@ namespace Forms9Patch
         /// <summary>
         /// Interpolates between two colors
         /// </summary>
-        /// <param name="c"></param>
+        /// <param name="c1"></param>
         /// <param name="c2"></param>
         /// <param name="percent"></param>
         /// <returns></returns>

@@ -153,10 +153,17 @@ namespace FormsGestures
             WindowTouches = other.WindowTouches;
         }
 
+        /// <summary>
+        /// Tests if a point, in Window coordinates, is within the bounds of the view
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public bool Contains(Point p)
             => ElementPosition.Contains(p);
         
-
+        /// <summary>
+        /// Tests if the TouchCenter is within the bounds of the view
+        /// </summary>
         public bool TouchCenterInView
             => Contains(Center(WindowTouches));
     }

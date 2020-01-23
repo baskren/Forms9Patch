@@ -55,7 +55,7 @@ namespace FormsGestures
         /// <summary>
         /// Translates the bounds of an element to the coordinates of app's window
         /// </summary>
-        /// <param name="fromElement"></param>
+        /// <param name="element"></param>
         /// <returns></returns>
         public static Rectangle BoundsInWindowCoord(this VisualElement element)
             => Service.BoundsInWindowCoord(element);
@@ -73,7 +73,7 @@ namespace FormsGestures
         /// <summary>
         /// Translates the location of an element to the app's window's coordinates
         /// </summary>
-        /// <param name="fromElement"></param>
+        /// <param name="element"></param>
         /// <returns></returns>
         public static Point LocationInWindowCoord(this VisualElement element)
             => Service.PointInWindowCoord(element, Point.Zero);

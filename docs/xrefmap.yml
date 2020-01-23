@@ -918,6 +918,44 @@ references:
   commentId: F:Forms9Patch.Button.BackgroundColorProperty
   fullName: Forms9Patch.Button.BackgroundColorProperty
   nameWithType: Button.BackgroundColorProperty
+- uid: Forms9Patch.Button.BorderColor
+  name: BorderColor
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_BorderColor
+  commentId: P:Forms9Patch.Button.BorderColor
+  fullName: Forms9Patch.Button.BorderColor
+  nameWithType: Button.BorderColor
+- uid: Forms9Patch.Button.BorderColor*
+  name: BorderColor
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_BorderColor_
+  commentId: Overload:Forms9Patch.Button.BorderColor
+  isSpec: "True"
+  fullName: Forms9Patch.Button.BorderColor
+  nameWithType: Button.BorderColor
+- uid: Forms9Patch.Button.BorderColorProperty
+  name: BorderColorProperty
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_BorderColorProperty
+  commentId: F:Forms9Patch.Button.BorderColorProperty
+  fullName: Forms9Patch.Button.BorderColorProperty
+  nameWithType: Button.BorderColorProperty
+- uid: Forms9Patch.Button.BorderWidth
+  name: BorderWidth
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_BorderWidth
+  commentId: P:Forms9Patch.Button.BorderWidth
+  fullName: Forms9Patch.Button.BorderWidth
+  nameWithType: Button.BorderWidth
+- uid: Forms9Patch.Button.BorderWidth*
+  name: BorderWidth
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_BorderWidth_
+  commentId: Overload:Forms9Patch.Button.BorderWidth
+  isSpec: "True"
+  fullName: Forms9Patch.Button.BorderWidth
+  nameWithType: Button.BorderWidth
+- uid: Forms9Patch.Button.BorderWidthProperty
+  name: BorderWidthProperty
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_BorderWidthProperty
+  commentId: F:Forms9Patch.Button.BorderWidthProperty
+  fullName: Forms9Patch.Button.BorderWidthProperty
+  nameWithType: Button.BorderWidthProperty
 - uid: Forms9Patch.Button.CheckIsClipped(System.Double,System.Double)
   name: CheckIsClipped(Double, Double)
   href: api/Forms9Patch.Button.html#Forms9Patch_Button_CheckIsClipped_System_Double_System_Double_
@@ -2903,19 +2941,32 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ColorExtension.IsDefaultOrTransparent
   nameWithType: ColorExtension.IsDefaultOrTransparent
-- uid: Forms9Patch.ColorExtension.RgbBlend(Xamarin.Forms.Color,Xamarin.Forms.Color,System.Double)
-  name: RgbBlend(Color, Color, Double)
-  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_RgbBlend_Xamarin_Forms_Color_Xamarin_Forms_Color_System_Double_
-  commentId: M:Forms9Patch.ColorExtension.RgbBlend(Xamarin.Forms.Color,Xamarin.Forms.Color,System.Double)
-  fullName: Forms9Patch.ColorExtension.RgbBlend(Xamarin.Forms.Color, Xamarin.Forms.Color, System.Double)
-  nameWithType: ColorExtension.RgbBlend(Color, Color, Double)
-- uid: Forms9Patch.ColorExtension.RgbBlend*
-  name: RgbBlend
-  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_RgbBlend_
-  commentId: Overload:Forms9Patch.ColorExtension.RgbBlend
+- uid: Forms9Patch.ColorExtension.RgbaBlend(Xamarin.Forms.Color,Xamarin.Forms.Color,System.Double)
+  name: RgbaBlend(Color, Color, Double)
+  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_RgbaBlend_Xamarin_Forms_Color_Xamarin_Forms_Color_System_Double_
+  commentId: M:Forms9Patch.ColorExtension.RgbaBlend(Xamarin.Forms.Color,Xamarin.Forms.Color,System.Double)
+  fullName: Forms9Patch.ColorExtension.RgbaBlend(Xamarin.Forms.Color, Xamarin.Forms.Color, System.Double)
+  nameWithType: ColorExtension.RgbaBlend(Color, Color, Double)
+- uid: Forms9Patch.ColorExtension.RgbaBlend*
+  name: RgbaBlend
+  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_RgbaBlend_
+  commentId: Overload:Forms9Patch.ColorExtension.RgbaBlend
   isSpec: "True"
-  fullName: Forms9Patch.ColorExtension.RgbBlend
-  nameWithType: ColorExtension.RgbBlend
+  fullName: Forms9Patch.ColorExtension.RgbaBlend
+  nameWithType: ColorExtension.RgbaBlend
+- uid: Forms9Patch.ColorExtension.RgbHybridBlend(Xamarin.Forms.Color,Xamarin.Forms.Color,System.Double)
+  name: RgbHybridBlend(Color, Color, Double)
+  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_RgbHybridBlend_Xamarin_Forms_Color_Xamarin_Forms_Color_System_Double_
+  commentId: M:Forms9Patch.ColorExtension.RgbHybridBlend(Xamarin.Forms.Color,Xamarin.Forms.Color,System.Double)
+  fullName: Forms9Patch.ColorExtension.RgbHybridBlend(Xamarin.Forms.Color, Xamarin.Forms.Color, System.Double)
+  nameWithType: ColorExtension.RgbHybridBlend(Color, Color, Double)
+- uid: Forms9Patch.ColorExtension.RgbHybridBlend*
+  name: RgbHybridBlend
+  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_RgbHybridBlend_
+  commentId: Overload:Forms9Patch.ColorExtension.RgbHybridBlend
+  isSpec: "True"
+  fullName: Forms9Patch.ColorExtension.RgbHybridBlend
+  nameWithType: ColorExtension.RgbHybridBlend
 - uid: Forms9Patch.ColorExtension.ToColor(System.String)
   name: ToColor(String)
   href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ToColor_System_String_
@@ -2981,6 +3032,19 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ColorExtension.ToHextAarrggbbColorString
   nameWithType: ColorExtension.ToHextAarrggbbColorString
+- uid: Forms9Patch.ColorExtension.ToIntRgbaColorString(Xamarin.Forms.Color)
+  name: ToIntRgbaColorString(Color)
+  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ToIntRgbaColorString_Xamarin_Forms_Color_
+  commentId: M:Forms9Patch.ColorExtension.ToIntRgbaColorString(Xamarin.Forms.Color)
+  fullName: Forms9Patch.ColorExtension.ToIntRgbaColorString(Xamarin.Forms.Color)
+  nameWithType: ColorExtension.ToIntRgbaColorString(Color)
+- uid: Forms9Patch.ColorExtension.ToIntRgbaColorString*
+  name: ToIntRgbaColorString
+  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ToIntRgbaColorString_
+  commentId: Overload:Forms9Patch.ColorExtension.ToIntRgbaColorString
+  isSpec: "True"
+  fullName: Forms9Patch.ColorExtension.ToIntRgbaColorString
+  nameWithType: ColorExtension.ToIntRgbaColorString
 - uid: Forms9Patch.ColorExtension.ToIntRgbColorString(Xamarin.Forms.Color)
   name: ToIntRgbColorString(Color)
   href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ToIntRgbColorString_Xamarin_Forms_Color_
@@ -16011,12 +16075,15 @@ references:
   isSpec: "True"
   fullName: FormsGestures.BaseGestureEventArgs.Cancelled
   nameWithType: BaseGestureEventArgs.Cancelled
-- uid: FormsGestures.BaseGestureEventArgs.Center
-  name: Center
-  href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_Center
-  commentId: P:FormsGestures.BaseGestureEventArgs.Center
-  fullName: FormsGestures.BaseGestureEventArgs.Center
-  nameWithType: BaseGestureEventArgs.Center
+- uid: FormsGestures.BaseGestureEventArgs.Center(Xamarin.Forms.Point[])
+  name: Center(Point[])
+  href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_Center_Xamarin_Forms_Point___
+  commentId: M:FormsGestures.BaseGestureEventArgs.Center(Xamarin.Forms.Point[])
+  name.vb: Center(Point())
+  fullName: FormsGestures.BaseGestureEventArgs.Center(Xamarin.Forms.Point[])
+  fullName.vb: FormsGestures.BaseGestureEventArgs.Center(Xamarin.Forms.Point())
+  nameWithType: BaseGestureEventArgs.Center(Point[])
+  nameWithType.vb: BaseGestureEventArgs.Center(Point())
 - uid: FormsGestures.BaseGestureEventArgs.Center*
   name: Center
   href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_Center_
@@ -16024,6 +16091,45 @@ references:
   isSpec: "True"
   fullName: FormsGestures.BaseGestureEventArgs.Center
   nameWithType: BaseGestureEventArgs.Center
+- uid: FormsGestures.BaseGestureEventArgs.Contains(Xamarin.Forms.Point)
+  name: Contains(Point)
+  href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_Contains_Xamarin_Forms_Point_
+  commentId: M:FormsGestures.BaseGestureEventArgs.Contains(Xamarin.Forms.Point)
+  fullName: FormsGestures.BaseGestureEventArgs.Contains(Xamarin.Forms.Point)
+  nameWithType: BaseGestureEventArgs.Contains(Point)
+- uid: FormsGestures.BaseGestureEventArgs.Contains*
+  name: Contains
+  href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_Contains_
+  commentId: Overload:FormsGestures.BaseGestureEventArgs.Contains
+  isSpec: "True"
+  fullName: FormsGestures.BaseGestureEventArgs.Contains
+  nameWithType: BaseGestureEventArgs.Contains
+- uid: FormsGestures.BaseGestureEventArgs.ElementPosition
+  name: ElementPosition
+  href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_ElementPosition
+  commentId: P:FormsGestures.BaseGestureEventArgs.ElementPosition
+  fullName: FormsGestures.BaseGestureEventArgs.ElementPosition
+  nameWithType: BaseGestureEventArgs.ElementPosition
+- uid: FormsGestures.BaseGestureEventArgs.ElementPosition*
+  name: ElementPosition
+  href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_ElementPosition_
+  commentId: Overload:FormsGestures.BaseGestureEventArgs.ElementPosition
+  isSpec: "True"
+  fullName: FormsGestures.BaseGestureEventArgs.ElementPosition
+  nameWithType: BaseGestureEventArgs.ElementPosition
+- uid: FormsGestures.BaseGestureEventArgs.ElementTouches
+  name: ElementTouches
+  href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_ElementTouches
+  commentId: P:FormsGestures.BaseGestureEventArgs.ElementTouches
+  fullName: FormsGestures.BaseGestureEventArgs.ElementTouches
+  nameWithType: BaseGestureEventArgs.ElementTouches
+- uid: FormsGestures.BaseGestureEventArgs.ElementTouches*
+  name: ElementTouches
+  href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_ElementTouches_
+  commentId: Overload:FormsGestures.BaseGestureEventArgs.ElementTouches
+  isSpec: "True"
+  fullName: FormsGestures.BaseGestureEventArgs.ElementTouches
+  nameWithType: BaseGestureEventArgs.ElementTouches
 - uid: FormsGestures.BaseGestureEventArgs.Equals(FormsGestures.BaseGestureEventArgs)
   name: Equals(BaseGestureEventArgs)
   href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_Equals_FormsGestures_BaseGestureEventArgs_
@@ -16043,6 +16149,19 @@ references:
   isSpec: "True"
   fullName: FormsGestures.BaseGestureEventArgs.Equals
   nameWithType: BaseGestureEventArgs.Equals
+- uid: FormsGestures.BaseGestureEventArgs.Event
+  name: Event
+  href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_Event
+  commentId: P:FormsGestures.BaseGestureEventArgs.Event
+  fullName: FormsGestures.BaseGestureEventArgs.Event
+  nameWithType: BaseGestureEventArgs.Event
+- uid: FormsGestures.BaseGestureEventArgs.Event*
+  name: Event
+  href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_Event_
+  commentId: Overload:FormsGestures.BaseGestureEventArgs.Event
+  isSpec: "True"
+  fullName: FormsGestures.BaseGestureEventArgs.Event
+  nameWithType: BaseGestureEventArgs.Event
 - uid: FormsGestures.BaseGestureEventArgs.GetHashCode
   name: GetHashCode()
   href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_GetHashCode
@@ -16095,19 +16214,19 @@ references:
   isSpec: "True"
   fullName: FormsGestures.BaseGestureEventArgs.NumberOfTouches
   nameWithType: BaseGestureEventArgs.NumberOfTouches
-- uid: FormsGestures.BaseGestureEventArgs.Touches
-  name: Touches
-  href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_Touches
-  commentId: P:FormsGestures.BaseGestureEventArgs.Touches
-  fullName: FormsGestures.BaseGestureEventArgs.Touches
-  nameWithType: BaseGestureEventArgs.Touches
-- uid: FormsGestures.BaseGestureEventArgs.Touches*
-  name: Touches
-  href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_Touches_
-  commentId: Overload:FormsGestures.BaseGestureEventArgs.Touches
+- uid: FormsGestures.BaseGestureEventArgs.TouchCenterInView
+  name: TouchCenterInView
+  href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_TouchCenterInView
+  commentId: P:FormsGestures.BaseGestureEventArgs.TouchCenterInView
+  fullName: FormsGestures.BaseGestureEventArgs.TouchCenterInView
+  nameWithType: BaseGestureEventArgs.TouchCenterInView
+- uid: FormsGestures.BaseGestureEventArgs.TouchCenterInView*
+  name: TouchCenterInView
+  href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_TouchCenterInView_
+  commentId: Overload:FormsGestures.BaseGestureEventArgs.TouchCenterInView
   isSpec: "True"
-  fullName: FormsGestures.BaseGestureEventArgs.Touches
-  nameWithType: BaseGestureEventArgs.Touches
+  fullName: FormsGestures.BaseGestureEventArgs.TouchCenterInView
+  nameWithType: BaseGestureEventArgs.TouchCenterInView
 - uid: FormsGestures.BaseGestureEventArgs.ValueFrom(FormsGestures.BaseGestureEventArgs)
   name: ValueFrom(BaseGestureEventArgs)
   href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_ValueFrom_FormsGestures_BaseGestureEventArgs_
@@ -16121,19 +16240,19 @@ references:
   isSpec: "True"
   fullName: FormsGestures.BaseGestureEventArgs.ValueFrom
   nameWithType: BaseGestureEventArgs.ValueFrom
-- uid: FormsGestures.BaseGestureEventArgs.ViewPosition
-  name: ViewPosition
-  href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_ViewPosition
-  commentId: P:FormsGestures.BaseGestureEventArgs.ViewPosition
-  fullName: FormsGestures.BaseGestureEventArgs.ViewPosition
-  nameWithType: BaseGestureEventArgs.ViewPosition
-- uid: FormsGestures.BaseGestureEventArgs.ViewPosition*
-  name: ViewPosition
-  href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_ViewPosition_
-  commentId: Overload:FormsGestures.BaseGestureEventArgs.ViewPosition
+- uid: FormsGestures.BaseGestureEventArgs.WindowTouches
+  name: WindowTouches
+  href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_WindowTouches
+  commentId: P:FormsGestures.BaseGestureEventArgs.WindowTouches
+  fullName: FormsGestures.BaseGestureEventArgs.WindowTouches
+  nameWithType: BaseGestureEventArgs.WindowTouches
+- uid: FormsGestures.BaseGestureEventArgs.WindowTouches*
+  name: WindowTouches
+  href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_WindowTouches_
+  commentId: Overload:FormsGestures.BaseGestureEventArgs.WindowTouches
   isSpec: "True"
-  fullName: FormsGestures.BaseGestureEventArgs.ViewPosition
-  nameWithType: BaseGestureEventArgs.ViewPosition
+  fullName: FormsGestures.BaseGestureEventArgs.WindowTouches
+  nameWithType: BaseGestureEventArgs.WindowTouches
 - uid: FormsGestures.Debug
   name: Debug
   href: api/FormsGestures.Debug.html
@@ -16417,6 +16536,19 @@ references:
   commentId: T:FormsGestures.ICoordTransform
   fullName: FormsGestures.ICoordTransform
   nameWithType: ICoordTransform
+- uid: FormsGestures.ICoordTransform.BoundsInWindowCoord(Xamarin.Forms.VisualElement)
+  name: BoundsInWindowCoord(VisualElement)
+  href: api/FormsGestures.ICoordTransform.html#FormsGestures_ICoordTransform_BoundsInWindowCoord_Xamarin_Forms_VisualElement_
+  commentId: M:FormsGestures.ICoordTransform.BoundsInWindowCoord(Xamarin.Forms.VisualElement)
+  fullName: FormsGestures.ICoordTransform.BoundsInWindowCoord(Xamarin.Forms.VisualElement)
+  nameWithType: ICoordTransform.BoundsInWindowCoord(VisualElement)
+- uid: FormsGestures.ICoordTransform.BoundsInWindowCoord*
+  name: BoundsInWindowCoord
+  href: api/FormsGestures.ICoordTransform.html#FormsGestures_ICoordTransform_BoundsInWindowCoord_
+  commentId: Overload:FormsGestures.ICoordTransform.BoundsInWindowCoord
+  isSpec: "True"
+  fullName: FormsGestures.ICoordTransform.BoundsInWindowCoord
+  nameWithType: ICoordTransform.BoundsInWindowCoord
 - uid: FormsGestures.ICoordTransform.CoordTransform(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,Xamarin.Forms.VisualElement)
   name: CoordTransform(VisualElement, Point, VisualElement)
   href: api/FormsGestures.ICoordTransform.html#FormsGestures_ICoordTransform_CoordTransform_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_Xamarin_Forms_VisualElement_
@@ -16436,6 +16568,19 @@ references:
   isSpec: "True"
   fullName: FormsGestures.ICoordTransform.CoordTransform
   nameWithType: ICoordTransform.CoordTransform
+- uid: FormsGestures.ICoordTransform.PointInWindowCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.Point)
+  name: PointInWindowCoord(VisualElement, Point)
+  href: api/FormsGestures.ICoordTransform.html#FormsGestures_ICoordTransform_PointInWindowCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_
+  commentId: M:FormsGestures.ICoordTransform.PointInWindowCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.Point)
+  fullName: FormsGestures.ICoordTransform.PointInWindowCoord(Xamarin.Forms.VisualElement, Xamarin.Forms.Point)
+  nameWithType: ICoordTransform.PointInWindowCoord(VisualElement, Point)
+- uid: FormsGestures.ICoordTransform.PointInWindowCoord*
+  name: PointInWindowCoord
+  href: api/FormsGestures.ICoordTransform.html#FormsGestures_ICoordTransform_PointInWindowCoord_
+  commentId: Overload:FormsGestures.ICoordTransform.PointInWindowCoord
+  isSpec: "True"
+  fullName: FormsGestures.ICoordTransform.PointInWindowCoord
+  nameWithType: ICoordTransform.PointInWindowCoord
 - uid: FormsGestures.Listener
   name: Listener
   href: api/FormsGestures.Listener.html
@@ -18072,12 +18217,12 @@ references:
   isSpec: "True"
   fullName: FormsGestures.PanEventArgs.PanEventArgs
   nameWithType: PanEventArgs.PanEventArgs
-- uid: FormsGestures.PanEventArgs.CalculateDistances(FormsGestures.PanEventArgs)
-  name: CalculateDistances(PanEventArgs)
-  href: api/FormsGestures.PanEventArgs.html#FormsGestures_PanEventArgs_CalculateDistances_FormsGestures_PanEventArgs_
-  commentId: M:FormsGestures.PanEventArgs.CalculateDistances(FormsGestures.PanEventArgs)
-  fullName: FormsGestures.PanEventArgs.CalculateDistances(FormsGestures.PanEventArgs)
-  nameWithType: PanEventArgs.CalculateDistances(PanEventArgs)
+- uid: FormsGestures.PanEventArgs.CalculateDistances(FormsGestures.BaseGestureEventArgs)
+  name: CalculateDistances(BaseGestureEventArgs)
+  href: api/FormsGestures.PanEventArgs.html#FormsGestures_PanEventArgs_CalculateDistances_FormsGestures_BaseGestureEventArgs_
+  commentId: M:FormsGestures.PanEventArgs.CalculateDistances(FormsGestures.BaseGestureEventArgs)
+  fullName: FormsGestures.PanEventArgs.CalculateDistances(FormsGestures.BaseGestureEventArgs)
+  nameWithType: PanEventArgs.CalculateDistances(BaseGestureEventArgs)
 - uid: FormsGestures.PanEventArgs.CalculateDistances*
   name: CalculateDistances
   href: api/FormsGestures.PanEventArgs.html#FormsGestures_PanEventArgs_CalculateDistances_
@@ -18266,6 +18411,57 @@ references:
   isSpec: "True"
   fullName: FormsGestures.PinchEventArgs.ValueFrom
   nameWithType: PinchEventArgs.ValueFrom
+- uid: FormsGestures.PointExtensions
+  name: PointExtensions
+  href: api/FormsGestures.PointExtensions.html
+  commentId: T:FormsGestures.PointExtensions
+  fullName: FormsGestures.PointExtensions
+  nameWithType: PointExtensions
+- uid: FormsGestures.PointExtensions.Add(Xamarin.Forms.Point,Xamarin.Forms.Point)
+  name: Add(Point, Point)
+  href: api/FormsGestures.PointExtensions.html#FormsGestures_PointExtensions_Add_Xamarin_Forms_Point_Xamarin_Forms_Point_
+  commentId: M:FormsGestures.PointExtensions.Add(Xamarin.Forms.Point,Xamarin.Forms.Point)
+  fullName: FormsGestures.PointExtensions.Add(Xamarin.Forms.Point, Xamarin.Forms.Point)
+  nameWithType: PointExtensions.Add(Point, Point)
+- uid: FormsGestures.PointExtensions.Add*
+  name: Add
+  href: api/FormsGestures.PointExtensions.html#FormsGestures_PointExtensions_Add_
+  commentId: Overload:FormsGestures.PointExtensions.Add
+  isSpec: "True"
+  fullName: FormsGestures.PointExtensions.Add
+  nameWithType: PointExtensions.Add
+- uid: FormsGestures.PointExtensions.Subtract(Xamarin.Forms.Point,Xamarin.Forms.Point)
+  name: Subtract(Point, Point)
+  href: api/FormsGestures.PointExtensions.html#FormsGestures_PointExtensions_Subtract_Xamarin_Forms_Point_Xamarin_Forms_Point_
+  commentId: M:FormsGestures.PointExtensions.Subtract(Xamarin.Forms.Point,Xamarin.Forms.Point)
+  fullName: FormsGestures.PointExtensions.Subtract(Xamarin.Forms.Point, Xamarin.Forms.Point)
+  nameWithType: PointExtensions.Subtract(Point, Point)
+- uid: FormsGestures.PointExtensions.Subtract*
+  name: Subtract
+  href: api/FormsGestures.PointExtensions.html#FormsGestures_PointExtensions_Subtract_
+  commentId: Overload:FormsGestures.PointExtensions.Subtract
+  isSpec: "True"
+  fullName: FormsGestures.PointExtensions.Subtract
+  nameWithType: PointExtensions.Subtract
+- uid: FormsGestures.PointExtensions.ToString(Xamarin.Forms.Point,System.String)
+  name: ToString(Point, String)
+  href: api/FormsGestures.PointExtensions.html#FormsGestures_PointExtensions_ToString_Xamarin_Forms_Point_System_String_
+  commentId: M:FormsGestures.PointExtensions.ToString(Xamarin.Forms.Point,System.String)
+  fullName: FormsGestures.PointExtensions.ToString(Xamarin.Forms.Point, System.String)
+  nameWithType: PointExtensions.ToString(Point, String)
+- uid: FormsGestures.PointExtensions.ToString(Xamarin.Forms.Rectangle,System.String)
+  name: ToString(Rectangle, String)
+  href: api/FormsGestures.PointExtensions.html#FormsGestures_PointExtensions_ToString_Xamarin_Forms_Rectangle_System_String_
+  commentId: M:FormsGestures.PointExtensions.ToString(Xamarin.Forms.Rectangle,System.String)
+  fullName: FormsGestures.PointExtensions.ToString(Xamarin.Forms.Rectangle, System.String)
+  nameWithType: PointExtensions.ToString(Rectangle, String)
+- uid: FormsGestures.PointExtensions.ToString*
+  name: ToString
+  href: api/FormsGestures.PointExtensions.html#FormsGestures_PointExtensions_ToString_
+  commentId: Overload:FormsGestures.PointExtensions.ToString
+  isSpec: "True"
+  fullName: FormsGestures.PointExtensions.ToString
+  nameWithType: PointExtensions.ToString
 - uid: FormsGestures.Proximity
   name: Proximity
   href: api/FormsGestures.Proximity.html
@@ -18534,32 +18730,32 @@ references:
   commentId: T:FormsGestures.VisualElementExtensions
   fullName: FormsGestures.VisualElementExtensions
   nameWithType: VisualElementExtensions
-- uid: FormsGestures.VisualElementExtensions.BoundsToEleCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.VisualElement)
-  name: BoundsToEleCoord(VisualElement, VisualElement)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_BoundsToEleCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_VisualElement_
-  commentId: M:FormsGestures.VisualElementExtensions.BoundsToEleCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.VisualElement)
-  fullName: FormsGestures.VisualElementExtensions.BoundsToEleCoord(Xamarin.Forms.VisualElement, Xamarin.Forms.VisualElement)
-  nameWithType: VisualElementExtensions.BoundsToEleCoord(VisualElement, VisualElement)
-- uid: FormsGestures.VisualElementExtensions.BoundsToEleCoord*
-  name: BoundsToEleCoord
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_BoundsToEleCoord_
-  commentId: Overload:FormsGestures.VisualElementExtensions.BoundsToEleCoord
+- uid: FormsGestures.VisualElementExtensions.BoundsInElementCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.VisualElement)
+  name: BoundsInElementCoord(VisualElement, VisualElement)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_BoundsInElementCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_VisualElement_
+  commentId: M:FormsGestures.VisualElementExtensions.BoundsInElementCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.VisualElement)
+  fullName: FormsGestures.VisualElementExtensions.BoundsInElementCoord(Xamarin.Forms.VisualElement, Xamarin.Forms.VisualElement)
+  nameWithType: VisualElementExtensions.BoundsInElementCoord(VisualElement, VisualElement)
+- uid: FormsGestures.VisualElementExtensions.BoundsInElementCoord*
+  name: BoundsInElementCoord
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_BoundsInElementCoord_
+  commentId: Overload:FormsGestures.VisualElementExtensions.BoundsInElementCoord
   isSpec: "True"
-  fullName: FormsGestures.VisualElementExtensions.BoundsToEleCoord
-  nameWithType: VisualElementExtensions.BoundsToEleCoord
-- uid: FormsGestures.VisualElementExtensions.BoundsToWinCoord(Xamarin.Forms.VisualElement)
-  name: BoundsToWinCoord(VisualElement)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_BoundsToWinCoord_Xamarin_Forms_VisualElement_
-  commentId: M:FormsGestures.VisualElementExtensions.BoundsToWinCoord(Xamarin.Forms.VisualElement)
-  fullName: FormsGestures.VisualElementExtensions.BoundsToWinCoord(Xamarin.Forms.VisualElement)
-  nameWithType: VisualElementExtensions.BoundsToWinCoord(VisualElement)
-- uid: FormsGestures.VisualElementExtensions.BoundsToWinCoord*
-  name: BoundsToWinCoord
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_BoundsToWinCoord_
-  commentId: Overload:FormsGestures.VisualElementExtensions.BoundsToWinCoord
+  fullName: FormsGestures.VisualElementExtensions.BoundsInElementCoord
+  nameWithType: VisualElementExtensions.BoundsInElementCoord
+- uid: FormsGestures.VisualElementExtensions.BoundsInWindowCoord(Xamarin.Forms.VisualElement)
+  name: BoundsInWindowCoord(VisualElement)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_BoundsInWindowCoord_Xamarin_Forms_VisualElement_
+  commentId: M:FormsGestures.VisualElementExtensions.BoundsInWindowCoord(Xamarin.Forms.VisualElement)
+  fullName: FormsGestures.VisualElementExtensions.BoundsInWindowCoord(Xamarin.Forms.VisualElement)
+  nameWithType: VisualElementExtensions.BoundsInWindowCoord(VisualElement)
+- uid: FormsGestures.VisualElementExtensions.BoundsInWindowCoord*
+  name: BoundsInWindowCoord
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_BoundsInWindowCoord_
+  commentId: Overload:FormsGestures.VisualElementExtensions.BoundsInWindowCoord
   isSpec: "True"
-  fullName: FormsGestures.VisualElementExtensions.BoundsToWinCoord
-  nameWithType: VisualElementExtensions.BoundsToWinCoord
+  fullName: FormsGestures.VisualElementExtensions.BoundsInWindowCoord
+  nameWithType: VisualElementExtensions.BoundsInWindowCoord
 - uid: FormsGestures.VisualElementExtensions.CoordTransform(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,Xamarin.Forms.VisualElement)
   name: CoordTransform(VisualElement, Point, VisualElement)
   href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_CoordTransform_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_Xamarin_Forms_VisualElement_
@@ -18766,77 +18962,58 @@ references:
   isSpec: "True"
   fullName: FormsGestures.VisualElementExtensions.IsInVisibleViewTree
   nameWithType: VisualElementExtensions.IsInVisibleViewTree
-- uid: FormsGestures.VisualElementExtensions.LocationToEleCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.VisualElement)
-  name: LocationToEleCoord(VisualElement, VisualElement)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_LocationToEleCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_VisualElement_
-  commentId: M:FormsGestures.VisualElementExtensions.LocationToEleCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.VisualElement)
-  fullName: FormsGestures.VisualElementExtensions.LocationToEleCoord(Xamarin.Forms.VisualElement, Xamarin.Forms.VisualElement)
-  nameWithType: VisualElementExtensions.LocationToEleCoord(VisualElement, VisualElement)
-- uid: FormsGestures.VisualElementExtensions.LocationToEleCoord*
-  name: LocationToEleCoord
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_LocationToEleCoord_
-  commentId: Overload:FormsGestures.VisualElementExtensions.LocationToEleCoord
+- uid: FormsGestures.VisualElementExtensions.LocationInElementCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.VisualElement)
+  name: LocationInElementCoord(VisualElement, VisualElement)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_LocationInElementCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_VisualElement_
+  commentId: M:FormsGestures.VisualElementExtensions.LocationInElementCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.VisualElement)
+  fullName: FormsGestures.VisualElementExtensions.LocationInElementCoord(Xamarin.Forms.VisualElement, Xamarin.Forms.VisualElement)
+  nameWithType: VisualElementExtensions.LocationInElementCoord(VisualElement, VisualElement)
+- uid: FormsGestures.VisualElementExtensions.LocationInElementCoord*
+  name: LocationInElementCoord
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_LocationInElementCoord_
+  commentId: Overload:FormsGestures.VisualElementExtensions.LocationInElementCoord
   isSpec: "True"
-  fullName: FormsGestures.VisualElementExtensions.LocationToEleCoord
-  nameWithType: VisualElementExtensions.LocationToEleCoord
-- uid: FormsGestures.VisualElementExtensions.LocationToWinCoord(Xamarin.Forms.VisualElement)
-  name: LocationToWinCoord(VisualElement)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_LocationToWinCoord_Xamarin_Forms_VisualElement_
-  commentId: M:FormsGestures.VisualElementExtensions.LocationToWinCoord(Xamarin.Forms.VisualElement)
-  fullName: FormsGestures.VisualElementExtensions.LocationToWinCoord(Xamarin.Forms.VisualElement)
-  nameWithType: VisualElementExtensions.LocationToWinCoord(VisualElement)
-- uid: FormsGestures.VisualElementExtensions.LocationToWinCoord*
-  name: LocationToWinCoord
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_LocationToWinCoord_
-  commentId: Overload:FormsGestures.VisualElementExtensions.LocationToWinCoord
+  fullName: FormsGestures.VisualElementExtensions.LocationInElementCoord
+  nameWithType: VisualElementExtensions.LocationInElementCoord
+- uid: FormsGestures.VisualElementExtensions.LocationInWindowCoord(Xamarin.Forms.VisualElement)
+  name: LocationInWindowCoord(VisualElement)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_LocationInWindowCoord_Xamarin_Forms_VisualElement_
+  commentId: M:FormsGestures.VisualElementExtensions.LocationInWindowCoord(Xamarin.Forms.VisualElement)
+  fullName: FormsGestures.VisualElementExtensions.LocationInWindowCoord(Xamarin.Forms.VisualElement)
+  nameWithType: VisualElementExtensions.LocationInWindowCoord(VisualElement)
+- uid: FormsGestures.VisualElementExtensions.LocationInWindowCoord*
+  name: LocationInWindowCoord
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_LocationInWindowCoord_
+  commentId: Overload:FormsGestures.VisualElementExtensions.LocationInWindowCoord
   isSpec: "True"
-  fullName: FormsGestures.VisualElementExtensions.LocationToWinCoord
-  nameWithType: VisualElementExtensions.LocationToWinCoord
-- uid: FormsGestures.VisualElementExtensions.ToEleCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,Xamarin.Forms.VisualElement)
-  name: ToEleCoord(VisualElement, Point, VisualElement)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_ToEleCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_Xamarin_Forms_VisualElement_
-  commentId: M:FormsGestures.VisualElementExtensions.ToEleCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,Xamarin.Forms.VisualElement)
-  fullName: FormsGestures.VisualElementExtensions.ToEleCoord(Xamarin.Forms.VisualElement, Xamarin.Forms.Point, Xamarin.Forms.VisualElement)
-  nameWithType: VisualElementExtensions.ToEleCoord(VisualElement, Point, VisualElement)
-- uid: FormsGestures.VisualElementExtensions.ToEleCoord*
-  name: ToEleCoord
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_ToEleCoord_
-  commentId: Overload:FormsGestures.VisualElementExtensions.ToEleCoord
+  fullName: FormsGestures.VisualElementExtensions.LocationInWindowCoord
+  nameWithType: VisualElementExtensions.LocationInWindowCoord
+- uid: FormsGestures.VisualElementExtensions.PointInElementCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,Xamarin.Forms.VisualElement)
+  name: PointInElementCoord(VisualElement, Point, VisualElement)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_PointInElementCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_Xamarin_Forms_VisualElement_
+  commentId: M:FormsGestures.VisualElementExtensions.PointInElementCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,Xamarin.Forms.VisualElement)
+  fullName: FormsGestures.VisualElementExtensions.PointInElementCoord(Xamarin.Forms.VisualElement, Xamarin.Forms.Point, Xamarin.Forms.VisualElement)
+  nameWithType: VisualElementExtensions.PointInElementCoord(VisualElement, Point, VisualElement)
+- uid: FormsGestures.VisualElementExtensions.PointInElementCoord*
+  name: PointInElementCoord
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_PointInElementCoord_
+  commentId: Overload:FormsGestures.VisualElementExtensions.PointInElementCoord
   isSpec: "True"
-  fullName: FormsGestures.VisualElementExtensions.ToEleCoord
-  nameWithType: VisualElementExtensions.ToEleCoord
-- uid: FormsGestures.VisualElementExtensions.ToWinCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.Point)
-  name: ToWinCoord(VisualElement, Point)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_ToWinCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_
-  commentId: M:FormsGestures.VisualElementExtensions.ToWinCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.Point)
-  fullName: FormsGestures.VisualElementExtensions.ToWinCoord(Xamarin.Forms.VisualElement, Xamarin.Forms.Point)
-  nameWithType: VisualElementExtensions.ToWinCoord(VisualElement, Point)
-- uid: FormsGestures.VisualElementExtensions.ToWinCoord*
-  name: ToWinCoord
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_ToWinCoord_
-  commentId: Overload:FormsGestures.VisualElementExtensions.ToWinCoord
+  fullName: FormsGestures.VisualElementExtensions.PointInElementCoord
+  nameWithType: VisualElementExtensions.PointInElementCoord
+- uid: FormsGestures.VisualElementExtensions.PointInWindowCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.Point)
+  name: PointInWindowCoord(VisualElement, Point)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_PointInWindowCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_
+  commentId: M:FormsGestures.VisualElementExtensions.PointInWindowCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.Point)
+  fullName: FormsGestures.VisualElementExtensions.PointInWindowCoord(Xamarin.Forms.VisualElement, Xamarin.Forms.Point)
+  nameWithType: VisualElementExtensions.PointInWindowCoord(VisualElement, Point)
+- uid: FormsGestures.VisualElementExtensions.PointInWindowCoord*
+  name: PointInWindowCoord
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_PointInWindowCoord_
+  commentId: Overload:FormsGestures.VisualElementExtensions.PointInWindowCoord
   isSpec: "True"
-  fullName: FormsGestures.VisualElementExtensions.ToWinCoord
-  nameWithType: VisualElementExtensions.ToWinCoord
-- uid: FormsGestures.VisualElementExtensions.WinToEleCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.Point)
-  name: WinToEleCoord(VisualElement, Point)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_WinToEleCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_
-  commentId: M:FormsGestures.VisualElementExtensions.WinToEleCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.Point)
-  fullName: FormsGestures.VisualElementExtensions.WinToEleCoord(Xamarin.Forms.VisualElement, Xamarin.Forms.Point)
-  nameWithType: VisualElementExtensions.WinToEleCoord(VisualElement, Point)
-- uid: FormsGestures.VisualElementExtensions.WinToEleCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.Rectangle)
-  name: WinToEleCoord(VisualElement, Rectangle)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_WinToEleCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_Rectangle_
-  commentId: M:FormsGestures.VisualElementExtensions.WinToEleCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.Rectangle)
-  fullName: FormsGestures.VisualElementExtensions.WinToEleCoord(Xamarin.Forms.VisualElement, Xamarin.Forms.Rectangle)
-  nameWithType: VisualElementExtensions.WinToEleCoord(VisualElement, Rectangle)
-- uid: FormsGestures.VisualElementExtensions.WinToEleCoord*
-  name: WinToEleCoord
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_WinToEleCoord_
-  commentId: Overload:FormsGestures.VisualElementExtensions.WinToEleCoord
-  isSpec: "True"
-  fullName: FormsGestures.VisualElementExtensions.WinToEleCoord
-  nameWithType: VisualElementExtensions.WinToEleCoord
+  fullName: FormsGestures.VisualElementExtensions.PointInWindowCoord
+  nameWithType: VisualElementExtensions.PointInWindowCoord
 - uid: P42.Utils
   name: P42.Utils
   href: api/P42.Utils.html
@@ -20920,6 +21097,22 @@ references:
   commentId: T:P42.Utils.JsonExtensions
   fullName: P42.Utils.JsonExtensions
   nameWithType: JsonExtensions
+- uid: P42.Utils.JsonExtensions.Instantiate*
+  name: Instantiate
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_Instantiate_
+  commentId: Overload:P42.Utils.JsonExtensions.Instantiate
+  isSpec: "True"
+  fullName: P42.Utils.JsonExtensions.Instantiate
+  nameWithType: JsonExtensions.Instantiate
+- uid: P42.Utils.JsonExtensions.Instantiate``1(Newtonsoft.Json.JsonReader)
+  name: Instantiate<T>(JsonReader)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_Instantiate__1_Newtonsoft_Json_JsonReader_
+  commentId: M:P42.Utils.JsonExtensions.Instantiate``1(Newtonsoft.Json.JsonReader)
+  name.vb: Instantiate(Of T)(JsonReader)
+  fullName: P42.Utils.JsonExtensions.Instantiate<T>(Newtonsoft.Json.JsonReader)
+  fullName.vb: P42.Utils.JsonExtensions.Instantiate(Of T)(Newtonsoft.Json.JsonReader)
+  nameWithType: JsonExtensions.Instantiate<T>(JsonReader)
+  nameWithType.vb: JsonExtensions.Instantiate(Of T)(JsonReader)
 - uid: P42.Utils.JsonExtensions.IsSimple(System.Type)
   name: IsSimple(Type)
   href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_IsSimple_System_Type_
@@ -21017,6 +21210,32 @@ references:
   isSpec: "True"
   fullName: P42.Utils.JsonExtensions.ParseInt
   nameWithType: JsonExtensions.ParseInt
+- uid: P42.Utils.JsonExtensions.ParseLong(Newtonsoft.Json.JsonReader)
+  name: ParseLong(JsonReader)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_ParseLong_Newtonsoft_Json_JsonReader_
+  commentId: M:P42.Utils.JsonExtensions.ParseLong(Newtonsoft.Json.JsonReader)
+  fullName: P42.Utils.JsonExtensions.ParseLong(Newtonsoft.Json.JsonReader)
+  nameWithType: JsonExtensions.ParseLong(JsonReader)
+- uid: P42.Utils.JsonExtensions.ParseLong*
+  name: ParseLong
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_ParseLong_
+  commentId: Overload:P42.Utils.JsonExtensions.ParseLong
+  isSpec: "True"
+  fullName: P42.Utils.JsonExtensions.ParseLong
+  nameWithType: JsonExtensions.ParseLong
+- uid: P42.Utils.JsonExtensions.ParseNullableDouble(Newtonsoft.Json.JsonReader)
+  name: ParseNullableDouble(JsonReader)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_ParseNullableDouble_Newtonsoft_Json_JsonReader_
+  commentId: M:P42.Utils.JsonExtensions.ParseNullableDouble(Newtonsoft.Json.JsonReader)
+  fullName: P42.Utils.JsonExtensions.ParseNullableDouble(Newtonsoft.Json.JsonReader)
+  nameWithType: JsonExtensions.ParseNullableDouble(JsonReader)
+- uid: P42.Utils.JsonExtensions.ParseNullableDouble*
+  name: ParseNullableDouble
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_ParseNullableDouble_
+  commentId: Overload:P42.Utils.JsonExtensions.ParseNullableDouble
+  isSpec: "True"
+  fullName: P42.Utils.JsonExtensions.ParseNullableDouble
+  nameWithType: JsonExtensions.ParseNullableDouble
 - uid: P42.Utils.JsonExtensions.ParseSimple*
   name: ParseSimple
   href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_ParseSimple_
@@ -21130,6 +21349,32 @@ references:
   isSpec: "True"
   fullName: P42.Utils.JsonExtensions.ReadInt
   nameWithType: JsonExtensions.ReadInt
+- uid: P42.Utils.JsonExtensions.ReadLong(Newtonsoft.Json.JsonReader)
+  name: ReadLong(JsonReader)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_ReadLong_Newtonsoft_Json_JsonReader_
+  commentId: M:P42.Utils.JsonExtensions.ReadLong(Newtonsoft.Json.JsonReader)
+  fullName: P42.Utils.JsonExtensions.ReadLong(Newtonsoft.Json.JsonReader)
+  nameWithType: JsonExtensions.ReadLong(JsonReader)
+- uid: P42.Utils.JsonExtensions.ReadLong*
+  name: ReadLong
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_ReadLong_
+  commentId: Overload:P42.Utils.JsonExtensions.ReadLong
+  isSpec: "True"
+  fullName: P42.Utils.JsonExtensions.ReadLong
+  nameWithType: JsonExtensions.ReadLong
+- uid: P42.Utils.JsonExtensions.ReadNullableDouble(Newtonsoft.Json.JsonReader)
+  name: ReadNullableDouble(JsonReader)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_ReadNullableDouble_Newtonsoft_Json_JsonReader_
+  commentId: M:P42.Utils.JsonExtensions.ReadNullableDouble(Newtonsoft.Json.JsonReader)
+  fullName: P42.Utils.JsonExtensions.ReadNullableDouble(Newtonsoft.Json.JsonReader)
+  nameWithType: JsonExtensions.ReadNullableDouble(JsonReader)
+- uid: P42.Utils.JsonExtensions.ReadNullableDouble*
+  name: ReadNullableDouble
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_ReadNullableDouble_
+  commentId: Overload:P42.Utils.JsonExtensions.ReadNullableDouble
+  isSpec: "True"
+  fullName: P42.Utils.JsonExtensions.ReadNullableDouble
+  nameWithType: JsonExtensions.ReadNullableDouble
 - uid: P42.Utils.JsonExtensions.ReadSimpleList*
   name: ReadSimpleList
   href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_ReadSimpleList_
@@ -22251,6 +22496,19 @@ references:
   isSpec: "True"
   fullName: P42.Utils.TextCache.Clear
   nameWithType: TextCache.Clear
+- uid: P42.Utils.TextCache.GetStreamReader(System.String,System.String)
+  name: GetStreamReader(String, String)
+  href: api/P42.Utils.TextCache.html#P42_Utils_TextCache_GetStreamReader_System_String_System_String_
+  commentId: M:P42.Utils.TextCache.GetStreamReader(System.String,System.String)
+  fullName: P42.Utils.TextCache.GetStreamReader(System.String, System.String)
+  nameWithType: TextCache.GetStreamReader(String, String)
+- uid: P42.Utils.TextCache.GetStreamReader*
+  name: GetStreamReader
+  href: api/P42.Utils.TextCache.html#P42_Utils_TextCache_GetStreamReader_
+  commentId: Overload:P42.Utils.TextCache.GetStreamReader
+  isSpec: "True"
+  fullName: P42.Utils.TextCache.GetStreamReader
+  nameWithType: TextCache.GetStreamReader
 - uid: P42.Utils.TextCache.IsCached(System.String,System.String)
   name: IsCached(String, String)
   href: api/P42.Utils.TextCache.html#P42_Utils_TextCache_IsCached_System_String_System_String_

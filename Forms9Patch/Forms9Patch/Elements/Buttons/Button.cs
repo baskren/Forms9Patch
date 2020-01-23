@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using System.Windows.Input;
 using System.ComponentModel;
 using System.Reflection;
+using FormsGestures;
 
 namespace Forms9Patch
 {
@@ -1042,6 +1043,9 @@ namespace Forms9Patch
             _gestureListener.Down += OnDown;
             _gestureListener.LongPressed += OnLongPressed;
             _gestureListener.LongPressing += OnLongPressing;
+            _gestureListener.Panning += OnPanning;
+            _gestureListener.Panned += OnPanned;
+            _gestureListener.Swiped += OnSwiped;
 
             SizeChanged += OnSizeChanged;
 
@@ -1137,6 +1141,9 @@ namespace Forms9Patch
                 _gestureListener.Down -= OnDown;
                 _gestureListener.LongPressed -= OnLongPressed;
                 _gestureListener.LongPressing -= OnLongPressing;
+                _gestureListener.Panning -= OnPanning;
+                _gestureListener.Panned -= OnPanned;
+                _gestureListener.Swiped -= OnSwiped;
                 _gestureListener.Dispose();
                 _gestureListener = null;
 
@@ -1162,6 +1169,7 @@ namespace Forms9Patch
             }
             base.Dispose(disposing);
         }
+
 
         #endregion
 
@@ -1337,6 +1345,30 @@ namespace Forms9Patch
             });
         }
 
+        private void OnSwiped(object sender, SwipeEventArgs e)
+        {
+            if (IsEnabled && IsVisible)
+            {
+                AnimateRelease();
+                if (!IsLongPressEnabled && !e.Cancelled && e.TouchCenterInView)
+                    e.Handled = HandleTap();
+            }
+        }
+
+        private void OnPanned(object sender, PanEventArgs e)
+        {
+            if (IsEnabled && IsVisible)
+            {
+                AnimateRelease();
+                if (!IsLongPressEnabled && !e.Cancelled && e.TouchCenterInView)
+                    e.Handled = HandleTap();
+            }
+        }
+
+        private void OnPanning(object sender, PanEventArgs e)
+        {
+            
+        }
         #endregion
 
 

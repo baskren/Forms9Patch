@@ -383,14 +383,67 @@
   </table>
   
   
-  <a id="Forms9Patch_ColorExtension_RgbBlend_" data-uid="Forms9Patch.ColorExtension.RgbBlend*"></a>
-  <h4 id="Forms9Patch_ColorExtension_RgbBlend_Xamarin_Forms_Color_Xamarin_Forms_Color_System_Double_" data-uid="Forms9Patch.ColorExtension.RgbBlend(Xamarin.Forms.Color,Xamarin.Forms.Color,System.Double)">RgbBlend(Color, Color, Double)</h4>
-  <div class="markdown level1 summary"><p>Rgbs the blend.</p>
+  <a id="Forms9Patch_ColorExtension_RgbaBlend_" data-uid="Forms9Patch.ColorExtension.RgbaBlend*"></a>
+  <h4 id="Forms9Patch_ColorExtension_RgbaBlend_Xamarin_Forms_Color_Xamarin_Forms_Color_System_Double_" data-uid="Forms9Patch.ColorExtension.RgbaBlend(Xamarin.Forms.Color,Xamarin.Forms.Color,System.Double)">RgbaBlend(Color, Color, Double)</h4>
+  <div class="markdown level1 summary"><p>Interpolates between two colors</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Color RgbBlend(this Color c, Color c2, double percent)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Color RgbaBlend(this Color c1, Color c2, double percent)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.color">Color</a></td>
+        <td><span class="parametername">c1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.color">Color</a></td>
+        <td><span class="parametername">c2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><span class="parametername">percent</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.color">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_ColorExtension_RgbHybridBlend_" data-uid="Forms9Patch.ColorExtension.RgbHybridBlend*"></a>
+  <h4 id="Forms9Patch_ColorExtension_RgbHybridBlend_Xamarin_Forms_Color_Xamarin_Forms_Color_System_Double_" data-uid="Forms9Patch.ColorExtension.RgbHybridBlend(Xamarin.Forms.Color,Xamarin.Forms.Color,System.Double)">RgbHybridBlend(Color, Color, Double)</h4>
+  <div class="markdown level1 summary"><p>Interpolates between two colors - keeping the Alpha of the first (unless it's transparent ... then its white with alpha 0);</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Color RgbHybridBlend(this Color c, Color c2, double percent)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -660,6 +713,49 @@
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><p>The hex rgb color string.</p>
 </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_ColorExtension_ToIntRgbaColorString_" data-uid="Forms9Patch.ColorExtension.ToIntRgbaColorString*"></a>
+  <h4 id="Forms9Patch_ColorExtension_ToIntRgbaColorString_Xamarin_Forms_Color_" data-uid="Forms9Patch.ColorExtension.ToIntRgbaColorString(Xamarin.Forms.Color)">ToIntRgbaColorString(Color)</h4>
+  <div class="markdown level1 summary"><p>Returns a sring with comma separated, 0-255, integer values for color's RGBA</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ToIntRgbaColorString(this Color color)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.color">Color</a></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
