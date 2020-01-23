@@ -35,11 +35,17 @@ namespace FormsGestures
 			}
 		}
 
-        /// <summary>
-        /// helper function used to calculate rotation angles
-        /// </summary>
-        /// <param name="previous"></param>
+		int direction = 1;
+
+		/// <summary>
+		/// helper function used to calculate rotation angles
+		/// </summary>
+		/// <param name="previous"></param>
 		protected void CalculateAngles(RotateEventArgs previous) {
+
+			if (Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.Android)
+		    	direction *= -1;
+
 			if (WindowTouches.Length > 1)
 				Angle = GetAngle(WindowTouches);
 			else if (previous != null)
@@ -59,7 +65,7 @@ namespace FormsGestures
 			DeltaAngle = Angle - previous.Angle;
 			DeltaAngle += (DeltaAngle > 180) ? -360 : (DeltaAngle < -180) ? +360 : 0;
 			TotalAngle = previous.TotalAngle + DeltaAngle;
-            System.Diagnostics.Debug.WriteLine("detalAngle=["+DeltaAngle.ToString("N2")+"]");
+            //System.Diagnostics.Debug.WriteLine("detalAngle=["+DeltaAngle.ToString("N2")+"]");
 
         }
 
@@ -75,7 +81,7 @@ namespace FormsGestures
                 + "] result = " + result.ToString("N3") + " T0=["+Touches[0].ToString("N3")+"] T1=["+Touches[1].ToString("N3")+"]"  );
                 */
 
-            System.Diagnostics.Debug.WriteLine("angle=["+result.ToString("N2")+"]");
+            //System.Diagnostics.Debug.WriteLine("angle=["+result.ToString("N2")+"]");
 
             return result;
 		}

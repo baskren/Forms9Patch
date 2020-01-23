@@ -40,6 +40,8 @@
     <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AssemblyName></AssemblyName>
+    <AssemblyName>Forms9PatchDemo.Source.Android</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />

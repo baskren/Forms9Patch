@@ -34,20 +34,40 @@ namespace FormsGestures.Droid
         
         public static Point[] GetRawTouches(MotionEvent current)
         {
-			var offsetX = current.RawX/Display.Scale - current.GetX();
-			var offsetY = current.RawY/Display.Scale - current.GetY();
-
 			var result = new Point[current.PointerCount];
-			MotionEvent.PointerCoords touch = new MotionEvent.PointerCoords();
-            for(int i=0;i< current.PointerCount;i++)
-            {
-				current.GetPointerCoords(i, touch);
-				var point = new Point(touch.X + offsetX, touch.Y + offsetY);
-				result[i] = point;
+
+            /*
+            // second point is jumps around a lot
+			if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Q)
+			{
+				for (int i = 0; i < current.PointerCount; i++)
+				{
+					var x = current.GetRawX(i) / Display.Scale;
+					var y = current.GetRawY(i) / Display.Scale;
+					var point = new Point(x, y);
+					result[i] = point;
+				}
+                if (result.Length>1)
+                System.Diagnostics.Debug.WriteLine("p0["+result[0].ToString("N2")+"]  p1["+result[1].ToString("N2")+"]");
+
             }
+			else
+			{
+            */
+				var offsetX = current.RawX / Display.Scale - current.GetX();
+				var offsetY = current.RawY / Display.Scale - current.GetY();
+
+				MotionEvent.PointerCoords touch = new MotionEvent.PointerCoords();
+				for (int i = 0; i < current.PointerCount; i++)
+				{
+					current.GetPointerCoords(i, touch);
+					var point = new Point(touch.X + offsetX, touch.Y + offsetY);
+					result[i] = point;
+				}
+			//}
 			return result;
-        }
-        
+		}
+
 
 		public static Point[] GetTouches(MotionEvent.PointerCoords[] pointerCoords, Android.Views.View sourceView, Listener listener)
         {
@@ -63,7 +83,10 @@ namespace FormsGestures.Droid
 					: Point.Zero;
 				var touchViewLocation = AndroidViewExtensions.LocationInFormsCoord(sourceView);
 				delta = touchViewLocation.Subtract(listenerViewLocation);
-			}
+
+                System.Diagnostics.Debug.WriteLine("vl["+listenerViewLocation.ToString("N2")+"] ["+touchViewLocation.ToString("+N2+")+"]");
+
+            }
 
 			var pointerCount = pointerCoords.Length;
 			var array = new Point[pointerCount];
