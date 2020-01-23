@@ -476,7 +476,7 @@ namespace FormsGestures.iOS
                 if (tappingHandled && doubleTappedHandled)
                     break;
             }
-
+            
             if (!_waitingForTapsToFinish && HandlesTapped)
             {
                 _waitingForTapsToFinish = true;
@@ -484,21 +484,18 @@ namespace FormsGestures.iOS
                 {
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        if (_listeners == null)
-                        {
-                            _numberOfTaps = 0;
-                            _waitingForTapsToFinish = false;
-                            return;
-                        }
 
-                        foreach (var listener in _listeners)
+                        if (_listeners != null)
                         {
-                            if (listener.HandlesTapped)
+                            foreach (var listener in _listeners)
                             {
-                                var taskArgs = new TapEventArgs(_lastTapEventArgs, listener);
-                                listener.OnTapped(taskArgs);
-                                if (taskArgs.Handled)
-                                    break;
+                                if (listener.HandlesTapped)
+                                {
+                                    var taskArgs = new TapEventArgs(_lastTapEventArgs, listener);
+                                    listener.OnTapped(taskArgs);
+                                    if (taskArgs.Handled)
+                                        break;
+                                }
                             }
                         }
                         _numberOfTaps = 0;
