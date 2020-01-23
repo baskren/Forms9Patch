@@ -9,21 +9,25 @@ namespace FormsGestures.UWP
 {
     public class UwpLongPressEventArgs : LongPressEventArgs
     {
-        public UwpLongPressEventArgs(Windows.UI.Xaml.FrameworkElement element, Windows.UI.Xaml.Input.ManipulationStartedRoutedEventArgs args, long elapsedMilliseconds)
+        public UwpLongPressEventArgs(FrameworkElement element, Windows.UI.Xaml.Input.ManipulationStartedRoutedEventArgs args, long elapsedMilliseconds)
         {
-            ViewPosition = element.GetXfViewFrame();
-            Touches = new Xamarin.Forms.Point[] { args.Position.ToXfPoint() };
+            ElementPosition = element.GetXfViewFrame();
+            var point = args.Position;
+            ElementTouches = new Xamarin.Forms.Point[] { point.ToXfPoint() };
+            WindowTouches = new Xamarin.Forms.Point[] { element.PointInNativeAppWindowCoord(point).ToXfPoint() };
             Duration = elapsedMilliseconds;
         }
 
-        public UwpLongPressEventArgs(Windows.UI.Xaml.FrameworkElement element, Windows.UI.Xaml.Input.TappedRoutedEventArgs args, long elapsedMilliseconds)
+        public UwpLongPressEventArgs(FrameworkElement element, Windows.UI.Xaml.Input.TappedRoutedEventArgs args, long elapsedMilliseconds)
         {
-            ViewPosition = element.GetXfViewFrame();
-            Touches = new Xamarin.Forms.Point[] { args.GetPosition(element).ToXfPoint() };
+            ElementPosition = element.GetXfViewFrame();
+            var point = args.GetPosition(element);
+            ElementTouches = new Xamarin.Forms.Point[] { point.ToXfPoint() };
+            WindowTouches = new Xamarin.Forms.Point[] { element.PointInNativeAppWindowCoord(point).ToXfPoint() };
             Duration = elapsedMilliseconds;
         }
 
-        public static bool FireLongPressed(Windows.UI.Xaml.FrameworkElement element, Windows.UI.Xaml.Input.TappedRoutedEventArgs e, long elapsedMilliseconds, Listener listener)
+        public static bool FireLongPressed(FrameworkElement element, Windows.UI.Xaml.Input.TappedRoutedEventArgs e, long elapsedMilliseconds, Listener listener)
         {
             var args = new UwpLongPressEventArgs(element, e, elapsedMilliseconds)
             {
@@ -35,15 +39,16 @@ namespace FormsGestures.UWP
         }
 
         //PointerRoutedEventArgs
-        public UwpLongPressEventArgs(Windows.UI.Xaml.FrameworkElement element, Windows.UI.Xaml.Input.PointerRoutedEventArgs args, long elapsedMilliseconds)
+        public UwpLongPressEventArgs(FrameworkElement element, Windows.UI.Xaml.Input.PointerRoutedEventArgs args, long elapsedMilliseconds)
         {
-            ViewPosition = element.GetXfViewFrame();
-            //Touches = new Xamarin.Forms.Point[] { args.GetCurrentPoint(null).Position.ToXfPoint() };
-            Touches = new Xamarin.Forms.Point[] { args.GetCurrentPoint(element).Position.ToXfPoint() };
+            ElementPosition = element.GetXfViewFrame();
+            var point = args.GetCurrentPoint(element).Position;
+            ElementTouches = new Xamarin.Forms.Point[] { point.ToXfPoint() };
+            WindowTouches = new Xamarin.Forms.Point[] { element.PointInNativeAppWindowCoord(point).ToXfPoint() };
             Duration = elapsedMilliseconds;
         }
 
-        public static bool FireLongPressed(Windows.UI.Xaml.FrameworkElement element, Windows.UI.Xaml.Input.PointerRoutedEventArgs e, long elapsedMilliseconds, Listener listener)
+        public static bool FireLongPressed(FrameworkElement element, Windows.UI.Xaml.Input.PointerRoutedEventArgs e, long elapsedMilliseconds, Listener listener)
         {
             var args = new UwpLongPressEventArgs(element, e, elapsedMilliseconds)
             {
@@ -54,21 +59,17 @@ namespace FormsGestures.UWP
             return e.Handled;
         }
 
-        public UwpLongPressEventArgs(Windows.UI.Xaml.FrameworkElement element, long elapsedMilliseconds)
+        public UwpLongPressEventArgs(FrameworkElement element, long elapsedMilliseconds)
         {
-            ViewPosition = element.GetXfViewFrame();
-            var pointerPositionInScreenCoord = Windows.UI.Core.CoreWindow.GetForCurrentThread().PointerPosition;
-            var pointerPositionInAppWindowX = pointerPositionInScreenCoord.X - Window.Current.Bounds.X;
-            var pointerPositionInAppWindowY = pointerPositionInScreenCoord.Y - Window.Current.Bounds.Y;
-            var transform = element.TransformToVisual(Window.Current.Content);
-            var elementOrigin = transform.TransformPoint(Xamarin.Forms.Point.Zero.ToUwpPoint());
-            var pointerPositionInElementCoordX = pointerPositionInAppWindowX - elementOrigin.X;
-            var pointerPositionInElementCoordY = pointerPositionInAppWindowY - elementOrigin.Y;
-            Touches = new Xamarin.Forms.Point[] { new Xamarin.Forms.Point(pointerPositionInElementCoordX, pointerPositionInElementCoordY) };
+            ElementPosition = element.GetXfViewFrame();
+
+            var point = element.GetCurrentPointerPosition();
+            ElementTouches = new Xamarin.Forms.Point[] { point.ToXfPoint() };
+            WindowTouches = new Xamarin.Forms.Point[] { element.PointInNativeAppWindowCoord(point).ToXfPoint() };
             Duration = elapsedMilliseconds;
         }
 
-        public static bool FireLongPressed(Windows.UI.Xaml.FrameworkElement element, long elapsedMilliseconds, Listener listener)
+        public static bool FireLongPressed(FrameworkElement element, long elapsedMilliseconds, Listener listener)
         {
             var args = new UwpLongPressEventArgs(element, elapsedMilliseconds)
             {

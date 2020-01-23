@@ -10,16 +10,16 @@ namespace FormsGestures.UWP
 {
     public static class FrameworkElementExtensions
     {
-        public static Xamarin.Forms.Point GetCurrentPointerPosition(this FrameworkElement element)
+        public static Windows.Foundation.Point GetCurrentPointerPosition(this FrameworkElement element)
         {
             var pointerPositionInScreenCoord = Windows.UI.Core.CoreWindow.GetForCurrentThread().PointerPosition;
             var pointerPositionInAppWindowX = pointerPositionInScreenCoord.X - Window.Current.Bounds.X;
             var pointerPositionInAppWindowY = pointerPositionInScreenCoord.Y - Window.Current.Bounds.Y;
             var transform = element.TransformToVisual(Window.Current.Content);
-            var elementOrigin = transform.TransformPoint(Xamarin.Forms.Point.Zero.ToUwpPoint());
+            var elementOrigin = transform.TransformPoint(new Windows.Foundation.Point(0,0));
             var pointerPositionInElementCoordX = pointerPositionInAppWindowX - elementOrigin.X;
             var pointerPositionInElementCoordY = pointerPositionInAppWindowY - elementOrigin.Y;
-            return new Xamarin.Forms.Point(pointerPositionInElementCoordX, pointerPositionInElementCoordY);
+            return new Windows.Foundation.Point(pointerPositionInElementCoordX, pointerPositionInElementCoordY);
         }
 
         public static Xamarin.Forms.Rectangle GetXfViewFrame(this FrameworkElement frameworkElement)
@@ -35,6 +35,13 @@ namespace FormsGestures.UWP
             }
             return Xamarin.Forms.Rectangle.Zero;
         }
+
+        public static Windows.Foundation.Point PointInNativeAppWindowCoord(this FrameworkElement element, Windows.Foundation.Point point)
+        {
+                var transform = element.TransformToVisual(Window.Current.Content);
+                return transform.TransformPoint(point);
+        }
+
 
         public static T GetClosestAncestor<T>(this FrameworkElement uwpElement) where T : class
         {

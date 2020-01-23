@@ -131,21 +131,14 @@ namespace FormsGestures.UWP
 		bool _panning;
 		bool _pinching;
 		bool _rotating;
-		//static bool _longPressing;
 
-		int _upFires;
 		int _numberOfTaps;
 
 		System.Timers.Timer TappedTimer;
-		int _tappedTimerNumberOfTaps;
 
-		int _downFires;
 		DateTime _onDownDateTime = DateTime.MinValue;
 
 		System.Timers.Timer LongPressTimer;
-
-		//Stopwatch _holdTimer;
-		//Stopwatch _releaseTimer;
 
 		#endregion
 
@@ -175,15 +168,6 @@ namespace FormsGestures.UWP
 					_xfElement.PropertyChanged -= OnElementPropertyChanged;
 				}
 				DisconnectFrameworkEvents();
-				/*
-                if (_gestureRecognizers != null)
-                {
-                    UIGestureRecognizer[] array = _gestureRecognizers;
-                    foreach (var uIGestureRecognizer in array)
-                        uIGestureRecognizer.View.RemoveGestureRecognizer(uIGestureRecognizer);
-                    _gestureRecognizers = null;
-                }
-                */
 				_listeners = null;
 				P42.Utils.Debug.RemoveFromCensus(this);
 			}
@@ -199,21 +183,6 @@ namespace FormsGestures.UWP
 				var modes = ManipulationModes.None;
 				if (HandlesPans)
 				{
-					/*
-                    var element = (_listeners != null && _listeners.Count > 0 ? _listeners[0].Element : null);
-                    if (element.GetType().ToString() == "Forms9Patch.BaseCellView")
-                    {
-                        modes = ManipulationModes.System;
-                        // 2. Find which direction it can scroll
-                        //if (scrollView.HorizontalScrollMode == Windows.UI.Xaml.Controls.ScrollMode.Disabled)
-                        modes |= ManipulationModes.TranslateX;
-                        //if (scrollView.VerticalScrollMode == Windows.UI.Xaml.Controls.ScrollMode.Disabled)
-                            modes |= ManipulationModes.TranslateY;
-                        //FrameworkElement.ManipulationMode = FrameworkElement.ManipulationMode ^ (scrollView.HorizontalScrollMode > 0 ? ManipulationModes.)
-                        // 3. Filter out that/those directions from the ManipulationMode
-                    }
-                    else
-                    */
 					modes |= ManipulationModes.TranslateX | ManipulationModes.TranslateY;
 					if (modes != ManipulationModes.None)
 						modes |= ManipulationModes.TranslateInertia;
@@ -222,7 +191,6 @@ namespace FormsGestures.UWP
 					modes |= ManipulationModes.Rotate | ManipulationModes.RotateInertia;
 				if (HandlesPinches)
 					modes |= ManipulationModes.Scale | ManipulationModes.ScaleInertia;
-				//System.Diagnostics.Debug.WriteLine("CurrentManipulationModes[" + _xfElement + "]["+modes+"]");
 				// NOTE: Scrolling on UWP touch screens doesn't work without the following two lines;
 				if (modes == ManipulationModes.None)
 					modes = ManipulationModes.System;
@@ -240,9 +208,6 @@ namespace FormsGestures.UWP
 				if (_renderer != null)
 					_renderer.ElementChanged += OnRendererElementChanged;
 
-				//FrameworkElement.ManipulationStarting += OnManipulationStarting;
-
-
 				FrameworkElement.ManipulationStarted += OnManipulationStarted;
 				FrameworkElement.ManipulationDelta += OnManipulationDelta;
 				FrameworkElement.ManipulationInertiaStarting += OnManipulationInertiaStarting;
@@ -253,7 +218,6 @@ namespace FormsGestures.UWP
 
 
 
-				//FrameworkElement.Tapped += _UwpElement_Tapped;
 				FrameworkElement.RightTapped += OnElementRightTapped;
 				//FrameworkElement.PointerWheelChanged += _UwpElement_PointerWheelChanged;
 
@@ -270,6 +234,7 @@ namespace FormsGestures.UWP
 
 				//FrameworkElement.Holding += OnHolding;  // holding event doesn't work with Mouse (https://stackoverflow.com/questions/34995594/holding-event-for-desktop-app-not-firing)
 
+				// double tapping doesn't seem to be working
 				//FrameworkElement.DoubleTapped += OnDoubleTapped;
 				//FrameworkElement.IsDoubleTapEnabled = true;
 			}
@@ -284,15 +249,11 @@ namespace FormsGestures.UWP
 				if (_renderer != null)
 					_renderer.ElementChanged -= OnRendererElementChanged;
 
-				//FrameworkElement.ManipulationMode = ManipulationModes.None;  // commented this out because line 112 was commented out
-				//FrameworkElement.ManipulationStarting -= OnManipulationStarting;
-
 				FrameworkElement.ManipulationStarted -= OnManipulationStarted;
 				FrameworkElement.ManipulationDelta -= OnManipulationDelta;
 				FrameworkElement.ManipulationInertiaStarting -= OnManipulationInertiaStarting;
 				FrameworkElement.ManipulationCompleted -= OnManipulationComplete;
 
-				//FrameworkElement.Tapped -= _UwpElement_Tapped;
 				FrameworkElement.RightTapped -= OnElementRightTapped;
 				//FrameworkElement.PointerWheelChanged -= _UwpElement_PointerWheelChanged;
 
@@ -311,14 +272,6 @@ namespace FormsGestures.UWP
 
 				//FrameworkElement.DoubleTapped -= OnDoubleTapped;
 				//FrameworkElement.IsDoubleTapEnabled = false;
-
-				/*
-				_downHandled = null;
-				_upHandled = null;
-				_tapHandled = null;
-				_longPressHandled = null;
-				_doubleTapHandled = null;
-				*/
 			}
 		}
 
@@ -331,9 +284,7 @@ namespace FormsGestures.UWP
 			if (value != _renderer)
 			{
 				DisconnectFrameworkEvents();
-
 				_renderer = value;
-
 				ConnectFrameworkEvents();
 			}
 		}
@@ -388,9 +339,8 @@ namespace FormsGestures.UWP
 		}
 
 		static NativeGestureHandler GetInstanceForElement(VisualElement element)
-		{
-			return (NativeGestureHandler)element.GetValue(GestureHandlerProperty);
-		}
+			=> (NativeGestureHandler)element.GetValue(GestureHandlerProperty);
+		
 
 		static internal NativeGestureHandler GetInstanceForListener(Listener listener)
 		{
@@ -401,9 +351,8 @@ namespace FormsGestures.UWP
 
 
 		void OnRendererElementChanged(object sender, ElementChangedEventArgs<VisualElement> e)
-		{
-			SetRenderer();
-		}
+			=>SetRenderer();
+		
 
 		void OnElementPropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
 		{
@@ -518,7 +467,6 @@ namespace FormsGestures.UWP
 			_longPressed = false;
 			if (!HandlesLongPresses)
 				return;
-			// System.Diagnostics.Debug.WriteLine("NativeGestureListener.LongPressTimerStart ENTER");
 			if (!_panning && !_longPressed && !_pinching && !_rotating)
 			{
 				LongPressingTimerStop();
@@ -538,7 +486,7 @@ namespace FormsGestures.UWP
 			if (!_panning && !_longPressed && !_pinching && !_rotating)
 			{
 				_longPressed = true;
-				Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+				Device.BeginInvokeOnMainThread(() =>
 				{
 					foreach (var listener in _listeners)
 					{
@@ -569,7 +517,6 @@ namespace FormsGestures.UWP
 				TappedTimer.Stop();
 				TappedTimer.Elapsed -= OnTappedTimerElapsed;
 				TappedTimer = null;
-				//_tappedTimerUpMotionEvent = null;
 			}
 		}
 
@@ -582,7 +529,6 @@ namespace FormsGestures.UWP
 			if (!_panning && !_longPressed && !_pinching && !_rotating)
 			{
 				TappedTimerUpMotionEvent = upEvent;
-				_tappedTimerNumberOfTaps = taps;
 				TappedTimer = new System.Timers.Timer(Settings.TappedThreshold.TotalMilliseconds);
 				TappedTimer.Elapsed += OnTappedTimerElapsed;
 				TappedTimer.Start();
@@ -633,14 +579,9 @@ namespace FormsGestures.UWP
 			StopTapLongPress();
 
 			CallOnUp(sender, e);
-			//TODO: Not necessary?
-			//if (_panning)
-			//	CallOnPanned(sender, e);
 			_panning = false;
 			_pinching = false;
 			_rotating = false;
-			//_multiMoving = false;
-
 		}
 
 		void StopTapLongPress()
@@ -679,92 +620,16 @@ namespace FormsGestures.UWP
 
 		#region UWP Pointer Cancel Event Responders
 		private void OnPointerCancelled(object sender, PointerRoutedEventArgs e)
-		{
-			Cancel(sender, e);
-			/*
-			_downHandled = null;
-
-			if (!_xfElement.IsVisible || FrameworkElement == null)
-				return;
-			PointerRoutedDebugMessage(e, "POINTER CANCELLED");
-
-			long elapsed = 0;
-			if (_holdTimer != null)
-			{
-				elapsed = _holdTimer.ElapsedMilliseconds;
-				_holdTimer?.Stop();
-				_holdTimer = null;
-			}
-
-			_releaseTimer?.Stop();
-			_releaseTimer = null;
-
-			foreach (var listener in _listeners)
-			{
-				if (_tapHandled == null && listener.HandlesTapped)
-				{
-					System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": listener.Element[" + listener.Element + "] e.Handled[" + e.Handled + "]");
-					var args = new UwpTapEventArgs(FrameworkElement, e, _numberOfTaps)
-					{
-						Listener = listener,
-						Cancelled = true
-					};
-					listener?.OnTapped(args);
-					e.Handled = args.Handled;
-					_tapHandled = listener;
-				}
-				if (_longPressHandled == null && _longPressing && listener.HandlesLongPressed)
-				{
-					System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": listener.Element[" + listener.Element + "] e.Handled[" + e.Handled + "]");
-					var args = new UwpLongPressEventArgs(FrameworkElement, e, elapsed)
-					{
-						Listener = listener,
-						Cancelled = true
-					};
-					listener?.OnLongPressed(args);
-					e.Handled = args.Handled;
-					_longPressHandled = listener;
-				}
-				if (listener.HandlesUp)
-				{
-					System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": listener.Element[" + listener.Element + "] e.Handled[" + e.Handled + "]");
-					var args = new UwpDownUpArgs(FrameworkElement, e)
-					{
-						Listener = listener,
-						Cancelled = true
-					};
-					listener.OnUp(args);
-					e.Handled = args.Handled;
-					_upHandled = listener;
-					if (e.Handled)
-						return;
-				}
-
-			}
-			*/
-		}
+			=>  Cancel(sender, e);
+		
 
 		private void OnPointerCaptureLost(object sender, PointerRoutedEventArgs e)
-		{
-			Cancel(sender, e);
-			/*
-			_downHandled = null;
-			_upHandled = null;
-			_tapHandled = null;
-			_doubleTapHandled = null;
-			_longPressHandled = null;
-
-			foreach (var listener in _listeners)
-				System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": listener.Element[" + listener.Element + "] e.Handled[" + e.Handled + "]");
-			PointerRoutedDebugMessage(e, "POINTER CAPTURE LOST");
-			//OnPointerCancelled
-			*/
-		}
-        #endregion
+			=> Cancel(sender, e);
+		#endregion
 
 
-        #region UWP Pointer Down/Up Event Responders
-        private void OnElementRightTapped(object sender, RightTappedRoutedEventArgs e)
+		#region UWP Pointer Down/Up Event Responders
+		private void OnElementRightTapped(object sender, RightTappedRoutedEventArgs e)
 		{
 			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
 			if (!_xfElement.IsVisible || FrameworkElement == null)
@@ -788,12 +653,10 @@ namespace FormsGestures.UWP
 				return;
 
 			_onDownDateTime = DateTime.Now;
-			_downFires++;
 
 			_panning = false;
 			_pinching = false;
 			_rotating = false;
-			//_multimoving = false;
 			TappedTimerStop();
 			LongPressTimerStart();
 
@@ -805,21 +668,8 @@ namespace FormsGestures.UWP
 					return;
 				}
 			}
-
-
-
-
 		}
 
-		/*
-		static object _downHandled;
-		static object _upHandled;
-		static object _tapHandled;
-		static object _doubleTapHandled;
-		static object _longPressHandled;
-
-		bool _runningTapCounterResetter;
-		*/
 		private void OnPointerUp(object sender, PointerRoutedEventArgs e)
 		{
 			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
@@ -830,8 +680,6 @@ namespace FormsGestures.UWP
 			_numberOfTaps++;
 			LongPressingTimerStop();
 			TappedTimerStart(e, _numberOfTaps);
-
-			_upFires++;
 
 			long elapsed = (long)(DateTime.Now - _onDownDateTime).TotalMilliseconds;
 
@@ -867,222 +715,26 @@ namespace FormsGestures.UWP
 
 				}
 			}
-
-
-
-			/*
-			_downHandled = null;
-
-			//_pointerSource = e.OriginalSource;
-
-			DebugMethodName(2);
-
-			var senderRenderer = sender as Xamarin.Forms.Platform.UWP.LayoutRenderer;
-
-			long elapsed = 0;
-			if (_holdTimer != null)
-			{
-				elapsed = _holdTimer.ElapsedMilliseconds;
-				_holdTimer?.Stop();
-				_holdTimer = null;
-			}
-
-			_releaseTimer?.Stop();
-			_releaseTimer = new Stopwatch();
-			_releaseTimer.Start();
-
-			if (!_runningTapCounterResetter)
-			{
-				_runningTapCounterResetter = true;
-				Device.StartTimer(TimeSpan.FromSeconds(1), () =>
-				{
-					if (_releaseTimer == null || _releaseTimer.Elapsed > Settings.Tapp)
-					{
-						_numberOfTaps = 0;
-						_releaseTimer?.Stop();
-						_releaseTimer = null;
-						_runningTapCounterResetter = false;
-					}
-					return _runningTapCounterResetter;
-				});
-			}
-
-			foreach (var listener in _listeners)
-			{
-				System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": listener.Element[" + listener.Element + "] _numberOfTaps[" + _numberOfTaps + "]  sender=[" + senderRenderer?.Name + "] [" + senderRenderer?.Element + "] e.Handled[" + e.Handled + "]");
-				if (_tapHandled == null && listener.HandlesTapped && UwpTapEventArgs.FireTapped(FrameworkElement, e, _numberOfTaps, listener))
-				{
-					e.Handled = true;
-					_tapHandled = listener;
-					System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": FireTapped[" + null + "]");
-					break;
-				}
-			}
-
-			foreach (var listener in _listeners)
-				if (_longPressHandled == null && _longPressing && listener.HandlesLongPressed && UwpLongPressEventArgs.FireLongPressed(FrameworkElement, e, elapsed, listener))
-				{
-					e.Handled = true;
-					_longPressHandled = listener;
-					System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": FireLongPressed[" + null + "]");
-					break;
-				}
-
-
-			foreach (var listener in _listeners)
-				if (_upHandled == null && listener.HandlesDown && UwpDownUpArgs.FireUp(FrameworkElement, e, listener))
-				{
-					e.Handled = true;
-					_upHandled = listener;
-					System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": FireUp[" + null + "]");
-					break;
-				}
-
-
-			_longPressing = false;
-			*/
 		}
-
-		/*
-		private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
-		{
-			if (!_xfElement.IsVisible || FrameworkElement == null)
-				return;
-
-
-			//if (!_pointerTracking)
-			//    return;
-
-			DebugMethodName(2);
-			foreach (var listener in _listeners)
-				if (_doubleTapHandled != null && listener.HandlesDoubleTapped && UwpTapEventArgs.FireDoubleTapped(FrameworkElement, e, _numberOfTaps, listener))
-				{
-					e.Handled = true;
-					_doubleTapHandled = listener;
-					break;
-				}
-			_longPressing = false;
-		}
-		*/
-		/*
-        
-        private void OnHolding(object sender, HoldingRoutedEventArgs e)
-        {
-            DebugMethodName(2);
-        }
-
-            
-        private void OnTapped(object sender, TappedRoutedEventArgs e)
-        {
-            DebugMethodName(2);
-            throw new NotImplementedException();
-        }
-
-        void OnPointerMoved(object sender, PointerRoutedEventArgs e)
-        {
-            // USE OnManipulationDelta INSTEAD
-            if (!_xfElement.IsVisible || FrameworkElement == null)
-                return;
-            DebugMethodName(2);
-
-
-            var currentPoint = e.GetCurrentPoint(null);
-            if (!currentPoint.IsInContact)
-                return;
-            foreach (var listener in _listeners)
-            {
-                if (listener.HandlesPanning)
-                {
-                    var args = new UWPDownUpArgs(_UwpElement, e);
-                    args.Listener = listener;
-                    listener.OnUp(args);
-                    e.Handled = args.Handled;
-                    if (e.Handled)
-                        return;
-                }
-            }
-
-            throw new NotImplementedException();
-        }
-        */
 		#endregion
 
 
 		#region UWP Manipulations (multi-touch)
 
-#pragma warning disable CC0057 // Unused parameters
-#pragma warning disable IDE0060 // Remove unused parameter
 		void OnManipulationStarting(object sender, ManipulationStartingRoutedEventArgs e)
-#pragma warning restore IDE0060 // Remove unused parameter
-#pragma warning restore CC0057 // Unused parameters
 		{
 			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
-			/*
-			DebugMethodName(2);
-			ModesDebugMessage(e.Mode);
-			PivotDebugMessage(e.Pivot);
-			ContainerDebugMessage(e.Container);
-			*/
 		}
 
 
 		void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
 		{
 			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
-			/*
-			DebugMethodName(2);
-			DebugMessage("Element=[" + _xfElement + "]");
-			PointerDeviceTypeDebugMessage(e.PointerDeviceType);
-			PositionDebugMessage(e.Position);
-			ManipulationDeltaDebugMessage(e.Cumulative, "Cumul");
-			ContainerDebugMessage(e.Container);
-			HandledDebugString(e.Handled);
-
-			if (!_xfElement.IsVisible || FrameworkElement == null)
-				return;
-
-			long elapsed = 0;
-			if (_holdTimer != null)
-			{
-				elapsed = _holdTimer.ElapsedMilliseconds;
-				_holdTimer?.Stop();
-				_holdTimer = null;
-			}
-			DebugMessage("elapse=[" + elapsed + "]");
-			if (!_panning || !_pinching || !_rotating)
-			{
-				_longPressing = elapsed > 750;
-				if (_longPressing)
-				{
-					foreach (var listener in _listeners)
-					{
-						if (listener.HandlesLongPressing)
-						{
-							var args = new UwpLongPressEventArgs(FrameworkElement, e, elapsed)
-							{
-								Listener = listener
-							};
-							listener?.OnLongPressing(args);
-							e.Handled = args.Handled;
-							DebugMessage("LongPressing Handled=[" + e.Handled + "]");
-							if (e.Handled)
-								break;
-						}
-					}
-				}
-			}
-			HandledDebugString(e.Handled);
-			*/
 		}
 
 		private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
 		{
 			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
-			//System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() +"("+sender+", [d:{"+e.Delta.Translation.X+","+e.Delta.Translation.Y+"} c:{"+e.Cumulative.Translation.Y+","+e.Cumulative.Translation.Y+"}])");
-
-			//_longPressing = false;
-			//_holdTimer?.Stop();
-			//_holdTimer = null;
 
 			if (!_xfElement.IsVisible || FrameworkElement == null)
 				return;
@@ -1094,18 +746,6 @@ namespace FormsGestures.UWP
 			if (!_rotating && Math.Abs(e.Cumulative.Rotation) > 0)
 				_rotating = true;
 
-			/*
-			DebugMethodName(2);
-			DebugMessage("Element=[" + _xfElement + "]");
-			PointerDeviceTypeDebugMessage(e.PointerDeviceType);
-			PositionDebugMessage(e.Position);
-			ManipulationDeltaDebugMessage(e.Delta, "Delta");
-			ManipulationDeltaDebugMessage(e.Cumulative, "Cumul");
-			VelocitiesDebugString(e.Velocities);
-			DebugMessage("IsIntertial=[" + e.IsInertial + "]");
-			ContainerDebugMessage(e.Container);
-			HandledDebugString(e.Handled);
-			*/
 			foreach (var listener in _listeners)
 			{
 				if (_panning && listener.HandlesPanning)
@@ -1141,25 +781,11 @@ namespace FormsGestures.UWP
 				if (e.Handled)
 					break;
 			}
-			//HandledDebugString(e.Handled);
 		}
 
 		private void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingRoutedEventArgs e)
 		{
 			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
-			/*
-			DebugMethodName(2);
-			DebugMessage("Element=[" + _xfElement + "]");
-			PointerDeviceTypeDebugMessage(e.PointerDeviceType);
-			ManipulationDeltaDebugMessage(e.Delta, "Delta");
-			ManipulationDeltaDebugMessage(e.Cumulative, "Cumul");
-			VelocitiesDebugString(e.Velocities);
-			ContainerDebugMessage(e.Container);
-			DebugMessage("TranslationBehavioir: disp=[" + e.TranslationBehavior.DesiredDisplacement + "] decl=[" + e.TranslationBehavior.DesiredDeceleration + "]");
-			DebugMessage("RotationBehavior: rot=[" + e.RotationBehavior.DesiredRotation + "] decl=[" + e.RotationBehavior.DesiredDeceleration + "]");
-			DebugMessage("ExpansionBehavior: exp=[" + e.ExpansionBehavior.DesiredExpansion + "] decl=[" + e.ExpansionBehavior.DesiredDeceleration + "]");
-			HandledDebugString(e.Handled);
-			*/
 		}
 
 		private void OnManipulationComplete(object sender, ManipulationCompletedRoutedEventArgs e)
@@ -1167,17 +793,6 @@ namespace FormsGestures.UWP
 			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
 			if (!_xfElement.IsVisible || FrameworkElement == null)
 				return;
-			/*
-			DebugMethodName(2);
-			DebugMessage("Element=[" + _xfElement + "]");
-			PointerDeviceTypeDebugMessage(e.PointerDeviceType);
-			PositionDebugMessage(e.Position);
-			ManipulationDeltaDebugMessage(e.Cumulative, "Cumul");
-			VelocitiesDebugString(e.Velocities);
-			DebugMessage("IsIntertial=[" + e.IsInertial + "]");
-			ContainerDebugMessage(e.Container);
-			HandledDebugString(e.Handled);
-			*/
 			foreach (var listener in _listeners)
 			{
 				if (_panning && listener.HandlesPanning)
@@ -1219,7 +834,6 @@ namespace FormsGestures.UWP
 			_panning = false;
 			_pinching = false;
 			_rotating = false;
-			//_longPressing = false;
 		}
 		#endregion
 

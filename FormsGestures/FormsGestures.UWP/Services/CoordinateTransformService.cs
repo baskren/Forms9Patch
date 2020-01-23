@@ -53,9 +53,8 @@ namespace FormsGestures.UWP
         {
             if (Platform.GetRenderer(element) is IVisualElementRenderer renderer && renderer.ContainerElement != null)
             {
-                var transform = renderer.ContainerElement.TransformToVisual(Window.Current.Content);
-                var transformedPoint = transform.TransformPoint(point.ToUwpPoint());
-                return transformedPoint.ToXfPoint();
+                var result = renderer.ContainerElement.PointInNativeAppWindowCoord(point.ToUwpPoint());
+                return result.ToXfPoint();
             }
             return new Point(double.NegativeInfinity, double.NegativeInfinity);
         }
@@ -64,8 +63,8 @@ namespace FormsGestures.UWP
             if (Platform.GetRenderer(element) is IVisualElementRenderer renderer && renderer.ContainerElement != null)
             {
                 var transform = renderer.ContainerElement.TransformToVisual(Window.Current.Content);
-                var transformedPoint = transform.TransformBounds(new Windows.Foundation.Rect(0,0, renderer.ContainerElement.Width, renderer.ContainerElement.Height));
-                return transformedPoint.ToXfRectangle();
+                var transformedRectangle = transform.TransformBounds(new Windows.Foundation.Rect(0,0, renderer.ContainerElement.Width, renderer.ContainerElement.Height));
+                return transformedRectangle.ToXfRectangle();
             }
             return new Rectangle(double.NegativeInfinity, double.NegativeInfinity, element.Width, element.Height);
         }

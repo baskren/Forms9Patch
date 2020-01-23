@@ -8,8 +8,10 @@ namespace FormsGestures.UWP
     {
         public UwpRightClickEventArgs(Windows.UI.Xaml.FrameworkElement element, Windows.UI.Xaml.Input.RightTappedRoutedEventArgs args, FormsGestures.Listener listener) 
         {
-            ViewPosition = element.GetXfViewFrame();
-            Touches = new Xamarin.Forms.Point[] { args.GetPosition(element).ToXfPoint() };
+            ElementPosition = element.GetXfViewFrame();
+            var point = args.GetPosition(element);
+            ElementTouches = new Xamarin.Forms.Point[] { point.ToXfPoint() };
+            WindowTouches = new Xamarin.Forms.Point[] { element.PointInNativeAppWindowCoord(point).ToXfPoint() };
             Listener = listener;
         }
 

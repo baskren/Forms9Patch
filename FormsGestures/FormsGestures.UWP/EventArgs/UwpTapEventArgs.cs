@@ -12,9 +12,10 @@ namespace FormsGestures.UWP
     {
         public UwpTapEventArgs(Windows.UI.Xaml.FrameworkElement element, Windows.UI.Xaml.Input.TappedRoutedEventArgs args, int numberOfTaps)
         {
-            ViewPosition = element.GetXfViewFrame();
-            //Touches = new Xamarin.Forms.Point[] { args.GetPosition(null).ToXfPoint() };
-            Touches = new Xamarin.Forms.Point[] { args.GetPosition(element).ToXfPoint() };
+            ElementPosition = element.GetXfViewFrame();
+            var point = args.GetPosition(element);
+            ElementTouches = new Xamarin.Forms.Point[] { point.ToXfPoint() };
+            WindowTouches = new Xamarin.Forms.Point[] { element.PointInNativeAppWindowCoord(point).ToXfPoint() };
             NumberOfTaps = numberOfTaps;
         }
 
@@ -33,9 +34,11 @@ namespace FormsGestures.UWP
         //PointerRoutedEventArgs
         public UwpTapEventArgs(Windows.UI.Xaml.FrameworkElement element, Windows.UI.Xaml.Input.PointerRoutedEventArgs args, int numberOfTaps)
         {
-            ViewPosition = element.GetXfViewFrame();
-            //Touches = new Xamarin.Forms.Point[] { args.GetCurrentPoint(null).Position.ToXfPoint() };
-            Touches = new Xamarin.Forms.Point[] { args.GetCurrentPoint(element).Position.ToXfPoint() };
+            ElementPosition = element.GetXfViewFrame();
+            //ElementTouches = new Xamarin.Forms.Point[] { args.GetCurrentPoint(null).Position.ToXfPoint() };
+            var point = args.GetCurrentPoint(element).Position;
+            ElementTouches = new Xamarin.Forms.Point[] { point.ToXfPoint() };
+            WindowTouches = new Xamarin.Forms.Point[] { element.PointInNativeAppWindowCoord(point).ToXfPoint() };
             NumberOfTaps = numberOfTaps;
         }
 
@@ -76,9 +79,10 @@ namespace FormsGestures.UWP
         //DoubleTappedRoutedEventArgs
         public UwpTapEventArgs(FrameworkElement element, DoubleTappedRoutedEventArgs args, int numberOfTaps)
         {
-            ViewPosition = element.GetXfViewFrame();
-            //Touches = new Xamarin.Forms.Point[] { args.GetPosition(null).ToXfPoint() };
-            Touches = new Xamarin.Forms.Point[] { args.GetPosition(element).ToXfPoint() };
+            ElementPosition = element.GetXfViewFrame();
+            var point = args.GetPosition(element);
+            ElementTouches = new Xamarin.Forms.Point[] { point.ToXfPoint() };
+            WindowTouches = new Xamarin.Forms.Point[] { element.PointInNativeAppWindowCoord(point).ToXfPoint() };
             NumberOfTaps = numberOfTaps;
         }
 
@@ -95,8 +99,10 @@ namespace FormsGestures.UWP
 
         public UwpTapEventArgs(FrameworkElement element, int numberOfTaps)
         {
-            ViewPosition = element.GetXfViewFrame();
-            Touches = new Xamarin.Forms.Point[] { element.GetCurrentPointerPosition() };
+            ElementPosition = element.GetXfViewFrame();
+            var point = element.GetCurrentPointerPosition();
+            ElementTouches = new Xamarin.Forms.Point[] { point.ToXfPoint() };
+            WindowTouches = new Xamarin.Forms.Point[] { element.PointInNativeAppWindowCoord(point).ToXfPoint() };
             NumberOfTaps = numberOfTaps;
         }
 

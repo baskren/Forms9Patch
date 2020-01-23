@@ -10,14 +10,14 @@ namespace FormsGestures.UWP
 {
     class UwpDownUpArgs : DownUpEventArgs
     {
-        public UwpDownUpArgs(FrameworkElement uwpElement, PointerRoutedEventArgs args)
+        public UwpDownUpArgs(FrameworkElement element, PointerRoutedEventArgs args)
         {
             Cancelled = false;
-            ViewPosition = uwpElement.GetXfViewFrame();
-            var currentPoint = args.GetCurrentPoint(uwpElement);
-            var point = currentPoint.Position.ToXfPoint();
-            System.Diagnostics.Debug.WriteLine("UwpDownUpArgs point[" + point + "]");
-            Touches = new Xamarin.Forms.Point[] { point };
+            ElementPosition = element.GetXfViewFrame();
+            var currentPoint = args.GetCurrentPoint(element);
+            var point = currentPoint.Position;
+            ElementTouches = new Xamarin.Forms.Point[] { point.ToXfPoint() };
+            WindowTouches = new Xamarin.Forms.Point[] { element.PointInNativeAppWindowCoord(point).ToXfPoint() };
             TriggeringTouches = new[] { 0 };
         }
 
@@ -54,10 +54,10 @@ namespace FormsGestures.UWP
         public UwpDownUpArgs(FrameworkElement element, TappedRoutedEventArgs args)
         {
             Cancelled = false;
-            ViewPosition = element.GetXfViewFrame();
-            //var currentPoint = args.GetPosition(null);
-            var currentPoint = args.GetPosition(element);
-            Touches = new Xamarin.Forms.Point[] { currentPoint.ToXfPoint() };
+            ElementPosition = element.GetXfViewFrame();
+            var point = args.GetPosition(element);
+            ElementTouches = new Xamarin.Forms.Point[] { point.ToXfPoint() };
+            WindowTouches = new Xamarin.Forms.Point[] { element.PointInNativeAppWindowCoord(point).ToXfPoint() };
             TriggeringTouches = new[] { 0 };
         }
 

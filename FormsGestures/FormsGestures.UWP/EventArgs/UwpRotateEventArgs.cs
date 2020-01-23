@@ -10,8 +10,10 @@ namespace FormsGestures.UWP
     {
         public UwpRotateEventArgs(Windows.UI.Xaml.FrameworkElement element, Windows.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs args)
         {
-            ViewPosition = element.GetXfViewFrame();
-            Touches = new Xamarin.Forms.Point[] { args.Position.ToXfPoint() };
+            ElementPosition = element.GetXfViewFrame();
+            var point = args.Position;
+            ElementTouches = new Xamarin.Forms.Point[] { point.ToXfPoint() };
+            WindowTouches = new Xamarin.Forms.Point[] { element.PointInNativeAppWindowCoord(point).ToXfPoint() };
             Angle = 0;
             DeltaAngle = args.Delta.Rotation;
             TotalAngle = args.Cumulative.Rotation;
@@ -19,8 +21,10 @@ namespace FormsGestures.UWP
 
         public UwpRotateEventArgs(Windows.UI.Xaml.FrameworkElement element, Windows.UI.Xaml.Input.ManipulationCompletedRoutedEventArgs args)
         {
-            ViewPosition = element.GetXfViewFrame();
-            Touches = new Xamarin.Forms.Point[] { args.Position.ToXfPoint() };
+            ElementPosition = element.GetXfViewFrame();
+            var point = args.Position;
+            ElementTouches = new Xamarin.Forms.Point[] { point.ToXfPoint() };
+            WindowTouches = new Xamarin.Forms.Point[] { element.PointInNativeAppWindowCoord(point).ToXfPoint() };
             Angle = 0;
             TotalAngle = args.Cumulative.Rotation;
         }
