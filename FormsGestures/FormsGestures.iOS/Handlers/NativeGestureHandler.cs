@@ -401,9 +401,6 @@ namespace FormsGestures.iOS
         DownUpEventArgs _downGestureArgs;
         void OnDown(DownUpGestureRecognizer gr, UITouch[] touchesBegan)
         {
-            System.Diagnostics.Debug.WriteLine("ON DOWN: N:"+ gr.NumberOfTouches);
-            
-
             _panning = false;
             if (!_element.IsVisible)
                 return;
@@ -567,9 +564,6 @@ namespace FormsGestures.iOS
             
             if (touchCount == 0)
                 touchCount++;
-
-            if (_lastPanArgs!=null)
-                System.Diagnostics.Debug.WriteLine("NativeGestureHandler");
 
             PanEventArgs panEventArgs = new iOSPanEventArgs(gr, (BaseGestureEventArgs)_lastPanArgs ?? _downGestureArgs);
             if (gr.State == UIGestureRecognizerState.Ended || gr.State == UIGestureRecognizerState.Cancelled || gr.State == UIGestureRecognizerState.Failed)

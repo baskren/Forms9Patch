@@ -1274,7 +1274,7 @@ namespace Forms9Patch
              */
             AnimateRelease();
 
-            if (!IsLongPressEnabled && !e.Cancelled && e.TouchCenterInView)
+            if (!IsLongPressEnabled && !e.Cancelled && e.IsTouchCenterInView)
                 e.Handled = HandleTap();
         }
 
@@ -1301,7 +1301,7 @@ namespace Forms9Patch
             if (IsEnabled && IsVisible)
             {
                 AnimateRelease();
-                if (e.TouchCenterInView)
+                if (e.IsTouchCenterInView)
                 {
                     if (IsLongPressEnabled)
                     {
@@ -1323,7 +1323,7 @@ namespace Forms9Patch
         /// <param name="e"></param>
         protected virtual void OnLongPressing(object sender, FormsGestures.LongPressEventArgs e)
         {
-            if (IsEnabled && IsVisible && IsLongPressEnabled && e.TouchCenterInView)
+            if (IsEnabled && IsVisible && IsLongPressEnabled && e.IsTouchCenterInView)
             {
                 AnimateLongPress();
                 _longPressing?.Invoke(this, EventArgs.Empty);
@@ -1350,7 +1350,7 @@ namespace Forms9Patch
             if (IsEnabled && IsVisible)
             {
                 AnimateRelease();
-                if (!IsLongPressEnabled && !e.Cancelled && e.TouchCenterInView)
+                if (!IsLongPressEnabled && !e.Cancelled && e.IsTouchCenterInView)
                     e.Handled = HandleTap();
             }
         }
@@ -1360,14 +1360,14 @@ namespace Forms9Patch
             if (IsEnabled && IsVisible)
             {
                 AnimateRelease();
-                if (!IsLongPressEnabled && !e.Cancelled && e.TouchCenterInView)
+                if (!IsLongPressEnabled && !e.Cancelled && e.IsTouchCenterInView)
                     e.Handled = HandleTap();
             }
         }
 
         private void OnPanning(object sender, PanEventArgs e)
         {
-            
+
         }
         #endregion
 

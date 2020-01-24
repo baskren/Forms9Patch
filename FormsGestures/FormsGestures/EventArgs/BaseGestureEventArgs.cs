@@ -160,11 +160,11 @@ namespace FormsGestures
         /// <returns></returns>
         public bool Contains(Point p)
             => ElementPosition.Contains(p);
-        
+
         /// <summary>
         /// Tests if the TouchCenter is within the bounds of the view
         /// </summary>
-        public bool TouchCenterInView
+        public bool IsTouchCenterInView
             => Contains(Center(WindowTouches));
     }
 }
