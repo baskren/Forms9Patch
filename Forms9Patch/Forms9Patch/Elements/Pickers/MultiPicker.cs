@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Collections.Generic;
+using P42.Utils;
 
 namespace Forms9Patch
 {
@@ -43,6 +44,7 @@ namespace Forms9Patch
                 return result;
             }
         }
+
         #endregion
 
 
@@ -52,6 +54,9 @@ namespace Forms9Patch
         /// </summary>
         public MultiPicker()
         {
+            PlainTextCellType = typeof(MultiPickerCellContentView);
+            HtmlTextCellType = typeof(MultiPickerHtmlCellContentView);
+
             //SelectedItems = new ObservableCollection<object>();
             _lowerGradient.StartColor = _overlayColor.WithAlpha(0);
             _upperGradient.EndColor = _overlayColor.WithAlpha(0);
@@ -61,7 +66,7 @@ namespace Forms9Patch
             _basePicker.GroupToggleBehavior = GroupToggleBehavior.Multiselect;
 
             _basePicker.ItemTemplates.RemoveFactoryDefaults();
-            _basePicker.ItemTemplates.Add(typeof(string), typeof(MultiPickerCellContentView));
+            _basePicker.ItemTemplates.Add(typeof(string), PlainTextCellType);
 
             SelectedItems = _basePicker.SelectedItems;
 
@@ -77,10 +82,29 @@ namespace Forms9Patch
 
 
     #region Cell Template
+    class MultiPickerHtmlCellContentView : MultiPickerCellContentView
+    {
+        protected override void OnBindingContextChanged()
+        {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(OnBindingContextChanged);
+                return;
+            }
+
+            base.OnBindingContextChanged();
+
+            if (BindingContext is IHtmlString htmlObject)
+                itemLabel.HtmlText = htmlObject.ToHtml();
+            else if (BindingContext != null)
+                itemLabel.HtmlText = BindingContext?.ToString();
+            else
+                itemLabel.HtmlText = itemLabel.Text = null;
+        }
+    }
+
     class MultiPickerCellContentView : SinglePickerCellContentView
     {
-
-
         #region Fields
         protected readonly Label checkLabel = new Label
         {

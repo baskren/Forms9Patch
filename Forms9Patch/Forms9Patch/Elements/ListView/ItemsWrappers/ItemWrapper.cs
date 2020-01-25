@@ -169,6 +169,13 @@ namespace Forms9Patch
         }
         #endregion
 
+        WeakReference _listViewWeakRef;
+        public ListView ListView
+        {
+            get => _listViewWeakRef?.Target as ListView;
+            set => _listViewWeakRef = new WeakReference(value, false);
+        }
+
         #endregion
 
 

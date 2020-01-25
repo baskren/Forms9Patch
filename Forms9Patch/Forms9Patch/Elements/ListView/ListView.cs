@@ -935,6 +935,7 @@ namespace Forms9Patch
         {
             if (e?.Item is ItemWrapper itemWrapper)
             {
+                itemWrapper.ListView = this;
                 //System.Diagnostics.Debug.WriteLine("APPEARING: " + itemWrapper.Source);
                 if (!_visibleItemWrappers.Contains(itemWrapper))
                     _visibleItemWrappers.Add(itemWrapper);
@@ -970,6 +971,7 @@ namespace Forms9Patch
                     if (itemWrapper.Source == SelectedItem)
                         _listView.SelectedItem = null;
                 }
+                itemWrapper.ListView = null;
             }
 
         }

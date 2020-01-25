@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using Xamarin.Forms;
 using System.ComponentModel;
+using P42.Utils;
+using System;
 
 namespace Forms9Patch
 {
@@ -81,6 +83,21 @@ namespace Forms9Patch
             set => SetValue(SelectedItemProperty, value);
         }
 
+        #region IsHtmlText
+        /// <summary>
+        /// Backing store for SinglePicker's IsHtmlText property
+        /// </summary>
+        public static readonly BindableProperty IsHtmlTextProperty = BindableProperty.Create(nameof(IsHtmlText), typeof(bool), typeof(SinglePicker), default);
+        /// <summary>
+        /// controls value of .IsHtmlText property
+        /// </summary>
+        public bool IsHtmlText
+        {
+            get => (bool)GetValue(IsHtmlTextProperty);
+            set => SetValue(IsHtmlTextProperty, value);
+        }
+        #endregion
+
         #endregion
 
         #region Fields
@@ -114,6 +131,8 @@ namespace Forms9Patch
             VerticalOptions = LayoutOptions.Start,
         };
 
+        protected Type PlainTextCellType = typeof(SinglePickerCellContentView);
+        protected Type HtmlTextCellType = typeof(SinglePickerHtmlCellContentView);
         #endregion
 
         /// <summary>
@@ -132,7 +151,7 @@ namespace Forms9Patch
 
             _basePicker._listView.SelectedCellBackgroundColor = Color.Transparent;
             _basePicker.ItemTemplates.RemoveFactoryDefaults();
-            _basePicker.ItemTemplates.Add(typeof(string), typeof(SinglePickerCellContentView));
+            _basePicker.ItemTemplates.Add(typeof(string), PlainTextCellType);
 
             _upperGradient.StartColor = _overlayColor;
             _upperGradient.EndColor = _overlayColor.WithAlpha(0.5);
@@ -181,6 +200,16 @@ namespace Forms9Patch
                 _basePicker.Index = Index;
             else if (propertyName == SelectedItemProperty.PropertyName)
                 _basePicker.SelectedItem = SelectedItem;
+            else if (propertyName == IsHtmlTextProperty.PropertyName)
+            {
+                _basePicker.ItemsSource = null;
+                _basePicker.ItemTemplates.Clear();
+                var template = IsHtmlText
+                    ? HtmlTextCellType
+                    : PlainTextCellType;
+                _basePicker.ItemTemplates.Add(typeof(string), template);
+                _basePicker.ItemsSource = ItemsSource;
+            }
         }
         #endregion
 
@@ -223,6 +252,27 @@ namespace Forms9Patch
 
 
     #region Cell Template
+    class SinglePickerHtmlCellContentView : SinglePickerCellContentView
+    {
+        protected override void OnBindingContextChanged()
+        {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(OnBindingContextChanged);
+                return;
+            }
+
+            base.OnBindingContextChanged();
+
+            if (BindingContext is IHtmlString htmlObject)
+                itemLabel.HtmlText = htmlObject.ToHtml();
+            else if (BindingContext != null)
+                itemLabel.HtmlText = BindingContext?.ToString();
+            else
+                itemLabel.HtmlText = itemLabel.Text = null;
+        }
+    }
+
     class SinglePickerCellContentView : Grid, ICellContentView, IIsSelectedAble
     {
         #region Properties
@@ -295,18 +345,6 @@ namespace Forms9Patch
                 itemLabel.Text = BindingContext.ToString();
             else
                 itemLabel.Text = null;
-
-            var parent = Parent;
-            while (parent != null)
-            {
-                if (parent is BasePicker picker)
-                {
-                    itemLabel.TextColor = picker.TextColor;
-                    return;
-                }
-                parent = parent.Parent;
-            }
-
         }
 
         #endregion

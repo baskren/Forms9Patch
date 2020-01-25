@@ -11,6 +11,11 @@ namespace Forms9Patch
     internal interface IItemWrapper
     {
         /// <summary>
+        /// The Forms9Patch.ListView hosting this cell
+        /// </summary>
+        ListView ListView { get; }
+
+        /// <summary>
         /// Gets the parent.
         /// </summary>
         /// <value>The parent.</value>
