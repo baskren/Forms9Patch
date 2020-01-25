@@ -335,9 +335,6 @@ namespace Forms9Patch
             //System.Diagnostics.Debug.WriteLine("Swiped:" + e);
         }
 
-
-
-
         enum Side
         {
             Start = -1,
@@ -426,7 +423,8 @@ namespace Forms9Patch
                         return;
                     }
                 }
-
+                else
+                    PutAwaySwipeButtons(false);
             }
         }
 
