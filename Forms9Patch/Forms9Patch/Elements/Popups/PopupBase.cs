@@ -781,6 +781,8 @@ namespace Forms9Patch
             _isPushing = false;
             _isPushed = true;
 
+            await Task.Delay(TimeSpan.FromSeconds(1));
+
             if (!IsVisible && !_isPopping)
                 await CancelAsync(PopupPoppedCause.IsVisiblePropertySet);
             else if (PopAfter > default(TimeSpan))
