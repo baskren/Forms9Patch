@@ -14237,6 +14237,12 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.SinglePicker.SinglePicker
   nameWithType: SinglePicker.SinglePicker
+- uid: Forms9Patch.SinglePicker.HtmlTextCellType
+  name: HtmlTextCellType
+  href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_HtmlTextCellType
+  commentId: F:Forms9Patch.SinglePicker.HtmlTextCellType
+  fullName: Forms9Patch.SinglePicker.HtmlTextCellType
+  nameWithType: SinglePicker.HtmlTextCellType
 - uid: Forms9Patch.SinglePicker.Index
   name: Index
   href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_Index
@@ -14256,6 +14262,25 @@ references:
   commentId: F:Forms9Patch.SinglePicker.IndexProperty
   fullName: Forms9Patch.SinglePicker.IndexProperty
   nameWithType: SinglePicker.IndexProperty
+- uid: Forms9Patch.SinglePicker.IsHtmlText
+  name: IsHtmlText
+  href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_IsHtmlText
+  commentId: P:Forms9Patch.SinglePicker.IsHtmlText
+  fullName: Forms9Patch.SinglePicker.IsHtmlText
+  nameWithType: SinglePicker.IsHtmlText
+- uid: Forms9Patch.SinglePicker.IsHtmlText*
+  name: IsHtmlText
+  href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_IsHtmlText_
+  commentId: Overload:Forms9Patch.SinglePicker.IsHtmlText
+  isSpec: "True"
+  fullName: Forms9Patch.SinglePicker.IsHtmlText
+  nameWithType: SinglePicker.IsHtmlText
+- uid: Forms9Patch.SinglePicker.IsHtmlTextProperty
+  name: IsHtmlTextProperty
+  href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_IsHtmlTextProperty
+  commentId: F:Forms9Patch.SinglePicker.IsHtmlTextProperty
+  fullName: Forms9Patch.SinglePicker.IsHtmlTextProperty
+  nameWithType: SinglePicker.IsHtmlTextProperty
 - uid: Forms9Patch.SinglePicker.ItemsSource
   name: ItemsSource
   href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_ItemsSource
@@ -14307,6 +14332,12 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.SinglePicker.OnPropertyChanged
   nameWithType: SinglePicker.OnPropertyChanged
+- uid: Forms9Patch.SinglePicker.PlainTextCellType
+  name: PlainTextCellType
+  href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_PlainTextCellType
+  commentId: F:Forms9Patch.SinglePicker.PlainTextCellType
+  fullName: Forms9Patch.SinglePicker.PlainTextCellType
+  nameWithType: SinglePicker.PlainTextCellType
 - uid: Forms9Patch.SinglePicker.Reset
   name: Reset()
   href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_Reset
@@ -16188,6 +16219,19 @@ references:
   isSpec: "True"
   fullName: FormsGestures.BaseGestureEventArgs.Handled
   nameWithType: BaseGestureEventArgs.Handled
+- uid: FormsGestures.BaseGestureEventArgs.IsTouchCenterInView
+  name: IsTouchCenterInView
+  href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_IsTouchCenterInView
+  commentId: P:FormsGestures.BaseGestureEventArgs.IsTouchCenterInView
+  fullName: FormsGestures.BaseGestureEventArgs.IsTouchCenterInView
+  nameWithType: BaseGestureEventArgs.IsTouchCenterInView
+- uid: FormsGestures.BaseGestureEventArgs.IsTouchCenterInView*
+  name: IsTouchCenterInView
+  href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_IsTouchCenterInView_
+  commentId: Overload:FormsGestures.BaseGestureEventArgs.IsTouchCenterInView
+  isSpec: "True"
+  fullName: FormsGestures.BaseGestureEventArgs.IsTouchCenterInView
+  nameWithType: BaseGestureEventArgs.IsTouchCenterInView
 - uid: FormsGestures.BaseGestureEventArgs.Listener
   name: Listener
   href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_Listener
@@ -16214,19 +16258,6 @@ references:
   isSpec: "True"
   fullName: FormsGestures.BaseGestureEventArgs.NumberOfTouches
   nameWithType: BaseGestureEventArgs.NumberOfTouches
-- uid: FormsGestures.BaseGestureEventArgs.TouchCenterInView
-  name: TouchCenterInView
-  href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_TouchCenterInView
-  commentId: P:FormsGestures.BaseGestureEventArgs.TouchCenterInView
-  fullName: FormsGestures.BaseGestureEventArgs.TouchCenterInView
-  nameWithType: BaseGestureEventArgs.TouchCenterInView
-- uid: FormsGestures.BaseGestureEventArgs.TouchCenterInView*
-  name: TouchCenterInView
-  href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_TouchCenterInView_
-  commentId: Overload:FormsGestures.BaseGestureEventArgs.TouchCenterInView
-  isSpec: "True"
-  fullName: FormsGestures.BaseGestureEventArgs.TouchCenterInView
-  nameWithType: BaseGestureEventArgs.TouchCenterInView
 - uid: FormsGestures.BaseGestureEventArgs.ValueFrom(FormsGestures.BaseGestureEventArgs)
   name: ValueFrom(BaseGestureEventArgs)
   href: api/FormsGestures.BaseGestureEventArgs.html#FormsGestures_BaseGestureEventArgs_ValueFrom_FormsGestures_BaseGestureEventArgs_
@@ -20921,6 +20952,25 @@ references:
   isSpec: "True"
   fullName: P42.Utils.IHideable.IsHidden
   nameWithType: IHideable.IsHidden
+- uid: P42.Utils.IHtmlString
+  name: IHtmlString
+  href: api/P42.Utils.IHtmlString.html
+  commentId: T:P42.Utils.IHtmlString
+  fullName: P42.Utils.IHtmlString
+  nameWithType: IHtmlString
+- uid: P42.Utils.IHtmlString.ToHtml
+  name: ToHtml()
+  href: api/P42.Utils.IHtmlString.html#P42_Utils_IHtmlString_ToHtml
+  commentId: M:P42.Utils.IHtmlString.ToHtml
+  fullName: P42.Utils.IHtmlString.ToHtml()
+  nameWithType: IHtmlString.ToHtml()
+- uid: P42.Utils.IHtmlString.ToHtml*
+  name: ToHtml
+  href: api/P42.Utils.IHtmlString.html#P42_Utils_IHtmlString_ToHtml_
+  commentId: Overload:P42.Utils.IHtmlString.ToHtml
+  isSpec: "True"
+  fullName: P42.Utils.IHtmlString.ToHtml
+  nameWithType: IHtmlString.ToHtml
 - uid: P42.Utils.IJsonReadable
   name: IJsonReadable
   href: api/P42.Utils.IJsonReadable.html

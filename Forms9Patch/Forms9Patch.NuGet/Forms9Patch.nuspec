@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
         <id>Forms9Patch</id>
-        <version>2.2.4-beta1</version>
+        <version>2.2.4</version>
         <title>Forms9Patch</title>
         <authors>Ben Askren</authors>
         <owners>baskren</owners>
@@ -25,7 +25,7 @@ Android developers can use NinePatch bitmaps, the drawable directory naming conv
   </description>
   <summary>Simplify multi-device image, label and font management in your NetStandard, PCL, and Shared Library Xamarin.Forms mobile and UWP apps</summary>
 	<releaseNotes>
-    2.2.4.0: Fixed: Inconsistancies in gesture values, resulting in buttons being triggered when pointer has been moved outside of button's bounds;
+    2.2.4.0: Fixed: Inconsistancies in gesture values, resulting in buttons being triggered when pointer has been moved outside of button's bounds; Swiping ListView cell w/o menu can cause scrolling to be disabled;
     2.2.3.0: Fixed: Android.FontManagement.get_FontFiles can call disposed Directory object;
     2.2.2.0: Renamed WebViewExtensions to PrintService;
     2.2.1.0: New: htmlString.ToPdf() and webView.ToPdf() extension methods for iOS and Android; htmlString.Print() extension method. Fixed: Label.LineHeight not working in UWP; Button is not visually responsive enough; 

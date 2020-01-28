@@ -131,8 +131,8 @@ namespace Forms9Patch
             VerticalOptions = LayoutOptions.Start,
         };
 
-        protected Type PlainTextCellType = typeof(SinglePickerCellContentView);
-        protected Type HtmlTextCellType = typeof(SinglePickerHtmlCellContentView);
+        internal protected Type PlainTextCellType = typeof(SinglePickerCellContentView);
+        internal protected Type HtmlTextCellType = typeof(SinglePickerHtmlCellContentView);
         #endregion
 
         /// <summary>

@@ -3019,7 +3019,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.MultiPicker.html",
-          "hash": "QLcvHKudv9CZTWd8mw+1sA=="
+          "hash": "T1cAbkgQggFQqNxqA7Ke3w=="
         }
       },
       "is_incremental": false,
@@ -3283,7 +3283,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.SinglePicker.html",
-          "hash": "hnkkIIR2IZBQDPykd2O59A=="
+          "hash": "70UNuK0KAVP6gcgRr6itLQ=="
         }
       },
       "is_incremental": false,
@@ -3499,7 +3499,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FormsGestures.BaseGestureEventArgs.html",
-          "hash": "CmRyn/LwTw5eQ3FQ8PK/0A=="
+          "hash": "duKbBIwaliCV4JTnbtMKuA=="
         }
       },
       "is_incremental": false,
@@ -3571,7 +3571,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FormsGestures.DownUpEventArgs.html",
-          "hash": "INzrQhGuKtSgvuX/Lh90sw=="
+          "hash": "RFNc9+XirN7n7Zm84D2IOA=="
         }
       },
       "is_incremental": false,
@@ -3607,7 +3607,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FormsGestures.LongPressEventArgs.html",
-          "hash": "7Ne+Z6xvd0wmyY4PbonJzg=="
+          "hash": "aZ8SvpGtE4KVI/AwrMUH7Q=="
         }
       },
       "is_incremental": false,
@@ -3619,7 +3619,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FormsGestures.PanEventArgs.html",
-          "hash": "U6MhXW/C3l7TCOFCdCZx7w=="
+          "hash": "K1wWnce2SfDx+F4ilmYftw=="
         }
       },
       "is_incremental": false,
@@ -3631,7 +3631,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FormsGestures.PinchEventArgs.html",
-          "hash": "UuJjsicdjGTuN0PJ3rBALQ=="
+          "hash": "iZFopsC8gZBW6A66y6BXFg=="
         }
       },
       "is_incremental": false,
@@ -3667,7 +3667,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FormsGestures.RightClickEventArgs.html",
-          "hash": "xZz3EWqTZz6DnJ7ngJePCQ=="
+          "hash": "JhB7yDedGkkbiqoZU9KUsg=="
         }
       },
       "is_incremental": false,
@@ -3679,7 +3679,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FormsGestures.RotateEventArgs.html",
-          "hash": "Hq0OoWoGxe7JRBs5GkJC3Q=="
+          "hash": "xgfcQgCUk4DkqKYzY2e6eQ=="
         }
       },
       "is_incremental": false,
@@ -3691,7 +3691,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FormsGestures.SwipeEventArgs.html",
-          "hash": "MmiQtlSTsEy/rmRnVgSCDA=="
+          "hash": "1Y/05Z/Pkjf2WNn2jgYHkg=="
         }
       },
       "is_incremental": false,
@@ -3703,7 +3703,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FormsGestures.TapEventArgs.html",
-          "hash": "5cV6kEFEIDDEmGELIfbPCg=="
+          "hash": "Tmnzqf3P2aLulhUG0+3a5A=="
         }
       },
       "is_incremental": false,
@@ -4035,6 +4035,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "obj/api/P42.Utils.IHtmlString.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/P42.Utils.IHtmlString.html",
+          "hash": "ay6a5NdwdG+RiuYOyHsdYQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "obj/api/P42.Utils.IJsonReadWriteable.yml",
       "output": {
         ".html": {
@@ -4279,7 +4291,7 @@
       "output": {
         ".html": {
           "relative_path": "api/P42.Utils.html",
-          "hash": "0DiuBjOOPSnBYgpBLzVIlQ=="
+          "hash": "nj06gJQXx+imwtx6kQ7PvQ=="
         }
       },
       "is_incremental": false,
@@ -4315,7 +4327,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "uBFM4D2OCNnK8GO4Tj2k0w=="
+          "hash": "UOmR/9P0yYoSItjv50eMAg=="
         }
       },
       "is_incremental": false,
@@ -4345,13 +4357,6 @@
         "full_build_reason_code": "ForceRebuild"
       },
       "processors": {
-        "ResourceDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
@@ -4359,10 +4364,17 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 229,
+          "total_file_count": 230,
           "skipped_file_count": 0
         },
         "ConceptualDocumentProcessor": {
