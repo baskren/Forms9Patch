@@ -224,7 +224,7 @@ namespace FormsGestures.UWP
 				FrameworkElement.PointerPressed += OnPointerDown;
 				FrameworkElement.PointerReleased += OnPointerUp;
 
-				//FrameworkElement.Tapped += OnTapped;
+				FrameworkElement.Tapped += OnTapped;
 
 				//_UwpElement.PointerMoved += OnPointerMoved;
 				//FrameworkElement.PointerExited += _UwpElement_PointerExited;
@@ -260,7 +260,7 @@ namespace FormsGestures.UWP
 				FrameworkElement.PointerPressed -= OnPointerDown;
 				FrameworkElement.PointerReleased -= OnPointerUp;
 
-				//FrameworkElement.Tapped -= OnTapped;
+				FrameworkElement.Tapped -= OnTapped;
 
 				//_UwpElement.PointerMoved -= OnPointerMoved;
 				//FrameworkElement.PointerExited -= _UwpElement_PointerExited;
@@ -509,45 +509,34 @@ namespace FormsGestures.UWP
 
 
 		#region Tapped Timer
-		void TappedTimerStop()
+		bool _tapCompleteTiming;
+		DateTime _lastTap = DateTime.MinValue;
+
+		private void OnTapped(object sender, TappedRoutedEventArgs e)
 		{
 			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
-			if (TappedTimer != null)
+			if (!_panning && !_longPressed && !_pinching && !_rotating)
 			{
-				TappedTimer.Stop();
-				TappedTimer.Elapsed -= OnTappedTimerElapsed;
-				TappedTimer = null;
+				_lastTap = DateTime.Now;
+				e.Handled = OnTappedTimerElapsedInner();
+				if (!_tapCompleteTiming)
+				{
+					_tapCompleteTiming = true;
+					Device.StartTimer(Settings.TappedThreshold, () =>
+					{
+						_tapCompleteTiming = DateTime.Now - _lastTap < Settings.TappedThreshold;
+						if (!_tapCompleteTiming)
+							_numberOfTaps = 0;
+						return _tapCompleteTiming;
+					});
+				}
 			}
 		}
 
-		void TappedTimerStart(PointerRoutedEventArgs upEvent, int taps)
+		bool OnTappedTimerElapsedInner()
 		{
 			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
-			if (!HandlesTapped)
-				return;
-			TappedTimerStop();
-			if (!_panning && !_longPressed && !_pinching && !_rotating)
-			{
-				TappedTimerUpMotionEvent = upEvent;
-				TappedTimer = new System.Timers.Timer(Settings.TappedThreshold.TotalMilliseconds);
-				TappedTimer.Elapsed += OnTappedTimerElapsed;
-				TappedTimer.Start();
-			}
-		}
-
-		void OnTappedTimerElapsed(object sender, ElapsedEventArgs e)
-		{
-			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
-			TappedTimerStop();
-			_numberOfTaps = 0;
-			if (!_panning && !_longPressed && !_pinching && !_rotating)
-				OnTappedTimerElapsedInner();
-		}
-
-		void OnTappedTimerElapsedInner()
-		{
-			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
-			if (P42.Utils.Environment.IsOnMainThread)
+			//if (P42.Utils.Environment.IsOnMainThread)
 			{
 				try
 				{
@@ -558,15 +547,16 @@ namespace FormsGestures.UWP
 							if (UwpTapEventArgs.FireTapped(FrameworkElement, _numberOfTaps, listener))
 							{
 								System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": listener.Element[" + listener.Element + "] _numberOfTaps[" + _numberOfTaps + "] HANDLED");
-								break;
+								return true;
 							}
 						}
 					}
 				}
 				catch (Exception) { }
 			}
-			else
-				Device.BeginInvokeOnMainThread(() => OnTappedTimerElapsedInner());
+			//else
+			//	Device.BeginInvokeOnMainThread(() => OnTappedTimerElapsedInner());
+			return false;
 		}
 
 		#endregion
@@ -587,7 +577,6 @@ namespace FormsGestures.UWP
 		void StopTapLongPress()
 		{
 			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
-			TappedTimerStop();
 			LongPressingTimerStop();
 			_numberOfTaps = 0;
 		}
@@ -657,7 +646,6 @@ namespace FormsGestures.UWP
 			_panning = false;
 			_pinching = false;
 			_rotating = false;
-			TappedTimerStop();
 			LongPressTimerStart();
 
 			foreach (var listener in _listeners)
@@ -679,7 +667,6 @@ namespace FormsGestures.UWP
 
 			_numberOfTaps++;
 			LongPressingTimerStop();
-			TappedTimerStart(e, _numberOfTaps);
 
 			long elapsed = (long)(DateTime.Now - _onDownDateTime).TotalMilliseconds;
 
