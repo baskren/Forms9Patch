@@ -660,7 +660,8 @@ namespace Forms9Patch
             {
                 _disposed = true;
                 //_f9pImageData?.Dispose();
-                _f9pImageData.ReleaseF9PBitmap(this);
+                _f9pImageData?.ReleaseF9PBitmap(this);
+                _f9pImageData?.Dispose();
                 _f9pImageData = null;
                 _sourceRangeLists = null;
                 Source = null;

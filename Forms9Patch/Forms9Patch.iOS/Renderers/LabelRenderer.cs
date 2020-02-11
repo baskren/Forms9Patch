@@ -53,6 +53,7 @@ namespace Forms9Patch.iOS
                 if (_currentDrawState == _lastDrawState && _lastDrawResult.HasValue)
                     return _lastDrawResult.Value;
                 _lastDrawResult = InternalLayout(control, _currentDrawState);
+                //_lastDrawState?.Dispose();
                 _lastDrawState = new TextControlState(_currentDrawState);
                 return _lastDrawResult.Value;
             }
@@ -75,6 +76,7 @@ namespace Forms9Patch.iOS
                 || Element == null)
                 return new SizeRequest(Size.Zero);
 
+            //_currentMeasureState?.Dispose();
             _currentMeasureState = new TextControlState(_currentDrawState)
             {
                 AvailWidth = widthConstraint,
@@ -85,6 +87,7 @@ namespace Forms9Patch.iOS
                 return _lastMeasureResult.Value;
 
             _lastMeasureResult = InternalLayout(MeasureControl, _currentMeasureState);
+            //_lastMeasureState?.Dispose();
             _lastMeasureState = new TextControlState(_currentMeasureState);
 
             return _lastMeasureResult.Value;
@@ -250,6 +253,7 @@ namespace Forms9Patch.iOS
             {
                 if (element.Text != null)
                 {
+                    label.Text = element.Text;
                     labelSize = label.Text.StringSize(font, constraintSize,// _currentDrawState.LineBreakMode);
                     element.LineBreakMode == LineBreakMode.CharacterWrap
                         ? UILineBreakMode.CharacterWrap
@@ -523,12 +527,22 @@ namespace Forms9Patch.iOS
         {
             if (Element is Forms9Patch.Label element)
             {
+                _currentDrawState.AttributedString?.Dispose();
                 _currentDrawState.AttributedString = null;
+
+                _currentDrawState.Text?.Dispose();
+                _currentDrawState.Text = null;
+
                 _currentDrawState.Text = element?.Text is null
                     ? null
                     : new NSString(element.Text);
+
                 if (Control is UILabel control)
                 {
+                    control.AttributedText?.Dispose();
+                    control.AttributedText = null;
+                    control.Text = null;
+
                     if (string.IsNullOrEmpty(_currentDrawState.Text) || element.LineHeight <= 0 || Math.Abs(element.LineHeight - 1) < 0.01)
                         control.Text = _currentDrawState.Text;
                     else
@@ -654,7 +668,7 @@ namespace Forms9Patch.iOS
                     LineFragmentPadding = 0,
                     MaximumNumberOfLines = (nuint)_currentDrawState.Lines,
                     LineBreakMode = UILineBreakMode.WordWrap,
-                    Size = new CGSize(control.Frame.Width, control.Frame.Height * 2)
+                    //Size = new CGSize(control.Frame.Width, control.Frame.Height * 2)
                 })
                 {
                     textStorage.SetString(attrText);

@@ -11,13 +11,60 @@ namespace Forms9Patch.iOS
 {
     public class HardwareKeyPageRenderer : Xamarin.Forms.Platform.iOS.PageRenderer
     {
+        static readonly NSString UIKeyCommand_BackspaceDeleteKeyInput = new NSString("\b");
+        static readonly NSString UIKeyCommand_ForwardDeleteKeyInput = new NSString("\0x7F");
+        static readonly NSString UIKeyCommand_TabKeyInput = new NSString("\t");
+        static readonly NSString UIKeyCommand_EnterReturnKeyInput = new NSString("\r");
+        static readonly NSString UIKeyCommand_PageUpKeyInput = new NSString("UIKeyInputPageUp");
+        static readonly NSString UIKeyCommand_PageDownKeyInput = new NSString("UIKeyInputPageDown");
+        static readonly NSString UIKeyCommand_HomeKeyInput = new NSString("UIKeyInputHome");
+        static readonly NSString UIKeyCommand_EndKeyInput = new NSString("UIKeyInputEnd");
+        static readonly NSString UIKeyCommand_InsertKeyInput = new NSString("UIKeyInputInsert");
+        static readonly NSString UIKeyCommand_InputDeleteKeyInput = new NSString("UIKeyInputDelete");
+        //static readonly NSString UIKeyCommand_ = new NSString();
 
         public override bool CanBecomeFirstResponder => true;
 
         [Export("OnKeyPress:")]
         void OnKeyPress(UIKeyCommand cmd) => ProcessKeyPress(cmd);
 
-        public override UIKeyCommand[] KeyCommands => GetKeyCommands();
+        UIKeyCommand[] _keyCommands;
+        public override UIKeyCommand[] KeyCommands
+        {
+            get
+            {
+                DisposeKeyCommands();
+                return _keyCommands = GetKeyCommands();
+            }
+        }
+
+        void DisposeKeyCommands()
+        {
+            if (_keyCommands != null)
+            {
+                foreach (var keyCommand in _keyCommands)
+                {
+                    keyCommand.DiscoverabilityTitle?.Dispose();
+                    keyCommand.Image?.Dispose();
+                    keyCommand.Input?.Dispose();
+                    keyCommand.PropertyList?.Dispose();
+                    keyCommand.Dispose();
+                }
+            }
+            _keyCommands = null;
+        }
+
+        private bool _disposed;
+        protected override void Dispose(bool disposing)
+        {
+            if (!_disposed && disposing)
+            {
+                _disposed = true;
+                DisposeKeyCommands();
+            }
+            base.Dispose(disposing);
+        }
+
 
         public override void ViewDidAppear(bool animated)
         {
@@ -49,25 +96,25 @@ namespace Forms9Patch.iOS
                 keyInput = HardwareKey.RightArrowKeyInput;
             else if (cmd.Input == UIKeyCommand.Escape)
                 keyInput = HardwareKey.EscapeKeyInput;
-            else if (cmd.Input == "\b")
+            else if (cmd.Input == UIKeyCommand_BackspaceDeleteKeyInput)
                 keyInput = HardwareKey.BackspaceDeleteKeyInput;
-            else if (cmd.Input == "\0x7F")
+            else if (cmd.Input == UIKeyCommand_ForwardDeleteKeyInput)
                 keyInput = HardwareKey.ForwardDeleteKeyInput;
-            else if (cmd.Input == "\t")
+            else if (cmd.Input == UIKeyCommand_TabKeyInput)
                 keyInput = HardwareKey.TabKeyInput;
-            else if (cmd.Input == "\r")
+            else if (cmd.Input == UIKeyCommand_EnterReturnKeyInput)
                 keyInput = HardwareKey.EnterReturnKeyInput;
-            else if (cmd.Input == "UIKeyInputPageUp")
+            else if (cmd.Input == UIKeyCommand_PageUpKeyInput)
                 keyInput = HardwareKey.PageUpKeyInput;
-            else if (cmd.Input == "UIKeyInputPageDown")
+            else if (cmd.Input == UIKeyCommand_PageDownKeyInput)
                 keyInput = HardwareKey.PageDownKeyInput;
-            else if (cmd.Input == "UIKeyInputHome")
+            else if (cmd.Input == UIKeyCommand_HomeKeyInput)
                 keyInput = HardwareKey.HomeKeyInput;
-            else if (cmd.Input == "UIKeyInputEnd")
+            else if (cmd.Input == UIKeyCommand_EndKeyInput)
                 keyInput = HardwareKey.EndKeyInput;
-            else if (cmd.Input == "UIKeyInputInsert")
+            else if (cmd.Input == UIKeyCommand_InsertKeyInput)
                 keyInput = HardwareKey.InsertKeyInput;
-            else if (cmd.Input == "UIKeyInputDelete")
+            else if (cmd.Input == UIKeyCommand_InputDeleteKeyInput)
                 keyInput = HardwareKey.ForwardDeleteKeyInput;
             else
                 useShift = keyInput.Length > 0 && char.IsLetter(keyInput[0]);
@@ -129,48 +176,48 @@ namespace Forms9Patch.iOS
                 switch (keyInput)
                 {
                     case HardwareKey.UpArrowKeyInput:
-                        nsInput = UIKeyCommand.UpArrow;
+                        nsInput = new NSString(UIKeyCommand.UpArrow);
                         break;
                     case HardwareKey.DownArrowKeyInput:
-                        nsInput = UIKeyCommand.DownArrow;
+                        nsInput = new NSString(UIKeyCommand.DownArrow);
                         break;
                     case HardwareKey.LeftArrowKeyInput:
-                        nsInput = UIKeyCommand.LeftArrow;
+                        nsInput = new NSString(UIKeyCommand.LeftArrow);
                         break;
                     case HardwareKey.RightArrowKeyInput:
-                        nsInput = UIKeyCommand.RightArrow;
+                        nsInput = new NSString(UIKeyCommand.RightArrow);
                         break;
                     case HardwareKey.EscapeKeyInput:
-                        nsInput = UIKeyCommand.Escape;
+                        nsInput = new NSString(UIKeyCommand.Escape);
                         break;
                     case HardwareKey.BackspaceDeleteKeyInput:
-                        nsInput = new NSString("\b");
+                        nsInput = new NSString(UIKeyCommand_BackspaceDeleteKeyInput);
                         break;
                     case HardwareKey.ForwardDeleteKeyInput:
                         //nsInput = new NSString("\0x7F");
-                        nsInput = new NSString("UIKeyInputDelete");
+                        nsInput = new NSString(UIKeyCommand_InputDeleteKeyInput);
                         break;
                     // there is not an insert key on mac extended keyboard.  In it's place is the Fn?
                     case HardwareKey.TabKeyInput:
-                        nsInput = new NSString("\t");
+                        nsInput = new NSString(UIKeyCommand_TabKeyInput);
                         break;
                     case HardwareKey.EnterReturnKeyInput:
-                        nsInput = new NSString("\r");
+                        nsInput = new NSString(UIKeyCommand_EnterReturnKeyInput);
                         break;
                     case HardwareKey.PageUpKeyInput:
-                        nsInput = new NSString("UIKeyInputPageUp");
+                        nsInput = new NSString(UIKeyCommand_PageUpKeyInput);
                         break;
                     case HardwareKey.PageDownKeyInput:
-                        nsInput = new NSString("UIKeyInputPageDown");
+                        nsInput = new NSString(UIKeyCommand_PageDownKeyInput);
                         break;
                     case HardwareKey.HomeKeyInput:
-                        nsInput = new NSString("UIKeyInputHome");
+                        nsInput = new NSString(UIKeyCommand_HomeKeyInput);
                         break;
                     case HardwareKey.EndKeyInput:
-                        nsInput = new NSString("UIKeyInputEnd");
+                        nsInput = new NSString(UIKeyCommand_EndKeyInput);
                         break;
                     case HardwareKey.InsertKeyInput:
-                        nsInput = new NSString("UIKeyInputInsert");
+                        nsInput = new NSString(UIKeyCommand_InsertKeyInput);
                         break;
 
 
@@ -185,6 +232,8 @@ namespace Forms9Patch.iOS
                         result.Add(UIKeyCommandFrom(nsInput, (HardwareKeyModifierKeys)m, listener.HardwareKey.DiscoverableTitle));
                 else
                     result.Add(UIKeyCommandFrom(nsInput, modifier, listener.HardwareKey.DiscoverableTitle));
+
+                nsInput.Dispose();
 
             }
             return result.ToArray();
