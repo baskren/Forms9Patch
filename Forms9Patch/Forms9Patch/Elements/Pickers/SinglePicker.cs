@@ -131,8 +131,10 @@ namespace Forms9Patch
             VerticalOptions = LayoutOptions.Start,
         };
 
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         internal protected Type PlainTextCellType = typeof(SinglePickerCellContentView);
         internal protected Type HtmlTextCellType = typeof(SinglePickerHtmlCellContentView);
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
         #endregion
 
         /// <summary>

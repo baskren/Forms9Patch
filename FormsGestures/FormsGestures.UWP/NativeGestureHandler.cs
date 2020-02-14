@@ -162,6 +162,7 @@ namespace FormsGestures.UWP
 			if (!_disposed && disposing)
 			{
 				_disposed = true;
+				LongPressingTimerStop();
 				if (_xfElement != null)
 				{
 					_xfElement.PropertyChanging -= OnElementPropertyChanging;
@@ -457,6 +458,7 @@ namespace FormsGestures.UWP
 			{
 				LongPressTimer.Stop();
 				LongPressTimer.Elapsed -= OnLongPressTimerElapsed;
+				LongPressTimer.Dispose();
 				LongPressTimer = null;
 			}
 		}
