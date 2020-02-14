@@ -453,7 +453,6 @@ namespace FormsGestures.UWP
 		#region LongPress Timer
 		void LongPressingTimerStop()
 		{
-			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
 			if (LongPressTimer != null)
 			{
 				LongPressTimer.Stop();
@@ -465,7 +464,6 @@ namespace FormsGestures.UWP
 
 		void LongPressTimerStart()
 		{
-			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
 			_longPressed = false;
 			if (!HandlesLongPresses)
 				return;
@@ -480,7 +478,6 @@ namespace FormsGestures.UWP
 
 		void OnLongPressTimerElapsed(object sender, ElapsedEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
 			LongPressingTimerStop();
 
 			long elapsed = (long)(DateTime.Now - _onDownDateTime).TotalMilliseconds;
@@ -499,7 +496,6 @@ namespace FormsGestures.UWP
 								Listener = listener
 							};
 							listener?.OnLongPressing(args);
-							System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] listener.Element["+listener?.Element+"] handled["+args.Handled+"]");
 							if (args.Handled)
 								break;
 						}
@@ -516,7 +512,6 @@ namespace FormsGestures.UWP
 
 		private void OnTapped(object sender, TappedRoutedEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
 			if (!_panning && !_longPressed && !_pinching && !_rotating)
 			{
 				_lastTap = DateTime.Now;
@@ -537,7 +532,6 @@ namespace FormsGestures.UWP
 
 		bool OnTappedTimerElapsedInner()
 		{
-			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
 			//if (P42.Utils.Environment.IsOnMainThread)
 			{
 				try
@@ -548,7 +542,6 @@ namespace FormsGestures.UWP
 						{
 							if (UwpTapEventArgs.FireTapped(FrameworkElement, _numberOfTaps, listener))
 							{
-								System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": listener.Element[" + listener.Element + "] _numberOfTaps[" + _numberOfTaps + "] HANDLED");
 								return true;
 							}
 						}
@@ -567,7 +560,6 @@ namespace FormsGestures.UWP
 		#region Cancelation
 		public void Cancel(object sender, PointerRoutedEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
 			StopTapLongPress();
 
 			CallOnUp(sender, e);
@@ -578,7 +570,6 @@ namespace FormsGestures.UWP
 
 		void StopTapLongPress()
 		{
-			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
 			LongPressingTimerStop();
 			_numberOfTaps = 0;
 		}
@@ -588,14 +579,10 @@ namespace FormsGestures.UWP
 		#region Up / Panned Wrappers
 		bool CallOnUp(object sender, PointerRoutedEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
 			foreach (var listener in _listeners)
 			{
 				if (listener.HandlesUp && UwpDownUpArgs.FireUp(FrameworkElement, e, listener))
-				{
-					System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ["+listener?.Element+"] HANDLED");
 					return true;
-				}
 			}
 			return false;
 		}
@@ -603,7 +590,6 @@ namespace FormsGestures.UWP
 		// TODO: Not necessary?
 		bool CallOnPanned(object sender, PointerRoutedEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
 			return false;
 		}
 		#endregion
@@ -622,24 +608,19 @@ namespace FormsGestures.UWP
 		#region UWP Pointer Down/Up Event Responders
 		private void OnElementRightTapped(object sender, RightTappedRoutedEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
 			if (!_xfElement.IsVisible || FrameworkElement == null)
 				return;
 
 			foreach (var listener in _listeners)
 			{
 				if (listener.HandlesRightClicked && UwpRightClickEventArgs.Fire(FrameworkElement, e, listener))
-				{
-					System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] [" + listener?.Element + "] HANDLED ");
 					break;
-				}
 			}
 		}
 
 		//object _downSource;
 		private void OnPointerDown(object sender, PointerRoutedEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
 			if (!_xfElement.IsVisible || FrameworkElement == null)
 				return;
 
@@ -653,17 +634,12 @@ namespace FormsGestures.UWP
 			foreach (var listener in _listeners)
 			{
 				if (listener.HandlesDown && UwpDownUpArgs.FireDown(FrameworkElement, e, listener))
-				{
-					System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "]  [" + listener?.Element + "] HANDLED");
 					return;
-				}
 			}
 		}
 
 		private void OnPointerUp(object sender, PointerRoutedEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
-
 			if (!_xfElement.IsVisible || FrameworkElement == null)
 				return;
 
@@ -681,10 +657,7 @@ namespace FormsGestures.UWP
 				foreach (var listener in _listeners)
 				{
 					if (listener.HandlesLongPressed && UwpLongPressEventArgs.FireLongPressed(FrameworkElement, e, elapsed, listener))
-					{
-						System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": FireLongPressed[" + null + "]");
 						break;
-					}
 				}
 			}
 			else if (!_pinching && !_rotating)
@@ -692,16 +665,9 @@ namespace FormsGestures.UWP
 				foreach (var listener in _listeners)
 				{
 					if (listener.HandlesTapping && UwpTapEventArgs.FireTapping(FrameworkElement, e, _numberOfTaps, listener))
-					{
-						System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": FireTapping[" + null + "]");
 						break;
-					}
 					if (_numberOfTaps % 2 == 0 && listener.HandlesDoubleTapped && UwpTapEventArgs.FireDoubleTapped(FrameworkElement, e, _numberOfTaps, listener))
-					{
-						System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": FireOnDoubleTapping[" + null + "]");
 						break;
-					}
-
 				}
 			}
 		}
@@ -712,19 +678,17 @@ namespace FormsGestures.UWP
 
 		void OnManipulationStarting(object sender, ManipulationStartingRoutedEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
+			//System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
 		}
 
 
 		void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
+			//System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
 		}
 
 		private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
-
 			if (!_xfElement.IsVisible || FrameworkElement == null)
 				return;
 
@@ -774,12 +738,11 @@ namespace FormsGestures.UWP
 
 		private void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingRoutedEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
+			//System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
 		}
 
 		private void OnManipulationComplete(object sender, ManipulationCompletedRoutedEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerString() + "] ");
 			if (!_xfElement.IsVisible || FrameworkElement == null)
 				return;
 			foreach (var listener in _listeners)

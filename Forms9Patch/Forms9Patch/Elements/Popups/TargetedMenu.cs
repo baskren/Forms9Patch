@@ -840,7 +840,7 @@ namespace Forms9Patch
 
                 _layoutRendered = true;
 
-                System.Diagnostics.Debug.WriteLine("TargetedMenu" + P42.Utils.ReflectionExtensions.CallerString() + ": ENTER");
+                //System.Diagnostics.Debug.WriteLine("TargetedMenu" + P42.Utils.ReflectionExtensions.CallerString() + ": ENTER");
                 _updating = true;
                 _pendingUpdateRequest = false;
 
@@ -959,7 +959,7 @@ namespace Forms9Patch
                 if (_pendingUpdateRequest)
                     UpdateLayout();
 
-                System.Diagnostics.Debug.WriteLine("TargetedMenu" + P42.Utils.ReflectionExtensions.CallerString() + ": EXIT");
+                //System.Diagnostics.Debug.WriteLine("TargetedMenu" + P42.Utils.ReflectionExtensions.CallerString() + ": EXIT");
 
             }
             else
@@ -1008,7 +1008,7 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnAppearingAnimationEnd()
         {
-            System.Diagnostics.Debug.WriteLine("TargetedMenu" + P42.Utils.ReflectionExtensions.CallerString() + ": ENTER");
+            //System.Diagnostics.Debug.WriteLine("TargetedMenu" + P42.Utils.ReflectionExtensions.CallerString() + ": ENTER");
             base.OnAppearingAnimationEnd();
             if (_firstAppearance && Device.RuntimePlatform == Device.Android && Orientation == StackOrientation.Vertical)
             {
@@ -1020,7 +1020,7 @@ namespace Forms9Patch
             _firstAppearance = false;
             if (_layoutRendered)
                 UpdateLayout();
-            System.Diagnostics.Debug.WriteLine("TargetedMenu" + P42.Utils.ReflectionExtensions.CallerString() + ": EXIT");
+            //System.Diagnostics.Debug.WriteLine("TargetedMenu" + P42.Utils.ReflectionExtensions.CallerString() + ": EXIT");
         }
         #endregion
     }

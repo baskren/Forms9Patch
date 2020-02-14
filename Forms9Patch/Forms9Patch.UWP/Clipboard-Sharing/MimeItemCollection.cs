@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Windows.Storage;
+using Windows.ApplicationModel.DataTransfer;
 
 namespace Forms9Patch.UWP
 {
@@ -31,97 +32,107 @@ namespace Forms9Patch.UWP
         {
             get
             {
-                if (_items != null)
-                    return _items;
-
-                _items = new List<IMimeItem>();
-
-                if (_plainText != null)
-                    _items.Add(new ReturnKeyValueMimeItem("text/plain", _plainText));
-                if (_htmlText != null)
-                    _items.Add(new ReturnKeyValueMimeItem("text/html", _htmlText));
-                if (_rtfText != null)
-                    _items.Add(new ReturnKeyValueMimeItem("text/rtf", _rtfText));
-
-                var dataPackageView = Windows.ApplicationModel.DataTransfer.Clipboard.GetContent();
-
-                var availableFormats = new List<string>(dataPackageView?.AvailableFormats);
-
-                for (int i = availableFormats.Count - 1; i >= 0; i--)
+                try
                 {
-                    foreach (var property in dataPackageView.Properties)
-                    {
-                        var key = property.Key;
-                        var value = property.Value;
-                        if (!MimeItem.ValidValue(value))
-                            continue;
-                        var item = new ReturnKeyValueMimeItem(key, value);
-                        _items.Add(item);
-                        if (availableFormats.Contains(key))
-                            availableFormats.Remove(key);
-                    }
-                }
 
-                if (dataPackageView.Contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.StorageItems))
-                {
-                    var storageItems = AsyncHelper.RunSync(() => dataPackageView.GetStorageItemsAsync().AsTask());
-                    foreach (var storageItem in storageItems)
+                    if (_items != null)
+                        return _items;
+
+                    _items = new List<IMimeItem>();
+
+                    if (_plainText != null)
+                        _items.Add(new ReturnKeyValueMimeItem("text/plain", _plainText));
+                    if (_htmlText != null)
+                        _items.Add(new ReturnKeyValueMimeItem("text/html", _htmlText));
+                    if (_rtfText != null)
+                        _items.Add(new ReturnKeyValueMimeItem("text/rtf", _rtfText));
+
+                    var dataPackageView = Windows.ApplicationModel.DataTransfer.Clipboard.GetContent();
+
+                    var availableFormats = dataPackageView?.AvailableFormats?.ToList() ?? new List<string>();
+                    for (int i = availableFormats.Count - 1; i >= 0; i--)
                     {
-                        if (storageItem is StorageFile storageFile)
+                        foreach (var property in dataPackageView.Properties)
                         {
-                            var item = new StorageFileReturnMimeItem(storageFile);
+                            var key = property.Key;
+                            var value = property.Value;
+                            if (!MimeItem.ValidValue(value))
+                                continue;
+                            var item = new ReturnKeyValueMimeItem(key, value);
                             _items.Add(item);
-                            var key = item.MimeType;
-                            if (availableFormats.Contains(key))
+                            if (!string.IsNullOrWhiteSpace(key) && availableFormats.Contains(key))
                                 availableFormats.Remove(key);
                         }
                     }
-                }
 
-                return _items;
+                    if (dataPackageView?.Contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.StorageItems) ?? false)
+                    {
+                        if (AsyncHelper.RunSync(() => dataPackageView.GetStorageItemsAsync().AsTask()) is IReadOnlyList<IStorageItem> storageItems)
+                        foreach (var storageItem in storageItems)
+                        {
+                            if (storageItem is StorageFile storageFile)
+                            {
+                                var item = new StorageFileReturnMimeItem(storageFile);
+                                _items.Add(item);
+                                var key = item.MimeType;
+                                if (!string.IsNullOrWhiteSpace(key) && availableFormats.Contains(key))
+                                    availableFormats.Remove(key);
+                            }
+                        }
+                    }
+
+                    return _items;
+                }
+                catch (Exception e)
+                {
+                    Forms9Patch.Settings.RequestUserHelp(e);
+                }
+                return new List<IMimeItem>();
             }
         }
         #endregion
 
+
         #region Constructor
         public MimeItemCollection()
         {
-            var dataPackageView = Windows.ApplicationModel.DataTransfer.Clipboard.GetContent();
-            if (dataPackageView.Contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.Text))
-                _plainText = AsyncHelper.RunSync(()=>dataPackageView.GetTextAsync().AsTask());
-            if (dataPackageView.Contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.Html))
+            if (Windows.ApplicationModel.DataTransfer.Clipboard.GetContent() is DataPackageView dataPackageView)
             {
-                _htmlText = AsyncHelper.RunSync(() => dataPackageView.GetHtmlFormatAsync().AsTask());
-                var header = _htmlText.Substring(0, 144);
-                if (header.StartsWith("Version:"))
+                if (dataPackageView.Contains(StandardDataFormats.Text))
+                    _plainText = AsyncHelper.RunSync(() => dataPackageView.GetTextAsync().AsTask());
+                if (dataPackageView.Contains(StandardDataFormats.Html))
                 {
-                    // we're going to assume this is an html fragment
-                    var startFragmentIndex = header.IndexOf("StartFragment:");  //14
-                    var endFragmentIndex = header.IndexOf("EndFragment:");  // 12
-                    if (startFragmentIndex>0 && endFragmentIndex>0)
+                    _htmlText = AsyncHelper.RunSync(() => dataPackageView.GetHtmlFormatAsync().AsTask());
+                    if (!string.IsNullOrWhiteSpace(_htmlText) && _htmlText.StartsWith("Version:"))
                     {
-                        var startIndexText = header.Substring(startFragmentIndex + 14, 10);
-                        var endIndexText = header.Substring(endFragmentIndex + 12, 10);
-                        if (Int32.TryParse(startIndexText, out int startIndex) && Int32.TryParse(endIndexText, out int endIndex))
-                            _htmlText = _htmlText.Substring(startIndex, endIndex - startIndex);
-                    }
-                    else
-                    {
-                        var startHtmlIndex = header.IndexOf("StartHTML:");  //10
-                        var endHtmlIndex = header.IndexOf("EndHTML:");  // 8
-                        if (startHtmlIndex > 0 && endHtmlIndex > 0)
-                        {
-                            var startIndexText = header.Substring(startHtmlIndex + 14, 10);
-                            var endIndexText = header.Substring(endHtmlIndex + 12, 10);
-                            if (Int32.TryParse(startIndexText, out int startIndex) && Int32.TryParse(endIndexText, out int endIndex))
-                                _htmlText = _htmlText.Substring(startIndex, endIndex - startIndex);
-                        }
+                        //var header = _htmlText.Substring(0, 144);
+                            // we're going to assume this is an html fragment
+                            var startFragmentIndex = _htmlText.IndexOf("StartFragment:");  //14
+                            var endFragmentIndex = _htmlText.IndexOf("EndFragment:");  // 12
+                            if (startFragmentIndex > 0 && endFragmentIndex > 0)
+                            {
+                                var startIndexText = _htmlText.Substring(startFragmentIndex + 14, 10);
+                                var endIndexText = _htmlText.Substring(endFragmentIndex + 12, 10);
+                                if (Int32.TryParse(startIndexText, out int startIndex) && Int32.TryParse(endIndexText, out int endIndex))
+                                    _htmlText = _htmlText.Substring(startIndex, endIndex - startIndex);
+                            }
+                            else
+                            {
+                                var startHtmlIndex = _htmlText.IndexOf("StartHTML:");  //10
+                                var endHtmlIndex = _htmlText.IndexOf("EndHTML:");  // 8
+                                if (startHtmlIndex > 0 && endHtmlIndex > 0)
+                                {
+                                    var startIndexText = _htmlText.Substring(startHtmlIndex + 14, 10);
+                                    var endIndexText = _htmlText.Substring(endHtmlIndex + 12, 10);
+                                    if (Int32.TryParse(startIndexText, out int startIndex) && Int32.TryParse(endIndexText, out int endIndex))
+                                        _htmlText = _htmlText.Substring(startIndex, endIndex - startIndex);
+                                }
+                            }
                     }
                 }
+                if (dataPackageView.Contains(StandardDataFormats.Rtf))
+                    _rtfText = AsyncHelper.RunSync(() => dataPackageView.GetRtfAsync().AsTask());
             }
-            if (dataPackageView.Contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.Rtf))
-                _rtfText = AsyncHelper.RunSync(() => dataPackageView.GetRtfAsync().AsTask());
-
         }
         #endregion
     }

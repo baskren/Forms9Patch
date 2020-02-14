@@ -43,17 +43,24 @@ namespace Forms9Patch.UWP
             }
             set
             {
-                if (value == null)
-                    return;
+                try
+                {
+                    if (value == null)
+                        return;
 
-                var dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
-                
+                    var dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
 
-                dataPackage.Source(value);
 
-                _lastEntry = value;
-                _lastChangedByThis = true;
-                Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(dataPackage);
+                    dataPackage.Source(value);
+
+                    _lastEntry = value;
+                    _lastChangedByThis = true;
+                    Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(dataPackage);
+                }
+                catch (Exception e)
+                {
+                    Forms9Patch.Settings.RequestUserHelp(e);
+                }
             }
         }
 

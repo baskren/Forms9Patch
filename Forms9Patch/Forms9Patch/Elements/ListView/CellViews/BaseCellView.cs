@@ -407,25 +407,143 @@ namespace Forms9Patch
                     }
                     else
                     {
-                        // display 3 buttons
-                        //TranslateContentViewTo(-(int)side * (60 * (_endButtons + _startButtons)), 0, 200, Easing.Linear);
-                        ContentViewX = -(int)side * (60 * (_endButtons + _startButtons));
-                        //_swipeFrame1.TranslateTo((int)side * (Width - 60), 0, 200, Easing.Linear);
-                        _swipeFrame1.TranslationX = (int)side * (Width - 60);
-                        if (_endButtons + _startButtons > 1)
-                            //_swipeFrame2.TranslateTo((int)side * (Width - 120), 0, 200, Easing.Linear);
-                            _swipeFrame2.TranslationX = (int)side * (Width - 120);
-                        if (_endButtons + _startButtons > 2)
-                            //_swipeFrame3.TranslateTo((int)side * (Width - 180), 0, 200, Easing.Linear);
-                            _swipeFrame3.TranslationX = (int)side * (Width - 180);
-                        //_insetFrame.TranslateTo((int)side * (Width - (60 * (_endButtons + _startButtons))), 0, 300, Easing.Linear);
-                        _translateOnUp = (int)side * -180;
+                        ShowButtons(side);
                         return;
                     }
                 }
                 else
                     PutAwaySwipeButtons(false);
             }
+        }
+
+        void ShowButtons(Side side)
+        {
+            // display 3 buttons
+            //TranslateContentViewTo(-(int)side * (60 * (_endButtons + _startButtons)), 0, 200, Easing.Linear);
+            ContentViewX = -(int)side * (60 * (_endButtons + _startButtons));
+            //_swipeFrame1.TranslateTo((int)side * (Width - 60), 0, 200, Easing.Linear);
+            _swipeFrame1.TranslationX = (int)side * (Width - 60);
+            if (_endButtons + _startButtons > 1)
+                //_swipeFrame2.TranslateTo((int)side * (Width - 120), 0, 200, Easing.Linear);
+                _swipeFrame2.TranslationX = (int)side * (Width - 120);
+            if (_endButtons + _startButtons > 2)
+                //_swipeFrame3.TranslateTo((int)side * (Width - 180), 0, 200, Easing.Linear);
+                _swipeFrame3.TranslationX = (int)side * (Width - 180);
+            //_insetFrame.TranslateTo((int)side * (Width - (60 * (_endButtons + _startButtons))), 0, 300, Easing.Linear);
+            _translateOnUp = (int)side * -180;
+
+        }
+
+        void MapButtons(Side side, double distance)
+        {
+            _homeOffset = 0;
+            if (ContentView is ICellSwipeMenus iCellSwipeMenus)
+            {
+                var swipeMenu = side == Side.End ? iCellSwipeMenus.EndSwipeMenu : iCellSwipeMenus.StartSwipeMenu;
+                if (swipeMenu != null && swipeMenu.Count > 0)
+                {
+                    _settingup = true;
+                    _homeOffset -= _swipeButton1.Width * (int)side;
+
+                    Children.Add(_touchBlocker, 0, 0);
+                    _touchBlocker.IsVisible = true;
+
+                    // setup buttons
+                    if (side == Side.End)
+                    {
+                        _endButtons = 1;
+                        _swipeButton1.HorizontalOptions = LayoutOptions.Start;
+                    }
+                    else
+                    {
+                        _startButtons = 1;
+                        _swipeButton1.HorizontalOptions = LayoutOptions.End;
+                    }
+                    _translateOnUp = 0;
+                    _swipeFrame1.BackgroundColor = swipeMenu[0].BackgroundColor;
+                    _swipeButton1.HtmlText = swipeMenu[0].Text;
+                    _swipeButton1.IconText = swipeMenu[0].IconText;
+                    _swipeButton1.TextColor = swipeMenu[0].TextColor;
+
+                    //_swipeFrame2.IsVisible = false;
+                    //_swipeFrame3.IsVisible = false;
+
+                    //System.Diagnostics.Debug.WriteLine("BaseCellView.OnPanning swipeMenu.Count=[" + swipeMenu.Count + "]");
+                    if (swipeMenu.Count > 1)
+                    {
+                        _homeOffset -= _swipeButton2.Width * (int)side;
+                        //System.Diagnostics.Debug.WriteLine("BaseCellView.OnPanning _swipeButton2.Width=[" + _swipeButton2.Width + "]");
+                        if (side == Side.End)
+                        {
+                            _endButtons = 2;
+                            _swipeButton2.HorizontalOptions = LayoutOptions.Start;
+                        }
+                        else
+                        {
+                            _startButtons = 2;
+                            _swipeButton2.HorizontalOptions = LayoutOptions.End;
+                        }
+                        _swipeFrame2.BackgroundColor = swipeMenu[1].BackgroundColor;
+                        _swipeButton2.HtmlText = swipeMenu[1].Text;
+                        _swipeButton2.IconText = swipeMenu[1].IconText;
+                        _swipeButton2.TextColor = swipeMenu[1].TextColor;
+                        if (swipeMenu.Count > 2)
+                        {
+                            _homeOffset -= _swipeButton3.Width * (int)side;
+                            if (side == Side.End)
+                            {
+                                _endButtons = 3;
+                                _swipeButton3.HorizontalOptions = LayoutOptions.Start;
+                            }
+                            else
+                            {
+                                _startButtons = 3;
+                                _swipeButton3.HorizontalOptions = LayoutOptions.End;
+                            }
+                            if (swipeMenu.Count > 3)
+                            {
+                                _swipeFrame3.BackgroundColor = Color.Gray;
+                                _swipeButton3.HtmlText = "More";
+                                _swipeButton3.IconText = "•••";
+                                _swipeButton3.TextColor = Color.White;
+                            }
+                            else
+                            {
+                                _swipeFrame3.BackgroundColor = swipeMenu[2].BackgroundColor;
+                                _swipeButton3.HtmlText = swipeMenu[2].Text;
+                                _swipeButton3.IconText = swipeMenu[2].IconText;
+                                _swipeButton3.TextColor = swipeMenu[2].TextColor;
+                            }
+                            Children.Add(_swipeFrame3, 0, 0);
+                            RaiseChild(_swipeFrame3);
+                            _swipeFrame3.TranslationX = (int)side * Width;
+                            _swipeFrame3.IsVisible = true;
+                            _swipeButton3.IsVisible = true;
+                        }
+                        else
+                            _swipeFrame3.IsVisible = false;
+
+                        Children.Add(_swipeFrame2, 0, 0);
+                        RaiseChild(_swipeFrame2);
+                        _swipeFrame2.TranslationX = (int)side * (Width - distance / 3.0);
+                        _swipeFrame2.IsVisible = true;
+                        _swipeButton2.IsVisible = true;
+                    }
+                    else
+                    {
+                        _swipeFrame2.IsVisible = false;
+                        _swipeFrame3.IsVisible = false;
+                    }
+                    Children.Add(_swipeFrame1, 0, 0);
+                    RaiseChild(_swipeFrame1);
+                    _swipeFrame1.TranslationX = (int)side * (Width - 2 * distance / 3.0);
+                    _swipeFrame1.IsVisible = true;
+                    _swipeButton1.IsVisible = true;
+                    _settingup = false;
+                }
+
+            }
+
         }
 
         bool _panHz, _panVt;
@@ -496,113 +614,7 @@ namespace Forms9Patch
             {
                 // setup end SwipeMenu
                 var side = distance < 0 ? Side.End : Side.Start;
-                _homeOffset = 0;
-                if (ContentView is ICellSwipeMenus iCellSwipeMenus)
-                {
-                    var swipeMenu = side == Side.End ? iCellSwipeMenus.EndSwipeMenu : iCellSwipeMenus.StartSwipeMenu;
-                    if (swipeMenu != null && swipeMenu.Count > 0)
-                    {
-                        _settingup = true;
-                        _homeOffset -= _swipeButton1.Width * (int)side;
-
-                        Children.Add(_touchBlocker, 0, 0);
-                        _touchBlocker.IsVisible = true;
-
-                        // setup buttons
-                        if (side == Side.End)
-                        {
-                            _endButtons = 1;
-                            _swipeButton1.HorizontalOptions = LayoutOptions.Start;
-                        }
-                        else
-                        {
-                            _startButtons = 1;
-                            _swipeButton1.HorizontalOptions = LayoutOptions.End;
-                        }
-                        _translateOnUp = 0;
-                        _swipeFrame1.BackgroundColor = swipeMenu[0].BackgroundColor;
-                        _swipeButton1.HtmlText = swipeMenu[0].Text;
-                        _swipeButton1.IconText = swipeMenu[0].IconText;
-                        _swipeButton1.TextColor = swipeMenu[0].TextColor;
-
-                        //_swipeFrame2.IsVisible = false;
-                        //_swipeFrame3.IsVisible = false;
-
-                        System.Diagnostics.Debug.WriteLine("BaseCellView.OnPanning swipeMenu.Count=[" + swipeMenu.Count + "]");
-                        if (swipeMenu.Count > 1)
-                        {
-                            _homeOffset -= _swipeButton2.Width * (int)side;
-                            System.Diagnostics.Debug.WriteLine("BaseCellView.OnPanning _swipeButton2.Width=[" + _swipeButton2.Width + "]");
-                            if (side == Side.End)
-                            {
-                                _endButtons = 2;
-                                _swipeButton2.HorizontalOptions = LayoutOptions.Start;
-                            }
-                            else
-                            {
-                                _startButtons = 2;
-                                _swipeButton2.HorizontalOptions = LayoutOptions.End;
-                            }
-                            _swipeFrame2.BackgroundColor = swipeMenu[1].BackgroundColor;
-                            _swipeButton2.HtmlText = swipeMenu[1].Text;
-                            _swipeButton2.IconText = swipeMenu[1].IconText;
-                            _swipeButton2.TextColor = swipeMenu[1].TextColor;
-                            if (swipeMenu.Count > 2)
-                            {
-                                _homeOffset -= _swipeButton3.Width * (int)side;
-                                if (side == Side.End)
-                                {
-                                    _endButtons = 3;
-                                    _swipeButton3.HorizontalOptions = LayoutOptions.Start;
-                                }
-                                else
-                                {
-                                    _startButtons = 3;
-                                    _swipeButton3.HorizontalOptions = LayoutOptions.End;
-                                }
-                                if (swipeMenu.Count > 3)
-                                {
-                                    _swipeFrame3.BackgroundColor = Color.Gray;
-                                    _swipeButton3.HtmlText = "More";
-                                    _swipeButton3.IconText = "•••";
-                                    _swipeButton3.TextColor = Color.White;
-                                }
-                                else
-                                {
-                                    _swipeFrame3.BackgroundColor = swipeMenu[2].BackgroundColor;
-                                    _swipeButton3.HtmlText = swipeMenu[2].Text;
-                                    _swipeButton3.IconText = swipeMenu[2].IconText;
-                                    _swipeButton3.TextColor = swipeMenu[2].TextColor;
-                                }
-                                Children.Add(_swipeFrame3, 0, 0);
-                                RaiseChild(_swipeFrame3);
-                                _swipeFrame3.TranslationX = (int)side * Width;
-                                _swipeFrame3.IsVisible = true;
-                                _swipeButton3.IsVisible = true;
-                            }
-                            else
-                                _swipeFrame3.IsVisible = false;
-
-                            Children.Add(_swipeFrame2, 0, 0);
-                            RaiseChild(_swipeFrame2);
-                            _swipeFrame2.TranslationX = (int)side * (Width - distance / 3.0);
-                            _swipeFrame2.IsVisible = true;
-                            _swipeButton2.IsVisible = true;
-                        }
-                        else
-                        {
-                            _swipeFrame2.IsVisible = false;
-                            _swipeFrame3.IsVisible = false;
-                        }
-                        Children.Add(_swipeFrame1, 0, 0);
-                        RaiseChild(_swipeFrame1);
-                        _swipeFrame1.TranslationX = (int)side * (Width - 2 * distance / 3.0);
-                        _swipeFrame1.IsVisible = true;
-                        _swipeButton1.IsVisible = true;
-                        _settingup = false;
-                    }
-
-                }
+                MapButtons(side, distance);
             }
         }
 
@@ -693,10 +705,13 @@ namespace Forms9Patch
             else
             {
                 PutAwaySwipeButtons(false);
-                var args = new SwipeMenuItemTappedArgs((ICellSwipeMenus)ContentView, (ItemWrapper)BindingContext, swipeMenu[index]);
-                ((ICellSwipeMenus)ContentView)?.OnSwipeMenuItemButtonTapped(this.BindingContext, args);
-                ((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, args);
-                //System.Diagnostics.Debug.WriteLine("SwipeMenu[" + swipeMenu[index].Key + "]");
+                if (swipeMenu != null && swipeMenu.Count > index)
+                {
+                    var args = new SwipeMenuItemTappedArgs((ICellSwipeMenus)ContentView, (ItemWrapper)BindingContext, swipeMenu[index]);
+                    ((ICellSwipeMenus)ContentView)?.OnSwipeMenuItemButtonTapped(this.BindingContext, args);
+                    ((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, args);
+                    //System.Diagnostics.Debug.WriteLine("SwipeMenu[" + swipeMenu[index].Key + "]");
+                }
             }
         }
 
@@ -746,13 +761,37 @@ namespace Forms9Patch
                 ((ItemWrapper)BindingContext)?.OnLongPressing(this, new ItemWrapperLongPressEventArgs((ItemWrapper)BindingContext));
         }
 
-        async void OnRightClicked(object sender, RightClickEventArgs e)
+        void OnRightClicked(object sender, RightClickEventArgs e)
         {
             if (_startButtons + _endButtons > 0)
                 PutAwaySwipeButtons(true);
             else
             {
-
+                if (ContentView is ICellSwipeMenus contentView)
+                {
+                    Side? side = null;
+                    if (contentView.StartSwipeMenu != null
+                        && contentView.StartSwipeMenu.Count > 0
+                        && contentView.EndSwipeMenu != null
+                        && contentView.EndSwipeMenu.Count > 0)
+                    {
+                        side = e.Center(e.ElementTouches).X < Bounds.Center.X
+                            ? Side.Start
+                            : Side.End;
+                    }
+                    else if (contentView.StartSwipeMenu != null
+                        && contentView.StartSwipeMenu.Count > 0)
+                        side = Side.Start;
+                    else if (contentView.EndSwipeMenu != null
+                        && contentView.EndSwipeMenu.Count > 0)
+                        side = Side.End;
+                    if (side != null)
+                    {
+                        MapButtons(side.Value, 2);
+                        ShowButtons(side.Value);
+                    }
+                }
+                /*
                 if (ContentView is ICellSwipeMenus contentView)
                 {
                     var segments = new List<Segment>();
@@ -794,7 +833,8 @@ namespace Forms9Patch
                     if (segments.Count > 0)
                     {
 
-                        using (var menu = new Forms9Patch.TargetedMenu(this, e.Center(e.WindowTouches))
+                        //using (var menu = new Forms9Patch.TargetedMenu(this, e.Center(e.ElementTouches))
+                        using (var menu = new Forms9Patch.TargetedMenu(this, new Point(e.Center(e.ElementTouches).X, 0))
                         {
                             Segments = segments
                         })
@@ -813,7 +853,7 @@ namespace Forms9Patch
                         }
                     }
                 }
-
+                */
             }
         }
 
