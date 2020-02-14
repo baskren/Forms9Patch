@@ -35,7 +35,7 @@ namespace Forms9Patch.Droid
         {
             var decoreView = DecoreView;
 
-            page.Parent = XApplication.Current.MainPage;
+            page.Parent = XApplication.Current?.MainPage;
 
             var renderer = page.GetOrCreateRenderer();
 
