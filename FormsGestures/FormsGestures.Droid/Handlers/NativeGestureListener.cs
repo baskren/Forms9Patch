@@ -162,6 +162,7 @@ namespace FormsGestures.Droid
             LongPressTimer?.Stop();
             if (LongPressTimer != null)
                 LongPressTimer.Elapsed -= OnLongPressTimerElapsed;
+            LongPressTimer?.Dispose();
             LongPressTimer = null;
         }
 
@@ -220,8 +221,8 @@ namespace FormsGestures.Droid
             {
                 TappedTimer.Stop();
                 TappedTimer.Elapsed -= OnTappedTimerElapsed;
+                TappedTimer.Dispose();
                 TappedTimer = null;
-                //_tappedTimerUpMotionEvent = null;
             }
         }
 
