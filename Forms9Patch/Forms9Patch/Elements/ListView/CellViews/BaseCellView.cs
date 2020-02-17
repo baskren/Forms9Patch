@@ -672,45 +672,49 @@ namespace Forms9Patch
                 return;
             }
 
+            if (sender is Button button)
+            {
+                P42.Utils.BreadCrumbs.Add(GetType(), button.Text ?? button.HtmlText);
 
-            var listView = this.Ancestor<ListView>();
-            if (listView != null)
-                listView.IsScrollEnabled = true;
-            var index = 0;
-            if (sender == _swipeButton2)
-                index = 1;
-            else if (sender == _swipeButton3)
-                index = 2;
-            var swipeMenu = _endButtons > 0 ? ((ICellSwipeMenus)ContentView)?.EndSwipeMenu : ((ICellSwipeMenus)ContentView)?.StartSwipeMenu;
-            if (index == 2 && _endButtons + _startButtons > 2)
-            {
-                // show remaining menu items in a modal list
-                PutAwaySwipeButtons(false);
-                _swipePopupCancelButton.Tapped += OnSwipePopupCancelButtonTapped;
-                for (int i = 2; i < swipeMenu.Count; i++)
+                var listView = this.Ancestor<ListView>();
+                if (listView != null)
+                    listView.IsScrollEnabled = true;
+                var index = 0;
+                if (button == _swipeButton2)
+                    index = 1;
+                else if (button == _swipeButton3)
+                    index = 2;
+                var swipeMenu = _endButtons > 0 ? ((ICellSwipeMenus)ContentView)?.EndSwipeMenu : ((ICellSwipeMenus)ContentView)?.StartSwipeMenu;
+                if (index == 2 && _endButtons + _startButtons > 2)
                 {
-                    var menuItem = swipeMenu[i];
-                    var segment = new Segment
+                    // show remaining menu items in a modal list
+                    PutAwaySwipeButtons(false);
+                    _swipePopupCancelButton.Tapped += OnSwipePopupCancelButtonTapped;
+                    for (int i = 2; i < swipeMenu.Count; i++)
                     {
-                        Text = menuItem.Text,
-                        IconText = menuItem.IconText,
-                        IconImage = menuItem.IconImage
-                    };
-                    segment.Tapped += OnSwipeSegmentTapped;
-                    _swipeSegmentedController.Segments.Add(segment);
+                        var menuItem = swipeMenu[i];
+                        var segment = new Segment
+                        {
+                            Text = menuItem.Text,
+                            IconText = menuItem.IconText,
+                            IconImage = menuItem.IconImage
+                        };
+                        segment.Tapped += OnSwipeSegmentTapped;
+                        _swipeSegmentedController.Segments.Add(segment);
+                    }
+                    _swipePopup.IsVisible = true;
+                    //System.Diagnostics.Debug.WriteLine("SwipeMenu[More]");
                 }
-                _swipePopup.IsVisible = true;
-                //System.Diagnostics.Debug.WriteLine("SwipeMenu[More]");
-            }
-            else
-            {
-                PutAwaySwipeButtons(false);
-                if (swipeMenu != null && swipeMenu.Count > index)
+                else
                 {
-                    var args = new SwipeMenuItemTappedArgs((ICellSwipeMenus)ContentView, (ItemWrapper)BindingContext, swipeMenu[index]);
-                    ((ICellSwipeMenus)ContentView)?.OnSwipeMenuItemButtonTapped(this.BindingContext, args);
-                    ((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, args);
-                    //System.Diagnostics.Debug.WriteLine("SwipeMenu[" + swipeMenu[index].Key + "]");
+                    PutAwaySwipeButtons(false);
+                    if (swipeMenu != null && swipeMenu.Count > index)
+                    {
+                        var args = new SwipeMenuItemTappedArgs((ICellSwipeMenus)ContentView, (ItemWrapper)BindingContext, swipeMenu[index]);
+                        ((ICellSwipeMenus)ContentView)?.OnSwipeMenuItemButtonTapped(this.BindingContext, args);
+                        ((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, args);
+                        //System.Diagnostics.Debug.WriteLine("SwipeMenu[" + swipeMenu[index].Key + "]");
+                    }
                 }
             }
         }
@@ -719,6 +723,7 @@ namespace Forms9Patch
         {
             if (sender is Segment segment)
             {
+                P42.Utils.BreadCrumbs.Add(GetType(), segment.Text ?? segment.HtmlText);
                 await _swipePopup.CancelAsync(segment);
                 var swipeMenu = _endButtons > 0 ? ((ICellSwipeMenus)ContentView)?.EndSwipeMenu : ((ICellSwipeMenus)ContentView)?.StartSwipeMenu;
                 if (swipeMenu?.FirstOrDefault((m) => m.Text == segment.Text) is SwipeMenuItem menuItem)
@@ -734,7 +739,10 @@ namespace Forms9Patch
         }
 
         async void OnSwipePopupCancelButtonTapped(object sender, EventArgs e)
-            => await _swipePopup.CancelAsync(_swipePopupCancelButton);
+        {
+            P42.Utils.BreadCrumbs.Add(GetType(), "");
+            await _swipePopup.CancelAsync(_swipePopupCancelButton);
+        }
         #endregion
 
 

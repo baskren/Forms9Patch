@@ -303,12 +303,16 @@ namespace Forms9Patch
         #region Event Handlers
         internal async void OnOkButtonTappedAsync(object sender, EventArgs e)
         {
+            P42.Utils.BreadCrumbs.Add(GetType(), "ok");
             PermissionState = PermissionState.Ok;
             await PopAsync(_okButton, lastAction: () => OkTapped?.Invoke(this, EventArgs.Empty));
         }
 
         async void OnCancelButtonTappedAsync(object sender, EventArgs e)
-            => await CancelAsync(_cancelButton);
+        {
+            P42.Utils.BreadCrumbs.Add(GetType(), "cancel");
+            await CancelAsync(_cancelButton);
+        }
 
         /// <summary>
         /// Cancel the PermissionPopup
