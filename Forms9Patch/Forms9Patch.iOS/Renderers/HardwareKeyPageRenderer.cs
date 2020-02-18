@@ -73,8 +73,12 @@ namespace Forms9Patch.iOS
         }
 
         #region static methods
+        static UIKeyCommand _lastKeyCommand;
         internal static void ProcessKeyPress(UIKeyCommand cmd)
         {
+            if (cmd == _lastKeyCommand)
+                return;
+            _lastKeyCommand = cmd;
             var element = HardwareKeyPage.FocusedElement ?? HardwareKeyPage.DefaultFocusedElement;
             if (element == null)
                 return;
