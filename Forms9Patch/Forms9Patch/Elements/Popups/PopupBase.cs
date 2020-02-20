@@ -1062,6 +1062,8 @@ namespace Forms9Patch
             }
             else if (propertyName == CancelOnPageOverlayTouchProperty.PropertyName)
                 CloseWhenBackgroundIsClicked = CancelOnPageOverlayTouch;
+            else if (propertyName == TargetProperty.PropertyName)
+                Update();
 
 
             if (_decorativeContainerView != null && !_disposed)
