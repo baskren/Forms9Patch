@@ -520,7 +520,7 @@ namespace Forms9Patch
         internal PopupBase(VisualElement target = null, TimeSpan popAfter = default)
         {
 
-            Debug.AddToCensus(this);
+            P42.Utils.Debug.AddToCensus(this);
 
             HorizontalOptions = LayoutOptions.Center;
             VerticalOptions = LayoutOptions.Center;
@@ -583,7 +583,7 @@ namespace Forms9Patch
                 catch (Exception) { }
 #pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
 
-                Debug.RemoveFromCensus(this);
+                P42.Utils.Debug.RemoveFromCensus(this);
             }
         }
 

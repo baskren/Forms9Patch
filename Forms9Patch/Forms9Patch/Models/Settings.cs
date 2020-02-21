@@ -33,11 +33,6 @@ namespace Forms9Patch
 
         internal static TimeSpan MsUntilTapped = TimeSpan.FromMilliseconds(210);
 
-        /// <summary>
-        /// Enable ability to email user for help when unusual crash is encountered
-        /// </summary>
-        public static bool IsRequestUserHelpEnabled;
-
         #region Swipe menu
         /// <summary>
         /// WidthRequest for ListView Cell swipe popup menu.
@@ -126,46 +121,6 @@ namespace Forms9Patch
         internal static List<Assembly> IncludedAssemblies => NativeSettings?.IncludedAssemblies;
         #endregion
 
-        /// <summary>
-        /// Used internally to communicate with user when perplexing exception is triggered;
-        /// </summary>
-        /// <param name="e"></param>
-        /// <param name="path"></param>
-        /// <param name="lineNumber"></param>
-        /// <param name="methodName"></param>
-        /// <returns></returns>
-        internal static async Task RequestUserHelp(Exception e, [System.Runtime.CompilerServices.CallerFilePath] string path = null, [System.Runtime.CompilerServices.CallerLineNumber] int lineNumber = -1, [System.Runtime.CompilerServices.CallerMemberName] string methodName=null)
-        {
-            if (IsRequestUserHelpEnabled)
-            {
-                using (var popup = Forms9Patch.PermissionPopup.Create("I believe I need your help ...", "My name is Ben and I am the developer of this application (or at least the part the just didn't work).  Unfortunately you have managed to trigger a bug that, for the life of me, I cannot reproduce - and therefore fix!  Would you be willing to email me so I can learn more about what just happened?"))
-                {
-                    popup.IsVisible = true;
-                    await popup.WaitForPoppedAsync();
-                    if (popup.PermissionState == PermissionState.Ok)
-                    {
-                        var info = "Exception Type: "+e.GetType()+"\n\nMessage: " + e.Message + "\n\nMethod: " + methodName + "\n\nLine Number: " + lineNumber + "\n\nPath: " + path + "\n\nCall Stack Trace: " + e.StackTrace;
-                        try
-                        {
-                            var message = new EmailMessage
-                            {
-                                Subject = "Help with Windows Printing Bug",
-                                Body = "I'm willing to help.  Below is some information about what happened.\n\n" + info, 
-                                To = new List<string> { "ben@buildcalc.com" },
-                                //Cc = ccRecipients,
-                                //Bcc = bccRecipients
-                            };
-                            await Email.ComposeAsync(message);
-                        }
-                        catch (Exception)
-                        {
-                            using (var toast = Forms9Patch.Toast.Create("Email not available", "Email cannot be opened directly from this app ... but I still would like your help.  Could you email me at ben@buildcalc.com and include (via copy and paste into your email) the below information?  Thank you for considering this! \n\n <b>INFORMATION:</b>\n\n" + info)) { }
-                        }
-                    }
-                }
-
-            }
-        }
     }
 }
 

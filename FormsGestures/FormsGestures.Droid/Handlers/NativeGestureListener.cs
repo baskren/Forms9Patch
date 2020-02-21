@@ -588,18 +588,20 @@ namespace FormsGestures.Droid
             var handler = NativeGestureHandler.InstanceForElement(Element);
             while (handler != null)
             {
-                var listener = handler.Listener;
-                var previousArgs = _previousPinchArgs.ContainsKey(listener)
-                    ? _previousPinchArgs[listener]
-                    : null;
-                PinchEventArgs args = new AndroidPinchEventArgs(ev, coords, previousArgs, _view, listener);
-                if (listener != null && listener.HandlesPinching)
+                if (handler.Listener is Listener listener)
                 {
-                    listener.OnPinching(args);
-                    handled = handled || args.Handled;
-                    //if (args.Handled)
-                    //	break;
-                    _previousPinchArgs[listener] = new PinchEventArgs(args, listener);
+                    var previousArgs = _previousPinchArgs.ContainsKey(listener)
+                        ? _previousPinchArgs[listener]
+                        : null;
+                    PinchEventArgs args = new AndroidPinchEventArgs(ev, coords, previousArgs, _view, listener);
+                    if (listener != null && listener.HandlesPinching)
+                    {
+                        listener.OnPinching(args);
+                        handled = handled || args.Handled;
+                        //if (args.Handled)
+                        //	break;
+                        _previousPinchArgs[listener] = new PinchEventArgs(args, listener);
+                    }
                 }
                 handler = NativeGestureHandler.InstanceForElement(handler.Element?.Parent);
             }
@@ -616,18 +618,20 @@ namespace FormsGestures.Droid
             var handler = NativeGestureHandler.InstanceForElement(Element);
             while (handler != null)
             {
-                var listener = handler.Listener;
-                var previousArgs = _previousRotateArgs.ContainsKey(listener)
+                if (handler.Listener is Listener listener)
+                {
+                    var previousArgs = _previousRotateArgs.ContainsKey(listener)
                     ? _previousRotateArgs[listener]
                     : null;
-                RotateEventArgs args = new AndroidRotateEventArgs(ev, coords, previousArgs, _view, listener);
-                if (listener != null && listener.HandlesRotating)
-                {
-                    listener.OnRotating(args);
-                    handled = handled || args.Handled;
-                    //if (args.Handled)
-                    //	break;
-                    _previousRotateArgs[listener] = new RotateEventArgs(args, listener);
+                    RotateEventArgs args = new AndroidRotateEventArgs(ev, coords, previousArgs, _view, listener);
+                    if (listener != null && listener.HandlesRotating)
+                    {
+                        listener.OnRotating(args);
+                        handled = handled || args.Handled;
+                        //if (args.Handled)
+                        //	break;
+                        _previousRotateArgs[listener] = new RotateEventArgs(args, listener);
+                    }
                 }
                 handler = NativeGestureHandler.InstanceForElement(handler.Element?.Parent);
             }
@@ -646,18 +650,20 @@ namespace FormsGestures.Droid
                 var handler = NativeGestureHandler.InstanceForElement(Element);
                 while (handler != null)
                 {
-                    var listener = handler.Listener;
-                    var previousArgs = _previousPinchArgs.ContainsKey(listener)
+                    if (handler.Listener is Listener listener)
+                    {
+                        var previousArgs = _previousPinchArgs.ContainsKey(listener)
                         ? _previousPinchArgs[listener]
                         : null;
-                    PinchEventArgs args = new AndroidPinchEventArgs(ev, coords, previousArgs, _view, listener);
-                    if (listener != null && (listener.HandlesPinching || listener.HandlesPinched))
-                    {
-                        listener.OnPinched(args);
-                        handled = handled || args.Handled;
-                        //if (args.Handled)
-                        //	break;
-                        _previousPinchArgs[listener] = new PinchEventArgs(args, listener);
+                        PinchEventArgs args = new AndroidPinchEventArgs(ev, coords, previousArgs, _view, listener);
+                        if (listener != null && (listener.HandlesPinching || listener.HandlesPinched))
+                        {
+                            listener.OnPinched(args);
+                            handled = handled || args.Handled;
+                            //if (args.Handled)
+                            //	break;
+                            _previousPinchArgs[listener] = new PinchEventArgs(args, listener);
+                        }
                     }
                     handler = NativeGestureHandler.InstanceForElement(handler.Element?.Parent);
                 }
@@ -678,18 +684,20 @@ namespace FormsGestures.Droid
                 var handler = NativeGestureHandler.InstanceForElement(Element);
                 while (handler != null)
                 {
-                    var listener = handler.Listener;
-                    var previousArgs = _previousRotateArgs.ContainsKey(listener)
+                    if (handler.Listener is Listener listener)
+                    {
+                        var previousArgs = _previousRotateArgs.ContainsKey(listener)
                         ? _previousRotateArgs[listener]
                         : null;
-                    RotateEventArgs args = new AndroidRotateEventArgs(ev, coords, previousArgs, _view, listener);
-                    if (listener != null && (listener.HandlesRotating || listener.HandlesRotated))
-                    {
-                        listener.OnRotated(args);
-                        handled = handled || args.Handled;
-                        //if (args.Handled)
-                        //	break;
-                        _previousRotateArgs[listener] = new RotateEventArgs(args, listener);
+                        RotateEventArgs args = new AndroidRotateEventArgs(ev, coords, previousArgs, _view, listener);
+                        if (listener != null && (listener.HandlesRotating || listener.HandlesRotated))
+                        {
+                            listener.OnRotated(args);
+                            handled = handled || args.Handled;
+                            //if (args.Handled)
+                            //	break;
+                            _previousRotateArgs[listener] = new RotateEventArgs(args, listener);
+                        }
                     }
                     handler = NativeGestureHandler.InstanceForElement(handler.Element?.Parent);
                 }
