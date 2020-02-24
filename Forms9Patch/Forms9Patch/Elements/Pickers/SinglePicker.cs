@@ -245,8 +245,15 @@ namespace Forms9Patch
             else if (e.PropertyName == BasePicker.IndexProperty.PropertyName)
             {
                 Index = _basePicker.Index;
-                if (ItemsSource != null && ItemsSource.Count > Index)
-                    SelectedItem = ItemsSource[Index];
+                try
+                {
+                    if (ItemsSource != null && Index > -1 && ItemsSource.Count > Index)
+                        SelectedItem = ItemsSource[Index];
+                }
+                catch(Exception)
+                {
+                    SelectedItem = null;
+                }
             }
         }
     }
