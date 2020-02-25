@@ -35,7 +35,7 @@ namespace Forms9Patch
         /// <param name="lineNumber"></param>
         /// <param name="methodName"></param>
         /// <returns></returns>
-        public static async Task RequestUserHelp(Exception e, [System.Runtime.CompilerServices.CallerFilePath] string path = null, [System.Runtime.CompilerServices.CallerLineNumber] int lineNumber = -1, [System.Runtime.CompilerServices.CallerMemberName] string methodName = null)
+        public static async Task RequestUserHelp(Exception e, string additionalInfo= null, [System.Runtime.CompilerServices.CallerFilePath] string path = null, [System.Runtime.CompilerServices.CallerLineNumber] int lineNumber = -1, [System.Runtime.CompilerServices.CallerMemberName] string methodName = null)
         {
             if (IsRequestUserHelpEnabled)
             {
@@ -45,7 +45,20 @@ namespace Forms9Patch
                     await popup.WaitForPoppedAsync();
                     if (popup.PermissionState == PermissionState.Ok)
                     {
-                        var info = "Exception Type: " + e.GetType() + "\n\nMessage: " + e.Message + "\n\nMethod: " + methodName + "\n\nLine Number: " + lineNumber + "\n\nPath: " + path + "\n\nCall Stack Trace: " + e.StackTrace;
+                        var info = "";
+                        if (!(e is null))
+                            info += "Exception Type: " + e.GetType() + "\n\nMessage: " + e.Message;
+                        info += "\n\nMethod: " + methodName + "\n\nLine Number: " + lineNumber + "\n\nPath: " + path;
+                        if (!string.IsNullOrWhiteSpace(additionalInfo))
+                            info += "\n\nAdditionalInfo: " + additionalInfo;
+                        info += "\n\nDeviceType: " + Xamarin.Essentials.DeviceInfo.DeviceType;
+                        info += "\n\nIdiom: " + Xamarin.Essentials.DeviceInfo.Idiom;
+                        info += "\n\nManufacturer : " + Xamarin.Essentials.DeviceInfo.Manufacturer;
+                        info += "\n\nModel : " + Xamarin.Essentials.DeviceInfo.Model;
+                        info += "\n\nPlatform : " + Xamarin.Essentials.DeviceInfo.Platform;
+                        info += "\n\nVersion : " + Xamarin.Essentials.DeviceInfo.Version;
+                        info += "\n\nVersionString : " + Xamarin.Essentials.DeviceInfo.VersionString;
+                        info += "\n\nStack Trace: " + (e?.StackTrace ?? Environment.StackTrace);
                         try
                         {
                             var message = new EmailMessage
