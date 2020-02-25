@@ -85,7 +85,7 @@ namespace Forms9Patch.UWP
                 }
                 catch (Exception e)
                 {
-                    Forms9Patch.Settings.RequestUserHelp(e);
+                    Forms9Patch.Debug.RequestUserHelp(e);
                 }
                 return new List<IMimeItem>();
             }

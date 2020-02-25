@@ -218,21 +218,21 @@ namespace Forms9Patch.UWP
 
         internal static void DebugMetricsForLabel(this TextBlock textBlock)
         {
-            Debug.WriteLine("TextBlock: " + textBlock.Text);
+            System.Diagnostics.Debug.WriteLine("TextBlock: " + textBlock.Text);
             textBlock.GetFontMetrics().DebugMetricsForFontSize(textBlock.FontSize);
-            Debug.WriteLine("\t LineHeight: " + textBlock.LineHeight);
-            Debug.WriteLine("");
+            System.Diagnostics.Debug.WriteLine("\t LineHeight: " + textBlock.LineHeight);
+            System.Diagnostics.Debug.WriteLine("");
         }
 
         internal static void DebugMetricsForFontSize(this FontMetrics metric, double fontSize)
         {
-            Debug.WriteLine("Metrics for FontSize: " + fontSize);
-            Debug.WriteLine("\t Ascent: " + metric.AscentForFontSize(fontSize));
-            Debug.WriteLine("\t Descent: " + metric.DescentForFontSize(fontSize));
-            Debug.WriteLine("\t CapHeight: " + metric.CapHeightForFontSize(fontSize));
-            Debug.WriteLine("\t XHeight: " + metric.XHeightForFontSize(fontSize));
-            Debug.WriteLine("\t LineGap: " + metric.LineGapForFontSize(fontSize));
-            Debug.WriteLine("\t LineHeight: " + metric.LineHeightForFontSize(fontSize));
+            System.Diagnostics.Debug.WriteLine("Metrics for FontSize: " + fontSize);
+            System.Diagnostics.Debug.WriteLine("\t Ascent: " + metric.AscentForFontSize(fontSize));
+            System.Diagnostics.Debug.WriteLine("\t Descent: " + metric.DescentForFontSize(fontSize));
+            System.Diagnostics.Debug.WriteLine("\t CapHeight: " + metric.CapHeightForFontSize(fontSize));
+            System.Diagnostics.Debug.WriteLine("\t XHeight: " + metric.XHeightForFontSize(fontSize));
+            System.Diagnostics.Debug.WriteLine("\t LineGap: " + metric.LineGapForFontSize(fontSize));
+            System.Diagnostics.Debug.WriteLine("\t LineHeight: " + metric.LineHeightForFontSize(fontSize));
 
 
 

@@ -19,7 +19,7 @@ namespace Forms9Patch.UWP
                 var widthString = await webView.InvokeScriptAsync("eval", new[] { "document.body.scrollWidth.toString()" });
                 int.TryParse(widthString, out contentWidth);
 
-                Debug.WriteLine("elementHeight = " + webView.Height);
+                System.Diagnostics.Debug.WriteLine("elementHeight = " + webView.Height);
 
                 //var rect = await webView.InvokeScriptAsync("pizzx", new[] { "document.getElementById( 'rasta' ).clientHeight.toString()" });
                 // ask the content its height
@@ -34,7 +34,7 @@ namespace Forms9Patch.UWP
             }
             catch (Exception e)
             {
-                await Forms9Patch.Settings.RequestUserHelp(e);
+                await Forms9Patch.Debug.RequestUserHelp(e);
             }
             return new SizeI(contentWidth, contentHeight);
         }
