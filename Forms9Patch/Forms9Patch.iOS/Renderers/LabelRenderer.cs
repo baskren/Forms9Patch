@@ -248,7 +248,7 @@ namespace Forms9Patch.iOS
         {
             var font = label.Font.WithSize(fontSize);
             CGSize labelSize = CGSize.Empty;
-            var constraintSize = new CGSize(widthConstraint, double.PositiveInfinity);
+            var constraintSize = new CGSize(Math.Floor(widthConstraint), double.PositiveInfinity);
             if (Element is Label element)
             {
                 if (element.Text != null)

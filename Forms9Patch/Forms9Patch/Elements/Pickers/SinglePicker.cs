@@ -246,7 +246,12 @@ namespace Forms9Patch
             {
                 Index = _basePicker.Index;
                 if (ItemsSource != null && ItemsSource.Count > Index)
-                    SelectedItem = ItemsSource[Index];
+                {
+                    if (Index > -1)
+                        SelectedItem = ItemsSource[Index];
+                    else
+                        SelectedItem = null;
+                }
             }
         }
     }

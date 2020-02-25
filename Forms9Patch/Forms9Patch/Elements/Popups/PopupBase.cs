@@ -556,7 +556,6 @@ namespace Forms9Patch
         {
             if (!_disposed && disposing)
             {
-                BreadCrumbs.Add(GetType(), null);
                 _disposed = true;
 
                 Cancelled = null;
@@ -653,7 +652,6 @@ namespace Forms9Patch
         protected override bool OnBackgroundClicked()
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + ReflectionExtensions.CallerMemberName());
-            BreadCrumbs.Add(GetType(), null);
             var isClose = base.OnBackgroundClicked();
             if (isClose)
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
@@ -754,7 +752,6 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnAppearingAnimationBegin()
         {
-            BreadCrumbs.Add(GetType(), null);
             Recursion.Enter(GetType().ToString(), _id.ToString());
             _isPopped = false;
             _popAnimationComplete = false;
@@ -772,7 +769,6 @@ namespace Forms9Patch
 #pragma warning restore RECS0165 // Asynchronous methods should return a Task instead of void
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + ReflectionExtensions.CallerMemberName());
-            BreadCrumbs.Add(GetType(), null);
             Recursion.Enter(GetType().ToString(), _id.ToString());
             _isPopping = false;
             _isPopped = false;
@@ -803,7 +799,6 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnDisappearingAnimationBegin()
         {
-            BreadCrumbs.Add(GetType(), null);
             Recursion.Enter(GetType().ToString(), _id.ToString());
             _isPopped = false;
             _popAnimationComplete = false;
@@ -822,7 +817,6 @@ namespace Forms9Patch
         protected override void OnDisappearingAnimationEnd()
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + ReflectionExtensions.CallerMemberName());
-            BreadCrumbs.Add(GetType(), null);
             Recursion.Enter(GetType().ToString(), _id.ToString());
             _popAnimationComplete = true;
             base.OnDisappearingAnimationEnd();
@@ -874,7 +868,6 @@ namespace Forms9Patch
             //    return;
             if (P42.Utils.Environment.IsOnMainThread)
             {
-                BreadCrumbs.Add(GetType(), null);
                 Recursion.Enter(GetType().ToString(), _id.ToString());
                 //_isPushing = true;
                 //while (_isPoping) await Task.Delay(100);
@@ -934,7 +927,6 @@ namespace Forms9Patch
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + ReflectionExtensions.CallerMemberName());
             if (P42.Utils.Environment.IsOnMainThread)
             {
-                BreadCrumbs.Add(GetType(), null);
                 Recursion.Enter(GetType(), _id);
                 _isPopping = true;
                 IsVisible = false;
