@@ -47,6 +47,7 @@ namespace Forms9Patch.UWP
         Task<IRandomAccessStreamWithContentType> moderateMarginsIconTask;
         Task<IRandomAccessStreamWithContentType> narrowMarginsIconTask;
 
+        /*
         /// <summary>
         ///  A reference back to the scenario page used to access XAML elements on the scenario page
         /// </summary>
@@ -59,6 +60,7 @@ namespace Forms9Patch.UWP
                 return content;
             }
         }
+        */
 
         /// <summary>
         ///  A hidden canvas used to hold pages we wish to print
@@ -247,17 +249,20 @@ namespace Forms9Patch.UWP
                 printDetailedOptions.OptionChanged += OnPrintDetailOptionChanged;
 
                 // Print Task event handler is invoked when the print job is completed.
-                printTask.Completed += async (s, args) =>
+                printTask.Completed += (s, args) =>
                 {
-                    // Notify the user when the print operation fails.
-                    if (args.Completion == PrintTaskCompletion.Failed)
+                    Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
                     {
-                        await ApplicationPage.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-                        {
-                            //MainPage.Current.NotifyUser("Failed to print.", NotifyType.ErrorMessage);
-                            using (Forms9Patch.Toast.Create(null, "Failed to print.")) { }
-                        });
-                    }
+                        // Notify the user when the print operation fails.
+                        if (args.Completion == PrintTaskCompletion.Failed)
+                            using (Toast.Create("Printing Failed", null)) { }
+                        //else if (args.Completion == PrintTaskCompletion.Canceled)
+                        //    using (Toast.Create("Printing Cancelled", null)) { }
+                        else if (args.Completion == PrintTaskCompletion.Submitted)
+                            using (Toast.Create("Printing ...", "Print job submitted to printer.", TimeSpan.FromSeconds(5))) { }
+                        else if (args.Completion == PrintTaskCompletion.Abandoned)
+                            using (Toast.Create("Printing Abandoned", null)) { }
+                    });
                     UnregisterForPrinting();
                 };
 
