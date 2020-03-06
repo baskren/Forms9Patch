@@ -845,8 +845,8 @@ namespace Forms9Patch
                 _processingItemTapped = true;
                 _listView.SelectedItem = null;
 
-                var tappedItemWrapper = e.ItemWrapper;
-                var group = tappedItemWrapper.Parent ?? (GroupWrapper)_listView.ItemsSource;
+                var tappedItemWrapper = e?.ItemWrapper;
+                //var group = tappedItemWrapper.Parent ?? (GroupWrapper)_listView.ItemsSource;
 
                 if (tappedItemWrapper?.Source != null)
                 {
@@ -858,13 +858,13 @@ namespace Forms9Patch
                     {
                         case GroupToggleBehavior.None:
                             _internalAddRemove = true;
-                            SelectedItems.Clear();
+                            SelectedItems?.Clear();
                             _internalAddRemove = false;
                             SelectedItem = null;
                             if (_selectedItemWrapper != null)
                                 _selectedItemWrapper.IsSelected = false;
                             _selectedItemWrapper = null;
-                            if (_selectedItemWrappers.Count > 0)
+                            if (_selectedItemWrappers != null && _selectedItemWrappers.Count > 0)
                             {
                                 foreach (var item in _selectedItemWrappers)
                                     item.IsSelected = false;
@@ -880,7 +880,7 @@ namespace Forms9Patch
                             }
                             break;
                         case GroupToggleBehavior.Multiselect:
-                            if (_selectedItemWrappers.Contains(tappedItemWrapper))
+                            if (_selectedItemWrappers?.Contains(tappedItemWrapper) ?? false)
                             {
                                 if (_listView.SelectedItem == tappedItemWrapper)
                                     _listView.SelectedItem = null;
