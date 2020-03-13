@@ -25,7 +25,7 @@ namespace Forms9Patch.iOS
         /// <param name="jobName">Job name.</param>
         public void Print(WebView viewToPrint, string jobName)
         {
-            if (viewToPrint.Effects.Any(e => e is Forms9Patch.PrintableEffect) && viewToPrint.GetValue(Forms9Patch.iOS.PrintableEffect.ActualSourceProperty) is WebViewSource actualSource)
+            if (viewToPrint.Effects.Any(e => e is Forms9Patch.WebViewPrintEffect) && viewToPrint.ActualSource() is WebViewSource actualSource)
             {
                 var printInfo = UIPrintInfo.PrintInfo;
 
@@ -76,7 +76,7 @@ namespace Forms9Patch.iOS
                 });
             }
             else
-                throw new Exception("Cannot print WebView in iOS without first calling Forms9Patch.PrintableEffect.AttachTo(webView) BEFORE setting webview.Source");
+                throw new Exception("Cannot print WebView in iOS without first calling Forms9Patch.WebViewPrintEffect.AttachTo(webView) BEFORE setting webview.Source");
 
         }
 

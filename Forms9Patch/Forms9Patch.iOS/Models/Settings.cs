@@ -42,6 +42,9 @@ namespace Forms9Patch.iOS
             LinkAssemblies();
 
             AppDelegate = appDelegate;
+
+            Forms9Patch.WebViewPrintEffect.ButtheadPath = $"file://{NSBundle.MainBundle.BundlePath}/";
+
             if (licenseKey != null)
                 System.Console.WriteLine("Forms9Patch is now open source using the MIT license ... so it's free, including for commercial use.  Why?  The more people who use it, the faster bugs will be found and fixed - which helps me and you.  So, please help get the word out - tell your friends, post on social media, write about it on the bathroom walls at work!  If you have purchased a license from me, please don't get mad - you did a good deed.  They really were not that expensive and you did a great service in encouraging me keep working on Forms9Patch.");
             P42.Utils.iOS.Settings.Init();
@@ -82,7 +85,6 @@ namespace Forms9Patch.iOS
                 var e1 = new EmbeddedResourceFontEffect();
                 var e2 = new PopupLayerEffect();
                 var e3 = new SliderStepSizeEffect();
-                var e4 = new WebViewFixEffect();
 
                 var c1 = new ClipboardService();
                 var c2 = new MimeItemCollection();

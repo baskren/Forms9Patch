@@ -15,6 +15,9 @@ namespace Forms9Patch
 
         static IPrintService _service;
 
+        internal static WebViewSource ActualSource(this WebView webView)
+            => (WebViewSource)webView.GetValue(Forms9Patch.WebViewPrintEffect.ActualSourceProperty);
+
         /// <summary>
         /// Print the specified webview and jobName.
         /// </summary>

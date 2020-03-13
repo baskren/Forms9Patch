@@ -89,7 +89,6 @@
     <Compile Include="Effects\CustomFontEffect.cs" />
     <Compile Include="Effects\PopupLayerEffect.cs" />
     <Compile Include="Effects\SliderStepSizeEffect.cs" />
-    <Compile Include="Effects\WebViewFixEffect.cs" />
     <Compile Include="Extensions\AlignmentExtensions.cs" />
     <Compile Include="Extensions\Debug.cs" />
     <Compile Include="Extensions\FontExtensions.cs" />
@@ -123,7 +122,6 @@
     <Compile Include="Popup\PopupPageRenderer.cs" />
     <Compile Include="Effects\EntryClearButtonEffect.cs" />
     <Compile Include="Services\ToPdfService.cs" />
-    <Compile Include="Effects\PrintableEffect.cs" />
   </ItemGroup>
 
   <!-- NuGet Packages-->
