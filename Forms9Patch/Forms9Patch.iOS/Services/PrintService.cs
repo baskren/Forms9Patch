@@ -2,6 +2,7 @@
 using System.Linq;
 using Foundation;
 using UIKit;
+using WebKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
@@ -24,36 +25,59 @@ namespace Forms9Patch.iOS
         /// <param name="jobName">Job name.</param>
         public void Print(WebView viewToPrint, string jobName)
         {
-            var printInfo = UIPrintInfo.PrintInfo;
-
-            printInfo.JobName = jobName;
-            printInfo.Duplex = UIPrintInfoDuplex.None;
-            printInfo.OutputType = UIPrintInfoOutputType.General;
-
-            var printController = UIPrintInteractionController.SharedPrintController;
-            printController.ShowsPageRange = true;
-            printController.ShowsPaperSelectionForLoadedPapers = true;
-            printController.PrintInfo = printInfo;
-            printController.Delegate = this;
-
-            if (viewToPrint.Source is HtmlWebViewSource htmlSource)
-                printController.PrintFormatter = new UIMarkupTextPrintFormatter(htmlSource.Html);
-            else if (viewToPrint.Source is UrlWebViewSource urlSource
-                && urlSource.Url is string url
-                && !string.IsNullOrWhiteSpace(url)
-                && Foundation.NSUrl.FromString(url) is Foundation.NSUrl candidateUrl
-                && candidateUrl.Scheme != null)
+            if (viewToPrint.Effects.Any(e => e is Forms9Patch.PrintableEffect) && viewToPrint.GetValue(Forms9Patch.iOS.PrintableEffect.ActualSourceProperty) is WebViewSource actualSource)
             {
-                var printData = Foundation.NSData.FromUrl(candidateUrl);
-                printController.PrintingItem = printData;
+                var printInfo = UIPrintInfo.PrintInfo;
+
+                printInfo.JobName = jobName;
+                printInfo.Duplex = UIPrintInfoDuplex.None;
+                printInfo.OutputType = UIPrintInfoOutputType.General;
+
+                var printController = UIPrintInteractionController.SharedPrintController;
+                printController.ShowsPageRange = true;
+                printController.ShowsPaperSelectionForLoadedPapers = true;
+                printController.PrintInfo = printInfo;
+                printController.Delegate = this;
+
+                string html = null;
+
+                if (actualSource is HtmlWebViewSource htmlSource)
+                    html = htmlSource.Html;
+                else if (actualSource is EmbeddedHtmlViewSource embeddedHtmlViewSource)
+                    html = embeddedHtmlViewSource.Html;
+                /*
+                else if (actualSource is UrlWebViewSource urlSource
+                    && urlSource.Url is string url
+                    && !string.IsNullOrWhiteSpace(url)
+                    && url.StartsWith($"file://", StringComparison.OrdinalIgnoreCase))
+                {
+                    var path = url.Substring(7).TrimEnd('/');
+                        html = System.IO.File.ReadAllText(path);
+                }
+                */
+
+                if (!string.IsNullOrWhiteSpace(html))
+                    printController.PrintFormatter = new UIMarkupTextPrintFormatter(html);
+                else if (actualSource is UrlWebViewSource urlSource
+                    && urlSource.Url is string url
+                    && !string.IsNullOrWhiteSpace(url)
+                    && Foundation.NSUrl.FromString(url) is Foundation.NSUrl candidateUrl
+                    && candidateUrl.Scheme != null
+                    && NSData.FromUrl(candidateUrl) is NSData printData)
+                {
+                    printController.PrintingItem = printData;
+                }
+                else
+                    printController.PrintFormatter = Platform.CreateRenderer(viewToPrint).NativeView.ViewPrintFormatter;
+
+                printController.Present(true, (printInteractionController, completed, error) =>
+                {
+                    System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": PRESENTED completed[" + completed + "] error[" + error + "]");
+                });
             }
             else
-                printController.PrintFormatter = Platform.CreateRenderer(viewToPrint).NativeView.ViewPrintFormatter;
+                throw new Exception("Cannot print WebView in iOS without first calling Forms9Patch.PrintableEffect.AttachTo(webView) BEFORE setting webview.Source");
 
-            printController.Present(true, (printInteractionController, completed, error) =>
-            {
-                System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": PRESENTED completed[" + completed + "] error[" + error + "]");
-            });
         }
 
         /// <summary>
