@@ -33,7 +33,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <NoWarn>;2008</NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -212,7 +212,7 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.8" />
     <PackageReference Include="Xamarin.Forms" Version="4.4.0.991640" />
-    <PackageReference Include="Forms9Patch" Version="2.2.3" />
+    <PackageReference Include="Forms9Patch" Version="2.2.5-beta1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forms9PatchDemo.NuGet\Forms9PatchDemo.NuGet.csproj">

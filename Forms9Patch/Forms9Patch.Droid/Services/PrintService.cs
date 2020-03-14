@@ -13,7 +13,6 @@ namespace Forms9Patch.Droid
     public class PrintService : IPrintService
     {
         Forms9Patch.ActivityIndicatorPopup _activityIndicatorPopup;
-        IVisualElementRenderer _existingRenderer;
 
         public void Print(WebView viewToPrint, string jobName)
         {

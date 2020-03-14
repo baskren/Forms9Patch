@@ -202,7 +202,7 @@ namespace Forms9Patch.UWP
         protected virtual void PrintTaskRequested(PrintManager sender, PrintTaskRequestedEventArgs e)
         {
             PrintTask printTask = null;
-            printTask = e.Request.CreatePrintTask(JobName, async sourceRequestedArgs =>
+            printTask = e.Request.CreatePrintTask(JobName, sourceRequestedArgs =>
             {
                 var deferral = sourceRequestedArgs.GetDeferral();
 

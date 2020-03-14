@@ -106,6 +106,7 @@ namespace Forms9Patch.Droid
         {
             if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Kitkat)
             {
+                await Task.Delay(5);
                 var builder = new PrintAttributes.Builder();
                 builder.SetMediaSize(PrintAttributes.MediaSize.NaLetter);
                 builder.SetResolution(new PrintAttributes.Resolution("pdf", "pdf", 600, 600));

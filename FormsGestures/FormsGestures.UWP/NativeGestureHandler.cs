@@ -134,8 +134,6 @@ namespace FormsGestures.UWP
 
 		int _numberOfTaps;
 
-		System.Timers.Timer TappedTimer;
-
 		DateTime _onDownDateTime = DateTime.MinValue;
 
 		System.Timers.Timer LongPressTimer;

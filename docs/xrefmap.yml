@@ -3638,6 +3638,49 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.DataTemplateSelector.Add
   nameWithType: DataTemplateSelector.Add
+- uid: Forms9Patch.Debug
+  name: Debug
+  href: api/Forms9Patch.Debug.html
+  commentId: T:Forms9Patch.Debug
+  fullName: Forms9Patch.Debug
+  nameWithType: Debug
+- uid: Forms9Patch.Debug.IsRequestUserHelpEnabled
+  name: IsRequestUserHelpEnabled
+  href: api/Forms9Patch.Debug.html#Forms9Patch_Debug_IsRequestUserHelpEnabled
+  commentId: F:Forms9Patch.Debug.IsRequestUserHelpEnabled
+  fullName: Forms9Patch.Debug.IsRequestUserHelpEnabled
+  nameWithType: Debug.IsRequestUserHelpEnabled
+- uid: Forms9Patch.Debug.RequestUserHelp(System.Exception,System.String,System.String,System.Int32,System.String)
+  name: RequestUserHelp(Exception, String, String, Int32, String)
+  href: api/Forms9Patch.Debug.html#Forms9Patch_Debug_RequestUserHelp_System_Exception_System_String_System_String_System_Int32_System_String_
+  commentId: M:Forms9Patch.Debug.RequestUserHelp(System.Exception,System.String,System.String,System.Int32,System.String)
+  fullName: Forms9Patch.Debug.RequestUserHelp(System.Exception, System.String, System.String, System.Int32, System.String)
+  nameWithType: Debug.RequestUserHelp(Exception, String, String, Int32, String)
+- uid: Forms9Patch.Debug.RequestUserHelp*
+  name: RequestUserHelp
+  href: api/Forms9Patch.Debug.html#Forms9Patch_Debug_RequestUserHelp_
+  commentId: Overload:Forms9Patch.Debug.RequestUserHelp
+  isSpec: "True"
+  fullName: Forms9Patch.Debug.RequestUserHelp
+  nameWithType: Debug.RequestUserHelp
+- uid: Forms9Patch.Debug.RequestUserHelpEmailToAddress
+  name: RequestUserHelpEmailToAddress
+  href: api/Forms9Patch.Debug.html#Forms9Patch_Debug_RequestUserHelpEmailToAddress
+  commentId: F:Forms9Patch.Debug.RequestUserHelpEmailToAddress
+  fullName: Forms9Patch.Debug.RequestUserHelpEmailToAddress
+  nameWithType: Debug.RequestUserHelpEmailToAddress
+- uid: Forms9Patch.Debug.RequestUserHelpMissiveMessage
+  name: RequestUserHelpMissiveMessage
+  href: api/Forms9Patch.Debug.html#Forms9Patch_Debug_RequestUserHelpMissiveMessage
+  commentId: F:Forms9Patch.Debug.RequestUserHelpMissiveMessage
+  fullName: Forms9Patch.Debug.RequestUserHelpMissiveMessage
+  nameWithType: Debug.RequestUserHelpMissiveMessage
+- uid: Forms9Patch.Debug.RequestUserHelpMissiveTitle
+  name: RequestUserHelpMissiveTitle
+  href: api/Forms9Patch.Debug.html#Forms9Patch_Debug_RequestUserHelpMissiveTitle
+  commentId: F:Forms9Patch.Debug.RequestUserHelpMissiveTitle
+  fullName: Forms9Patch.Debug.RequestUserHelpMissiveTitle
+  nameWithType: Debug.RequestUserHelpMissiveTitle
 - uid: Forms9Patch.Display
   name: Display
   href: api/Forms9Patch.Display.html
@@ -5428,6 +5471,38 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.EntryClearButtonEffect.ApplyTo
   nameWithType: EntryClearButtonEffect.ApplyTo
+- uid: Forms9Patch.EntryNoUnderlineEffect
+  name: EntryNoUnderlineEffect
+  href: api/Forms9Patch.EntryNoUnderlineEffect.html
+  commentId: T:Forms9Patch.EntryNoUnderlineEffect
+  fullName: Forms9Patch.EntryNoUnderlineEffect
+  nameWithType: EntryNoUnderlineEffect
+- uid: Forms9Patch.EntryNoUnderlineEffect.#ctor
+  name: EntryNoUnderlineEffect()
+  href: api/Forms9Patch.EntryNoUnderlineEffect.html#Forms9Patch_EntryNoUnderlineEffect__ctor
+  commentId: M:Forms9Patch.EntryNoUnderlineEffect.#ctor
+  fullName: Forms9Patch.EntryNoUnderlineEffect.EntryNoUnderlineEffect()
+  nameWithType: EntryNoUnderlineEffect.EntryNoUnderlineEffect()
+- uid: Forms9Patch.EntryNoUnderlineEffect.#ctor*
+  name: EntryNoUnderlineEffect
+  href: api/Forms9Patch.EntryNoUnderlineEffect.html#Forms9Patch_EntryNoUnderlineEffect__ctor_
+  commentId: Overload:Forms9Patch.EntryNoUnderlineEffect.#ctor
+  isSpec: "True"
+  fullName: Forms9Patch.EntryNoUnderlineEffect.EntryNoUnderlineEffect
+  nameWithType: EntryNoUnderlineEffect.EntryNoUnderlineEffect
+- uid: Forms9Patch.EntryNoUnderlineEffect.ApplyTo(Xamarin.Forms.Entry)
+  name: ApplyTo(Entry)
+  href: api/Forms9Patch.EntryNoUnderlineEffect.html#Forms9Patch_EntryNoUnderlineEffect_ApplyTo_Xamarin_Forms_Entry_
+  commentId: M:Forms9Patch.EntryNoUnderlineEffect.ApplyTo(Xamarin.Forms.Entry)
+  fullName: Forms9Patch.EntryNoUnderlineEffect.ApplyTo(Xamarin.Forms.Entry)
+  nameWithType: EntryNoUnderlineEffect.ApplyTo(Entry)
+- uid: Forms9Patch.EntryNoUnderlineEffect.ApplyTo*
+  name: ApplyTo
+  href: api/Forms9Patch.EntryNoUnderlineEffect.html#Forms9Patch_EntryNoUnderlineEffect_ApplyTo_
+  commentId: Overload:Forms9Patch.EntryNoUnderlineEffect.ApplyTo
+  isSpec: "True"
+  fullName: Forms9Patch.EntryNoUnderlineEffect.ApplyTo
+  nameWithType: EntryNoUnderlineEffect.ApplyTo
 - uid: Forms9Patch.ExtendedElementShape
   name: ExtendedElementShape
   href: api/Forms9Patch.ExtendedElementShape.html
@@ -15861,6 +15936,12 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.Toast.Toast
   nameWithType: Toast.Toast
+- uid: Forms9Patch.Toast.ActionTagTapped
+  name: ActionTagTapped
+  href: api/Forms9Patch.Toast.html#Forms9Patch_Toast_ActionTagTapped
+  commentId: E:Forms9Patch.Toast.ActionTagTapped
+  fullName: Forms9Patch.Toast.ActionTagTapped
+  nameWithType: Toast.ActionTagTapped
 - uid: Forms9Patch.Toast.Create(System.String,System.String,System.TimeSpan)
   name: Create(String, String, TimeSpan)
   href: api/Forms9Patch.Toast.html#Forms9Patch_Toast_Create_System_String_System_String_System_TimeSpan_
@@ -16068,6 +16149,44 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ToPngService.ToPngAsync
   nameWithType: ToPngService.ToPngAsync
+- uid: Forms9Patch.WebViewPrintEffect
+  name: WebViewPrintEffect
+  href: api/Forms9Patch.WebViewPrintEffect.html
+  commentId: T:Forms9Patch.WebViewPrintEffect
+  fullName: Forms9Patch.WebViewPrintEffect
+  nameWithType: WebViewPrintEffect
+- uid: Forms9Patch.WebViewPrintEffect.#ctor(Xamarin.Forms.WebView)
+  name: WebViewPrintEffect(WebView)
+  href: api/Forms9Patch.WebViewPrintEffect.html#Forms9Patch_WebViewPrintEffect__ctor_Xamarin_Forms_WebView_
+  commentId: M:Forms9Patch.WebViewPrintEffect.#ctor(Xamarin.Forms.WebView)
+  fullName: Forms9Patch.WebViewPrintEffect.WebViewPrintEffect(Xamarin.Forms.WebView)
+  nameWithType: WebViewPrintEffect.WebViewPrintEffect(WebView)
+- uid: Forms9Patch.WebViewPrintEffect.#ctor*
+  name: WebViewPrintEffect
+  href: api/Forms9Patch.WebViewPrintEffect.html#Forms9Patch_WebViewPrintEffect__ctor_
+  commentId: Overload:Forms9Patch.WebViewPrintEffect.#ctor
+  isSpec: "True"
+  fullName: Forms9Patch.WebViewPrintEffect.WebViewPrintEffect
+  nameWithType: WebViewPrintEffect.WebViewPrintEffect
+- uid: Forms9Patch.WebViewPrintEffect.ActualSourceProperty
+  name: ActualSourceProperty
+  href: api/Forms9Patch.WebViewPrintEffect.html#Forms9Patch_WebViewPrintEffect_ActualSourceProperty
+  commentId: F:Forms9Patch.WebViewPrintEffect.ActualSourceProperty
+  fullName: Forms9Patch.WebViewPrintEffect.ActualSourceProperty
+  nameWithType: WebViewPrintEffect.ActualSourceProperty
+- uid: Forms9Patch.WebViewPrintEffect.ApplyTo(Xamarin.Forms.WebView)
+  name: ApplyTo(WebView)
+  href: api/Forms9Patch.WebViewPrintEffect.html#Forms9Patch_WebViewPrintEffect_ApplyTo_Xamarin_Forms_WebView_
+  commentId: M:Forms9Patch.WebViewPrintEffect.ApplyTo(Xamarin.Forms.WebView)
+  fullName: Forms9Patch.WebViewPrintEffect.ApplyTo(Xamarin.Forms.WebView)
+  nameWithType: WebViewPrintEffect.ApplyTo(WebView)
+- uid: Forms9Patch.WebViewPrintEffect.ApplyTo*
+  name: ApplyTo
+  href: api/Forms9Patch.WebViewPrintEffect.html#Forms9Patch_WebViewPrintEffect_ApplyTo_
+  commentId: Overload:Forms9Patch.WebViewPrintEffect.ApplyTo
+  isSpec: "True"
+  fullName: Forms9Patch.WebViewPrintEffect.ApplyTo
+  nameWithType: WebViewPrintEffect.ApplyTo
 - uid: FormsGestures
   name: FormsGestures
   href: api/FormsGestures.html
@@ -19420,6 +19539,25 @@ references:
   isSpec: "True"
   fullName: P42.Utils.BreadCrumbs.Add
   nameWithType: BreadCrumbs.Add
+- uid: P42.Utils.BreadCrumbs.AddException(System.Exception,System.String,System.String,System.String,System.Int32,System.String)
+  name: AddException(Exception, String, String, String, Int32, String)
+  href: api/P42.Utils.BreadCrumbs.html#P42_Utils_BreadCrumbs_AddException_System_Exception_System_String_System_String_System_String_System_Int32_System_String_
+  commentId: M:P42.Utils.BreadCrumbs.AddException(System.Exception,System.String,System.String,System.String,System.Int32,System.String)
+  fullName: P42.Utils.BreadCrumbs.AddException(System.Exception, System.String, System.String, System.String, System.Int32, System.String)
+  nameWithType: BreadCrumbs.AddException(Exception, String, String, String, Int32, String)
+- uid: P42.Utils.BreadCrumbs.AddException(System.Exception,System.Type,System.Object,System.String,System.Int32,System.String)
+  name: AddException(Exception, Type, Object, String, Int32, String)
+  href: api/P42.Utils.BreadCrumbs.html#P42_Utils_BreadCrumbs_AddException_System_Exception_System_Type_System_Object_System_String_System_Int32_System_String_
+  commentId: M:P42.Utils.BreadCrumbs.AddException(System.Exception,System.Type,System.Object,System.String,System.Int32,System.String)
+  fullName: P42.Utils.BreadCrumbs.AddException(System.Exception, System.Type, System.Object, System.String, System.Int32, System.String)
+  nameWithType: BreadCrumbs.AddException(Exception, Type, Object, String, Int32, String)
+- uid: P42.Utils.BreadCrumbs.AddException*
+  name: AddException
+  href: api/P42.Utils.BreadCrumbs.html#P42_Utils_BreadCrumbs_AddException_
+  commentId: Overload:P42.Utils.BreadCrumbs.AddException
+  isSpec: "True"
+  fullName: P42.Utils.BreadCrumbs.AddException
+  nameWithType: BreadCrumbs.AddException
 - uid: P42.Utils.BreadCrumbs.Clear
   name: Clear()
   href: api/P42.Utils.BreadCrumbs.html#P42_Utils_BreadCrumbs_Clear
@@ -19445,12 +19583,18 @@ references:
   isSpec: "True"
   fullName: P42.Utils.BreadCrumbs.Clear
   nameWithType: BreadCrumbs.Clear
-- uid: P42.Utils.BreadCrumbs.DelegateAction
-  name: DelegateAction
-  href: api/P42.Utils.BreadCrumbs.html#P42_Utils_BreadCrumbs_DelegateAction
-  commentId: F:P42.Utils.BreadCrumbs.DelegateAction
-  fullName: P42.Utils.BreadCrumbs.DelegateAction
-  nameWithType: BreadCrumbs.DelegateAction
+- uid: P42.Utils.BreadCrumbs.EventAction
+  name: EventAction
+  href: api/P42.Utils.BreadCrumbs.html#P42_Utils_BreadCrumbs_EventAction
+  commentId: F:P42.Utils.BreadCrumbs.EventAction
+  fullName: P42.Utils.BreadCrumbs.EventAction
+  nameWithType: BreadCrumbs.EventAction
+- uid: P42.Utils.BreadCrumbs.ExceptionAction
+  name: ExceptionAction
+  href: api/P42.Utils.BreadCrumbs.html#P42_Utils_BreadCrumbs_ExceptionAction
+  commentId: F:P42.Utils.BreadCrumbs.ExceptionAction
+  fullName: P42.Utils.BreadCrumbs.ExceptionAction
+  nameWithType: BreadCrumbs.ExceptionAction
 - uid: P42.Utils.BreadCrumbs.IsEnabled
   name: IsEnabled
   href: api/P42.Utils.BreadCrumbs.html#P42_Utils_BreadCrumbs_IsEnabled
@@ -19934,19 +20078,6 @@ references:
   isSpec: "True"
   fullName: P42.Utils.DiskSpace.Free
   nameWithType: DiskSpace.Free
-- uid: P42.Utils.DiskSpace.Humanize(System.Double,System.Int32,System.Boolean)
-  name: Humanize(Double, Int32, Boolean)
-  href: api/P42.Utils.DiskSpace.html#P42_Utils_DiskSpace_Humanize_System_Double_System_Int32_System_Boolean_
-  commentId: M:P42.Utils.DiskSpace.Humanize(System.Double,System.Int32,System.Boolean)
-  fullName: P42.Utils.DiskSpace.Humanize(System.Double, System.Int32, System.Boolean)
-  nameWithType: DiskSpace.Humanize(Double, Int32, Boolean)
-- uid: P42.Utils.DiskSpace.Humanize*
-  name: Humanize
-  href: api/P42.Utils.DiskSpace.html#P42_Utils_DiskSpace_Humanize_
-  commentId: Overload:P42.Utils.DiskSpace.Humanize
-  isSpec: "True"
-  fullName: P42.Utils.DiskSpace.Humanize
-  nameWithType: DiskSpace.Humanize
 - uid: P42.Utils.DiskSpace.Size
   name: Size
   href: api/P42.Utils.DiskSpace.html#P42_Utils_DiskSpace_Size
@@ -21873,6 +22004,25 @@ references:
   fullName.vb: P42.Utils.KeyedStack(Of K, V).Push
   nameWithType: KeyedStack<K, V>.Push
   nameWithType.vb: KeyedStack(Of K, V).Push
+- uid: P42.Utils.Process
+  name: Process
+  href: api/P42.Utils.Process.html
+  commentId: T:P42.Utils.Process
+  fullName: P42.Utils.Process
+  nameWithType: Process
+- uid: P42.Utils.Process.Memory
+  name: Memory
+  href: api/P42.Utils.Process.html#P42_Utils_Process_Memory
+  commentId: P:P42.Utils.Process.Memory
+  fullName: P42.Utils.Process.Memory
+  nameWithType: Process.Memory
+- uid: P42.Utils.Process.Memory*
+  name: Memory
+  href: api/P42.Utils.Process.html#P42_Utils_Process_Memory_
+  commentId: Overload:P42.Utils.Process.Memory
+  isSpec: "True"
+  fullName: P42.Utils.Process.Memory
+  nameWithType: Process.Memory
 - uid: P42.Utils.Recursion
   name: Recursion
   href: api/P42.Utils.Recursion.html
@@ -22399,6 +22549,19 @@ references:
   isSpec: "True"
   fullName: P42.Utils.StringExtensions.HasIllegalCharacter
   nameWithType: StringExtensions.HasIllegalCharacter
+- uid: P42.Utils.StringExtensions.HumanReadableBytes(System.Double,System.Int32,System.Boolean)
+  name: HumanReadableBytes(Double, Int32, Boolean)
+  href: api/P42.Utils.StringExtensions.html#P42_Utils_StringExtensions_HumanReadableBytes_System_Double_System_Int32_System_Boolean_
+  commentId: M:P42.Utils.StringExtensions.HumanReadableBytes(System.Double,System.Int32,System.Boolean)
+  fullName: P42.Utils.StringExtensions.HumanReadableBytes(System.Double, System.Int32, System.Boolean)
+  nameWithType: StringExtensions.HumanReadableBytes(Double, Int32, Boolean)
+- uid: P42.Utils.StringExtensions.HumanReadableBytes*
+  name: HumanReadableBytes
+  href: api/P42.Utils.StringExtensions.html#P42_Utils_StringExtensions_HumanReadableBytes_
+  commentId: Overload:P42.Utils.StringExtensions.HumanReadableBytes
+  isSpec: "True"
+  fullName: P42.Utils.StringExtensions.HumanReadableBytes
+  nameWithType: StringExtensions.HumanReadableBytes
 - uid: P42.Utils.StringExtensions.IllegalSafeCharacters
   name: IllegalSafeCharacters
   href: api/P42.Utils.StringExtensions.html#P42_Utils_StringExtensions_IllegalSafeCharacters

@@ -5,6 +5,9 @@ using Xamarin.Essentials;
 
 namespace Forms9Patch
 {
+    /// <summary>
+    /// Class with helper methods intended to ask for user assistance in debugging application using Forms9Patch
+    /// </summary>
     public class Debug
     {
         /// <summary>
@@ -30,10 +33,11 @@ namespace Forms9Patch
         /// <summary>
         /// Used internally to communicate with user when perplexing exception is triggered;
         /// </summary>
-        /// <param name="e"></param>
-        /// <param name="path"></param>
-        /// <param name="lineNumber"></param>
-        /// <param name="methodName"></param>
+        /// <param name="e">Exception thrown that prompted request for help</param>
+        /// <param name="additionalInfo">Any additional info you would like shared with you </param>
+        /// <param name="path">Path to file where this request was called</param>
+        /// <param name="lineNumber">Linenumber of where this request was called</param>
+        /// <param name="methodName">Name of method from which this request was called</param>
         /// <returns></returns>
         public static async Task RequestUserHelp(Exception e, string additionalInfo= null, [System.Runtime.CompilerServices.CallerFilePath] string path = null, [System.Runtime.CompilerServices.CallerLineNumber] int lineNumber = -1, [System.Runtime.CompilerServices.CallerMemberName] string methodName = null)
         {

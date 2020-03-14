@@ -222,12 +222,15 @@
       mkdir "$(SolutionDir)FormsGestures\FormsGestures.UWP\bin\Release\FormsGestures.UWP\"
       xcopy "$(SolutionDir)FormsGestures\FormsGestures.UWP\bin\Release\FormsGestures.UWP\" "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\FormsGestures.UWP\" /Y
       xcopy "$(SolutionDir)FormsGestures\FormsGestures.UWP\Properties\FormsGestures.UWP.rd.xml" "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\FormsGestures.UWP\Properties\" /Y
+      xcopy "$(SolutionDir)FormsGestures\FormsGestures.UWP\obj\Release\FormsGestures.UWP.xr.xml" "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\FormsGestures.UWP\" /Y
+      xcopy "$(SolutionDir)FormsGestures\FormsGestures.UWP\obj\Release\Microsoft.UI.Xaml\DensityStyles\Compact.xaml" "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\FormsGestures.UWP\Microsoft.UI.Xaml\DensityStyles\" /Y
       xcopy "$(TargetDir)FormsGestures.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\" /Y
 
       mkdir "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\Forms9Patch.UWP"
       mkdir "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\Forms9Patch.UWP\Assets"
       xcopy "$(SolutionDir)Forms9Patch\Forms9Patch.UWP\bin\Release\Forms9Patch.UWP\" "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10\Forms9Patch.UWP\" /Y
-      xcopy "$(SolutionDir)Forms9Patch\Forms9Patch.UWP\bin\Release\Forms9Patch.UWP.xr.xml" "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\Forms9Patch.UWP\" /Y
+      xcopy "$(SolutionDir)Forms9Patch\Forms9Patch.UWP\Properties\Forms9Patch.UWP.rd.xml" "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\Forms9Patch.UWP\Properties\" /Y
+      xcopy "$(SolutionDir)Forms9Patch\Forms9Patch.UWP\obj\Release\Forms9Patch.UWP.xr.xml" "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\Forms9Patch.UWP\" /Y
       xcopy "$(SolutionDir)Forms9Patch\Forms9Patch.UWP\Assets\*.*" "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\Forms9Patch.UWP\Assets\" /Y
       xcopy "$(TargetDir)Forms9Patch.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\" /Y
     </PostBuildEvent>

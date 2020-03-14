@@ -72,15 +72,16 @@ namespace Forms9PatchDemo
             _grid.Children.Add(new Xamarin.Forms.Label { Text = "Convert HTML to PNG", TextColor = Color.White });
             _grid.Children.Add(_htmlEditor, 0, 1);
             _grid.Children.Add(_destinationSelector, 0, 2);
+            /*
             _grid.Children.Add(new Xamarin.Forms.Label
             {
-                Text = "Size: " + P42.Utils.DiskSpace.Humanize(P42.Utils.DiskSpace.Size) + "\nUsed: " + P42.Utils.DiskSpace.Humanize(P42.Utils.DiskSpace.Used) + "\nFree: " + P42.Utils.DiskSpace.Humanize(P42.Utils.DiskSpace.Free),
+                Text = "Size: " + P42.Utils.StringExtensions.HumanReadableBytes(P42.Utils.DiskSpace.Size) + "\nUsed: " + P42.Utils.StringExtensions.HumanReadableBytes(P42.Utils.DiskSpace.Used) + "\nFree: " + P42.Utils.StringExtensions.HumanReadableBytes(P42.Utils.DiskSpace.Free),
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 VerticalTextAlignment = TextAlignment.Center,
                 TextColor = Color.Black,
 
             }, 0, 3);
-
+            */
             Padding = new Thickness(10, 40);
 
             Content = _grid;

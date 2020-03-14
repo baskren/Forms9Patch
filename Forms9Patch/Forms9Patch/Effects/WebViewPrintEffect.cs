@@ -6,6 +6,9 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
+    /// <summary>
+    /// Effect required to enable Printing of content of Xamarin.Forms.WebView
+    /// </summary>
     [DesignTimeVisible(true)]
     public class WebViewPrintEffect : RoutingEffect
     {
@@ -20,12 +23,21 @@ namespace Forms9Patch
 
         WebView WebView;
 
+        /// <summary>
+        /// Effect required to enable printing of content of Xamarin.Forms.Webview
+        /// </summary>
+        /// <param name="webView"></param>
         protected WebViewPrintEffect(WebView webView) : base("Forms9Patch.WebViewPrintEffect")
         {
             Settings.ConfirmInitialization();
             WebView = webView;
         }
 
+        /// <summary>
+        /// Apply WebViewPrintEffect to Xamarin.Forms.WebView
+        /// </summary>
+        /// <param name="webView"></param>
+        /// <returns></returns>
         public static bool ApplyTo(WebView webView)
         {
             if (webView.Effects.Any(e => e is WebViewPrintEffect))
