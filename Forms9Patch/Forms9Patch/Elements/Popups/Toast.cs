@@ -92,6 +92,14 @@ namespace Forms9Patch
         #endregion
 
 
+        #region Events
+        /// <summary>
+        /// Occurs when HtmlText wrapped with an action (&lt;a&gt;) tag is tapped.
+        /// </summary>
+        public event EventHandler<ActionTagEventArgs> ActionTagTapped;
+        #endregion
+
+
         #region Construction / Disposal
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.Toast"/> class.
@@ -111,7 +119,9 @@ namespace Forms9Patch
             };
             listener = FormsGestures.Listener.For(Content);
             listener.LongPressing += OnListener_LongPressing;
+            _textLabel.ActionTagTapped += OnTextLabel_ActionTagTapped;
         }
+
 
         private bool _disposed;
         /// <summary>
@@ -125,6 +135,8 @@ namespace Forms9Patch
                 _disposed = true;
 
                 listener.LongPressing -= OnListener_LongPressing;
+                _textLabel.ActionTagTapped -= OnTextLabel_ActionTagTapped;
+                ActionTagTapped = null;
                 listener.Dispose();
             }
             base.Dispose(disposing);
@@ -142,6 +154,11 @@ namespace Forms9Patch
                 await targetedMenu.WaitForPoppedAsync();
             }
         }
+        private void OnTextLabel_ActionTagTapped(object sender, ActionTagEventArgs e)
+        {
+            ActionTagTapped?.Invoke(this, e);
+        }
+
 
         private void OnTargetedMenu_SegmentTapped(object sender, SegmentedControlEventArgs e)
         {

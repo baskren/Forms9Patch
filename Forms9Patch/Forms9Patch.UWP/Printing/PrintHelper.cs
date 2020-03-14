@@ -347,6 +347,8 @@ namespace Forms9Patch.UWP
 
             //lock (printPreviewPages)
             await _semaphoreSlim.WaitAsync();
+
+            try
             {
                 // Clear the cache of preview pages
                 printPreviewPages.Clear();
@@ -369,7 +371,7 @@ namespace Forms9Patch.UWP
                         PrintCanvas.Children.Add(page);
                     PrintCanvas.InvalidateMeasure();
                     PrintCanvas.UpdateLayout();
-                    
+
                     await Task.Delay(1000);
 
                     printPreviewPages.AddRange(pages);
@@ -383,9 +385,33 @@ namespace Forms9Patch.UWP
 
                 // Report the number of preview pages created
                 printDoc.SetPreviewPageCount(printPreviewPages.Count, PreviewPageCountType.Intermediate);
+
             }
-            _semaphoreSlim.Release();
+            catch (Exception pve)
+            {
+                P42.Utils.BreadCrumbs.AddException(pve, GetType());
+
+                if (pve.Message.Contains("The RPC server is unavailable", StringComparison.OrdinalIgnoreCase))
+                    using (var toast = Forms9Patch.Toast.Create("The RPC server is unavailable", "Windows failed trying to setup the print preview because it could not connect to its RPC server.   There are three basic potential causes for this error message. Either the RPC service is not running, there are issues with the network, or some important registry entries that control the RPC service have been corrupted. In Windows 10, the most common cause for the error is that the RPC service is simply not running.  <a id='link' href='https://www.techjunkie.com/rpc-server-is-unavailable/'>Click here to learn more about how to fix this.</a>")) 
+                    {
+                        toast.ActionTagTapped += On_RpcUnavailable_Toast_ActionTagTapped;
+                    }
+                else
+                    using (Forms9Patch.Toast.Create("Cannot print", "Windows failed trying to setup the print preview.  Below is some information from Windows about the failure.  \n\n" + pve.Message)) { }
+            }
+            finally
+            {
+                _semaphoreSlim.Release();
+            }
         }
+
+        private void On_RpcUnavailable_Toast_ActionTagTapped(object sender, ActionTagEventArgs e)
+        {
+            Xamarin.Essentials.Browser.OpenAsync(e.Href, Xamarin.Essentials.BrowserLaunchMode.SystemPreferred);
+        }
+
+
+
 
         /// <summary>
         /// This is the event handler for PrintDocument.GetPrintPreviewPage. It provides a specific print preview page,
