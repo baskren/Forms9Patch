@@ -928,13 +928,15 @@ namespace Forms9Patch
             if (P42.Utils.Environment.IsOnMainThread)
             {
                 Recursion.Enter(GetType(), _id);
-                _isPopping = true;
+
+
+                //_isPopping = true;
                 IsVisible = false;
                 try
                 {
-                    await _semaphore.WaitAsync();
                     if (PopupNavigation.Instance.PopupStack.Contains(this) && PopupPoppedEventArgs == null)
                     {
+                        await _semaphore.WaitAsync();
                         _isPopping = true;
                         SetPopupPoppedEventArgs(trigger, callerName);
                         PopupLayerEffect.RemoveFrom(this);
@@ -947,6 +949,7 @@ namespace Forms9Patch
                         catch (Exception) { }
                         Popped?.Invoke(this, PopupPoppedEventArgs);
                     }
+                    /*
                     else if (!_disposed)
                     {
                         try
@@ -955,6 +958,7 @@ namespace Forms9Patch
                         }
                         catch (Exception) { }
                     }
+                    */
                 }
                 catch (ObjectDisposedException)
                 {
@@ -965,11 +969,12 @@ namespace Forms9Patch
                 //if (!Retain)
                 //    Dispose();
 
-                do
-                {
-                    await Task.Delay(100);
-                }
-                while (/*PopupNavigation.Instance.PopupStack.Contains(this) && */!_popAnimationComplete);
+                if (_isPopping)
+                    do
+                    {
+                        await Task.Delay(100);
+                    }
+                    while (/*PopupNavigation.Instance.PopupStack.Contains(this) && */!_popAnimationComplete);
 
                 //_isPopped = true;
 
