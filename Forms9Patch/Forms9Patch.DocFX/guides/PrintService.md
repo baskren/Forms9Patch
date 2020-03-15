@@ -23,6 +23,7 @@ if (Forms9Patch.PrintService.CanPrint)
     ...
 
     var myWebView = new Xamarin.Forms.WebView();
+    WebViewPrintEffect.ApplyTo(myWebView);
     myWebView.Source = new HtmlWebViewSource { Html = "some HTML text here" };
 
     ...

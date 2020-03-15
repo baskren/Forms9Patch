@@ -12,7 +12,7 @@ I've had to do this enough times that I finally broke down and added it to Forms
 Usage is as follows:
 
 ```c-sharp
-    if (await Forms9Patch.ToPngService.ToPdfAsync(_htmlEditor.Text, "myHtmlPage") is ToFileResult result)
+    if (await Forms9Patch.ToPdfService.ToPdfAsync(_htmlEditor.Text, "myHtmlPage") is ToFileResult result)
     {
         if (result.IsError)
         {
@@ -39,6 +39,15 @@ In the above example, we are putting the PNG onto the clipboard.  Xamarin.Essent
 Below, we take the contents of a Xamarin.Forms.WebView and Share it as a PNG:
 
 ```c-sharp
+
+...
+
+var myWebView = new Xamarin.Forms.WebView();
+WebViewPrintEffect.ApplyTo(myWebView);
+myWebView.Source = new HtmlWebViewSource { Html = "some HTML text here" };
+
+...
+
 if (await myWebView.ToPdfAsync("output.png") is ToFileResult result)
 {
     if (result.IsError)

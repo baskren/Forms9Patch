@@ -39,6 +39,15 @@ In the above example, we are putting the PNG onto the clipboard.  Xamarin.Essent
 Below, we take the contents of a Xamarin.Forms.WebView and Share it as a PNG:
 
 ```c-sharp
+
+...
+
+var myWebView = new Xamarin.Forms.WebView();
+WebViewPrintEffect.ApplyTo(myWebView);
+myWebView.Source = new HtmlWebViewSource { Html = "some HTML text here" };
+
+...
+
 if (await myWebView.ToPngAsync("output.png") is ToFileResult result)
 {
     if (result.IsError)

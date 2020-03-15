@@ -59,6 +59,7 @@ namespace Forms9Patch.UWP
 					Html = html
 				}
 			};
+			WebViewPrintEffect.ApplyTo(webView);
 			Print(webView, jobName);
 		}
 	}

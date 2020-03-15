@@ -98,6 +98,7 @@ namespace Forms9Patch.iOS
                     Html = html
                 }
             };
+            WebViewPrintEffect.ApplyTo(webView);
             Print(webView, jobName);
         }
     }
