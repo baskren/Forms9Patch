@@ -311,6 +311,7 @@ namespace Forms9Patch
         async void OnCancelButtonTappedAsync(object sender, EventArgs e)
         {
             P42.Utils.BreadCrumbs.Add(GetType(), "cancel");
+            PermissionState = PermissionState.Rejected;
             await CancelAsync(_cancelButton);
         }
 
@@ -321,7 +322,8 @@ namespace Forms9Patch
         /// <returns></returns>
         public override Task CancelAsync(object trigger = null)
         {
-            PermissionState = trigger == _cancelButton ? PermissionState.Rejected : PermissionState.Cancelled;
+            if (PermissionState == PermissionState.Pending)
+                PermissionState = PermissionState.Cancelled;
             return base.CancelAsync(trigger);
         }
 
