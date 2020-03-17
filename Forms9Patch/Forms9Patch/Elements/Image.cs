@@ -531,13 +531,16 @@ namespace Forms9Patch
             {
                 Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
                 {
-                    if ((DateTime.Now - _lastPaint) is TimeSpan elapsed && elapsed > TimeSpan.FromMilliseconds(100))
+                    Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
                     {
-                        _repainting = true;
-                        _lastPaint = DateTime.MaxValue;
-                        Invalidate();
-                    }
-                    return true;
+                        if ((DateTime.Now - _lastPaint) is TimeSpan elapsed && elapsed > TimeSpan.FromMilliseconds(100))
+                        {
+                            _repainting = true;
+                            _lastPaint = DateTime.MaxValue;
+                            Invalidate();
+                        }
+                    });
+                    return false;
                 });
             }
         }
