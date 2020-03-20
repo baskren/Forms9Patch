@@ -91,14 +91,9 @@ namespace Forms9Patch.iOS
 
         public void Print(string html, string jobName)
         {
-            var webView = new Xamarin.Forms.WebView
-            {
-                Source = new HtmlWebViewSource
-                {
-                    Html = html
-                }
-            };
+            var webView = new Xamarin.Forms.WebView();
             WebViewPrintEffect.ApplyTo(webView);
+            webView.Source = new HtmlWebViewSource{ Html = html };
             Print(webView, jobName);
         }
     }
