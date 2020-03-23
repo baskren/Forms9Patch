@@ -7,6 +7,7 @@ using System.Threading;
 using System.Runtime.CompilerServices;
 using P42.Utils;
 using Forms9Patch.Elements.Popups.Core;
+using System.Collections.Generic;
 
 namespace Forms9Patch
 {
@@ -929,45 +930,36 @@ namespace Forms9Patch
             {
                 Recursion.Enter(GetType(), _id);
 
-
-                //_isPopping = true;
                 IsVisible = false;
                 try
                 {
-                    if (PopupNavigation.Instance.PopupStack.Contains(this) && PopupPoppedEventArgs == null)
+                    if (PopupPoppedEventArgs == null
+                        && _semaphore is SemaphoreSlim semaphore
+                        && PopupNavigation.Instance?.PopupStack is IReadOnlyList<PopupPage> popupStack
+                        && popupStack.Contains(this)
+                        && Navigation is INavigation navigation)
                     {
-                        await _semaphore.WaitAsync();
+                        await semaphore.WaitAsync();
                         _isPopping = true;
                         SetPopupPoppedEventArgs(trigger, callerName);
                         PopupLayerEffect.RemoveFrom(this);
                         base.IsAnimationEnabled = IsAnimationEnabled;
-                        await Navigation.RemovePopupPageAsync(this);
+                        await navigation.RemovePopupPageAsync(this);
                         try
                         {
-                            _semaphore.Release();
+                            semaphore.Release();
                         }
                         catch (Exception) { }
                         Popped?.Invoke(this, PopupPoppedEventArgs);
                     }
-                    /*
-                    else if (!_disposed)
-                    {
-                        try
-                        {
-                            _semaphore.Release();
-                        }
-                        catch (Exception) { }
-                    }
-                    */
                 }
                 catch (ObjectDisposedException)
                 {
+                    Recursion.Exit(GetType(), _id);
                     return;
                 }
 
                 lastAction?.Invoke();
-                //if (!Retain)
-                //    Dispose();
 
                 if (_isPopping)
                     do
@@ -975,8 +967,6 @@ namespace Forms9Patch
                         await Task.Delay(100);
                     }
                     while (/*PopupNavigation.Instance.PopupStack.Contains(this) && */!_popAnimationComplete);
-
-                //_isPopped = true;
 
                 Recursion.Exit(GetType(), _id);
             }
