@@ -200,9 +200,6 @@ namespace Forms9Patch.iOS
                 //else
                 //    result = new SizeRequest(new Size(Math.Ceiling(reqWidth * 1.25), Math.Ceiling(reqHeight * 1.25)), new Size(10, Math.Ceiling(state.Font.LineHeight)));
 
-                if (Element.Text == "back")
-                    System.Diagnostics.Debug.WriteLine("SCALE: " + Display.Scale);
-
                 return result;
             }
             return new SizeRequest(Size.Zero);
