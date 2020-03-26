@@ -155,14 +155,14 @@ namespace Forms9Patch.iOS
     {
         public static NSMutableData CreatePdfFile(this WebKit.WKWebView webView, UIViewPrintFormatter printFormatter)
         {
-            var bounds = webView.Bounds;
-            webView.Bounds = new CoreGraphics.CGRect(bounds.X, bounds.Y, bounds.Width, webView.ScrollView.ContentSize.Height);
-            var pdfPageFrame = new CoreGraphics.CGRect(0, 0, webView.Bounds.Width, webView.Bounds.Height);
             var renderer = new PdfRenderer();
             renderer.AddPrintFormatter(printFormatter, 0);
-            renderer.SetValueForKey(NSValue.FromCGRect(UIScreen.MainScreen.Bounds), new NSString("paperRect"));
+            // Letter = 8.5" * 72 x 11" * 72
+            // Inset = .5"/2 * 72 x 1"/2 * 72
+            var page = new CGRect(0, 0, 8.5 * 72, 11 * 72);
+            var pdfPageFrame = page.Inset(dx: (nfloat).25 * 72, dy: (nfloat).5 * 72);
+            renderer.SetValueForKey(NSValue.FromCGRect(page), new NSString("paperRect"));
             renderer.SetValueForKey(NSValue.FromCGRect(pdfPageFrame), new NSString("printableRect"));
-            webView.Bounds = bounds;
             return renderer.PrintToPdf();
         }
 
