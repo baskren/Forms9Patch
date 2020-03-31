@@ -217,7 +217,8 @@ namespace FormsGestures.iOS
             bindable.PropertyChanging -= OnElementPropertyChanging;
             bindable.PropertyChanged -= OnElementPropertyChanged;
             // cleanup listeners
-            foreach (var listener in _listeners)
+            if (_listeners is List<Listener> listeners)
+            foreach (var listener in listeners)
                 listener.PropertyChanged -= OnListenerPropertyChanged;
             // cleanup properties
             bindable.SetValue(GestureHandlerProperty, null);
