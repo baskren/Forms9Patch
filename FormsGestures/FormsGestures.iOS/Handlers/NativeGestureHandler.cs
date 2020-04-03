@@ -261,19 +261,19 @@ namespace FormsGestures.iOS
         {
             var list = new List<UIGestureRecognizer>();
             //if (HandlesDownUps)  WE NEED TO ALWAYS MONITOR FOR DOWN TO BE ABLE TO UNDO A CANCEL 
-            {  // commenting out if (HanglesDownUps) causes FormsDragNDrop listview to not recognize cell selections after a scroll.  Why?  I have no clue.
-               // Let's always trigger the down gesture recognizer so we can get the starting location
-                var downUpGestureRecognizer = new DownUpGestureRecognizer(new Action<DownUpGestureRecognizer, UITouch[]>(OnDown), new Action<DownUpGestureRecognizer, UITouch[]>(OnUp))
-                {
-                    ShouldRecognizeSimultaneously = ((thisGr, otherGr) => false),
-                    ShouldReceiveTouch = ((UIGestureRecognizer gr, UITouch touch) => !(touch.View is UIControl))
-                };
-                list.Add(downUpGestureRecognizer);
-            }
+            // commenting out if (HanglesDownUps) causes FormsDragNDrop listview to not recognize cell selections after a scroll.  Why?  I have no clue.
+            // Let's always trigger the down gesture recognizer so we can get the starting location
+            //var downUpGestureRecognizer = new DownUpGestureRecognizer(new Action<DownUpGestureRecognizer, UITouch[]>(OnDown), new Action<DownUpGestureRecognizer, UITouch[]>(OnUp))
+            var downUpGestureRecognizer = new DownUpGestureRecognizer(OnDown, OnUp)
+            {
+                ShouldRecognizeSimultaneously = ((thisGr, otherGr) => false),
+                ShouldReceiveTouch = ((UIGestureRecognizer gr, UITouch touch) => !(touch.View is UIControl))
+            };
+            list.Add(downUpGestureRecognizer);
             UILongPressGestureRecognizer uILongPressGestureRecognizer = null;
             if (HandlesLongs)
             {
-                uILongPressGestureRecognizer = new UILongPressGestureRecognizer(new Action<UILongPressGestureRecognizer>(OnLongPressed))
+                uILongPressGestureRecognizer = new UILongPressGestureRecognizer(OnLongPressed)
                 {
                     ShouldRecognizeSimultaneously = ((thisGr, otherGr) => false)
                 };
@@ -281,7 +281,7 @@ namespace FormsGestures.iOS
             }
             if (HandlesTaps)
             {
-                var uITapGestureRecognizer = new UITapGestureRecognizer(new Action<UITapGestureRecognizer>(OnTapped))
+                var uITapGestureRecognizer = new UITapGestureRecognizer(OnTapped)
                 {
                     ShouldRecognizeSimultaneously = ((thisGr, otherGr) =>
                     {
@@ -299,7 +299,7 @@ namespace FormsGestures.iOS
             }
             if (HandlesPans)
             {
-                var uIPanGestureRecognizer = new UIPanGestureRecognizer(new Action<UIPanGestureRecognizer>(OnPanned))
+                var uIPanGestureRecognizer = new UIPanGestureRecognizer(OnPanned)
                 {
                     MinimumNumberOfTouches = 1,
                     ShouldRecognizeSimultaneously = ((thisGr, otherGr) => true)
@@ -308,7 +308,7 @@ namespace FormsGestures.iOS
             }
             if (HandlesPinches)
             {
-                var uIPinchGestureRecognizer = new UIPinchGestureRecognizer(new Action<UIPinchGestureRecognizer>(OnPinched))
+                var uIPinchGestureRecognizer = new UIPinchGestureRecognizer(OnPinched)
                 {
                     ShouldRecognizeSimultaneously = ((thisGr, otherGr) => true)
                 };
@@ -316,7 +316,7 @@ namespace FormsGestures.iOS
             }
             if (HandlesRotates)
             {
-                var uIRotationGestureRecognizer = new UIRotationGestureRecognizer(new Action<UIRotationGestureRecognizer>(OnRotated))
+                var uIRotationGestureRecognizer = new UIRotationGestureRecognizer(OnRotated)
                 {
                     ShouldRecognizeSimultaneously = ((thisGr, otherGr) => true)
                 };
