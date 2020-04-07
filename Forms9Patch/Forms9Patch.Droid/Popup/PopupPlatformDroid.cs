@@ -60,7 +60,7 @@ namespace Forms9Patch.Droid
                 return PostAsync(DecoreView);
             }
 
-            return Task.FromResult(true);
+            return Task.CompletedTask;
         }
 
         #region System Animation
