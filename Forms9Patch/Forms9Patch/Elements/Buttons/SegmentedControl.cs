@@ -546,6 +546,22 @@ namespace Forms9Patch
         }
         #endregion
 
+        #region IconColor
+        /// <summary>
+        /// Backing store for SegmentedControl IconColor property
+        /// </summary>
+        public static readonly BindableProperty IconColorProperty = BindableProperty.Create(nameof(IconColor), typeof(Color), typeof(SegmentedControl), default);
+        /// <summary>
+        /// controls value of .IconColor property
+        /// </summary>
+        public Color IconColor
+        {
+            get => (Color)GetValue(IconColorProperty);
+            set => SetValue(IconColorProperty, value);
+        }
+        #endregion
+
+
         #region HasTightSpacing
         /// <summary>
         /// The has tight spacing property.
@@ -817,6 +833,7 @@ namespace Forms9Patch
                 segment._button.TextColor = TextColor;
             button.SelectedTextColor = SelectedTextColor;
             button.TintIcon = TintIcon;
+            button.IconColor = IconColor;
             button.HasTightSpacing = HasTightSpacing;
             button.HorizontalTextAlignment = HorizontalTextAlignment;
             button.VerticalTextAlignment = VerticalTextAlignment;
@@ -1057,6 +1074,9 @@ namespace Forms9Patch
                 else if (propertyName == TintIconProperty.PropertyName)
                     foreach (Segment segment in Segments)
                         segment._button.TintIcon = TintIcon;
+                else if (propertyName == IconColorProperty.PropertyName)
+                    foreach (Segment segment in Segments)
+                        segment._button.IconColor = IconColor;
                 else if (propertyName == HasTightSpacingProperty.PropertyName)
                     foreach (Segment segment in Segments)
                         segment._button.HasTightSpacing = HasTightSpacing;

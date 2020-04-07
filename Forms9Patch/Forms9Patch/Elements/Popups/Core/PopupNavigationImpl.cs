@@ -38,7 +38,7 @@ namespace Forms9Patch.Elements.Popups.Core
             lock (_locker)
             {
                 if (_popupStack.Contains(page))
-                    return null;
+                    return Task.CompletedTask;
 
                 _popupStack.Add(page);
 
@@ -69,7 +69,7 @@ namespace Forms9Patch.Elements.Popups.Core
             {
                 animate = CanBeAnimated(animate);
                 if (!PopupStack.Any())
-                    return null;
+                    return Task.CompletedTask;
 
                 return RemovePageAsync(PopupStack.Last(), animate);
             }
@@ -81,7 +81,7 @@ namespace Forms9Patch.Elements.Popups.Core
             {
                 animate = CanBeAnimated(animate);
                 if (!PopupStack.Any())
-                    return null;
+                    return Task.CompletedTask;
                 var popupPages = PopupStack.ToList();
                 var popupTasks = popupPages.Select(page => RemovePageAsync(page, animate));
                 return Task.WhenAll(popupTasks).ContinueWith((Task continuationAction) => PoppedAll?.Invoke(this, new AllPagesPoppedEventArgs(popupPages)));
@@ -93,10 +93,10 @@ namespace Forms9Patch.Elements.Popups.Core
             lock (_locker)
             {
                 if (page == null)
-                    return null;
+                    return Task.CompletedTask;
 
                 if (!_popupStack.Contains(page))
-                    return null;
+                    return Task.CompletedTask;
 
                 if (page.DisappearingTransactionTask != null)
                     return page.DisappearingTransactionTask;

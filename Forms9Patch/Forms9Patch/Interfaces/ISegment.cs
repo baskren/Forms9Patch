@@ -47,7 +47,6 @@ namespace Forms9Patch
         Xamarin.Forms.VisualElement VisualElement { get; }
 
 
-
     }
 
 }

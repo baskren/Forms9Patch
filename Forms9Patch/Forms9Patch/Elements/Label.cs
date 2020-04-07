@@ -306,56 +306,52 @@ namespace Forms9Patch
             //else if (propertyName == HeightProperty.PropertyName)
             //P42.Utils.Debug.Message(this, " Height: " + Height);
 
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
-            }
+                if (propertyName == FittedFontSizeProperty.PropertyName)
+                    // required to keep the layout system calm.  
+                    return;
 
-            if (propertyName == FittedFontSizeProperty.PropertyName)
-                // required to keep the layout system calm.  
-                return;
-
-            if (propertyName == HtmlTextProperty.PropertyName)
-            {
-                if (F9PFormattedString != null && F9PFormattedString.ContainsActionSpan)
+                if (propertyName == HtmlTextProperty.PropertyName)
                 {
-                    if (_listener == null)
+                    if (F9PFormattedString != null && F9PFormattedString.ContainsActionSpan)
                     {
-                        _listener = FormsGestures.Listener.For(this);
-                        _listener.Tapped += OnTapped;
-                        _listener.Down += OnDown;
+                        if (_listener == null)
+                        {
+                            _listener = FormsGestures.Listener.For(this);
+                            _listener.Tapped += OnTapped;
+                            _listener.Down += OnDown;
+                        }
+                    }
+                    else if (_listener != null)
+                    {
+                        _listener.Tapped -= OnTapped;
+                        _listener.Down -= OnDown;
+                        _listener.Dispose();
+                        _listener = null;
                     }
                 }
-                else if (_listener != null)
+                else if (propertyName == TextProperty.PropertyName && Text != null)
+                    HtmlText = null;
+
+                // This is crazy!  It appears that UWP is disposing the VisualElementTracker but not unsubscribing to  VisualElementTracker.OnPropertyChanged event handler;
+                try
                 {
-                    _listener.Tapped -= OnTapped;
-                    _listener.Down -= OnDown;
-                    _listener.Dispose();
-                    _listener = null;
+                    base.OnPropertyChanged(propertyName);
                 }
-            }
-            else if (propertyName == TextProperty.PropertyName && Text != null)
-                HtmlText = null;
+                catch (Exception) { }
 
-            // This is crazy!  It appears that UWP is disposing the VisualElementTracker but not unsubscribing to  VisualElementTracker.OnPropertyChanged event handler;
-            try
-            {
-                base.OnPropertyChanged(propertyName);
-            }
-            catch (Exception) { }
-
-            if (propertyName == LinesProperty.PropertyName
-                || propertyName == AutoFitProperty.PropertyName
-                || propertyName == HtmlTextProperty.PropertyName
-                || propertyName == TextProperty.PropertyName
-               )
-                InvalidateMeasure();
-
+                if (propertyName == LinesProperty.PropertyName
+                    || propertyName == AutoFitProperty.PropertyName
+                    || propertyName == HtmlTextProperty.PropertyName
+                    || propertyName == TextProperty.PropertyName
+                   )
+                    InvalidateMeasure();
+            });
         }
 
         internal void InternalInvalidateMeasure()
-            => InvalidateMeasure();
+            => Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(InvalidateMeasure);
         #endregion
 
 

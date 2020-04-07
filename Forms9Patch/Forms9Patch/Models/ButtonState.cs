@@ -152,6 +152,23 @@ namespace Forms9Patch
         }
         #endregion TintIcon
 
+        #region IconColor
+        /// <summary>
+        /// Backing store for ButtonState IconColor property
+        /// </summary>
+        public static readonly BindableProperty IconColorProperty = BindableProperty.Create(nameof(IconColor), typeof(Color), typeof(ButtonState), default);
+        /// <summary>
+        /// Overrides this icon color as provided by the Button's TextColor (if TintIcon=true), the default TextColor (if IconText != null), or the IconImage colors
+        /// </summary>
+        public Color IconColor
+        {
+            get => (Color)GetValue(IconColorProperty);
+            set => SetValue(IconColorProperty, value);
+        }
+        #endregion
+
+
+
         #region HasTightSpacing
         internal bool HasTightSpacingSet;
         /// <summary>
@@ -763,6 +780,7 @@ namespace Forms9Patch
             TrailingIcon = source.TrailingIcon;
             TrailingIconSet = source.TrailingIconSet;
             TintIcon = source.TintIcon;
+            IconColor = source.IconColor;
             TintIconSet = source.TintIconSet;
             HasTightSpacing = source.HasTightSpacing;
             HasTightSpacingSet = source.HasTightSpacingSet;

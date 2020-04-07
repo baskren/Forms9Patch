@@ -817,20 +817,15 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnDisappearingAnimationEnd()
         {
-            //System.Diagnostics.Debug.WriteLine(GetType() + "." + ReflectionExtensions.CallerMemberName());
             Recursion.Enter(GetType().ToString(), _id.ToString());
             _popAnimationComplete = true;
             base.OnDisappearingAnimationEnd();
-            //IsVisible = false;
             _isPushing = false;
             _isPushed = false;
             _isPopping = false;
 
-
             if (IsVisible && !_isPushing)
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                PushAsync();
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                PushAsync().ConfigureAwait(false);
             else
             {
                 _isPopped = true;
@@ -885,7 +880,8 @@ namespace Forms9Patch
                 }
                 try
                 {
-                    _semaphore.Release();
+                    if (!_disposed)
+                        _semaphore.Release();
                 }
                 catch (Exception) { }
                 Recursion.Exit(GetType().ToString(), _id.ToString());
@@ -947,7 +943,8 @@ namespace Forms9Patch
                         await navigation.RemovePopupPageAsync(this);
                         try
                         {
-                            semaphore.Release();
+                            if (!_disposed)
+                                semaphore.Release();
                         }
                         catch (Exception) { }
                         Popped?.Invoke(this, PopupPoppedEventArgs);

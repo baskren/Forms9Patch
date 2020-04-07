@@ -319,20 +319,17 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
-            {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
-            }
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
+            { 
+                try
+                {
+                    base.OnPropertyChanged(propertyName);
+                }
+                catch (Exception) { }
 
-            try
-            {
-                base.OnPropertyChanged(propertyName);
-            }
-            catch (Exception) { }
-
-            if (propertyName == HasShadowProperty.PropertyName)
-                InvalidateMeasure();
+                if (propertyName == HasShadowProperty.PropertyName)
+                    InvalidateMeasure();
+            });
         }
         #endregion
 

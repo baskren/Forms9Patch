@@ -380,46 +380,43 @@ namespace Forms9Patch
         /// <param name="propertyName"></param>
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
-            }
-
-            // This is BEFORE base.OnPropertyChanged to assure that SegmentedControlBackground is not invoked before the BackgroundImage has been updated - an issue on UWP;
-            if (propertyName == BackgroundColorProperty.PropertyName)
-                CurrentBackgroundImage.BackgroundColor = _fallbackBackgroundImage.BackgroundColor = BackgroundColor;
-            else if (propertyName == HasShadowProperty.PropertyName)
-                CurrentBackgroundImage.HasShadow = _fallbackBackgroundImage.HasShadow = HasShadow;
-            else if (propertyName == ShadowInvertedProperty.PropertyName)
-                CurrentBackgroundImage.ShadowInverted = _fallbackBackgroundImage.ShadowInverted = ShadowInverted;
-            else if (propertyName == OutlineColorProperty.PropertyName)
-                CurrentBackgroundImage.OutlineColor = _fallbackBackgroundImage.OutlineColor = OutlineColor;
-            if (propertyName == OutlineRadiusProperty.PropertyName)
-                CurrentBackgroundImage.OutlineRadius = _fallbackBackgroundImage.OutlineRadius = OutlineRadius;
-            else if (propertyName == OutlineWidthProperty.PropertyName)
-                CurrentBackgroundImage.OutlineWidth = _fallbackBackgroundImage.OutlineWidth = OutlineWidth;
-            else if (propertyName == ElementShapeProperty.PropertyName)
-                CurrentBackgroundImage.ElementShape = _fallbackBackgroundImage.ElementShape = ElementShape;
-            //else if (propertyName == MarginProperty.PropertyName)
-            //    CurrentBackgroundImage.Margin = _fallbackBackgroundImage.Margin = Margin;
-            //this fixes a crash in ConnectionCalc.UWP when the [Calculated] button is updated
-            try
-            {
-                base.OnPropertyChanged(propertyName);
-            }
+                // This is BEFORE base.OnPropertyChanged to assure that SegmentedControlBackground is not invoked before the BackgroundImage has been updated - an issue on UWP;
+                if (propertyName == BackgroundColorProperty.PropertyName)
+                    CurrentBackgroundImage.BackgroundColor = _fallbackBackgroundImage.BackgroundColor = BackgroundColor;
+                else if (propertyName == HasShadowProperty.PropertyName)
+                    CurrentBackgroundImage.HasShadow = _fallbackBackgroundImage.HasShadow = HasShadow;
+                else if (propertyName == ShadowInvertedProperty.PropertyName)
+                    CurrentBackgroundImage.ShadowInverted = _fallbackBackgroundImage.ShadowInverted = ShadowInverted;
+                else if (propertyName == OutlineColorProperty.PropertyName)
+                    CurrentBackgroundImage.OutlineColor = _fallbackBackgroundImage.OutlineColor = OutlineColor;
+                if (propertyName == OutlineRadiusProperty.PropertyName)
+                    CurrentBackgroundImage.OutlineRadius = _fallbackBackgroundImage.OutlineRadius = OutlineRadius;
+                else if (propertyName == OutlineWidthProperty.PropertyName)
+                    CurrentBackgroundImage.OutlineWidth = _fallbackBackgroundImage.OutlineWidth = OutlineWidth;
+                else if (propertyName == ElementShapeProperty.PropertyName)
+                    CurrentBackgroundImage.ElementShape = _fallbackBackgroundImage.ElementShape = ElementShape;
+                //else if (propertyName == MarginProperty.PropertyName)
+                //    CurrentBackgroundImage.Margin = _fallbackBackgroundImage.Margin = Margin;
+                //this fixes a crash in ConnectionCalc.UWP when the [Calculated] button is updated
+                try
+                {
+                    base.OnPropertyChanged(propertyName);
+                }
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
-            catch (Exception) { }
+                catch (Exception) { }
 #pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
 
-            if (propertyName == BackgroundColorProperty.PropertyName ||
-                propertyName == HasShadowProperty.PropertyName ||
-                propertyName == ShadowInvertedProperty.PropertyName ||
-                propertyName == OutlineColorProperty.PropertyName ||
-                propertyName == OutlineWidthProperty.PropertyName ||
-                propertyName == ElementShapeProperty.PropertyName)
-                //InvalidateMeasure(); //NOTE: InvalidateMeasure() will cause some Content to be layed out again but not others.  Test using SingleButton.cs in Forms9PatchDemo.  ForceLayout() works better.
-                ForceLayout();
+                if (propertyName == BackgroundColorProperty.PropertyName ||
+                    propertyName == HasShadowProperty.PropertyName ||
+                    propertyName == ShadowInvertedProperty.PropertyName ||
+                    propertyName == OutlineColorProperty.PropertyName ||
+                    propertyName == OutlineWidthProperty.PropertyName ||
+                    propertyName == ElementShapeProperty.PropertyName)
+                    //InvalidateMeasure(); //NOTE: InvalidateMeasure() will cause some Content to be layed out again but not others.  Test using SingleButton.cs in Forms9PatchDemo.  ForceLayout() works better.
+                    ForceLayout();
+            });
         }
         #endregion
 

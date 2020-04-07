@@ -25,6 +25,11 @@ namespace Forms9Patch
         bool TintIcon { get; set; }
 
         /// <summary>
+        /// Overrides the icon color as provided by the Button's TextColor (if TintIcon=true), the default TextColor (if IconText != null), or the IconImage colors
+        /// </summary>
+        Xamarin.Forms.Color IconColor { get; set; }
+
+        /// <summary>
         /// controls if the button's icon will be justified to the edge of the button (false) or to be next to the button's text (true)
         /// </summary>
         bool HasTightSpacing { get; set; }

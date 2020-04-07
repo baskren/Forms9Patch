@@ -116,6 +116,8 @@ namespace Forms9Patch
             set => SetValue(TintImageProperty, value);
         }
 
+
+
         #region IsElliptical property
         /// <summary>
         /// backing store for IsEliptical property
@@ -515,8 +517,23 @@ namespace Forms9Patch
             get => (bool)GetValue(TintIconProperty);
             set => SetValue(TintIconProperty, value);
         }
-
         #endregion TintIcon
+
+        #region IconColor
+        /// <summary>
+        /// Backing store for Button IconColor property
+        /// </summary>
+        public static readonly BindableProperty IconColorProperty = BindableProperty.Create(nameof(IconColor), typeof(Color), typeof(Button), default);
+        /// <summary>
+        /// Overrides the icon color as provided by the Button's TextColor (if TintIcon=true), the default TextColor (if IconText != null), or the IconImage colors
+        /// </summary>
+        public Color IconColor
+        {
+            get => (Color)GetValue(IconColorProperty);
+            set => SetValue(IconColorProperty, value);
+        }
+        #endregion
+
 
         #region HasTightSpacing
         /// <summary>
@@ -1490,10 +1507,16 @@ namespace Forms9Patch
         internal void UpdateIconTint()
         {
             if (_iconImage != null)
-                _iconImage.TintColor = TintIcon ? _label.TextColor : Color.Default;
+                _iconImage.TintColor = IconColor == default
+                    ? TintIcon
+                        ? _label.TextColor
+                        : Color.Default
+                    : IconColor;
             if (_iconLabel != null)
             {
-                _iconLabel.TextColor = _label.TextColor;
+                _iconLabel.TextColor = IconColor == default
+                    ? _label.TextColor
+                    : IconColor;
                 _iconLabel.FontSize = _label.FontSize;
                 _iconLabel.FontFamily = IconFontFamily;
             }

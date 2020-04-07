@@ -151,22 +151,18 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
-            }
+                base.OnPropertyChanged(propertyName);
 
-            base.OnPropertyChanged(propertyName);
+                if (propertyName == BackgroundImageProperty.PropertyName && BackgroundImage != null)
+                    BackgroundImage.IsBubble = true;
 
-            if (propertyName == BackgroundImageProperty.PropertyName && BackgroundImage != null)
-                BackgroundImage.IsBubble = true;
-
-            if (propertyName == PointerLengthProperty.PropertyName
-                || propertyName == HasShadowProperty.PropertyName
-                || propertyName == IsVisibleProperty.PropertyName)
-                InvalidateMeasure();
-
+                if (propertyName == PointerLengthProperty.PropertyName
+                    || propertyName == HasShadowProperty.PropertyName
+                    || propertyName == IsVisibleProperty.PropertyName)
+                    InvalidateMeasure();
+            });
         }
         #endregion PropertyChange management
 
