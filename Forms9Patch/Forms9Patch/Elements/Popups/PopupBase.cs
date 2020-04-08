@@ -596,7 +596,8 @@ namespace Forms9Patch
         {
             if (_isPopped || (!_isPushing && !_isPushed))
             {
-                Dispose(true);
+                Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(()=> Dispose(true));
+
                 GC.SuppressFinalize(this);
             }
             else

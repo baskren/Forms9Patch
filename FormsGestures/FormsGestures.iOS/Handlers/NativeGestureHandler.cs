@@ -230,9 +230,8 @@ namespace FormsGestures.iOS
         #region iOS Gesture Recognizers
         void ClearGestureRecognizers()
         {
-            if (_gestureRecognizers != null)
+            if (_gestureRecognizers?.ToArray() is UIGestureRecognizer[] array)
             {
-                UIGestureRecognizer[] array = _gestureRecognizers;
                 foreach (var uIGestureRecognizer in array)
                 {
                     uIGestureRecognizer.View.RemoveGestureRecognizer(uIGestureRecognizer);
