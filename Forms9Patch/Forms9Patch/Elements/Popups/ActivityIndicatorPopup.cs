@@ -39,6 +39,7 @@ namespace Forms9Patch
 
         };
 
+
         /*
         internal readonly Xamarin.Forms.Grid Grid = new Xamarin.Forms.Grid
         {
@@ -61,10 +62,24 @@ namespace Forms9Patch
         /// <returns></returns>
         public static ActivityIndicatorPopup Create(TimeSpan popAfter = default)
             => new ActivityIndicatorPopup(popAfter) { IsVisible = true };
+
+        /// <summary>
+        /// Presents an Activity Indicator Page Overlay
+        /// </summary>
+        /// <param name="color"></param>
+        /// <param name="popAfter"></param>
+        /// <returns></returns>
+        public static ActivityIndicatorPopup Create(Color color, TimeSpan popAfter = default)
+            => new ActivityIndicatorPopup(color, popAfter) { IsVisible = true };
         #endregion
 
 
         #region Constructor
+        public ActivityIndicatorPopup(Color color, TimeSpan popAfter = default) : this(popAfter)
+        {
+            Color = color;
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.ActivityIndicatorPopup"/> class.
         /// </summary>

@@ -69,6 +69,25 @@ namespace Forms9Patch
 
         #endregion
 
+
+        #region Scale
+        #region Scale property
+        /// <summary>
+        /// BindableProperty for Scale property
+        /// </summary>
+        public new static readonly BindableProperty ScaleProperty = BindableProperty.Create(nameof(Scale), typeof(double), typeof(ActivityIndicatorPopup), default(double));
+        /// <summary>
+        /// the scale of the content of the popup
+        /// </summary>
+        public new double Scale
+        {
+            get { return (double)GetValue(ScaleProperty); }
+            set { SetValue(ScaleProperty, value); }
+        }
+        #endregion
+
+        #endregion
+
         #endregion
 
 
@@ -140,6 +159,11 @@ namespace Forms9Patch
                 return;
             }
 
+            if (propertyName == ScaleProperty.PropertyName)
+            {
+                Content.Scale = Scale;
+                return;
+            }
             base.OnPropertyChanged(propertyName);
         }
         #endregion
