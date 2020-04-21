@@ -662,12 +662,10 @@ namespace Forms9Patch
             if (!_disposed && disposing)
             {
                 _disposed = true;
-                //_f9pImageData?.Dispose();
-                _f9pImageData?.ReleaseF9PBitmap(this);
+                Source = null;
                 _f9pImageData?.Dispose();
                 _f9pImageData = null;
                 _sourceRangeLists = null;
-                Source = null;
 
                 P42.Utils.Debug.RemoveFromCensus(this);
             }

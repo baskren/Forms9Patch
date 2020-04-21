@@ -185,7 +185,8 @@ namespace Forms9Patch
             if (!_disposed && disposing)
             {
                 _disposed = true;
-                SKBitmap?.Dispose();
+                // Don't do this ... other Images may need it!
+                //SKBitmap?.Dispose();
                 SKBitmap = null;
                 P42.Utils.Debug.RemoveFromCensus(this);
             }
