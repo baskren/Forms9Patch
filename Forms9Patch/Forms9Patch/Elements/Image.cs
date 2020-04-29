@@ -1289,7 +1289,8 @@ namespace Forms9Patch
                                 workingCanvas.DrawPicture(_f9pImageData.SKSvg.Picture);
                             }
                         workingCanvas.Restore();
-                        shadowCanvas?.Dispose();
+                        if (shadowCanvas != workingCanvas)
+                            shadowCanvas?.Dispose();
                         return;
                     }
                 }
@@ -1570,7 +1571,8 @@ namespace Forms9Patch
             else
                 Console.WriteLine("Image [" + _f9pImageData.Key + "] is neither a valid SVG or valid Bitmap.");
 
-            shadowCanvas?.Dispose();
+            if (shadowCanvas != workingCanvas)
+                shadowCanvas?.Dispose();
         }
         #endregion
 
