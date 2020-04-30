@@ -20,11 +20,8 @@ namespace Forms9Patch
         /// <param name="title">Title.</param>
         /// <param name="text">Text.</param>
         /// <param name="okText">Ok text.</param>
-        /// <param name="cancelText">Cancel text.</param>
         /// <param name="okButtonColor">Ok button color.</param>
-        /// <param name="cancelButtonColor">Cancel button color.</param>
         /// <param name="okTextColor">Ok text color.</param>
-        /// <param name="cancelTextColor">Cancel text color.</param>
         public static Alert Create(string title, string text, string okText = "OK", Color okButtonColor = default, Color okTextColor = default)
         {
             var popup = new Alert { Title = title, Text = text, OkText = okText };
@@ -44,11 +41,8 @@ namespace Forms9Patch
         /// <param name="title">Title.</param>
         /// <param name="text">Text.</param>
         /// <param name="okText">Ok text.</param>
-        /// <param name="cancelText">Cancel text.</param>
         /// <param name="okButtonColor">Ok button color.</param>
-        /// <param name="cancelButtonColor">Cancel button color.</param>
         /// <param name="okTextColor">Ok text color.</param>
-        /// <param name="cancelTextColor">Cancel text color.</param>
         public static Alert Create(VisualElement target, string title, string text, string okText = "OK", Color okButtonColor = default, Color okTextColor = default)
         {
             var popup = new Alert(target) { Title = title, Text = text, OkText = okText };
@@ -176,6 +170,9 @@ namespace Forms9Patch
             TextColor = Color.Black
         };
 
+        /// <summary>
+        /// OK Button 
+        /// </summary>
         protected readonly Button _okButton = new Button
         {
             HorizontalOptions = LayoutOptions.FillAndExpand

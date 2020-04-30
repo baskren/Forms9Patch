@@ -75,6 +75,11 @@ namespace Forms9Patch
 
 
         #region Constructor
+        /// <summary>
+        /// Constructs an ActivityIndicator Popup
+        /// </summary>
+        /// <param name="color"></param>
+        /// <param name="popAfter"></param>
         public ActivityIndicatorPopup(Color color, TimeSpan popAfter = default) : this(popAfter)
         {
             Color = color;
