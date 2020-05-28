@@ -187,6 +187,7 @@
     <Compile Include="Popup\PopupPageRenderer.cs" />
     <Compile Include="Popup\PopupPlatformUWP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderers\ColorGradientBoxRenderer.cs" />
     <Compile Include="Renderers\EnhancedListViewRenderer.cs" />
     <Compile Include="Renderers\LabeLRenderer.cs" />
     <Compile Include="Services\ApplicationInfoService.cs" />
