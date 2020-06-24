@@ -13,8 +13,7 @@ namespace FormsGestures.Droid
         public static readonly float Density = Droid.Settings.Context.Resources.DisplayMetrics.Density;
 
         public static Android.Graphics.Point ToNativePoint(this Point p)
-        {
-            return new Android.Graphics.Point((int)(p.X * Density), (int)(p.Y * Density));
-        }
+            => new Android.Graphics.Point((int)p.X, (int)p.Y);
+        
     }
 }

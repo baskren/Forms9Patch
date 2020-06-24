@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Reflection;
 using Xamarin.Forms;
 using System.ComponentModel;
+using System.Text;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Forms9Patch
 {
@@ -45,6 +49,18 @@ namespace Forms9Patch
 
 
         #region Static Methods
+        /// <summary>
+        /// Use a SVG string as a image source for a Forms9Patch image
+        /// </summary>
+        /// <param name="svgText"></param>
+        /// <returns></returns>
+        public static Xamarin.Forms.ImageSource FromSvgText(string svgText)
+        {
+            byte[] byteArray = Encoding.ASCII.GetBytes(svgText);
+            var stream = new MemoryStream(byteArray);
+            return FromStream(() => stream);
+        }
+
         /// <summary>
         /// Cached selection of best fit multi-device / multi-resolution image embedded resource 
         /// </summary>

@@ -115,11 +115,14 @@ namespace Forms9Patch
                     {
                         if (stream == null)
                             return null;
+                        /*
                         using (var skStream = new SKManagedStream(stream))
                         {
                             var skBitmap = SKBitmap.Decode(skStream);
                             f9pImageData = F9PImageData.Create(skBitmap, null);
                         }
+                        */
+                        f9pImageData = F9PImageData.Create(stream, null);
                     }
                 }
                 else
