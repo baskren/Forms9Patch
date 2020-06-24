@@ -42,7 +42,7 @@
   <!-- NuGet Packages -->
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.4.0.991640</Version>
+      <Version>4.4.0.991757</Version>
     </PackageReference>
   </ItemGroup>
   <!-- Files -->
