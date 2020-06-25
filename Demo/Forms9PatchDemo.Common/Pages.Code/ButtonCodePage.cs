@@ -326,7 +326,7 @@ namespace Forms9PatchDemo
                         heightRequestSlider,
 
 
-                            new Xamarin.Forms.Label { Text="Display.Scale=["+Forms9Patch.Display.Scale+"]" }
+                        new Xamarin.Forms.Label { Text="Display.Scale=["+Forms9Patch.Display.Scale+"]" }
 
 
                     },
@@ -361,6 +361,7 @@ namespace Forms9PatchDemo
             #endregion
 
         }
+
 
         #region Event Handlers
         private void AntiAliasSwitch_Toggled(object sender, ToggledEventArgs e)

@@ -26,5 +26,15 @@ namespace Forms9Patch
         /// Segment's text with Html markup
         /// </summary>
         string HtmlText { get; set; }
+
+        /// <summary>
+        /// Gets or sets the font family for the IconText
+        /// </summary>
+        string IconFontFamily { get; set; }
+
+        /// <summary>
+        /// Gets for set the font size for the IconText
+        /// </summary>
+        double IconFontSize { get; set; }
     }
 }

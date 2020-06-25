@@ -83,9 +83,9 @@ namespace Forms9PatchDemo
             Segments =
             {
                 new Segment { Text = "NONE" },
-                new Segment { Text = "x"},
-                new Segment { HtmlText = "©" },
-                new Segment { HtmlText = "<font face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>" },
+                new Segment { IconText = "x"},
+                new Segment { IconText = "©" },
+                new Segment { IconText = "<font face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>" },
                 new Segment { IconImage = new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info"), TintColor=Color.Green }  }
             }
         };
@@ -97,6 +97,11 @@ namespace Forms9PatchDemo
         readonly Slider _outlineWidthSlider = new Slider(0, 7, width);
 
         readonly Slider _outlineRadiusSlider = new Slider(0, 16.0, radius);
+
+        readonly Slider _iconFontSizeSlider = new Slider(0, 40, 12);
+
+        readonly Slider _paddingSlider = new Slider(0, 20, 4);
+
 
         readonly Forms9Patch.StateButton _stateButton = new Forms9Patch.StateButton
         {
@@ -198,7 +203,7 @@ namespace Forms9PatchDemo
 
         readonly Xamarin.Forms.Grid _grid3 = new Xamarin.Forms.Grid
         {
-            ColumnDefinitions = { new ColumnDefinition { Width = GridLength.Star }, new ColumnDefinition { Width = GridLength.Star } },
+            ColumnDefinitions = { new ColumnDefinition { Width = GridLength.Star }, new ColumnDefinition { Width = GridLength.Star }, new ColumnDefinition { Width = GridLength.Star } },
             RowDefinitions = { new RowDefinition { Height = GridLength.Auto }, new RowDefinition { Height = GridLength.Auto }, new RowDefinition { Height = GridLength.Auto }, new RowDefinition { Height = GridLength.Auto } }
         };
 
@@ -210,6 +215,8 @@ namespace Forms9PatchDemo
 
         public ButtonAndSegmentAlignments()
         {
+            _iconFontSizeSlider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(1));
+            _paddingSlider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(1));
 
             _grid1.Children.Add(new Xamarin.Forms.Label { Text = "HZ", VerticalTextAlignment = TextAlignment.Center, FontSize = 9 }, 0, 0);
             _grid1.Children.Add(_hzAlignmentElement, 1, 0);
@@ -231,6 +238,10 @@ namespace Forms9PatchDemo
 
             _grid3.Children.Add(new Xamarin.Forms.Label { Text = "HasShadow:" }, 0, 0);
             _grid3.Children.Add(_hasShadowSwitch, 0, 1);
+            _grid3.Children.Add(new Forms9Patch.Label("Icon Font Size:"), 1, 0);
+            _grid3.Children.Add(_iconFontSizeSlider, 1, 1);
+            _grid3.Children.Add(new Xamarin.Forms.Label { Text = "Padding:" }, 2, 0);
+            _grid3.Children.Add(_paddingSlider, 2, 1);
 
             Padding = new Thickness(40, 20, 20, 20);
             Content = new Xamarin.Forms.ScrollView
@@ -247,6 +258,8 @@ namespace Forms9PatchDemo
                         _grid2,
                         new BoxView { HeightRequest = 1, Color = Color.Gray },
                         _grid3,
+                        
+                        
 
                         new BoxView { HeightRequest = 1, Color = Color.Black },
 
@@ -258,9 +271,35 @@ namespace Forms9PatchDemo
                         new BoxView { HeightRequest = 1, Color = Color.Gray },
                         _vtSegmentsElement,
                         new BoxView { HeightRequest = 1, Color = Color.Gray },
-                        new Xamarin.Forms.Label { Text="Display.Scale=["+Display.Scale+"]" }
+                        new Xamarin.Forms.Label { Text="Display.Scale=["+Display.Scale+"]" },
+                        new BoxView { HeightRequest = 1, Color = Color.Gray },
+
                     }
                 }
+            };
+
+            _paddingSlider.ValueChanged += (sender, e) =>
+            {
+                _hzAlignmentElement.Padding = e.NewValue;
+                _vtAlignmentElement.Padding = e.NewValue;
+                _optionsElement.Padding = e.NewValue;
+                _iconElement.Padding = e.NewValue;
+                _button.Padding = e.NewValue;
+                _stateButton.Padding = e.NewValue;
+                _hzSegmentsElement.Padding = e.NewValue;
+                _vtSegmentsElement.Padding = e.NewValue;
+            };
+
+            _iconFontSizeSlider.ValueChanged += (sender, e) =>
+            {
+                _hzAlignmentElement.IconFontSize = e.NewValue;
+                _vtAlignmentElement.IconFontSize = e.NewValue;
+                _optionsElement.IconFontSize = e.NewValue;
+                _iconElement.IconFontSize = e.NewValue;
+                _button.IconFontSize = e.NewValue;
+                _stateButton.IconFontSize = e.NewValue;
+                _hzSegmentsElement.IconFontSize = e.NewValue;
+                _vtSegmentsElement.IconFontSize = e.NewValue;
             };
 
             _hasShadowSwitch.Toggled += (sender, e) =>
@@ -340,7 +379,7 @@ namespace Forms9PatchDemo
                 SetIconImage(e.Segment.IconImage);
                 //}
                 //else
-                SetIconText(e.Segment.HtmlText ?? e.Segment.Text);
+                SetIconText(e.Segment.IconText);
             };
 
             _spacingSlider.ValueChanged += (sender, e) =>

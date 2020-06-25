@@ -82,6 +82,36 @@ namespace Forms9Patch
         }
         #endregion IconText property
 
+        #region IconFontFamily
+        /// <summary>
+        /// Backing store for Segment IconFontFamily property
+        /// </summary>
+        public static readonly BindableProperty IconFontFamilyProperty = BindableProperty.Create(nameof(IconFontFamily), typeof(string), typeof(Segment), default);
+        /// <summary>
+        /// controls value of .IconFontFamily property
+        /// </summary>
+        public string IconFontFamily
+        {
+            get => (string)GetValue(IconFontFamilyProperty);
+            set => SetValue(IconFontFamilyProperty, value);
+        }
+        #endregion
+
+        #region IconFontSize
+        /// <summary>
+        /// Backing store for Segment IconFontSize property
+        /// </summary>
+        public static readonly BindableProperty IconFontSizeProperty = BindableProperty.Create(nameof(IconFontSize), typeof(double), typeof(Segment), -1.0);
+        /// <summary>
+        /// controls value of .IconFontSize property
+        /// </summary>
+        public double IconFontSize
+        {
+            get => (double)GetValue(IconFontSizeProperty);
+            set => SetValue(IconFontSizeProperty, value);
+        }
+        #endregion
+
         #region Text property
         /// <summary>
         /// Backing store for the Text bindable property.
@@ -451,6 +481,12 @@ namespace Forms9Patch
                 case nameof(FontAttributes):
                     FontAttributes = _button.FontAttributes;
                     break;
+                case nameof(IconFontFamily):
+                    IconFontFamily = _button.InternalIconFontFamily;
+                    break;
+                case nameof(IconFontSize):
+                    IconFontSize = _button.InternalIconFontSize;
+                    break;
                 case nameof(IsEnabled):
                     IsEnabled = _button.IsEnabled;
                     break;
@@ -503,6 +539,12 @@ namespace Forms9Patch
                     break;
                 case nameof(FontAttributes):
                     _button.FontAttributes = FontAttributes;
+                    break;
+                case nameof(IconFontFamily):
+                    _button.InternalIconFontFamily = IconFontFamily;
+                    break;
+                case nameof(IconFontSize):
+                    _button.InternalIconFontSize = IconFontSize;
                     break;
                 case nameof(IsEnabled):
                     _button.IsEnabled = IsEnabled;

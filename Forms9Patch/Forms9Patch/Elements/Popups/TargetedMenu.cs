@@ -220,6 +220,22 @@ namespace Forms9Patch
         }
         #endregion IcontFontFamiliy property
 
+        #region IconFontSize
+        /// <summary>
+        /// Backing store for TargetedMenu IconFontSize property
+        /// </summary>
+        public static readonly BindableProperty IconFontSizeProperty = BindableProperty.Create(nameof(IconFontSize), typeof(double), typeof(TargetedMenu), -1.0);
+        /// <summary>
+        /// controls value of .IconFontSize property
+        /// </summary>
+        public double IconFontSize
+        {
+            get => (double)GetValue(IconFontSizeProperty);
+            set => SetValue(IconFontSizeProperty, value);
+        }
+        #endregion
+
+
         #region FontFamily property
         /// <summary>
         /// Key for FontFamily property
@@ -566,9 +582,17 @@ namespace Forms9Patch
                 UpdateOrientation();
             }
             else if (propertyName == IconFontFamilyProperty.PropertyName)
+            {
                 foreach (var child in _stackLayout.Children)
                     if (child is Button button)
                         button.IconFontFamily = IconFontFamily;
+            }
+            else if (propertyName == IconFontSizeProperty.PropertyName)
+            {
+                foreach (var child in _stackLayout.Children)
+                    if (child is Button button)
+                        button.IconFontSize = IconFontSize;
+            }
         }
         #endregion
 
@@ -580,6 +604,7 @@ namespace Forms9Patch
                     ? (Orientation == StackOrientation.Horizontal ? DefaultHorizontalTextColor : DefaultVerticalTextColor)
                     : TextColor;
             segment._button.IconFontFamily = IconFontFamily;
+            segment._button.IconFontSize = IconFontSize;
             segment._button.FontFamily = FontFamily;
             segment._button.Text = segment.Text;
             segment._button.HtmlText = segment.HtmlText;

@@ -487,6 +487,22 @@ namespace Forms9Patch
         }
         #endregion IconFontFamily property
 
+        #region InternalIconFontFamily
+        /// <summary>
+        /// Backing store for Button InternalIconFontFamily property
+        /// </summary>
+        internal static readonly BindableProperty InternalIconFontFamilyProperty = BindableProperty.Create(nameof(InternalIconFontFamily), typeof(string), typeof(Button), default);
+        /// <summary>
+        /// controls value of .InternalIconFontFamily property
+        /// </summary>
+        internal string InternalIconFontFamily
+        {
+            get => (string)GetValue(InternalIconFontFamilyProperty);
+            set => SetValue(InternalIconFontFamilyProperty, value);
+        }
+        #endregion
+
+
         #region TrailingIcon
         /// <summary>
         /// Backing store for the trailing image property.
@@ -531,6 +547,36 @@ namespace Forms9Patch
         {
             get => (Color)GetValue(IconColorProperty);
             set => SetValue(IconColorProperty, value);
+        }
+        #endregion
+
+        #region IconFontSize
+        /// <summary>
+        /// Backing store for Button IconFontSize property
+        /// </summary>
+        public static readonly BindableProperty IconFontSizeProperty = BindableProperty.Create(nameof(IconFontSize), typeof(double), typeof(Button), -1.0);
+        /// <summary>
+        /// Overrides the default icon font size (the button's FontSize).
+        /// </summary>
+        public double IconFontSize
+        {
+            get => (double)GetValue(IconFontSizeProperty);
+            set => SetValue(IconFontSizeProperty, value);
+        }
+        #endregion
+
+        #region InternalFontSize
+        /// <summary>
+        /// Backing store for Button InternalFontSize property
+        /// </summary>
+        internal static readonly BindableProperty InternalIconFontSizeProperty = BindableProperty.Create(nameof(InternalIconFontSize), typeof(double), typeof(Button), -1.0);
+        /// <summary>
+        /// controls value of .InternalFontSize property
+        /// </summary>
+        internal double InternalIconFontSize
+        {
+            get => (double)GetValue(InternalIconFontSizeProperty);
+            set => SetValue(InternalIconFontSizeProperty, value);
         }
         #endregion
 
@@ -1517,8 +1563,12 @@ namespace Forms9Patch
                 _iconLabel.TextColor = IconColor == default
                     ? _label.TextColor
                     : IconColor;
-                _iconLabel.FontSize = _label.FontSize;
-                _iconLabel.FontFamily = IconFontFamily;
+                _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
+                    ? InternalIconFontFamily
+                    : IconFontFamily;
+                _iconLabel.FontSize = InternalIconFontSize > 0
+                    ? InternalIconFontSize
+                    : IconFontSize > 0 ? IconFontSize : FontSize;
             }
         }
         #endregion
@@ -1840,7 +1890,12 @@ namespace Forms9Patch
                         _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
                         _iconLabel.HorizontalOptions = HorizontalTextAlignment.ToLayoutOptions(true);
                         _iconLabel.VerticalOptions = LayoutOptions.Fill;
-                        _iconLabel.FontFamily = IconFontFamily;
+                        _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
+                            ? InternalIconFontFamily
+                            : IconFontFamily;
+                        _iconLabel.FontSize = InternalIconFontSize > 0
+                            ? InternalIconFontSize
+                            : IconFontSize > 0 ? IconFontSize : FontSize;
                     }
                     _stackLayout.HorizontalOptions = LayoutOptions.FillAndExpand;
                 }
@@ -1857,7 +1912,12 @@ namespace Forms9Patch
                         _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
                         _iconLabel.HorizontalOptions = LayoutOptions.Center;
                         _iconLabel.VerticalOptions = LayoutOptions.Fill;
-                        _iconLabel.FontFamily = IconFontFamily;
+                        _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
+                            ? InternalIconFontFamily
+                            : IconFontFamily;
+                        _iconLabel.FontSize = InternalIconFontSize > 0
+                            ? InternalIconFontSize
+                            : IconFontSize > 0 ? IconFontSize : FontSize;
                     }
                     if (_label != null)
                     {
@@ -1882,7 +1942,12 @@ namespace Forms9Patch
                         _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
                         _iconLabel.HorizontalOptions = LayoutOptions.Center;
                         _iconLabel.VerticalOptions = LayoutOptions.Fill;
-                        _iconLabel.FontFamily = IconFontFamily;
+                        _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
+                            ? InternalIconFontFamily
+                            : IconFontFamily;
+                        _iconLabel.FontSize = InternalIconFontSize > 0
+                            ? InternalIconFontSize
+                            : IconFontSize > 0 ? IconFontSize : FontSize;
                     }
                     if (_label != null)
                     {
@@ -1912,7 +1977,12 @@ namespace Forms9Patch
                         _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
                         _iconLabel.HorizontalOptions = horzOption;
                         _iconLabel.VerticalOptions = vertOption;
-                        _iconLabel.FontFamily = IconFontFamily;
+                        _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
+                            ? InternalIconFontFamily
+                            : IconFontFamily;
+                        _iconLabel.FontSize = InternalIconFontSize > 0
+                            ? InternalIconFontSize
+                            : IconFontSize > 0 ? IconFontSize : FontSize;
                     }
                     _stackLayout.HorizontalOptions = LayoutOptions.Fill;
                     _stackLayout.VerticalOptions = VerticalTextAlignment.ToLayoutOptions(true);
@@ -1930,7 +2000,12 @@ namespace Forms9Patch
                         _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
                         _iconLabel.HorizontalOptions = horzOption;
                         _iconLabel.VerticalOptions = LayoutOptions.Center;
-                        _iconLabel.FontFamily = IconFontFamily;
+                        _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
+                            ? InternalIconFontFamily
+                            : IconFontFamily;
+                        _iconLabel.FontSize = InternalIconFontSize > 0
+                            ? InternalIconFontSize
+                            : IconFontSize > 0 ? IconFontSize : FontSize;
                     }
                     if (_label != null)
                     {
@@ -1956,7 +2031,12 @@ namespace Forms9Patch
                         _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
                         _iconLabel.HorizontalOptions = horzOption;
                         _iconLabel.VerticalOptions = (TrailingIcon ? LayoutOptions.End : LayoutOptions.Start);
-                        _iconLabel.FontFamily = IconFontFamily;
+                        _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
+                            ? InternalIconFontFamily
+                            : IconFontFamily;
+                        _iconLabel.FontSize = InternalIconFontSize > 0
+                            ? InternalIconFontSize
+                            : IconFontSize > 0 ? IconFontSize : FontSize;
                     }
                     if (_label != null)
                     {
@@ -2058,7 +2138,12 @@ namespace Forms9Patch
                 {
                     _iconLabel.SizeChanged -= OnIconLabelSizeChanged;
                     _stackLayout.Children.Remove(_iconLabel);
-                    _iconLabel.FontFamily = IconFontFamily;
+                    _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
+                        ? InternalIconFontFamily
+                        : IconFontFamily;
+                    _iconLabel.FontSize = InternalIconFontSize > 0
+                        ? InternalIconFontSize
+                        : IconFontSize > 0 ? IconFontSize : FontSize;
                 }
                 if (IconText != null)
                 {
@@ -2074,10 +2159,14 @@ namespace Forms9Patch
                         HorizontalTextAlignment = TextAlignment.Center,
                         VerticalTextAlignment = TextAlignment.Center,
                         Lines = 1,
-                        FontSize = FontSize,
                         AutoFit = AutoFit.None,
-                        FontFamily = IconFontFamily
-                    };
+                        FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
+                            ? InternalIconFontFamily
+                            : IconFontFamily,
+                        FontSize = InternalIconFontSize > 0
+                            ? InternalIconFontSize
+                            : IconFontSize > 0 ? IconFontSize : FontSize
+                };
                     if (_iconLabel != null)
                     {
                         _iconLabel.SizeChanged += OnIconLabelSizeChanged;
@@ -2086,7 +2175,12 @@ namespace Forms9Patch
                         else
                             _stackLayout.Children.Insert(0, _iconLabel);
                         SetOrienations();
-                        _iconLabel.FontFamily = IconFontFamily;
+                        _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
+                            ? InternalIconFontFamily
+                            : IconFontFamily;
+                        _iconLabel.FontSize = InternalIconFontSize > 0
+                            ? InternalIconFontSize
+                            : IconFontSize > 0 ? IconFontSize : FontSize;
                     }
                     UpdateIconTint();
                 }
@@ -2149,8 +2243,14 @@ namespace Forms9Patch
                 _label.FontAttributes = FontAttributes;
             else if (propertyName == FontFamilyProperty.PropertyName)
                 _label.FontFamily = FontFamily;
-            else if (propertyName == IconFontFamilyProperty.PropertyName && _iconLabel != null)
-                _iconLabel.FontFamily = IconFontFamily;
+            else if (_iconLabel != null &&(propertyName == IconFontFamilyProperty.PropertyName || propertyName == InternalIconFontFamilyProperty.PropertyName))
+                _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
+                    ? InternalIconFontFamily
+                    : IconFontFamily;
+            else if (_iconLabel != null &&(propertyName == IconFontSizeProperty.PropertyName || propertyName == InternalIconFontSizeProperty.PropertyName))
+                _iconLabel.FontSize = InternalIconFontSize > 0
+                    ? InternalIconFontSize
+                    : IconFontSize > 0 ? IconFontSize : FontSize;
             else if (propertyName == TrailingIconProperty.PropertyName && _stackLayout.Children.Contains(_label))
             {
                 if (_label != null && _stackLayout.Children.Contains(_label))

@@ -405,6 +405,13 @@ namespace Forms9Patch
 
             _label.FontAttributes = (_currentState.FontAttributesSet || _currentState.FontAttributes != (FontAttributes)ButtonState.FontAttributesProperty.DefaultValue ? _currentState.FontAttributes : DefaultState.FontAttributes);
 
+            if (_iconLabel != null)
+            {
+                _iconLabel.FontSize = (_currentState.IconFontSizeSet || Math.Abs(_currentState.IconFontSize - (double)ButtonState.IconFontSizeProperty.DefaultValue) > 0.01 ? _currentState.IconFontSize : (DefaultState.IconFontSizeSet || Math.Abs(DefaultState.IconFontSize - (double)ButtonState.FontSizeProperty.DefaultValue) > 0.01 ? DefaultState.IconFontSize : DefaultState.FontSize));
+
+                _iconLabel.FontFamily = (_currentState.IconFontFamilySet || _currentState.IconFontFamily != (string)ButtonState.IconFontFamilyProperty.DefaultValue ? _currentState.IconFontFamily : DefaultState.FontFamily);
+            }
+
             #endregion IFontElement
 
 
@@ -732,6 +739,11 @@ namespace Forms9Patch
             else if (propertyName == IconFontFamilyProperty.PropertyName && !_showingState)
             {
                 DefaultState.IconFontFamily = IconFontFamily;
+                UpdateState();
+            }
+            else if (propertyName == IconFontSizeProperty.PropertyName && !_showingState)
+            {
+                DefaultState.IconFontSize = IconFontSize;
                 UpdateState();
             }
             #endregion IFontElement

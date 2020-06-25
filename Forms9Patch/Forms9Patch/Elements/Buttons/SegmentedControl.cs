@@ -307,6 +307,22 @@ namespace Forms9Patch
         }
         #endregion IconFontFamiliy property
 
+        #region IconFontSize
+        /// <summary>
+        /// Backing store for SegmentedControl IconFontSize property
+        /// </summary>
+        public static readonly BindableProperty IconFontSizeProperty = BindableProperty.Create(nameof(IconFontSize), typeof(double), typeof(double), -1.0);
+        /// <summary>
+        /// controls value of .IconFontSize property
+        /// </summary>
+        public double IconFontSize
+        {
+            get => (double)GetValue(IconFontSizeProperty);
+            set => SetValue(IconFontSizeProperty, value);
+        }
+        #endregion
+
+
         #region BackgroundColor
         /// <summary>
         /// Backing store for the Button.BackgroundColor bindable property.
@@ -820,6 +836,7 @@ namespace Forms9Patch
             button.OutlineWidth = OutlineWidth;
             button.FontFamily = FontFamily;
             button.IconFontFamily = IconFontFamily;
+            button.IconFontSize = IconFontSize;
             button.FontSize = FontSize;
             button.HasShadow = HasShadow;
             button.ExtendedElementShapeOrientation = Orientation;
@@ -1128,7 +1145,10 @@ namespace Forms9Patch
                         segment._button.FontFamily = FontFamily;
                 else if (propertyName == IconFontFamilyProperty.PropertyName)
                     foreach (Segment segment in Segments)
-                        segment._button.IconFontFamily = FontFamily;
+                        segment._button.IconFontFamily = IconFontFamily;
+                else if (propertyName == IconFontSizeProperty.PropertyName)
+                    foreach (Segment segment in Segments)
+                        segment._button.IconFontSize = IconFontSize;
                 else if (propertyName == FontSizeProperty.PropertyName)
                     foreach (Segment segment in Segments)
                         segment._button.FontSize = FontSize;

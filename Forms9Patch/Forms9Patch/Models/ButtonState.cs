@@ -96,10 +96,16 @@ namespace Forms9Patch
         #endregion IconText
 
         #region IconFontFamily property
+        internal bool IconFontFamilySet;
         /// <summary>
         /// backing store for the IconFontFamily property
         /// </summary>
-        public static readonly BindableProperty IconFontFamilyProperty = BindableProperty.Create(nameof(IconFontFamily), typeof(string), typeof(ButtonState), default(string));
+        public static readonly BindableProperty IconFontFamilyProperty = BindableProperty.Create(nameof(IconFontFamily), typeof(string), typeof(ButtonState), default(string),
+            propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                ((ButtonState)bindable).IconFontFamilySet = newValue != null;
+            }
+            );
         /// <summary>
         /// The font used to render the IconText
         /// </summary>
@@ -109,6 +115,28 @@ namespace Forms9Patch
             set => SetValue(IconFontFamilyProperty, value);
         }
         #endregion IconFontFamily property
+
+        #region IconFontSize
+        internal bool IconFontSizeSet;
+        /// <summary>
+        /// Backing store for ButtonState IconFontSize property
+        /// </summary>
+        public static readonly BindableProperty IconFontSizeProperty = BindableProperty.Create(nameof(IconFontSize), typeof(double), typeof(ButtonState), -1.0,
+            propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                ((ButtonState)bindable).IconFontSizeSet = ((double)newValue) >= 0;
+            }
+            );
+        /// <summary>
+        /// controls value of .IconFontSize property
+        /// </summary>
+        public double IconFontSize
+        {
+            get => (double)GetValue(IconFontSizeProperty);
+            set => SetValue(IconFontSizeProperty, value);
+        }
+        #endregion
+
 
         #region TrailingIcon
         internal bool TrailingIconSet;
@@ -837,6 +865,9 @@ namespace Forms9Patch
             FontFamilySet = source.FontFamilySet;
             FontAttributes = source.FontAttributes;
             FontAttributesSet = source.FontAttributesSet;
+
+            IconFontSize = source.IconFontSize;
+            IconFontFamily = source.IconFontFamily;
             #endregion
 
             #endregion ILabel

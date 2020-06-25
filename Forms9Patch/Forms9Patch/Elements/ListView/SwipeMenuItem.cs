@@ -59,6 +59,37 @@ namespace Forms9Patch
         }
         #endregion IconText property
 
+        #region IconFontFamily
+        /// <summary>
+        /// Backing store for SwipeMenuItem IconFontFamily property
+        /// </summary>
+        public static readonly BindableProperty IconFontFamilyProperty = BindableProperty.Create(nameof(IconFontFamily), typeof(string), typeof(SwipeMenuItem), default);
+        /// <summary>
+        /// controls value of .IconFontFamily property
+        /// </summary>
+        public string IconFontFamily
+        {
+            get => (string)GetValue(IconFontFamilyProperty);
+            set => SetValue(IconFontFamilyProperty, value);
+        }
+        #endregion
+
+        #region IconFontSize
+        /// <summary>
+        /// Backing store for SwipeMenuItem IconFontSize property
+        /// </summary>
+        public static readonly BindableProperty IconFontSizeProperty = BindableProperty.Create(nameof(IconFontSize), typeof(double), typeof(SwipeMenuItem), -1.0);
+        /// <summary>
+        /// controls value of .IconFontSize property
+        /// </summary>
+        public double IconFontSize
+        {
+            get => (double)GetValue(IconFontSizeProperty);
+            set => SetValue(IconFontSizeProperty, value);
+        }
+        #endregion
+
+
         #region Text property
         /// <summary>
         /// The text property backing store.

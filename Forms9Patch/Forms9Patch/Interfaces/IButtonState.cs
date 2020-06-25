@@ -30,6 +30,16 @@ namespace Forms9Patch
         Xamarin.Forms.Color IconColor { get; set; }
 
         /// <summary>
+        /// Gets or sets the font family for the IconText
+        /// </summary>
+        string IconFontFamily { get; set; }
+
+        /// <summary>
+        /// Overrides the default icon font size (the button's FontSize).
+        /// </summary>
+        double IconFontSize { get; set; }
+
+        /// <summary>
         /// controls if the button's icon will be justified to the edge of the button (false) or to be next to the button's text (true)
         /// </summary>
         bool HasTightSpacing { get; set; }
