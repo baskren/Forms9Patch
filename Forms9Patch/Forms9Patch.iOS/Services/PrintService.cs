@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Foundation;
 using UIKit;
 using WebKit;
@@ -23,7 +24,7 @@ namespace Forms9Patch.iOS
         /// </summary>
         /// <param name="viewToPrint">View to print.</param>
         /// <param name="jobName">Job name.</param>
-        public void Print(WebView viewToPrint, string jobName)
+        public async Task PrintAsync(WebView viewToPrint, string jobName)
         {
             if (viewToPrint.Effects.Any(e => e is Forms9Patch.WebViewPrintEffect) && viewToPrint.ActualSource() is WebViewSource actualSource)
             {
@@ -63,9 +64,23 @@ namespace Forms9Patch.iOS
                     && !string.IsNullOrWhiteSpace(url)
                     && Foundation.NSUrl.FromString(url) is Foundation.NSUrl candidateUrl
                     && candidateUrl.Scheme != null
-                    && NSData.FromUrl(candidateUrl) is NSData printData)
+                    )
                 {
-                    printController.PrintingItem = printData;
+                    //printController.PrintingItem = printData;
+                    //printController.PrintingItem = new NSUrl(url);
+                    if (await Forms9Patch.ToPdfService.ToPdfAsync(viewToPrint, "Forms9Patch.PdfPrintFile") is ToFileResult result)
+                    {
+                        if (result.IsError)
+                        {
+                            using (var alert = Forms9Patch.Alert.Create("Print File Generation Error", result.Result)) { }
+                            return;
+                        }
+                        else
+                        {
+                            var fileUrl = NSUrl.CreateFileUrl(result.Result, null);
+                            printController.PrintingItem = fileUrl;
+                        }
+                    }
                 }
                 else
                     printController.PrintFormatter = Platform.CreateRenderer(viewToPrint).NativeView.ViewPrintFormatter;
@@ -89,12 +104,12 @@ namespace Forms9Patch.iOS
             return UIPrintInteractionController.PrintingAvailable;
         }
 
-        public void Print(string html, string jobName)
+        public Task PrintAsync(string html, string jobName)
         {
             var webView = new Xamarin.Forms.WebView();
             WebViewPrintEffect.ApplyTo(webView);
             webView.Source = new HtmlWebViewSource{ Html = html };
-            Print(webView, jobName);
+            return PrintAsync(webView, jobName);
         }
     }
 }

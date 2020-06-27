@@ -14,7 +14,7 @@ namespace Forms9Patch
         /// <param name="html"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-		Task<ToFileResult> ToPdfAsync(string html, string fileName);
+		Task<ToFileResult> ToPdfAsync(string html, string fileName, PageSize pageSize, PageMargin margin);
 
         /// <summary>
         /// WebView to PNG interface
@@ -22,7 +22,7 @@ namespace Forms9Patch
         /// <param name="webView"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        Task<ToFileResult> ToPdfAsync(WebView webView, string fileName);
+        Task<ToFileResult> ToPdfAsync(WebView webView, string fileName, PageSize pageSize, PageMargin margin);
 
         /// <summary>
         /// Determines if PDF printing is available on this platform;

@@ -141,7 +141,7 @@ namespace Forms9PatchDemo
                 }
             }
             else if (e.Segment.Text.Contains("PRINT"))
-                Forms9Patch.PrintService.Print(_htmlEditor.Text, "myHtmlPage");
+                await Forms9Patch.PrintService.PrintAsync(_htmlEditor.Text, "myHtmlPage");
             _processing = false;
         }
         #endregion

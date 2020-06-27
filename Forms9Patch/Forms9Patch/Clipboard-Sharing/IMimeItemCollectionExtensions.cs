@@ -80,11 +80,12 @@ namespace Forms9Patch
         /// <param name="path">File Path.</param>
         public static byte[] AddBytesFromFile(this Forms9Patch.MimeItemCollection mimeItemCollection, string mimeType, string path)
         {
-            if (File.ReadAllBytes(path) is byte[] byteArray)
+            if (File.ReadAllBytes(path) is byte[] byteArray && byteArray.Length > 0)
             {
                 mimeItemCollection.Items.Add(new MimeItem<byte[]>(mimeType, byteArray));
                 return byteArray;
             }
+            using (Alert.Create(null, "Cannot access empty file [" + path + "]")) { }
             return null;
         }
 

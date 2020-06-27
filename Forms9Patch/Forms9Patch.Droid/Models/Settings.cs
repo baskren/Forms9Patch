@@ -68,6 +68,7 @@ namespace Forms9Patch.Droid
 
         static void Init()
         {
+            //Android.Webkit.WebView.EnableSlowWholeDocumentDraw();
             IsInitialized = true;
             Activity = Activity ?? Context as Android.App.Activity;
             Context = Activity as Android.Content.Context;

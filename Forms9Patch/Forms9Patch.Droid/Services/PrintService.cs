@@ -14,7 +14,7 @@ namespace Forms9Patch.Droid
     {
         Forms9Patch.ActivityIndicatorPopup _activityIndicatorPopup;
 
-        public void Print(WebView viewToPrint, string jobName)
+        public Task PrintAsync(WebView viewToPrint, string jobName)
         {
             if (Build.VERSION.SdkInt >= BuildVersionCodes.Kitkat)
             {
@@ -41,13 +41,15 @@ namespace Forms9Patch.Droid
                         renderer.Dispose();
                 }
             }
+            return Task.CompletedTask;
         }
 
-        public void Print(string html, string jobName)
+        public Task PrintAsync(string html, string jobName)
         {
             _activityIndicatorPopup = ActivityIndicatorPopup.Create();
             var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
             InnerPrint(taskCompletionSource, html, jobName);
+            return taskCompletionSource.Task;
         }
 
         void InnerPrint(TaskCompletionSource<ToFileResult> taskCompletionSource, string html, string jobName)
@@ -61,13 +63,14 @@ namespace Forms9Patch.Droid
 #pragma warning restore CS0618 // Type or member is obsolete
             webView.SetLayerType(LayerType.Software, null);
 
-            webView.Layout(0, 0, (int)((size.Width - 0.5) * 72), (int)((size.Height - 0.5) * 72));
+            //webView.Layout(0, 0, (int)((size.Width - 0.5) * 72), (int)((size.Height - 0.5) * 72));
+            webView.Layout(36, 36, (int)((PageSize.Default.Width - 0.5) * 72), (int)((PageSize.Default.Height - 0.5) * 72));
 
-            webView.SetWebViewClient(new WebViewCallBack(taskCompletionSource, jobName, OnPageFinished));
+            webView.SetWebViewClient(new WebViewCallBack(taskCompletionSource,jobName, PageSize.Default, null, OnPageFinished));
             webView.LoadData(html, "text/html; charset=utf-8", "UTF-8");
         }
 
-        async Task OnPageFinished(Android.Webkit.WebView webView, string jobName, TaskCompletionSource<ToFileResult> taskCompletionSource)
+        async Task OnPageFinished(Android.Webkit.WebView webView, string jobName, PageSize pageSize, PageMargin margin, TaskCompletionSource<ToFileResult> taskCompletionSource)
         {
             if (string.IsNullOrWhiteSpace(jobName))
                 jobName = Forms9Patch.ApplicationInfoService.Name;

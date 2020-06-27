@@ -33,10 +33,11 @@ namespace Forms9Patch
         /// <summary>
         /// Converts HTML text to PNG
         /// </summary>
-        /// <param name="html"></param>
-        /// <param name="fileName"></param>
+        /// <param name="html">HTML string to be converted to PDF</param>
+        /// <param name="fileName">Name (not path), excluding suffix, of PDF file</param>
+        /// <param name="pageSize">PDF page size, in points. (default based upon user's region)</param>
         /// <returns></returns>
-        public static async Task<ToFileResult> ToPdfAsync(this string html, string fileName)
+        public static async Task<ToFileResult> ToPdfAsync(this string html, string fileName, PageSize pageSize = default, PageMargin margin = default)
         {
             _platformToPdfService = _platformToPdfService ?? DependencyService.Get<IToPdfService>();
             if (_platformToPdfService == null)
@@ -44,7 +45,10 @@ namespace Forms9Patch
             ToFileResult result = null;
             using (var indicator = ActivityIndicatorPopup.Create())
             {
-                result = await _platformToPdfService.ToPdfAsync(html, fileName);
+                if (pageSize is null || pageSize.Width <= 0 || pageSize.Height <= 0)
+                    pageSize = PageSize.Default;
+
+                result = await _platformToPdfService.ToPdfAsync(html, fileName, pageSize, margin);
             }
             await Task.Delay(50);
             return result;
@@ -53,10 +57,11 @@ namespace Forms9Patch
         /// <summary>
         /// Creates a PNG from the contents of a Xamarin.Forms.WebView
         /// </summary>
-        /// <param name="webView"></param>
-        /// <param name="fileName"></param>
+        /// <param name="webView">Xamarin.Forms.WebView</param>
+        /// <param name="fileName">Name (not path), excluding suffix, of PDF file</param>
+        /// <param name="pageSize">PDF page size, in points. (default based upon user's region)</param>
         /// <returns></returns>
-        public static async Task<ToFileResult> ToPdfAsync(this Xamarin.Forms.WebView webView, string fileName)
+        public static async Task<ToFileResult> ToPdfAsync(this Xamarin.Forms.WebView webView, string fileName, PageSize pageSize = default, PageMargin margin = default)
         {
             _platformToPdfService = _platformToPdfService ?? DependencyService.Get<IToPdfService>();
             if (_platformToPdfService == null)
@@ -64,7 +69,10 @@ namespace Forms9Patch
             ToFileResult result = null;
             using (var indicator = ActivityIndicatorPopup.Create())
             {
-                result = await _platformToPdfService.ToPdfAsync(webView, fileName);
+                if (pageSize is null || pageSize.Width <= 0 || pageSize.Height <= 0)
+                    pageSize = PageSize.Default;
+
+                result = await _platformToPdfService.ToPdfAsync(webView, fileName, pageSize, margin);
             }
             await Task.Delay(50);
             return result;

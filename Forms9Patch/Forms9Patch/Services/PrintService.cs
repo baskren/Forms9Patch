@@ -1,5 +1,6 @@
 ﻿using Xamarin.Forms;
 using System;
+using System.Threading.Tasks;
 
 namespace Forms9Patch
 {
@@ -18,17 +19,29 @@ namespace Forms9Patch
         internal static WebViewSource ActualSource(this WebView webView)
             => (WebViewSource)webView.GetValue(Forms9Patch.WebViewPrintEffect.ActualSourceProperty);
 
+        [Obsolete("Please use PrintAsync", true)]
+        public static void Print(this WebView webview, string jobName)
+        {
+            throw new Exception("Forms9Patch.PrintService.Print is obsolete.  Please use PrintAsync");
+        }
+
         /// <summary>
         /// Print the specified webview and jobName.
         /// </summary>
         /// <param name="webview">Webview.</param>
         /// <param name="jobName">Job name.</param>
-        public static void Print(this WebView webview, string jobName)
+        public static Task PrintAsync(this WebView webview, string jobName)
         {
             _service = _service ?? DependencyService.Get<IPrintService>();
             if (_service == null)
                 throw new NotSupportedException("Cannot get IWebViewService: must not be supported on this platform.");
-            _service.Print(webview, jobName ?? ApplicationInfoService.Name);
+            return _service.PrintAsync(webview, jobName ?? ApplicationInfoService.Name);
+        }
+
+        [Obsolete("Please use PrintAsync", true)]
+        public static void Print(this string html, string jobName)
+        {
+            throw new Exception("Forms9Patch.PrintService.Print is obsolete.  Please use PrintAsync");
         }
 
         /// <summary>
@@ -36,12 +49,12 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="html"></param>
         /// <param name="jobName"></param>
-        public static void Print(this string html, string jobName)
+        public static Task PrintAsync(this string html, string jobName)
         {
             _service = _service ?? DependencyService.Get<IPrintService>();
             if (_service == null)
                 throw new NotSupportedException("Cannot get IWebViewService: must not be supported on this platform.");
-            _service.Print(html, jobName ?? ApplicationInfoService.Name);
+            return _service.PrintAsync(html, jobName ?? ApplicationInfoService.Name);
         }
 
 

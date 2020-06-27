@@ -17,30 +17,30 @@ namespace Forms9Patch.Droid
     public class ToPngService : Java.Lang.Object, IToPngService
     {
 
-        public async Task<ToFileResult> ToPngAsync(string html, string fileName)
+        public async Task<ToFileResult> ToPngAsync(string html, string fileName, int width)
         {
-            if (!await Permissions.WriteExternalStorage.ConfirmOrRequest())
+            if (!await XamarinEssentialsExtensions.ConfirmOrRequest<Xamarin.Essentials.Permissions.StorageWrite>())
                 return new ToFileResult(true, "Write External Stoarge permission must be granted for PNG images to be available.");
             var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
-            ToPng(taskCompletionSource, html, fileName);
+            ToPng(taskCompletionSource, html, fileName, width);
             return await taskCompletionSource.Task;
         }
 
-        public async Task<ToFileResult> ToPngAsync(Xamarin.Forms.WebView webView, string fileName)
+        public async Task<ToFileResult> ToPngAsync(Xamarin.Forms.WebView webView, string fileName, int width)
         {
-            if (!await Permissions.WriteExternalStorage.ConfirmOrRequest())
+            if (!await XamarinEssentialsExtensions.ConfirmOrRequest<Xamarin.Essentials.Permissions.StorageWrite>())
                 return new ToFileResult(true, "Write External Stoarge permission must be granted for PNG images to be available.");
             var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
-            ToPng(taskCompletionSource, webView, fileName);
+            ToPng(taskCompletionSource, webView, fileName, width);
             return await taskCompletionSource.Task;
         }
 
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0067:Dispose objects before losing scope", Justification = "CustomWebView is disposed in Callback.Compete")]
-        public void ToPng(TaskCompletionSource<ToFileResult> taskCompletionSource, string html, string fileName)
+        public void ToPng(TaskCompletionSource<ToFileResult> taskCompletionSource, string html, string fileName, int width)
         {
 
-            var size = new Size(8.5, 11);
+            //var size = new Size(8.5, 11);
             var externalPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
             using (var dir = new Java.IO.File(externalPath))
             using (var file = new Java.IO.File(dir + "/" + fileName + ".png"))
@@ -57,23 +57,25 @@ namespace Forms9Patch.Droid
 #pragma warning restore CS0618 // Type or member is obsolete
                 webView.SetLayerType(LayerType.Software, null);
 
-                webView.Layout(0, 0, (int)((size.Width - 0.5) * 72), (int)((size.Height - 0.5) * 72));
+                //webView.Layout(0, 0, (int)((size.Width - 0.5) * 72), (int)((size.Height - 0.5) * 72));
+                webView.Layout(0, 0, width, width);
 
-                webView.SetWebViewClient(new WebViewCallBack(taskCompletionSource, fileName, OnPageFinished));
+                webView.SetWebViewClient(new WebViewCallBack(taskCompletionSource, fileName, new PageSize { Width = width }, null, OnPageFinished));
                 webView.LoadData(html, "text/html; charset=utf-8", "UTF-8");
             }
         }
 
-        public void ToPng(TaskCompletionSource<ToFileResult> taskCompletionSource, Xamarin.Forms.WebView xfWebView, string fileName)
+        public void ToPng(TaskCompletionSource<ToFileResult> taskCompletionSource, Xamarin.Forms.WebView xfWebView, string fileName, int width)
         {
             if (Platform.CreateRendererWithContext(xfWebView, Settings.Context) is IVisualElementRenderer renderer)
             {
-                Android.Webkit.WebView droidWebView = renderer.View as Android.Webkit.WebView;
+                var droidWebView = renderer.View as Android.Webkit.WebView;
                 if (droidWebView == null && renderer.View is WebViewRenderer xfWebViewRenderer)
                     droidWebView = xfWebViewRenderer.Control;
                 if (droidWebView != null)
                 {
                     //var size = new Size(8.5, 11);
+                    //var bounds = new Rectangle(droidWebView.Left, droidWebView.Top, droidWebView.Width, droidWebView.Height);
                     var externalPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
                     using (var dir = new Java.IO.File(externalPath))
                     using (var file = new Java.IO.File(dir + "/" + fileName + ".png"))
@@ -83,6 +85,18 @@ namespace Forms9Patch.Droid
                         if (file.Exists())
                             file.Delete();
 
+                        /*
+                        Android.Widget.FrameLayout.LayoutParams tmpParams = new Android.Widget.FrameLayout.LayoutParams(width, width);
+                        droidWebView.LayoutParameters = tmpParams;
+                        droidWebView.Layout(0, 0, width, width);
+                        int specWidth = MeasureSpecFactory.MakeMeasureSpec((int)(width * Display.Scale), MeasureSpecMode.Exactly);
+                        //int specHeight = MeasureSpecFactory.MakeMeasureSpec((int)(width * Display.Scale), MeasureSpecMode.Exactly);
+                        int specHeight = MeasureSpecFactory.MakeMeasureSpec(0, MeasureSpecMode.Unspecified);
+                        droidWebView.Measure(specWidth, specHeight);
+                        droidWebView.Layout(0, 0, droidWebView.MeasuredWidth, droidWebView.MeasuredHeight);
+                        */
+
+
                         droidWebView.SetLayerType(LayerType.Software, null);
                         droidWebView.Settings.JavaScriptEnabled = true;
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -90,81 +104,108 @@ namespace Forms9Patch.Droid
                         droidWebView.BuildDrawingCache();
 #pragma warning restore CS0618 // Type or member is obsolete
 
-                        droidWebView.SetWebViewClient(new WebViewCallBack(taskCompletionSource, fileName, OnPageFinished));
+                        droidWebView.SetWebViewClient(new WebViewCallBack(taskCompletionSource, fileName, new PageSize { Width = width }, null, OnPageFinished));
                     }
                 }
             }
         }
 
-        async Task OnPageFinished(Android.Webkit.WebView view, string fileName, TaskCompletionSource<ToFileResult> taskCompletionSource)
+        async Task OnPageFinished(Android.Webkit.WebView view, string fileName, PageSize pageSize, PageMargin margin, TaskCompletionSource<ToFileResult> taskCompletionSource)
         {
+            /*
             var widthString = await view.EvaluateJavaScriptAsync("document.documentElement.offsetWidth");
-            var width = double.Parse(widthString.ToString());
+            var width = (int)System.Math.Ceiling(double.Parse(widthString.ToString()));
 
             var heightString = await view.EvaluateJavaScriptAsync("document.documentElement.offsetHeight");
-            var height = double.Parse(heightString.ToString());
-
-            int specWidth = MeasureSpecFactory.MakeMeasureSpec((int)(width * Display.Scale), MeasureSpecMode.Exactly);
-            int specHeight = MeasureSpecFactory.MakeMeasureSpec((int)(height * Display.Scale), MeasureSpecMode.Exactly);
+            var height = (int)System.Math.Ceiling(double.Parse(heightString.ToString()));
+            var contentHeight = view.ContentHeight;
+            */
+            //var imageView = new WebViewImage(view, fileName, taskCompletionSource);
+            int specWidth = MeasureSpecFactory.MakeMeasureSpec((int)(pageSize.Width), MeasureSpecMode.Exactly);
+            int specHeight = MeasureSpecFactory.MakeMeasureSpec(0, MeasureSpecMode.Unspecified);
             view.Measure(specWidth, specHeight);
-            view.Layout(0, 0, view.MeasuredWidth, view.MeasuredHeight);
+            var height = view.ContentHeight;
+            view.Layout(0, 0, view.MeasuredWidth, height);
+            //imageView.Layout(0, 0, width, height);
+
+            if (height < 1)
+                taskCompletionSource.SetResult(new ToFileResult(true, "Image has no height."));
+
+
 
             await Task.Delay(50);
-            using (var _dir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDocuments))
+            //using (var _dir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDocuments))
+            using (var _dir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads))
             {
                 if (!_dir.Exists())
                     _dir.Mkdir();
 
-                var path = _dir.Path + "/" + fileName + ".png";
-                using (var file = new Java.IO.File(path))
+                //var path = _dir.Path + "/" + fileName + ".png";
+                var path = System.IO.Path.Combine(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath, Android.OS.Environment.DirectoryDownloads, fileName + ".png");
+                var file = new Java.IO.File(path);
+                int iter = 0;
+                while (file.Exists())
                 {
-                    if (!file.Exists())
-                        file.CreateNewFile();
-                    using (var stream = new FileStream(file.Path, FileMode.Create, System.IO.FileAccess.Write))
+                    file.Dispose();
+                    iter++;
+                    path = System.IO.Path.Combine(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath, Android.OS.Environment.DirectoryDownloads, fileName + "_" + iter.ToString("D3") + ".png");
+                    file = new Java.IO.File(path);
+                }
+                file.CreateNewFile();
+                using (var stream = new FileStream(file.Path, FileMode.Create, System.IO.FileAccess.Write))
+                {
+                    if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Honeycomb)
                     {
+                        await Task.Delay(1000);
 
-                        if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Honeycomb)
+                        //using (var bitmap = Bitmap.CreateBitmap(System.Math.Max(view.MeasuredWidth, view.ContentWidth()), view.MeasuredHeight, Bitmap.Config.Argb8888))
+                        using (var bitmap = Bitmap.CreateBitmap(view.MeasuredWidth, height, Bitmap.Config.Argb8888))
                         {
-                            await Task.Delay(1000);
-
-                            using (var bitmap = Bitmap.CreateBitmap(System.Math.Max(view.MeasuredWidth, view.ContentWidth()), view.MeasuredHeight, Bitmap.Config.Argb8888))
+                            using (var canvas = new Canvas(bitmap))
                             {
-                                using (var canvas = new Canvas(bitmap))
-                                {
-                                    if (view.Background != null)
-                                        view.Background.Draw(canvas);
-                                    else
-                                        canvas.DrawColor(Android.Graphics.Color.White);
+                                if (view.Background != null)
+                                    view.Background.Draw(canvas);
+                                else
+                                    canvas.DrawColor(Android.Graphics.Color.White);
 
-                                    view.SetClipChildren(false);
-                                    view.SetClipToPadding(false);
-                                    view.SetClipToOutline(false);
+                                view.SetClipChildren(false);
+                                view.SetClipToPadding(false);
+                                view.SetClipToOutline(false);
 
-                                    await Task.Delay(50);
-                                    view.Draw(canvas);
-                                    await Task.Delay(50);
-                                    bitmap.Compress(Bitmap.CompressFormat.Png, 80, stream);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            await Task.Delay(1000);
-#pragma warning disable CS0618 // Type or member is obsolete
-                            using (var bitmap = Bitmap.CreateBitmap(view.DrawingCache))
-#pragma warning restore CS0618 // Type or member is obsolete
-                            {
+                                await Task.Delay(50);
+                                view.Draw(canvas);
+                                await Task.Delay(50);
                                 bitmap.Compress(Bitmap.CompressFormat.Png, 80, stream);
                             }
                         }
-                        stream.Flush();
-                        stream.Close();
-                        taskCompletionSource.SetResult(new ToFileResult(false, path));
-                        view.Dispose();
                     }
-                }
-            }
+                    else
+                    {
+                        await Task.Delay(1000);
+#pragma warning disable CS0618 // Type or member is obsolete
+                        using (var bitmap = Bitmap.CreateBitmap(view.DrawingCache))
+#pragma warning restore CS0618 // Type or member is obsolete
+                        {
+                            bitmap.Compress(Bitmap.CompressFormat.Png, 80, stream);
+                        }
+                    }
+                    stream.Flush();
+                    stream.Close();
 
+                    // notify download manager!
+                    var downloadManager = Android.App.DownloadManager.FromContext(Android.App.Application.Context);
+                    downloadManager.AddCompletedDownload(
+                        System.IO.Path.GetFileName(path),
+                        System.IO.Path.GetFileName(path),
+                        true, "image/png", path,
+                        File.ReadAllBytes(path).Length, true);
+
+                    taskCompletionSource.SetResult(new ToFileResult(false, path));
+                    view.Dispose();
+                }
+                file.Dispose();
+            }
+            
         }
     }
 
@@ -172,12 +213,16 @@ namespace Forms9Patch.Droid
     {
         bool _complete;
         readonly string _fileName;
+        readonly PageSize _pageSize;
+        readonly PageMargin _margin;
         readonly TaskCompletionSource<ToFileResult> _taskCompletionSource;
-        readonly Func<Android.Webkit.WebView, string, TaskCompletionSource<ToFileResult>, Task> _onPageFinished;
+        readonly Func<Android.Webkit.WebView, string, PageSize, PageMargin, TaskCompletionSource<ToFileResult>, Task> _onPageFinished;
 
-        public WebViewCallBack(TaskCompletionSource<ToFileResult> taskCompletionSource, string fileName, Func<Android.Webkit.WebView, string, TaskCompletionSource<ToFileResult>, Task> onPageFinished)
+        public WebViewCallBack(TaskCompletionSource<ToFileResult> taskCompletionSource, string fileName, PageSize pageSize, PageMargin margin, Func<Android.Webkit.WebView, string, PageSize, PageMargin, TaskCompletionSource<ToFileResult>, Task> onPageFinished)
         {
             _fileName = fileName;
+            _pageSize = pageSize;
+            _margin = margin;
             _taskCompletionSource = taskCompletionSource;
             _onPageFinished = onPageFinished;
         }
@@ -198,7 +243,7 @@ namespace Forms9Patch.Droid
 
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    _onPageFinished?.Invoke(view, _fileName, _taskCompletionSource);
+                    _onPageFinished?.Invoke(view, _fileName, _pageSize, _margin, _taskCompletionSource);
                 });
             }
         }
@@ -252,4 +297,93 @@ namespace Forms9Patch.Droid
         }
     }
 
+
+    class WebViewImage : Android.Widget.ImageView
+    {
+        public Android.Webkit.WebView WebView { get; set; }
+
+        public string FileName { get; set; }
+
+        public TaskCompletionSource<ToFileResult> TaskCompletionSource { get; set; }
+
+        public WebViewImage(Android.Content.Context context, Android.Util.IAttributeSet attr) : base(context, attr) { }
+
+        public WebViewImage(Android.Content.Context context) : base(context) { }
+
+        public WebViewImage(Android.Webkit.WebView webView, string fileName, TaskCompletionSource<ToFileResult> taskCompletionSource) : base(webView.Context)
+        {
+            WebView = webView;
+            FileName = fileName;
+            TaskCompletionSource = taskCompletionSource;
+        }
+
+        public override void Draw(Canvas canvas)
+        {
+            base.Draw(canvas);
+            WebView.Draw(canvas);
+            Invalidate();
+
+            System.Diagnostics.Debug.WriteLine("DRAW COMPLETE");
+
+        }
+
+        public async Task WriteResults()
+        {
+            using (var _dir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDocuments))
+            {
+                if (!_dir.Exists())
+                    _dir.Mkdir();
+
+                var path = _dir.Path + "/" + FileName + ".png";
+                using (var file = new Java.IO.File(path))
+                {
+                    if (!file.Exists())
+                        file.CreateNewFile();
+                    using (var stream = new FileStream(file.Path, FileMode.Create, System.IO.FileAccess.Write))
+                    {
+
+                        if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Honeycomb)
+                        {
+                            await Task.Delay(1000);
+
+                            using (var bitmap = Bitmap.CreateBitmap(MeasuredWidth, MeasuredHeight, Bitmap.Config.Argb8888))
+                            {
+                                using (var canvas = new Canvas(bitmap))
+                                {
+                                    if (Background != null)
+                                        Background.Draw(canvas);
+                                    else
+                                        canvas.DrawColor(Android.Graphics.Color.White);
+
+                                    //SetClipChildren(false);
+                                    //SetClipToPadding(false);
+                                    //SetClipToOutline(false);
+
+                                    await Task.Delay(50);
+                                    Draw(canvas);
+                                    await Task.Delay(50);
+                                    bitmap.Compress(Bitmap.CompressFormat.Png, 80, stream);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            await Task.Delay(1000);
+#pragma warning disable CS0618 // Type or member is obsolete
+                            using (var bitmap = Bitmap.CreateBitmap(DrawingCache))
+#pragma warning restore CS0618 // Type or member is obsolete
+                            {
+                                bitmap.Compress(Bitmap.CompressFormat.Png, 80, stream);
+                            }
+                        }
+                        stream.Flush();
+                        stream.Close();
+                        TaskCompletionSource.SetResult(new ToFileResult(false, path));
+                        Dispose();
+                    }
+                }
+            }
+
+        }
+    }
 }

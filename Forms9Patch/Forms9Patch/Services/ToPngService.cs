@@ -29,10 +29,11 @@ namespace Forms9Patch
         /// <summary>
         /// Converts HTML text to PNG
         /// </summary>
-        /// <param name="html"></param>
-        /// <param name="fileName"></param>
+        /// <param name="html">HTML string to be converted to PNG</param>
+        /// <param name="fileName">Name (not path), excluding suffix, of PNG file</param>
+        /// <param name="width">Width of resulting PNG (in pixels).</param>
         /// <returns></returns>
-        public static async Task<ToFileResult> ToPngAsync(this string html, string fileName)
+        public static async Task<ToFileResult> ToPngAsync(this string html, string fileName, int width = -1)
         {
             _platformToPngService = _platformToPngService ?? DependencyService.Get<IToPngService>();
             if (_platformToPngService == null)
@@ -40,7 +41,9 @@ namespace Forms9Patch
             ToFileResult result = null;
             using (var indicator = ActivityIndicatorPopup.Create())
             {
-                result = await _platformToPngService.ToPngAsync(html, fileName);
+                if (width <= 0)
+                    width = (int)Math.Ceiling((PageSize.Default.Width - 0.5) * 4);
+                result = await _platformToPngService.ToPngAsync(html, fileName, width);
             }
             await Task.Delay(50);
             return result;
@@ -49,10 +52,11 @@ namespace Forms9Patch
         /// <summary>
         /// Creates a PNG from the contents of a Xamarin.Forms.WebView
         /// </summary>
-        /// <param name="webView"></param>
-        /// <param name="fileName"></param>
+        /// <param name="webView">Xamarin.Forms.WebView</param>
+        /// <param name="fileName">Name (not path), excluding suffix, of PNG file</param>
+        /// <param name="width">Width of resulting PNG (in pixels).</param>
         /// <returns></returns>
-        public static async Task<ToFileResult> ToPngAsync(this Xamarin.Forms.WebView webView, string fileName)
+        public static async Task<ToFileResult> ToPngAsync(this Xamarin.Forms.WebView webView, string fileName, int width = -1)
         {
             _platformToPngService = _platformToPngService ?? DependencyService.Get<IToPngService>();
             if (_platformToPngService == null)
@@ -60,7 +64,9 @@ namespace Forms9Patch
             ToFileResult result = null;
             using (var indicator = ActivityIndicatorPopup.Create())
             {
-                result = await _platformToPngService.ToPngAsync(webView, fileName);
+                if (width <= 0)
+                    width = (int)Math.Ceiling((PageSize.Default.Width - (12 * 25.4)) * 4);
+                result = await _platformToPngService.ToPngAsync(webView, fileName, width);
             }
             await Task.Delay(50);
             return result;

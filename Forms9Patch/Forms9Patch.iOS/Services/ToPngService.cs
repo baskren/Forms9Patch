@@ -39,11 +39,16 @@ namespace Forms9Patch.iOS
         /// <param name="html"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public async Task<ToFileResult> ToPngAsync(string html, string fileName)
+        public async Task<ToFileResult> ToPngAsync(string html, string fileName, int width)
         {
-            var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
-            ToPng(taskCompletionSource, html, fileName);
-            return await taskCompletionSource.Task;
+            if (NSProcessInfo.ProcessInfo.IsOperatingSystemAtLeastVersion(new NSOperatingSystemVersion(11, 0, 0)))
+            {
+                var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
+                ToPng(taskCompletionSource, html, fileName, width);
+                return await taskCompletionSource.Task;
+            }
+            else
+                return await Task.FromResult<ToFileResult>(new ToFileResult(true, "PNG output not available prior to iOS 11"));
         }
 
         /// <summary>
@@ -53,11 +58,16 @@ namespace Forms9Patch.iOS
         /// <param name="webView"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public async Task<ToFileResult> ToPngAsync(WebView webView, string fileName)
+        public async Task<ToFileResult> ToPngAsync(WebView webView, string fileName, int width)
         {
-            var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
-            ToPng(taskCompletionSource, webView, fileName);
-            return await taskCompletionSource.Task;
+            if (NSProcessInfo.ProcessInfo.IsOperatingSystemAtLeastVersion(new NSOperatingSystemVersion(11, 0, 0)))
+            {
+                var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
+                ToPng(taskCompletionSource, webView, fileName, width);
+                return await taskCompletionSource.Task;
+            }
+            else
+                return await Task.FromResult<ToFileResult>(new ToFileResult(true, "PNG output not available prior to iOS 11"));
         }
 
         /// <summary>
@@ -66,7 +76,7 @@ namespace Forms9Patch.iOS
         /// <param name="taskCompletionSource"></param>
         /// <param name="html"></param>
         /// <param name="fileName"></param>
-        public void ToPng(TaskCompletionSource<ToFileResult> taskCompletionSource, string html, string fileName)
+        public void ToPng(TaskCompletionSource<ToFileResult> taskCompletionSource, string html, string fileName, int width)
         {
             if (NSProcessInfo.ProcessInfo.IsOperatingSystemAtLeastVersion(new NSOperatingSystemVersion(11, 0, 0)))
             {
@@ -78,16 +88,17 @@ namespace Forms9Patch.iOS
                 {
                     UserContentController = wkUController
                 };
-                //webView = new WKWebView(new CGRect(0, 0, (size.Width - 0.5) * 72, (size.Height - 0.5) * 72), configuration)
-                var webView = new WKWebView(new CGRect(0, 0, 8.0 * 72, 10.5 * 72), configuration)
+                var webView = new WKWebView(new CGRect(0, 0, width, width), configuration)
                 {
 
                     UserInteractionEnabled = false,
                     BackgroundColor = UIColor.White
                 };
-                webView.NavigationDelegate = new WKNavigationCompleteCallback(fileName, taskCompletionSource, NavigationComplete);
+                webView.NavigationDelegate = new WKNavigationCompleteCallback(fileName, new WebViewToPngSize(width), null, taskCompletionSource, NavigationComplete);
                 webView.LoadHtmlString(html, null);
             }
+            else
+                taskCompletionSource.SetResult(new ToFileResult(true, "PNG output not available prior to iOS 11"));
         }
 
 
@@ -98,17 +109,22 @@ namespace Forms9Patch.iOS
         /// <param name="xfWebView"></param>
         /// <param name="fileName"></param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0067:Dispose objects before losing scope", Justification = "Disposal happens in WKUiCallback")]
-        public void ToPng(TaskCompletionSource<ToFileResult> taskCompletionSource, WebView xfWebView, string fileName)
+        public void ToPng(TaskCompletionSource<ToFileResult> taskCompletionSource, WebView xfWebView, string fileName, int width)
         {
-            if (Platform.CreateRenderer(xfWebView) is WkWebViewRenderer renderer)
+            if (NSProcessInfo.ProcessInfo.IsOperatingSystemAtLeastVersion(new NSOperatingSystemVersion(11, 0, 0)))
             {
-                renderer.BackgroundColor = UIColor.White;
-                renderer.UserInteractionEnabled = false;
-                renderer.NavigationDelegate = new WKNavigationCompleteCallback(fileName, taskCompletionSource, NavigationComplete);
+                if (Platform.CreateRenderer(xfWebView) is WkWebViewRenderer renderer)
+                {
+                    renderer.BackgroundColor = UIColor.White;
+                    renderer.UserInteractionEnabled = false;
+                    renderer.NavigationDelegate = new WKNavigationCompleteCallback(fileName, new WebViewToPngSize(width, renderer.Bounds.ToRectangle()), null, taskCompletionSource, NavigationComplete);
+                }
             }
+            else
+                taskCompletionSource.SetResult(new ToFileResult(true, "PNG output not available prior to iOS 11"));
         }
 
-        async Task NavigationComplete(WKWebView webView, string filename, TaskCompletionSource<ToFileResult> taskCompletionSource)
+        async Task NavigationComplete(WKWebView webView, string filename, PageSize pageSize, PageMargin margin, TaskCompletionSource<ToFileResult> taskCompletionSource)
         {
             try
             {
@@ -121,9 +137,15 @@ namespace Forms9Patch.iOS
                 webView.ClipsToBounds = false;
                 webView.ScrollView.ClipsToBounds = false;
 
+                var bounds = webView.Bounds;
+                webView.Bounds = new CGRect(0, 0, (nfloat)width, (nfloat)height);
+
+                var scale = pageSize.Width / width;
+
+
                 var snapshotConfig = new WKSnapshotConfiguration
                 {
-                    Rect = new CGRect(0, 0, width, height)
+                    SnapshotWidth = pageSize.Width / Display.Scale
                 };
 
                 var image = await webView.TakeSnapshotAsync(snapshotConfig);
@@ -135,10 +157,12 @@ namespace Forms9Patch.iOS
                     taskCompletionSource.SetResult(new ToFileResult(false, path));
                     return;
                 }
+                webView.Bounds = bounds;
                 taskCompletionSource.SetResult(new ToFileResult(true, "No data returned."));
             }
             catch (Exception e)
             {
+
                 taskCompletionSource.SetResult(new ToFileResult(true, "Exception: " + e.Message + (e.InnerException != null
                     ? "Inner exception: " + e.InnerException.Message
                     : null)));
@@ -158,12 +182,16 @@ namespace Forms9Patch.iOS
 
         int loadCount;
         readonly string _filename;
+        readonly PageSize _pageSize;
+        readonly PageMargin _margin;
         readonly TaskCompletionSource<ToFileResult> _taskCompletionSource;
-        readonly Func<WKWebView, string, TaskCompletionSource<ToFileResult>, Task> _action;
+        readonly Func<WKWebView, string, PageSize, PageMargin, TaskCompletionSource<ToFileResult>, Task> _action;
 
-        public WKNavigationCompleteCallback(string fileName, TaskCompletionSource<ToFileResult> taskCompletionSource, Func<WKWebView, string, TaskCompletionSource<ToFileResult>, Task> action)
+        public WKNavigationCompleteCallback(string fileName, PageSize pageSize, PageMargin margin, TaskCompletionSource<ToFileResult> taskCompletionSource, Func<WKWebView, string, PageSize, PageMargin, TaskCompletionSource<ToFileResult>, Task> action)
         {
             _filename = fileName;
+            _pageSize = pageSize;
+            _margin = margin;
             _taskCompletionSource = taskCompletionSource;
             _action = action;
         }
@@ -183,7 +211,7 @@ namespace Forms9Patch.iOS
                 {
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        _action?.Invoke(webView, _filename, _taskCompletionSource);
+                        _action?.Invoke(webView, _filename, _pageSize, _margin, _taskCompletionSource);
                     });
                     return false;
                 }

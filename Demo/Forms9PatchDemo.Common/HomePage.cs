@@ -125,6 +125,13 @@ namespace Forms9PatchDemo
 
                         new TextCell
                         {
+                            Text = "WebView Export",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(WebViewExport)
+                        },
+
+                        new TextCell
+                        {
                             Text = "Print HTML or Share/Copy as PNG/PDF",
                             Command = navigateCommand,
                             CommandParameter = typeof(PngFromHtmlPage)

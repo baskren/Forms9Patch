@@ -93,7 +93,6 @@
     <Compile Include="Popup\RgGestureDetectorListener.cs" />
     <Compile Include="Popup\PlatformExtension.cs" />
     <Compile Include="Effects\EntryClearButtonEffect.cs" />
-    <Compile Include="Permissions\WriteExternalStorage.cs" />
     <Compile Include="Services\ToPdfService.cs" />
     <Compile Include="Extensions\AndroidWebViewExtensions.cs" />
     <Compile Include="Effects\EntryNoUnderline.cs" />
@@ -153,7 +152,6 @@
   </ItemGroup-->
   <ItemGroup>
     <Folder Include="Popup\" />
-    <Folder Include="Permissions\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <PropertyGroup>

@@ -22,29 +22,28 @@ namespace Forms9Patch.Droid
     {
         public bool IsAvailable => Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Kitkat;
 
-        public async Task<ToFileResult> ToPdfAsync(string html, string fileName)
+        public async Task<ToFileResult> ToPdfAsync(string html, string fileName, PageSize pageSize, PageMargin margin)
         {
-            if (!await Permissions.WriteExternalStorage.ConfirmOrRequest())
+            if (!await XamarinEssentialsExtensions.ConfirmOrRequest<Xamarin.Essentials.Permissions.StorageWrite>())
                 return new ToFileResult(true, "Write External Stoarge permission must be granted for PNG images to be available.");
             var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
-            ToPdf(taskCompletionSource, html, fileName);
+            ToPdf(taskCompletionSource, html, fileName, pageSize, margin);
             return await taskCompletionSource.Task;
         }
 
-        public async Task<ToFileResult> ToPdfAsync(Xamarin.Forms.WebView webView, string fileName)
+        public async Task<ToFileResult> ToPdfAsync(Xamarin.Forms.WebView webView, string fileName, PageSize pageSize, PageMargin margin)
         {
-            if (!await Permissions.WriteExternalStorage.ConfirmOrRequest())
+            if (!await XamarinEssentialsExtensions.ConfirmOrRequest<Xamarin.Essentials.Permissions.StorageWrite>())
                 return new ToFileResult(true, "Write External Stoarge permission must be granted for PNG images to be available.");
             var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
-            ToPdf(taskCompletionSource, webView, fileName);
+            ToPdf(taskCompletionSource, webView, fileName, pageSize, margin);
             return await taskCompletionSource.Task;
         }
 
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0067:Dispose objects before losing scope", Justification = "CustomWebView is disposed in Callback.Compete")]
-        public void ToPdf(TaskCompletionSource<ToFileResult> taskCompletionSource, string html, string fileName)
+        public void ToPdf(TaskCompletionSource<ToFileResult> taskCompletionSource, string html, string fileName, PageSize pageSize, PageMargin margin)
         {
-            var size = new Size(8.5, 11);
             var externalPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
             using (var dir = new Java.IO.File(externalPath))
             using (var file = new Java.IO.File(dir + "/" + fileName + ".pdf"))
@@ -61,18 +60,19 @@ namespace Forms9Patch.Droid
 #pragma warning restore CS0618 // Type or member is obsolete
                 webView.SetLayerType(LayerType.Software, null);
 
-                webView.Layout(0, 0, (int)((size.Width - 0.5) * 72), (int)((size.Height - 0.5) * 72));
+                //webView.Layout(0, 0, (int)((size.Width - 0.5) * 72), (int)((size.Height - 0.5) * 72));
+                webView.Layout(0, 0, (int)System.Math.Ceiling(pageSize.Width), (int)System.Math.Ceiling(pageSize.Height));
 
                 webView.LoadData(html, "text/html; charset=utf-8", "UTF-8");
-                webView.SetWebViewClient(new WebViewCallBack(taskCompletionSource, fileName, OnPageFinished));
+                webView.SetWebViewClient(new WebViewCallBack(taskCompletionSource, fileName, pageSize, margin, OnPageFinished));
             }
         }
 
-        public void ToPdf(TaskCompletionSource<ToFileResult> taskCompletionSource, Xamarin.Forms.WebView xfWebView, string fileName)
+        public void ToPdf(TaskCompletionSource<ToFileResult> taskCompletionSource, Xamarin.Forms.WebView xfWebView, string fileName, PageSize pageSize, PageMargin margin)
         {
             if (Platform.CreateRendererWithContext(xfWebView, Settings.Context) is IVisualElementRenderer renderer)
             {
-                Android.Webkit.WebView droidWebView = renderer.View as Android.Webkit.WebView;
+                var droidWebView = renderer.View as Android.Webkit.WebView;
                 if (droidWebView == null && renderer.View is WebViewRenderer xfWebViewRenderer)
                     droidWebView = xfWebViewRenderer.Control;
                 if (droidWebView != null)
@@ -94,7 +94,7 @@ namespace Forms9Patch.Droid
                         droidWebView.BuildDrawingCache();
 #pragma warning restore CS0618 // Type or member is obsolete
 
-                        droidWebView.SetWebViewClient(new WebViewCallBack(taskCompletionSource, fileName, OnPageFinished));
+                        droidWebView.SetWebViewClient(new WebViewCallBack(taskCompletionSource, fileName, pageSize, margin, OnPageFinished));
                     }
                 }
             }
@@ -102,15 +102,20 @@ namespace Forms9Patch.Droid
 
 
 
-        async Task OnPageFinished(Android.Webkit.WebView webView, string fileName, TaskCompletionSource<ToFileResult> taskCompletionSource)
+        async Task OnPageFinished(Android.Webkit.WebView webView, string fileName, PageSize pageSize, PageMargin margin, TaskCompletionSource<ToFileResult> taskCompletionSource)
         {
-            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Kitkat)
+            if (Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Kitkat)
             {
+
                 await Task.Delay(5);
                 var builder = new PrintAttributes.Builder();
-                builder.SetMediaSize(PrintAttributes.MediaSize.NaLetter);
-                builder.SetResolution(new PrintAttributes.Resolution("pdf", "pdf", 600, 600));
-                builder.SetMinMargins(PrintAttributes.Margins.NoMargins);
+                //builder.SetMediaSize(PrintAttributes.MediaSize.NaLetter);
+                builder.SetMediaSize(new PrintAttributes.MediaSize(pageSize.Name, pageSize.Name, (int)(pageSize.Width * 1000 / 72), (int)(pageSize.Height * 1000 / 72)));
+                builder.SetResolution(new PrintAttributes.Resolution("pdf", "pdf", 72, 72));
+                if (margin is null)
+                    builder.SetMinMargins(PrintAttributes.Margins.NoMargins);
+                else
+                    builder.SetMinMargins(new PrintAttributes.Margins((int)(margin.Left * 1000 / 72), (int)(margin.Top *1000/72), (int)(margin.Right * 1000/72), (int)(margin.Bottom * 1000 / 72)));
                 var attributes = builder.Build();
 
                 var adapter = webView.CreatePrintDocumentAdapter(Guid.NewGuid().ToString());
@@ -167,23 +172,28 @@ namespace Android.Print
 
         public override void OnLayoutFinished(PrintDocumentInfo info, bool changed)
         {
-            using (var _dir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDocuments))
+            //using (var _dir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDocuments))
+            using (var _dir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads))
             {
                 if (!_dir.Exists())
                     _dir.Mkdir();
 
-                var path = _dir.Path + "/" + FileName + ".pdf";
+                // var path = _dir.Path + "/" + FileName + ".pdf";
+                var path = System.IO.Path.Combine(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath, Android.OS.Environment.DirectoryDownloads, FileName + ".pdf");
                 var file = new Java.IO.File(path);
                 int iter = 0;
                 while (file.Exists())
                 {
+                    file.Dispose();
                     iter++;
-                    path = _dir.Path + "/" + FileName + "_" + iter.ToString("D3") + ".pdf";
+                    //path = _dir.Path + "/" + FileName + "_" + iter.ToString("D3") + ".pdf";
+                    path = System.IO.Path.Combine(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath, Android.OS.Environment.DirectoryDownloads, FileName + "_" + iter.ToString("D3") + ".pdf");
                     file = new Java.IO.File(path);
                 }
                 file.CreateNewFile();
 
                 var fileDescriptor = ParcelFileDescriptor.Open(file, ParcelFileMode.ReadWrite);
+                file.Dispose();
 
                 var writeResultCallback = new PdfWriteResultCallback(TaskCompletionSource, path);
 
@@ -227,6 +237,15 @@ namespace Android.Print
         {
             base.OnWriteFinished(pages);
             _taskCompletionSource.SetResult(new ToFileResult(false, _path));
+
+            // notify download manager!
+            var downloadManager = Android.App.DownloadManager.FromContext(Android.App.Application.Context);
+            var length = File.ReadAllBytes(_path).Length;
+            downloadManager.AddCompletedDownload(
+                System.IO.Path.GetFileName(_path),
+                System.IO.Path.GetFileName(_path),
+                true, "application/pdf", _path,
+                length, true);
         }
 
         public override void OnWriteCancelled()

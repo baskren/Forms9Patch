@@ -59,6 +59,7 @@
         <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\SVG_ButtonBackgroundImage.cs" Link="Pages.Code\SVG_ButtonBackgroundImage.cs" />
         <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\UnconstrainedLabelAutoFitPage.cs" Link="Pages.Code\UnconstrainedLabelAutoFitPage.cs" />
         <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\VariableWidthButton.cs" Link="Pages.Code\VariableWidthButton.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\WebViewExport.cs" Link="Pages.Code\WebViewExport.cs" />
         <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\AbsoluteLayoutExplorationCode.cs" Link="UserPages\AbsoluteLayoutExplorationCode.cs" />
         <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\BackgroundImageOpacityPage.cs" Link="UserPages\BackgroundImageOpacityPage.cs" />
         <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\br.cs" Link="UserPages\br.cs" />

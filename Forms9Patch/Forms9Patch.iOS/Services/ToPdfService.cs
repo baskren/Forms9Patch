@@ -40,21 +40,21 @@ namespace Forms9Patch.iOS
         /// <param name="html"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public async Task<ToFileResult> ToPdfAsync(string html, string fileName)
+        public Task<ToFileResult> ToPdfAsync(string html, string fileName, PageSize pageSize, PageMargin margin)
         {
             var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
-            ToPdf(taskCompletionSource, html, fileName);
+            ToPdf(taskCompletionSource, html, fileName, pageSize, margin);
+            return taskCompletionSource.Task;
+        }
+
+        public async Task<ToFileResult> ToPdfAsync(WebView webView, string fileName, PageSize pageSize, PageMargin margin)
+        {
+            var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
+            ToPdf(taskCompletionSource, webView, fileName, pageSize, margin);
             return await taskCompletionSource.Task;
         }
 
-        public async Task<ToFileResult> ToPdfAsync(WebView webView, string fileName)
-        {
-            var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
-            ToPdf(taskCompletionSource, webView, fileName);
-            return await taskCompletionSource.Task;
-        }
-
-        public void ToPdf(TaskCompletionSource<ToFileResult> taskCompletionSource, string html, string fileName)
+        public void ToPdf(TaskCompletionSource<ToFileResult> taskCompletionSource, string html, string fileName, PageSize pageSize, PageMargin margin)
         {
             if (NSProcessInfo.ProcessInfo.IsOperatingSystemAtLeastVersion(new NSOperatingSystemVersion(11, 0, 0)))
             {
@@ -66,18 +66,18 @@ namespace Forms9Patch.iOS
                 {
                     UserContentController = wkUController
                 };
-                //webView = new WKWebView(new CGRect(0, 0, (size.Width - 0.5) * 72, (size.Height - 0.5) * 72), configuration)
-                var webView = new WKWebView(new CGRect(0, 0, 8.0 * 72, 10.5 * 72), configuration)
-                {
 
+                //webView = new WKWebView(new CGRect(0, 0, (size.Width - 0.5) * 72, (size.Height - 0.5) * 72), configuration)
+                var webView = new WKWebView(new CGRect(0, 0, pageSize.Width, pageSize.Height), configuration)
+                {
                     UserInteractionEnabled = false,
                     BackgroundColor = UIColor.White
                 };
-                webView.NavigationDelegate = new WKNavigationCompleteCallback(fileName, taskCompletionSource, NavigationComplete);
+                webView.NavigationDelegate = new WKNavigationCompleteCallback(fileName, pageSize, margin,taskCompletionSource, NavigationComplete);
                 webView.LoadHtmlString(html, null);
             }
         }
-
+        
         /// <summary>
         /// Produces PDF from a Xamarin.Forms.WebView
         /// </summary>
@@ -85,17 +85,26 @@ namespace Forms9Patch.iOS
         /// <param name="xfWebView"></param>
         /// <param name="fileName"></param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0067:Dispose objects before losing scope", Justification = "Disposal happens in WKUiCallback")]
-        public void ToPdf(TaskCompletionSource<ToFileResult> taskCompletionSource, WebView xfWebView, string fileName)
+        public void ToPdf(TaskCompletionSource<ToFileResult> taskCompletionSource, WebView xfWebView, string fileName, PageSize pageSize, PageMargin margin)
         {
             if (Platform.CreateRenderer(xfWebView) is WkWebViewRenderer renderer)
             {
                 renderer.BackgroundColor = UIColor.White;
                 renderer.UserInteractionEnabled = false;
-                renderer.NavigationDelegate = new WKNavigationCompleteCallback(fileName, taskCompletionSource, NavigationComplete);
+                renderer.NavigationDelegate = new WKNavigationCompleteCallback(fileName, pageSize, margin, taskCompletionSource, NavigationComplete);
             }
         }
+        /*
+        public void ToPdf(TaskCompletionSource<ToFileResult> taskCompletionSource, WebView xfWebView, string fileName)
+        {
+            if (xfWebView.Effects.Any(e=>e is Forms9Patch.WebViewPrintEffect))
+            {
 
-        async Task NavigationComplete(WKWebView webView, string filename, TaskCompletionSource<ToFileResult> taskCompletionSource)
+            }
+        }
+        */
+
+        async Task NavigationComplete(WKWebView webView, string filename, PageSize pageSize, PageMargin margin, TaskCompletionSource<ToFileResult> taskCompletionSource)
         {
             try
             {
@@ -108,7 +117,7 @@ namespace Forms9Patch.iOS
                 webView.ClipsToBounds = false;
                 webView.ScrollView.ClipsToBounds = false;
 
-                if (webView.CreatePdfFile(webView.ViewPrintFormatter) is NSMutableData data)
+                if (webView.CreatePdfFile(webView.ViewPrintFormatter, pageSize, margin) is NSMutableData data)
                 {
                     var path = System.IO.Path.Combine(ToPngService.FolderPath(), filename + ".pdf");
                     System.IO.File.WriteAllBytes(path, data.ToArray());
@@ -138,7 +147,11 @@ namespace Forms9Patch.iOS
         public NSMutableData PrintToPdf()
         {
             var pdfData = new NSMutableData();
+            // Second parameter (CGRect bounds) of BeginPDFContext controls the size of the page onto which the content is rendered ... but not the content size.
+            // So the content (if bigger) will be clipped (both vertically and horizontally).
+            // Also, pagenation is determinted by the content - independent of the below CGRect bounds.
             UIGraphics.BeginPDFContext(pdfData, PaperRect, null);
+            //UIGraphics.BeginPDFContext(pdfData, new CGRect(0, 0, 200, 300), null); 
             PrepareForDrawingPages(new NSRange(0, NumberOfPages));
             var rect = UIGraphics.PDFContextBounds;
             for (int i = 0; i < NumberOfPages; i++)
@@ -153,14 +166,19 @@ namespace Forms9Patch.iOS
 
     static class WKWebViewExtensions
     {
-        public static NSMutableData CreatePdfFile(this WebKit.WKWebView webView, UIViewPrintFormatter printFormatter)
+        public static NSMutableData CreatePdfFile(this WKWebView webView, UIViewPrintFormatter printFormatter, PageSize pageSize, PageMargin margin)
         {
             var bounds = webView.Bounds;
-            webView.Bounds = new CoreGraphics.CGRect(bounds.X, bounds.Y, bounds.Width, webView.ScrollView.ContentSize.Height);
-            var pdfPageFrame = new CoreGraphics.CGRect(0, 0, webView.Bounds.Width, webView.Bounds.Height);
+
+            //webView.Bounds = new CoreGraphics.CGRect(bounds.X, bounds.Y, bounds.Width, webView.ScrollView.ContentSize.Height);
+            webView.Bounds = new CoreGraphics.CGRect(0, 0, (nfloat)pageSize.Width, (nfloat)pageSize.Height);
+            margin = margin ?? new PageMargin();
+            var pdfPageFrame = new CoreGraphics.CGRect((nfloat)margin.Left, (nfloat)margin.Top, webView.Bounds.Width - margin.HorizontalThickness, webView.Bounds.Height - margin.VerticalThickness);
+            //var pdfPageFrame = new CoreGraphics.CGRect(0, 0, 72 * 8, 72 * 10.5);
             var renderer = new PdfRenderer();
             renderer.AddPrintFormatter(printFormatter, 0);
-            renderer.SetValueForKey(NSValue.FromCGRect(UIScreen.MainScreen.Bounds), new NSString("paperRect"));
+            //renderer.SetValueForKey(NSValue.FromCGRect(UIScreen.MainScreen.Bounds), new NSString("paperRect"));
+            renderer.SetValueForKey(NSValue.FromCGRect(webView.Bounds), new NSString("paperRect"));
             renderer.SetValueForKey(NSValue.FromCGRect(pdfPageFrame), new NSString("printableRect"));
             webView.Bounds = bounds;
             return renderer.PrintToPdf();

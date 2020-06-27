@@ -514,6 +514,13 @@ namespace Forms9Patch
         }
 
         /// <summary>
+        /// Initializes new instance of the PopupBase class.
+        /// </summary>
+        /// <param name="segment"></param>
+        /// <param name="popAfter"></param>
+        internal PopupBase(Segment segment, TimeSpan popAfter = default) : this(segment._button, popAfter) { }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.PopupBase"/> class.
         /// </summary>
         /// <param name="target">Target.</param>
@@ -542,8 +549,6 @@ namespace Forms9Patch
             IsAnimationEnabled = false;
 
             PopAfter = popAfter;
-
-
         }
 
 

@@ -204,6 +204,12 @@ namespace Forms9Patch
             Point = point;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.BubblePopup"/> class.
+        /// </summary>
+        /// <param name="segment"></param>
+        /// <param name="popAfter"></param>
+        public BubblePopup(Segment segment, TimeSpan popAfter = default) : base(segment._button, popAfter) => Init();
         #endregion
 
 
