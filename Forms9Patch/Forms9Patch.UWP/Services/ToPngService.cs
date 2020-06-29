@@ -29,19 +29,24 @@ namespace Forms9Patch.UWP
 		readonly static DependencyProperty TaskCompletionSourceProperty = DependencyProperty.Register("OnPngComplete", typeof(TaskCompletionSource<ToFileResult>), typeof(ToPngService), null);
 		//readonly static DependencyProperty WebViewProperty = DependencyProperty.Register("WebView", typeof(Windows.UI.Xaml.Controls.WebView), typeof(ToPngService), null);
 		readonly static DependencyProperty HtmlStringProperty = DependencyProperty.Register("HtmlString", typeof(string), typeof(ToPngService), null);
+		readonly static DependencyProperty PngWidthProperty = DependencyProperty.Register("PngWidth", typeof(int), typeof(ToPngService), null);
 
+		readonly static DependencyProperty BeforeWidthProperty = DependencyProperty.Register("BeforeWidth", typeof(int), typeof(ToPngService), null);
+		readonly static DependencyProperty BeforeHeightProperty = DependencyProperty.Register("BeforeHeight", typeof(int), typeof(ToPngService), null);
 
-		public async Task<ToFileResult> ToPngAsync(string html, string fileName)
+		readonly static DependencyProperty ToFileResultProperty = DependencyProperty.Register("ToFileResult", typeof(string), typeof(ToPngService), null);
+
+		public async Task<ToFileResult> ToPngAsync(string html, string fileName, int width)
 		{
 			var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
-			ToPng(taskCompletionSource, html, fileName);
+			ToPng(taskCompletionSource, html, fileName, width);
 			return await taskCompletionSource.Task;
 		}
 
-		public async Task<ToFileResult> ToPngAsync(Xamarin.Forms.WebView webView, string fileName)
+		public async Task<ToFileResult> ToPngAsync(Xamarin.Forms.WebView webView, string fileName, int width)
 		{
 			var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
-			ToPng(taskCompletionSource, webView, fileName);
+			ToPng(taskCompletionSource, webView, fileName, width);
 			return await taskCompletionSource.Task;
 		}
 
@@ -49,11 +54,11 @@ namespace Forms9Patch.UWP
 		int instanceCount = 0;
 
 #pragma warning disable CS1998
-		public void ToPng(TaskCompletionSource<ToFileResult> taskCompletionSource, string html, string fileName)
+		public void ToPng(TaskCompletionSource<ToFileResult> taskCompletionSource, string html, string fileName, int width)
 		{
 			Device.BeginInvokeOnMainThread(async () =>
 			{
-				var size = new Size(5, 11);
+				//var size = new Size(5, 11);
 				//if (Platform.GetRenderer(popup.WebView) is Xamarin.Forms.Platform.UWP.WebViewRenderer renderer)
 				{
 					//var webView = renderer.Control;
@@ -67,7 +72,7 @@ namespace Forms9Patch.UWP
 					var webView = _webView;
 
 					webView.DefaultBackgroundColor = Windows.UI.Colors.White;
-					webView.Width = (size.Width - 0.5) * 72;
+					webView.Width = width;
 					webView.Height = 10; // (size.Height - 0.5) * 72,
 
 					webView.Visibility = Visibility.Visible;
@@ -75,6 +80,8 @@ namespace Forms9Patch.UWP
 					webView.SetValue(PngFileNameProperty, fileName);
 					webView.SetValue(TaskCompletionSourceProperty, taskCompletionSource);
 					webView.SetValue(HtmlStringProperty, html);
+					webView.SetValue(PngWidthProperty, width);
+					webView.Width = width;
 
 					webView.NavigationCompleted += NavigationCompleteA;
 					webView.NavigationFailed += WebView_NavigationFailed;
@@ -87,7 +94,7 @@ namespace Forms9Patch.UWP
 			});
 		}
 
-		public void ToPng(TaskCompletionSource<ToFileResult> taskCompletionSource, Xamarin.Forms.WebView xfWebView, string fileName)
+		public void ToPng(TaskCompletionSource<ToFileResult> taskCompletionSource, Xamarin.Forms.WebView xfWebView, string fileName, int width)
 		{
 			Device.BeginInvokeOnMainThread(async () =>
 			{
@@ -95,12 +102,23 @@ namespace Forms9Patch.UWP
 				{
 					var webView = renderer.Control;
 
+					var contentSize = await webView.WebViewContentSizeAsync();
+					System.Diagnostics.Debug.WriteLine("A contentSize=[" + contentSize + "]");
+					System.Diagnostics.Debug.WriteLine("A webView.Size=[" + webView.Width + "," + webView.Height + "] IsOnMainThread=[" + P42.Utils.Environment.IsOnMainThread + "]");
+
+					webView.SetValue(BeforeWidthProperty, contentSize.Width);
+					webView.SetValue(BeforeHeightProperty, contentSize.Height);
+
 					webView.SetValue(PngFileNameProperty, fileName);
 					webView.SetValue(TaskCompletionSourceProperty, taskCompletionSource);
+					webView.SetValue(PngWidthProperty, width);
+					webView.Width = width;
 
 					webView.NavigationCompleted += NavigationCompleteA;
 					webView.NavigationFailed += WebView_NavigationFailed;
 
+					//webView.Width = width;
+					NavigationCompleteA(webView, null);
 				}
 			});
 		}
@@ -123,23 +141,30 @@ namespace Forms9Patch.UWP
 
 			webView.NavigationCompleted -= NavigationCompleteA;
 			var contentSize = await webView.WebViewContentSizeAsync();
-
 			System.Diagnostics.Debug.WriteLine("A contentSize=[" + contentSize + "]");
 			System.Diagnostics.Debug.WriteLine("A webView.Size=[" + webView.Width + "," + webView.Height + "] IsOnMainThread=[" + P42.Utils.Environment.IsOnMainThread + "]");
 
-			webView.Width = contentSize.Width;
+			//webView.Width = contentSize.Width;
+			var width = (int)webView.GetValue(PngWidthProperty);
+			webView.Width = width;
 			webView.Height = contentSize.Height;
 
 			//webView.UpdateLayout();
 
 			webView.NavigationCompleted += NavigationCompleteB;
 
-			var html = (string)webView.GetValue(HtmlStringProperty);
-			webView.NavigateToString(html);
+			//if (webView.GetValue(HtmlStringProperty) is string html)
+			//	webView.NavigateToString(html);
+			//else
+				//NavigationCompleteB(webView, args);
+				webView.Refresh();
 		}
 
 		private async void NavigationCompleteB(Windows.UI.Xaml.Controls.WebView webView, WebViewNavigationCompletedEventArgs args)
 		{
+			webView.NavigationCompleted -= NavigationCompleteB;
+			webView.NavigationCompleted += NavigationCompleteC;
+
 			IsMainPageChild(webView);
 
 			using (InMemoryRandomAccessStream ms = new InMemoryRandomAccessStream())
@@ -147,6 +172,17 @@ namespace Forms9Patch.UWP
 				System.Diagnostics.Debug.WriteLine("B webView.Size=[" + webView.Width + "," + webView.Height + "] IsOnMainThread=[" + P42.Utils.Environment.IsOnMainThread + "]");
 				try
 				{
+					var contentSize = await webView.WebViewContentSizeAsync();
+					System.Diagnostics.Debug.WriteLine("B contentSize=[" + contentSize + "]");
+					System.Diagnostics.Debug.WriteLine("B webView.Size=[" + webView.Width + "," + webView.Height + "] IsOnMainThread=[" + P42.Utils.Environment.IsOnMainThread + "]");
+
+					webView.Width = contentSize.Width;
+					webView.Height = contentSize.Height;
+					System.Diagnostics.Debug.WriteLine("B webView.Size=[" + webView.Width + "," + webView.Height + "] IsOnMainThread=[" + P42.Utils.Environment.IsOnMainThread + "]");
+
+					webView.InvalidateMeasure();
+					System.Diagnostics.Debug.WriteLine("B webView.Size=[" + webView.Width + "," + webView.Height + "] IsOnMainThread=[" + P42.Utils.Environment.IsOnMainThread + "]");
+
 					//await Task.Delay(2000);
 					await webView.CapturePreviewToStreamAsync(ms);
 
@@ -154,8 +190,10 @@ namespace Forms9Patch.UWP
 
 					var transform = new BitmapTransform
 					{
-						ScaledHeight = (uint)decoder.PixelHeight,
-						ScaledWidth = (uint)decoder.PixelWidth
+						//ScaledHeight = (uint)decoder.PixelHeight,
+						//ScaledWidth = (uint)decoder.PixelWidth
+						ScaledHeight = (uint)Math.Ceiling(webView.Height),
+						ScaledWidth = (uint)Math.Ceiling(webView.Width)
 					};
 
 					var pixelData = await decoder.GetPixelDataAsync(
@@ -175,21 +213,51 @@ namespace Forms9Patch.UWP
 						var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
 						encoder.SetPixelData(BitmapPixelFormat.Bgra8,
 											BitmapAlphaMode.Ignore,
-											(uint)decoder.PixelWidth, (uint)decoder.PixelHeight,
+											//(uint)decoder.PixelWidth, (uint)decoder.PixelHeight,
+											(uint)Math.Ceiling(webView.Width),(uint)Math.Ceiling(webView.Height),
 											0, 0, bytes);
 						await encoder.FlushAsync();
 					}
 
-					var onComplete = (TaskCompletionSource<ToFileResult>)webView.GetValue(TaskCompletionSourceProperty);
-					System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": Complete[" + file.Path + "]");
-					onComplete?.SetResult(new ToFileResult(false, file.Path));
+					webView.Width = (int)webView.GetValue(BeforeWidthProperty);
+					webView.Height = (int)webView.GetValue(BeforeHeightProperty);
+					webView.Refresh();
+
+					var toFileResult = new ToFileResult(false, file.Path);
+					webView.SetValue(ToFileResultProperty, toFileResult);
+
 				}
 				catch (Exception e)
 				{
-					var onComplete = (TaskCompletionSource<ToFileResult>)webView.GetValue(TaskCompletionSourceProperty);
-					onComplete?.SetResult(new ToFileResult(true, e.InnerException?.Message ?? e.Message));
+					webView.Width = (int)webView.GetValue(BeforeWidthProperty);
+					webView.Height = (int)webView.GetValue(BeforeHeightProperty);
+					webView.Refresh();
+
+					var toFileResult = new ToFileResult(true, e.InnerException?.Message ?? e.Message);
+					webView.SetValue(ToFileResultProperty, toFileResult);
+
 				}
 			}
+			webView.Refresh();
+		}
+
+		private void NavigationCompleteC(Windows.UI.Xaml.Controls.WebView webView, WebViewNavigationCompletedEventArgs args)
+        {
+			webView.NavigationCompleted -= NavigationCompleteC;
+			if (webView.GetValue(TaskCompletionSourceProperty) is TaskCompletionSource<ToFileResult> onComplete)
+			{
+				if (webView.GetValue(ToFileResultProperty) is ToFileResult result)
+				{
+					System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": Complete[" + result.Result + "]");
+					onComplete.SetResult(result);
+				}
+				else
+				{
+					onComplete.SetResult(new ToFileResult(true, "unknown error generating PNG."));
+				}
+			}
+			else
+				throw new Exception("Failed to get TaskCompletionSource for UWP WebView.ToPngAsync");
 		}
 
 		bool IsMainPageChild(Windows.UI.Xaml.Controls.WebView webView)

@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo
 {
-    public class PngFromHtmlPage : Xamarin.Forms.ContentPage
+    public class HtmlExport : Xamarin.Forms.ContentPage
     {
 
         const string sharePngButtonText = "SHARE PNG";
@@ -65,7 +65,7 @@ namespace Forms9PatchDemo
 
 
         #region Constructor
-        public PngFromHtmlPage()
+        public HtmlExport()
         {
             BackgroundColor = Color.White;
 

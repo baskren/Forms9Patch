@@ -28,19 +28,19 @@ namespace Forms9Patch.UWP
 			return PrintManager.IsSupported();
 		}
 
-		public void Print(Xamarin.Forms.WebView webView, string jobName)
+		public Task PrintAsync(Xamarin.Forms.WebView webView, string jobName)
 		{
 			Device.BeginInvokeOnMainThread(async () =>
 			{
 				if (string.IsNullOrWhiteSpace(jobName))
 					jobName = Forms9Patch.ApplicationInfoService.Name;
 				WebViewPrintHelper printHelper = null;
-				if (Platform.GetRenderer(webView) is WebViewRenderer renderer && renderer.Control is Windows.UI.Xaml.Controls.WebView nativeWebView)
-					printHelper = new WebViewPrintHelper(nativeWebView, jobName);
-				else if (webView.Source is HtmlWebViewSource htmlSource && !string.IsNullOrWhiteSpace(htmlSource.Html))
+				if (webView.Source is HtmlWebViewSource htmlSource && !string.IsNullOrWhiteSpace(htmlSource.Html))
 					printHelper = new WebViewPrintHelper(htmlSource.Html, htmlSource.BaseUrl, jobName);
 				else if (webView.Source is UrlWebViewSource urlSource && !string.IsNullOrWhiteSpace(urlSource.Url))
 					printHelper = new WebViewPrintHelper(urlSource.Url, jobName);
+				else if (Platform.GetRenderer(webView) is WebViewRenderer renderer && renderer.Control is Windows.UI.Xaml.Controls.WebView nativeWebView)
+					printHelper = new WebViewPrintHelper(nativeWebView, jobName);
 				if (printHelper != null)
 				{
 					printHelper.RegisterForPrinting();
@@ -48,9 +48,10 @@ namespace Forms9Patch.UWP
 					bool showprint = await PrintManager.ShowPrintUIAsync();
 				}
 			});
+			return Task.CompletedTask;
 		}
 
-		public void Print(string html, string jobName)
+		public Task PrintAsync(string html, string jobName)
 		{
 			var webView = new Xamarin.Forms.WebView
 			{
@@ -60,7 +61,7 @@ namespace Forms9Patch.UWP
 				}
 			};
 			WebViewPrintEffect.ApplyTo(webView);
-			Print(webView, jobName);
+			return PrintAsync(webView, jobName);
 		}
 	}
 }

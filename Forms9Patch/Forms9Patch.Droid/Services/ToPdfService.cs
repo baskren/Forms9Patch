@@ -106,7 +106,6 @@ namespace Forms9Patch.Droid
         {
             if (Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Kitkat)
             {
-
                 await Task.Delay(5);
                 var builder = new PrintAttributes.Builder();
                 //builder.SetMediaSize(PrintAttributes.MediaSize.NaLetter);

@@ -43,6 +43,7 @@ namespace Forms9PatchDemo
 
             Content = layout;
 
+
             segmentedControl.SegmentTapped += async (sender, e) =>
             {
                 e.Segment.IsSelected = false;
@@ -64,12 +65,20 @@ namespace Forms9PatchDemo
                 }
                 else if (e.Segment.Text == "ToPdf Letter")
                 {
-                    if (await Forms9Patch.ToPdfService.ToPdfAsync(webView, "test", Forms9Patch.PageSize.NaLetter) is Forms9Patch.ToFileResult fileResult)
+                    if (Device.RuntimePlatform == Device.UWP)
+                    {
+                        using (Forms9Patch.Toast.Create("ToPdf not available in UWP.", "Use Forms9Patch.PrintService.PrintAsync instead")) { }
+                    }
+                    else if (await Forms9Patch.ToPdfService.ToPdfAsync(webView, "test", Forms9Patch.PageSize.NaLetter) is Forms9Patch.ToFileResult fileResult)
                             result = fileResult;
                 }
                 else if (e.Segment.Text == "ToPdf A4")
                 {
-                    if (await Forms9Patch.ToPdfService.ToPdfAsync(webView, "test", Forms9Patch.PageSize.IsoA4) is Forms9Patch.ToFileResult fileResult)
+                    if (Device.RuntimePlatform == Device.UWP)
+                    {
+                        using (Forms9Patch.Toast.Create("ToPdf not available in UWP.", "Use Forms9Patch.PrintService.PrintAsync instead")) { }
+                    }
+                    else if (await Forms9Patch.ToPdfService.ToPdfAsync(webView, "test", Forms9Patch.PageSize.IsoA4) is Forms9Patch.ToFileResult fileResult)
                         result = fileResult;
                 }
                 else if (e.Segment.Text == "Print")

@@ -48,7 +48,7 @@
         <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\GestureTestPage.cs" Link="Pages.Code\GestureTestPage.cs" />
         <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\PickerInPopup.cs" Link="Pages.Code\PickerInPopup.cs" />
         <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\PopupsPage.cs" Link="Pages.Code\PopupsPage.cs" />
-        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\PngFromHtml.cs" Link="Pages.Code\PngFromHtml.cs" />
+        <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\HtmlExport.cs" Link="Pages.Code\HtmlExport.cs" />
         <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\SegmentedControlCrowding.cs" Link="Pages.Code\SegmentedControlCrowding.cs" />
         <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\SegmentSelectedBackgroundPage.cs" Link="Pages.Code\SegmentSelectedBackgroundPage.cs" />
         <Compile Include="$(Forms9PatchDemoSourceDir)\Pages.Code\SingleButton.cs" Link="Pages.Code\SingleButton.cs" />

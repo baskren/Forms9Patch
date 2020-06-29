@@ -132,9 +132,9 @@ namespace Forms9PatchDemo
 
                         new TextCell
                         {
-                            Text = "Print HTML or Share/Copy as PNG/PDF",
+                            Text = "HTML Export",
                             Command = navigateCommand,
-                            CommandParameter = typeof(PngFromHtmlPage)
+                            CommandParameter = typeof(HtmlExport)
                         },
 
                         new TextCell {

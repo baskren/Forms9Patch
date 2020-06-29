@@ -134,6 +134,12 @@ namespace Forms9Patch.iOS
                 var heightString = await webView.EvaluateJavaScriptAsync("document.documentElement.offsetHeight");
                 var height = double.Parse(heightString.ToString());
 
+                if (width < 1 || height < 1)
+                {
+                    taskCompletionSource.SetResult(new ToFileResult(true, "WebView has zero width or height"));
+                    return;
+                }    
+
                 webView.ClipsToBounds = false;
                 webView.ScrollView.ClipsToBounds = false;
 

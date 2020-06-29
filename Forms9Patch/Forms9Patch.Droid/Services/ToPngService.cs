@@ -128,9 +128,11 @@ namespace Forms9Patch.Droid
             view.Layout(0, 0, view.MeasuredWidth, height);
             //imageView.Layout(0, 0, width, height);
 
-            if (height < 1)
-                taskCompletionSource.SetResult(new ToFileResult(true, "Image has no height."));
-
+            if (height < 1 || view.MeasuredWidth < 1)
+            {
+                taskCompletionSource.SetResult(new ToFileResult(true, "WebView width or height is zero."));
+                return;
+            }
 
 
             await Task.Delay(50);
@@ -297,93 +299,4 @@ namespace Forms9Patch.Droid
         }
     }
 
-
-    class WebViewImage : Android.Widget.ImageView
-    {
-        public Android.Webkit.WebView WebView { get; set; }
-
-        public string FileName { get; set; }
-
-        public TaskCompletionSource<ToFileResult> TaskCompletionSource { get; set; }
-
-        public WebViewImage(Android.Content.Context context, Android.Util.IAttributeSet attr) : base(context, attr) { }
-
-        public WebViewImage(Android.Content.Context context) : base(context) { }
-
-        public WebViewImage(Android.Webkit.WebView webView, string fileName, TaskCompletionSource<ToFileResult> taskCompletionSource) : base(webView.Context)
-        {
-            WebView = webView;
-            FileName = fileName;
-            TaskCompletionSource = taskCompletionSource;
-        }
-
-        public override void Draw(Canvas canvas)
-        {
-            base.Draw(canvas);
-            WebView.Draw(canvas);
-            Invalidate();
-
-            System.Diagnostics.Debug.WriteLine("DRAW COMPLETE");
-
-        }
-
-        public async Task WriteResults()
-        {
-            using (var _dir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDocuments))
-            {
-                if (!_dir.Exists())
-                    _dir.Mkdir();
-
-                var path = _dir.Path + "/" + FileName + ".png";
-                using (var file = new Java.IO.File(path))
-                {
-                    if (!file.Exists())
-                        file.CreateNewFile();
-                    using (var stream = new FileStream(file.Path, FileMode.Create, System.IO.FileAccess.Write))
-                    {
-
-                        if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Honeycomb)
-                        {
-                            await Task.Delay(1000);
-
-                            using (var bitmap = Bitmap.CreateBitmap(MeasuredWidth, MeasuredHeight, Bitmap.Config.Argb8888))
-                            {
-                                using (var canvas = new Canvas(bitmap))
-                                {
-                                    if (Background != null)
-                                        Background.Draw(canvas);
-                                    else
-                                        canvas.DrawColor(Android.Graphics.Color.White);
-
-                                    //SetClipChildren(false);
-                                    //SetClipToPadding(false);
-                                    //SetClipToOutline(false);
-
-                                    await Task.Delay(50);
-                                    Draw(canvas);
-                                    await Task.Delay(50);
-                                    bitmap.Compress(Bitmap.CompressFormat.Png, 80, stream);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            await Task.Delay(1000);
-#pragma warning disable CS0618 // Type or member is obsolete
-                            using (var bitmap = Bitmap.CreateBitmap(DrawingCache))
-#pragma warning restore CS0618 // Type or member is obsolete
-                            {
-                                bitmap.Compress(Bitmap.CompressFormat.Png, 80, stream);
-                            }
-                        }
-                        stream.Flush();
-                        stream.Close();
-                        TaskCompletionSource.SetResult(new ToFileResult(false, path));
-                        Dispose();
-                    }
-                }
-            }
-
-        }
-    }
 }

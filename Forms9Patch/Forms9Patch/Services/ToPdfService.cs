@@ -36,9 +36,11 @@ namespace Forms9Patch
         /// <param name="html">HTML string to be converted to PDF</param>
         /// <param name="fileName">Name (not path), excluding suffix, of PDF file</param>
         /// <param name="pageSize">PDF page size, in points. (default based upon user's region)</param>
+        /// <param name="margin">PDF page's margin, in points. (default is zero)</param>
         /// <returns></returns>
         public static async Task<ToFileResult> ToPdfAsync(this string html, string fileName, PageSize pageSize = default, PageMargin margin = default)
         {
+
             _platformToPdfService = _platformToPdfService ?? DependencyService.Get<IToPdfService>();
             if (_platformToPdfService == null)
                 throw new NotSupportedException("Cannot get HtmlService: must not be supported on this platform.");
@@ -47,6 +49,10 @@ namespace Forms9Patch
             {
                 if (pageSize is null || pageSize.Width <= 0 || pageSize.Height <= 0)
                     pageSize = PageSize.Default;
+
+                margin = margin ?? new PageMargin();
+                if (pageSize.Width - margin.HorizontalThickness < 1 || pageSize.Height - margin.VerticalThickness < 1)
+                    return new ToFileResult(true, "Page printable area (page size - margins) has zero width or height.");
 
                 result = await _platformToPdfService.ToPdfAsync(html, fileName, pageSize, margin);
             }
@@ -60,7 +66,8 @@ namespace Forms9Patch
         /// <param name="webView">Xamarin.Forms.WebView</param>
         /// <param name="fileName">Name (not path), excluding suffix, of PDF file</param>
         /// <param name="pageSize">PDF page size, in points. (default based upon user's region)</param>
-        /// <returns></returns>
+        /// <param name="margin">PDF page's margin, in points. (default is zero)</param>
+        /// <returns>Forms9Patch.ToFileResult</returns>
         public static async Task<ToFileResult> ToPdfAsync(this Xamarin.Forms.WebView webView, string fileName, PageSize pageSize = default, PageMargin margin = default)
         {
             _platformToPdfService = _platformToPdfService ?? DependencyService.Get<IToPdfService>();
@@ -71,6 +78,10 @@ namespace Forms9Patch
             {
                 if (pageSize is null || pageSize.Width <= 0 || pageSize.Height <= 0)
                     pageSize = PageSize.Default;
+
+                margin = margin ?? new PageMargin();
+                if (pageSize.Width - margin.HorizontalThickness < 1 || pageSize.Height - margin.VerticalThickness < 1)
+                    return new ToFileResult(true, "Page printable area (page size - margins) has zero width or height.");
 
                 result = await _platformToPdfService.ToPdfAsync(webView, fileName, pageSize, margin);
             }
