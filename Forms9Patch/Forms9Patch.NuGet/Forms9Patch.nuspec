@@ -25,35 +25,42 @@ Android developers can use NinePatch bitmaps, the drawable directory naming conv
   </description>
   <summary>Simplify multi-device image, label and font management in your NetStandard, PCL, and Shared Library Xamarin.Forms mobile and UWP apps</summary>
 	<releaseNotes>
-    2.3.0.0: **New:**
+    2.3.0.0: 
     
-               - Forms9Patch.ImageSource.FromSvgText(string svgText) allows svg string to be used as an Source for Forms9Patch.Image;
-               - Added UWP ColorGradientBoxRenderer;
-               - Added Color to ActivityIndicatorPopup constructor;
-               - Added Scale property to Popups;
-               - Alert element (subclass of BubblePopup);
-               - Added IconColor to Button and SegmentedControl;
-               - Fixed missing components of WebView export + print in iOS;
+    **New:**
 
-             **Fixed:** 
+    - Forms9Patch.ImageSource.FromSvgText(string svgText) allows SVG string to be used as an Source for Forms9Patch.Image;
+    - Added UWP ColorGradientBoxRenderer;
+    - Added Color to ActivityIndicatorPopup constructor;
+    - Added Scale property to Popups;
+    - Alert element (subclass of BubblePopup);
+    - Added IconColor to Button and SegmentedControl;
+    - Fixed missing components of WebView export + print in iOS;
+    - Added optional width (in pixels) argument for ToPngService.ToPngAsync;
+    - Added optional PageSize (in points) and PageMargin (in points) argument to ToPdfService.ToPdfAsync;
+    - Added new PageSize class to specify standard page sizes and switch between landscape and portrait (for PDFs);
+    - Added new PageMargin class to specify margins for PDFs;
 
-               - &lt;a&gt; tag touches not working on Android;
-               - Edge case where Image can cause crash because SKCanvas is accidentally disposed;
-               - SKBitmaps can be release prematurely, causing future Images using the same EmbeddedResource to not render;
-               - Multiple Add/Removes from P42.Utils.ObservableConcurrentCollection are being passed as one item instead of n items;
-               - Crash when clearing iOS gesture recognizers;
-               - Popup crashes when disposed called on background thread;
-               - Prevented BubbleLayout.InvalidateMeasure from being called on background thread;
-               - Removed risk of null exception being thrown when Popup navigation is called;
-               - Crash on iOS when disposing NativeGestureHandler;
-               - AppCenter reported null exception in PopupBase.PopAsync();
-               - SIGABRT: Cannot print WebView in iOS without first calling Forms9Patch.WebViewPrintEffect.AttachTo(webView) BEFORE setting webview.Sourc;
-               - UWP image auto invalidate could occur on background thread;
-               - Permission popup not returning correct PermissionState;
-               - Weird edge case where thread will deadlock when Popup is asked to Pop when it has never been generated;
-               - iOS print html string not working;
-               - Guides not showing additional step required to get Pdf export, Png export, and printing working on iOS;       
-               - Fixed missing components of WebView export + print in iOS;
+    **Fixed:**
+
+    - &lt;a&gt; tag touches not working on Android;
+    - Edge case where Image can cause crash because SKCanvas is accidentally disposed;
+    - SKBitmaps can be release prematurely, causing future Images using the same EmbeddedResource to not render;
+    - Multiple Add/Removes from P42.Utils.ObservableConcurrentCollection are being passed as one item instead of n items;
+    - Crash when clearing iOS gesture recognizers;
+    - Popup crashes when disposed called on background thread;
+    - Prevented BubbleLayout.InvalidateMeasure from being called on background thread;
+    - Removed risk of null exception being thrown when Popup navigation is called;
+    - Crash on iOS when disposing NativeGestureHandler;
+    - AppCenter reported null exception in PopupBase.PopAsync();
+    - SIGABRT: Cannot print WebView in iOS without first calling Forms9Patch.WebViewPrintEffect.AttachTo(webView) BEFORE setting webview.Sourc;
+    - UWP image auto invalidate could occur on background thread;
+    - Permission popup not returning correct PermissionState;
+    - Weird edge case where thread will deadlock when Popup is asked to Pop when it has never been generated;
+    - iOS print html string not working;
+    - Guides not showing additional step required to get Pdf export, Png export, and printing working on iOS;       
+    - Fixed missing components of WebView export + print in iOS;
+            
 
     2.2.6.0: Fixed: Printing HTML text not working in iOS;  Guides not up to date WRT using WebViewPrintEffect;
     2.2.5.0: New: Added EntryNoUnderlineEffect (to remove those pesky Android underlines);  Fixed: Multiple memory leaks; Changing Target property of Popup doesn't update target if it is currently visible; Android crash when Pinching or Rotating; SinglePicker can crash when BasePicker.Index has changed to -1; iOS label renderer is elipsizing the last character in very long, multiline, lines=0 strings; Crash when print job fails on UWP; WebView printing, pdf export, and pnd export not working on iOS; Edge case crashes for UWP printing;
@@ -212,6 +219,17 @@ Fixed: iOS HtmlMarkup underlines don't match font color, Default Android image b
                 <dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="6.2.9" />
                 <dependency id="NETStandard.Library" version="2.0.3" />
                 <dependency id="Win2D.uwp" version="1.20.0" />
+            </group>
+            <group targetFramework="UAP1.0">
+              <dependency id="Xamarin.Forms" version="4.4.0.991757" />
+              <dependency id="Xamarin.Essentials" version="1.5.3.2" />
+              <dependency id="Newtonsoft.Json" version="12.0.3" />
+              <dependency id="SkiaSharp.Views.Forms" version="1.68.3" />
+              <dependency id="SkiaSharp.Svg" version="1.60.0" />
+              <dependency id="SharpDX.Direct2D1" version="4.2.0" />
+              <dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="6.2.9" />
+              <dependency id="NETStandard.Library" version="2.0.3" />
+              <dependency id="Win2D.uwp" version="1.20.0" />
             </group>
             <group targetFramework="MonoAndroid10">
                 <dependency id="Xamarin.Forms" version="4.4.0.991757" />

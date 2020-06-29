@@ -19,6 +19,11 @@ namespace Forms9Patch
         internal static WebViewSource ActualSource(this WebView webView)
             => (WebViewSource)webView.GetValue(Forms9Patch.WebViewPrintEffect.ActualSourceProperty);
 
+        /// <summary>
+        /// OBSOLETE: Use PrintAsync instead
+        /// </summary>
+        /// <param name="webview"></param>
+        /// <param name="jobName"></param>
         [Obsolete("Please use PrintAsync", true)]
         public static void Print(this WebView webview, string jobName)
         {
@@ -38,6 +43,11 @@ namespace Forms9Patch
             return _service.PrintAsync(webview, jobName ?? ApplicationInfoService.Name);
         }
 
+        /// <summary>
+        /// OBSOLETE: Use PrintAsync instead
+        /// </summary>
+        /// <param name="html"></param>
+        /// <param name="jobName"></param>
         [Obsolete("Please use PrintAsync", true)]
         public static void Print(this string html, string jobName)
         {

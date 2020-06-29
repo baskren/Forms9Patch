@@ -99,7 +99,8 @@
     <div class="level8"><a class="xref" href="Forms9Patch.Elements.Popups.Core.PopupPage.html">PopupPage</a></div>
     <div class="level9"><span class="xref">Forms9Patch.PopupBase</span></div>
     <div class="level10"><a class="xref" href="Forms9Patch.BubblePopup.html">BubblePopup</a></div>
-    <div class="level11"><span class="xref">PermissionPopup</span></div>
+    <div class="level11"><a class="xref" href="Forms9Patch.Alert.html">Alert</a></div>
+    <div class="level12"><span class="xref">PermissionPopup</span></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
@@ -119,6 +120,57 @@
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Forms9Patch.Alert.html#Forms9Patch_Alert_Create_System_String_System_String_System_String_Xamarin_Forms_Color_Xamarin_Forms_Color_">Alert.Create(String, String, String, Color, Color)</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.Alert.html#Forms9Patch_Alert_Create_Xamarin_Forms_VisualElement_System_String_System_String_System_String_Xamarin_Forms_Color_Xamarin_Forms_Color_">Alert.Create(VisualElement, String, String, String, Color, Color)</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.Alert.html#Forms9Patch_Alert_TitleProperty">Alert.TitleProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.Alert.html#Forms9Patch_Alert_Title">Alert.Title</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.Alert.html#Forms9Patch_Alert_TextProperty">Alert.TextProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.Alert.html#Forms9Patch_Alert_Text">Alert.Text</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.Alert.html#Forms9Patch_Alert_OkTextProperty">Alert.OkTextProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.Alert.html#Forms9Patch_Alert_OkText">Alert.OkText</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.Alert.html#Forms9Patch_Alert_OkButtonColorProperty">Alert.OkButtonColorProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.Alert.html#Forms9Patch_Alert_OkButtonColor">Alert.OkButtonColor</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.Alert.html#Forms9Patch_Alert_OkTextColorProperty">Alert.OkTextColorProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.Alert.html#Forms9Patch_Alert_OkTextColor">Alert.OkTextColor</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.Alert.html#Forms9Patch_Alert_PermissionStateProperty">Alert.PermissionStateProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.Alert.html#Forms9Patch_Alert_PermissionState">Alert.PermissionState</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.Alert.html#Forms9Patch_Alert_OkTapped">Alert.OkTapped</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.Alert.html#Forms9Patch_Alert__okButton">Alert._okButton</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.Alert.html#Forms9Patch_Alert_OnAppearing">Alert.OnAppearing()</a>
+    </div>
     <div>
       <a class="xref" href="Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup_Content">BubblePopup.Content</a>
     </div>
@@ -772,7 +824,7 @@
   <h6><strong>Assembly</strong>: Forms9Patch.dll</h6>
   <h5 id="Forms9Patch_PermissionPopup_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class PermissionPopup : BubblePopup, INotifyPropertyChanged, IDynamicResourceHandler, IElement, INameScope, INavigationProxy, IAnimatable, IResourcesProvider, IStyleElement, IFlowDirectionController, IPropertyPropagationController, IVisualController, ITabStopElement, IStyleSelectable, IStylable, ILayout, IPageController, IVisualElementController, IElementController, IElementConfiguration&lt;Page&gt;, IPaddingElement, IControlTemplated, IPopup, IBackground, IShape, IElement, IDisposable</code></pre>
+    <pre><code class="lang-csharp hljs">public class PermissionPopup : Alert, INotifyPropertyChanged, IDynamicResourceHandler, IElement, INameScope, INavigationProxy, IAnimatable, IResourcesProvider, IStyleElement, IFlowDirectionController, IPropertyPropagationController, IVisualController, ITabStopElement, IStyleSelectable, IStylable, ILayout, IPageController, IVisualElementController, IElementController, IElementConfiguration&lt;Page&gt;, IPaddingElement, IControlTemplated, IPopup, IBackground, IShape, IElement, IDisposable</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -881,156 +933,6 @@
       </tr>
     </tbody>
   </table>
-  
-  
-  <h4 id="Forms9Patch_PermissionPopup_OkButtonColorProperty" data-uid="Forms9Patch.PermissionPopup.OkButtonColorProperty">OkButtonColorProperty</h4>
-  <div class="markdown level1 summary"><p>The ok button color property.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly BindableProperty OkButtonColorProperty</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="Forms9Patch_PermissionPopup_OkTextColorProperty" data-uid="Forms9Patch.PermissionPopup.OkTextColorProperty">OkTextColorProperty</h4>
-  <div class="markdown level1 summary"><p>The ok text color property.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly BindableProperty OkTextColorProperty</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="Forms9Patch_PermissionPopup_OkTextProperty" data-uid="Forms9Patch.PermissionPopup.OkTextProperty">OkTextProperty</h4>
-  <div class="markdown level1 summary"><p>The ok text property.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly BindableProperty OkTextProperty</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="Forms9Patch_PermissionPopup_PermissionStateProperty" data-uid="Forms9Patch.PermissionPopup.PermissionStateProperty">PermissionStateProperty</h4>
-  <div class="markdown level1 summary"><p>PermissionState Bindable Property</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly BindableProperty PermissionStateProperty</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="Forms9Patch_PermissionPopup_TextProperty" data-uid="Forms9Patch.PermissionPopup.TextProperty">TextProperty</h4>
-  <div class="markdown level1 summary"><p>The text property backing store.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly BindableProperty TextProperty</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="Forms9Patch_PermissionPopup_TitleProperty" data-uid="Forms9Patch.PermissionPopup.TitleProperty">TitleProperty</h4>
-  <div class="markdown level1 summary"><p>The title property backing store.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly BindableProperty TitleProperty</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="properties">Properties
   </h3>
   
@@ -1114,167 +1016,6 @@
       </tr>
     </tbody>
   </table>
-  
-  
-  <a id="Forms9Patch_PermissionPopup_OkButtonColor_" data-uid="Forms9Patch.PermissionPopup.OkButtonColor*"></a>
-  <h4 id="Forms9Patch_PermissionPopup_OkButtonColor" data-uid="Forms9Patch.PermissionPopup.OkButtonColor">OkButtonColor</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the color of the ok button.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Color OkButtonColor { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.color">Color</a></td>
-        <td><p>The color of the ok button.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Forms9Patch_PermissionPopup_OkText_" data-uid="Forms9Patch.PermissionPopup.OkText*"></a>
-  <h4 id="Forms9Patch_PermissionPopup_OkText" data-uid="Forms9Patch.PermissionPopup.OkText">OkText</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the ok text.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string OkText { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><p>The ok text.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Forms9Patch_PermissionPopup_OkTextColor_" data-uid="Forms9Patch.PermissionPopup.OkTextColor*"></a>
-  <h4 id="Forms9Patch_PermissionPopup_OkTextColor" data-uid="Forms9Patch.PermissionPopup.OkTextColor">OkTextColor</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the color of the ok text.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Color OkTextColor { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.color">Color</a></td>
-        <td><p>The color of the ok text.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Forms9Patch_PermissionPopup_PermissionState_" data-uid="Forms9Patch.PermissionPopup.PermissionState*"></a>
-  <h4 id="Forms9Patch_PermissionPopup_PermissionState" data-uid="Forms9Patch.PermissionPopup.PermissionState">PermissionState</h4>
-  <div class="markdown level1 summary"><p>The current permission process state of the Permision Popup</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public PermissionState PermissionState { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Forms9Patch.PermissionState.html">PermissionState</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Forms9Patch_PermissionPopup_Text_" data-uid="Forms9Patch.PermissionPopup.Text*"></a>
-  <h4 id="Forms9Patch_PermissionPopup_Text" data-uid="Forms9Patch.PermissionPopup.Text">Text</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the text.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Text { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><p>The text.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Forms9Patch_PermissionPopup_Title_" data-uid="Forms9Patch.PermissionPopup.Title*"></a>
-  <h4 id="Forms9Patch_PermissionPopup_Title" data-uid="Forms9Patch.PermissionPopup.Title">Title</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the title.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Title { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><p>The title.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="methods">Methods
   </h3>
   
@@ -1321,7 +1062,7 @@
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">Forms9Patch.PopupBase.CancelAsync(System.Object)</span></div>
+  <div><a class="xref" href="Forms9Patch.Alert.html#Forms9Patch_Alert_CancelAsync_System_Object_">Alert.CancelAsync(Object)</a></div>
   
   
   <a id="Forms9Patch_PermissionPopup_Create_" data-uid="Forms9Patch.PermissionPopup.Create*"></a>
@@ -1530,20 +1271,7 @@
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">Forms9Patch.PopupBase.Dispose(System.Boolean)</span></div>
-  
-  
-  <a id="Forms9Patch_PermissionPopup_OnAppearing_" data-uid="Forms9Patch.PermissionPopup.OnAppearing*"></a>
-  <h4 id="Forms9Patch_PermissionPopup_OnAppearing" data-uid="Forms9Patch.PermissionPopup.OnAppearing">OnAppearing()</h4>
-  <div class="markdown level1 summary"><p>Called when appearing</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected override void OnAppearing()</code></pre>
-  </div>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.page.onappearing#Xamarin_Forms_Page_OnAppearing">Page.OnAppearing()</a></div>
+  <div><a class="xref" href="Forms9Patch.Alert.html#Forms9Patch_Alert_Dispose_System_Boolean_">Alert.Dispose(Boolean)</a></div>
   
   
   <a id="Forms9Patch_PermissionPopup_OnPropertyChanged_" data-uid="Forms9Patch.PermissionPopup.OnPropertyChanged*"></a>
@@ -1574,34 +1302,7 @@
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup_OnPropertyChanged_System_String_">BubblePopup.OnPropertyChanged(String)</a></div>
-  <h3 id="events">Events
-  </h3>
-  
-  
-  <h4 id="Forms9Patch_PermissionPopup_OkTapped" data-uid="Forms9Patch.PermissionPopup.OkTapped">OkTapped</h4>
-  <div class="markdown level1 summary"><p>Occurs when ok button is tapped.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public event EventHandler OkTapped</code></pre>
-  </div>
-  <h5 class="eventType">Event Type</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler">EventHandler</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+  <div><a class="xref" href="Forms9Patch.Alert.html#Forms9Patch_Alert_OnPropertyChanged_System_String_">Alert.OnPropertyChanged(String)</a></div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">System.ComponentModel.INotifyPropertyChanged</a>

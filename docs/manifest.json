@@ -1603,7 +1603,19 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.ActivityIndicatorPopup.html",
-          "hash": "TmaQYn9KOAwkFDsAL2EH4w=="
+          "hash": "+OhmEGrPZnIpY93cPpykZg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Forms9Patch.Alert.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Forms9Patch.Alert.html",
+          "hash": "+gmSrFcjxQI0xKIAp6wAIQ=="
         }
       },
       "is_incremental": false,
@@ -1723,7 +1735,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.BubblePopup.html",
-          "hash": "3m7mqduFwWe6mAr07RCx5Q=="
+          "hash": "uVnIS4C1bWeoEhtKXN2F8w=="
         }
       },
       "is_incremental": false,
@@ -1735,7 +1747,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.Button.html",
-          "hash": "KyOFjlZDjNewzWyDTFu3Xg=="
+          "hash": "3lG7tPRpaOgvFo7l8QNoyA=="
         }
       },
       "is_incremental": false,
@@ -1747,7 +1759,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.ButtonState.html",
-          "hash": "vlqj9EOmGhC8Kj+4amSk+w=="
+          "hash": "SCvXn1USLsHMkj9D028dGQ=="
         }
       },
       "is_incremental": false,
@@ -2419,7 +2431,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.IButton.html",
-          "hash": "c39/OSPmwP23HFFn2i9d8Q=="
+          "hash": "P6ixD+RsPJM0bvVejudENA=="
         }
       },
       "is_incremental": false,
@@ -2431,7 +2443,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.IButtonState.html",
-          "hash": "+woQxZuuQ4Xz/gLkIeXqgQ=="
+          "hash": "wvu/SfYpTuelRzDlgaK63Q=="
         }
       },
       "is_incremental": false,
@@ -2575,7 +2587,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.IMenuItem.html",
-          "hash": "9iLDP2ARFwX+J+H+1S5zvg=="
+          "hash": "ZwXBaLulkfKf/V6t8ikCZw=="
         }
       },
       "is_incremental": false,
@@ -2647,7 +2659,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.IPrintService.html",
-          "hash": "qlHlWU3yEv/KZnusiAg28g=="
+          "hash": "B1hx0II273ZWTefTP+2O6A=="
         }
       },
       "is_incremental": false,
@@ -2659,7 +2671,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.ISegment.html",
-          "hash": "4iuDrfwbs46qbG8Z9/V/Ow=="
+          "hash": "gn1Y8T7R3Pc/+USEvPtdNw=="
         }
       },
       "is_incremental": false,
@@ -2707,7 +2719,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.IToPdfService.html",
-          "hash": "IetNnQhqhRu8yvFlBlFaCw=="
+          "hash": "KMYjtVz0n1sQVHzcdHppfw=="
         }
       },
       "is_incremental": false,
@@ -2719,7 +2731,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.IToPngService.html",
-          "hash": "uKKmCtByA2mgEVrzJ38lGw=="
+          "hash": "P0NkO/Pq0m0fthFyjBE9kw=="
         }
       },
       "is_incremental": false,
@@ -2743,7 +2755,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.ImageButton.html",
-          "hash": "+d5ymiS1kTUC20khPrOOoQ=="
+          "hash": "jGZ8ALHL9C0TS0FMFcSdVw=="
         }
       },
       "is_incremental": false,
@@ -2755,7 +2767,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.ImageButtonState.html",
-          "hash": "60tSGVJ51+EmTwgDNp8HKw=="
+          "hash": "sEW5uXp7sErxiA8PpmwUfw=="
         }
       },
       "is_incremental": false,
@@ -2767,7 +2779,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.ImageSource.html",
-          "hash": "EsU99c2U8wPAnymZLIGH4w=="
+          "hash": "aOXveSXYy8OyFJB9pkHNgg=="
         }
       },
       "is_incremental": false,
@@ -2947,7 +2959,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.MaterialButton.html",
-          "hash": "i+vUH6M9iEBj2ghUv/w9cg=="
+          "hash": "2OnXbVea4qpJuy/1dvM9hw=="
         }
       },
       "is_incremental": false,
@@ -2959,7 +2971,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.MaterialSegmentedControl.html",
-          "hash": "ry7m6qRE9cx0cIddPBGLYQ=="
+          "hash": "Go1zgiVPBqpJdrNsSkpAvA=="
         }
       },
       "is_incremental": false,
@@ -3007,7 +3019,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.ModalPopup.html",
-          "hash": "44u6FGGPEw68qODee4/kig=="
+          "hash": "krkZZlJYCtmwZnPdPmrijg=="
         }
       },
       "is_incremental": false,
@@ -3063,11 +3075,35 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "obj/api/Forms9Patch.PageMargin.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Forms9Patch.PageMargin.html",
+          "hash": "E9A2hI8F/ZIvcaCVhKNqZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Forms9Patch.PageSize.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Forms9Patch.PageSize.html",
+          "hash": "76/9UdvGvEheSOvxlAJvrg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "obj/api/Forms9Patch.PermissionPopup.yml",
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.PermissionPopup.html",
-          "hash": "WM3z84e8EcRBuatnLdN2zA=="
+          "hash": "YTmxHjtxpJbvLvVc48d5dw=="
         }
       },
       "is_incremental": false,
@@ -3139,7 +3175,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.PrintService.html",
-          "hash": "Zh+mFEAPeqWIqK5LZcIhMA=="
+          "hash": "Hk++1y4zL07CRzTjUmfuhA=="
         }
       },
       "is_incremental": false,
@@ -3211,7 +3247,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.Segment.html",
-          "hash": "lt3tJyyNYLKBgBxNCcgiQQ=="
+          "hash": "KyRHIJopBRsIDRJYtS+x2Q=="
         }
       },
       "is_incremental": false,
@@ -3223,7 +3259,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.SegmentedControl.html",
-          "hash": "XpsCSX1WKS4IertmB3BMcw=="
+          "hash": "kKfyNI4Dnmejykbz5u5ztg=="
         }
       },
       "is_incremental": false,
@@ -3295,7 +3331,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.Sharing.html",
-          "hash": "hEN983WvaBckG5Dc97mKSQ=="
+          "hash": "oFa8c/wBWKjHXQIg2uFo4w=="
         }
       },
       "is_incremental": false,
@@ -3367,7 +3403,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.StateButton.html",
-          "hash": "GGl4BtiXUeys8DhrNeqGMw=="
+          "hash": "yr8V3Z6tY0mTESIwvlUJJw=="
         }
       },
       "is_incremental": false,
@@ -3391,7 +3427,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.SwipeMenuItem.html",
-          "hash": "m7UNdNV8VQT966doYSeXYA=="
+          "hash": "/5n7AvmPGv0er8Om5NS+9w=="
         }
       },
       "is_incremental": false,
@@ -3415,7 +3451,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.TargetedMenu.html",
-          "hash": "mpH/A9EJgOstZGdlnEFxIg=="
+          "hash": "c6SpGFQBNT9vUfuUZO5vXA=="
         }
       },
       "is_incremental": false,
@@ -3475,7 +3511,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.ToPdfService.html",
-          "hash": "9K8I+RC0jAj+tzAuk0rzaQ=="
+          "hash": "dWGR25IwUGCtDH9flD4OTw=="
         }
       },
       "is_incremental": false,
@@ -3487,7 +3523,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.ToPngService.html",
-          "hash": "WIvqxYgUZ9qyUVNBtCC45g=="
+          "hash": "0PRwFVJ1L3VBst4z+c/4PQ=="
         }
       },
       "is_incremental": false,
@@ -3499,7 +3535,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.Toast.html",
-          "hash": "y7j3myi8LeCSKdPCHAZj7g=="
+          "hash": "shiV0bB4TC5T+84eSSQfFA=="
         }
       },
       "is_incremental": false,
@@ -3519,11 +3555,23 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "obj/api/Forms9Patch.XamarinEssentialsExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Forms9Patch.XamarinEssentialsExtensions.html",
+          "hash": "EGmksQhiYA3ynKIiHVUKjA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "obj/api/Forms9Patch.yml",
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.html",
-          "hash": "Ekw+JIgAldNv2u8/azlxkg=="
+          "hash": "qCzEZgM9MyFl5/7tJ86+vA=="
         }
       },
       "is_incremental": false,
@@ -3783,6 +3831,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "obj/api/P42.Utils.AssemblyExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/P42.Utils.AssemblyExtensions.html",
+          "hash": "K3V/qKgtTcWA+q92hqhPYA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "obj/api/P42.Utils.AsyncAwaitForSet-1.yml",
       "output": {
         ".html": {
@@ -3811,7 +3871,7 @@
       "output": {
         ".html": {
           "relative_path": "api/P42.Utils.CircularBuffer-1.html",
-          "hash": "vfExUAXUoK2fd4m1WEuBQg=="
+          "hash": "B/6Gn2ur6IVrKBWuF9qFNQ=="
         }
       },
       "is_incremental": false,
@@ -3920,30 +3980,6 @@
         ".html": {
           "relative_path": "api/P42.Utils.EventArgs-1.html",
           "hash": "PK9DRVlWYqeaDkpTfrEKVw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "obj/api/P42.Utils.Extensions.AssemblyExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/P42.Utils.Extensions.AssemblyExtensions.html",
-          "hash": "UyAvhPDGmw3ZCzfisJzr4g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "obj/api/P42.Utils.Extensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/P42.Utils.Extensions.html",
-          "hash": "3u6fUOfGBrUGsAosDoklWQ=="
         }
       },
       "is_incremental": false,
@@ -4183,7 +4219,43 @@
       "output": {
         ".html": {
           "relative_path": "api/P42.Utils.KeyedStack-2.html",
-          "hash": "hG76yQJ5XlP+BZ0lj9WkLw=="
+          "hash": "Iv2CV531JHZCvFhN9q2Xuw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/P42.Utils.NotifiablePropertyObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/P42.Utils.NotifiablePropertyObject.html",
+          "hash": "tUjcdIavJdZ7KrIt8j68nA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/P42.Utils.ObservableConcurrentCollection-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/P42.Utils.ObservableConcurrentCollection-1.html",
+          "hash": "sLVGH6ea5+ZMQmsy5uTBFg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/P42.Utils.ObservableConcurrentDictionary-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/P42.Utils.ObservableConcurrentDictionary-2.html",
+          "hash": "VLtt+ijlHzRWx9tNY8hi8g=="
         }
       },
       "is_incremental": false,
@@ -4311,6 +4383,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "obj/api/P42.Utils.TypeExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/P42.Utils.TypeExtensions.html",
+          "hash": "uEqEx0pHJWR/7fAoElrkOQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "obj/api/P42.Utils.UnsupportedPlatformException.yml",
       "output": {
         ".html": {
@@ -4339,7 +4423,7 @@
       "output": {
         ".html": {
           "relative_path": "api/P42.Utils.html",
-          "hash": "vMPj3KW16DDbkash8ynJqQ=="
+          "hash": "fGJbIQaf/dLYKqOp0O1CnA=="
         }
       },
       "is_incremental": false,
@@ -4351,7 +4435,7 @@
       "output": {
         ".html": {
           "relative_path": "api/System.Collections.ObservableKeyedCollection-2.html",
-          "hash": "ukd+mvK1Wb9j07nxACIMCg=="
+          "hash": "Ec09xCzFnNyE2k8o8R3T4g=="
         }
       },
       "is_incremental": false,
@@ -4375,7 +4459,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "JzotePiNog2f1gBvueqY8A=="
+          "hash": "rHn2+tAW+L96ODy0R9m9fQ=="
         }
       },
       "is_incremental": false,
@@ -4412,23 +4496,23 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 234,
+          "total_file_count": 241,
           "skipped_file_count": 0
         },
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
           "total_file_count": 18,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
           "skipped_file_count": 0
         }
       }
