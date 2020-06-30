@@ -45,9 +45,12 @@ namespace Forms9Patch.iOS
                 foreach (var keyCommand in _keyCommands)
                 {
                     keyCommand.DiscoverabilityTitle?.Dispose();
-                    keyCommand.Image?.Dispose();
+                    if (UIDevice.CurrentDevice.CheckSystemVersion(13, 0))
+                    {
+                        keyCommand.Image?.Dispose();  // https://appcenter.ms/orgs/AWC/apps/SpanCalc.iOS/crashes/errors/3982867855u/overview, SIGABRT: Objective-C exception thrown. Name: NSInvalidArgumentException Reason: -[UIKeyCommand image]: unrecognized selector sent to instance
+                        keyCommand.PropertyList?.Dispose();
+                    }
                     keyCommand.Input?.Dispose();
-                    keyCommand.PropertyList?.Dispose();
                     keyCommand.Dispose();
                 }
             }
