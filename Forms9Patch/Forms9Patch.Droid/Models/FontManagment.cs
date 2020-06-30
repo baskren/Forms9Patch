@@ -168,7 +168,7 @@ namespace Forms9Patch.Droid
                     }
                 }
             }
-            return null;
+            return Typeface.Default;
         }
 
         static Typeface LoadAndRegisterEmbeddedFont(string resouceId, Assembly assembly)

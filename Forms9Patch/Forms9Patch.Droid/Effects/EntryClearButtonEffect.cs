@@ -67,9 +67,8 @@ namespace Forms9Patch.Droid
     {
         public bool OnTouch(Android.Views.View v, MotionEvent e)
         {
-            if (v is EditText && e.Action == MotionEventActions.Up)
+            if (v is EditText editText && e?.Action == MotionEventActions.Up)
             {
-                EditText editText = (EditText)v;
 
                 if (editText.Text != null)
                     editText.SetCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, Resource.Drawable.abc_ic_clear_material, 0);

@@ -109,7 +109,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.4.0.991757</Version>
+      <Version>4.6.0.967</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.9</Version>

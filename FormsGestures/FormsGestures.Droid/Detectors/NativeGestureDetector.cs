@@ -98,8 +98,8 @@ namespace FormsGestures.Droid
             var handled = OnTouchEvent(e);
             //System.Diagnostics.Debug.WriteLine("\n\nTouch: Action=[" + e.Action + "] Handled=[" + handled + "]");
             if (!handled)
-                v.TouchUpViewHeirarchy(e);
-            return handled | e.Action == MotionEventActions.Down;
+                v?.TouchUpViewHeirarchy(e);
+            return handled | e?.Action == MotionEventActions.Down;
         }
     }
 }

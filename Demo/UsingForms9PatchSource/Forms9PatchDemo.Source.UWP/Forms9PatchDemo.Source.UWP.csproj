@@ -211,7 +211,7 @@
     <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.9" />
-    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991757" />
+    <PackageReference Include="Xamarin.Forms" Version="4.6.0.967" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Forms9Patch\Forms9Patch.UWP\Forms9Patch.UWP.csproj">

@@ -196,21 +196,21 @@ Fixed: iOS HtmlMarkup underlines don't match font color, Default Android image b
         <tags>NinePatch Xamarin Forms SVG Image Segmented button Tooltip Popup Bubble Pointer ImageButton longpress HTML text markup Label autofit autosize autoscale Data Sharing Multi-item clipboard</tags>
         <dependencies>
             <group targetFramework="NetStandard2.0">
-                <dependency id="Xamarin.Forms" version="4.4.0.991757" />
+                <dependency id="Xamarin.Forms" version="4.6.0.967" />
                 <dependency id="Xamarin.Essentials" version="1.5.3.2" />
                 <dependency id="Newtonsoft.Json" version="12.0.3" />
                 <dependency id="SkiaSharp.Views.Forms" version="1.68.3" />
                 <dependency id="SkiaSharp.Svg" version="1.60" />
             </group>
             <group targetFramework="Xamarin.iOS10">
-                <dependency id="Xamarin.Forms" version="4.4.0.991757" />
+                <dependency id="Xamarin.Forms" version="4.6.0.967" />
                 <dependency id="Xamarin.Essentials" version="1.5.3.2" />
                 <dependency id="Newtonsoft.Json" version="12.0.3" />
                 <dependency id="SkiaSharp.Views.Forms" version="1.68.3" />
                 <dependency id="SkiaSharp.Svg" version="1.60" />
             </group>
             <group targetFramework="UAP10.0">
-                <dependency id="Xamarin.Forms" version="4.4.0.991757" />
+                <dependency id="Xamarin.Forms" version="4.6.0.967" />
                 <dependency id="Xamarin.Essentials" version="1.5.3.2" />
                 <dependency id="Newtonsoft.Json" version="12.0.3" />
                 <dependency id="SkiaSharp.Views.Forms" version="1.68.3" />
@@ -221,7 +221,7 @@ Fixed: iOS HtmlMarkup underlines don't match font color, Default Android image b
                 <dependency id="Win2D.uwp" version="1.20.0" />
             </group>
             <group targetFramework="UAP1.0">
-              <dependency id="Xamarin.Forms" version="4.4.0.991757" />
+              <dependency id="Xamarin.Forms" version="4.6.0.967" />
               <dependency id="Xamarin.Essentials" version="1.5.3.2" />
               <dependency id="Newtonsoft.Json" version="12.0.3" />
               <dependency id="SkiaSharp.Views.Forms" version="1.68.3" />
@@ -232,7 +232,7 @@ Fixed: iOS HtmlMarkup underlines don't match font color, Default Android image b
               <dependency id="Win2D.uwp" version="1.20.0" />
             </group>
             <group targetFramework="MonoAndroid10">
-                <dependency id="Xamarin.Forms" version="4.4.0.991757" />
+                <dependency id="Xamarin.Forms" version="4.6.0.967" />
                 <dependency id="Xamarin.Essentials" version="1.5.3.2" />
                 <dependency id="Newtonsoft.Json" version="12.0.3" />
                 <dependency id="SkiaSharp.Views.Forms" version="1.68.3" />

@@ -43,7 +43,7 @@ namespace FormsGestures.Droid
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " e:" + e.Action + " Element:[" + _nativeGestureHandler.Element.Id + "] x:[" + e.RawX + "," + e.GetX() + "," + e.GetAxisValue(Axis.X) + "] y:[" + e.RawY + "," + e.GetY() + "," + e.GetAxisValue(Axis.Y) + "] count:" + e.PointerCount);
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " e:" + e.Action + " " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture));
 
-            if (!_nativeGestureHandler.Element.IsVisible)
+            if (_nativeGestureHandler?.Element == null || !_nativeGestureHandler.Element.IsVisible)
                 return false;
             if (MatchesLastMotionEvent(e))
                 return false;

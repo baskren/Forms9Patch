@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991757" />
+    <PackageReference Include="Xamarin.Forms" Version="4.6.0.967" />
   </ItemGroup>
 
   <ItemGroup>

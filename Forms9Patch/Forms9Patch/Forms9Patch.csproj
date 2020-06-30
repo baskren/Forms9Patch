@@ -21,7 +21,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
-    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991757" />
+    <PackageReference Include="Xamarin.Forms" Version="4.6.0.967" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.3" />
     <PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
   </ItemGroup>

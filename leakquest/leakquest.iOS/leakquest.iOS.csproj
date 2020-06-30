@@ -121,7 +121,7 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991757" />
+    <PackageReference Include="Xamarin.Forms" Version="4.6.0.967" />
     <PackageReference Include="Xamarin.Essentials" Version="1.2.0" />
     <PackageReference Include="SkiaSharp.Views.Forms">
       <Version>1.68.3</Version>
