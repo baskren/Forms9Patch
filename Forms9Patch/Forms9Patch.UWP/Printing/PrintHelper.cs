@@ -362,8 +362,6 @@ namespace Forms9Patch.UWP
                 // Get the page description to deterimine how big the page is
                 PrintPageDescription pageDescription = printingOptions.GetPageDescription(0);
 
-
-
                 if (await GeneratePagesAsync(pageDescription) is List<UIElement> pages)
                 {
 

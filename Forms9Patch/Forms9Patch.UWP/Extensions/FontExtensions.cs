@@ -388,7 +388,7 @@ namespace Forms9Patch.UWP
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "will persist ")]
         readonly FontFileEnumerator _fontFileEnumerator;
 
-        public FontCollectionLoader(FontFile fontFile)
+        public FontCollectionLoader(SharpDX.DirectWrite.FontFile fontFile)
         {
             _fontFileEnumerator = new FontFileEnumerator(fontFile);
         }
@@ -401,15 +401,15 @@ namespace Forms9Patch.UWP
 
     class FontFileEnumerator : CallbackBase, SharpDX.DirectWrite.FontFileEnumerator
     {
-        readonly FontFile _fontFile;
+        readonly SharpDX.DirectWrite.FontFile _fontFile;
 
-        public FontFileEnumerator(FontFile fontFile)
+        public FontFileEnumerator(SharpDX.DirectWrite.FontFile fontFile)
         {
             _fontFile = fontFile;
             //CurrentFontFile = _fontFile;
         }
 
-        public FontFile CurrentFontFile
+        public SharpDX.DirectWrite.FontFile CurrentFontFile
         {
             get;
             private set;

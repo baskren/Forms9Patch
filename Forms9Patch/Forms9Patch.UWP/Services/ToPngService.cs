@@ -62,12 +62,16 @@ namespace Forms9Patch.UWP
 				//if (Platform.GetRenderer(popup.WebView) is Xamarin.Forms.Platform.UWP.WebViewRenderer renderer)
 				{
 					//var webView = renderer.Control;
-					_webView = new Windows.UI.Xaml.Controls.WebView
+					_webView = new Windows.UI.Xaml.Controls.WebView(WebViewExecutionMode.SameThread)
 					{
 						Name = "PrintWebView" + (instanceCount++).ToString("D3"),
 						DefaultBackgroundColor = Windows.UI.Colors.White,
 						Visibility = Visibility.Visible,
+
 					};
+					_webView.Settings.IsJavaScriptEnabled = true;
+					_webView.Settings.IsIndexedDBEnabled = true;
+
 					PrintHelper.RootPanel.Children.Insert(0, _webView);
 					var webView = _webView;
 
@@ -172,16 +176,22 @@ namespace Forms9Patch.UWP
 				System.Diagnostics.Debug.WriteLine("B webView.Size=[" + webView.Width + "," + webView.Height + "] IsOnMainThread=[" + P42.Utils.Environment.IsOnMainThread + "]");
 				try
 				{
+					var width = (int)webView.GetValue(PngWidthProperty);
+					System.Diagnostics.Debug.WriteLine("B width=[" + width + "]");
+
 					var contentSize = await webView.WebViewContentSizeAsync();
 					System.Diagnostics.Debug.WriteLine("B contentSize=[" + contentSize + "]");
 					System.Diagnostics.Debug.WriteLine("B webView.Size=[" + webView.Width + "," + webView.Height + "] IsOnMainThread=[" + P42.Utils.Environment.IsOnMainThread + "]");
 
-					webView.Width = contentSize.Width;
-					webView.Height = contentSize.Height;
-					System.Diagnostics.Debug.WriteLine("B webView.Size=[" + webView.Width + "," + webView.Height + "] IsOnMainThread=[" + P42.Utils.Environment.IsOnMainThread + "]");
+					if (contentSize.Height != webView.Height || width != webView.Width)
+					{
+						webView.Width = contentSize.Width;
+						webView.Height = contentSize.Height;
+						System.Diagnostics.Debug.WriteLine("B webView.Size=[" + webView.Width + "," + webView.Height + "] IsOnMainThread=[" + P42.Utils.Environment.IsOnMainThread + "]");
 
-					webView.InvalidateMeasure();
-					System.Diagnostics.Debug.WriteLine("B webView.Size=[" + webView.Width + "," + webView.Height + "] IsOnMainThread=[" + P42.Utils.Environment.IsOnMainThread + "]");
+						webView.InvalidateMeasure();
+						System.Diagnostics.Debug.WriteLine("B webView.Size=[" + webView.Width + "," + webView.Height + "] IsOnMainThread=[" + P42.Utils.Environment.IsOnMainThread + "]");
+					}
 
 					//await Task.Delay(2000);
 					await webView.CapturePreviewToStreamAsync(ms);
