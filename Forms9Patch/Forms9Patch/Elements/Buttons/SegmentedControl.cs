@@ -1310,6 +1310,33 @@ namespace Forms9Patch
                  });
             }
         }
+
+        /// <summary>
+        /// What is the smallest that this control can be rendered (labels are 1 line)
+        /// </summary>
+        /// <returns></returns>
+        public Size GetMinSize()
+        {
+            double width = 0;
+            double height = 0;
+            foreach (var segment in Segments)
+            {
+                var size = segment._button.GetMinSize();
+                if (Orientation == StackOrientation.Horizontal)
+                {
+                    width += size.Width;
+                    height = Math.Max(height, size.Height);
+                }
+                else
+                {
+                    width = Math.Max(width, size.Width);
+                    height += size.Height;
+                }
+            }
+            width += Margin.HorizontalThickness;
+            height += Margin.VerticalThickness;
+            return new Size(width, height);
+        }
         #endregion
 
 
@@ -1465,6 +1492,8 @@ namespace Forms9Patch
             }
             return false;
         }
+
+
         #endregion
 
 

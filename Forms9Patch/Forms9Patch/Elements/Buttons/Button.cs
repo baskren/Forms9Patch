@@ -1714,6 +1714,57 @@ namespace Forms9Patch
             return result;
         }
         */
+
+        /// <summary>
+        /// What is the smallest that this button can be rendered (in one line of text)
+        /// </summary>
+        /// <returns></returns>
+        public Size GetMinSize()
+        {
+            double elementWidths = 0; 
+            double elementHeights = 0;
+            bool hasIcon = false;
+            foreach (var child in _stackLayout.Children)
+            {
+                if (child.IsVisible)
+                {
+                    Size childSize = Size.Zero;
+                    if (child == _label)
+                        childSize = _label.SizeForWidthAndFontSize(double.MaxValue, MinFontSize);
+                    else if (child == _iconLabel)
+                    {
+                        hasIcon = true;
+                        childSize = _label.SizeForWidthAndFontSize(double.MaxValue, MinFontSize);
+                    }
+                    else if (child == _iconImage)
+                        hasIcon = true;
+
+                    if (Orientation == StackOrientation.Horizontal)
+                    {
+                        elementWidths += childSize.Width;
+                        elementHeights = Math.Max(elementHeights, childSize.Height);
+                    }
+                    else
+                    {
+                        elementWidths = Math.Max(elementWidths, childSize.Width);
+                        elementHeights += childSize.Height;
+                    }
+                }
+            }
+            elementWidths += Padding.HorizontalThickness + Margin.HorizontalThickness;
+            elementHeights += Padding.VerticalThickness + Margin.VerticalThickness;
+
+            if (hasIcon)
+            {
+                elementWidths += Orientation == StackOrientation.Horizontal && Spacing > 0
+                    ? Spacing
+                    : 0;
+                elementHeights += Orientation == StackOrientation.Vertical && Spacing > 0
+                    ? Spacing
+                    : 0;
+            }
+            return new Size(elementWidths, elementHeights);
+        }
         #endregion
 
 
