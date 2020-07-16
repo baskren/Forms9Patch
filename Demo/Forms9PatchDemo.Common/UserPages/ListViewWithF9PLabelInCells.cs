@@ -4,6 +4,7 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class ListViewWithF9PLabelInCells : ContentPage
     {
 
@@ -39,6 +40,7 @@ namespace Forms9PatchDemo
             Content = listView;
         }
 
+        [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
         public class TestClass
         {
             public Color BackgroundColor { get; set; }
@@ -48,6 +50,7 @@ namespace Forms9PatchDemo
 
         }
 
+        [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
         public class TestClassCell : ViewCell
         {
 

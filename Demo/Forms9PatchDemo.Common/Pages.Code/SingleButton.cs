@@ -7,6 +7,7 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo.Pages
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class SingleButton : ContentPage
     {
         public SingleButton()

@@ -4,13 +4,15 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class PickerInPopup : ContentPage
     {
+        
         Forms9Patch.SinglePicker _singlePicker = new Forms9Patch.SinglePicker
         {
             BackgroundColor = Color.White
         };
-
+        
         Forms9Patch.Button _singlePickerButton = new Forms9Patch.Button
         {
             HtmlText = "<i>select year</i>",
@@ -18,7 +20,7 @@ namespace Forms9PatchDemo
             HorizontalOptions = LayoutOptions.FillAndExpand,
             WidthRequest = -1,
         };
-
+        
         List<string> _years = new List<string>();
 
         public PickerInPopup()
@@ -27,10 +29,10 @@ namespace Forms9PatchDemo
 
             for (int i = DateTime.Now.Year - 13; i > 1899; i--)
                 _years.Add(i.ToString());
+            
             _singlePicker.ItemsSource = _years;
 
             _singlePicker.PropertyChanged += OnSinglePickerPropertyChanged;
-
             var stackLayout = new StackLayout
             {
                 Padding = 10,
@@ -50,10 +52,11 @@ namespace Forms9PatchDemo
             };
 
             Content = stackLayout;
-
             _singlePickerButton.Clicked += OnSinglePickerButtonClicked;
+            
         }
 
+        
         private void OnSinglePickerPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == Forms9Patch.SinglePicker.SelectedItemProperty.PropertyName)
@@ -121,5 +124,6 @@ namespace Forms9PatchDemo
 
             bubblePopup.IsVisible = true;
         }
+        
     }
 }

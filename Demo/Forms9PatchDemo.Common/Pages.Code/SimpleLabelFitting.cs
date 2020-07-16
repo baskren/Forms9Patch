@@ -5,6 +5,7 @@ using Forms9Patch;
 
 namespace Forms9PatchDemo.Pages.Code
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class SimpleLabelFitting : Xamarin.Forms.ContentPage
     {
         public SimpleLabelFitting()

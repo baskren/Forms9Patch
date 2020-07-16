@@ -4,6 +4,7 @@ using Forms9PatchDemo;
 
 namespace Forms9PatchDemo
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers =true)]
     class UserPagesHomePage : ContentPage
     {
         protected override void OnAppearing()
@@ -62,6 +63,13 @@ namespace Forms9PatchDemo
 
                     new TableSection("XAML") {
 
+
+                        new TextCell
+                        {
+                            Text = "MFoster Button Binding Sample",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(ButtonBindingSample.MainPage)
+                        },
 
                         new TextCell
                         {

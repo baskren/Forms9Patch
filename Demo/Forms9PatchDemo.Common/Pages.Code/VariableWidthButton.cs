@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Forms9PatchDemo
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class VariableWidthButtonMasterDetailPageA : MasterDetailPage
     {
         ContentPage switchPage = new ContentPage
@@ -23,6 +24,7 @@ namespace Forms9PatchDemo
         }
     }
 
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class VariableWidthButtonMasterDetailPageB : MasterDetailPage
     {
         ContentPage switchPage = new ContentPage
@@ -40,6 +42,7 @@ namespace Forms9PatchDemo
         }
     }
 
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class VariableWidthButtonPage : ContentPage
     {
         #region VisualElements

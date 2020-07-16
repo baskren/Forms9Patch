@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace Forms9PatchDemo
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class BubblePopupTestPage : ContentPage
     {
         #region Properties

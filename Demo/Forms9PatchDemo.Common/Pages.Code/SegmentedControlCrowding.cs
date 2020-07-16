@@ -4,6 +4,7 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class SegmentedCrowdingPage : ContentPage
     {
         Forms9Patch.SegmentedControl control = new Forms9Patch.SegmentedControl

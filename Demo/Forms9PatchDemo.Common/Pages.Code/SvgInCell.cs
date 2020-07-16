@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace Forms9PatchDemo
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class SvgInCell : ContentPage
     {
         #region VisualElements
@@ -75,6 +76,7 @@ namespace Forms9PatchDemo
         #endregion
     }
 
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class ImageWrapper : ContentView
     {
         #region Source property
@@ -107,6 +109,7 @@ namespace Forms9PatchDemo
         }
     }
 
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class SvgInCellViewCell : ViewCell
     {
         #region VisualElements

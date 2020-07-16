@@ -77,86 +77,90 @@ namespace Forms9Patch
         #endregion
 
 
-    }
-
-
-
-    #region Cell Template
-    class MultiPickerHtmlCellContentView : MultiPickerCellContentView
-    {
-        protected override void OnBindingContextChanged()
+        #region Cell Template
+        [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
+        protected class MultiPickerHtmlCellContentView : MultiPickerCellContentView
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            protected override void OnBindingContextChanged()
             {
-                Device.BeginInvokeOnMainThread(OnBindingContextChanged);
-                return;
+                if (!P42.Utils.Environment.IsOnMainThread)
+                {
+                    Device.BeginInvokeOnMainThread(OnBindingContextChanged);
+                    return;
+                }
+
+                base.OnBindingContextChanged();
+
+                if (BindingContext is IHtmlString htmlObject)
+                    itemLabel.HtmlText = htmlObject.ToHtml();
+                else if (BindingContext != null)
+                    itemLabel.HtmlText = BindingContext?.ToString();
+                else
+                    itemLabel.HtmlText = itemLabel.Text = null;
             }
-
-            base.OnBindingContextChanged();
-
-            if (BindingContext is IHtmlString htmlObject)
-                itemLabel.HtmlText = htmlObject.ToHtml();
-            else if (BindingContext != null)
-                itemLabel.HtmlText = BindingContext?.ToString();
-            else
-                itemLabel.HtmlText = itemLabel.Text = null;
         }
-    }
 
-    class MultiPickerCellContentView : SinglePickerCellContentView
-    {
-        #region Fields
-        protected readonly Label checkLabel = new Label
+        [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
+        protected class MultiPickerCellContentView : SinglePickerCellContentView
         {
-            Text = "✓",
-            TextColor = Color.Blue,
-            VerticalTextAlignment = TextAlignment.Center,
-            HorizontalTextAlignment = TextAlignment.Center,
-            IsVisible = false
-        };
-        #endregion
+            #region Fields
+            protected readonly Label checkLabel = new Label
+            {
+                Text = "✓",
+                TextColor = Color.Blue,
+                VerticalTextAlignment = TextAlignment.Center,
+                HorizontalTextAlignment = TextAlignment.Center,
+                IsVisible = false
+            };
+            #endregion
 
 
-        #region Constructors
-        public MultiPickerCellContentView()
-        {
-            ColumnDefinitions = new ColumnDefinitionCollection
+            #region Constructors
+            public MultiPickerCellContentView()
+            {
+                ColumnDefinitions = new ColumnDefinitionCollection
             {
                 new ColumnDefinition { Width = new GridLength(30,GridUnitType.Absolute)},
                 new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star)}
             };
-            Children.Add(checkLabel, 0, 0);
-        }
-        #endregion
+                Children.Add(checkLabel, 0, 0);
+            }
+            #endregion
 
 
-        #region Change management
-        protected override void OnPropertyChanged(string propertyName = null)
-        {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            #region Change management
+            protected override void OnPropertyChanged(string propertyName = null)
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
+                if (!P42.Utils.Environment.IsOnMainThread)
+                {
+                    Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
+                    return;
+                }
+
+                base.OnPropertyChanged(propertyName);
+
+                if (propertyName == IsSelectedProperty.PropertyName)
+                    checkLabel.IsVisible = IsSelected;
             }
 
-            base.OnPropertyChanged(propertyName);
+            #endregion
 
-            if (propertyName == IsSelectedProperty.PropertyName)
-                checkLabel.IsVisible = IsSelected;
+
+            #region Appearing / Disappearing Event Handlers
+            public override void OnAppearing() { }
+
+            public override void OnDisappearing() { }
+            #endregion
+
+
+
         }
-
         #endregion
-
-
-        #region Appearing / Disappearing Event Handlers
-        public override void OnAppearing() { }
-
-        public override void OnDisappearing() { }
-        #endregion
-
 
 
     }
-    #endregion
+
+
+
 }
 

@@ -12,6 +12,7 @@ using System.IO;
 
 namespace Forms9PatchDemo
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class ClipboardTest : Xamarin.Forms.ContentPage
     {
         #region Fields

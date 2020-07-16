@@ -4,6 +4,7 @@ using System.ComponentModel;
 namespace Forms9Patch
 {
     [DesignTimeVisible(true)]
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     internal class TextCellViewContent : Forms9Patch.Label // Xamarin.Forms.Label //, ICellHeight
     {
 

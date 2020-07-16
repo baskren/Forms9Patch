@@ -2,6 +2,7 @@
 
 namespace Forms9PatchDemo
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class ButtonCommandModel : Xamarin.Forms.BindableObject
     {
         private string _title;

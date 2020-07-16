@@ -10,6 +10,7 @@ using P42.Utils;
 
 namespace Forms9PatchDemo
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class ModalPopupOnMasterDetailPage : MasterDetailPage
     {
         public ModalPopupOnMasterDetailPage()

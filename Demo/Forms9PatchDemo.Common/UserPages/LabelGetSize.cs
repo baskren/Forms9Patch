@@ -5,6 +5,7 @@ using FormsGestures;
 
 namespace Forms9PatchDemo
 {
+	[Xamarin.Forms.Internals.Preserve(AllMembers = true)]
 	public class LabelGetSize : ContentPage
 	{
 		Forms9Patch.Label _label = new Forms9Patch.Label

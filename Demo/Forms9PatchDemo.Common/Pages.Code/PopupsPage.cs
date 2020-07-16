@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Forms9PatchDemo.Pages.Code
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class PopupsPage : Xamarin.Forms.ContentPage
     {
         bool _hasShadow;

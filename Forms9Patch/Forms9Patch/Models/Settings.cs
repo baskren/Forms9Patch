@@ -12,6 +12,7 @@ namespace Forms9Patch
     /// Forms9Patch Settings (for use by Forms9Patch PCL code).
     /// </summary>
     [DesignTimeVisible(true)]
+    [Preserve(AllMembers = true)]
     public static class Settings
     {
         static Settings()
@@ -99,9 +100,9 @@ namespace Forms9Patch
                 platformSettings.LazyInit();
                 _confirmed = true;
             }
-
+            
             if (!_confirmed)
-                throw new Exception("Unable to confirmed initialization.  Did you forget to add " +
+                throw new Exception("Unable to confirm initialization.  Did you forget to add " +
                     "Forms9Patch." + Device.RuntimePlatform + ".Settings.Initialize() after XamarinForms.Forms.Forms.Init()?");
         }
         #endregion

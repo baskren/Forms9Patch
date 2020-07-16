@@ -5,6 +5,7 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class HardwareKeyPage1 : Forms9Patch.HardwareKeyPage
     {
         #region Visual Elements

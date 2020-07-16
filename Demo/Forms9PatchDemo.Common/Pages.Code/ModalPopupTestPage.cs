@@ -4,6 +4,7 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class ModalPopupTestPage : MasterDetailPage
     {
         public static readonly BindableProperty CornerRadiusProperty = BindableProperty.Create("CornerRadius", typeof(double), typeof(ModalPopupTestPage), 4.0);
