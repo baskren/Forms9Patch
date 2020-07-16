@@ -15,6 +15,7 @@ namespace Forms9Patch.Droid
     /// <summary>
     /// Forms9Patch Settings.
     /// </summary>
+    [Preserve(AllMembers = true)]
     public class Settings : ISettings
     {
         #region Properties
