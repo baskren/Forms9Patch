@@ -254,38 +254,38 @@ namespace Forms9Patch
                 }
             }
         }
-    }
 
 
-
-    #region Cell Template
-    class SinglePickerHtmlCellContentView : SinglePickerCellContentView
-    {
-        protected override void OnBindingContextChanged()
+        #region Cell Template
+        [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
+        protected class SinglePickerHtmlCellContentView : SinglePickerCellContentView
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            protected override void OnBindingContextChanged()
             {
-                Device.BeginInvokeOnMainThread(OnBindingContextChanged);
-                return;
+                if (!P42.Utils.Environment.IsOnMainThread)
+                {
+                    Device.BeginInvokeOnMainThread(OnBindingContextChanged);
+                    return;
+                }
+
+                base.OnBindingContextChanged();
+
+                if (BindingContext is IHtmlString htmlObject)
+                    itemLabel.HtmlText = htmlObject.ToHtml();
+                else if (BindingContext != null)
+                    itemLabel.HtmlText = BindingContext?.ToString();
+                else
+                    itemLabel.HtmlText = itemLabel.Text = null;
             }
-
-            base.OnBindingContextChanged();
-
-            if (BindingContext is IHtmlString htmlObject)
-                itemLabel.HtmlText = htmlObject.ToHtml();
-            else if (BindingContext != null)
-                itemLabel.HtmlText = BindingContext?.ToString();
-            else
-                itemLabel.HtmlText = itemLabel.Text = null;
         }
-    }
 
-    class SinglePickerCellContentView : Grid, ICellContentView, IIsSelectedAble
+        [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
+        protected class SinglePickerCellContentView : Grid, ICellContentView, IIsSelectedAble
     {
         #region Properties
         public double CellHeight { get; set; }
 
-        public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create(nameof(IsSelected), typeof(bool), typeof(MultiPickerCellContentView), default(bool));
+        public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create(nameof(IsSelected), typeof(bool), typeof(SinglePickerCellContentView), default(bool));
         public bool IsSelected
         {
             get => (bool)GetValue(IsSelectedProperty);
@@ -366,6 +366,11 @@ namespace Forms9Patch
 
 
     }
-    #endregion
+        #endregion
+
+    }
+
+
+
 
 }

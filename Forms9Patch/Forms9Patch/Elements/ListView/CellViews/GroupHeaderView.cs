@@ -7,6 +7,7 @@ namespace Forms9Patch
     /// FormsDragNDropListView Group header view.
     /// </summary>
     [DesignTimeVisible(true)]
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class GroupHeaderView : Xamarin.Forms.ViewCell
     {
 

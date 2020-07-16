@@ -7,6 +7,7 @@ namespace Forms9Patch
     /// DO NOT USE: Used by Forms9Patch.ListView as a placeholder for a cell when being dragged
     /// </summary>
     [DesignTimeVisible(true)]
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     class BlankCellView : BaseCellView
     {
         readonly BoxView _boxView = new BoxView

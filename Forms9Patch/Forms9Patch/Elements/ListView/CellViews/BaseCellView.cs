@@ -13,6 +13,7 @@ namespace Forms9Patch
     /// DO NOT USE: Used by Forms9Patch.ListView as a foundation for cells.
     /// </summary>
     [DesignTimeVisible(true)]
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     class BaseCellView : Xamarin.Forms.Grid, IDisposable, ICellContentView  // why grid?  because you can put more than one view in the same place at the same time
     {
 

@@ -10,6 +10,7 @@ namespace Forms9Patch
 {
 
     [DesignTimeVisible(true)]
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     internal class HeaderCell<TContent> : Cell<TContent> where TContent : View, new()
     {
         public HeaderCell()
@@ -20,6 +21,7 @@ namespace Forms9Patch
 
     [DesignTimeVisible(true)]
     // the non-group header version of Cell
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     internal class ItemCell<TContent> : Cell<TContent> where TContent : View, new()
     {
         public ItemCell()
@@ -32,6 +34,7 @@ namespace Forms9Patch
     // - capture and manage the height of Forms9Patch.ListView cells
     // - set proper BindingContext to a cell's content view 
     // In the future, it may be also to manage cell separators.
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     internal class Cell<TContent> : ViewCell, ICell_T_Height, IDisposable where TContent : View, new()
     {
         #region debug convenience
