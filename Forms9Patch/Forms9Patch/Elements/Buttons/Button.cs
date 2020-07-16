@@ -1751,8 +1751,8 @@ namespace Forms9Patch
                     }
                 }
             }
-            elementWidths += Padding.HorizontalThickness + Margin.HorizontalThickness;
-            elementHeights += Padding.VerticalThickness + Margin.VerticalThickness;
+            elementWidths += Math.Max(OutlineWidth,0) * 2 + Padding.HorizontalThickness + Margin.HorizontalThickness;
+            elementHeights += Math.Max(OutlineWidth, 0) * 2 + Padding.VerticalThickness + Margin.VerticalThickness;
 
             if (hasIcon)
             {

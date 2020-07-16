@@ -402,7 +402,7 @@ namespace Forms9Patch.Droid
                 else
                     control.TextFormatted = text;
 
-                var result = new SizeRequest(new Size(System.Math.Ceiling(tmpWd), System.Math.Ceiling(tmpHt)), new Size(10, System.Math.Ceiling(tmpHt)));
+                var result = new SizeRequest(new Size(System.Math.Ceiling(tmpWd), System.Math.Ceiling(tmpHt)), new Size(state.Lines == 1 && state.AutoFit == AutoFit.None ? tmpWd  : 10, System.Math.Ceiling(tmpHt)));
 
                 if (element.LineBreakMode == LineBreakMode.NoWrap)
                     control.SetSingleLine(true);

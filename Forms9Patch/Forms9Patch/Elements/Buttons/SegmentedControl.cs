@@ -1317,25 +1317,27 @@ namespace Forms9Patch
         /// <returns></returns>
         public Size GetMinSize()
         {
-            double width = 0;
-            double height = 0;
+            double maxSegmentWidth = 0;
+            double maxSegmentHeight = 0;
             foreach (var segment in Segments)
             {
                 var size = segment._button.GetMinSize();
-                if (Orientation == StackOrientation.Horizontal)
-                {
-                    width += size.Width;
-                    height = Math.Max(height, size.Height);
-                }
-                else
-                {
-                    width = Math.Max(width, size.Width);
-                    height += size.Height;
-                }
+                maxSegmentWidth = Math.Max(maxSegmentWidth, size.Width);
+                maxSegmentHeight = Math.Max(maxSegmentHeight, size.Height);
             }
-            width += Margin.HorizontalThickness;
-            height += Margin.VerticalThickness;
-            return new Size(width, height);
+            if (Orientation == StackOrientation.Horizontal)
+            {
+                maxSegmentWidth *= Segments.Count;
+                //maxSegmentWidth += (Segments.Count + 1) * outlineWidth;
+            }
+            else
+            {
+                maxSegmentHeight *= Segments.Count;
+                //maxSegmentHeight += (Segments.Count + 1) * outlineWidth;
+            }
+            maxSegmentWidth += Margin.HorizontalThickness;
+            maxSegmentHeight += Margin.VerticalThickness;
+            return new Size(maxSegmentWidth, maxSegmentHeight);
         }
         #endregion
 
@@ -1444,7 +1446,7 @@ namespace Forms9Patch
                 //x = Math.Round(x);
                 //y = Math.Round(y);
 
-                var outlineWidth = OutlineWidth;// / Display.Scale;
+                var outlineWidth = Math.Max(OutlineWidth, 0);// / Display.Scale;
                 var xOffset = hz ? outlineWidth + (newWidth - outlineWidth * (count + 1)) / count : 0;
                 var yOffset = vt ? outlineWidth + (newHeight - outlineWidth * (count + 1)) / count : 0;
                 var segmentWidth = hz ? xOffset : width;

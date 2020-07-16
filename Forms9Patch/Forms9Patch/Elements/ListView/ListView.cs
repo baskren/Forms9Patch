@@ -169,6 +169,7 @@ namespace Forms9Patch
         #endregion
 
         #region Data mapping and filtering properties
+        /*
 
         #region SourcePropertyMap
         /// <summary>
@@ -217,7 +218,7 @@ namespace Forms9Patch
             set => SetValue(SubGroupTypeProperty, value);
         }
         #endregion
-
+        */
         #endregion
 
         #region Row Selection properties
@@ -626,7 +627,7 @@ namespace Forms9Patch
 
                     ItemsSource = null; // this removes the group wrapper events;
                     //ItemTemplates = null;  causes crash and is not necessary
-                    VisibilityTest = null;
+                    //VisibilityTest = null;
 
                     _listView.Dispose();
 
@@ -717,8 +718,8 @@ namespace Forms9Patch
                 #endregion
 
                 #region Data mapping and filtering
-                else if (propertyName == SourcePropertyMapProperty.PropertyName || propertyName == VisibilityTestProperty.PropertyName || propertyName == SubGroupTypeProperty.PropertyName)
-                    UpdateBaseItemsSource();
+                //else if (propertyName == SourcePropertyMapProperty.PropertyName || propertyName == VisibilityTestProperty.PropertyName || propertyName == SubGroupTypeProperty.PropertyName)
+                //    UpdateBaseItemsSource();
                 #endregion
 
                 #region Row selection properties
@@ -1210,9 +1211,9 @@ namespace Forms9Patch
 
                 #region Data mapping and filtering
                 groupWrapper.BindingContext = this;
-                groupWrapper.SourceSubPropertyMap = SourcePropertyMap;
-                groupWrapper.SubGroupType = SubGroupType;
-                groupWrapper.VisibilityTest = VisibilityTest;
+                //groupWrapper.SourceSubPropertyMap = SourcePropertyMap;
+                //groupWrapper.SubGroupType = SubGroupType;
+                //groupWrapper.VisibilityTest = VisibilityTest;
                 #endregion
 
                 #region RowHeight Properties
