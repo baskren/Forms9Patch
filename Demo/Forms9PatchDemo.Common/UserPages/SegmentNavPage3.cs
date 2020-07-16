@@ -8,6 +8,7 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class SegmentNavPage3 : ContentPage
     {
         public SegmentNavPage3()

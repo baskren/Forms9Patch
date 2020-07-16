@@ -6,6 +6,7 @@ using System.Reflection;
 namespace Forms9PatchDemo
 {
     [ContentProperty("Source")]
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class ImageMultiResourceExtension : IMarkupExtension
     {
         public string Source { get; set; }
@@ -18,6 +19,7 @@ namespace Forms9PatchDemo
     }
 
     [ContentProperty("Source")]
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class ImageResourceExtension : IMarkupExtension
     {
         public string Source { get; set; }

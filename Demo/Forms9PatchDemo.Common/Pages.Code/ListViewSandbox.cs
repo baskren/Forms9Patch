@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Forms9PatchDemo
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class ListViewSandbox : Xamarin.Forms.ContentPage
     {
         readonly Button _button = new Button
@@ -266,6 +267,7 @@ namespace Forms9PatchDemo
     #endregion
 
     #region PersonViewCell
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class PersonViewCell : Xamarin.Forms.Grid, Forms9Patch.ICellContentView
     {
         public double CellHeight
@@ -359,6 +361,7 @@ namespace Forms9PatchDemo
     #endregion
 
     #region PeopleGroupCell
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class PeopleGroupCell : StackLayout, Forms9Patch.ICellContentView
     {
         #region Fields

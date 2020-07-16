@@ -10,6 +10,7 @@ using Forms9Patch;
 namespace Forms9PatchDemo
 {
     //[XamlCompilation(XamlCompilationOptions.Compile)]
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public partial class GridPage : global::Xamarin.Forms.ContentPage
     {
         public GridPage()

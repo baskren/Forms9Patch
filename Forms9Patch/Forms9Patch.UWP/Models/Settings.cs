@@ -9,6 +9,7 @@ using Xamarin.Forms;
 [assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.UWP.Settings))]
 namespace Forms9Patch.UWP
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class Settings : ISettings
     {
         #region Fields

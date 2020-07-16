@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Forms9Patch;
 namespace Forms9PatchDemo
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class EmbeddedResourceFontEffectPage : Forms9Patch.HardwareKeyPage
     {
         Xamarin.Forms.Label _label = new Xamarin.Forms.Label

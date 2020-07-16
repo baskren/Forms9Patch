@@ -3,6 +3,7 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     class KeyboardHeight : ContentPage
     {
         StackLayout _layout = new StackLayout();

@@ -7,6 +7,7 @@ using System;
 using Xamarin.Forms;
 namespace Forms9PatchDemo
 {
+	[Xamarin.Forms.Internals.Preserve(AllMembers = true)]
 	public class ChrisEmbeddedResourceFontEffectPage : ContentPage
 	{
 		public ChrisEmbeddedResourceFontEffectPage()

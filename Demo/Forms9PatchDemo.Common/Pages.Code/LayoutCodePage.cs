@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace Forms9PatchDemo
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class LayoutCodePage : MasterDetailPage
     {
         #region Shapes

@@ -3,6 +3,7 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     class ButtonInFrame : ContentPage
     {
         StackLayout _stackLayout = new StackLayout();

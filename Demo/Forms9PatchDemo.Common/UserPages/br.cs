@@ -9,6 +9,7 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo
 {
+	[Xamarin.Forms.Internals.Preserve(AllMembers = true)]
 	public class br : ContentPage
 	{
 		public br()

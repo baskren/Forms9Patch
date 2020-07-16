@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 namespace Forms9PatchDemo
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class ButtonAndSegmentAlignments : Xamarin.Forms.ContentPage
     {
 

@@ -5,6 +5,7 @@ using Forms9Patch;
 
 namespace Forms9PatchDemo
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class SegmentSelectedBackgroundPage : Xamarin.Forms.ContentPage
     {
         SegmentedControl segCtrl = new SegmentedControl

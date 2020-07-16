@@ -106,6 +106,7 @@ namespace Forms9PatchDemo
     #endregion
 
     #region Cell Classes
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     class InternalQuoteViewCell : ViewCell
     {
 
@@ -121,6 +122,7 @@ namespace Forms9PatchDemo
         }
     }
 
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     class ExternalQuoteViewCell : ViewCell
     {
         public ExternalQuoteViewCell()
@@ -161,6 +163,7 @@ namespace Forms9PatchDemo
     #endregion
 
     #region Content
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class ChatListPage : ContentPage
     {
         #region Model

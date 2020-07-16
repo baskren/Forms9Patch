@@ -164,6 +164,15 @@
 	      <Link>UserPages\Mfloyd.xaml.cs</Link>
 	    </Compile>
 
+	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\UserPages\MFoster.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>UserPages\MFoster.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\MFoster.xaml.cs">
+	      <DependentUpon>UserPages\MFoster.xaml</DependentUpon>
+	      <Link>UserPages\MFoster.xaml.cs</Link>
+	    </Compile>
+
 	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\UserPages\SegmentXAML.xaml">
 	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	      <Link>UserPages\SegmentXAML.xaml</Link>

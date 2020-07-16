@@ -4,6 +4,7 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class PickerInPopup : ContentPage
     {
         Forms9Patch.SinglePicker _singlePicker = new Forms9Patch.SinglePicker

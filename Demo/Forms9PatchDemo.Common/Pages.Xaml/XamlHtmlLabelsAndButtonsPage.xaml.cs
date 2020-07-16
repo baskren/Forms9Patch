@@ -7,6 +7,7 @@ using Xamarin.Forms.Xaml;
 namespace Forms9PatchDemo
 {
     //[XamlCompilation(XamlCompilationOptions.Compile)]
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public partial class XamlHtmlLabelsAndButtonsPage : ContentPage
     {
         public XamlHtmlLabelsAndButtonsPage()

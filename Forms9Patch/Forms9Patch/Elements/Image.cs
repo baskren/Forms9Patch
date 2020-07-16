@@ -1011,7 +1011,8 @@ namespace Forms9Patch
                         })
                         {
 
-                            var filter = SKImageFilter.CreateDropShadow(shadowX, shadowY, shadowR / 2, shadowR / 2, shadowColor, SKDropShadowImageFilterShadowMode.DrawShadowOnly);
+                            //var filter = SKImageFilter.CreateDropShadow(shadowX, shadowY, shadowR / 2, shadowR / 2, shadowColor, SKDropShadowImageFilterShadowMode.DrawShadowOnly);
+                            var filter = SKImageFilter.CreateDropShadowOnly(shadowX, shadowY, shadowR / 2, shadowR / 2, shadowColor);
                             shadowPaint.ImageFilter = filter;
                             //var filter = SkiaSharp.SKMaskFilter.CreateBlur(SKBlurStyle.Outer, 0.5f);
                             //shadowPaint.MaskFilter = filter;
@@ -1208,7 +1209,8 @@ namespace Forms9Patch
                         IsAntialias = true
                     })
                     {
-                        var filter = SKImageFilter.CreateDropShadow(shadowX, shadowY, shadowR / 2, shadowR / 2, shadowColor, SKDropShadowImageFilterShadowMode.DrawShadowOnly);
+                        //var filter = SKImageFilter.CreateDropShadow(shadowX, shadowY, shadowR / 2, shadowR / 2, shadowColor, SKDropShadowImageFilterShadowMode.DrawShadowOnly);
+                        var filter = SKImageFilter.CreateDropShadowOnly(shadowX, shadowY, shadowR / 2, shadowR / 2, shadowColor);
                         insetShadowPaint.ImageFilter = filter;
 
                         // what is the mask?

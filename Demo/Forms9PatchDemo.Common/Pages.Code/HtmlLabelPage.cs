@@ -4,6 +4,7 @@ using System.Reflection;
 
 namespace Forms9PatchDemo
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class HtmlLabelPage : ContentPage
     {
         public HtmlLabelPage()
