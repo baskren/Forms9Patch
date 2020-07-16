@@ -7,6 +7,7 @@ namespace Forms9Patch
     /// <summary>
     /// Interface for platform settings
     /// </summary>
+    [Preserve(AllMembers = true)]
     public interface ISettings
     {
         /// <summary>

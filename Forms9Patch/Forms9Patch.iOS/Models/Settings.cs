@@ -13,6 +13,7 @@ namespace Forms9Patch.iOS
     /// <summary>
     /// Forms9Patch Settings.
     /// </summary>
+    [Preserve(AllMembers = true)]
     public class Settings : ISettings
     {
         #region Fields
