@@ -7,6 +7,7 @@ namespace Forms9Patch.iOS
     /// <summary>
     /// Keyboard service.
     /// </summary>
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class KeyboardService : IKeyboardService
     {
         public bool IsHardwareKeyboardActive

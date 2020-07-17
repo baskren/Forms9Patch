@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Controls;
 [assembly: Dependency(typeof(Forms9Patch.UWP.FontService))]
 namespace Forms9Patch.UWP
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     internal class FontService : IFontService
     {
         static bool _xamlAutoFontFamilyPresent;

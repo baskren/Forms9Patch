@@ -15,6 +15,7 @@ using Xamarin.Forms.Platform.Android;
 namespace Forms9Patch.Droid
 {
     [Preserve(AllMembers = true)]
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     internal class PopupPlatformDroid : IPopupPlatform
     {
         private IPopupNavigation PopupNavigationInstance => PopupNavigation.Instance;

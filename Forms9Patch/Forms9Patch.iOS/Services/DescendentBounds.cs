@@ -9,6 +9,7 @@ namespace Forms9Patch.iOS
     /// <summary>
     /// Descendent bounds.
     /// </summary>
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class DescendentBounds : IDescendentBounds
     {
 

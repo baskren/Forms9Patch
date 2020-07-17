@@ -8,6 +8,7 @@ using Android.Media;
 
 namespace Forms9Patch.Droid
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class HapticsService : IHapticsService
     {
         readonly static Vibrator _vibrator = (Vibrator)Android.App.Application.Context.GetSystemService(Context.VibratorService);

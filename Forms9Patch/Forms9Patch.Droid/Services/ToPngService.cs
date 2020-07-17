@@ -14,6 +14,7 @@ using Android.OS;
 namespace Forms9Patch.Droid
 {
 
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class ToPngService : Java.Lang.Object, IToPngService
     {
 

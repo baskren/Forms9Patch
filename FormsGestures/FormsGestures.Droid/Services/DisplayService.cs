@@ -11,6 +11,7 @@ using Android.Content;
 namespace FormsGestures.Droid
 {
 
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class DisplayService : IDisplayService
     {
 

@@ -15,6 +15,7 @@ namespace Forms9Patch.Droid
     /// <summary>
     /// Custom font effect.
     /// </summary>
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class EmbeddedResourceFontEffect : PlatformEffect
     {
         static int instances;

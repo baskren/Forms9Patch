@@ -9,6 +9,7 @@ using UIKit;
 [assembly: Dependency(typeof(Forms9Patch.iOS.OsInfoService))]
 namespace Forms9Patch.iOS
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     class OsInfoService : IOsInformationService
     {
         public Version Version

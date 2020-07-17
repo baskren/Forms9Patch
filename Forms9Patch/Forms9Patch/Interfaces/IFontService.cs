@@ -14,6 +14,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// Font service.
 	/// </summary>
+	[Xamarin.Forms.Internals.Preserve(AllMembers = true)]
 	interface IFontService 
 	{
 		/// <summary>

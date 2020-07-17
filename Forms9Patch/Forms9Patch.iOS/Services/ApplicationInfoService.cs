@@ -13,6 +13,7 @@ namespace Forms9Patch.iOS
     /// <summary>
     /// Application info service.
     /// </summary>
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class ApplicationInfoService : IApplicationInfoService
     {
         /// <summary>

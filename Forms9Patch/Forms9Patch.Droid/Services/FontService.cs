@@ -9,6 +9,7 @@ using Xamarin.Forms;
 [assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.Droid.FontService))]
 namespace Forms9Patch.Droid
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class FontService : IFontService
     {
         public double LineHeight(string fontFamily, double fontSize, FontAttributes fontAttributes)

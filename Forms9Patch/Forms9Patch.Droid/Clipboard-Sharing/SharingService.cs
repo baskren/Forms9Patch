@@ -22,6 +22,7 @@ using P42.Utils;
 [assembly: Dependency(typeof(Forms9Patch.Droid.SharingService))]
 namespace Forms9Patch.Droid
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class SharingService : Forms9Patch.ISharingService
     {
 

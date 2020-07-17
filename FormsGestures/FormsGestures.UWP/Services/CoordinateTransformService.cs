@@ -7,10 +7,11 @@ using Windows.UI.Xaml;
 namespace FormsGestures.UWP
 
 {
-	/// <summary>
-	/// Descendent bounds.
-	/// </summary>
-	public class CoordinateTransformService : ICoordTransform
+    /// <summary>
+    /// Descendent bounds.
+    /// </summary>
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
+    public class CoordinateTransformService : ICoordTransform
 	{
         #region ILocation implementation
 

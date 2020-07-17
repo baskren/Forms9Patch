@@ -10,6 +10,7 @@ namespace FormsGestures.Droid
     /// <summary>
     /// Descendent bounds.
     /// </summary>
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class CoordTransformService : ICoordTransform
     {
         #region ILocation implementation

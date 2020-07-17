@@ -9,6 +9,7 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(Forms9Patch.UWP.ApplicationInfoService))]
 namespace Forms9Patch.UWP
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class ApplicationInfoService : IApplicationInfoService
     {
         public string Version => Package.Current.Id.Version.Major + "." + Package.Current.Id.Version.Minor; // + "." + Package.Current.Id.Version.Revision;

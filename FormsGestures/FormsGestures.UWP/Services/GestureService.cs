@@ -8,6 +8,7 @@ using FormsGestures;
 [assembly: Xamarin.Forms.Dependency(typeof(FormsGestures.UWP.GestureService))]
 namespace FormsGestures.UWP
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class GestureService : IGestureService
     {
         #region IGestureService implementation

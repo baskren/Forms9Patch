@@ -16,6 +16,7 @@ namespace Forms9Patch.UWP
     /// <summary>
     /// Custom font effect.
     /// </summary>
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class EmbeddedResourceFontEffect : PlatformEffect
     {
         #region Debug support

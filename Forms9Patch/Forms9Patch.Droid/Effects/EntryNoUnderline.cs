@@ -9,6 +9,7 @@ using Xamarin.Forms.Platform.Android;
 [assembly: ExportEffect(typeof(Forms9Patch.Droid.EntryNoUnderlineEffect), "EntryNoUnderlineEffect")]
 namespace Forms9Patch.Droid
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class EntryNoUnderlineEffect : PlatformEffect
     {
         protected override void OnAttached()

@@ -8,6 +8,7 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     internal static class StatusBarService
     {
         static StatusBarService()

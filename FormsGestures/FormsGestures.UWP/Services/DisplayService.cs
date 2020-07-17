@@ -12,6 +12,7 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(FormsGestures.UWP.DisplayService))]
 namespace FormsGestures.UWP
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class DisplayService : IDisplayService
     {
         ApplicationView _applicationView;

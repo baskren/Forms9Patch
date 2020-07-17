@@ -14,6 +14,7 @@ namespace Forms9Patch.iOS
     /// <summary>
     /// Custom font effect.
     /// </summary>
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class EmbeddedResourceFontEffect : PlatformEffect
     {
         static int instances;

@@ -13,6 +13,7 @@ namespace Forms9Patch.iOS
 	/// <summary>
 	/// Font service.
 	/// </summary>
+	[Xamarin.Forms.Internals.Preserve(AllMembers = true)]
 	public class FontService : IFontService
 	{
 		/// <summary>

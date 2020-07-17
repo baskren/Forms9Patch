@@ -5,6 +5,7 @@ using UIKit;
 [assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.iOS.HapticService))]
 namespace Forms9Patch.iOS
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class HapticService : IHapticsService
     {
         public void Feedback(HapticEffect effect, EffectMode mode = EffectMode.Default)

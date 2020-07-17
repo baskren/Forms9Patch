@@ -15,6 +15,7 @@ using Java.Lang;
 [assembly: Dependency(typeof(Forms9Patch.Droid.ApplicationInfoService))]
 namespace Forms9Patch.Droid
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class ApplicationInfoService : IApplicationInfoService
     {
         public int Build

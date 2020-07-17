@@ -22,6 +22,7 @@ using P42.Utils;
 [assembly: Dependency(typeof(Forms9Patch.Droid.ClipboardService))]
 namespace Forms9Patch.Droid
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class ClipboardService : Forms9Patch.IClipboardService
     {
 

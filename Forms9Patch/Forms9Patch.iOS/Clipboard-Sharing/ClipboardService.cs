@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 [assembly: Dependency(typeof(Forms9Patch.iOS.ClipboardService))]
 namespace Forms9Patch.iOS
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class ClipboardService : Forms9Patch.IClipboardService
     {
         //const bool TestPre11 = false;

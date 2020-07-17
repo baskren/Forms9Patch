@@ -14,6 +14,7 @@ namespace Forms9Patch.iOS
     /// <summary>
     /// HTML to PDF service.
     /// </summary>
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class ToPngService : IToPngService
     {
         const string LocalStorageFolderName = "Forms9Patch.ToPngService";

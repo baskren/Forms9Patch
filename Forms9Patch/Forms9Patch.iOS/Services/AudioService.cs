@@ -5,6 +5,7 @@ using CoreFoundation;
 [assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.iOS.AudioService))]
 namespace Forms9Patch.iOS
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class AudioService : IAudioService
     {
         static readonly AudioToolbox.SystemSound click = new AudioToolbox.SystemSound(1104);

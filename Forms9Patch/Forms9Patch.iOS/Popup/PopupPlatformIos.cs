@@ -13,6 +13,7 @@ using Forms9Patch.Elements.Popups.Core;
 namespace Forms9Patch.iOS
 {
     [Preserve(AllMembers = true)]
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     internal class PopupPlatformIos : IPopupPlatform
     {
         readonly List<UIWindow> _windows = new List<UIWindow>();

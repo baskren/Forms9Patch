@@ -23,6 +23,7 @@ namespace Forms9Patch.UWP
 	/// <summary>
 	/// HTML to PDF service.
 	/// </summary>
+	[Xamarin.Forms.Internals.Preserve(AllMembers = true)]
 	public class ToPngService : IToPngService
 	{
 		readonly static DependencyProperty PngFileNameProperty = DependencyProperty.Register("PngFileName", typeof(string), typeof(ToPngService), null);

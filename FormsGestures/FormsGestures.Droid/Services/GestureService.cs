@@ -6,6 +6,7 @@ namespace FormsGestures.Droid
     /// <summary>
     /// FormsGesture.Droid Gesture service.
     /// </summary>
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class GestureService : IGestureService
     {
         public GestureService()

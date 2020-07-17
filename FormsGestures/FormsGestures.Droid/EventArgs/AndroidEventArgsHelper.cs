@@ -84,7 +84,7 @@ namespace FormsGestures.Droid
 				var touchViewLocation = AndroidViewExtensions.LocationInFormsCoord(sourceView);
 				delta = touchViewLocation.Subtract(listenerViewLocation);
 
-                System.Diagnostics.Debug.WriteLine("vl["+listenerViewLocation.ToString("N2")+"] ["+touchViewLocation.ToString("+N2+")+"]");
+                //System.Diagnostics.Debug.WriteLine("vl["+listenerViewLocation.ToString("N2")+"] ["+touchViewLocation.ToString("+N2+")+"]");
 
             }
 

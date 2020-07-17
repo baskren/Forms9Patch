@@ -13,6 +13,7 @@ using System.Reflection;
 [assembly: Dependency(typeof(FontFamilies))]
 namespace Forms9Patch.iOS
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     class FontFamilies : IFontFamilies
     {
         List<string> IFontFamilies.FontFamilies()

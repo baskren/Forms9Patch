@@ -8,6 +8,7 @@ namespace FormsGestures.iOS
     /// <summary>
     /// Descendent bounds.
     /// </summary>
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class LocationService : ICoordTransform
     {
         #region ILocation implementation

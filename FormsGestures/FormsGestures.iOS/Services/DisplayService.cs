@@ -9,6 +9,7 @@ namespace FormsGestures.iOS
     /// <summary>
     /// Display service.
     /// </summary>
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class DisplayService : IDisplayService
     {
         //public float Density => 163 * Scale;

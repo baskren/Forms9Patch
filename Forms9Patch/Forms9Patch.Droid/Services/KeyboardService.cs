@@ -11,6 +11,7 @@ using Xamarin.Forms.PlatformConfiguration;
 [assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.Droid.KeyboardService))]
 namespace Forms9Patch.Droid
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class KeyboardService : IKeyboardService
     {
         public bool IsHardwareKeyboardActive

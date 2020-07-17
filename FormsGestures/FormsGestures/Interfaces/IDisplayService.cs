@@ -4,6 +4,7 @@ using Xamarin.Forms;
 
 namespace FormsGestures
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     interface IDisplayService
     {
         //float Density { get; }

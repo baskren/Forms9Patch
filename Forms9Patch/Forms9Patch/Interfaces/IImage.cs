@@ -1,6 +1,7 @@
 ﻿
 namespace Forms9Patch
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     interface IImage : IShape
     {
         /// <summary>

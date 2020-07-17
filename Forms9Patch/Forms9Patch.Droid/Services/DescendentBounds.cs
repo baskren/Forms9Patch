@@ -8,6 +8,7 @@ namespace Forms9Patch.Droid
     /// <summary>
     /// Descendent bounds.
     /// </summary>
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class DescendentBounds : IDescendentBounds
     {
 

@@ -6,6 +6,7 @@ using Forms9Patch.Interfaces;
 [assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.Droid.AudioService))]
 namespace Forms9Patch.Droid
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class AudioService : IAudioService
     {
         readonly static Android.Media.AudioManager _audio = (Android.Media.AudioManager)Android.App.Application.Context.GetSystemService(Context.AudioService);

@@ -13,6 +13,7 @@ using Android.Content.PM;
 namespace Forms9Patch.Droid
 {
 
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     class FontManagment : IFontFamilies
     {
 

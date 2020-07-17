@@ -10,6 +10,7 @@ using Xamarin.Forms.Platform.UWP;
 [assembly: ExportEffect(typeof(Forms9Patch.UWP.SliderStepSizeEffect), "SliderStepSizeEffect")]
 namespace Forms9Patch.UWP
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     class SliderStepSizeEffect : PlatformEffect
     {
         static int instances;

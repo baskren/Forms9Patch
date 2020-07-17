@@ -8,6 +8,7 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(Forms9Patch.Droid.OsInfoService))]
 namespace Forms9Patch.Droid
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     class OsInfoService : IOsInformationService
     {
         public Version Version

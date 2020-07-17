@@ -9,6 +9,7 @@ using Xamarin.Forms.Platform.Android;
 [assembly: ExportEffect(typeof(Forms9Patch.Droid.EntryClearButtonEffect), "EntryClearButtonEffect")]
 namespace Forms9Patch.Droid
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class EntryClearButtonEffect : PlatformEffect
     {
         protected override void OnAttached()

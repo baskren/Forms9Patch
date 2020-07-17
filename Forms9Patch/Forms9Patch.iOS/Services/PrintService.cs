@@ -14,6 +14,7 @@ namespace Forms9Patch.iOS
     /// <summary>
     /// Web view extensions service.
     /// </summary>
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class PrintService : UIPrintInteractionControllerDelegate, IPrintService
     {
         //UIView AppleViewToPrint;

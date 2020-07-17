@@ -8,6 +8,7 @@ using Android.Widget;
 [assembly: ExportEffect(typeof(Forms9Patch.Droid.SliderStepSizeEffect), "SliderStepSizeEffect")]
 namespace Forms9Patch.Droid
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class SliderStepSizeEffect : PlatformEffect
     {
         static int instances;

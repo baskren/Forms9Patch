@@ -9,6 +9,7 @@ using ObjCRuntime;
 [assembly: ExportEffect(typeof(Forms9Patch.iOS.SliderStepSizeEffect), "SliderStepSizeEffect")]
 namespace Forms9Patch.iOS
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class SliderStepSizeEffect : PlatformEffect
     {
         Forms9Patch.SliderStepSizeEffect _stepSizeEffect;

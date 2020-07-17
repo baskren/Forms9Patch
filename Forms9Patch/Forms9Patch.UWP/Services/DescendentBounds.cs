@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Media;
 [assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.UWP.DescendentBounds))]
 namespace Forms9Patch.UWP
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     class DescendentBounds : IDescendentBounds
     {
         #region IDescendentBounds implementation

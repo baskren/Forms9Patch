@@ -15,6 +15,7 @@ using CoreGraphics;
 [assembly: Dependency(typeof(Forms9Patch.iOS.SharingService))]
 namespace Forms9Patch.iOS
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class SharingService : Forms9Patch.ISharingService
     {
 

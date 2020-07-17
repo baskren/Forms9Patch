@@ -10,6 +10,7 @@ using Xamarin.Forms.Platform.Android;
 [assembly: Dependency(typeof(Forms9Patch.Droid.PrintService))]
 namespace Forms9Patch.Droid
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class PrintService : IPrintService
     {
         Forms9Patch.ActivityIndicatorPopup _activityIndicatorPopup;

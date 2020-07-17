@@ -12,6 +12,7 @@ using Windows.UI.ViewManagement;
 [assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.UWP.KeyboardService))]
 namespace Forms9Patch.UWP
 {
+	[Xamarin.Forms.Internals.Preserve(AllMembers = true)]
 	class KeyboardService : IKeyboardService, IDisposable
 	{
 		public bool IsHardwareKeyboardActive

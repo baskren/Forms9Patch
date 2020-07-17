@@ -10,6 +10,7 @@ using Xamarin.Forms.Internals;
 [assembly: ExportEffect(typeof(Forms9Patch.iOS.PopupLayerEffect), "PopupLayerEffect")]
 namespace Forms9Patch.iOS
 {
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class PopupLayerEffect : PlatformEffect
     {
 

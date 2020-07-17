@@ -9,6 +9,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// Status bar service.
 	/// </summary>
+	[Xamarin.Forms.Internals.Preserve(AllMembers = true)]
 	internal interface IStatusBarService
 	{
 		/// <summary>
