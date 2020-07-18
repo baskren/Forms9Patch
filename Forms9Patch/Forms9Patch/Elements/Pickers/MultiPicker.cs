@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Collections.Generic;
 using P42.Utils;
+using System;
 
 namespace Forms9Patch
 {
@@ -14,19 +15,22 @@ namespace Forms9Patch
     public class MultiPicker : SinglePicker
     {
         #region Properties
+
         /// <summary>
         /// The selected items property.
         /// </summary>
-        public static readonly BindablePropertyKey SelectedItemsPropertyKey = BindableProperty.CreateReadOnly(nameof(SelectedItems), typeof(ObservableCollection<object>), typeof(MultiPicker), null);
+        public static readonly BindableProperty SelectedItemsProperty = BasePicker.SelectedItemsProperty; 
         /// <summary>
         /// Gets or sets the selected items.
         /// </summary>
         /// <value>The selected items.</value>
-        public ObservableCollection<object> SelectedItems
+        public IList<object> SelectedItems
         {
-            get => (ObservableCollection<object>)GetValue(SelectedItemsPropertyKey.BindableProperty);
-            private set => SetValue(SelectedItemsPropertyKey, value);
+            get => (IList<object>)_basePicker.GetValue(SelectedItemsProperty);
+            private set => _basePicker.SetValue(SelectedItemsProperty, value);
         }
+        
+
 
         /// <summary>
         /// The indexes currently selected
@@ -58,19 +62,19 @@ namespace Forms9Patch
             HtmlTextCellType = typeof(MultiPickerHtmlCellContentView);
 
             //SelectedItems = new ObservableCollection<object>();
+            /*
             _lowerGradient.StartColor = _overlayColor.WithAlpha(0);
             _upperGradient.EndColor = _overlayColor.WithAlpha(0);
-            _basePicker.SelectBy = SelectBy.Default;
             Children.Remove(_lowerEdge);
             Children.Remove(_upperEdge);
-            _basePicker.GroupToggleBehavior = GroupToggleBehavior.Multiselect;
+            */
+            //_basePicker.GroupToggleBehavior = GroupToggleBehavior.Multiselect;
+            _basePicker.SelectionMode = SelectionMode.Multiple;
 
-            _basePicker.ItemTemplates.RemoveFactoryDefaults();
+            _basePicker.ItemTemplates.Clear();
             _basePicker.ItemTemplates.Add(typeof(string), PlainTextCellType);
 
-            SelectedItems = _basePicker.SelectedItems;
-
-            SelectedItems.CollectionChanged += (sender, e) => OnPropertyChanged(SelectedItemsPropertyKey.BindableProperty.PropertyName);
+            //SelectedItems.CollectionChanged += (sender, e) => OnPropertyChanged(SelectedItemsPropertyKey.BindableProperty.PropertyName);
 
             _basePicker.IsSelectOnScrollEnabled = false;
         }

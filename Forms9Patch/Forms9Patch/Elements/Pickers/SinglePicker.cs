@@ -3,6 +3,8 @@ using Xamarin.Forms;
 using System.ComponentModel;
 using P42.Utils;
 using System;
+using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Forms9Patch
 {
@@ -16,71 +18,74 @@ namespace Forms9Patch
         /// <summary>
         /// The item templates property.
         /// </summary>
-        public static readonly BindableProperty ItemTemplatesProperty = BindableProperty.Create(nameof(ItemTemplates), typeof(DataTemplateSelector), typeof(SinglePicker), null);
+        public static readonly BindableProperty ItemTemplatesProperty = BasePicker.ItemTemplateProperty; 
         /// <summary>
         /// Gets the item templates.
         /// </summary>
         /// <value>The item templates.</value>
         public DataTemplateSelector ItemTemplates
         {
-            get => (DataTemplateSelector)GetValue(ItemTemplatesProperty);
-            private set => SetValue(ItemTemplatesProperty, value);
+            get => (DataTemplateSelector)_basePicker.GetValue(ItemTemplatesProperty);
+            private set => _basePicker.SetValue(ItemTemplatesProperty, value);
         }
 
         /// <summary>
         /// The items source property.
         /// </summary>
-        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(ItemsSource), typeof(IList), typeof(SinglePicker), null);
+        public static readonly BindableProperty ItemsSourceProperty = BasePicker.ItemsSourceProperty; 
         /// <summary>
         /// Gets or sets the items source.
         /// </summary>
         /// <value>The items source.</value>
         public IList ItemsSource
         {
-            get => (IList)GetValue(ItemsSourceProperty);
-            set => SetValue(ItemsSourceProperty, value);
+            get => (IList)_basePicker.GetValue(ItemsSourceProperty);
+            set => _basePicker.SetValue(ItemsSourceProperty, value);
         }
+
 
         /// <summary>
         /// The row height property.
         /// </summary>
-        public static readonly BindableProperty RowHeightProperty = BindableProperty.Create(nameof(RowHeight), typeof(int), typeof(SinglePicker), 30);
+        public static readonly BindableProperty RowHeightProperty = BasePicker.RowHeightProperty; 
         /// <summary>
         /// Gets or sets the height of the row.
         /// </summary>
         /// <value>The height of the row.</value>
         public int RowHeight
         {
-            get => (int)GetValue(RowHeightProperty);
-            set => SetValue(RowHeightProperty, value);
+            get => (int)_basePicker.GetValue(RowHeightProperty);
+            set => _basePicker.SetValue(RowHeightProperty, value);
         }
+        
 
         /// <summary>
         /// The index property.
         /// </summary>
-        public static readonly BindableProperty IndexProperty = BindableProperty.Create(nameof(Index), typeof(int), typeof(SinglePicker), 0);
+        public static readonly BindableProperty IndexProperty = BasePicker.IndexProperty; 
         /// <summary>
         /// Gets or sets the index.
         /// </summary>
         /// <value>The index.</value>
         public int Index
         {
-            get => (int)GetValue(IndexProperty);
-            set => SetValue(IndexProperty, value);
+            get => (int)_basePicker.GetValue(IndexProperty);
+            set => _basePicker.SetValue(IndexProperty, value);
         }
+
 
         /// <summary>
         /// The selected item property.
         /// </summary>
-        public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create(nameof(SelectedItem), typeof(object), typeof(SinglePicker), null);
+        public static readonly BindableProperty SelectedItemProperty = BasePicker.SelectedItemProperty; 
         /// <summary>
         /// Gets or sets the selected item.
         /// </summary>
         /// <value>The selected item.</value>
         public object SelectedItem
         {
-            get => GetValue(SelectedItemProperty);
-            set => SetValue(SelectedItemProperty, value);
+            get => _basePicker.GetValue(SelectedItemProperty);
+            set => _basePicker.SetValue(SelectedItemProperty, value);
         }
 
         #region IsHtmlText
@@ -105,7 +110,7 @@ namespace Forms9Patch
         {
             IsSelectOnScrollEnabled = true
         };
-
+        /*
         readonly internal Color _overlayColor = Color.FromRgb(0.85, 0.85, 0.85);
 
         readonly internal ColorGradientBox _upperGradient = new ColorGradientBox
@@ -130,50 +135,66 @@ namespace Forms9Patch
             HeightRequest = 1,
             VerticalOptions = LayoutOptions.Start,
         };
-
+        */
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         internal protected Type PlainTextCellType = typeof(SinglePickerCellContentView);
         internal protected Type HtmlTextCellType = typeof(SinglePickerHtmlCellContentView);
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
         #endregion
 
+
+        #region Events
+        public event EventHandler<SelectionChangedEventArgs> SelectionChanged
+        {
+            add => _basePicker.SelectionChanged += value;
+            remove => _basePicker.SelectionChanged -= value;
+        }
+        #endregion
+
+
+        static SinglePicker()
+        {
+
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.SinglePicker"/> class.
         /// </summary>
         public SinglePicker()
         {
+
+            RowSpacing = 0;
+
             RowDefinitions = new RowDefinitionCollection
             {
                 new RowDefinition{ Height = GridLength.Star },
-                new RowDefinition{ Height = RowHeight },
+                new RowDefinition{ Height = (int)BasePicker.RowHeightProperty.DefaultValue },
                 new RowDefinition{ Height = GridLength.Star }
             };
 
             Padding = new Thickness(0, 0, 0, 0);
 
-            _basePicker._listView.SelectedCellBackgroundColor = Color.Transparent;
-            _basePicker.ItemTemplates.RemoveFactoryDefaults();
+            //_basePicker._listView.SelectedCellBackgroundColor = Color.Transparent;
+            _basePicker.ItemTemplates.Clear();
             _basePicker.ItemTemplates.Add(typeof(string), PlainTextCellType);
 
-            _upperGradient.StartColor = _overlayColor;
-            _upperGradient.EndColor = _overlayColor.WithAlpha(0.5);
-            _lowerGradient.StartColor = _overlayColor.WithAlpha(0.5);
-            _lowerGradient.EndColor = _overlayColor;
+            //_upperGradient.StartColor = _overlayColor;
+            //_upperGradient.EndColor = _overlayColor.WithAlpha(0.5);
+            //_lowerGradient.StartColor = _overlayColor.WithAlpha(0.5);
+            //_lowerGradient.EndColor = _overlayColor;
 
-            Children.Add(_upperEdge);
-            Children.Add(_lowerEdge, 0, 2);
+            //Children.Add(_upperEdge);
+            //Children.Add(_lowerEdge, 0, 2);
             Children.Add(_basePicker);
             Grid.SetRowSpan(_basePicker, 3);
-            Children.Add(_upperGradient);
-            Children.Add(_lowerGradient, 0, 2);
+            //Children.Add(_upperGradient);
+            //Children.Add(_lowerGradient, 0, 2);
 
-            _basePicker.SelectBy = SelectBy.Position;
-
-            _basePicker.RowHeight = RowHeight;
+            //_basePicker.RowHeight = RowHeight;
 
             VerticalOptions = LayoutOptions.FillAndExpand;
 
-            _basePicker.PropertyChanged += BasePickerPropertyChanged;
+            //BackgroundColor = Color.Green;
         }
 
         #region change management
@@ -191,12 +212,13 @@ namespace Forms9Patch
 
             base.OnPropertyChanged(propertyName);
 
-            if (propertyName == RowHeightProperty.PropertyName)
-            {
-                _basePicker.RowHeight = RowHeight;
-                RowDefinitions[1].Height = RowHeight;
-            }
-            else if (propertyName == ItemsSourceProperty.PropertyName)
+            //if (propertyName == RowHeightProperty.PropertyName)
+            //{
+            //_basePicker.RowHeight = RowHeight;
+            //    RowDefinitions[1].Height = RowHeight;
+            //}
+            //else
+            if (propertyName == ItemsSourceProperty.PropertyName)
                 _basePicker.ItemsSource = ItemsSource;
             else if (propertyName == IndexProperty.PropertyName)
                 _basePicker.Index = Index;
@@ -212,6 +234,8 @@ namespace Forms9Patch
                 _basePicker.ItemTemplates.Add(typeof(string), template);
                 _basePicker.ItemsSource = ItemsSource;
             }
+            //else if (propertyName == BackgroundColorProperty.PropertyName)
+            //    BackgroundColor = Color.Red;
         }
         #endregion
 
@@ -225,6 +249,7 @@ namespace Forms9Patch
 
         void BasePickerPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
+            /*
             if (e.PropertyName == BasePicker.SelectedItemProperty.PropertyName)
             {
                 SelectedItem = _basePicker.SelectedItem;
@@ -253,6 +278,8 @@ namespace Forms9Patch
                         SelectedItem = null;
                 }
             }
+            */
+
         }
 
 
@@ -280,92 +307,182 @@ namespace Forms9Patch
         }
 
         [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
-        protected class SinglePickerCellContentView : Grid, ICellContentView, IIsSelectedAble
-    {
-        #region Properties
-        public double CellHeight { get; set; }
-
-        public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create(nameof(IsSelected), typeof(bool), typeof(SinglePickerCellContentView), default(bool));
-        public bool IsSelected
+        protected class SinglePickerCellContentView : Xamarin.Forms.Grid, ICellContentView, IIsSelectedAble, IDisposable
         {
-            get => (bool)GetValue(IsSelectedProperty);
-            set => SetValue(IsSelectedProperty, value);
-        }
+            #region Properties
+            public double CellHeight { get; set; }
 
-        #endregion
-
-
-        #region Fields
-        /*
-        readonly Label checkLabel = new Label
-        {
-            Text = "✓",
-            TextColor = Color.Blue,
-            VerticalTextAlignment = TextAlignment.Center,
-            HorizontalTextAlignment = TextAlignment.Center,
-            IsVisible = false
-        };
-        */
-        protected readonly Label itemLabel = new Label
-        {
-            TextColor = Color.Black,
-            VerticalTextAlignment = TextAlignment.Center,
-            HorizontalTextAlignment = TextAlignment.Start
-        };
-
-        #endregion
-
-
-        #region Constructors
-        public SinglePickerCellContentView()
-        {
-            CellHeight = 50;
-            Padding = new Thickness(5, 1, 5, 1);
-            ColumnDefinitions = new ColumnDefinitionCollection
+            public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create(nameof(IsSelected), typeof(bool), typeof(SinglePickerCellContentView), default(bool));
+            public bool IsSelected
             {
-                new ColumnDefinition { Width = new GridLength(0,GridUnitType.Absolute)},
-                new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star)}
-            };
-            RowDefinitions = new RowDefinitionCollection
-            {
-                new RowDefinition { Height = new GridLength(CellHeight - Padding.VerticalThickness, GridUnitType.Absolute)}
-            };
-            IgnoreChildren = true;
-            ColumnSpacing = 0;
-
-            Children.Add(itemLabel, 1, 0);
-        }
-        #endregion
-
-
-        #region Change management
-        protected override void OnBindingContextChanged()
-        {
-            if (!P42.Utils.Environment.IsOnMainThread)
-            {
-                Device.BeginInvokeOnMainThread(OnBindingContextChanged);
-                return;
+                get => (bool)GetValue(IsSelectedProperty);
+                set => SetValue(IsSelectedProperty, value);
             }
 
-            base.OnBindingContextChanged();
-            if (BindingContext != null)
-                itemLabel.Text = BindingContext.ToString();
-            else
-                itemLabel.Text = null;
+            #endregion
+
+
+            #region Fields
+            /*
+            readonly Label checkLabel = new Label
+            {
+                Text = "✓",
+                TextColor = Color.Blue,
+                VerticalTextAlignment = TextAlignment.Center,
+                HorizontalTextAlignment = TextAlignment.Center,
+                IsVisible = false
+            };
+            */
+            protected readonly Label itemLabel = new Label
+            {
+                TextColor = Color.Black,
+                VerticalTextAlignment = TextAlignment.Center,
+                HorizontalTextAlignment = TextAlignment.Start
+            };
+
+            #endregion
+
+
+            #region Constructors
+            public SinglePickerCellContentView()
+            {
+                
+                var vsgs = VisualStateManager.GetVisualStateGroups(this);
+
+                if (!vsgs.Any())
+                {
+                    var vsg = new VisualStateGroup
+                    {
+                        Name = "CommonStates",
+
+                    };
+                    vsg.States.Add(new VisualState
+                    {
+                        Name = "Normal"
+                    });
+
+                    var selectedState = new VisualState
+                    {
+                        Name = "Selected",
+                        TargetType = GetType(),
+                    };
+                    selectedState.Setters.Add(new Setter
+                    {
+                        Property = BackgroundColorProperty,
+                        Value = Color.LightGray
+                    });
+                    vsg.States.Add(selectedState);
+                    vsgs.Add(vsg);
+                }
+                /*
+                foreach (var vsg in vsgs)
+                {
+
+                    System.Diagnostics.Debug.WriteLine("=========================");
+
+                    System.Diagnostics.Debug.WriteLine("vsg.Name: " + vsg.Name);
+                    System.Diagnostics.Debug.WriteLine("vsg.CurrentState: " + vsg.CurrentState);
+                    System.Diagnostics.Debug.WriteLine("-------");
+
+                    foreach (var vs in vsg.States)
+                    {
+                        System.Diagnostics.Debug.WriteLine("    vs.Name : " + vs.Name);
+                        System.Diagnostics.Debug.WriteLine("    vs.TargetType : " + vs.TargetType);
+                        foreach (var trigger in vs.StateTriggers)
+                        {
+
+                        }
+                    }
+                    System.Diagnostics.Debug.WriteLine("=========================");
+                }
+                */
+
+
+
+                CellHeight = (int)BasePicker.RowHeightProperty.DefaultValue;
+                Padding = new Thickness(5, 1, 5, 1);
+                ColumnDefinitions = new ColumnDefinitionCollection
+                {
+                    new ColumnDefinition { Width = new GridLength(0,GridUnitType.Absolute)},
+                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star)}
+                };
+                RowDefinitions = new RowDefinitionCollection
+                {
+                    new RowDefinition { Height = new GridLength(CellHeight - Padding.VerticalThickness, GridUnitType.Absolute)}
+                };
+                //IgnoreChildren = true;
+                ColumnSpacing = 0;
+
+                Children.Add(itemLabel, 1, 0);
+
+                //BackgroundColor = Color.Yellow;
+            }
+
+            private bool _disposed;
+            protected virtual void Dispose(bool disposing)
+            {
+                if (!_disposed && disposing)
+                {
+                    _disposed = true;
+
+                }
+            }
+
+            public void Dispose()
+            {
+                Dispose(true);
+                GC.SuppressFinalize(this);
+            }
+            #endregion
+
+
+            #region Change management
+            protected override void OnPropertyChanging([CallerMemberName] string propertyName = null)
+            {
+                base.OnPropertyChanging(propertyName);
+                if (propertyName == BindingContextProperty.PropertyName)
+                {
+                    System.Diagnostics.Debug.WriteLine("SinglePickerCellContentView");
+
+                }
+            }
+
+            protected override void OnBindingContextChanged()
+            {
+                if (!P42.Utils.Environment.IsOnMainThread)
+                {
+                    Device.BeginInvokeOnMainThread(OnBindingContextChanged);
+                    return;
+                }
+
+                base.OnBindingContextChanged();
+                if (BindingContext != null)
+                    itemLabel.Text = BindingContext.ToString();
+                else
+                    itemLabel.Text = null;
+
+                //VisualStateManager.CommonStates.Selected;
+
+                var visualStateGroupName = "CommonStates";
+                var myVsg = VisualStateManager.GetVisualStateGroups(this).FirstOrDefault(vsg => vsg.Name == visualStateGroupName);
+            }
+
+            #endregion
+
+
+            #region Appearing / Disappearing Event Handlers
+            public virtual void OnAppearing()
+            {
+                System.Diagnostics.Debug.WriteLine("SinglePickerCellContentView");
+
+            }
+
+            public virtual void OnDisappearing() { }
+            #endregion
+
+
+
         }
-
-        #endregion
-
-
-        #region Appearing / Disappearing Event Handlers
-        public virtual void OnAppearing() { }
-
-        public virtual void OnDisappearing() { }
-        #endregion
-
-
-
-    }
         #endregion
 
     }

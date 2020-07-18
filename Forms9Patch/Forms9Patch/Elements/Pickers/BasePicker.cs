@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Runtime.Serialization;
 using Xamarin.Forms;
 using System.Linq;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace Forms9Patch
 {
@@ -12,7 +14,7 @@ namespace Forms9Patch
     /// Base picker.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    class BasePicker : Xamarin.Forms.ContentView
+    class BasePicker : Xamarin.Forms.CollectionView
     {
         #region Properties
 
@@ -21,21 +23,8 @@ namespace Forms9Patch
         /// Gets the item templates.
         /// </summary>
         /// <value>The item templates.</value>
-        public DataTemplateSelector ItemTemplates => _listView.ItemTemplates;
-
-        /// <summary>
-        /// The items source property.
-        /// </summary>
-        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(ItemsSource), typeof(IList), typeof(BasePicker), null);
-        /// <summary>
-        /// Gets or sets the items source.
-        /// </summary>
-        /// <value>The items source.</value>
-        public IList ItemsSource
-        {
-            get => (IList)GetValue(ItemsSourceProperty);
-            set => SetValue(ItemsSourceProperty, value);
-        }
+        //public DataTemplateSelector ItemTemplates => _listView.ItemTemplates;
+        public BasePickerDataTemplateSelector ItemTemplates { get; } = new BasePickerDataTemplateSelector();
         #endregion
 
         #region Position and Selection
@@ -53,48 +42,6 @@ namespace Forms9Patch
             set => SetValue(IndexProperty, value);
         }
 
-        /// <summary>
-        /// The selected item property.
-        /// </summary>
-        public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create(nameof(SelectedItem), typeof(object), typeof(BasePicker), null, BindingMode.TwoWay);
-        /// <summary>
-        /// Gets or sets the selected item.
-        /// </summary>
-        /// <value>The selected item.</value>
-        public object SelectedItem
-        {
-            get => GetValue(SelectedItemProperty);
-            set => SetValue(SelectedItemProperty, value);
-        }
-
-        /// <summary>
-        /// The selected items property key.
-        /// </summary>
-        public static readonly BindablePropertyKey SelectedItemsPropertyKey = BindableProperty.CreateReadOnly(nameof(SelectedItems), typeof(ObservableCollection<object>), typeof(BasePicker), null);
-        /// <summary>
-        /// Gets the selected items.
-        /// </summary>
-        /// <value>The selected items.</value>
-        public ObservableCollection<object> SelectedItems
-        {
-            get => (ObservableCollection<object>)GetValue(SelectedItemsPropertyKey.BindableProperty);
-            private set => SetValue(SelectedItemsPropertyKey, value);
-        }
-
-
-        /// <summary>
-        /// The backing store for the ListViews's GroupToggleBehavior property.
-        /// </summary>
-        public static readonly BindableProperty GroupToggleBehaviorProperty = ListView.GroupToggleBehaviorProperty;
-        /// <summary>
-        /// Gets or sets the ListViews's GroupToggle behavior.
-        /// </summary>
-        /// <value>The Toggle behavior (None, Radio, Multiselect).</value>
-        public GroupToggleBehavior GroupToggleBehavior
-        {
-            get => (GroupToggleBehavior)GetValue(GroupToggleBehaviorProperty);
-            set => SetValue(GroupToggleBehaviorProperty, value);
-        }
 
         #region IsSelectOnScrollEnabled Property
         /// <summary>
@@ -113,12 +60,12 @@ namespace Forms9Patch
 
 
         #endregion
-
+        
         #region Appearance
         /// <summary>
         /// The row height property.
         /// </summary>
-        public static readonly BindableProperty RowHeightProperty = BindableProperty.Create(nameof(RowHeight), typeof(int), typeof(BasePicker), 30);
+        public static readonly BindableProperty RowHeightProperty = BindableProperty.Create(nameof(RowHeight), typeof(int), typeof(BasePicker), 40);
         /// <summary>
         /// Gets or sets the height of the row.
         /// </summary>
@@ -129,7 +76,7 @@ namespace Forms9Patch
             set => SetValue(RowHeightProperty, value);
         }
         #endregion
-
+        
         #region TextColor property
         public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(BasePicker), default(Color));
         public Color TextColor
@@ -144,18 +91,16 @@ namespace Forms9Patch
         #endregion
 
 
+
         #region Fields
-        internal readonly Forms9Patch.ListView _listView = new Forms9Patch.ListView
-        {
-            SeparatorHeight = 0
-        };
         readonly BoxView _upperPadding = new BoxView { Color = Color.Transparent };
         readonly BoxView _lowerPadding = new BoxView { Color = Color.Transparent };
-
-        internal SelectBy SelectBy;
-        bool _tapping;
-        bool _scrolling;
+        bool _isRendered;
+        bool _waitingForIsRendered;
+        IList<object> _pendingSelectedItems;
+        object _pendingSelectedItem;
         #endregion
+
 
 
         #region Constructor
@@ -169,76 +114,41 @@ namespace Forms9Patch
         /// </summary>
         internal BasePicker()
         {
-            _listView.RowHeight = RowHeight;
-            _listView.GroupToggleBehavior = GroupToggleBehavior;
-            _listView.BackgroundColor = Color.Transparent;
-            _listView.SelectedCellBackgroundColor = Color.Transparent;
+            IsGrouped = false;
+            ItemSizingStrategy = ItemSizingStrategy.MeasureFirstItem;
+            ItemTemplate = ItemTemplates;
+            SelectionMode = SelectionMode.Single;
+            BackgroundColor = Color.Transparent;
 
-            _listView.IsGroupingEnabled = false;
-            _listView.SeparatorVisibility = SeparatorVisibility.None;
+            Header = _upperPadding;
+            Footer = _lowerPadding;
 
-            _listView.ItemTapped += OnItemTapped;
-
-
-            _listView.Scrolled += OnScrolled;
-            _listView.Scrolling += OnScrolling;
-
-
-            _listView.Header = _upperPadding;
-            _listView.Footer = _lowerPadding;
-
-            SelectedItems = _listView.SelectedItems;
-            Content = _listView;
-
-            _listView.Appeared += OnAppeared;
         }
+
         #endregion
 
 
-        #region Selection management
-        protected void OnItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            if (_scrolling)
-                return;
-            if (_scrollCompleting)
-            {
-                _scrollCompleting = false;
-                return;
-            }
-            _tapping = true;
-            var index = 0;
-            foreach (var item in ItemsSource)
-            {
-                if (item == e.Item)
-                {
-                    Index = index;
-                    break;
-                }
-                index++;
-            }
-            _tapping = false;
-            e.Handled = true;
-        }
-
-        /// <summary>
-        /// Programmatically Taps the item at point.
-        /// </summary>
-        /// <param name="p">P.</param>
-        public void TapItemAtPoint(Point p) => _listView.TapItemAtPoint(p);
-
-        #endregion
 
 
         #region Property Change management
-
-        void OnAppeared(object sender, EventArgs e)
+        
+        protected virtual void OnRendered()
         {
-            if (ItemsSource == null || ItemsSource.Count < 1 || !ItemsSource.Contains(SelectedItem))
-                _listView.ScrollTo(0);
-            if (SelectedItem != null)
-                ScrollTo(SelectedItem);
-            else if (SelectedItems.Count > 0)
-                ScrollTo(SelectedItems[0]);
+            if (ElementExtensions.HasRenderer(this))
+            {
+                _isRendered = true;
+                SelectedItems = _pendingSelectedItems;
+                SelectedItem = _pendingSelectedItem;
+            }
+            _isRendered = false;
+            /*
+        if (ItemsSource == null || (ItemsSource.Cast<object>().ToArray() is object[] array && (array.Length > 0 || !array.Contains(SelectedItem)) ) )
+            ScrollTo(0);
+        if (SelectedItem != null)
+            ScrollTo(SelectedItem);
+        else if (SelectedItems.Count > 0)
+            ScrollTo(SelectedItems[0]);
+            */
         }
 
 
@@ -249,11 +159,33 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
+            /*
+            if (!_isRendered)
+            {
+                if (propertyName == SelectedItemProperty.PropertyName)
+                {
+                    if (SelectedItem != null)
+                        _pendingSelectedItem = SelectedItem;
+                    SelectedItem = null;
+                    return;
+                }
+                else if (propertyName == SelectedItemsProperty.PropertyName)
+                {
+                    if (SelectedItems != null)
+                        _pendingSelectedItems = SelectedItems;
+                    SelectedItems = null;
+                    return;
+                }
+            }
+            */
             if (!P42.Utils.Environment.IsOnMainThread)
             {
                 Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
                 return;
             }
+
+            System.Diagnostics.Debug.WriteLine("BasePicker.OnPropertyChanged(" + propertyName + ") ["+DateTime.Now+"]");
+
 
             try
             {
@@ -261,153 +193,153 @@ namespace Forms9Patch
             }
             catch (Exception) { }
 
+
+
             if (propertyName == ItemsSourceProperty.PropertyName)
             {
-                _listView.ItemsSource = ItemsSource;
-                if (ItemsSource != null)
-                    ScrollToIndex(Index);
+                //_listView.ItemsSource = ItemsSource;
+                if (ItemsSource?.Cast<object>().ToArray() is object[] items && Index > -1 && Index < items.Length)
+                    ScrollTo(Index, position: ScrollToPosition.Center);
+                /*
                 else
                 {
                     SelectedItem = null;
                     SelectedItems.Clear();
-                    _listView.SelectedItem = null;
-                    _listView.SelectedItems.Clear();
                 }
+                */
             }
-            else if (propertyName == HeightProperty.PropertyName || propertyName == RowHeightProperty.PropertyName)
+            else if (propertyName == HeightProperty.PropertyName)// || propertyName == RowHeightProperty.PropertyName)
             {
                 _lowerPadding.HeightRequest = (Height - RowHeight) / 2.0;
                 _upperPadding.HeightRequest = (Height - RowHeight) / 2.0;
             }
             else if (propertyName == IndexProperty.PropertyName)
             {
-                //System.Diagnostics.Debug.WriteLine("BasePicker.OnPropertyChanged(Index)  scrolling=[" + _scrolling + "] _tapping=[" + _tapping + "]");
-                if (!_scrolling && (GroupToggleBehavior != GroupToggleBehavior.Multiselect || !_tapping))
-                    ScrollToIndex(Index);
+                System.Diagnostics.Debug.WriteLine("Index: " + Index);
+
+                //if (!_scrolling)
+                //    ScrollTo(Index, position: ScrollToPosition.Center);
+                if (ItemsSource?.Cast<object>().ToList() is List<object> items)
+                {
+                    if (Index > -1 && Index < items.Count)
+                        SelectedItem = items[Index];
+                    if (!_scrolling)
+                        ScrollTo(Index, -1, ScrollToPosition.Center, true);
+                }
             }
-            else if (propertyName == SelectedItemProperty.PropertyName && !_scrolling)
+            else if (propertyName == SelectedItemProperty.PropertyName)
             {
-                //System.Diagnostics.Debug.WriteLine("BasePicker SELECTED ITEM: " + SelectedItem);
-                if ((GroupToggleBehavior != GroupToggleBehavior.Multiselect || !_tapping) && ItemsSource != null)
-                    ScrollTo(SelectedItem);
+                System.Diagnostics.Debug.WriteLine("SelectedItem: " + SelectedItem);
+
+                if (!_scrolling && ItemsSource?.Cast<object>().ToList() is List<object> items)
+                    Index = items.IndexOf(SelectedItem);
             }
-            else if (propertyName == RowHeightProperty.PropertyName)
-                _listView.RowHeight = RowHeight;
-            else if (propertyName == GroupToggleBehaviorProperty.PropertyName)
-                _listView.GroupToggleBehavior = GroupToggleBehavior;
+            else if (propertyName == SelectedItemsProperty.PropertyName)
+            {
+                if (!_scrolling && SelectedItems != null && SelectedItems.Count > 0 && ItemsSource?.Cast<object>().ToList() is List<object> items)
+                {
+                    ScrollTo(SelectedItems[0]);
+                }
+            }
+            /*
+            else if (propertyName == "Renderer")
+            {
+                if (ElementExtensions.HasRenderer(this))
+                {
+                    if (!_waitingForIsRendered)
+                    {
+                        _waitingForIsRendered = true;
+                        Device.StartTimer(TimeSpan.FromMilliseconds(5000), () =>
+                        {
+                            if (_waitingForIsRendered && ElementExtensions.HasRenderer(this))
+                            {
+                                _waitingForIsRendered = false;
+                                OnRendered();
+                            }
+                            return false;
+                        });
+                    }
+                }
+                else
+                    _isRendered = false;
+            }
+            */
         }
 
-        public virtual void ScrollTo(object item)
+        protected override void OnChildAdded(Element child)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
-            {
-                Device.BeginInvokeOnMainThread(() => ScrollTo(item));
-                return;
-            }
-
-            if (ItemsSource == null || ItemsSource.Count < 1 || item == null)
-                return;
-
-            foreach (var i in _listView.ItemsSource)
-                if (i.Equals(item))
-                {
-                    //_listView.SelectedItem = item;
-                    _listView.ScrollTo(item, ScrollToPosition.Center);
-                    break;
-                }
+            base.OnChildAdded(child);
+            if (child is VisualElement element)
+                System.Diagnostics.Debug.WriteLine("CHILD HEIGHT: " + element.Height);
         }
 
-        /// <summary>
-        /// Scrolls to index
-        /// </summary>
-        /// <param name="index">Index.</param>
-        /// <param name="force">If set to <c>true</c> scroll to index even if already scrolling.</param>
-        public virtual void ScrollToIndex(int index, bool force = false)
+        protected override void OnChildRemoved(Element child)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
-            {
-                Device.BeginInvokeOnMainThread(() => ScrollToIndex(index, force));
-                return;
-            }
-
-            if (ItemsSource == null || ItemsSource.Count < 1)
-                return;
-
-            var count = 0;
-            object firstItem = null;
-            object indexItem = null;
-            object lastItem = null;
-            if (ItemsSource is IList list)
-            {
-                firstItem = list[0];
-                lastItem = list[list.Count - 1];
-                if (index > -1 && index < list.Count)
-                    indexItem = list[index];
-                count = list.Count;
-            }
-            else
-            {
-                foreach (var item in ItemsSource)
-                {
-                    if (count == 0)
-                        firstItem = item;
-                    if (count == index)
-                        indexItem = item;
-                    lastItem = item;
-                    count++;
-                }
-            }
-            if (count > 0)
-            {
-                if (index < 0)
-                    indexItem = firstItem;
-                if (index > count - 1)
-                    indexItem = lastItem;
-                if (indexItem != null && (!_scrolling || force))
-                {
-                    //System.Diagnostics.Debug.WriteLine("BasePicker.ScrollToIndex(" + index + "): indexItemn=[" + indexItem + "]");
-                    _listView.ScrollTo(indexItem, ScrollToPosition.Center, true);
-                }
-            }
+            base.OnChildRemoved(child);
         }
         #endregion
 
 
         #region Snap to cell
-        void OnScrolling(object sender, EventArgs e)
+        DateTime _lastScrollPoint = DateTime.MinValue;
+        bool _scrolling;
+        protected override void OnScrolled(ItemsViewScrolledEventArgs e)
         {
-            _scrolling = true;
-            if (IsSelectOnScrollEnabled)
+            base.OnScrolled(e);
+
+            //System.Diagnostics.Debug.WriteLine("Scrolled: dt["+(DateTime.Now - _lastScrollPoint).Milliseconds+"]  Delta["+e.VerticalDelta+"] offset["+e.VerticalOffset+"] first["+e.FirstVisibleItemIndex+"] center=["+e.CenterItemIndex+"] last=["+e.LastVisibleItemIndex+"]");
+            _lastScrollPoint = DateTime.Now;
+            if (!_scrolling)
             {
-                var deepDataSet = _listView.TwoDeepDataSetAtPoint(Bounds.Center);
-                if (deepDataSet?.Index != null && deepDataSet.Index.Length == 1)
+                _scrolling = true;
+                Device.StartTimer(TimeSpan.FromMilliseconds(25), () =>
                 {
-                    Index = deepDataSet.Index[0];
-                    SelectedItem = ItemsSource[Index];
-                    //System.Diagnostics.Debug.WriteLine("BasePicker.OnScrolled: Index=[" + Index + "]");
-                }
+                    if ((DateTime.Now - _lastScrollPoint).Milliseconds >= 300)
+                    {
+                        _scrolling = false;
+                        //if (Index > -1)
+                        //    ScrollTo(Index, position: ScrollToPosition.Center);
+                        return false;
+                    }
+                    return true;
+                });
             }
         }
-
-        bool _scrollCompleting;
-        void OnScrolled(object sender, EventArgs e)
-        {
-            if (IsSelectOnScrollEnabled && ItemsSource != null && SelectBy == SelectBy.Position && Index >= 0 && Index < ItemsSource.Count)
-            {
-                //System.Diagnostics.Debug.WriteLine("BasePicker.OnScrolled: Index=[" + Index + "]");
-                SelectedItem = ItemsSource[Index];
-                //System.Diagnostics.Debug.WriteLine("BasePicker.OnScrolled: SelectedItem=[" + SelectedItem + "]");
-                ScrollToIndex(Index, true);
-            }
-            _scrolling = false;
-        }
-
         #endregion
 
 
 
     }
 
+    class BasePickerDataTemplateSelector : Xamarin.Forms.DataTemplateSelector
+    {
+        Dictionary<Type, DataTemplate> Templates = new Dictionary<Type, DataTemplate>();
 
+        protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
+        {
+            var type = item.GetType();
+            if (TemplateForType(type) is DataTemplate template)
+                return template;
+            var baseType = type.GetTypeInfo().BaseType;
+            if (TemplateForType(baseType) is DataTemplate template1)
+                return template1;
+            return null;
+        }
+
+        DataTemplate TemplateForType(Type type)
+        {
+            if (Templates.TryGetValue(type, out DataTemplate dataTemplate))
+                return dataTemplate;
+            if (type.IsConstructedGenericType && Templates.TryGetValue(type.GetGenericTypeDefinition(), out DataTemplate dataTemplate1))
+                    return dataTemplate1;
+            return null;
+        }
+
+        public void Add(Type itemType, Type templateType)
+            => Templates[itemType] = new DataTemplate(templateType);
+
+        public void Clear()
+            => Templates.Clear();
+    }
 }
 
