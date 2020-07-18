@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Threading;
+using System.Threading.Tasks;
 using Android.Content.Res;
 using Android.Graphics;
 using Android.OS;
@@ -56,7 +57,7 @@ namespace Forms9Patch.Droid
         #region Constructor / Disposer
 #pragma warning disable CS0618 // Type or member is obsolete
         public LabelRenderer(System.IntPtr intPtr, Android.Runtime.JniHandleOwnership owner)
-        => InstanceInit();
+            => InstanceInit();
 
 
         /// <summary>
@@ -119,22 +120,24 @@ namespace Forms9Patch.Droid
             }
 
             //P42.Utils.Debug.Message(Element, "ENTER: widthConstraint:" + widthConstraint + " fontSize:" + fontSize);
-            var displayScale = (float)Resources.DisplayMetrics.DensityDpi / (float)Android.Util.DisplayMetricsDensity.Default;
-            _currentMeasureState = new TextControlState(_currentDrawState)
+            var task = Task.Run(async () =>
             {
-                AvailWidth = (int)System.Math.Floor(System.Math.Min(widthConstraint * displayScale, MaxDim)),
-                AvailHeight = MaxDim,
-                TextSize = (float)fontSize,
-            };
-
-            _measureControl = _measureControl ?? new F9PTextView(Settings.Context);
-            _lastMeasureResult = InternalLayout(_measureControl, _currentMeasureState);
-            _lastMeasureState = new TextControlState(_currentMeasureState);
-
-
-            var result = new Size(_lastMeasureResult.Value.Request.Width / displayScale, _lastMeasureResult.Value.Request.Height / displayScale);
-            //P42.Utils.Debug.Message(Element, "EXIT result: " + result);
-            return result;
+                await Task.Delay(5).ConfigureAwait(false);
+                var displayScale = (float)Resources.DisplayMetrics.DensityDpi / (float)Android.Util.DisplayMetricsDensity.Default;
+                _currentMeasureState = new TextControlState(_currentDrawState)
+                {
+                    AvailWidth = (int)System.Math.Floor(System.Math.Min(widthConstraint * displayScale, MaxDim)),
+                    AvailHeight = MaxDim,
+                    TextSize = (float)fontSize,
+                };
+                _measureControl = _measureControl ?? new F9PTextView(Settings.Context);
+                _lastMeasureResult = InternalLayout(_measureControl, _currentMeasureState);
+                _lastMeasureState = new TextControlState(_currentMeasureState);
+                return new Size(_lastMeasureResult.Value.Request.Width / displayScale, _lastMeasureResult.Value.Request.Height / displayScale);
+            });
+            task.Wait();
+            //P42.Utils.Debug.Message(Element, "EXIT result: " + task.Result);
+            return task.Result;
         }
 
         SizeRequest DrawLabel(double width, double height)
@@ -152,6 +155,7 @@ namespace Forms9Patch.Droid
                 return new SizeRequest(Size.Zero);
             }
 
+
             //P42.Utils.Debug.Message(Element, "ENTER: width:" + width + " height:" + height);
             var displayScale = (float)Resources.DisplayMetrics.DensityDpi / (float)Android.Util.DisplayMetricsDensity.Default;
             if (double.IsInfinity(width) || width > MaxDim)
@@ -161,6 +165,8 @@ namespace Forms9Patch.Droid
 
             _currentDrawState.AvailWidth = (int)System.Math.Floor(width * displayScale);
             _currentDrawState.AvailHeight = (int)System.Math.Floor(height * displayScale);
+
+            // putting the below on a background thread seemed to slow things down.
             _lastDrawResult = InternalLayout(Control, _currentDrawState);
             //P42.Utils.Debug.Message(Element, "EXIT result: " + _lastDrawResult);
             return _lastDrawResult.Value;
@@ -244,13 +250,15 @@ namespace Forms9Patch.Droid
             }
 
             //P42.Utils.Debug.Message(Element, _currentMeasureState.ToString());
-
             _measureControl = _measureControl ?? new F9PTextView(Settings.Context);
+            // putting the below on a background thread appears to slow things down
             _lastMeasureResult = InternalLayout(_measureControl, _currentMeasureState);
             _lastMeasureState = new TextControlState(_currentMeasureState);
             //P42.Utils.Debug.Message(Element, "EXIT _lastMeasureResult.Value: " + _lastMeasureResult.Value);
             return _lastMeasureResult.Value;
         }
+
+
 
         SizeRequest InternalLayout(F9PTextView control, TextControlState state)
         {
@@ -402,7 +410,7 @@ namespace Forms9Patch.Droid
                 else
                     control.TextFormatted = text;
 
-                var result = new SizeRequest(new Size(System.Math.Ceiling(tmpWd), System.Math.Ceiling(tmpHt)), new Size(state.Lines == 1 && state.AutoFit == AutoFit.None ? tmpWd  : 10, System.Math.Ceiling(tmpHt)));
+                var result = new SizeRequest(new Size(System.Math.Ceiling(tmpWd), System.Math.Ceiling(tmpHt)), new Size(state.Lines == 1 && state.AutoFit == AutoFit.None ? tmpWd : 10, System.Math.Ceiling(tmpHt)));
 
                 if (element.LineBreakMode == LineBreakMode.NoWrap)
                     control.SetSingleLine(true);
@@ -693,7 +701,12 @@ namespace Forms9Patch.Droid
 
         #region Touch to Index
         int IndexAtPoint(Xamarin.Forms.Point p)
-            => Control?.IndexForPoint(p.ToNativePoint()) ?? -1;
+        {
+            var task = Task.Run(()=>
+            Control?.IndexForPoint(p.ToNativePoint()) ?? -1);
+            task.Wait();
+            return task.Result;
+        }
         #endregion
 
 
