@@ -14,7 +14,7 @@ namespace Forms9Patch
     /// Base picker.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    class BasePicker : Xamarin.Forms.CollectionView
+    public abstract class BasePicker : Xamarin.Forms.CollectionView
     {
         #region Properties
 
@@ -26,6 +26,7 @@ namespace Forms9Patch
         //public DataTemplateSelector ItemTemplates => _listView.ItemTemplates;
         public BasePickerDataTemplateSelector ItemTemplates { get; } = new BasePickerDataTemplateSelector();
         #endregion
+
 
         #region Position and Selection
         /// <summary>
@@ -41,26 +42,8 @@ namespace Forms9Patch
             get => (int)GetValue(IndexProperty);
             set => SetValue(IndexProperty, value);
         }
-
-
-        #region IsSelectOnScrollEnabled Property
-        /// <summary>
-        /// BindableProperty for IsSelectOnScrollEnabled
-        /// </summary>
-        public static readonly BindableProperty IsSelectOnScrollEnabledProperty = BindableProperty.Create(nameof(IsSelectOnScrollEnabled), typeof(bool), typeof(BasePicker), true);
-        /// <summary>
-        /// Enables the ability to select an item when it is focused upon during a scroll
-        /// </summary>
-        public bool IsSelectOnScrollEnabled
-        {
-            get => (bool)GetValue(IsSelectOnScrollEnabledProperty);
-            set => SetValue(IsSelectOnScrollEnabledProperty, value);
-        }
         #endregion
 
-
-        #endregion
-        
         #region Appearance
         /// <summary>
         /// The row height property.
@@ -76,17 +59,6 @@ namespace Forms9Patch
             set => SetValue(RowHeightProperty, value);
         }
         #endregion
-        
-        #region TextColor property
-        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(BasePicker), default(Color));
-        public Color TextColor
-        {
-            get { return (Color)GetValue(TextColorProperty); }
-            set { SetValue(TextColorProperty, value); }
-        }
-        #endregion
-
-
 
         #endregion
 
@@ -95,10 +67,9 @@ namespace Forms9Patch
         #region Fields
         readonly BoxView _upperPadding = new BoxView { Color = Color.Transparent };
         readonly BoxView _lowerPadding = new BoxView { Color = Color.Transparent };
-        bool _isRendered;
-        bool _waitingForIsRendered;
-        IList<object> _pendingSelectedItems;
-        object _pendingSelectedItem;
+
+        public int Instances { get; private set; }
+        public int Instance { get; private set; }
         #endregion
 
 
@@ -114,6 +85,7 @@ namespace Forms9Patch
         /// </summary>
         internal BasePicker()
         {
+            Instance = Instances++;
             IsGrouped = false;
             ItemSizingStrategy = ItemSizingStrategy.MeasureFirstItem;
             ItemTemplate = ItemTemplates;
@@ -122,35 +94,12 @@ namespace Forms9Patch
 
             Header = _upperPadding;
             Footer = _lowerPadding;
-
         }
 
         #endregion
 
 
-
-
         #region Property Change management
-        
-        protected virtual void OnRendered()
-        {
-            if (ElementExtensions.HasRenderer(this))
-            {
-                _isRendered = true;
-                SelectedItems = _pendingSelectedItems;
-                SelectedItem = _pendingSelectedItem;
-            }
-            _isRendered = false;
-            /*
-        if (ItemsSource == null || (ItemsSource.Cast<object>().ToArray() is object[] array && (array.Length > 0 || !array.Contains(SelectedItem)) ) )
-            ScrollTo(0);
-        if (SelectedItem != null)
-            ScrollTo(SelectedItem);
-        else if (SelectedItems.Count > 0)
-            ScrollTo(SelectedItems[0]);
-            */
-        }
-
 
 
         /// <summary>
@@ -159,34 +108,11 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            /*
-            if (!_isRendered)
-            {
-                if (propertyName == SelectedItemProperty.PropertyName)
-                {
-                    if (SelectedItem != null)
-                        _pendingSelectedItem = SelectedItem;
-                    SelectedItem = null;
-                    return;
-                }
-                else if (propertyName == SelectedItemsProperty.PropertyName)
-                {
-                    if (SelectedItems != null)
-                        _pendingSelectedItems = SelectedItems;
-                    SelectedItems = null;
-                    return;
-                }
-            }
-            */
             if (!P42.Utils.Environment.IsOnMainThread)
             {
                 Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
                 return;
             }
-
-            System.Diagnostics.Debug.WriteLine("BasePicker.OnPropertyChanged(" + propertyName + ") ["+DateTime.Now+"]");
-
-
             try
             {
                 base.OnPropertyChanged(propertyName);
@@ -194,89 +120,28 @@ namespace Forms9Patch
             catch (Exception) { }
 
 
-
-            if (propertyName == ItemsSourceProperty.PropertyName)
+            if (propertyName == HeightProperty.PropertyName)
             {
-                //_listView.ItemsSource = ItemsSource;
-                if (ItemsSource?.Cast<object>().ToArray() is object[] items && Index > -1 && Index < items.Length)
-                    ScrollTo(Index, position: ScrollToPosition.Center);
-                /*
-                else
-                {
-                    SelectedItem = null;
-                    SelectedItems.Clear();
-                }
-                */
-            }
-            else if (propertyName == HeightProperty.PropertyName)// || propertyName == RowHeightProperty.PropertyName)
-            {
-                _lowerPadding.HeightRequest = (Height - RowHeight) / 2.0;
-                _upperPadding.HeightRequest = (Height - RowHeight) / 2.0;
+                _lowerPadding.HeightRequest = (Height - RowHeight) / 3.0;
+                _upperPadding.HeightRequest = (Height - RowHeight) / 3.0;
             }
             else if (propertyName == IndexProperty.PropertyName)
             {
-                System.Diagnostics.Debug.WriteLine("Index: " + Index);
-
-                //if (!_scrolling)
-                //    ScrollTo(Index, position: ScrollToPosition.Center);
                 if (ItemsSource?.Cast<object>().ToList() is List<object> items)
                 {
                     if (Index > -1 && Index < items.Count)
+                    {
                         SelectedItem = items[Index];
-                    if (!_scrolling)
-                        ScrollTo(Index, -1, ScrollToPosition.Center, true);
+                    }
                 }
             }
             else if (propertyName == SelectedItemProperty.PropertyName)
             {
-                System.Diagnostics.Debug.WriteLine("SelectedItem: " + SelectedItem);
-
                 if (!_scrolling && ItemsSource?.Cast<object>().ToList() is List<object> items)
                     Index = items.IndexOf(SelectedItem);
             }
-            else if (propertyName == SelectedItemsProperty.PropertyName)
-            {
-                if (!_scrolling && SelectedItems != null && SelectedItems.Count > 0 && ItemsSource?.Cast<object>().ToList() is List<object> items)
-                {
-                    ScrollTo(SelectedItems[0]);
-                }
-            }
-            /*
-            else if (propertyName == "Renderer")
-            {
-                if (ElementExtensions.HasRenderer(this))
-                {
-                    if (!_waitingForIsRendered)
-                    {
-                        _waitingForIsRendered = true;
-                        Device.StartTimer(TimeSpan.FromMilliseconds(5000), () =>
-                        {
-                            if (_waitingForIsRendered && ElementExtensions.HasRenderer(this))
-                            {
-                                _waitingForIsRendered = false;
-                                OnRendered();
-                            }
-                            return false;
-                        });
-                    }
-                }
-                else
-                    _isRendered = false;
-            }
-            */
         }
 
-        protected override void OnChildAdded(Element child)
-        {
-            base.OnChildAdded(child);
-            if (child is VisualElement element)
-                System.Diagnostics.Debug.WriteLine("CHILD HEIGHT: " + element.Height);
-        }
-
-        protected override void OnChildRemoved(Element child)
-        {
-            base.OnChildRemoved(child);
-        }
         #endregion
 
 
@@ -286,8 +151,6 @@ namespace Forms9Patch
         protected override void OnScrolled(ItemsViewScrolledEventArgs e)
         {
             base.OnScrolled(e);
-
-            //System.Diagnostics.Debug.WriteLine("Scrolled: dt["+(DateTime.Now - _lastScrollPoint).Milliseconds+"]  Delta["+e.VerticalDelta+"] offset["+e.VerticalOffset+"] first["+e.FirstVisibleItemIndex+"] center=["+e.CenterItemIndex+"] last=["+e.LastVisibleItemIndex+"]");
             _lastScrollPoint = DateTime.Now;
             if (!_scrolling)
             {
@@ -297,8 +160,6 @@ namespace Forms9Patch
                     if ((DateTime.Now - _lastScrollPoint).Milliseconds >= 300)
                     {
                         _scrolling = false;
-                        //if (Index > -1)
-                        //    ScrollTo(Index, position: ScrollToPosition.Center);
                         return false;
                     }
                     return true;
@@ -306,12 +167,9 @@ namespace Forms9Patch
             }
         }
         #endregion
-
-
-
     }
 
-    class BasePickerDataTemplateSelector : Xamarin.Forms.DataTemplateSelector
+    public class BasePickerDataTemplateSelector : Xamarin.Forms.DataTemplateSelector
     {
         Dictionary<Type, DataTemplate> Templates = new Dictionary<Type, DataTemplate>();
 

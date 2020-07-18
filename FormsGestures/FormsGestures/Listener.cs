@@ -1815,8 +1815,10 @@ namespace FormsGestures
         /// <returns></returns>
         public static Listener For(VisualElement element)
         {
+            if (element == null)
+                throw new InvalidCastException("element cannot be null");
             for (int i = 0; i < Listeners.Count; i++)
-                if (Listeners[i].Element == element)
+                if (Listeners[i]?.Element == element)
                     return Listeners[i];
             return new Listener(element);
         }
@@ -1829,7 +1831,7 @@ namespace FormsGestures
             var inserted = false;
             for (int i = Listeners.Count - 1; i >= 0; i--)
             {
-                if (element.IsDescendentOf(Listeners[i].Element))
+                if (Listeners[i]?.Element is VisualElement listeningElement && element.IsDescendentOf(listeningElement))
                 {
                     Listeners.Insert(i + 1, this);
                     inserted = true;

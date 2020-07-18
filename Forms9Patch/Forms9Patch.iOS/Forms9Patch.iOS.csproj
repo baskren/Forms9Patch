@@ -122,6 +122,7 @@
     <Compile Include="Popup\PopupPageRenderer.cs" />
     <Compile Include="Effects\EntryClearButtonEffect.cs" />
     <Compile Include="Services\ToPdfService.cs" />
+    <Compile Include="Services\RendererResolver.cs" />
   </ItemGroup>
 
   <!-- NuGet Packages-->

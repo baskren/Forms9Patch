@@ -332,7 +332,15 @@ namespace Forms9Patch
                     }
                 }
                 else if (propertyName == TextProperty.PropertyName && Text != null)
-                    HtmlText = null;
+                {
+                    if (TextType == TextType.Html)
+                    {
+                        HtmlText = Text;
+                        return;
+                    }
+                    else
+                        HtmlText = null;
+                }
 
                 // This is crazy!  It appears that UWP is disposing the VisualElementTracker but not unsubscribing to  VisualElementTracker.OnPropertyChanged event handler;
                 try

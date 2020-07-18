@@ -17,22 +17,6 @@ namespace Forms9Patch
         #region Properties
 
         /// <summary>
-        /// The selected items property.
-        /// </summary>
-        public static readonly BindableProperty SelectedItemsProperty = BasePicker.SelectedItemsProperty; 
-        /// <summary>
-        /// Gets or sets the selected items.
-        /// </summary>
-        /// <value>The selected items.</value>
-        public IList<object> SelectedItems
-        {
-            get => (IList<object>)_basePicker.GetValue(SelectedItemsProperty);
-            private set => _basePicker.SetValue(SelectedItemsProperty, value);
-        }
-        
-
-
-        /// <summary>
         /// The indexes currently selected
         /// </summary>
         public List<int> SelectedIndexes
@@ -40,9 +24,10 @@ namespace Forms9Patch
             get
             {
                 var result = new List<int>();
-                for (int i = 0; i < ItemsSource.Count; i++)
+                var itemsSource = ItemsSource.Cast<object>().ToArray();
+                for (int i = 0; i < itemsSource.Length; i++)
                 {
-                    if (SelectedItems.Contains(ItemsSource[i]))
+                    if (SelectedItems.Contains(itemsSource[i]))
                         result.Add(i);
                 }
                 return result;
@@ -60,23 +45,10 @@ namespace Forms9Patch
         {
             PlainTextCellType = typeof(MultiPickerCellContentView);
             HtmlTextCellType = typeof(MultiPickerHtmlCellContentView);
+            SelectionMode = SelectionMode.Multiple;
 
-            //SelectedItems = new ObservableCollection<object>();
-            /*
-            _lowerGradient.StartColor = _overlayColor.WithAlpha(0);
-            _upperGradient.EndColor = _overlayColor.WithAlpha(0);
-            Children.Remove(_lowerEdge);
-            Children.Remove(_upperEdge);
-            */
-            //_basePicker.GroupToggleBehavior = GroupToggleBehavior.Multiselect;
-            _basePicker.SelectionMode = SelectionMode.Multiple;
-
-            _basePicker.ItemTemplates.Clear();
-            _basePicker.ItemTemplates.Add(typeof(string), PlainTextCellType);
-
-            //SelectedItems.CollectionChanged += (sender, e) => OnPropertyChanged(SelectedItemsPropertyKey.BindableProperty.PropertyName);
-
-            _basePicker.IsSelectOnScrollEnabled = false;
+            ItemTemplates.Clear();
+            ItemTemplates.Add(typeof(string), PlainTextCellType);
         }
         #endregion
 
@@ -85,6 +57,11 @@ namespace Forms9Patch
         [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
         protected class MultiPickerHtmlCellContentView : MultiPickerCellContentView
         {
+            public MultiPickerHtmlCellContentView()
+            {
+                itemLabel.TextType = TextType.Html;
+            }
+
             protected override void OnBindingContextChanged()
             {
                 if (!P42.Utils.Environment.IsOnMainThread)
@@ -96,11 +73,11 @@ namespace Forms9Patch
                 base.OnBindingContextChanged();
 
                 if (BindingContext is IHtmlString htmlObject)
-                    itemLabel.HtmlText = htmlObject.ToHtml();
+                    itemLabel.Text = htmlObject.ToHtml();
                 else if (BindingContext != null)
-                    itemLabel.HtmlText = BindingContext?.ToString();
+                    itemLabel.Text = BindingContext?.ToString();
                 else
-                    itemLabel.HtmlText = itemLabel.Text = null;
+                    itemLabel.Text = itemLabel.Text = null;
             }
         }
 
@@ -149,22 +126,8 @@ namespace Forms9Patch
 
             #endregion
 
-
-            #region Appearing / Disappearing Event Handlers
-            public override void OnAppearing() { }
-
-            public override void OnDisappearing() { }
-            #endregion
-
-
-
         }
         #endregion
-
-
     }
-
-
-
 }
 

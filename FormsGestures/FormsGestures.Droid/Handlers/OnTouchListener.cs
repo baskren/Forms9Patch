@@ -27,7 +27,8 @@ namespace FormsGestures.Droid
 
             _nativeGestureHandler = nativeGestureHandler;
             _nativeListener = new NativeGestureListener(_nativeGestureHandler.Renderer.View, _nativeGestureHandler.Element);
-            _nativeDetector = new NativeGestureDetector(Droid.Settings.Context, _nativeListener);
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(()=>
+            _nativeDetector = new NativeGestureDetector(Droid.Settings.Context, _nativeListener));
         }
 
         /*
