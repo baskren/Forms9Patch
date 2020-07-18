@@ -58,6 +58,26 @@ namespace Forms9Patch
         {
             e.SetPropertyValue(nameof(IsInNativeLayout), value);
         }
-    }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+
+
+        static Interfaces.IRendererResolver _rendererResolver;
+        static Interfaces.IRendererResolver RendererResolver
+        {
+            get
+            {
+                if (_rendererResolver is null)
+                    _rendererResolver = DependencyService.Resolve<Interfaces.IRendererResolver>();
+                return _rendererResolver;
+            }
+        }
+
+        public static object GetRenderer(this VisualElement element)
+            => RendererResolver?.GetRenderer(element);
+
+        public static bool HasRenderer(this VisualElement element)
+            => GetRenderer(element) != null;
+    }
+
+
 }

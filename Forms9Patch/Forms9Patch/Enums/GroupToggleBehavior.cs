@@ -20,5 +20,17 @@ namespace Forms9Patch
 		/// </summary>
 		Multiselect,
 	}
+
+	public static class GroupToggleBehaviorExtensions
+    {
+		public static Xamarin.Forms.SelectionMode ToXfSelectionMode(this GroupToggleBehavior behavior)
+        {
+			if (behavior == GroupToggleBehavior.None)
+				return Xamarin.Forms.SelectionMode.None;
+			if (behavior == GroupToggleBehavior.Radio)
+				return Xamarin.Forms.SelectionMode.Single;
+			return Xamarin.Forms.SelectionMode.Multiple;
+        }
+    }
 }
 

@@ -96,11 +96,12 @@
     <Compile Include="Services\ToPdfService.cs" />
     <Compile Include="Extensions\AndroidWebViewExtensions.cs" />
     <Compile Include="Effects\EntryNoUnderline.cs" />
+    <Compile Include="Services\RendererResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.6.0.967</Version>
+      <Version>4.7.0.1142</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
@@ -115,11 +116,11 @@
       <Name>P42.Utils.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{0BCBCD07-F38D-4B3E-B9C5-22EE4FBC27BC}</Project>
+      <Project>{81BA6DD6-A5A8-48AB-9DDC-575ADDE9C672}</Project>
       <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-      <Project>{8DB8EF34-ACBC-472B-A91E-86EAD0333C46}</Project>
+      <Project>{31C28177-5579-410D-957E-7D1EC738702B}</Project>
       <Name>P42.NumericalMethods</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.Droid\FormsGestures.Droid.csproj">
@@ -127,15 +128,15 @@
       <Name>FormsGestures.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj">
-      <Project>{0B50BF77-6D06-448F-8048-D52FC1D6C940}</Project>
+      <Project>{D7BFB837-6195-4522-A8F2-B9E5AF2ED9C8}</Project>
       <Name>FormsGestures</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">
-      <Project>{61094D3D-545E-46EE-85F9-463A7507A1F8}</Project>
+      <Project>{15C31A7D-11FB-4CA9-9403-17903CEAA2BC}</Project>
       <Name>Forms9Patch</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj">
-      <Project>{49621984-BABA-4864-9065-D9C8B645828F}</Project>
+      <Project>{DEBF56C3-E544-4680-87BC-829F78600CC3}</Project>
       <Name>MimeSharp</Name>
     </ProjectReference>
   </ItemGroup>
