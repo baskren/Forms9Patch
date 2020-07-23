@@ -221,43 +221,6 @@
 	</ItemGroup>
 
 
-	<!-- F9PButtonTest -->
-	<ItemGroup>
-
-	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\F9PButtonTest\MainPage.xaml">
-	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-	      <Link>F9PButtonTest\MainPage.xaml</Link>
-	    </EmbeddedResource>
-	    <Compile Include="$(Forms9PatchDemoSourceDir)\F9PButtonTest\MainPage.xaml.cs">
-	      <DependentUpon>F9PButtonTest\MainPage.xaml</DependentUpon>
-	      <Link>F9PButtonTest\MainPage.xaml.cs</Link>
-	    </Compile>
-
-	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\F9PButtonTest\Views\Buttons1.xaml">
-	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-	      <Link>F9PButtonTest\Views\Buttons1.xaml</Link>
-	    </EmbeddedResource>
-	    <Compile Include="$(Forms9PatchDemoSourceDir)\F9PButtonTest\Views\Buttons1.xaml.cs">
-	      <DependentUpon>F9PButtonTest\Views\Buttons1.xaml</DependentUpon>
-	      <Link>F9PButtonTest\Views\Buttons1.xaml.cs</Link>
-	    </Compile>
-
-	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\F9PButtonTest\Views\Buttons2.xaml">
-	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-	      <Link>F9PButtonTest\Views\Buttons2.xaml</Link>
-	    </EmbeddedResource>
-	    <Compile Include="$(Forms9PatchDemoSourceDir)\F9PButtonTest\Views\Buttons2.xaml.cs">
-	      <DependentUpon>F9PButtonTest\Views\Buttons2.xaml</DependentUpon>
-	      <Link>F9PButtonTest\Views\Buttons2.xaml.cs</Link>
-	    </Compile>
-
-	    <Compile Include="$(Forms9PatchDemoSourceDir)\F9PButtonTest\Model\InfoMsg.cs">
-	      <Link>F9PButtonTest\Model\InfoMsg.cs</Link>
-	    </Compile>
-
-	</ItemGroup>
-
-
 	<Target Name="Compile">
 		<Message Text="Completed Forms9PatchDemoXaml.targets"/>
     	<Message Text="CompileConstants=[$(CompileConstants)]"/>
