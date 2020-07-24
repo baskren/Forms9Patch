@@ -137,17 +137,24 @@ namespace Forms9Patch.Droid
         {
             if (control != null && control != this)
             {
-                FallbackLineSpacing = control.FallbackLineSpacing;
-                FontFeatureSettings = control.FontFeatureSettings;
-                Gravity = control.Gravity;
-                LayoutDirection = control.LayoutDirection;
+                if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.JellyBeanMr1)
+                {
+                    LayoutDirection = control.LayoutDirection;
+                    if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Lollipop)
+                    {
+                        FontFeatureSettings = control.FontFeatureSettings;
+                        LetterSpacing = control.LetterSpacing;
+                        if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.P)
+                        {
+                            FallbackLineSpacing = control.FallbackLineSpacing;
+                            LineHeight = control.LineHeight;
+                        }
+                    }
+                }
                 LayoutParameters = control.LayoutParameters;
-                LetterSpacing = control.LetterSpacing;
-
-                //System.Diagnostics.Debug.WriteLine("LineHeight: before[" + LineHeight + "] after:[" + control.LineHeight + "]");
-
-                LineHeight = control.LineHeight;
                 PaintFlags = control.PaintFlags;
+
+
             }
         }
         #endregion

@@ -130,8 +130,25 @@ namespace Forms9Patch.Droid
             view.Layout(0, 0, view.MeasuredWidth, height);
             //imageView.Layout(0, 0, width, height);
 
-            if (height < 1 || view.MeasuredWidth < 1)
+            if (height < 1)
             {
+                var heightString = await view.EvaluateJavaScriptAsync("document.documentElement.offsetHeight");
+                height = (int)System.Math.Ceiling(double.Parse(heightString.ToString()));
+            }
+
+            var width = view.MeasuredWidth;
+
+            if (width < 1)
+            {
+                var widthString = await view.EvaluateJavaScriptAsync("document.documentElement.offsetWidth");
+                width = (int)System.Math.Ceiling(double.Parse(widthString.ToString()));
+            }
+
+            if (height < 1 || width < 1)
+            {
+
+
+
                 taskCompletionSource.SetResult(new ToFileResult(true, "WebView width or height is zero."));
                 return;
             }
