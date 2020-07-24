@@ -38,9 +38,10 @@ assignees: ''
 
 <!-- If the issue is a visual issue, please include screenshots showing the problem if possible -->
 
-### Reproduction Link
+### Reproduction Link - a link to a small demo project that reproduces this issue
 
-<!-- Please upload or provide a link to a reproduction case.  !!! Do not expect fast resolution to your issue without this. !!! -->
+<!-- !!!IMPORTANT!!!  EXPECT ANY ISSUE FILED WITHOUT A REPRODUCTION LINK TO BE IMMEDIATELY CLOSED!  For most issues, there are just too many possible causes to be able to reproduce the issue out of context.  
+This is a volunteer effort with (to date) zero funding.  Time with my family takes priority over spending hours trying to guess what permutation of settings causes the issue you are seeing.  -->
 
 ### Workaround
 
