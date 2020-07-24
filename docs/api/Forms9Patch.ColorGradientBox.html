@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ColorGradientBox
    | Forms9Patch ">
-    <meta name="generator" content="docfx 2.47.0.0">
+    <meta name="generator" content="docfx 2.56.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -105,6 +105,7 @@
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ivisualelementcontroller">IVisualElementController</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ielementcontroller">IElementController</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.internals.igesturecontroller">IGestureController</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.igesturerecognizers">IGestureRecognizers</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -194,6 +195,9 @@
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.scaleyproperty">VisualElement.ScaleYProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.clipproperty">VisualElement.ClipProperty</a>
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.visualproperty">VisualElement.VisualProperty</a>
@@ -391,6 +395,9 @@
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.y#Xamarin_Forms_VisualElement_Y">VisualElement.Y</a>
     </div>
     <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.clip#Xamarin_Forms_VisualElement_Clip">VisualElement.Clip</a>
+    </div>
+    <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.resources#Xamarin_Forms_VisualElement_Resources">VisualElement.Resources</a>
     </div>
     <div>
@@ -520,6 +527,12 @@
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.setvalue#Xamarin_Forms_BindableObject_SetValue_Xamarin_Forms_BindablePropertyKey_System_Object_">BindableObject.SetValue(BindablePropertyKey, Object)</a>
     </div>
     <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.coercevalue#Xamarin_Forms_BindableObject_CoerceValue_Xamarin_Forms_BindableProperty_">BindableObject.CoerceValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.coercevalue#Xamarin_Forms_BindableObject_CoerceValue_Xamarin_Forms_BindablePropertyKey_">BindableObject.CoerceValue(BindablePropertyKey)</a>
+    </div>
+    <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.dispatcher#Xamarin_Forms_BindableObject_Dispatcher">BindableObject.Dispatcher</a>
     </div>
     <div>
@@ -560,7 +573,7 @@
   <h6><strong>Assembly</strong>: Forms9Patch.dll</h6>
   <h5 id="Forms9Patch_ColorGradientBox_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ColorGradientBox : View, INotifyPropertyChanged, IDynamicResourceHandler, IElement, INameScope, INavigationProxy, IAnimatable, IResourcesProvider, IStyleElement, IFlowDirectionController, IPropertyPropagationController, IVisualController, ITabStopElement, IStyleSelectable, IStylable, IViewController, IVisualElementController, IElementController, IGestureController</code></pre>
+    <pre><code class="lang-csharp hljs">public class ColorGradientBox : View, INotifyPropertyChanged, IDynamicResourceHandler, IElement, INameScope, INavigationProxy, IStyleSelectable, IAnimatable, IResourcesProvider, IStyleElement, IFlowDirectionController, IPropertyPropagationController, IVisualController, ITabStopElement, IStylable, IViewController, IVisualElementController, IElementController, IGestureController, IGestureRecognizers</code></pre>
   </div>
   <h3 id="fields">Fields
   </h3>
@@ -744,6 +757,9 @@
   <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.internals.igesturecontroller">Xamarin.Forms.Internals.IGestureController</a>
   </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.igesturerecognizers">Xamarin.Forms.IGestureRecognizers</a>
+  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_IsDescendentOf_Xamarin_Forms_Element_Xamarin_Forms_Element_">VisualElementExtensions.IsDescendentOf(Element, Element)</a>
@@ -804,6 +820,12 @@
   </div>
   <div>
       <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_SetIsInNativeLayout_Xamarin_Forms_VisualElement_System_Boolean_">ElementExtensions.SetIsInNativeLayout(VisualElement, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_GetRenderer_Xamarin_Forms_VisualElement_">ElementExtensions.GetRenderer(VisualElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_HasRenderer_Xamarin_Forms_VisualElement_">ElementExtensions.HasRenderer(VisualElement)</a>
   </div>
   <div>
       <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_GetHardwareKeyListeners_Xamarin_Forms_View_">HardwareKeyListenerExtensions.GetHardwareKeyListeners(View)</a>

@@ -786,6 +786,51 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.BaseMimeItemCollection.PlainText
   nameWithType: BaseMimeItemCollection.PlainText
+- uid: Forms9Patch.BasePickerDataTemplateSelector
+  name: BasePickerDataTemplateSelector
+  href: api/Forms9Patch.BasePickerDataTemplateSelector.html
+  commentId: T:Forms9Patch.BasePickerDataTemplateSelector
+  fullName: Forms9Patch.BasePickerDataTemplateSelector
+  nameWithType: BasePickerDataTemplateSelector
+- uid: Forms9Patch.BasePickerDataTemplateSelector.Add(System.Type,System.Type)
+  name: Add(Type, Type)
+  href: api/Forms9Patch.BasePickerDataTemplateSelector.html#Forms9Patch_BasePickerDataTemplateSelector_Add_System_Type_System_Type_
+  commentId: M:Forms9Patch.BasePickerDataTemplateSelector.Add(System.Type,System.Type)
+  fullName: Forms9Patch.BasePickerDataTemplateSelector.Add(System.Type, System.Type)
+  nameWithType: BasePickerDataTemplateSelector.Add(Type, Type)
+- uid: Forms9Patch.BasePickerDataTemplateSelector.Add*
+  name: Add
+  href: api/Forms9Patch.BasePickerDataTemplateSelector.html#Forms9Patch_BasePickerDataTemplateSelector_Add_
+  commentId: Overload:Forms9Patch.BasePickerDataTemplateSelector.Add
+  isSpec: "True"
+  fullName: Forms9Patch.BasePickerDataTemplateSelector.Add
+  nameWithType: BasePickerDataTemplateSelector.Add
+- uid: Forms9Patch.BasePickerDataTemplateSelector.Clear
+  name: Clear()
+  href: api/Forms9Patch.BasePickerDataTemplateSelector.html#Forms9Patch_BasePickerDataTemplateSelector_Clear
+  commentId: M:Forms9Patch.BasePickerDataTemplateSelector.Clear
+  fullName: Forms9Patch.BasePickerDataTemplateSelector.Clear()
+  nameWithType: BasePickerDataTemplateSelector.Clear()
+- uid: Forms9Patch.BasePickerDataTemplateSelector.Clear*
+  name: Clear
+  href: api/Forms9Patch.BasePickerDataTemplateSelector.html#Forms9Patch_BasePickerDataTemplateSelector_Clear_
+  commentId: Overload:Forms9Patch.BasePickerDataTemplateSelector.Clear
+  isSpec: "True"
+  fullName: Forms9Patch.BasePickerDataTemplateSelector.Clear
+  nameWithType: BasePickerDataTemplateSelector.Clear
+- uid: Forms9Patch.BasePickerDataTemplateSelector.OnSelectTemplate(System.Object,Xamarin.Forms.BindableObject)
+  name: OnSelectTemplate(Object, BindableObject)
+  href: api/Forms9Patch.BasePickerDataTemplateSelector.html#Forms9Patch_BasePickerDataTemplateSelector_OnSelectTemplate_System_Object_Xamarin_Forms_BindableObject_
+  commentId: M:Forms9Patch.BasePickerDataTemplateSelector.OnSelectTemplate(System.Object,Xamarin.Forms.BindableObject)
+  fullName: Forms9Patch.BasePickerDataTemplateSelector.OnSelectTemplate(System.Object, Xamarin.Forms.BindableObject)
+  nameWithType: BasePickerDataTemplateSelector.OnSelectTemplate(Object, BindableObject)
+- uid: Forms9Patch.BasePickerDataTemplateSelector.OnSelectTemplate*
+  name: OnSelectTemplate
+  href: api/Forms9Patch.BasePickerDataTemplateSelector.html#Forms9Patch_BasePickerDataTemplateSelector_OnSelectTemplate_
+  commentId: Overload:Forms9Patch.BasePickerDataTemplateSelector.OnSelectTemplate
+  isSpec: "True"
+  fullName: Forms9Patch.BasePickerDataTemplateSelector.OnSelectTemplate
+  nameWithType: BasePickerDataTemplateSelector.OnSelectTemplate
 - uid: Forms9Patch.BubblePopup
   name: BubblePopup
   href: api/Forms9Patch.BubblePopup.html
@@ -1400,6 +1445,19 @@ references:
   commentId: F:Forms9Patch.Button.FontSizeProperty
   fullName: Forms9Patch.Button.FontSizeProperty
   nameWithType: Button.FontSizeProperty
+- uid: Forms9Patch.Button.GetMinSize
+  name: GetMinSize()
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_GetMinSize
+  commentId: M:Forms9Patch.Button.GetMinSize
+  fullName: Forms9Patch.Button.GetMinSize()
+  nameWithType: Button.GetMinSize()
+- uid: Forms9Patch.Button.GetMinSize*
+  name: GetMinSize
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_GetMinSize_
+  commentId: Overload:Forms9Patch.Button.GetMinSize
+  isSpec: "True"
+  fullName: Forms9Patch.Button.GetMinSize
+  nameWithType: Button.GetMinSize
 - uid: Forms9Patch.Button.HapticEffect
   name: HapticEffect
   href: api/Forms9Patch.Button.html#Forms9Patch_Button_HapticEffect
@@ -4163,6 +4221,32 @@ references:
   fullName.vb: Forms9Patch.ElementExtensions.AncestorOfBaseType(Of T)(Xamarin.Forms.Element)
   nameWithType: ElementExtensions.AncestorOfBaseType<T>(Element)
   nameWithType.vb: ElementExtensions.AncestorOfBaseType(Of T)(Element)
+- uid: Forms9Patch.ElementExtensions.GetRenderer(Xamarin.Forms.VisualElement)
+  name: GetRenderer(VisualElement)
+  href: api/Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_GetRenderer_Xamarin_Forms_VisualElement_
+  commentId: M:Forms9Patch.ElementExtensions.GetRenderer(Xamarin.Forms.VisualElement)
+  fullName: Forms9Patch.ElementExtensions.GetRenderer(Xamarin.Forms.VisualElement)
+  nameWithType: ElementExtensions.GetRenderer(VisualElement)
+- uid: Forms9Patch.ElementExtensions.GetRenderer*
+  name: GetRenderer
+  href: api/Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_GetRenderer_
+  commentId: Overload:Forms9Patch.ElementExtensions.GetRenderer
+  isSpec: "True"
+  fullName: Forms9Patch.ElementExtensions.GetRenderer
+  nameWithType: ElementExtensions.GetRenderer
+- uid: Forms9Patch.ElementExtensions.HasRenderer(Xamarin.Forms.VisualElement)
+  name: HasRenderer(VisualElement)
+  href: api/Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_HasRenderer_Xamarin_Forms_VisualElement_
+  commentId: M:Forms9Patch.ElementExtensions.HasRenderer(Xamarin.Forms.VisualElement)
+  fullName: Forms9Patch.ElementExtensions.HasRenderer(Xamarin.Forms.VisualElement)
+  nameWithType: ElementExtensions.HasRenderer(VisualElement)
+- uid: Forms9Patch.ElementExtensions.HasRenderer*
+  name: HasRenderer
+  href: api/Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_HasRenderer_
+  commentId: Overload:Forms9Patch.ElementExtensions.HasRenderer
+  isSpec: "True"
+  fullName: Forms9Patch.ElementExtensions.HasRenderer
+  nameWithType: ElementExtensions.HasRenderer
 - uid: Forms9Patch.ElementExtensions.IsInNativeLayout(Xamarin.Forms.VisualElement)
   name: IsInNativeLayout(VisualElement)
   href: api/Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_IsInNativeLayout_Xamarin_Forms_VisualElement_
@@ -6510,6 +6594,25 @@ references:
   commentId: F:Forms9Patch.GroupToggleBehavior.Radio
   fullName: Forms9Patch.GroupToggleBehavior.Radio
   nameWithType: GroupToggleBehavior.Radio
+- uid: Forms9Patch.GroupToggleBehaviorExtensions
+  name: GroupToggleBehaviorExtensions
+  href: api/Forms9Patch.GroupToggleBehaviorExtensions.html
+  commentId: T:Forms9Patch.GroupToggleBehaviorExtensions
+  fullName: Forms9Patch.GroupToggleBehaviorExtensions
+  nameWithType: GroupToggleBehaviorExtensions
+- uid: Forms9Patch.GroupToggleBehaviorExtensions.ToXfSelectionMode(Forms9Patch.GroupToggleBehavior)
+  name: ToXfSelectionMode(GroupToggleBehavior)
+  href: api/Forms9Patch.GroupToggleBehaviorExtensions.html#Forms9Patch_GroupToggleBehaviorExtensions_ToXfSelectionMode_Forms9Patch_GroupToggleBehavior_
+  commentId: M:Forms9Patch.GroupToggleBehaviorExtensions.ToXfSelectionMode(Forms9Patch.GroupToggleBehavior)
+  fullName: Forms9Patch.GroupToggleBehaviorExtensions.ToXfSelectionMode(Forms9Patch.GroupToggleBehavior)
+  nameWithType: GroupToggleBehaviorExtensions.ToXfSelectionMode(GroupToggleBehavior)
+- uid: Forms9Patch.GroupToggleBehaviorExtensions.ToXfSelectionMode*
+  name: ToXfSelectionMode
+  href: api/Forms9Patch.GroupToggleBehaviorExtensions.html#Forms9Patch_GroupToggleBehaviorExtensions_ToXfSelectionMode_
+  commentId: Overload:Forms9Patch.GroupToggleBehaviorExtensions.ToXfSelectionMode
+  isSpec: "True"
+  fullName: Forms9Patch.GroupToggleBehaviorExtensions.ToXfSelectionMode
+  nameWithType: GroupToggleBehaviorExtensions.ToXfSelectionMode
 - uid: Forms9Patch.HapticEffect
   name: HapticEffect
   href: api/Forms9Patch.HapticEffect.html
@@ -11172,44 +11275,6 @@ references:
   commentId: F:Forms9Patch.ListView.SeparatorVisibilityProperty
   fullName: Forms9Patch.ListView.SeparatorVisibilityProperty
   nameWithType: ListView.SeparatorVisibilityProperty
-- uid: Forms9Patch.ListView.SourcePropertyMap
-  name: SourcePropertyMap
-  href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_SourcePropertyMap
-  commentId: P:Forms9Patch.ListView.SourcePropertyMap
-  fullName: Forms9Patch.ListView.SourcePropertyMap
-  nameWithType: ListView.SourcePropertyMap
-- uid: Forms9Patch.ListView.SourcePropertyMap*
-  name: SourcePropertyMap
-  href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_SourcePropertyMap_
-  commentId: Overload:Forms9Patch.ListView.SourcePropertyMap
-  isSpec: "True"
-  fullName: Forms9Patch.ListView.SourcePropertyMap
-  nameWithType: ListView.SourcePropertyMap
-- uid: Forms9Patch.ListView.SourcePropertyMapProperty
-  name: SourcePropertyMapProperty
-  href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_SourcePropertyMapProperty
-  commentId: F:Forms9Patch.ListView.SourcePropertyMapProperty
-  fullName: Forms9Patch.ListView.SourcePropertyMapProperty
-  nameWithType: ListView.SourcePropertyMapProperty
-- uid: Forms9Patch.ListView.SubGroupType
-  name: SubGroupType
-  href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_SubGroupType
-  commentId: P:Forms9Patch.ListView.SubGroupType
-  fullName: Forms9Patch.ListView.SubGroupType
-  nameWithType: ListView.SubGroupType
-- uid: Forms9Patch.ListView.SubGroupType*
-  name: SubGroupType
-  href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_SubGroupType_
-  commentId: Overload:Forms9Patch.ListView.SubGroupType
-  isSpec: "True"
-  fullName: Forms9Patch.ListView.SubGroupType
-  nameWithType: ListView.SubGroupType
-- uid: Forms9Patch.ListView.SubGroupTypeProperty
-  name: SubGroupTypeProperty
-  href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_SubGroupTypeProperty
-  commentId: F:Forms9Patch.ListView.SubGroupTypeProperty
-  fullName: Forms9Patch.ListView.SubGroupTypeProperty
-  nameWithType: ListView.SubGroupTypeProperty
 - uid: Forms9Patch.ListView.SwipeMenuItemTapped
   name: SwipeMenuItemTapped
   href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_SwipeMenuItemTapped
@@ -11242,25 +11307,6 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ListView.TapItemAtPoint
   nameWithType: ListView.TapItemAtPoint
-- uid: Forms9Patch.ListView.VisibilityTest
-  name: VisibilityTest
-  href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_VisibilityTest
-  commentId: P:Forms9Patch.ListView.VisibilityTest
-  fullName: Forms9Patch.ListView.VisibilityTest
-  nameWithType: ListView.VisibilityTest
-- uid: Forms9Patch.ListView.VisibilityTest*
-  name: VisibilityTest
-  href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_VisibilityTest_
-  commentId: Overload:Forms9Patch.ListView.VisibilityTest
-  isSpec: "True"
-  fullName: Forms9Patch.ListView.VisibilityTest
-  nameWithType: ListView.VisibilityTest
-- uid: Forms9Patch.ListView.VisibilityTestProperty
-  name: VisibilityTestProperty
-  href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_VisibilityTestProperty
-  commentId: F:Forms9Patch.ListView.VisibilityTestProperty
-  fullName: Forms9Patch.ListView.VisibilityTestProperty
-  nameWithType: ListView.VisibilityTestProperty
 - uid: Forms9Patch.ListView.VisibleIndexes
   name: VisibleIndexes
   href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_VisibleIndexes
@@ -12185,6 +12231,76 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.MultiPicker.MultiPicker
   nameWithType: MultiPicker.MultiPicker
+- uid: Forms9Patch.MultiPicker.MultiPickerCellContentView
+  name: MultiPicker.MultiPickerCellContentView
+  href: api/Forms9Patch.MultiPicker.MultiPickerCellContentView.html
+  commentId: T:Forms9Patch.MultiPicker.MultiPickerCellContentView
+  fullName: Forms9Patch.MultiPicker.MultiPickerCellContentView
+  nameWithType: MultiPicker.MultiPickerCellContentView
+- uid: Forms9Patch.MultiPicker.MultiPickerCellContentView.#ctor
+  name: MultiPickerCellContentView()
+  href: api/Forms9Patch.MultiPicker.MultiPickerCellContentView.html#Forms9Patch_MultiPicker_MultiPickerCellContentView__ctor
+  commentId: M:Forms9Patch.MultiPicker.MultiPickerCellContentView.#ctor
+  fullName: Forms9Patch.MultiPicker.MultiPickerCellContentView.MultiPickerCellContentView()
+  nameWithType: MultiPicker.MultiPickerCellContentView.MultiPickerCellContentView()
+- uid: Forms9Patch.MultiPicker.MultiPickerCellContentView.#ctor*
+  name: MultiPickerCellContentView
+  href: api/Forms9Patch.MultiPicker.MultiPickerCellContentView.html#Forms9Patch_MultiPicker_MultiPickerCellContentView__ctor_
+  commentId: Overload:Forms9Patch.MultiPicker.MultiPickerCellContentView.#ctor
+  isSpec: "True"
+  fullName: Forms9Patch.MultiPicker.MultiPickerCellContentView.MultiPickerCellContentView
+  nameWithType: MultiPicker.MultiPickerCellContentView.MultiPickerCellContentView
+- uid: Forms9Patch.MultiPicker.MultiPickerCellContentView.checkLabel
+  name: checkLabel
+  href: api/Forms9Patch.MultiPicker.MultiPickerCellContentView.html#Forms9Patch_MultiPicker_MultiPickerCellContentView_checkLabel
+  commentId: F:Forms9Patch.MultiPicker.MultiPickerCellContentView.checkLabel
+  fullName: Forms9Patch.MultiPicker.MultiPickerCellContentView.checkLabel
+  nameWithType: MultiPicker.MultiPickerCellContentView.checkLabel
+- uid: Forms9Patch.MultiPicker.MultiPickerCellContentView.OnPropertyChanged(System.String)
+  name: OnPropertyChanged(String)
+  href: api/Forms9Patch.MultiPicker.MultiPickerCellContentView.html#Forms9Patch_MultiPicker_MultiPickerCellContentView_OnPropertyChanged_System_String_
+  commentId: M:Forms9Patch.MultiPicker.MultiPickerCellContentView.OnPropertyChanged(System.String)
+  fullName: Forms9Patch.MultiPicker.MultiPickerCellContentView.OnPropertyChanged(System.String)
+  nameWithType: MultiPicker.MultiPickerCellContentView.OnPropertyChanged(String)
+- uid: Forms9Patch.MultiPicker.MultiPickerCellContentView.OnPropertyChanged*
+  name: OnPropertyChanged
+  href: api/Forms9Patch.MultiPicker.MultiPickerCellContentView.html#Forms9Patch_MultiPicker_MultiPickerCellContentView_OnPropertyChanged_
+  commentId: Overload:Forms9Patch.MultiPicker.MultiPickerCellContentView.OnPropertyChanged
+  isSpec: "True"
+  fullName: Forms9Patch.MultiPicker.MultiPickerCellContentView.OnPropertyChanged
+  nameWithType: MultiPicker.MultiPickerCellContentView.OnPropertyChanged
+- uid: Forms9Patch.MultiPicker.MultiPickerHtmlCellContentView
+  name: MultiPicker.MultiPickerHtmlCellContentView
+  href: api/Forms9Patch.MultiPicker.MultiPickerHtmlCellContentView.html
+  commentId: T:Forms9Patch.MultiPicker.MultiPickerHtmlCellContentView
+  fullName: Forms9Patch.MultiPicker.MultiPickerHtmlCellContentView
+  nameWithType: MultiPicker.MultiPickerHtmlCellContentView
+- uid: Forms9Patch.MultiPicker.MultiPickerHtmlCellContentView.#ctor
+  name: MultiPickerHtmlCellContentView()
+  href: api/Forms9Patch.MultiPicker.MultiPickerHtmlCellContentView.html#Forms9Patch_MultiPicker_MultiPickerHtmlCellContentView__ctor
+  commentId: M:Forms9Patch.MultiPicker.MultiPickerHtmlCellContentView.#ctor
+  fullName: Forms9Patch.MultiPicker.MultiPickerHtmlCellContentView.MultiPickerHtmlCellContentView()
+  nameWithType: MultiPicker.MultiPickerHtmlCellContentView.MultiPickerHtmlCellContentView()
+- uid: Forms9Patch.MultiPicker.MultiPickerHtmlCellContentView.#ctor*
+  name: MultiPickerHtmlCellContentView
+  href: api/Forms9Patch.MultiPicker.MultiPickerHtmlCellContentView.html#Forms9Patch_MultiPicker_MultiPickerHtmlCellContentView__ctor_
+  commentId: Overload:Forms9Patch.MultiPicker.MultiPickerHtmlCellContentView.#ctor
+  isSpec: "True"
+  fullName: Forms9Patch.MultiPicker.MultiPickerHtmlCellContentView.MultiPickerHtmlCellContentView
+  nameWithType: MultiPicker.MultiPickerHtmlCellContentView.MultiPickerHtmlCellContentView
+- uid: Forms9Patch.MultiPicker.MultiPickerHtmlCellContentView.OnBindingContextChanged
+  name: OnBindingContextChanged()
+  href: api/Forms9Patch.MultiPicker.MultiPickerHtmlCellContentView.html#Forms9Patch_MultiPicker_MultiPickerHtmlCellContentView_OnBindingContextChanged
+  commentId: M:Forms9Patch.MultiPicker.MultiPickerHtmlCellContentView.OnBindingContextChanged
+  fullName: Forms9Patch.MultiPicker.MultiPickerHtmlCellContentView.OnBindingContextChanged()
+  nameWithType: MultiPicker.MultiPickerHtmlCellContentView.OnBindingContextChanged()
+- uid: Forms9Patch.MultiPicker.MultiPickerHtmlCellContentView.OnBindingContextChanged*
+  name: OnBindingContextChanged
+  href: api/Forms9Patch.MultiPicker.MultiPickerHtmlCellContentView.html#Forms9Patch_MultiPicker_MultiPickerHtmlCellContentView_OnBindingContextChanged_
+  commentId: Overload:Forms9Patch.MultiPicker.MultiPickerHtmlCellContentView.OnBindingContextChanged
+  isSpec: "True"
+  fullName: Forms9Patch.MultiPicker.MultiPickerHtmlCellContentView.OnBindingContextChanged
+  nameWithType: MultiPicker.MultiPickerHtmlCellContentView.OnBindingContextChanged
 - uid: Forms9Patch.MultiPicker.SelectedIndexes
   name: SelectedIndexes
   href: api/Forms9Patch.MultiPicker.html#Forms9Patch_MultiPicker_SelectedIndexes
@@ -12198,25 +12314,6 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.MultiPicker.SelectedIndexes
   nameWithType: MultiPicker.SelectedIndexes
-- uid: Forms9Patch.MultiPicker.SelectedItems
-  name: SelectedItems
-  href: api/Forms9Patch.MultiPicker.html#Forms9Patch_MultiPicker_SelectedItems
-  commentId: P:Forms9Patch.MultiPicker.SelectedItems
-  fullName: Forms9Patch.MultiPicker.SelectedItems
-  nameWithType: MultiPicker.SelectedItems
-- uid: Forms9Patch.MultiPicker.SelectedItems*
-  name: SelectedItems
-  href: api/Forms9Patch.MultiPicker.html#Forms9Patch_MultiPicker_SelectedItems_
-  commentId: Overload:Forms9Patch.MultiPicker.SelectedItems
-  isSpec: "True"
-  fullName: Forms9Patch.MultiPicker.SelectedItems
-  nameWithType: MultiPicker.SelectedItems
-- uid: Forms9Patch.MultiPicker.SelectedItemsPropertyKey
-  name: SelectedItemsPropertyKey
-  href: api/Forms9Patch.MultiPicker.html#Forms9Patch_MultiPicker_SelectedItemsPropertyKey
-  commentId: F:Forms9Patch.MultiPicker.SelectedItemsPropertyKey
-  fullName: Forms9Patch.MultiPicker.SelectedItemsPropertyKey
-  nameWithType: MultiPicker.SelectedItemsPropertyKey
 - uid: Forms9Patch.OsInfoService
   name: OsInfoService
   href: api/Forms9Patch.OsInfoService.html
@@ -15000,6 +15097,19 @@ references:
   commentId: F:Forms9Patch.SegmentedControl.FontSizeProperty
   fullName: Forms9Patch.SegmentedControl.FontSizeProperty
   nameWithType: SegmentedControl.FontSizeProperty
+- uid: Forms9Patch.SegmentedControl.GetMinSize
+  name: GetMinSize()
+  href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_GetMinSize
+  commentId: M:Forms9Patch.SegmentedControl.GetMinSize
+  fullName: Forms9Patch.SegmentedControl.GetMinSize()
+  nameWithType: SegmentedControl.GetMinSize()
+- uid: Forms9Patch.SegmentedControl.GetMinSize*
+  name: GetMinSize
+  href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_GetMinSize_
+  commentId: Overload:Forms9Patch.SegmentedControl.GetMinSize
+  isSpec: "True"
+  fullName: Forms9Patch.SegmentedControl.GetMinSize
+  nameWithType: SegmentedControl.GetMinSize
 - uid: Forms9Patch.SegmentedControl.GroupToggleBehavior
   name: GroupToggleBehavior
   href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_GroupToggleBehavior
@@ -16055,25 +16165,6 @@ references:
   commentId: F:Forms9Patch.SinglePicker.HtmlTextCellType
   fullName: Forms9Patch.SinglePicker.HtmlTextCellType
   nameWithType: SinglePicker.HtmlTextCellType
-- uid: Forms9Patch.SinglePicker.Index
-  name: Index
-  href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_Index
-  commentId: P:Forms9Patch.SinglePicker.Index
-  fullName: Forms9Patch.SinglePicker.Index
-  nameWithType: SinglePicker.Index
-- uid: Forms9Patch.SinglePicker.Index*
-  name: Index
-  href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_Index_
-  commentId: Overload:Forms9Patch.SinglePicker.Index
-  isSpec: "True"
-  fullName: Forms9Patch.SinglePicker.Index
-  nameWithType: SinglePicker.Index
-- uid: Forms9Patch.SinglePicker.IndexProperty
-  name: IndexProperty
-  href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_IndexProperty
-  commentId: F:Forms9Patch.SinglePicker.IndexProperty
-  fullName: Forms9Patch.SinglePicker.IndexProperty
-  nameWithType: SinglePicker.IndexProperty
 - uid: Forms9Patch.SinglePicker.IsHtmlText
   name: IsHtmlText
   href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_IsHtmlText
@@ -16093,44 +16184,6 @@ references:
   commentId: F:Forms9Patch.SinglePicker.IsHtmlTextProperty
   fullName: Forms9Patch.SinglePicker.IsHtmlTextProperty
   nameWithType: SinglePicker.IsHtmlTextProperty
-- uid: Forms9Patch.SinglePicker.ItemsSource
-  name: ItemsSource
-  href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_ItemsSource
-  commentId: P:Forms9Patch.SinglePicker.ItemsSource
-  fullName: Forms9Patch.SinglePicker.ItemsSource
-  nameWithType: SinglePicker.ItemsSource
-- uid: Forms9Patch.SinglePicker.ItemsSource*
-  name: ItemsSource
-  href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_ItemsSource_
-  commentId: Overload:Forms9Patch.SinglePicker.ItemsSource
-  isSpec: "True"
-  fullName: Forms9Patch.SinglePicker.ItemsSource
-  nameWithType: SinglePicker.ItemsSource
-- uid: Forms9Patch.SinglePicker.ItemsSourceProperty
-  name: ItemsSourceProperty
-  href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_ItemsSourceProperty
-  commentId: F:Forms9Patch.SinglePicker.ItemsSourceProperty
-  fullName: Forms9Patch.SinglePicker.ItemsSourceProperty
-  nameWithType: SinglePicker.ItemsSourceProperty
-- uid: Forms9Patch.SinglePicker.ItemTemplates
-  name: ItemTemplates
-  href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_ItemTemplates
-  commentId: P:Forms9Patch.SinglePicker.ItemTemplates
-  fullName: Forms9Patch.SinglePicker.ItemTemplates
-  nameWithType: SinglePicker.ItemTemplates
-- uid: Forms9Patch.SinglePicker.ItemTemplates*
-  name: ItemTemplates
-  href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_ItemTemplates_
-  commentId: Overload:Forms9Patch.SinglePicker.ItemTemplates
-  isSpec: "True"
-  fullName: Forms9Patch.SinglePicker.ItemTemplates
-  nameWithType: SinglePicker.ItemTemplates
-- uid: Forms9Patch.SinglePicker.ItemTemplatesProperty
-  name: ItemTemplatesProperty
-  href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_ItemTemplatesProperty
-  commentId: F:Forms9Patch.SinglePicker.ItemTemplatesProperty
-  fullName: Forms9Patch.SinglePicker.ItemTemplatesProperty
-  nameWithType: SinglePicker.ItemTemplatesProperty
 - uid: Forms9Patch.SinglePicker.OnPropertyChanged(System.String)
   name: OnPropertyChanged(String)
   href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_OnPropertyChanged_System_String_
@@ -16163,44 +16216,140 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.SinglePicker.Reset
   nameWithType: SinglePicker.Reset
-- uid: Forms9Patch.SinglePicker.RowHeight
-  name: RowHeight
-  href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_RowHeight
-  commentId: P:Forms9Patch.SinglePicker.RowHeight
-  fullName: Forms9Patch.SinglePicker.RowHeight
-  nameWithType: SinglePicker.RowHeight
-- uid: Forms9Patch.SinglePicker.RowHeight*
-  name: RowHeight
-  href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_RowHeight_
-  commentId: Overload:Forms9Patch.SinglePicker.RowHeight
+- uid: Forms9Patch.SinglePicker.SinglePickerCellContentView
+  name: SinglePicker.SinglePickerCellContentView
+  href: api/Forms9Patch.SinglePicker.SinglePickerCellContentView.html
+  commentId: T:Forms9Patch.SinglePicker.SinglePickerCellContentView
+  fullName: Forms9Patch.SinglePicker.SinglePickerCellContentView
+  nameWithType: SinglePicker.SinglePickerCellContentView
+- uid: Forms9Patch.SinglePicker.SinglePickerCellContentView.#ctor
+  name: SinglePickerCellContentView()
+  href: api/Forms9Patch.SinglePicker.SinglePickerCellContentView.html#Forms9Patch_SinglePicker_SinglePickerCellContentView__ctor
+  commentId: M:Forms9Patch.SinglePicker.SinglePickerCellContentView.#ctor
+  fullName: Forms9Patch.SinglePicker.SinglePickerCellContentView.SinglePickerCellContentView()
+  nameWithType: SinglePicker.SinglePickerCellContentView.SinglePickerCellContentView()
+- uid: Forms9Patch.SinglePicker.SinglePickerCellContentView.#ctor*
+  name: SinglePickerCellContentView
+  href: api/Forms9Patch.SinglePicker.SinglePickerCellContentView.html#Forms9Patch_SinglePicker_SinglePickerCellContentView__ctor_
+  commentId: Overload:Forms9Patch.SinglePicker.SinglePickerCellContentView.#ctor
   isSpec: "True"
-  fullName: Forms9Patch.SinglePicker.RowHeight
-  nameWithType: SinglePicker.RowHeight
-- uid: Forms9Patch.SinglePicker.RowHeightProperty
-  name: RowHeightProperty
-  href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_RowHeightProperty
-  commentId: F:Forms9Patch.SinglePicker.RowHeightProperty
-  fullName: Forms9Patch.SinglePicker.RowHeightProperty
-  nameWithType: SinglePicker.RowHeightProperty
-- uid: Forms9Patch.SinglePicker.SelectedItem
-  name: SelectedItem
-  href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_SelectedItem
-  commentId: P:Forms9Patch.SinglePicker.SelectedItem
-  fullName: Forms9Patch.SinglePicker.SelectedItem
-  nameWithType: SinglePicker.SelectedItem
-- uid: Forms9Patch.SinglePicker.SelectedItem*
-  name: SelectedItem
-  href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_SelectedItem_
-  commentId: Overload:Forms9Patch.SinglePicker.SelectedItem
+  fullName: Forms9Patch.SinglePicker.SinglePickerCellContentView.SinglePickerCellContentView
+  nameWithType: SinglePicker.SinglePickerCellContentView.SinglePickerCellContentView
+- uid: Forms9Patch.SinglePicker.SinglePickerCellContentView.Dispose
+  name: Dispose()
+  href: api/Forms9Patch.SinglePicker.SinglePickerCellContentView.html#Forms9Patch_SinglePicker_SinglePickerCellContentView_Dispose
+  commentId: M:Forms9Patch.SinglePicker.SinglePickerCellContentView.Dispose
+  fullName: Forms9Patch.SinglePicker.SinglePickerCellContentView.Dispose()
+  nameWithType: SinglePicker.SinglePickerCellContentView.Dispose()
+- uid: Forms9Patch.SinglePicker.SinglePickerCellContentView.Dispose(System.Boolean)
+  name: Dispose(Boolean)
+  href: api/Forms9Patch.SinglePicker.SinglePickerCellContentView.html#Forms9Patch_SinglePicker_SinglePickerCellContentView_Dispose_System_Boolean_
+  commentId: M:Forms9Patch.SinglePicker.SinglePickerCellContentView.Dispose(System.Boolean)
+  fullName: Forms9Patch.SinglePicker.SinglePickerCellContentView.Dispose(System.Boolean)
+  nameWithType: SinglePicker.SinglePickerCellContentView.Dispose(Boolean)
+- uid: Forms9Patch.SinglePicker.SinglePickerCellContentView.Dispose*
+  name: Dispose
+  href: api/Forms9Patch.SinglePicker.SinglePickerCellContentView.html#Forms9Patch_SinglePicker_SinglePickerCellContentView_Dispose_
+  commentId: Overload:Forms9Patch.SinglePicker.SinglePickerCellContentView.Dispose
   isSpec: "True"
-  fullName: Forms9Patch.SinglePicker.SelectedItem
-  nameWithType: SinglePicker.SelectedItem
-- uid: Forms9Patch.SinglePicker.SelectedItemProperty
-  name: SelectedItemProperty
-  href: api/Forms9Patch.SinglePicker.html#Forms9Patch_SinglePicker_SelectedItemProperty
-  commentId: F:Forms9Patch.SinglePicker.SelectedItemProperty
-  fullName: Forms9Patch.SinglePicker.SelectedItemProperty
-  nameWithType: SinglePicker.SelectedItemProperty
+  fullName: Forms9Patch.SinglePicker.SinglePickerCellContentView.Dispose
+  nameWithType: SinglePicker.SinglePickerCellContentView.Dispose
+- uid: Forms9Patch.SinglePicker.SinglePickerCellContentView.IsSelected
+  name: IsSelected
+  href: api/Forms9Patch.SinglePicker.SinglePickerCellContentView.html#Forms9Patch_SinglePicker_SinglePickerCellContentView_IsSelected
+  commentId: P:Forms9Patch.SinglePicker.SinglePickerCellContentView.IsSelected
+  fullName: Forms9Patch.SinglePicker.SinglePickerCellContentView.IsSelected
+  nameWithType: SinglePicker.SinglePickerCellContentView.IsSelected
+- uid: Forms9Patch.SinglePicker.SinglePickerCellContentView.IsSelected*
+  name: IsSelected
+  href: api/Forms9Patch.SinglePicker.SinglePickerCellContentView.html#Forms9Patch_SinglePicker_SinglePickerCellContentView_IsSelected_
+  commentId: Overload:Forms9Patch.SinglePicker.SinglePickerCellContentView.IsSelected
+  isSpec: "True"
+  fullName: Forms9Patch.SinglePicker.SinglePickerCellContentView.IsSelected
+  nameWithType: SinglePicker.SinglePickerCellContentView.IsSelected
+- uid: Forms9Patch.SinglePicker.SinglePickerCellContentView.IsSelectedProperty
+  name: IsSelectedProperty
+  href: api/Forms9Patch.SinglePicker.SinglePickerCellContentView.html#Forms9Patch_SinglePicker_SinglePickerCellContentView_IsSelectedProperty
+  commentId: F:Forms9Patch.SinglePicker.SinglePickerCellContentView.IsSelectedProperty
+  fullName: Forms9Patch.SinglePicker.SinglePickerCellContentView.IsSelectedProperty
+  nameWithType: SinglePicker.SinglePickerCellContentView.IsSelectedProperty
+- uid: Forms9Patch.SinglePicker.SinglePickerCellContentView.itemLabel
+  name: itemLabel
+  href: api/Forms9Patch.SinglePicker.SinglePickerCellContentView.html#Forms9Patch_SinglePicker_SinglePickerCellContentView_itemLabel
+  commentId: F:Forms9Patch.SinglePicker.SinglePickerCellContentView.itemLabel
+  fullName: Forms9Patch.SinglePicker.SinglePickerCellContentView.itemLabel
+  nameWithType: SinglePicker.SinglePickerCellContentView.itemLabel
+- uid: Forms9Patch.SinglePicker.SinglePickerCellContentView.OnBindingContextChanged
+  name: OnBindingContextChanged()
+  href: api/Forms9Patch.SinglePicker.SinglePickerCellContentView.html#Forms9Patch_SinglePicker_SinglePickerCellContentView_OnBindingContextChanged
+  commentId: M:Forms9Patch.SinglePicker.SinglePickerCellContentView.OnBindingContextChanged
+  fullName: Forms9Patch.SinglePicker.SinglePickerCellContentView.OnBindingContextChanged()
+  nameWithType: SinglePicker.SinglePickerCellContentView.OnBindingContextChanged()
+- uid: Forms9Patch.SinglePicker.SinglePickerCellContentView.OnBindingContextChanged*
+  name: OnBindingContextChanged
+  href: api/Forms9Patch.SinglePicker.SinglePickerCellContentView.html#Forms9Patch_SinglePicker_SinglePickerCellContentView_OnBindingContextChanged_
+  commentId: Overload:Forms9Patch.SinglePicker.SinglePickerCellContentView.OnBindingContextChanged
+  isSpec: "True"
+  fullName: Forms9Patch.SinglePicker.SinglePickerCellContentView.OnBindingContextChanged
+  nameWithType: SinglePicker.SinglePickerCellContentView.OnBindingContextChanged
+- uid: Forms9Patch.SinglePicker.SinglePickerCellContentView.OnPropertyChanged(System.String)
+  name: OnPropertyChanged(String)
+  href: api/Forms9Patch.SinglePicker.SinglePickerCellContentView.html#Forms9Patch_SinglePicker_SinglePickerCellContentView_OnPropertyChanged_System_String_
+  commentId: M:Forms9Patch.SinglePicker.SinglePickerCellContentView.OnPropertyChanged(System.String)
+  fullName: Forms9Patch.SinglePicker.SinglePickerCellContentView.OnPropertyChanged(System.String)
+  nameWithType: SinglePicker.SinglePickerCellContentView.OnPropertyChanged(String)
+- uid: Forms9Patch.SinglePicker.SinglePickerCellContentView.OnPropertyChanged*
+  name: OnPropertyChanged
+  href: api/Forms9Patch.SinglePicker.SinglePickerCellContentView.html#Forms9Patch_SinglePicker_SinglePickerCellContentView_OnPropertyChanged_
+  commentId: Overload:Forms9Patch.SinglePicker.SinglePickerCellContentView.OnPropertyChanged
+  isSpec: "True"
+  fullName: Forms9Patch.SinglePicker.SinglePickerCellContentView.OnPropertyChanged
+  nameWithType: SinglePicker.SinglePickerCellContentView.OnPropertyChanged
+- uid: Forms9Patch.SinglePicker.SinglePickerCellContentView.OnPropertyChanging(System.String)
+  name: OnPropertyChanging(String)
+  href: api/Forms9Patch.SinglePicker.SinglePickerCellContentView.html#Forms9Patch_SinglePicker_SinglePickerCellContentView_OnPropertyChanging_System_String_
+  commentId: M:Forms9Patch.SinglePicker.SinglePickerCellContentView.OnPropertyChanging(System.String)
+  fullName: Forms9Patch.SinglePicker.SinglePickerCellContentView.OnPropertyChanging(System.String)
+  nameWithType: SinglePicker.SinglePickerCellContentView.OnPropertyChanging(String)
+- uid: Forms9Patch.SinglePicker.SinglePickerCellContentView.OnPropertyChanging*
+  name: OnPropertyChanging
+  href: api/Forms9Patch.SinglePicker.SinglePickerCellContentView.html#Forms9Patch_SinglePicker_SinglePickerCellContentView_OnPropertyChanging_
+  commentId: Overload:Forms9Patch.SinglePicker.SinglePickerCellContentView.OnPropertyChanging
+  isSpec: "True"
+  fullName: Forms9Patch.SinglePicker.SinglePickerCellContentView.OnPropertyChanging
+  nameWithType: SinglePicker.SinglePickerCellContentView.OnPropertyChanging
+- uid: Forms9Patch.SinglePicker.SinglePickerHtmlCellContentView
+  name: SinglePicker.SinglePickerHtmlCellContentView
+  href: api/Forms9Patch.SinglePicker.SinglePickerHtmlCellContentView.html
+  commentId: T:Forms9Patch.SinglePicker.SinglePickerHtmlCellContentView
+  fullName: Forms9Patch.SinglePicker.SinglePickerHtmlCellContentView
+  nameWithType: SinglePicker.SinglePickerHtmlCellContentView
+- uid: Forms9Patch.SinglePicker.SinglePickerHtmlCellContentView.#ctor
+  name: SinglePickerHtmlCellContentView()
+  href: api/Forms9Patch.SinglePicker.SinglePickerHtmlCellContentView.html#Forms9Patch_SinglePicker_SinglePickerHtmlCellContentView__ctor
+  commentId: M:Forms9Patch.SinglePicker.SinglePickerHtmlCellContentView.#ctor
+  fullName: Forms9Patch.SinglePicker.SinglePickerHtmlCellContentView.SinglePickerHtmlCellContentView()
+  nameWithType: SinglePicker.SinglePickerHtmlCellContentView.SinglePickerHtmlCellContentView()
+- uid: Forms9Patch.SinglePicker.SinglePickerHtmlCellContentView.#ctor*
+  name: SinglePickerHtmlCellContentView
+  href: api/Forms9Patch.SinglePicker.SinglePickerHtmlCellContentView.html#Forms9Patch_SinglePicker_SinglePickerHtmlCellContentView__ctor_
+  commentId: Overload:Forms9Patch.SinglePicker.SinglePickerHtmlCellContentView.#ctor
+  isSpec: "True"
+  fullName: Forms9Patch.SinglePicker.SinglePickerHtmlCellContentView.SinglePickerHtmlCellContentView
+  nameWithType: SinglePicker.SinglePickerHtmlCellContentView.SinglePickerHtmlCellContentView
+- uid: Forms9Patch.SinglePicker.SinglePickerHtmlCellContentView.OnBindingContextChanged
+  name: OnBindingContextChanged()
+  href: api/Forms9Patch.SinglePicker.SinglePickerHtmlCellContentView.html#Forms9Patch_SinglePicker_SinglePickerHtmlCellContentView_OnBindingContextChanged
+  commentId: M:Forms9Patch.SinglePicker.SinglePickerHtmlCellContentView.OnBindingContextChanged
+  fullName: Forms9Patch.SinglePicker.SinglePickerHtmlCellContentView.OnBindingContextChanged()
+  nameWithType: SinglePicker.SinglePickerHtmlCellContentView.OnBindingContextChanged()
+- uid: Forms9Patch.SinglePicker.SinglePickerHtmlCellContentView.OnBindingContextChanged*
+  name: OnBindingContextChanged
+  href: api/Forms9Patch.SinglePicker.SinglePickerHtmlCellContentView.html#Forms9Patch_SinglePicker_SinglePickerHtmlCellContentView_OnBindingContextChanged_
+  commentId: Overload:Forms9Patch.SinglePicker.SinglePickerHtmlCellContentView.OnBindingContextChanged
+  isSpec: "True"
+  fullName: Forms9Patch.SinglePicker.SinglePickerHtmlCellContentView.OnBindingContextChanged
+  nameWithType: SinglePicker.SinglePickerHtmlCellContentView.OnBindingContextChanged
 - uid: Forms9Patch.SkiaColorExtensions
   name: SkiaColorExtensions
   href: api/Forms9Patch.SkiaColorExtensions.html
@@ -26781,6 +26930,52 @@ references:
   isSpec: "True"
   fullName: P42.Utils.TextCache.Store
   nameWithType: TextCache.Store
+- uid: P42.Utils.Threading
+  name: Threading
+  href: api/P42.Utils.Threading.html
+  commentId: T:P42.Utils.Threading
+  fullName: P42.Utils.Threading
+  nameWithType: Threading
+- uid: P42.Utils.Threading.InvokeInBackgroundAsync(System.Action)
+  name: InvokeInBackgroundAsync(Action)
+  href: api/P42.Utils.Threading.html#P42_Utils_Threading_InvokeInBackgroundAsync_System_Action_
+  commentId: M:P42.Utils.Threading.InvokeInBackgroundAsync(System.Action)
+  fullName: P42.Utils.Threading.InvokeInBackgroundAsync(System.Action)
+  nameWithType: Threading.InvokeInBackgroundAsync(Action)
+- uid: P42.Utils.Threading.InvokeInBackgroundAsync(System.Func{System.Threading.Tasks.Task})
+  name: InvokeInBackgroundAsync(Func<Task>)
+  href: api/P42.Utils.Threading.html#P42_Utils_Threading_InvokeInBackgroundAsync_System_Func_System_Threading_Tasks_Task__
+  commentId: M:P42.Utils.Threading.InvokeInBackgroundAsync(System.Func{System.Threading.Tasks.Task})
+  name.vb: InvokeInBackgroundAsync(Func(Of Task))
+  fullName: P42.Utils.Threading.InvokeInBackgroundAsync(System.Func<System.Threading.Tasks.Task>)
+  fullName.vb: P42.Utils.Threading.InvokeInBackgroundAsync(System.Func(Of System.Threading.Tasks.Task))
+  nameWithType: Threading.InvokeInBackgroundAsync(Func<Task>)
+  nameWithType.vb: Threading.InvokeInBackgroundAsync(Func(Of Task))
+- uid: P42.Utils.Threading.InvokeInBackgroundAsync*
+  name: InvokeInBackgroundAsync
+  href: api/P42.Utils.Threading.html#P42_Utils_Threading_InvokeInBackgroundAsync_
+  commentId: Overload:P42.Utils.Threading.InvokeInBackgroundAsync
+  isSpec: "True"
+  fullName: P42.Utils.Threading.InvokeInBackgroundAsync
+  nameWithType: Threading.InvokeInBackgroundAsync
+- uid: P42.Utils.Threading.InvokeInBackgroundAsync``1(System.Func{``0})
+  name: InvokeInBackgroundAsync<T>(Func<T>)
+  href: api/P42.Utils.Threading.html#P42_Utils_Threading_InvokeInBackgroundAsync__1_System_Func___0__
+  commentId: M:P42.Utils.Threading.InvokeInBackgroundAsync``1(System.Func{``0})
+  name.vb: InvokeInBackgroundAsync(Of T)(Func(Of T))
+  fullName: P42.Utils.Threading.InvokeInBackgroundAsync<T>(System.Func<T>)
+  fullName.vb: P42.Utils.Threading.InvokeInBackgroundAsync(Of T)(System.Func(Of T))
+  nameWithType: Threading.InvokeInBackgroundAsync<T>(Func<T>)
+  nameWithType.vb: Threading.InvokeInBackgroundAsync(Of T)(Func(Of T))
+- uid: P42.Utils.Threading.InvokeInBackgroundAsync``1(System.Func{System.Threading.Tasks.Task{``0}})
+  name: InvokeInBackgroundAsync<T>(Func<Task<T>>)
+  href: api/P42.Utils.Threading.html#P42_Utils_Threading_InvokeInBackgroundAsync__1_System_Func_System_Threading_Tasks_Task___0___
+  commentId: M:P42.Utils.Threading.InvokeInBackgroundAsync``1(System.Func{System.Threading.Tasks.Task{``0}})
+  name.vb: InvokeInBackgroundAsync(Of T)(Func(Of Task(Of T)))
+  fullName: P42.Utils.Threading.InvokeInBackgroundAsync<T>(System.Func<System.Threading.Tasks.Task<T>>)
+  fullName.vb: P42.Utils.Threading.InvokeInBackgroundAsync(Of T)(System.Func(Of System.Threading.Tasks.Task(Of T)))
+  nameWithType: Threading.InvokeInBackgroundAsync<T>(Func<Task<T>>)
+  nameWithType.vb: Threading.InvokeInBackgroundAsync(Of T)(Func(Of Task(Of T)))
 - uid: P42.Utils.Timer
   name: Timer
   href: api/P42.Utils.Timer.html

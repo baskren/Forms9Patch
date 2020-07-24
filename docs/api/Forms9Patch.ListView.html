@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ListView
    | Forms9Patch ">
-    <meta name="generator" content="docfx 2.47.0.0">
+    <meta name="generator" content="docfx 2.56.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -110,6 +110,7 @@
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ivisualelementcontroller">IVisualElementController</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ielementcontroller">IElementController</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.internals.igesturecontroller">IGestureController</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.igesturerecognizers">IGestureRecognizers</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ilayout">ILayout</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ilayoutcontroller">ILayoutController</a></div>
     <div><a class="xref" href="Forms9Patch.ILayout.html">ILayout</a></div>
@@ -382,6 +383,9 @@
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.scaleyproperty">VisualElement.ScaleYProperty</a>
     </div>
     <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.clipproperty">VisualElement.ClipProperty</a>
+    </div>
+    <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.visualproperty">VisualElement.VisualProperty</a>
     </div>
     <div>
@@ -565,6 +569,9 @@
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.y#Xamarin_Forms_VisualElement_Y">VisualElement.Y</a>
     </div>
     <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.clip#Xamarin_Forms_VisualElement_Clip">VisualElement.Clip</a>
+    </div>
+    <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.resources#Xamarin_Forms_VisualElement_Resources">VisualElement.Resources</a>
     </div>
     <div>
@@ -688,6 +695,12 @@
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.setvalue#Xamarin_Forms_BindableObject_SetValue_Xamarin_Forms_BindablePropertyKey_System_Object_">BindableObject.SetValue(BindablePropertyKey, Object)</a>
     </div>
     <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.coercevalue#Xamarin_Forms_BindableObject_CoerceValue_Xamarin_Forms_BindableProperty_">BindableObject.CoerceValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.coercevalue#Xamarin_Forms_BindableObject_CoerceValue_Xamarin_Forms_BindablePropertyKey_">BindableObject.CoerceValue(BindablePropertyKey)</a>
+    </div>
+    <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.dispatcher#Xamarin_Forms_BindableObject_Dispatcher">BindableObject.Dispatcher</a>
     </div>
     <div>
@@ -725,7 +738,7 @@
   <h6><strong>Assembly</strong>: Forms9Patch.dll</h6>
   <h5 id="Forms9Patch_ListView_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ListView : Frame, INotifyPropertyChanged, IDynamicResourceHandler, IElement, INameScope, INavigationProxy, IAnimatable, IResourcesProvider, IStyleElement, IFlowDirectionController, IPropertyPropagationController, IVisualController, ITabStopElement, IStyleSelectable, IStylable, IViewController, IVisualElementController, IElementController, IGestureController, ILayout, ILayoutController, IPaddingElement, IControlTemplated, ILayout, IBackground, IShape, IDisposable, IElement</code></pre>
+    <pre><code class="lang-csharp hljs">public class ListView : Frame, INotifyPropertyChanged, IDynamicResourceHandler, IElement, INameScope, INavigationProxy, IStyleSelectable, IAnimatable, IResourcesProvider, IStyleElement, IFlowDirectionController, IPropertyPropagationController, IVisualController, ITabStopElement, IStylable, IViewController, IVisualElementController, IElementController, IGestureController, IGestureRecognizers, ILayout, ILayoutController, IPaddingElement, IControlTemplated, ILayout, IBackground, IShape, IDisposable, IElement</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -1306,81 +1319,6 @@ public static readonly BindableProperty ContentProperty</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static readonly BindableProperty SeparatorVisibilityProperty</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="Forms9Patch_ListView_SourcePropertyMapProperty" data-uid="Forms9Patch.ListView.SourcePropertyMapProperty">SourcePropertyMapProperty</h4>
-  <div class="markdown level1 summary"><p>The source property map property.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly BindableProperty SourcePropertyMapProperty</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="Forms9Patch_ListView_SubGroupTypeProperty" data-uid="Forms9Patch.ListView.SubGroupTypeProperty">SubGroupTypeProperty</h4>
-  <div class="markdown level1 summary"><p>The sub group type property backing store.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly BindableProperty SubGroupTypeProperty</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="Forms9Patch_ListView_VisibilityTestProperty" data-uid="Forms9Patch.ListView.VisibilityTestProperty">VisibilityTestProperty</h4>
-  <div class="markdown level1 summary"><p>The cell visibility test property.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly BindableProperty VisibilityTestProperty</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2057,87 +1995,6 @@ public View Content { get; set; }</code></pre>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.separatorvisibility">SeparatorVisibility</a></td>
         <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Forms9Patch_ListView_SourcePropertyMap_" data-uid="Forms9Patch.ListView.SourcePropertyMap*"></a>
-  <h4 id="Forms9Patch_ListView_SourcePropertyMap" data-uid="Forms9Patch.ListView.SourcePropertyMap">SourcePropertyMap</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the source property map.  Used to map the properties in a hierarchical ItemsSource used to make the hierarchy and bind (as items) to the CellViews</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;string&gt; SourcePropertyMap { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
-        <td><p>The source property map.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Forms9Patch_ListView_SubGroupType_" data-uid="Forms9Patch.ListView.SubGroupType*"></a>
-  <h4 id="Forms9Patch_ListView_SubGroupType" data-uid="Forms9Patch.ListView.SubGroupType">SubGroupType</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the type for list subgroups.  If set, allows non-SubGroupType IEnumerables to be items rather than SubGroups.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Type SubGroupType { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
-        <td><p>The type of the sub group.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Forms9Patch_ListView_VisibilityTest_" data-uid="Forms9Patch.ListView.VisibilityTest*"></a>
-  <h4 id="Forms9Patch_ListView_VisibilityTest" data-uid="Forms9Patch.ListView.VisibilityTest">VisibilityTest</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the cell visibility test.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Func&lt;object, bool&gt; VisibilityTest { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>&gt;</td>
-        <td><p>The visibility test.</p>
-</td>
       </tr>
     </tbody>
   </table>
@@ -2919,6 +2776,9 @@ public View Content { get; set; }</code></pre>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.internals.igesturecontroller">Xamarin.Forms.Internals.IGestureController</a>
   </div>
   <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.igesturerecognizers">Xamarin.Forms.IGestureRecognizers</a>
+  </div>
+  <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ilayout">Xamarin.Forms.ILayout</a>
   </div>
   <div>
@@ -2999,6 +2859,12 @@ public View Content { get; set; }</code></pre>
   </div>
   <div>
       <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_SetIsInNativeLayout_Xamarin_Forms_VisualElement_System_Boolean_">ElementExtensions.SetIsInNativeLayout(VisualElement, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_GetRenderer_Xamarin_Forms_VisualElement_">ElementExtensions.GetRenderer(VisualElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_HasRenderer_Xamarin_Forms_VisualElement_">ElementExtensions.HasRenderer(VisualElement)</a>
   </div>
   <div>
       <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_GetHardwareKeyListeners_Xamarin_Forms_View_">HardwareKeyListenerExtensions.GetHardwareKeyListeners(View)</a>

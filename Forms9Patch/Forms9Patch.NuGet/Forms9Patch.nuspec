@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
         <id>Forms9Patch</id>
-        <version>2.3.0</version>
+        <version>2.4.0-beta1</version>
         <title>Forms9Patch</title>
         <authors>Ben Askren</authors>
         <owners>baskren</owners>
@@ -10,6 +10,7 @@
         <license type="file">license\LICENSE</license>
         <projectUrl>https://github.com/baskren/Forms9Patch</projectUrl>
         <iconUrl>http://buildcalc.com/forms9patch/Icons/favicon-128.png</iconUrl>
+        <icon>icon.png</icon>
 	<description>
 Xamarin Forms is great for developing apps on Android, iOS, and Universal Windows Platform (UWP) but it is missing some important features: 
 - Scalable images
@@ -25,8 +26,35 @@ Android developers can use NinePatch bitmaps, the drawable directory naming conv
   </description>
   <summary>Simplify multi-device image, label and font management in your NetStandard, PCL, and Shared Library Xamarin.Forms mobile and UWP apps</summary>
 	<releaseNotes>
-    2.3.0.0: 
-    
+    2.4.0.0:
+
+    **New:**
+
+    - Modernized FontExtensions for XF 4.6;
+    - Add ability to find minimum (one-line) size for Button and SegmentedControl;
+    - GetMinSize on Button and SegmentedControl;
+    - Improved Android label rendering;
+    - Migrated Pickers to use Xamarin.Forms.CollectionView (instead of ListView);
+
+    **Fixed:**
+
+    Android:
+    - Updated to Android Q not call APIs obsoleted at Android Q;
+    - Android label sizing issue on 1 line buttons where System font is very large;
+    - Label will crash if FontFamily is unknown;
+    - Exception thrown because Droid.OnTouchListener can construct NativeGestureDetector on non-ui- thread;
+    -
+
+    iOS:
+    - Objective-C exception thrown. Name: NSInvalidArgumentException Reason: -[UIKeyCommand image]: unrecognized selector sent to instance;
+
+    General:
+    - Forms9Patch.ListView and Picker's crash when LINK ALL is selected;
+    - Crash because Listener.Listeners can have null elements;
+
+
+    2.3.0.0:
+
     **New:**
 
     - Forms9Patch.ImageSource.FromSvgText(string svgText) allows SVG string to be used as an Source for Forms9Patch.Image;

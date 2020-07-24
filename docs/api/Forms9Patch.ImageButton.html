@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ImageButton
    | Forms9Patch ">
-    <meta name="generator" content="docfx 2.47.0.0">
+    <meta name="generator" content="docfx 2.56.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -109,6 +109,7 @@
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ianimatable">IAnimatable</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.itabstopelement">ITabStopElement</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.internals.igesturecontroller">IGestureController</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.igesturerecognizers">IGestureRecognizers</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ilayout">ILayout</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ilayoutcontroller">ILayoutController</a></div>
     <div><a class="xref" href="Forms9Patch.ILayout.html">ILayout</a></div>
@@ -555,6 +556,9 @@
       <a class="xref" href="Forms9Patch.Button.html#Forms9Patch_Button_InvokeLongPressed_System_Object_System_EventArgs_">Button.InvokeLongPressed(Object, EventArgs)</a>
     </div>
     <div>
+      <a class="xref" href="Forms9Patch.Button.html#Forms9Patch_Button_GetMinSize">Button.GetMinSize()</a>
+    </div>
+    <div>
       <a class="xref" href="Forms9Patch.Button.html#Forms9Patch_Button_CheckIsClipped_System_Double_System_Double_">Button.CheckIsClipped(Double, Double)</a>
     </div>
     <div>
@@ -792,6 +796,9 @@
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.scaleyproperty">VisualElement.ScaleYProperty</a>
     </div>
     <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.clipproperty">VisualElement.ClipProperty</a>
+    </div>
+    <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.visualproperty">VisualElement.VisualProperty</a>
     </div>
     <div>
@@ -975,6 +982,9 @@
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.y#Xamarin_Forms_VisualElement_Y">VisualElement.Y</a>
     </div>
     <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.clip#Xamarin_Forms_VisualElement_Clip">VisualElement.Clip</a>
+    </div>
+    <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.resources#Xamarin_Forms_VisualElement_Resources">VisualElement.Resources</a>
     </div>
     <div>
@@ -1098,6 +1108,12 @@
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.setvalue#Xamarin_Forms_BindableObject_SetValue_Xamarin_Forms_BindablePropertyKey_System_Object_">BindableObject.SetValue(BindablePropertyKey, Object)</a>
     </div>
     <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.coercevalue#Xamarin_Forms_BindableObject_CoerceValue_Xamarin_Forms_BindableProperty_">BindableObject.CoerceValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.coercevalue#Xamarin_Forms_BindableObject_CoerceValue_Xamarin_Forms_BindablePropertyKey_">BindableObject.CoerceValue(BindablePropertyKey)</a>
+    </div>
+    <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.dispatcher#Xamarin_Forms_BindableObject_Dispatcher">BindableObject.Dispatcher</a>
     </div>
     <div>
@@ -1136,7 +1152,7 @@
   <h5 id="Forms9Patch_ImageButton_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[Obsolete(&quot;Obsolete: Use Forms9Patch.StateButton&quot;, true)]
-public class ImageButton : StateButton, INotifyPropertyChanged, IDynamicResourceHandler, IElement, INameScope, INavigationProxy, IAnimatable, IResourcesProvider, IStyleElement, IFlowDirectionController, IPropertyPropagationController, IVisualController, ITabStopElement, IStyleSelectable, IStylable, IGestureController, ILayout, ILayoutController, IPaddingElement, IControlTemplated, ILayout, IDisposable, IButton, IButtonController, IViewController, IVisualElementController, IElementController, IButtonState, IBackground, IShape, ILabel, ILabelStyle, IFontElement, IElement</code></pre>
+public class ImageButton : StateButton, INotifyPropertyChanged, IDynamicResourceHandler, IElement, INameScope, INavigationProxy, IStyleSelectable, IAnimatable, IResourcesProvider, IStyleElement, IFlowDirectionController, IPropertyPropagationController, IVisualController, ITabStopElement, IStylable, IGestureController, IGestureRecognizers, ILayout, ILayoutController, IPaddingElement, IControlTemplated, ILayout, IDisposable, IButton, IButtonController, IViewController, IVisualElementController, IElementController, IButtonState, IBackground, IShape, ILabel, ILabelStyle, IFontElement, IElement</code></pre>
   </div>
   <h3 id="implements">Implements</h3>
   <div>
@@ -1150,6 +1166,9 @@ public class ImageButton : StateButton, INotifyPropertyChanged, IDynamicResource
   </div>
   <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.internals.igesturecontroller">Xamarin.Forms.Internals.IGestureController</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.igesturerecognizers">Xamarin.Forms.IGestureRecognizers</a>
   </div>
   <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ilayout">Xamarin.Forms.ILayout</a>
@@ -1259,6 +1278,12 @@ public class ImageButton : StateButton, INotifyPropertyChanged, IDynamicResource
   </div>
   <div>
       <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_SetIsInNativeLayout_Xamarin_Forms_VisualElement_System_Boolean_">ElementExtensions.SetIsInNativeLayout(VisualElement, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_GetRenderer_Xamarin_Forms_VisualElement_">ElementExtensions.GetRenderer(VisualElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_HasRenderer_Xamarin_Forms_VisualElement_">ElementExtensions.HasRenderer(VisualElement)</a>
   </div>
   <div>
       <a class="xref" href="Forms9Patch.FontExtensions.html#Forms9Patch_FontExtensions_LineHeight_Forms9Patch_IFontElement_">FontExtensions.LineHeight(IFontElement)</a>

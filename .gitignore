@@ -264,3 +264,4 @@ log.txt
 api/
 Forms9Patch/Forms9Patch.NuGet/lib/
 .mfractor
+*.nupkg

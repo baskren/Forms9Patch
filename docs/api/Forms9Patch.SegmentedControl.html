@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class SegmentedControl
    | Forms9Patch ">
-    <meta name="generator" content="docfx 2.47.0.0">
+    <meta name="generator" content="docfx 2.56.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -109,6 +109,7 @@
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ivisualelementcontroller">IVisualElementController</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ielementcontroller">IElementController</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.internals.igesturecontroller">IGestureController</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.igesturerecognizers">IGestureRecognizers</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ilayout">ILayout</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ilayoutcontroller">ILayoutController</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.iviewcontainer-1">IViewContainer</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.view">View</a>&gt;</div>
@@ -348,6 +349,9 @@
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.scaleyproperty">VisualElement.ScaleYProperty</a>
     </div>
     <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.clipproperty">VisualElement.ClipProperty</a>
+    </div>
+    <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.visualproperty">VisualElement.VisualProperty</a>
     </div>
     <div>
@@ -525,6 +529,9 @@
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.y#Xamarin_Forms_VisualElement_Y">VisualElement.Y</a>
     </div>
     <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.clip#Xamarin_Forms_VisualElement_Clip">VisualElement.Clip</a>
+    </div>
+    <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.resources#Xamarin_Forms_VisualElement_Resources">VisualElement.Resources</a>
     </div>
     <div>
@@ -651,6 +658,12 @@
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.setvalue#Xamarin_Forms_BindableObject_SetValue_Xamarin_Forms_BindablePropertyKey_System_Object_">BindableObject.SetValue(BindablePropertyKey, Object)</a>
     </div>
     <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.coercevalue#Xamarin_Forms_BindableObject_CoerceValue_Xamarin_Forms_BindableProperty_">BindableObject.CoerceValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.coercevalue#Xamarin_Forms_BindableObject_CoerceValue_Xamarin_Forms_BindablePropertyKey_">BindableObject.CoerceValue(BindablePropertyKey)</a>
+    </div>
+    <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.dispatcher#Xamarin_Forms_BindableObject_Dispatcher">BindableObject.Dispatcher</a>
     </div>
     <div>
@@ -689,7 +702,7 @@
   <h5 id="Forms9Patch_SegmentedControl_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[ContentProperty(&quot;Segments&quot;)]
-public class SegmentedControl : ManualLayout, INotifyPropertyChanged, IDynamicResourceHandler, IElement, INameScope, INavigationProxy, IAnimatable, IResourcesProvider, IStyleElement, IFlowDirectionController, IPropertyPropagationController, IVisualController, ITabStopElement, IStyleSelectable, IStylable, IViewController, IVisualElementController, IElementController, IGestureController, ILayout, ILayoutController, IPaddingElement, IViewContainer&lt;View&gt;, ILayout, IBackground, IShape, IElement, ILabelStyle, IFontElement, IDisposable</code></pre>
+public class SegmentedControl : ManualLayout, INotifyPropertyChanged, IDynamicResourceHandler, IElement, INameScope, INavigationProxy, IStyleSelectable, IAnimatable, IResourcesProvider, IStyleElement, IFlowDirectionController, IPropertyPropagationController, IVisualController, ITabStopElement, IStylable, IViewController, IVisualElementController, IElementController, IGestureController, IGestureRecognizers, ILayout, ILayoutController, IPaddingElement, IViewContainer&lt;View&gt;, ILayout, IBackground, IShape, IElement, ILabelStyle, IFontElement, IDisposable</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -2895,6 +2908,32 @@ public bool TrailingImage { get; set; }</code></pre>
   </table>
   
   
+  <a id="Forms9Patch_SegmentedControl_GetMinSize_" data-uid="Forms9Patch.SegmentedControl.GetMinSize*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_GetMinSize" data-uid="Forms9Patch.SegmentedControl.GetMinSize">GetMinSize()</h4>
+  <div class="markdown level1 summary"><p>What is the smallest that this control can be rendered (labels are 1 line)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Size GetMinSize()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.size">Size</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="Forms9Patch_SegmentedControl_IsIndexSelected_" data-uid="Forms9Patch.SegmentedControl.IsIndexSelected*"></a>
   <h4 id="Forms9Patch_SegmentedControl_IsIndexSelected_System_Int32_" data-uid="Forms9Patch.SegmentedControl.IsIndexSelected(System.Int32)">IsIndexSelected(Int32)</h4>
   <div class="markdown level1 summary"><p>Answers the question: Is an index selected?</p>
@@ -3277,6 +3316,9 @@ still call the base method and modify its calculated results.</p>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.internals.igesturecontroller">Xamarin.Forms.Internals.IGestureController</a>
   </div>
   <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.igesturerecognizers">Xamarin.Forms.IGestureRecognizers</a>
+  </div>
+  <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ilayout">Xamarin.Forms.ILayout</a>
   </div>
   <div>
@@ -3366,6 +3408,12 @@ still call the base method and modify its calculated results.</p>
   </div>
   <div>
       <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_SetIsInNativeLayout_Xamarin_Forms_VisualElement_System_Boolean_">ElementExtensions.SetIsInNativeLayout(VisualElement, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_GetRenderer_Xamarin_Forms_VisualElement_">ElementExtensions.GetRenderer(VisualElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_HasRenderer_Xamarin_Forms_VisualElement_">ElementExtensions.HasRenderer(VisualElement)</a>
   </div>
   <div>
       <a class="xref" href="Forms9Patch.FontExtensions.html#Forms9Patch_FontExtensions_LineHeight_Forms9Patch_IFontElement_">FontExtensions.LineHeight(IFontElement)</a>
