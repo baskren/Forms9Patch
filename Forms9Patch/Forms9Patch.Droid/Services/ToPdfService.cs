@@ -24,8 +24,8 @@ namespace Forms9Patch.Droid
 
         public async Task<ToFileResult> ToPdfAsync(string html, string fileName, PageSize pageSize, PageMargin margin)
         {
-            if (!await XamarinEssentialsExtensions.ConfirmOrRequest<Xamarin.Essentials.Permissions.StorageWrite>())
-                return new ToFileResult(true, "Write External Stoarge permission must be granted for PNG images to be available.");
+            //if (!await XamarinEssentialsExtensions.ConfirmOrRequest<Xamarin.Essentials.Permissions.StorageWrite>())
+            //    return new ToFileResult(true, "Write External Stoarge permission must be granted for PNG images to be available.");
             var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
             ToPdf(taskCompletionSource, html, fileName, pageSize, margin);
             return await taskCompletionSource.Task;
@@ -33,8 +33,8 @@ namespace Forms9Patch.Droid
 
         public async Task<ToFileResult> ToPdfAsync(Xamarin.Forms.WebView webView, string fileName, PageSize pageSize, PageMargin margin)
         {
-            if (!await XamarinEssentialsExtensions.ConfirmOrRequest<Xamarin.Essentials.Permissions.StorageWrite>())
-                return new ToFileResult(true, "Write External Stoarge permission must be granted for PNG images to be available.");
+            //if (!await XamarinEssentialsExtensions.ConfirmOrRequest<Xamarin.Essentials.Permissions.StorageWrite>())
+            //    return new ToFileResult(true, "Write External Stoarge permission must be granted for PNG images to be available.");
             var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
             ToPdf(taskCompletionSource, webView, fileName, pageSize, margin);
             return await taskCompletionSource.Task;
@@ -44,14 +44,14 @@ namespace Forms9Patch.Droid
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0067:Dispose objects before losing scope", Justification = "CustomWebView is disposed in Callback.Compete")]
         public void ToPdf(TaskCompletionSource<ToFileResult> taskCompletionSource, string html, string fileName, PageSize pageSize, PageMargin margin)
         {
-            var externalPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
-            using (var dir = new Java.IO.File(externalPath))
-            using (var file = new Java.IO.File(dir + "/" + fileName + ".pdf"))
-            {
-                if (!dir.Exists())
-                    dir.Mkdir();
-                if (file.Exists())
-                    file.Delete();
+            //var externalPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
+            //using (var dir = new Java.IO.File(externalPath))
+            //using (var file = new Java.IO.File(dir + "/" + fileName + ".pdf"))
+            //{
+            //    if (!dir.Exists())
+            //        dir.Mkdir();
+            //    if (file.Exists())
+            //        file.Delete();
 
                 var webView = new Android.Webkit.WebView(Android.App.Application.Context);
                 webView.Settings.JavaScriptEnabled = true;
@@ -65,7 +65,7 @@ namespace Forms9Patch.Droid
 
                 webView.LoadData(html, "text/html; charset=utf-8", "UTF-8");
                 webView.SetWebViewClient(new WebViewCallBack(taskCompletionSource, fileName, pageSize, margin, OnPageFinished));
-            }
+            //}
         }
 
         public void ToPdf(TaskCompletionSource<ToFileResult> taskCompletionSource, Xamarin.Forms.WebView xfWebView, string fileName, PageSize pageSize, PageMargin margin)
@@ -78,14 +78,15 @@ namespace Forms9Patch.Droid
                 if (droidWebView != null)
                 {
                     //var size = new Size(8.5, 11);
-                    var externalPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
-                    using (var dir = new Java.IO.File(externalPath))
-                    using (var file = new Java.IO.File(dir + "/" + fileName + ".pdf"))
-                    {
-                        if (!dir.Exists())
-                            dir.Mkdir();
-                        if (file.Exists())
-                            file.Delete();
+                    
+                    //var externalPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
+                    //using (var dir = new Java.IO.File(externalPath))
+                    //using (var file = new Java.IO.File(dir + "/" + fileName + ".pdf"))
+                    //{
+                        //if (!dir.Exists())
+                        //    dir.Mkdir();
+                        //if (file.Exists())
+                        //    file.Delete();
 
                         droidWebView.SetLayerType(LayerType.Software, null);
                         droidWebView.Settings.JavaScriptEnabled = true;
@@ -95,7 +96,7 @@ namespace Forms9Patch.Droid
 #pragma warning restore CS0618 // Type or member is obsolete
 
                         droidWebView.SetWebViewClient(new WebViewCallBack(taskCompletionSource, fileName, pageSize, margin, OnPageFinished));
-                    }
+                    //}
                 }
             }
         }
@@ -172,31 +173,42 @@ namespace Android.Print
         public override void OnLayoutFinished(PrintDocumentInfo info, bool changed)
         {
             //using (var _dir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDocuments))
-            using (var _dir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads))
+            //using (var _dir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads))
+            //using (var _dir = Forms9Patch.Droid.Settings.Context.FilesDir)
+            using (var _dir = Forms9Patch.Droid.Settings.Context.CacheDir)
             {
                 if (!_dir.Exists())
                     _dir.Mkdir();
 
                 // var path = _dir.Path + "/" + FileName + ".pdf";
-                var path = System.IO.Path.Combine(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath, Android.OS.Environment.DirectoryDownloads, FileName + ".pdf");
-                var file = new Java.IO.File(path);
+                //var path = System.IO.Path.Combine(_dir.AbsolutePath, Android.OS.Environment.DirectoryDownloads, FileName + ".pdf");
+                //var file = new Java.IO.File(path);
+                var file = new Java.IO.File(_dir, FileName + ".pdf");
                 int iter = 0;
                 while (file.Exists())
                 {
                     file.Dispose();
                     iter++;
                     //path = _dir.Path + "/" + FileName + "_" + iter.ToString("D3") + ".pdf";
-                    path = System.IO.Path.Combine(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath, Android.OS.Environment.DirectoryDownloads, FileName + "_" + iter.ToString("D3") + ".pdf");
-                    file = new Java.IO.File(path);
+                    //path = System.IO.Path.Combine(_dir.AbsolutePath, Android.OS.Environment.DirectoryDownloads, FileName + "_" + iter.ToString("D4") + ".pdf");
+                    //file = new Java.IO.File(path);
+                    file = new Java.IO.File(_dir, FileName + "_" + iter.ToString("D4") + ".pdf");
                 }
-                file.CreateNewFile();
+
+
+                //file.CreateNewFile();
+                file = Java.IO.File.CreateTempFile(FileName + "_" + iter.ToString("D4"), "pdf", _dir);
 
                 var fileDescriptor = ParcelFileDescriptor.Open(file, ParcelFileMode.ReadWrite);
-                file.Dispose();
 
-                var writeResultCallback = new PdfWriteResultCallback(TaskCompletionSource, path);
+                var writeResultCallback = new PdfWriteResultCallback(TaskCompletionSource, file.AbsolutePath);
 
                 Adapter.OnWrite(new Android.Print.PageRange[] { PageRange.AllPages }, fileDescriptor, new CancellationSignal(), writeResultCallback);
+
+                file.Dispose();
+
+                //Android.Media.MediaScannerConnection.ScanFile(Forms9Patch.Droid.Settings.Context, new string[] { file.AbsolutePath }, new string[] { "application/pdf" }, null);
+                //Android.Media.MediaScannerConnection.ScanFile(file.AbsolutePath, "application/pdf");
             }
             base.OnLayoutFinished(info, changed);
         }
@@ -236,15 +248,38 @@ namespace Android.Print
         {
             base.OnWriteFinished(pages);
             _taskCompletionSource.SetResult(new ToFileResult(false, _path));
+            /*
+            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Q)
+            {
+                // You can add more columns.. Complete list of columns can be found at 
+                // https://developer.android.com/reference/android/provider/MediaStore.Downloads
+                var contentValues = new Content.ContentValues();
+                contentValues.Put(Android.Provider.MediaStore.DownloadColumns.Title, System.IO.Path.GetFileName(_path));
+                contentValues.Put(Android.Provider.MediaStore.DownloadColumns.DisplayName, System.IO.Path.GetFileName(_path));
+                contentValues.Put(Android.Provider.MediaStore.DownloadColumns.MimeType, "image/png");
+                contentValues.Put(Android.Provider.MediaStore.DownloadColumns.Size, File.ReadAllBytes(_path).Length);
 
-            // notify download manager!
-            var downloadManager = Android.App.DownloadManager.FromContext(Android.App.Application.Context);
-            var length = File.ReadAllBytes(_path).Length;
-            downloadManager.AddCompletedDownload(
-                System.IO.Path.GetFileName(_path),
-                System.IO.Path.GetFileName(_path),
-                true, "application/pdf", _path,
-                length, true);
+                // If you downloaded to a specific folder inside "Downloads" folder
+                //contentValues.Put(Android.Provider.MediaStore.DownloadColumns.RelativePath, Android.OS.Environment.DirectoryDownloads + File.separator + "Temp");
+
+                // Insert into the database
+                var database = Forms9Patch.Droid.Settings.Context.ContentResolver; // getContentResolver();
+                database.Insert(Android.Provider.MediaStore.Downloads.ExternalContentUri, contentValues);
+            }
+            else
+            {
+                // notify download manager!
+                var downloadManager = Android.App.DownloadManager.FromContext(Android.App.Application.Context);
+                var length = File.ReadAllBytes(_path).Length;
+#pragma warning disable CS0618 // Type or member is obsolete
+                downloadManager.AddCompletedDownload(
+                    System.IO.Path.GetFileName(_path),
+                    System.IO.Path.GetFileName(_path),
+                    true, "application/pdf", _path,
+                    length, true);
+#pragma warning restore CS0618 // Type or member is obsolete
+            }
+            */
         }
 
         public override void OnWriteCancelled()

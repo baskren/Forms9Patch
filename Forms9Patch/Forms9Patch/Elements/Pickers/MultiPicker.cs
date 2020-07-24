@@ -54,14 +54,23 @@ namespace Forms9Patch
 
 
         #region Cell Template
+        /// <summary>
+        /// MultiPicker HTML cell content view
+        /// </summary>
         [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
         protected class MultiPickerHtmlCellContentView : MultiPickerCellContentView
         {
+            /// <summary>
+            /// Constructor
+            /// </summary>
             public MultiPickerHtmlCellContentView()
             {
                 itemLabel.TextType = TextType.Html;
             }
 
+            /// <summary>
+            /// Same as it ever was
+            /// </summary>
             protected override void OnBindingContextChanged()
             {
                 if (!P42.Utils.Environment.IsOnMainThread)
@@ -81,10 +90,16 @@ namespace Forms9Patch
             }
         }
 
+        /// <summary>
+        /// MultiPicker cell content view
+        /// </summary>
         [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
         protected class MultiPickerCellContentView : SinglePickerCellContentView
         {
             #region Fields
+            /// <summary>
+            /// Protected use
+            /// </summary>
             protected readonly Label checkLabel = new Label
             {
                 Text = "✓",
@@ -97,6 +112,9 @@ namespace Forms9Patch
 
 
             #region Constructors
+            /// <summary>
+            /// Constructor for MultiPicker Cell content view
+            /// </summary>
             public MultiPickerCellContentView()
             {
                 ColumnDefinitions = new ColumnDefinitionCollection
@@ -110,6 +128,9 @@ namespace Forms9Patch
 
 
             #region Change management
+            /// <summary>
+            /// Same as it ever was
+            /// </summary>
             protected override void OnPropertyChanged(string propertyName = null)
             {
                 if (!P42.Utils.Environment.IsOnMainThread)

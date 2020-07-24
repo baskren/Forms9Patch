@@ -21,8 +21,16 @@ namespace Forms9Patch
 		Multiselect,
 	}
 
+	/// <summary>
+    /// Extensions to Forms9Patch.GroupToggleBehavior
+    /// </summary>
 	public static class GroupToggleBehaviorExtensions
     {
+		/// <summary>
+        /// Converts a Forms9Patch.GroupToggleBehavior to a Xamarin.Forms.SelectionMode
+        /// </summary>
+        /// <param name="behavior"></param>
+        /// <returns></returns>
 		public static Xamarin.Forms.SelectionMode ToXfSelectionMode(this GroupToggleBehavior behavior)
         {
 			if (behavior == GroupToggleBehavior.None)

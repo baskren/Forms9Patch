@@ -72,9 +72,19 @@ namespace Forms9Patch
             }
         }
 
+        /// <summary>
+        /// Returns platform renderer for VisualElement (or null)
+        /// </summary>
+        /// <param name="element"></param>
+        /// <returns></returns>
         public static object GetRenderer(this VisualElement element)
             => RendererResolver?.GetRenderer(element);
 
+        /// <summary>
+        /// Tests if VisualElement has a Xamarin.Forms platform renderer attached
+        /// </summary>
+        /// <param name="element"></param>
+        /// <returns></returns>
         public static bool HasRenderer(this VisualElement element)
             => GetRenderer(element) != null;
     }

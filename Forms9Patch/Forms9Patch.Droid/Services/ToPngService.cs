@@ -9,6 +9,7 @@ using System.Reflection;
 using System;
 using Android.Runtime;
 using Android.OS;
+using Android.Content;
 
 [assembly: Dependency(typeof(Forms9Patch.Droid.ToPngService))]
 namespace Forms9Patch.Droid
@@ -20,8 +21,8 @@ namespace Forms9Patch.Droid
 
         public async Task<ToFileResult> ToPngAsync(string html, string fileName, int width)
         {
-            if (!await XamarinEssentialsExtensions.ConfirmOrRequest<Xamarin.Essentials.Permissions.StorageWrite>())
-                return new ToFileResult(true, "Write External Stoarge permission must be granted for PNG images to be available.");
+            //if (!await XamarinEssentialsExtensions.ConfirmOrRequest<Xamarin.Essentials.Permissions.StorageWrite>())
+            //    return new ToFileResult(true, "Write External Stoarge permission must be granted for PNG images to be available.");
             var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
             ToPng(taskCompletionSource, html, fileName, width);
             return await taskCompletionSource.Task;
@@ -29,8 +30,8 @@ namespace Forms9Patch.Droid
 
         public async Task<ToFileResult> ToPngAsync(Xamarin.Forms.WebView webView, string fileName, int width)
         {
-            if (!await XamarinEssentialsExtensions.ConfirmOrRequest<Xamarin.Essentials.Permissions.StorageWrite>())
-                return new ToFileResult(true, "Write External Stoarge permission must be granted for PNG images to be available.");
+            //if (!await XamarinEssentialsExtensions.ConfirmOrRequest<Xamarin.Essentials.Permissions.StorageWrite>())
+            //    return new ToFileResult(true, "Write External Stoarge permission must be granted for PNG images to be available.");
             var taskCompletionSource = new TaskCompletionSource<ToFileResult>();
             ToPng(taskCompletionSource, webView, fileName, width);
             return await taskCompletionSource.Task;
@@ -42,14 +43,14 @@ namespace Forms9Patch.Droid
         {
 
             //var size = new Size(8.5, 11);
-            var externalPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
-            using (var dir = new Java.IO.File(externalPath))
-            using (var file = new Java.IO.File(dir + "/" + fileName + ".png"))
-            {
-                if (!dir.Exists())
-                    dir.Mkdir();
-                if (file.Exists())
-                    file.Delete();
+            //var externalPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
+            //using (var dir = new Java.IO.File(externalPath))
+            //using (var file = new Java.IO.File(dir + "/" + fileName + ".png"))
+            //{
+            //    if (!dir.Exists())
+            //        dir.Mkdir();
+            //    if (file.Exists())
+            //        file.Delete();
 
                 var webView = new Android.Webkit.WebView(Android.App.Application.Context);
                 webView.Settings.JavaScriptEnabled = true;
@@ -63,7 +64,7 @@ namespace Forms9Patch.Droid
 
                 webView.SetWebViewClient(new WebViewCallBack(taskCompletionSource, fileName, new PageSize { Width = width }, null, OnPageFinished));
                 webView.LoadData(html, "text/html; charset=utf-8", "UTF-8");
-            }
+            //}
         }
 
         public void ToPng(TaskCompletionSource<ToFileResult> taskCompletionSource, Xamarin.Forms.WebView xfWebView, string fileName, int width)
@@ -77,14 +78,14 @@ namespace Forms9Patch.Droid
                 {
                     //var size = new Size(8.5, 11);
                     //var bounds = new Rectangle(droidWebView.Left, droidWebView.Top, droidWebView.Width, droidWebView.Height);
-                    var externalPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
-                    using (var dir = new Java.IO.File(externalPath))
-                    using (var file = new Java.IO.File(dir + "/" + fileName + ".png"))
-                    {
-                        if (!dir.Exists())
-                            dir.Mkdir();
-                        if (file.Exists())
-                            file.Delete();
+                    //var externalPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
+                    //using (var dir = new Java.IO.File(externalPath))
+                    //using (var file = new Java.IO.File(dir + "/" + fileName + ".png"))
+                    //{
+                    //    if (!dir.Exists())
+                    //        dir.Mkdir();
+                    //    if (file.Exists())
+                    //        file.Delete();
 
                         /*
                         Android.Widget.FrameLayout.LayoutParams tmpParams = new Android.Widget.FrameLayout.LayoutParams(width, width);
@@ -106,7 +107,7 @@ namespace Forms9Patch.Droid
 #pragma warning restore CS0618 // Type or member is obsolete
 
                         droidWebView.SetWebViewClient(new WebViewCallBack(taskCompletionSource, fileName, new PageSize { Width = width }, null, OnPageFinished));
-                    }
+                    //}
                 }
             }
         }
@@ -138,23 +139,29 @@ namespace Forms9Patch.Droid
 
             await Task.Delay(50);
             //using (var _dir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDocuments))
-            using (var _dir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads))
+            //using (var _dir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads))
+            using (var _dir = Forms9Patch.Droid.Settings.Context.GetExternalFilesDir(Android.OS.Environment.DirectoryDownloads))
             {
                 if (!_dir.Exists())
                     _dir.Mkdir();
 
                 //var path = _dir.Path + "/" + fileName + ".png";
-                var path = System.IO.Path.Combine(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath, Android.OS.Environment.DirectoryDownloads, fileName + ".png");
-                var file = new Java.IO.File(path);
+                //var path = System.IO.Path.Combine(_dir.AbsolutePath, Android.OS.Environment.DirectoryDownloads, fileName + ".png");
+                //var file = new Java.IO.File(path);
+                var file = new Java.IO.File(_dir, fileName + ".png");
                 int iter = 0;
                 while (file.Exists())
                 {
                     file.Dispose();
                     iter++;
-                    path = System.IO.Path.Combine(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath, Android.OS.Environment.DirectoryDownloads, fileName + "_" + iter.ToString("D3") + ".png");
-                    file = new Java.IO.File(path);
+                    //path = System.IO.Path.Combine(_dir.AbsolutePath, Android.OS.Environment.DirectoryDownloads, fileName + "_" + iter.ToString("D4") + ".png");
+                    //file = new Java.IO.File(path);
+                    file = new Java.IO.File(_dir, fileName + "_" + iter.ToString("D4") + ".png");
                 }
-                file.CreateNewFile();
+                //file.CreateNewFile();
+                file = Java.IO.File.CreateTempFile(fileName + "_" + iter.ToString("D4"), "png", _dir);
+                var path = file.AbsolutePath;
+
                 using (var stream = new FileStream(file.Path, FileMode.Create, System.IO.FileAccess.Write))
                 {
                     if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Honeycomb)
@@ -194,15 +201,37 @@ namespace Forms9Patch.Droid
                     }
                     stream.Flush();
                     stream.Close();
+                    /*
+                    if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Q)
+                    {
+                        // You can add more columns.. Complete list of columns can be found at 
+                        // https://developer.android.com/reference/android/provider/MediaStore.Downloads
+                        var contentValues = new ContentValues();
+                        contentValues.Put(Android.Provider.MediaStore.DownloadColumns.Title, System.IO.Path.GetFileName(path));
+                        contentValues.Put(Android.Provider.MediaStore.DownloadColumns.DisplayName, System.IO.Path.GetFileName(path));
+                        contentValues.Put(Android.Provider.MediaStore.DownloadColumns.MimeType, "image/png");
+                        contentValues.Put(Android.Provider.MediaStore.DownloadColumns.Size, File.ReadAllBytes(path).Length);
 
-                    // notify download manager!
-                    var downloadManager = Android.App.DownloadManager.FromContext(Android.App.Application.Context);
-                    downloadManager.AddCompletedDownload(
-                        System.IO.Path.GetFileName(path),
-                        System.IO.Path.GetFileName(path),
-                        true, "image/png", path,
-                        File.ReadAllBytes(path).Length, true);
+                        // If you downloaded to a specific folder inside "Downloads" folder
+                        //contentValues.Put(Android.Provider.MediaStore.DownloadColumns.RelativePath, Android.OS.Environment.DirectoryDownloads + File.separator + "Temp");
 
+                        // Insert into the database
+                        ContentResolver database = Forms9Patch.Droid.Settings.Context.ContentResolver; // getContentResolver();
+                        database.Insert(Android.Provider.MediaStore.Downloads.ExternalContentUri, contentValues);
+                    }
+                    else
+                    {
+                        // notify download manager!
+                        var downloadManager = Android.App.DownloadManager.FromContext(Android.App.Application.Context);
+#pragma warning disable CS0618 // Type or member is obsolete
+                        downloadManager.AddCompletedDownload(
+                            System.IO.Path.GetFileName(path),
+                            System.IO.Path.GetFileName(path),
+                            true, "image/png", path,
+                            File.ReadAllBytes(path).Length, true);
+#pragma warning restore CS0618 // Type or member is obsolete
+                    }
+                    */
                     taskCompletionSource.SetResult(new ToFileResult(false, path));
                     view.Dispose();
                 }

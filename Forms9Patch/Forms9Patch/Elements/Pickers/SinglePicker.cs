@@ -30,7 +30,13 @@ namespace Forms9Patch
         #endregion
 
         #region Fields
+        /// <summary>
+        /// Internal use
+        /// </summary>
         internal protected Type PlainTextCellType = typeof(SinglePickerCellContentView);
+        /// <summary>
+        /// Internal Use
+        /// </summary>
         internal protected Type HtmlTextCellType = typeof(SinglePickerHtmlCellContentView);
         #endregion
 
@@ -90,14 +96,23 @@ namespace Forms9Patch
 
 
         #region Cell Template
+        /// <summary>
+        /// Contents of a SinglePicker HTML cell
+        /// </summary>
         [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
         protected class SinglePickerHtmlCellContentView : SinglePickerCellContentView
         {
+            /// <summary>
+            /// Constructor for a SinglePicker HTML cell
+            /// </summary>
             public SinglePickerHtmlCellContentView()
             {
                 itemLabel.TextType = TextType.Html;
             }
 
+            /// <summary>
+            /// Same as it ever was
+            /// </summary>
             protected override void OnBindingContextChanged()
             {
                 if (!P42.Utils.Environment.IsOnMainThread)
@@ -117,13 +132,20 @@ namespace Forms9Patch
             }
         }
 
+        /// <summary>
+        /// Contents of a SinglePicker Cell
+        /// </summary>
         [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
         protected class SinglePickerCellContentView : Xamarin.Forms.Grid, IDisposable
         {
             #region Properties
-            public double CellHeight { get; set; }
-
+            /// <summary>
+            /// Backing store key for IsSelected property
+            /// </summary>
             public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create(nameof(IsSelected), typeof(bool), typeof(SinglePickerCellContentView), default(bool));
+            /// <summary>
+            /// Is this cell selected?
+            /// </summary>
             public bool IsSelected
             {
                 get => (bool)GetValue(IsSelectedProperty);
@@ -134,6 +156,9 @@ namespace Forms9Patch
 
 
             #region Fields
+            /// <summary>
+            /// For internal use
+            /// </summary>
             protected readonly Forms9Patch.Label itemLabel = new Forms9Patch.Label
             {
                 TextColor = Color.Black,
@@ -146,10 +171,13 @@ namespace Forms9Patch
 
 
             #region Constructors
+            /// <summary>
+            /// Constructs a Forms9Patch.SinglePickerCellContentView
+            /// </summary>
             public SinglePickerCellContentView()
             {
 
-                CellHeight = (int)BasePicker.RowHeightProperty.DefaultValue;
+                var cellHeight = (int)BasePicker.RowHeightProperty.DefaultValue;
                 Padding = new Thickness(5, 1, 5, 1);
                 ColumnDefinitions = new ColumnDefinitionCollection
                 {
@@ -158,7 +186,7 @@ namespace Forms9Patch
                 };
                 RowDefinitions = new RowDefinitionCollection
                 {
-                    new RowDefinition { Height = new GridLength(CellHeight - Padding.VerticalThickness, GridUnitType.Absolute)}
+                    new RowDefinition { Height = new GridLength(cellHeight - Padding.VerticalThickness, GridUnitType.Absolute)}
                 };
                 ColumnSpacing = 0;
 
@@ -166,6 +194,9 @@ namespace Forms9Patch
             }
 
             private bool _disposed;
+            /// <summary>
+            /// Same as it ever was
+            /// </summary>
             protected virtual void Dispose(bool disposing)
             {
                 if (!_disposed && disposing)
@@ -179,6 +210,9 @@ namespace Forms9Patch
                 }
             }
 
+            /// <summary>
+            /// Same as it ever was
+            /// </summary>
             public void Dispose()
             {
                 Dispose(true);
@@ -188,6 +222,9 @@ namespace Forms9Patch
 
 
             #region Change management
+            /// <summary>
+            /// Same as it ever was
+            /// </summary>
             protected override void OnPropertyChanging([CallerMemberName] string propertyName = null)
             {
                 base.OnPropertyChanging(propertyName);
@@ -205,6 +242,9 @@ namespace Forms9Patch
                 }
             }
 
+            /// <summary>
+            /// Same as it ever was
+            /// </summary>
             protected override void OnBindingContextChanged()
             {
                 if (!P42.Utils.Environment.IsOnMainThread)
@@ -221,6 +261,10 @@ namespace Forms9Patch
                 UpdateSelected();
             }
 
+            /// <summary>
+            /// Same as it ever was
+            /// </summary>
+            /// <param name="propertyName"></param>
             protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
             {
                 base.OnPropertyChanged(propertyName);

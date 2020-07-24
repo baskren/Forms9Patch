@@ -237,6 +237,7 @@ Fixed: iOS HtmlMarkup underlines don't match font color, Default Android image b
                 <dependency id="Newtonsoft.Json" version="12.0.3" />
                 <dependency id="SkiaSharp.Views.Forms" version="2.80.1" />
                 <dependency id="SkiaSharp.Svg" version="1.60" />
+                <!---
                 <dependency id="Xamarin.Android.Support.v4" version="28.0.0.3" />
                 <dependency id="Xamarin.Android.Support.Design" version="28.0.0.3" />
                 <dependency id="Xamarin.Android.Support.v7.AppCompat" version="28.0.0.3" />
@@ -244,6 +245,7 @@ Fixed: iOS HtmlMarkup underlines don't match font color, Default Android image b
                 <dependency id="Xamarin.Android.Support.v7.MediaRouter" version="28.0.0.3" />
                 <dependency id="Xamarin.Android.Support.CustomTabs" version="28.0.0.3" />
                 <dependency id="Xamarin.Android.Support.Core.Utils" version="28.0.0.3" />
+                -->
             </group>
         </dependencies>
     </metadata>

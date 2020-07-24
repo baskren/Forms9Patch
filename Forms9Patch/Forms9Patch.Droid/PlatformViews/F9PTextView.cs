@@ -128,8 +128,29 @@ namespace Forms9Patch.Droid
                     base.TextSize = value;
             }
         }
+
         #endregion
 
+
+        #region update
+        public void UpdateFrom(F9PTextView control)
+        {
+            if (control != null && control != this)
+            {
+                FallbackLineSpacing = control.FallbackLineSpacing;
+                FontFeatureSettings = control.FontFeatureSettings;
+                Gravity = control.Gravity;
+                LayoutDirection = control.LayoutDirection;
+                LayoutParameters = control.LayoutParameters;
+                LetterSpacing = control.LetterSpacing;
+
+                //System.Diagnostics.Debug.WriteLine("LineHeight: before[" + LineHeight + "] after:[" + control.LineHeight + "]");
+
+                LineHeight = control.LineHeight;
+                PaintFlags = control.PaintFlags;
+            }
+        }
+        #endregion
 
         #region Touch to Index
         internal int IndexForPoint(Android.Graphics.Point p)

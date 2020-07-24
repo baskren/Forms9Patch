@@ -99,8 +99,6 @@ namespace Forms9Patch.Droid
                 var v7 = new ItemCell<Label>();
                 var v8 = new Cell<Label>();
 
-                var a1 = new Android.Support.V7.Widget.FitWindowsFrameLayout(Activity);
-
                 var p1 = new PopupPlatformDroid();
                 var p2 = new PopupPageRenderer(null);
             }
@@ -137,23 +135,6 @@ namespace Forms9Patch
 
         public Cell<Label> Include(Cell<Label> cell)
             => new Cell<Label>();
-
-#pragma warning disable IDE0040
-#pragma warning disable IDE0044 // Add readonly modifier
-        static Activity Activity;
-        static bool _falseflag;
-#pragma warning restore IDE0044 // Add readonly modifier
-#pragma warning restore IDE0040
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "<Pending>")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0059:Unnecessary assignment of a value", Justification = "<Pending>")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0067:Dispose objects before losing scope", Justification = "<Pending>")]
-        static void FalseFlag()
-        {
-            if (_falseflag)
-            {
-                var ignore = new Android.Support.V7.Widget.FitWindowsFrameLayout(Activity);
-            }
-        }
 
 #pragma warning restore IDE0060 // Remove unused parameter
     }

@@ -260,10 +260,13 @@ namespace Forms9Patch.Droid
 
 
 
-        SizeRequest InternalLayout(F9PTextView control, TextControlState state)
+
+
+        SizeRequest InternalLayout(F9PTextView control, TextControlState state, [System.Runtime.CompilerServices.CallerMemberName] string caller = null)
         {
             if (Element is Forms9Patch.Label element && control != null)
             {
+                control.UpdateFrom(Control);
 
                 ICharSequence text = state.JavaText;
                 var tmpFontSize = BoundTextSize(element.FontSize);
@@ -341,7 +344,7 @@ namespace Forms9Patch.Droid
                 state.RenderedFontSize = tmpFontSize;
 
                 StaticLayout layout;
-                using (var tmpPaint = new TextPaint(control.Paint))
+                using (var tmpPaint = new TextPaint(Control?.Paint ?? control.Paint))
                 {
                     layout = TextExtensions.StaticLayout(state.JavaText, tmpPaint, state.AvailWidth, Android.Text.Layout.Alignment.AlignNormal, state.LineHeight < 0 ? 1 : state.LineHeight, 0.0f, true);
                 }
@@ -372,13 +375,14 @@ namespace Forms9Patch.Droid
                     else
                     {
                         layout.Dispose();
-                        using (var tmpPaint = new TextPaint(control.Paint))
+                        using (var tmpPaint = new TextPaint(Control?.Paint ?? control.Paint))
                         {
                             layout = TextPaintExtensions.Truncate(state.Text, element.F9PFormattedString, tmpPaint, state.AvailWidth, state.AvailHeight, element.AutoFit, element.LineBreakMode, state.LineHeight < 0 ? 1 : state.LineHeight, ref lines, ref text);
                         }
                     }
                 }
-                lines = lines > 0 ? System.Math.Min(lines, layout.LineCount) : layout.LineCount;
+                //lines = lines > 0 ? System.Math.Min(lines, layout.LineCount) : layout.LineCount;
+                lines = layout.LineCount;
 
                 for (int i = 0; i < lines; i++)
                 {
@@ -428,7 +432,10 @@ namespace Forms9Patch.Droid
                     Control.ForceLayout();
                 }
                 //if (control == Control)
-                //    System.Diagnostics.Debug.WriteLine("LabelRenderer" + P42.Utils.ReflectionExtensions.CallerString() + ": result: " + result);
+                //    System.Diagnostics.Debug.WriteLine("LabelRenderer" + P42.Utils.ReflectionExtensions.CallerString() + ":  from:["+caller+"] avail:["+state.AvailWidth + "," + state.AvailHeight+"] result: " + result);
+
+                if (control == Control && result.Request.Height > state.AvailHeight)
+                    Element?.InternalInvalidateMeasure();
                 return result;
             }
             return new SizeRequest(Size.Zero);

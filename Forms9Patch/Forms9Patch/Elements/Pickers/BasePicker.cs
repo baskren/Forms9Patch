@@ -68,7 +68,13 @@ namespace Forms9Patch
         readonly BoxView _upperPadding = new BoxView { Color = Color.Transparent };
         readonly BoxView _lowerPadding = new BoxView { Color = Color.Transparent };
 
+        /// <summary>
+        /// For debug purposes
+        /// </summary>
         public int Instances { get; private set; }
+        /// <summary>
+        /// For debug purposes
+        /// </summary>
         public int Instance { get; private set; }
         #endregion
 
@@ -148,6 +154,10 @@ namespace Forms9Patch
         #region Snap to cell
         DateTime _lastScrollPoint = DateTime.MinValue;
         bool _scrolling;
+        /// <summary>
+        /// Used to determine when scrolling has stopped
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnScrolled(ItemsViewScrolledEventArgs e)
         {
             base.OnScrolled(e);
@@ -169,10 +179,19 @@ namespace Forms9Patch
         #endregion
     }
 
+    /// <summary>
+    /// Template Picker
+    /// </summary>
     public class BasePickerDataTemplateSelector : Xamarin.Forms.DataTemplateSelector
     {
-        Dictionary<Type, DataTemplate> Templates = new Dictionary<Type, DataTemplate>();
+        readonly Dictionary<Type, DataTemplate> Templates = new Dictionary<Type, DataTemplate>();
 
+        /// <summary>
+        /// Selects a template for an item
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="container"></param>
+        /// <returns></returns>
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
             var type = item.GetType();
@@ -193,9 +212,17 @@ namespace Forms9Patch
             return null;
         }
 
+        /// <summary>
+        /// Adds a new template
+        /// </summary>
+        /// <param name="itemType"></param>
+        /// <param name="templateType"></param>
         public void Add(Type itemType, Type templateType)
             => Templates[itemType] = new DataTemplate(templateType);
 
+        /// <summary>
+        /// Clears the templates
+        /// </summary>
         public void Clear()
             => Templates.Clear();
     }
