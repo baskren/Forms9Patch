@@ -146,9 +146,6 @@ namespace Forms9Patch.Droid
 
             if (height < 1 || width < 1)
             {
-
-
-
                 taskCompletionSource.SetResult(new ToFileResult(true, "WebView width or height is zero."));
                 return;
             }
@@ -165,6 +162,7 @@ namespace Forms9Patch.Droid
                 //var path = _dir.Path + "/" + fileName + ".png";
                 //var path = System.IO.Path.Combine(_dir.AbsolutePath, Android.OS.Environment.DirectoryDownloads, fileName + ".png");
                 //var file = new Java.IO.File(path);
+                /*
                 var file = new Java.IO.File(_dir, fileName + ".png");
                 int iter = 0;
                 while (file.Exists())
@@ -177,6 +175,8 @@ namespace Forms9Patch.Droid
                 }
                 //file.CreateNewFile();
                 file = Java.IO.File.CreateTempFile(fileName + "_" + iter.ToString("D4"), "png", _dir);
+                */
+                var file = Java.IO.File.CreateTempFile(fileName + ".", ".png", _dir);
                 var path = file.AbsolutePath;
 
                 using (var stream = new FileStream(file.Path, FileMode.Create, System.IO.FileAccess.Write))

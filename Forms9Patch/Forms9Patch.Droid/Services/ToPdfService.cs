@@ -183,6 +183,7 @@ namespace Android.Print
                 // var path = _dir.Path + "/" + FileName + ".pdf";
                 //var path = System.IO.Path.Combine(_dir.AbsolutePath, Android.OS.Environment.DirectoryDownloads, FileName + ".pdf");
                 //var file = new Java.IO.File(path);
+                /*
                 var file = new Java.IO.File(_dir, FileName + ".pdf");
                 int iter = 0;
                 while (file.Exists())
@@ -192,12 +193,13 @@ namespace Android.Print
                     //path = _dir.Path + "/" + FileName + "_" + iter.ToString("D3") + ".pdf";
                     //path = System.IO.Path.Combine(_dir.AbsolutePath, Android.OS.Environment.DirectoryDownloads, FileName + "_" + iter.ToString("D4") + ".pdf");
                     //file = new Java.IO.File(path);
-                    file = new Java.IO.File(_dir, FileName + "_" + iter.ToString("D4") + ".pdf");
+                    file = new Java.IO.File(_dir, FileName + "_" + iter.ToString("D3") + ".pdf");
                 }
 
 
                 //file.CreateNewFile();
-                file = Java.IO.File.CreateTempFile(FileName + "_" + iter.ToString("D4"), "pdf", _dir);
+                */
+                var file = Java.IO.File.CreateTempFile(FileName + ".", ".pdf", _dir);
 
                 var fileDescriptor = ParcelFileDescriptor.Open(file, ParcelFileMode.ReadWrite);
 
