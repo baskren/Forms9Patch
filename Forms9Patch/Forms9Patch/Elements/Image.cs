@@ -1360,15 +1360,8 @@ namespace Forms9Patch
                 SKPaint paint = null;
                 if (shadowPaint == null && TintColor != Color.Default && TintColor != Color.Transparent)
                 {
-                    var mx = new[]
-                    {
-                        0, 0, 0, 0, TintColor.ByteR(),
-                        0, 0, 0, 0, TintColor.ByteG(),
-                        0, 0, 0, 0, TintColor.ByteB(),
-                        0, 0, 0, (float)(TintColor.A * Opacity), 0
-                    };
-                    var cf = SKColorFilter.CreateColorMatrix(mx);
-
+                    var color = new SKColor(TintColor.ByteR(), TintColor.ByteG(), TintColor.ByteB(), TintColor.ByteA());
+                    var cf = SKColorFilter.CreateBlendMode(color, SKBlendMode.SrcIn);
 
                     paint = new SKPaint
                     {
