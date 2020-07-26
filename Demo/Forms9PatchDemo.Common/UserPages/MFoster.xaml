@@ -7,14 +7,14 @@
              mc:Ignorable="d"
              x:Class="ButtonBindingSample.MainPage"
              Padding="10"
-             BackgroundColor="Red"
+             BackgroundColor="Black"
              >
 
     <StackLayout>
         <f9p:Button Text="Simple Button" TextColor="White" Command="{Binding CommandWithDisabledState}"/>
         <f9p:StateButton Text="State Button" TextColor="White" Command="{Binding CommandWithDisabledState}">
             <f9p:StateButton.DisabledState >
-                <f9p:ButtonState TextColor="#4000" Text="StateButton - Disabled" />
+                <f9p:ButtonState TextColor="#4888" Text="StateButton - Disabled" />
             </f9p:StateButton.DisabledState>
         </f9p:StateButton>
         <Button Text="Xamarin Button" TextColor="White" Command="{Binding CommandWithDisabledState}"/>
