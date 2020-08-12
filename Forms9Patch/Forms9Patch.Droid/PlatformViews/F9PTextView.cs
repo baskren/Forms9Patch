@@ -182,19 +182,42 @@ namespace Forms9Patch.Droid
                 base.RequestLayout();
         }
 
-        bool _skip;
+        //bool _skip;
+        bool invalidating = false;
+        bool pendingInvalidate = false;
         public override void Invalidate()
         {
             if (IsNativeDrawEnabled)
             {
+                /*
                 if (!_skip)
                     base.Invalidate();
                 _skip = false;
+                */
+                if (invalidating)
+                {
+                    pendingInvalidate = true;
+                    System.Diagnostics.Debug.WriteLine("pending");
+                    return;
+                }
+                invalidating = true;
+                //Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
+                //{
+                    base.Invalidate();
+                    invalidating = false;
+                    if (pendingInvalidate)
+                    {
+                        pendingInvalidate = false;
+                        Invalidate();
+                    }
+                //});
+
             }
         }
 
         public void SkipNextInvalidate()
-            => _skip = true;
+        { }
+        //=> _skip = true;
 
         #endregion
 
