@@ -65,25 +65,22 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
-            }
+                base.OnPropertyChanged(propertyName);
 
-            base.OnPropertyChanged(propertyName);
-
-            if (propertyName == IsHtmlTextProperty.PropertyName)
-            {
-                var itemsSource = ItemsSource;
-                ItemsSource = null;
-                ItemTemplates.Clear();
-                var template = IsHtmlText
-                    ? HtmlTextCellType
-                    : PlainTextCellType;
-                ItemTemplates.Add(typeof(string), template);
-                ItemsSource = itemsSource;
-            }
+                if (propertyName == IsHtmlTextProperty.PropertyName)
+                {
+                    var itemsSource = ItemsSource;
+                    ItemsSource = null;
+                    ItemTemplates.Clear();
+                    var template = IsHtmlText
+                        ? HtmlTextCellType
+                        : PlainTextCellType;
+                    ItemTemplates.Add(typeof(string), template);
+                    ItemsSource = itemsSource;
+                }
+            });
         }
         #endregion
 
@@ -116,20 +113,17 @@ namespace Forms9Patch
             /// </summary>
             protected override void OnBindingContextChanged()
             {
-                if (!P42.Utils.Environment.IsOnMainThread)
+                Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
                 {
-                    Device.BeginInvokeOnMainThread(OnBindingContextChanged);
-                    return;
-                }
+                    base.OnBindingContextChanged();
 
-                base.OnBindingContextChanged();
-
-                if (BindingContext is IHtmlString htmlObject)
-                    itemLabel.HtmlText = htmlObject.ToHtml();
-                else if (BindingContext != null)
-                    itemLabel.HtmlText = BindingContext?.ToString();
-                else
-                    itemLabel.HtmlText = itemLabel.Text = null;
+                    if (BindingContext is IHtmlString htmlObject)
+                        itemLabel.HtmlText = htmlObject.ToHtml();
+                    else if (BindingContext != null)
+                        itemLabel.HtmlText = BindingContext?.ToString();
+                    else
+                        itemLabel.HtmlText = itemLabel.Text = null;
+                });
             }
         }
 
@@ -248,18 +242,16 @@ namespace Forms9Patch
             /// </summary>
             protected override void OnBindingContextChanged()
             {
-                if (!P42.Utils.Environment.IsOnMainThread)
+                Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
                 {
-                    Device.BeginInvokeOnMainThread(OnBindingContextChanged);
-                    return;
-                }
 
-                base.OnBindingContextChanged();
-                if (BindingContext != null)
-                    itemLabel.Text = BindingContext.ToString();
-                else
-                    itemLabel.Text = null;
-                UpdateSelected();
+                    base.OnBindingContextChanged();
+                    if (BindingContext != null)
+                        itemLabel.Text = BindingContext.ToString();
+                    else
+                        itemLabel.Text = null;
+                    UpdateSelected();
+                });
             }
 
             /// <summary>

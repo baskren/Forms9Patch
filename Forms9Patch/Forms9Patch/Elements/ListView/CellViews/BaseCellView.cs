@@ -366,55 +366,53 @@ namespace Forms9Patch
 
         void OnPanned(object sender, PanEventArgs e)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPanned(sender, e));
-                return;
-            }
 
-            //if (Debug)
-            //    System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + sender + ", " + e + ")");
-            ((ItemWrapper)BindingContext)?.OnPanned(this, new ItemWrapperPanEventArgs((ItemWrapper)BindingContext, e));
-            if (_panVt)
-            {
-                _panVt = false;
-                return;
-            }
-            _panHz = false;
-            if (ContentView is ICellSwipeMenus iCellSwipeMenus)
-            {
-                var distance = e.TotalDistance.X + _translateOnUp;
-                if (_endButtons + _startButtons > 0)
+                //if (Debug)
+                //    System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + sender + ", " + e + ")");
+                ((ItemWrapper)BindingContext)?.OnPanned(this, new ItemWrapperPanEventArgs((ItemWrapper)BindingContext, e));
+                if (_panVt)
                 {
-                    var side = _startButtons > 0 ? Side.Start : Side.End;
-                    //System.Diagnostics.Debug.WriteLine("ChildrenX=[" + ChildrenX + "]");
-                    if ((_endButtons > 0 && side == Side.End && (e.TotalDistance.X > 20 || ContentViewX > -60)) ||
-                        (_startButtons > 0 && side == Side.Start && (e.TotalDistance.X < -20 || ContentViewX < 60)))
+                    _panVt = false;
+                    return;
+                }
+                _panHz = false;
+                if (ContentView is ICellSwipeMenus iCellSwipeMenus)
+                {
+                    var distance = e.TotalDistance.X + _translateOnUp;
+                    if (_endButtons + _startButtons > 0)
                     {
-                        PutAwaySwipeButtons(true);
-                        return;
-                    }
-                    if ((_endButtons > 0 && side == Side.End && /*_swipeFrame1.TranslationX < Width - 210 */ distance <= -210 && ((ICellSwipeMenus)ContentView)?.EndSwipeMenu != null && ((ICellSwipeMenus)ContentView).EndSwipeMenu.Count > 0 && ((ICellSwipeMenus)ContentView).EndSwipeMenu[0].IsTriggeredOnFullSwipe) ||
-                        (_startButtons > 0 && side == Side.Start && /*_swipeFrame1.TranslationX > 210 - Width */ distance >= 210 && ((ICellSwipeMenus)ContentView)?.StartSwipeMenu != null && ((ICellSwipeMenus)ContentView).StartSwipeMenu.Count > 0 && ((ICellSwipeMenus)ContentView).StartSwipeMenu[0].IsTriggeredOnFullSwipe))
-                    {
-                        // execute full swipe
-                        _swipeFrame1.TranslateTo(0, 0, 250, Easing.Linear);
-                        OnSwipeButtonTapped(_swipeButton1, EventArgs.Empty);
-                        Device.StartTimer(TimeSpan.FromMilliseconds(400), () =>
+                        var side = _startButtons > 0 ? Side.Start : Side.End;
+                        //System.Diagnostics.Debug.WriteLine("ChildrenX=[" + ChildrenX + "]");
+                        if ((_endButtons > 0 && side == Side.End && (e.TotalDistance.X > 20 || ContentViewX > -60)) ||
+                            (_startButtons > 0 && side == Side.Start && (e.TotalDistance.X < -20 || ContentViewX < 60)))
                         {
-                            PutAwaySwipeButtons(false);
-                            return false;
-                        });
+                            PutAwaySwipeButtons(true);
+                            return;
+                        }
+                        if ((_endButtons > 0 && side == Side.End && /*_swipeFrame1.TranslationX < Width - 210 */ distance <= -210 && ((ICellSwipeMenus)ContentView)?.EndSwipeMenu != null && ((ICellSwipeMenus)ContentView).EndSwipeMenu.Count > 0 && ((ICellSwipeMenus)ContentView).EndSwipeMenu[0].IsTriggeredOnFullSwipe) ||
+                            (_startButtons > 0 && side == Side.Start && /*_swipeFrame1.TranslationX > 210 - Width */ distance >= 210 && ((ICellSwipeMenus)ContentView)?.StartSwipeMenu != null && ((ICellSwipeMenus)ContentView).StartSwipeMenu.Count > 0 && ((ICellSwipeMenus)ContentView).StartSwipeMenu[0].IsTriggeredOnFullSwipe))
+                        {
+                            // execute full swipe
+                            _swipeFrame1.TranslateTo(0, 0, 250, Easing.Linear);
+                            OnSwipeButtonTapped(_swipeButton1, EventArgs.Empty);
+                            Device.StartTimer(TimeSpan.FromMilliseconds(400), () =>
+                            {
+                                PutAwaySwipeButtons(false);
+                                return false;
+                            });
+                        }
+                        else
+                        {
+                            ShowButtons(side);
+                            return;
+                        }
                     }
                     else
-                    {
-                        ShowButtons(side);
-                        return;
-                    }
+                        PutAwaySwipeButtons(false);
                 }
-                else
-                    PutAwaySwipeButtons(false);
-            }
+            });
         }
 
         void ShowButtons(Side side)
@@ -551,72 +549,70 @@ namespace Forms9Patch
         double _homeOffset;
         void OnPanning(object sender, PanEventArgs e)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPanning(sender, e));
-                return;
-            }
 
-            ((ItemWrapper)BindingContext)?.OnPanning(this, new ItemWrapperPanEventArgs((ItemWrapper)BindingContext, e));
-            //if (Debug)
-            //    System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + sender + ", " + e + ")");
-            if (_panVt)
-                return;
-            if (!_panVt && !_panHz)
-            {
-                if (Math.Abs(e.TotalDistance.Y) > 10)
+                ((ItemWrapper)BindingContext)?.OnPanning(this, new ItemWrapperPanEventArgs((ItemWrapper)BindingContext, e));
+                //if (Debug)
+                //    System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + sender + ", " + e + ")");
+                if (_panVt)
+                    return;
+                if (!_panVt && !_panHz)
                 {
-                    _panVt = true;
-                    return;
+                    if (Math.Abs(e.TotalDistance.Y) > 10)
+                    {
+                        _panVt = true;
+                        return;
+                    }
+                    if (Math.Abs(e.TotalDistance.X) > 10)
+                        _panHz = true;
+                    else
+                        return;
                 }
-                if (Math.Abs(e.TotalDistance.X) > 10)
-                    _panHz = true;
-                else
+
+                e.Handled = _panHz;
+                var listView = this.Ancestor<ListView>();
+                if (listView != null)
+                    listView.IsScrollEnabled = false;
+
+                var distance = e.TotalDistance.X + _translateOnUp;
+                if (_settingup)
                     return;
-            }
-
-            e.Handled = _panHz;
-            var listView = this.Ancestor<ListView>();
-            if (listView != null)
-                listView.IsScrollEnabled = false;
-
-            var distance = e.TotalDistance.X + _translateOnUp;
-            if (_settingup)
-                return;
-            if (_endButtons + _startButtons > 0)
-            {
-                var side = _startButtons > 0 ? Side.Start : Side.End;
-
-                if ((side == Side.End && distance <= _homeOffset) || (side == Side.Start && distance >= _homeOffset))
+                if (_endButtons + _startButtons > 0)
                 {
+                    var side = _startButtons > 0 ? Side.Start : Side.End;
 
-                    //System.Diagnostics.Debug.WriteLine("=S=t=r=e=t=c=h=");
-                    var parkedPosition = -(int)side * 60 * (_endButtons + _startButtons);
-                    var panOffset = distance - parkedPosition;
-                    ContentViewX = parkedPosition + panOffset / 2;
-                    _swipeFrame1.TranslationX = (int)side * (Width + (int)side * -60 + panOffset / 3);
-                    _swipeFrame2.TranslationX = (int)side * (Width + (int)side * -120 + panOffset / 6);
-                    _swipeFrame3.TranslationX = (int)side * (Width + (int)side * -180 + panOffset / 6);
-                    return;
+                    if ((side == Side.End && distance <= _homeOffset) || (side == Side.Start && distance >= _homeOffset))
+                    {
+
+                        //System.Diagnostics.Debug.WriteLine("=S=t=r=e=t=c=h=");
+                        var parkedPosition = -(int)side * 60 * (_endButtons + _startButtons);
+                        var panOffset = distance - parkedPosition;
+                        ContentViewX = parkedPosition + panOffset / 2;
+                        _swipeFrame1.TranslationX = (int)side * (Width + (int)side * -60 + panOffset / 3);
+                        _swipeFrame2.TranslationX = (int)side * (Width + (int)side * -120 + panOffset / 6);
+                        _swipeFrame3.TranslationX = (int)side * (Width + (int)side * -180 + panOffset / 6);
+                        return;
+                    }
+                    if ((side == Side.End && distance > 1) || (side == Side.Start && distance < 1))
+                    {
+                        // hey, the user is panning too far in the wrong direction
+                        ContentViewX = 0;
+                        return;
+                    }
+                    //System.Diagnostics.Debug.WriteLine("slide");
+                    ContentViewX = distance;
+                    _swipeFrame1.TranslationX = (int)side * (Width + (int)side * distance / (_endButtons + _startButtons));
+                    _swipeFrame2.TranslationX = (int)side * (Width + (int)side * 2 * distance / (_endButtons + _startButtons));
+                    _swipeFrame3.TranslationX = (int)side * (Width + (int)side * distance);
                 }
-                if ((side == Side.End && distance > 1) || (side == Side.Start && distance < 1))
+                else if (Math.Abs(distance) > 0.1)
                 {
-                    // hey, the user is panning too far in the wrong direction
-                    ContentViewX = 0;
-                    return;
+                    // setup end SwipeMenu
+                    var side = distance < 0 ? Side.End : Side.Start;
+                    MapButtons(side, distance);
                 }
-                //System.Diagnostics.Debug.WriteLine("slide");
-                ContentViewX = distance;
-                _swipeFrame1.TranslationX = (int)side * (Width + (int)side * distance / (_endButtons + _startButtons));
-                _swipeFrame2.TranslationX = (int)side * (Width + (int)side * 2 * distance / (_endButtons + _startButtons));
-                _swipeFrame3.TranslationX = (int)side * (Width + (int)side * distance);
-            }
-            else if (Math.Abs(distance) > 0.1)
-            {
-                // setup end SwipeMenu
-                var side = distance < 0 ? Side.End : Side.Start;
-                MapButtons(side, distance);
-            }
+            });
         }
 
         void PutAwaySwipeButtons(bool animated)
@@ -667,57 +663,54 @@ namespace Forms9Patch
 
         void OnSwipeButtonTapped(object sender, EventArgs e)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnSwipeButtonTapped(sender, e));
-                return;
-            }
-
-            if (sender is Button button)
-            {
-                P42.Utils.BreadCrumbs.Add(GetType(), button.Text ?? button.HtmlText);
-
-                var listView = this.Ancestor<ListView>();
-                if (listView != null)
-                    listView.IsScrollEnabled = true;
-                var index = 0;
-                if (button == _swipeButton2)
-                    index = 1;
-                else if (button == _swipeButton3)
-                    index = 2;
-                var swipeMenu = _endButtons > 0 ? ((ICellSwipeMenus)ContentView)?.EndSwipeMenu : ((ICellSwipeMenus)ContentView)?.StartSwipeMenu;
-                if (index == 2 && _endButtons + _startButtons > 2)
+                if (sender is Button button)
                 {
-                    // show remaining menu items in a modal list
-                    PutAwaySwipeButtons(false);
-                    _swipePopupCancelButton.Tapped += OnSwipePopupCancelButtonTapped;
-                    for (int i = 2; i < swipeMenu.Count; i++)
+                    P42.Utils.BreadCrumbs.Add(GetType(), button.Text ?? button.HtmlText);
+
+                    var listView = this.Ancestor<ListView>();
+                    if (listView != null)
+                        listView.IsScrollEnabled = true;
+                    var index = 0;
+                    if (button == _swipeButton2)
+                        index = 1;
+                    else if (button == _swipeButton3)
+                        index = 2;
+                    var swipeMenu = _endButtons > 0 ? ((ICellSwipeMenus)ContentView)?.EndSwipeMenu : ((ICellSwipeMenus)ContentView)?.StartSwipeMenu;
+                    if (index == 2 && _endButtons + _startButtons > 2)
                     {
-                        var menuItem = swipeMenu[i];
-                        var segment = new Segment
+                        // show remaining menu items in a modal list
+                        PutAwaySwipeButtons(false);
+                        _swipePopupCancelButton.Tapped += OnSwipePopupCancelButtonTapped;
+                        for (int i = 2; i < swipeMenu.Count; i++)
                         {
-                            Text = menuItem.Text,
-                            IconText = menuItem.IconText,
-                            IconImage = menuItem.IconImage
-                        };
-                        segment.Tapped += OnSwipeSegmentTapped;
-                        _swipeSegmentedController.Segments.Add(segment);
+                            var menuItem = swipeMenu[i];
+                            var segment = new Segment
+                            {
+                                Text = menuItem.Text,
+                                IconText = menuItem.IconText,
+                                IconImage = menuItem.IconImage
+                            };
+                            segment.Tapped += OnSwipeSegmentTapped;
+                            _swipeSegmentedController.Segments.Add(segment);
+                        }
+                        _swipePopup.IsVisible = true;
+                        //System.Diagnostics.Debug.WriteLine("SwipeMenu[More]");
                     }
-                    _swipePopup.IsVisible = true;
-                    //System.Diagnostics.Debug.WriteLine("SwipeMenu[More]");
-                }
-                else
-                {
-                    PutAwaySwipeButtons(false);
-                    if (swipeMenu != null && swipeMenu.Count > index)
+                    else
                     {
-                        var args = new SwipeMenuItemTappedArgs((ICellSwipeMenus)ContentView, (ItemWrapper)BindingContext, swipeMenu[index]);
-                        ((ICellSwipeMenus)ContentView)?.OnSwipeMenuItemButtonTapped(this.BindingContext, args);
-                        ((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, args);
-                        //System.Diagnostics.Debug.WriteLine("SwipeMenu[" + swipeMenu[index].Key + "]");
+                        PutAwaySwipeButtons(false);
+                        if (swipeMenu != null && swipeMenu.Count > index)
+                        {
+                            var args = new SwipeMenuItemTappedArgs((ICellSwipeMenus)ContentView, (ItemWrapper)BindingContext, swipeMenu[index]);
+                            ((ICellSwipeMenus)ContentView)?.OnSwipeMenuItemButtonTapped(this.BindingContext, args);
+                            ((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, args);
+                            //System.Diagnostics.Debug.WriteLine("SwipeMenu[" + swipeMenu[index].Key + "]");
+                        }
                     }
                 }
-            }
+            });
         }
 
         async void OnSwipeSegmentTapped(object sender, EventArgs e)
@@ -876,84 +869,75 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnBindingContextChanged()
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(OnBindingContextChanged);
-                return;
-            }
+                //DebugMessage("Enter BindingContext=[" + BindingContext + "]");
+                if (BindingContext == null)
+                    return;
 
-            //DebugMessage("Enter BindingContext=[" + BindingContext + "]");
-            if (BindingContext == null)
-                return;
+                if (BindingContext is ItemWrapper itemWrapper)
+                {
+                    itemWrapper.BaseCellView = this;
+                    itemWrapper.PropertyChanged += OnItemPropertyChanged;
+                    ContentView.BindingContext = itemWrapper.Source;
+                    UpdateBackground();
+                    UpdateHeights();
+                    UpdateSeparator();
 
-            if (BindingContext is ItemWrapper itemWrapper)
-            {
-                itemWrapper.BaseCellView = this;
-                itemWrapper.PropertyChanged += OnItemPropertyChanged;
-                ContentView.BindingContext = itemWrapper.Source;
-                UpdateBackground();
-                UpdateHeights();
-                UpdateSeparator();
+                    if (ContentView is IIsSelectedAble contentView)
+                        contentView.IsSelected = itemWrapper.IsSelected;
+                }
+                else
+                    HeightRequest = -1;
 
-                if (ContentView is IIsSelectedAble contentView)
-                    contentView.IsSelected = itemWrapper.IsSelected;
-            }
-            else
-                HeightRequest = -1;
+                base.OnBindingContextChanged();
 
-            base.OnBindingContextChanged();
-
-            //DebugMessage("Exit");
+                //DebugMessage("Exit");
+            });
         }
 
         protected override void OnPropertyChanging(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanging(propertyName));
-                return;
-            }
+                base.OnPropertyChanging(propertyName);
 
-            base.OnPropertyChanging(propertyName);
-
-            if (propertyName == BindingContextProperty.PropertyName)
-            {
-                if (BindingContext is ItemWrapper itemWrapper)
+                if (propertyName == BindingContextProperty.PropertyName)
                 {
-                    itemWrapper.BaseCellView = null;
-                    itemWrapper.PropertyChanged -= OnItemPropertyChanged;
-                    HeightRequest = -1;
+                    if (BindingContext is ItemWrapper itemWrapper)
+                    {
+                        itemWrapper.BaseCellView = null;
+                        itemWrapper.PropertyChanged -= OnItemPropertyChanged;
+                        HeightRequest = -1;
+                    }
+                    PutAwaySwipeButtons(false);
                 }
-                PutAwaySwipeButtons(false);
-            }
-            else if (propertyName == ContentViewProperty.PropertyName && ContentView != null)
-            {
-                ContentView.PropertyChanged -= OnContentViewPropertyChanged;
-                FocusMonitor.Stop(ContentView);
-                Children.Remove(ContentView);
-            }
+                else if (propertyName == ContentViewProperty.PropertyName && ContentView != null)
+                {
+                    ContentView.PropertyChanged -= OnContentViewPropertyChanged;
+                    FocusMonitor.Stop(ContentView);
+                    Children.Remove(ContentView);
+                }
+            });
         }
 
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
-            }
+                try
+                {
+                    base.OnPropertyChanged(propertyName);
+                }
+                catch (Exception) { }
 
-            try
-            {
-                base.OnPropertyChanged(propertyName);
-            }
-            catch (Exception) { }
-
-            if (propertyName == ContentViewProperty.PropertyName && ContentView != null)
-            {
-                FocusMonitor.Start(ContentView);
-                Children.Add(ContentView, 0, 0);
-                ContentView.PropertyChanged += OnContentViewPropertyChanged;
-            }
+                if (propertyName == ContentViewProperty.PropertyName && ContentView != null)
+                {
+                    FocusMonitor.Start(ContentView);
+                    Children.Add(ContentView, 0, 0);
+                    ContentView.PropertyChanged += OnContentViewPropertyChanged;
+                }
+            });
         }
 
         private void OnContentViewPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -1000,7 +984,7 @@ namespace Forms9Patch
 
         void UpdateVisibility()
         {
-            if (P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
                 if (Device.RuntimePlatform == Device.iOS)
                 {
@@ -1009,44 +993,36 @@ namespace Forms9Patch
                     else
                         this.FadeTo(0.0);
                 }
-            }
-            else
-                Device.BeginInvokeOnMainThread(UpdateVisibility);
+            });
         }
 
         void UpdateBackground()
         {
-            if (P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
                 if (BindingContext is IItemWrapper item && item.IsSelected)
                     BackgroundColor = item.SelectedCellBackgroundColor;
                 else
                     BackgroundColor = Color.Transparent;
-            }
-            else
-                Device.BeginInvokeOnMainThread(UpdateBackground);
+            });
         }
 
         void UpdateHeights()
         {
-            if (P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                //if (IsHeader)
-                //    System.Diagnostics.Debug.WriteLine("");
                 var rowHeight = RowHeight;
                 if (Math.Abs(RowDefinitions[0].Height.Value - rowHeight) > 0.1)
                     RowDefinitions[0] = new RowDefinition { Height = new GridLength(rowHeight, GridUnitType.Absolute) };
                 HeightRequest = rowHeight + SeparatorHeight;
                 if (Parent is ICell_T_Height cell)
                     cell.Height = HeightRequest;
-            }
-            else
-                Device.BeginInvokeOnMainThread(UpdateBackground);
+            });
         }
 
         void UpdateSeparator()
         {
-            if (P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
                 if (BindingContext is IItemWrapper itemWrapper)
                 {
@@ -1060,9 +1036,7 @@ namespace Forms9Patch
                     _separator.Margin = new Thickness(itemWrapper.SeparatorLeftIndent, 0, itemWrapper.SeparatorRightIndent, 0);
                     _separator.HeightRequest = separatorHeight;
                 }
-            }
-            else
-                Device.BeginInvokeOnMainThread(UpdateBackground);
+            });
         }
 
         public double CellHeight

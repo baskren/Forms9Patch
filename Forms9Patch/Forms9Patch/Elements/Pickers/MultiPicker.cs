@@ -74,20 +74,17 @@ namespace Forms9Patch
             /// </summary>
             protected override void OnBindingContextChanged()
             {
-                if (!P42.Utils.Environment.IsOnMainThread)
+                Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
                 {
-                    Device.BeginInvokeOnMainThread(OnBindingContextChanged);
-                    return;
-                }
+                    base.OnBindingContextChanged();
 
-                base.OnBindingContextChanged();
-
-                if (BindingContext is IHtmlString htmlObject)
-                    itemLabel.Text = htmlObject.ToHtml();
-                else if (BindingContext != null)
-                    itemLabel.Text = BindingContext?.ToString();
-                else
-                    itemLabel.Text = itemLabel.Text = null;
+                    if (BindingContext is IHtmlString htmlObject)
+                        itemLabel.Text = htmlObject.ToHtml();
+                    else if (BindingContext != null)
+                        itemLabel.Text = BindingContext?.ToString();
+                    else
+                        itemLabel.Text = itemLabel.Text = null;
+                });
             }
         }
 
@@ -134,16 +131,14 @@ namespace Forms9Patch
             /// </summary>
             protected override void OnPropertyChanged(string propertyName = null)
             {
-                if (!P42.Utils.Environment.IsOnMainThread)
+                Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
                 {
-                    Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                    return;
-                }
 
-                base.OnPropertyChanged(propertyName);
+                    base.OnPropertyChanged(propertyName);
 
-                if (propertyName == IsSelectedProperty.PropertyName)
-                    checkLabel.IsVisible = IsSelected;
+                    if (propertyName == IsSelectedProperty.PropertyName)
+                        checkLabel.IsVisible = IsSelected;
+                });
             }
 
             #endregion

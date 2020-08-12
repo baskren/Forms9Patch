@@ -16,12 +16,13 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnBindingContextChanged()
         {
+            /*
             if (!P42.Utils.Environment.IsOnMainThread)
             {
                 Device.BeginInvokeOnMainThread(OnBindingContextChanged);
                 return;
             }
-
+            */
             base.OnBindingContextChanged();
 
             var group = BindingContext as GroupWrapper;

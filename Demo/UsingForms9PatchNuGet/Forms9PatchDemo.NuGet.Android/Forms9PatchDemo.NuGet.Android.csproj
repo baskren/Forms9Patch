@@ -51,7 +51,7 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1179" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1269" />
     <PackageReference Include="Xamarin.Google.Android.Material" Version="1.0.0.1" />
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.1.0.1" />
     <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0.1" />

@@ -724,10 +724,11 @@ namespace Forms9Patch
 
         void OnContentViewPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
-                Device.BeginInvokeOnMainThread(() => OnContentViewPropertyChanged(sender, e));
-            else if (IsVisible && (e.PropertyName == Xamarin.Forms.Layout.PaddingProperty.PropertyName || e.PropertyName == KeyboardServiceHeight))
-                LayoutChildren(X, Y, Width, Height);
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
+            {
+                if (IsVisible && (e.PropertyName == Xamarin.Forms.Layout.PaddingProperty.PropertyName || e.PropertyName == KeyboardServiceHeight))
+                    LayoutChildren(X, Y, Width, Height);
+            });
         }
 
         /// <summary>
@@ -868,7 +869,7 @@ namespace Forms9Patch
             IsVisible = true;
             //if (_isPushing || _isPushed)
             //    return;
-            if (P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(async() =>
             {
                 Recursion.Enter(GetType().ToString(), _id.ToString());
                 //_isPushing = true;
@@ -891,11 +892,7 @@ namespace Forms9Patch
                 }
                 catch (Exception) { }
                 Recursion.Exit(GetType().ToString(), _id.ToString());
-            }
-            else
-#pragma warning disable RECS0165 // Asynchronous methods should return a Task instead of void
-                Device.BeginInvokeOnMainThread(async () => await PushAsync());
-#pragma warning restore RECS0165 // Asynchronous methods should return a Task instead of void
+            });
 
         }
 
@@ -1005,88 +1002,85 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
-            }
 
-            try
-            {
-                base.OnPropertyChanged(propertyName);
-            }
+                try
+                {
+                    base.OnPropertyChanged(propertyName);
+                }
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
-            catch (Exception) { }
+                catch (Exception) { }
 #pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
 
-            if (propertyName == PageOverlayColorProperty.PropertyName)
-                base.BackgroundColor = PageOverlayColor;
-            else if (propertyName == IsAnimationEnabledProperty.PropertyName)
-                base.IsAnimationEnabled = IsAnimationEnabled;
-            else if (propertyName == IsVisibleProperty.PropertyName)
-            {
-                if (IsVisible && !_isPushed)// && PopupPage != null)
+                if (propertyName == PageOverlayColorProperty.PropertyName)
+                    base.BackgroundColor = PageOverlayColor;
+                else if (propertyName == IsAnimationEnabledProperty.PropertyName)
+                    base.IsAnimationEnabled = IsAnimationEnabled;
+                else if (propertyName == IsVisibleProperty.PropertyName)
                 {
-                    //System.Diagnostics.Debug.WriteLine(GetType() + "." + ReflectionExtensions.CallerMemberName() + " IsVisible");
-                    DecorativeContainerView.TranslationX = 0;
-                    DecorativeContainerView.TranslationY = 0;
-                    if (Application.Current?.MainPage == null)
+                    if (IsVisible && !_isPushed)// && PopupPage != null)
                     {
-                        IsVisible = false;
-                        return;
+                        //System.Diagnostics.Debug.WriteLine(GetType() + "." + ReflectionExtensions.CallerMemberName() + " IsVisible");
+                        DecorativeContainerView.TranslationX = 0;
+                        DecorativeContainerView.TranslationY = 0;
+                        if (Application.Current?.MainPage == null)
+                        {
+                            IsVisible = false;
+                            return;
+                        }
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                        PushAsync();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                     }
+                    else if (!IsVisible && _isPushed && !_isPopping)
+                    {
+                        //System.Diagnostics.Debug.WriteLine(GetType() + "." + ReflectionExtensions.CallerMemberName() + " !IsVisible");
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                    PushAsync();
+                        //PopAsync(PopupPoppedCause.IsVisiblePropertySet);
+                        CancelAsync(PopupPoppedCause.IsVisiblePropertySet);
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                    }
+                    //else
+                    //    System.Diagnostics.Debug.WriteLine("IsVisible=[" + IsVisible + "] _isPushed=[" + _isPushed + "]");
                 }
-                else if (!IsVisible && _isPushed && !_isPopping)
+                else if (propertyName == CancelOnPageOverlayTouchProperty.PropertyName)
+                    CloseWhenBackgroundIsClicked = CancelOnPageOverlayTouch;
+                else if (propertyName == TargetProperty.PropertyName)
+                    Update();
+
+
+                if (_decorativeContainerView != null && !_disposed)
                 {
-                    //System.Diagnostics.Debug.WriteLine(GetType() + "." + ReflectionExtensions.CallerMemberName() + " !IsVisible");
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                    //PopAsync(PopupPoppedCause.IsVisiblePropertySet);
-                    CancelAsync(PopupPoppedCause.IsVisiblePropertySet);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                    #region ILayout
+                    if (propertyName == PaddingProperty.PropertyName)
+                        _decorativeContainerView.Padding = Padding;
+                    #endregion
+
+                    #region IBackground
+                    else if (propertyName == BackgroundImageProperty.PropertyName)
+                        _decorativeContainerView.BackgroundImage = BackgroundImage;
+
+                    #region IShape
+                    else if (propertyName == BackgroundColorProperty.PropertyName)
+                        _decorativeContainerView.BackgroundColor = (BackgroundColor == Color.Default || BackgroundColor == default ? Color.White : BackgroundColor);
+                    else if (propertyName == HasShadowProperty.PropertyName)
+                        _decorativeContainerView.HasShadow = HasShadow;
+                    else if (propertyName == ShadowInvertedProperty.PropertyName)
+                        _decorativeContainerView.ShadowInverted = ShadowInverted;
+                    else if (propertyName == OutlineColorProperty.PropertyName)
+                        _decorativeContainerView.OutlineColor = OutlineColor;
+                    else if (propertyName == OutlineWidthProperty.PropertyName)
+                        _decorativeContainerView.OutlineWidth = OutlineWidth;
+                    else if (propertyName == OutlineRadiusProperty.PropertyName)
+                        _decorativeContainerView.OutlineRadius = OutlineRadius;
+                    else if (propertyName == ElementShapeProperty.PropertyName)
+                        _decorativeContainerView.ElementShape = ElementShape;
+                    #endregion IShape
+
+                    #endregion IBackground
                 }
-                //else
-                //    System.Diagnostics.Debug.WriteLine("IsVisible=[" + IsVisible + "] _isPushed=[" + _isPushed + "]");
-            }
-            else if (propertyName == CancelOnPageOverlayTouchProperty.PropertyName)
-                CloseWhenBackgroundIsClicked = CancelOnPageOverlayTouch;
-            else if (propertyName == TargetProperty.PropertyName)
-                Update();
-
-
-            if (_decorativeContainerView != null && !_disposed)
-            {
-                #region ILayout
-                if (propertyName == PaddingProperty.PropertyName)
-                    _decorativeContainerView.Padding = Padding;
-                #endregion
-
-                #region IBackground
-                else if (propertyName == BackgroundImageProperty.PropertyName)
-                    _decorativeContainerView.BackgroundImage = BackgroundImage;
-
-                #region IShape
-                else if (propertyName == BackgroundColorProperty.PropertyName)
-                    _decorativeContainerView.BackgroundColor = (BackgroundColor == Color.Default || BackgroundColor == default ? Color.White : BackgroundColor);
-                else if (propertyName == HasShadowProperty.PropertyName)
-                    _decorativeContainerView.HasShadow = HasShadow;
-                else if (propertyName == ShadowInvertedProperty.PropertyName)
-                    _decorativeContainerView.ShadowInverted = ShadowInverted;
-                else if (propertyName == OutlineColorProperty.PropertyName)
-                    _decorativeContainerView.OutlineColor = OutlineColor;
-                else if (propertyName == OutlineWidthProperty.PropertyName)
-                    _decorativeContainerView.OutlineWidth = OutlineWidth;
-                else if (propertyName == OutlineRadiusProperty.PropertyName)
-                    _decorativeContainerView.OutlineRadius = OutlineRadius;
-                else if (propertyName == ElementShapeProperty.PropertyName)
-                    _decorativeContainerView.ElementShape = ElementShape;
-                #endregion IShape
-
-                #endregion IBackground
-            }
-
+            });
         }
 
 

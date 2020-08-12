@@ -199,20 +199,18 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
-            }
 
-            base.OnPropertyChanged(propertyName);
+                base.OnPropertyChanged(propertyName);
 
-            if (propertyName == CancelTextProperty.PropertyName)
-                _cancelButton.HtmlText = CancelText;
-            else if (propertyName == CancelTextColorProperty.PropertyName)
-                _cancelButton.TextColor = CancelTextColor;
-            else if (propertyName == CancelButtonColorProperty.PropertyName)
-                _cancelButton.BackgroundColor = CancelButtonColor;
+                if (propertyName == CancelTextProperty.PropertyName)
+                    _cancelButton.HtmlText = CancelText;
+                else if (propertyName == CancelTextColorProperty.PropertyName)
+                    _cancelButton.TextColor = CancelTextColor;
+                else if (propertyName == CancelButtonColorProperty.PropertyName)
+                    _cancelButton.BackgroundColor = CancelButtonColor;
+            });
         }
         #endregion
     }

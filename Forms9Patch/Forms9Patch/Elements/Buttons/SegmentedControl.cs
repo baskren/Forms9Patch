@@ -877,85 +877,79 @@ namespace Forms9Patch
         #region Collection management
         void OnSegmentsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnSegmentsCollectionChanged(sender, e));
-                return;
-            }
-
-            int index;
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    index = e.NewStartingIndex;
-                    if (e.NewItems != null)
-                        foreach (Segment newItem in e.NewItems)
-                            InsertSegment(index++, newItem);
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    if (e.OldItems != null)
-                        foreach (Segment oldItem in e.OldItems)
-                            RemoveSegment(oldItem);
-                    break;
-                case NotifyCollectionChangedAction.Reset:
-                    if (e.OldItems != null && e.OldItems.Count > 0)
-                    {
-                        foreach (var item in e.OldItems)
-                            if (item is Segment segment)
-                                RemoveSegment(segment);
-                    }
-                    else
-                    {
-                        for (int i = Children.Count - 1; i >= 0; i--)
+                int index;
+                switch (e.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        index = e.NewStartingIndex;
+                        if (e.NewItems != null)
+                            foreach (Segment newItem in e.NewItems)
+                                InsertSegment(index++, newItem);
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        if (e.OldItems != null)
+                            foreach (Segment oldItem in e.OldItems)
+                                RemoveSegment(oldItem);
+                        break;
+                    case NotifyCollectionChangedAction.Reset:
+                        if (e.OldItems != null && e.OldItems.Count > 0)
                         {
-                            if (Children[i] is SegmentButton button)
-                                RemoveButton(button);
+                            foreach (var item in e.OldItems)
+                                if (item is Segment segment)
+                                    RemoveSegment(segment);
                         }
-                    }
-                    break;
-            }
-            var count = Children.Count;
-            if (count > 2)
-            {
-                ((IExtendedShape)Children[1]).ExtendedElementShape = ExtendedElementShape.SegmentStart;
-                for (int i = 2; i < count - 1; i++)
-                    ((IExtendedShape)Children[i]).ExtendedElementShape = ExtendedElementShape.SegmentMid;
-                ((IExtendedShape)Children[count - 1]).ExtendedElementShape = ExtendedElementShape.SegmentEnd;
-            }
-            else if (count == 2)
-            {
-                ((IExtendedShape)Children[1]).ExtendedElementShape = ExtendedElementShape.Rectangle;
-            }
-            if (!UpdatingSegments)
-            {
-                UpdateChildrenPadding();
-                InvalidateLayout();
-            }
+                        else
+                        {
+                            for (int i = Children.Count - 1; i >= 0; i--)
+                            {
+                                if (Children[i] is SegmentButton button)
+                                    RemoveButton(button);
+                            }
+                        }
+                        break;
+                }
+                var count = Children.Count;
+                if (count > 2)
+                {
+                    ((IExtendedShape)Children[1]).ExtendedElementShape = ExtendedElementShape.SegmentStart;
+                    for (int i = 2; i < count - 1; i++)
+                        ((IExtendedShape)Children[i]).ExtendedElementShape = ExtendedElementShape.SegmentMid;
+                    ((IExtendedShape)Children[count - 1]).ExtendedElementShape = ExtendedElementShape.SegmentEnd;
+                }
+                else if (count == 2)
+                {
+                    ((IExtendedShape)Children[1]).ExtendedElementShape = ExtendedElementShape.Rectangle;
+                }
+                if (!UpdatingSegments)
+                {
+                    UpdateChildrenPadding();
+                    InvalidateLayout();
+                }
+            });
         }
 
         void InsertSegment(int index, Segment s)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => InsertSegment(index, s));
-                return;
-            }
-
-            var button = s._button;
-            UpdateSegment(s);
-            button.PropertyChanged += OnButtonPropertyChanged;
-            button.Tapped += OnSegmentTapped;
-            button.Selected += OnSegmentSelected;
-            button.LongPressing += OnSegmentLongPressing;
-            button.LongPressed += OnSegmentLongPressed;
-            button.FittedFontSizeChanged += OnButtonFittedFontSizeChanged;
-            Children.Insert(index + 1, button);
-            if (button.IsSelected && GroupToggleBehavior == GroupToggleBehavior.Radio)
-            {
-                foreach (var segment in _segments)
-                    if (segment != s)
-                        segment.IsSelected = false;
-            }
+                var button = s._button;
+                UpdateSegment(s);
+                button.PropertyChanged += OnButtonPropertyChanged;
+                button.Tapped += OnSegmentTapped;
+                button.Selected += OnSegmentSelected;
+                button.LongPressing += OnSegmentLongPressing;
+                button.LongPressed += OnSegmentLongPressed;
+                button.FittedFontSizeChanged += OnButtonFittedFontSizeChanged;
+                Children.Insert(index + 1, button);
+                if (button.IsSelected && GroupToggleBehavior == GroupToggleBehavior.Radio)
+                {
+                    foreach (var segment in _segments)
+                        if (segment != s)
+                            segment.IsSelected = false;
+                }
+            });
         }
 
         void RemoveSegment(Segment s)
@@ -983,15 +977,12 @@ namespace Forms9Patch
 
         void UpdateChildrenPadding()
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(UpdateChildrenPadding);
-                return;
-            }
-
-            foreach (var child in Children)
-                if (child is SegmentButton button)
-                    button.Padding = Padding;
+                foreach (var child in Children)
+                    if (child is SegmentButton button)
+                        button.Padding = Padding;
+            });
         }
         #endregion
 
@@ -1062,143 +1053,140 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
-            }
+                base.OnPropertyChanged(propertyName);
 
-            base.OnPropertyChanged(propertyName);
-
-            if (Segments != null)
-            {
-                if (propertyName == GroupToggleBehaviorProperty.PropertyName)
-                    foreach (Segment segment in Segments)
+                if (Segments != null)
+                {
+                    if (propertyName == GroupToggleBehaviorProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                        {
+                            segment._button.ToggleBehavior = (GroupToggleBehavior != GroupToggleBehavior.None);
+                            segment._button.GroupToggleBehavior = GroupToggleBehavior;
+                        }
+                    else if (propertyName == PaddingProperty.PropertyName)
+                        UpdateChildrenPadding();
+                    else if (propertyName == TextColorProperty.PropertyName)
                     {
-                        segment._button.ToggleBehavior = (GroupToggleBehavior != GroupToggleBehavior.None);
-                        segment._button.GroupToggleBehavior = GroupToggleBehavior;
+                        foreach (Segment segment in Segments)
+                            if (segment.TextColor == Color.Default)
+                                segment._button.TextColor = TextColor;
                     }
-                else if (propertyName == PaddingProperty.PropertyName)
-                    UpdateChildrenPadding();
-                else if (propertyName == TextColorProperty.PropertyName)
-                {
-                    foreach (Segment segment in Segments)
-                        if (segment.TextColor == Color.Default)
-                            segment._button.TextColor = TextColor;
-                }
-                else if (propertyName == SelectedTextColorProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.SelectedTextColor = SelectedTextColor;
-                else if (propertyName == TintIconProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.TintIcon = TintIcon;
-                else if (propertyName == IconColorProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.IconColor = IconColor;
-                else if (propertyName == HasTightSpacingProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.HasTightSpacing = HasTightSpacing;
-                else if (propertyName == HorizontalTextAlignmentProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.HorizontalTextAlignment = HorizontalTextAlignment;
-                else if (propertyName == VerticalTextAlignmentProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.VerticalTextAlignment = VerticalTextAlignment;
-                else if (propertyName == LineBreakModeProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.LineBreakMode = LineBreakMode;
-                else if (propertyName == AutoFitProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.AutoFit = AutoFit;
-                else if (propertyName == LinesProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.Lines = Lines;
-                else if (propertyName == MinFontSizeProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.MinFontSize = MinFontSize;
-                else if (propertyName == FontAttributesProperty.PropertyName)
-                {
-                    foreach (Segment segment in Segments)
-                        if (!segment.FontAttributesSet)
-                            segment._button.FontAttributes = FontAttributes;
+                    else if (propertyName == SelectedTextColorProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.SelectedTextColor = SelectedTextColor;
+                    else if (propertyName == TintIconProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.TintIcon = TintIcon;
+                    else if (propertyName == IconColorProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.IconColor = IconColor;
+                    else if (propertyName == HasTightSpacingProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.HasTightSpacing = HasTightSpacing;
+                    else if (propertyName == HorizontalTextAlignmentProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.HorizontalTextAlignment = HorizontalTextAlignment;
+                    else if (propertyName == VerticalTextAlignmentProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.VerticalTextAlignment = VerticalTextAlignment;
+                    else if (propertyName == LineBreakModeProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.LineBreakMode = LineBreakMode;
+                    else if (propertyName == AutoFitProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.AutoFit = AutoFit;
+                    else if (propertyName == LinesProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.Lines = Lines;
+                    else if (propertyName == MinFontSizeProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.MinFontSize = MinFontSize;
+                    else if (propertyName == FontAttributesProperty.PropertyName)
+                    {
+                        foreach (Segment segment in Segments)
+                            if (!segment.FontAttributesSet)
+                                segment._button.FontAttributes = FontAttributes;
 
+                    }
+                    else if (propertyName == DarkThemeProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.DarkTheme = DarkTheme;
+                    else if (propertyName == BackgroundColorProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.BackgroundColor = BackgroundColor;
+                    else if (propertyName == SelectedBackgroundColorProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.SelectedBackgroundColor = SelectedBackgroundColor;
+                    else if (propertyName == OutlineColorProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.OutlineColor = OutlineColor;
+                    else if (propertyName == OutlineRadiusProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.OutlineRadius = OutlineRadius;
+                    else if (propertyName == OutlineWidthProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.OutlineWidth = OutlineWidth;
+                    else if (propertyName == FontFamilyProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.FontFamily = FontFamily;
+                    else if (propertyName == IconFontFamilyProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.IconFontFamily = IconFontFamily;
+                    else if (propertyName == IconFontSizeProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.IconFontSize = IconFontSize;
+                    else if (propertyName == FontSizeProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.FontSize = FontSize;
+                    else if (propertyName == HasShadowProperty.PropertyName || propertyName == Xamarin.Forms.Frame.HasShadowProperty.PropertyName)
+                    {
+                        foreach (Segment segment in Segments)
+                            segment._button.HasShadow = HasShadow;
+                        InvalidateLayout();
+                    }
+                    else if (propertyName == OrientationProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.ExtendedElementShapeOrientation = Orientation;
+                    else if (propertyName == IntraSegmentOrientationProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.Orientation = IntraSegmentOrientation;
+                    else if (propertyName == SeparatorWidthProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.ExtendedElementSeparatorWidth = SeparatorWidth;
+                    else if (propertyName == TrailingIconProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.TrailingIcon = TrailingIcon;
+                    else if (propertyName == HapticEffectProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.HapticEffect = HapticEffect;
+                    else if (propertyName == HapticEffectModeProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.HapticEffectMode = HapticEffectMode;
+                    else if (propertyName == SoundEffectProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.SoundEffect = SoundEffect;
+                    else if (propertyName == SoundEffectModeProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.SoundEffectMode = SoundEffectMode;
+                    else if (propertyName == IsEnabledProperty.PropertyName)
+                    {
+                        if (IsEnabled)
+                            Opacity *= 2;
+                        else
+                            Opacity /= 2;
+                    }
+                    else if (propertyName == IntraSegmentSpacingProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.Spacing = IntraSegmentSpacing;
+                    else if (propertyName == IsLongPressEnabledProperty.PropertyName)
+                        foreach (Segment segment in Segments)
+                            segment._button.IsLongPressEnabled = IsLongPressEnabled;
+                    else if (propertyName == WidthProperty.PropertyName || propertyName == HeightProperty.PropertyName)
+                        CheckIsClipped();
                 }
-                else if (propertyName == DarkThemeProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.DarkTheme = DarkTheme;
-                else if (propertyName == BackgroundColorProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.BackgroundColor = BackgroundColor;
-                else if (propertyName == SelectedBackgroundColorProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.SelectedBackgroundColor = SelectedBackgroundColor;
-                else if (propertyName == OutlineColorProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.OutlineColor = OutlineColor;
-                else if (propertyName == OutlineRadiusProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.OutlineRadius = OutlineRadius;
-                else if (propertyName == OutlineWidthProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.OutlineWidth = OutlineWidth;
-                else if (propertyName == FontFamilyProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.FontFamily = FontFamily;
-                else if (propertyName == IconFontFamilyProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.IconFontFamily = IconFontFamily;
-                else if (propertyName == IconFontSizeProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.IconFontSize = IconFontSize;
-                else if (propertyName == FontSizeProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.FontSize = FontSize;
-                else if (propertyName == HasShadowProperty.PropertyName || propertyName == Xamarin.Forms.Frame.HasShadowProperty.PropertyName)
-                {
-                    foreach (Segment segment in Segments)
-                        segment._button.HasShadow = HasShadow;
-                    InvalidateLayout();
-                }
-                else if (propertyName == OrientationProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.ExtendedElementShapeOrientation = Orientation;
-                else if (propertyName == IntraSegmentOrientationProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.Orientation = IntraSegmentOrientation;
-                else if (propertyName == SeparatorWidthProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.ExtendedElementSeparatorWidth = SeparatorWidth;
-                else if (propertyName == TrailingIconProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.TrailingIcon = TrailingIcon;
-                else if (propertyName == HapticEffectProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.HapticEffect = HapticEffect;
-                else if (propertyName == HapticEffectModeProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.HapticEffectMode = HapticEffectMode;
-                else if (propertyName == SoundEffectProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.SoundEffect = SoundEffect;
-                else if (propertyName == SoundEffectModeProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.SoundEffectMode = SoundEffectMode;
-                else if (propertyName == IsEnabledProperty.PropertyName)
-                {
-                    if (IsEnabled)
-                        Opacity *= 2;
-                    else
-                        Opacity /= 2;
-                }
-                else if (propertyName == IntraSegmentSpacingProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.Spacing = IntraSegmentSpacing;
-                else if (propertyName == IsLongPressEnabledProperty.PropertyName)
-                    foreach (Segment segment in Segments)
-                        segment._button.IsLongPressEnabled = IsLongPressEnabled;
-                else if (propertyName == WidthProperty.PropertyName || propertyName == HeightProperty.PropertyName)
-                    CheckIsClipped();
-            }
+            });
         }
 
         //Segment _lastSelectedSegment;

@@ -394,16 +394,13 @@ namespace Forms9Patch
         /// <param name="propertyName"></param>
         protected override void OnPropertyChanging([CallerMemberName] string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanging(propertyName));
-                return;
-            }
+                base.OnPropertyChanging(propertyName);
 
-            base.OnPropertyChanging(propertyName);
-
-            if (propertyName == BindingContextProperty.PropertyName)
-                _xfLayout.BindingContext = null;
+                if (propertyName == BindingContextProperty.PropertyName)
+                    _xfLayout.BindingContext = null;
+            });
         }
 
         /// <summary>
@@ -412,16 +409,13 @@ namespace Forms9Patch
         /// <param name="propertyName"></param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
-            }
+                base.OnPropertyChanged(propertyName);
 
-            base.OnPropertyChanged(propertyName);
-
-            if (propertyName == BindingContextProperty.PropertyName)
-                _xfLayout.BindingContext = BindingContext;
+                if (propertyName == BindingContextProperty.PropertyName)
+                    _xfLayout.BindingContext = BindingContext;
+            });
         }
     }
 }

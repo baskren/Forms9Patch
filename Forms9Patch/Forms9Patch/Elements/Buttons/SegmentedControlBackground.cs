@@ -99,13 +99,11 @@ namespace Forms9Patch
 
         void Invalidate()
         {
-            if (P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
                 InvalidateMeasure();
                 InvalidateSurface();
-            }
-            else
-                Device.BeginInvokeOnMainThread(Invalidate);
+            });
         }
 
 

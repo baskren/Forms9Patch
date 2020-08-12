@@ -126,46 +126,44 @@ namespace Forms9Patch
         /// <param name="propertyName">The name of the property that changed.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
-            }
 
-            //System.Diagnostics.Debug.WriteLine ($"{this.GetType().FullName}.OnPropertyChanged property={propertyName}");
-            //if (propertyName == IsPresentedProperty.PropertyName) {
-            if (propertyName == TranslationXProperty.PropertyName)
-            {
-                Content.TranslationX = TranslationX;
-                return;
-            }
-            if (propertyName == TranslationYProperty.PropertyName)
-            {
-                Content.TranslationY = TranslationY;
-                return;
-            }
-            if (propertyName == RotationProperty.PropertyName)
-            {
-                Content.Rotation = Rotation;
-                return;
-            }
-            if (propertyName == RotationXProperty.PropertyName)
-            {
-                Content.RotationX = RotationX;
-                return;
-            }
-            if (propertyName == RotationYProperty.PropertyName)
-            {
-                Content.RotationY = RotationY;
-                return;
-            }
+                //System.Diagnostics.Debug.WriteLine ($"{this.GetType().FullName}.OnPropertyChanged property={propertyName}");
+                //if (propertyName == IsPresentedProperty.PropertyName) {
+                if (propertyName == TranslationXProperty.PropertyName)
+                {
+                    Content.TranslationX = TranslationX;
+                    return;
+                }
+                if (propertyName == TranslationYProperty.PropertyName)
+                {
+                    Content.TranslationY = TranslationY;
+                    return;
+                }
+                if (propertyName == RotationProperty.PropertyName)
+                {
+                    Content.Rotation = Rotation;
+                    return;
+                }
+                if (propertyName == RotationXProperty.PropertyName)
+                {
+                    Content.RotationX = RotationX;
+                    return;
+                }
+                if (propertyName == RotationYProperty.PropertyName)
+                {
+                    Content.RotationY = RotationY;
+                    return;
+                }
 
-            if (propertyName == ScaleProperty.PropertyName)
-            {
-                Content.Scale = Scale;
-                return;
-            }
-            base.OnPropertyChanged(propertyName);
+                if (propertyName == ScaleProperty.PropertyName)
+                {
+                    Content.Scale = Scale;
+                    return;
+                }
+                base.OnPropertyChanged(propertyName);
+            });
         }
         #endregion
 

@@ -114,38 +114,36 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
-            }
-            try
-            {
-                base.OnPropertyChanged(propertyName);
-            }
-            catch (Exception) { }
-
-
-            if (propertyName == HeightProperty.PropertyName)
-            {
-                _lowerPadding.HeightRequest = (Height - RowHeight) / 3.0;
-                _upperPadding.HeightRequest = (Height - RowHeight) / 3.0;
-            }
-            else if (propertyName == IndexProperty.PropertyName)
-            {
-                if (ItemsSource?.Cast<object>().ToList() is List<object> items)
+                try
                 {
-                    if (Index > -1 && Index < items.Count)
+                    base.OnPropertyChanged(propertyName);
+                }
+                catch (Exception) { }
+
+
+                if (propertyName == HeightProperty.PropertyName)
+                {
+                    _lowerPadding.HeightRequest = (Height - RowHeight) / 3.0;
+                    _upperPadding.HeightRequest = (Height - RowHeight) / 3.0;
+                }
+                else if (propertyName == IndexProperty.PropertyName)
+                {
+                    if (ItemsSource?.Cast<object>().ToList() is List<object> items)
                     {
-                        SelectedItem = items[Index];
+                        if (Index > -1 && Index < items.Count)
+                        {
+                            SelectedItem = items[Index];
+                        }
                     }
                 }
-            }
-            else if (propertyName == SelectedItemProperty.PropertyName)
-            {
-                if (!_scrolling && ItemsSource?.Cast<object>().ToList() is List<object> items)
-                    Index = items.IndexOf(SelectedItem);
-            }
+                else if (propertyName == SelectedItemProperty.PropertyName)
+                {
+                    if (!_scrolling && ItemsSource?.Cast<object>().ToList() is List<object> items)
+                        Index = items.IndexOf(SelectedItem);
+                }
+            });
         }
 
         #endregion
