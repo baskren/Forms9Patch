@@ -6,6 +6,7 @@ namespace Forms9Patch
     /// <summary>
     /// Rounded box base.
     /// </summary>
+    [Preserve(AllMembers = true)]
     public static class ShapeBase
     {
 
@@ -134,9 +135,9 @@ namespace Forms9Patch
             Settings.ConfirmInitialization();
         }
 
-        internal static Thickness ShadowPadding(IShape shape, bool scaleForDisplay = false)
+        internal static Thickness ShadowPadding(IShape shape, bool scaleForDisplay = false, bool force = false)
         {
-            if (shape.HasShadow || (shape is StateButton && shape is ContentView contentView && contentView.HasShadow))
+            if (force || shape.HasShadow || (shape is StateButton && shape is ContentView contentView && contentView.HasShadow))
             {
                 var shadowX = Settings.ShadowOffset.X;
                 var shadowY = Settings.ShadowOffset.Y;

@@ -7,6 +7,7 @@ namespace Forms9Patch
     /// <summary>
     /// Adds a clear button to a Xamarin.Forms.Entry
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class EntryClearButtonEffect : RoutingEffect
     {

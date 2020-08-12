@@ -13,6 +13,7 @@ namespace Forms9Patch
     /// Forms9Patch.Layout
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    [Preserve(AllMembers = true)]
     [EditorBrowsable(EditorBrowsableState.Never)]
     [ContentProperty(nameof(Children))]
     public abstract class Layout<T> : BaseLayout<T>, Xamarin.Forms.IViewContainer<View> where T : Xamarin.Forms.Layout<View>, new()

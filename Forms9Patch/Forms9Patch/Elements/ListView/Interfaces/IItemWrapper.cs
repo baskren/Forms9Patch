@@ -7,6 +7,7 @@ namespace Forms9Patch
     /// <summary>
     /// Interface used to queary current state of Forms9Patch.ListView cells and the ItemSource object bound to the cells view.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     internal interface IItemWrapper
     {

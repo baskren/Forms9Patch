@@ -16,6 +16,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Button.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class Button : Frame, IButton
     {
@@ -1466,8 +1467,11 @@ namespace Forms9Patch
                     ? 0
                     : OutlineWidth);
 
+
             if (IsEnabled)
             {
+                InvisibleShadow = false;
+
                 _label.TextColor = enabledLabelColor;
 
                 if (IsSelected)
@@ -1486,11 +1490,11 @@ namespace Forms9Patch
                 if (OutlineColor == Color.Default)
                     base.OutlineColor = enabledLabelColor;
 
-                base.HasShadow = (base.BackgroundColor.A > 0 || BackgroundImage?.Source != null) && HasShadow;
-                ShadowInverted = IsSelected && !isSegment;
             }
             else
             {
+                InvisibleShadow = HasShadow;
+
                 _label.TextColor = DarkTheme ? Color.FromHex("#FFF").WithAlpha(0.30) : Color.FromHex("#000").WithAlpha(0.26);
                 if (!isSegment)
                 {
@@ -1519,6 +1523,10 @@ namespace Forms9Patch
                         base.OutlineColor = enabledLabelColor;
                 }
             }
+
+            base.HasShadow = (base.BackgroundColor.A > 0 || BackgroundImage?.Source != null) && HasShadow;
+            ShadowInverted = IsSelected && !isSegment;
+
             UpdateIconTint();
             _noUpdate = false;
         }

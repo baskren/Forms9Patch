@@ -7,6 +7,7 @@ namespace Forms9Patch
     /// <summary>
     /// FormsDragNDropListView Item.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     abstract class ItemWrapper : BindableObject, IItemWrapper
     {

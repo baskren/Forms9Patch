@@ -10,6 +10,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch ContentView.  
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class ContentView : Xamarin.Forms.ContentView, ILayout, IDisposable
     {
@@ -135,6 +136,22 @@ namespace Forms9Patch
             set => SetValue(HasShadowProperty, value);
         }
         #endregion HasShadow property
+
+        #region MakeRoomForShadow
+        /// <summary>
+        /// Backing store for ContentView.MakeRoomForShadow property
+        /// </summary>
+        internal static readonly BindableProperty InvisibleShadowProperty = BindableProperty.Create(nameof(InvisibleShadow), typeof(bool), typeof(ContentView), default);
+        /// <summary>
+        /// controls value of .MakeRoomForShadow property
+        /// </summary>
+        internal bool InvisibleShadow
+        {
+            get => (bool)GetValue(InvisibleShadowProperty);
+            set => SetValue(InvisibleShadowProperty, value);
+        }
+        #endregion
+
 
         #region ShadowInverted property
         /// <summary>
@@ -387,6 +404,8 @@ namespace Forms9Patch
                     CurrentBackgroundImage.BackgroundColor = _fallbackBackgroundImage.BackgroundColor = BackgroundColor;
                 else if (propertyName == HasShadowProperty.PropertyName)
                     CurrentBackgroundImage.HasShadow = _fallbackBackgroundImage.HasShadow = HasShadow;
+                else if (propertyName == InvisibleShadowProperty.PropertyName)
+                    CurrentBackgroundImage.InvisibleShadow = _fallbackBackgroundImage.InvisibleShadow = InvisibleShadow;
                 else if (propertyName == ShadowInvertedProperty.PropertyName)
                     CurrentBackgroundImage.ShadowInverted = _fallbackBackgroundImage.ShadowInverted = ShadowInverted;
                 else if (propertyName == OutlineColorProperty.PropertyName)

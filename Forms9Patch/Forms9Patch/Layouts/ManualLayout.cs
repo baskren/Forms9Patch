@@ -7,6 +7,7 @@ namespace Forms9Patch
     /// <summary>
     /// Manual layout.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class ManualLayout : Xamarin.Forms.Layout<View>, ILayout
     {

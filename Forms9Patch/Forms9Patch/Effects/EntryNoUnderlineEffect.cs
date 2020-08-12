@@ -7,6 +7,7 @@ namespace Forms9Patch
     /// <summary>
     /// Removed underline from a Xamarin.Forms.Entry
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class EntryNoUnderlineEffect : RoutingEffect
     {

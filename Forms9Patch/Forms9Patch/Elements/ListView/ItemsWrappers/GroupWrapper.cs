@@ -11,6 +11,7 @@ using System.Diagnostics;
 
 namespace Forms9Patch
 {
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     class GroupWrapper : ItemWrapper<object>, IList<ItemWrapper>, ICollection<ItemWrapper>, IEnumerable<ItemWrapper>, IEnumerable, IList, ICollection, IReadOnlyList<ItemWrapper>, IReadOnlyCollection<ItemWrapper>, INotifyCollectionChanged
     {

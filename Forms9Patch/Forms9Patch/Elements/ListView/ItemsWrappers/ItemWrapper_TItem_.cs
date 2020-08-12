@@ -2,6 +2,7 @@
 
 namespace Forms9Patch
 {
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     class ItemWrapper<TItem> : ItemWrapper
     {

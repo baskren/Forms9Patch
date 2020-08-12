@@ -9,6 +9,7 @@ namespace Forms9Patch
     /// <summary>
     /// Effect required to enable Printing of content of Xamarin.Forms.WebView
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class WebViewPrintEffect : RoutingEffect
     {

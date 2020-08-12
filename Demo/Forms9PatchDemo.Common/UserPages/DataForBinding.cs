@@ -7,6 +7,7 @@ namespace Forms9PatchDemo
     public enum GameStatePlayerStatus { Playing, Resting };
     public enum GameStateMultiPlayerType { Individual, TwoTeams };
 
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class GameStatePlayer
     {
         public string Name { get; set; }
@@ -43,6 +44,7 @@ namespace Forms9PatchDemo
         }
     }
 
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class GameState
     {
         public static string[] PlayerAvatars = new string[] { "\ud83d\ude00" };

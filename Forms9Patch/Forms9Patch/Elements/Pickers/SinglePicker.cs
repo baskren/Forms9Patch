@@ -11,6 +11,7 @@ namespace Forms9Patch
     /// <summary>
     /// Single picker.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class SinglePicker : BasePicker
     {

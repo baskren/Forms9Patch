@@ -7,6 +7,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch RelativeLayout.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class RelativeLayout : Layout<Xamarin.Forms.RelativeLayout>, ILayout, IElementConfiguration<Xamarin.Forms.RelativeLayout>
     {

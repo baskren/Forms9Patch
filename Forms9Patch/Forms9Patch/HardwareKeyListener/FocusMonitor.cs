@@ -10,6 +10,7 @@ namespace Forms9Patch
     /// <summary>
     /// Focus monitor: Helps you keep up with what VisualElement currently has focus
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public static class FocusMonitor
     {

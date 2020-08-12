@@ -8,6 +8,7 @@ namespace Forms9Patch
     /// <summary>
     /// Group header template.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class GroupHeaderTemplate : Xamarin.Forms.DataTemplate
     {

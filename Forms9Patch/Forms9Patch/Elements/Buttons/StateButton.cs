@@ -15,6 +15,7 @@ namespace Forms9Patch
     /// <summary>
     /// Image button.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class StateButton : Button
     {

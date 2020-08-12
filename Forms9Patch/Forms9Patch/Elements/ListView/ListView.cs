@@ -10,6 +10,7 @@ namespace Forms9Patch
     /// <summary>
     /// FormsDragNDropListView List view.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class ListView : Forms9Patch.Frame, IElement //  Forms9Patch.ManualLayout, IElement
     {

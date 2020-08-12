@@ -9,6 +9,7 @@ namespace Forms9Patch
     /// <summary>
     /// Bubble layout.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     class BubbleLayout : Forms9Patch.ContentView, IBubbleLayout
     {

@@ -6,6 +6,7 @@ namespace Forms9Patch
     /// <summary>
     /// The Forms9Patch Data template selector.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class DataTemplateSelector : TemplateSelectorBase
     {

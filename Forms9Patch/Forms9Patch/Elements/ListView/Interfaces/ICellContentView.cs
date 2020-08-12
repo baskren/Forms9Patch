@@ -7,6 +7,7 @@ namespace Forms9Patch
     /// <summary>
     /// Interface to set the cell height for a cell that contains the content of a Forms9Patch ListView cell.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public interface ICellContentView
     {

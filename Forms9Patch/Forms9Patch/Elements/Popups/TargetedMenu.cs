@@ -11,6 +11,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch.TargetedMenu class 
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     [ContentProperty(nameof(Segments))]
     public class TargetedMenu : BubblePopup

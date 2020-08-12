@@ -9,6 +9,7 @@ namespace Forms9Patch
     /// <summary>
     /// Model for Segment.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     [ContentProperty(nameof(HtmlText))]
     public class Segment : Element, ISegment, IDisposable

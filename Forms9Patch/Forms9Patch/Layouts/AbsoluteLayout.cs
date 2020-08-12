@@ -7,6 +7,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch.AbsoluteLayout
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class AbsoluteLayout : Layout<Xamarin.Forms.AbsoluteLayout>, IElementConfiguration<Xamarin.Forms.AbsoluteLayout>
     {

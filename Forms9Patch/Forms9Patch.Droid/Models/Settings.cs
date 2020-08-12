@@ -90,17 +90,30 @@ namespace Forms9Patch.Droid
         {
             if (false.Equals(true))
             {
-                var v1 = new BaseCellView();
-                var v2 = new GroupHeaderView();
-                var v3 = new BlankCellView();
-                var v4 = new NullItemCellView();
-                var v5 = new TextCellViewContent();
-                var v6 = new HeaderCell<Label>();
-                var v7 = new ItemCell<Label>();
-                var v8 = new Cell<Label>();
+                var r1 = new PopupPlatformDroid();
+                var r2 = new PopupPageRenderer(null);
+                var r3 = new ColorGradientBoxRenderer(null);
+                var r4 = new EnhancedListViewRenderer(null);
+                var r5 = new HardwareKeyPageRenderer(null);
+                var r6 = new LabelRenderer(null);
 
-                var p1 = new PopupPlatformDroid();
-                var p2 = new PopupPageRenderer(null);
+                var e1 = new EmbeddedResourceFontEffect();
+                var e2 = new EntryClearButtonEffect();
+                var e3 = new EntryNoUnderlineEffect();
+                var e4 = new SliderStepSizeEffect();
+                var e5 = new HardwareKeyListenerEffect();
+
+                var s1 = new ApplicationInfoService();
+                var s2 = new AudioService();
+                var s3 = new DescendentBounds();
+                var s4 = new FontService();
+                var s5 = new HapticService();
+                var s6 = new KeyboardService();
+                var s7 = new OsInfoService();
+                var s8 = new PrintService();
+                var s9 = new ToPdfService();
+                var s10 = new ToPngService();
+
             }
         }
         #endregion
@@ -135,6 +148,7 @@ namespace Forms9Patch
 
         public Cell<Label> Include(Cell<Label> cell)
             => new Cell<Label>();
+
 
 #pragma warning restore IDE0060 // Remove unused parameter
     }
