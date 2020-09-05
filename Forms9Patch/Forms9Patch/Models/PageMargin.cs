@@ -69,8 +69,10 @@ namespace Forms9Patch
         public static PageMargin CreateInInches(double horizontal, double vertical)
             => new PageMargin
             {
-                Left = Right = horizontal * 72,
-                Top = Bottom = vertical * 72
+                Left = horizontal * 72,
+                Right = horizontal * 72,
+                Top = vertical * 72,
+                Bottom = vertical * 72
             };
 
         /// <summary>
@@ -81,7 +83,10 @@ namespace Forms9Patch
         public static PageMargin CreateInInches(double all)
             => new PageMargin
             {
-                Left = Right = Top = Bottom = all * 72
+                Left = all * 72,
+                Right = all * 72,
+                Top = all * 72,
+                Bottom = all * 72
             };
 
         /// <summary>
