@@ -11,6 +11,7 @@ namespace Forms9Patch
     /// <summary>
     /// Multi picker.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class MultiPicker : SinglePicker
     {

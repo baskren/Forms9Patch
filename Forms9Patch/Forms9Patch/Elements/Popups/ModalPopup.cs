@@ -32,6 +32,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Modal popup.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class ModalPopup : PopupBase
     {

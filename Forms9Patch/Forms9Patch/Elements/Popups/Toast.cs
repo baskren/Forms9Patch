@@ -7,6 +7,7 @@ namespace Forms9Patch
     /// <summary>
     /// Toast Popup: Plain and simple
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class Toast : ModalPopup
     {

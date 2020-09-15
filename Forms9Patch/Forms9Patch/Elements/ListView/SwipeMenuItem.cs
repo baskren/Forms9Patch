@@ -7,6 +7,7 @@ namespace Forms9Patch
     /// <summary>
     /// Describes a Swipe action button that appears when a cell is swiped 
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class SwipeMenuItem : BindableObject, IMenuItem
     {

@@ -14,6 +14,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch.Image element
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class Image : SKCanvasView, IImage, IImageController, IExtendedShape, IBubbleShape, IDisposable
     {
@@ -269,6 +270,23 @@ namespace Forms9Patch
             set => SetValue(HasShadowProperty, value);
         }
         #endregion HasShadow property
+
+
+        #region MakeRoomForShadow
+        /// <summary>
+        /// Backing store for ContentView.MakeRoomForShadow property
+        /// </summary>
+        internal static readonly BindableProperty InvisibleShadowProperty = BindableProperty.Create(nameof(InvisibleShadow), typeof(bool), typeof(Image), default);
+        /// <summary>
+        /// controls value of .MakeRoomForShadow property
+        /// </summary>
+        internal bool InvisibleShadow
+        {
+            get => (bool)GetValue(InvisibleShadowProperty);
+            set => SetValue(InvisibleShadowProperty, value);
+        }
+        #endregion
+
 
         #region ShadowInverted property
         /// <summary>
@@ -805,6 +823,7 @@ namespace Forms9Patch
                 // ShapeBase
                 propertyName == ElementShapeProperty.PropertyName ||
                 propertyName == HasShadowProperty.PropertyName ||
+                propertyName == InvisibleShadowProperty.PropertyName ||
                 propertyName == OutlineColorProperty.PropertyName ||
                 propertyName == OutlineRadiusProperty.PropertyName ||
                 propertyName == OutlineWidthProperty.PropertyName ||
@@ -955,7 +974,7 @@ namespace Forms9Patch
                 var shadowX = (float)(Settings.ShadowOffset.X * FormsGestures.Display.Scale);
                 var shadowY = (float)(Settings.ShadowOffset.Y * FormsGestures.Display.Scale);
                 var shadowR = (float)(Settings.ShadowRadius * FormsGestures.Display.Scale);
-                var shadowColor = Color.FromRgba(0.0, 0.0, 0.0, 0.75).ToSKColor(); //  .ToWindowsColor().ToSKColor();
+                var shadowColor = Color.FromRgba(0.0, 0.0, 0.0, InvisibleShadow ? 0.0 : 0.75).ToSKColor(); //  .ToWindowsColor().ToSKColor();
                 var shadowPadding = ShapeBase.ShadowPadding(this, true);
 
 

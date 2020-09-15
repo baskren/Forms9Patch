@@ -13,6 +13,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch ImageSource.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class ImageSource : Xamarin.Forms.ImageSource
     {

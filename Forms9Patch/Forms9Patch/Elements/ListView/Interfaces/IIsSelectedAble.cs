@@ -6,6 +6,7 @@ namespace Forms9Patch
     /// <summary>
     /// Assures a class has the IsSelected property.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public interface IIsSelectedAble
     {

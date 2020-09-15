@@ -14,6 +14,7 @@ namespace Forms9Patch
     /// <summary>
     /// Enable EmbeddedResource fonts to be used with Xamarin elements
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     internal class EnhancedListView : Xamarin.Forms.ListView, IScrollView, IDisposable
     {

@@ -6,6 +6,7 @@ namespace Forms9Patch
     /// <summary>
     /// Activity indicator full page overlay.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class ActivityIndicatorPopup : ModalPopup
     {

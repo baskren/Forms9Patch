@@ -9,6 +9,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch HTML markup string.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     class HTMLMarkupString : F9PFormattedString
     {

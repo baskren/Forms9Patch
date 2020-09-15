@@ -4,12 +4,12 @@ using Android.OS;
 using Forms9Patch.Interfaces;
 using Android.Media;
 
-[assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.Droid.HapticsService))]
+[assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.Droid.HapticService))]
 
 namespace Forms9Patch.Droid
 {
     [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
-    public class HapticsService : IHapticsService
+    public class HapticService : IHapticsService
     {
         readonly static Vibrator _vibrator = (Vibrator)Android.App.Application.Context.GetSystemService(Context.VibratorService);
 

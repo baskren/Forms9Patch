@@ -6,6 +6,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Frame layout.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class Frame : Forms9Patch.ContentView
     {

@@ -7,25 +7,26 @@ namespace Forms9PatchDemo
     [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class HtmlButtonsPage : ContentPage
     {
+        Forms9Patch.Button mb1 = new Forms9Patch.Button
+        {
+            IconText = "<font size=\"4\" face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
+            HtmlText = "<i>Markup</i> button",
+            TrailingIcon = true,
+            HasTightSpacing = true,
+            Spacing = 10,
+            //Text = "Pizza",
+            BackgroundColor = Color.FromRgb(200, 200, 200),
+            TextColor = Color.Blue,
+            HasShadow = true,
+            ToggleBehavior = true,
+        };
+
         public HtmlButtonsPage()
         {
             Padding = 20;
             BackgroundColor = Color.White;
 
             #region Material Button
-            var mb1 = new Forms9Patch.Button
-            {
-                IconText = "<font size=\"4\" face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
-                HtmlText = "<i>Markup</i> button",
-                TrailingIcon = true,
-                HasTightSpacing = true,
-                Spacing = 10,
-                //Text = "Pizza",
-                BackgroundColor = Color.FromRgb(200, 200, 200),
-                TextColor = Color.Blue,
-                HasShadow = true,
-                ToggleBehavior = true,
-            };
             mb1.Tapped += (sender, e) => System.Diagnostics.Debug.WriteLine("Tapped");
             mb1.Selected += (sender, e) => System.Diagnostics.Debug.WriteLine("Selected");
             mb1.LongPressing += (sender, e) => System.Diagnostics.Debug.WriteLine("Long Pressing");
@@ -115,45 +116,48 @@ namespace Forms9PatchDemo
                     ib1,
                 }
             };
+
+
         }
 
         #region Touch event responders
-        static void OnSegmentTapped(object sender, Forms9Patch.SegmentedControlEventArgs e)
+        void OnSegmentTapped(object sender, Forms9Patch.SegmentedControlEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("Tapped Segment[" + e.Index + "] Text=[" + e.Segment.HtmlText + "]");
         }
 
-        static void OnSegmentSelected(object sender, Forms9Patch.SegmentedControlEventArgs e)
+        void OnSegmentSelected(object sender, Forms9Patch.SegmentedControlEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("Selected Segment[" + e.Index + "] Text=[" + e.Segment.HtmlText + "]");
         }
 
-        static void OnSegmentLongPressing(object sender, Forms9Patch.SegmentedControlEventArgs e)
+        void OnSegmentLongPressing(object sender, Forms9Patch.SegmentedControlEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("LongPressing Segment[" + e.Index + "] Text=[" + e.Segment.HtmlText + "]");
         }
 
-        static void OnSegmentLongPressed(object sender, Forms9Patch.SegmentedControlEventArgs e)
+        void OnSegmentLongPressed(object sender, Forms9Patch.SegmentedControlEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("LongPressed Segment[" + e.Index + "] Text=[" + e.Segment.HtmlText + "]");
         }
 
-        static void OnImageButtonTapped(object sender, EventArgs e)
+        void OnImageButtonTapped(object sender, EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("Tapped Button Text=[" + ((Forms9Patch.StateButton)sender).Text + "]");
+            mb1.IsEnabled = !mb1.IsEnabled;
         }
 
-        static void OnImageButtonSelected(object sender, EventArgs e)
+        void OnImageButtonSelected(object sender, EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("Selected Button Text=[" + ((Forms9Patch.StateButton)sender).Text + "]");
         }
 
-        static void OnImageButtonLongPressing(object sender, EventArgs e)
+        void OnImageButtonLongPressing(object sender, EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("LongPressing Button Text=[" + ((Forms9Patch.StateButton)sender).Text + "]");
         }
 
-        static void OnImageButtonLongPressed(object sender, EventArgs e)
+        void OnImageButtonLongPressed(object sender, EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("LongPressed Button Text=[" + ((Forms9Patch.StateButton)sender).Text + "]");
         }

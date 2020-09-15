@@ -10,7 +10,7 @@ namespace Forms9Patch.UWP
 {
     static class UwpWebViewExtensions
     {
-        public static async Task<SizeI> WebViewContentSizeAsync(this Windows.UI.Xaml.Controls.WebView webView)
+        public static async Task<SizeI> WebViewContentSizeAsync(this Windows.UI.Xaml.Controls.WebView webView, int depth = 0, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
         {
             if (webView is null)
             {
@@ -19,6 +19,12 @@ namespace Forms9Patch.UWP
 
             int contentWidth = 72 * 8;
             int contentHeight = 72 * 10;
+
+            if (depth > 50)
+                return new SizeI(contentWidth, contentHeight);
+            if (depth > 0)
+                await Task.Delay(100);
+
             int line = P42.Utils.ReflectionExtensions.CallerLineNumber();
             try
             {
@@ -46,7 +52,9 @@ namespace Forms9Patch.UWP
             }
             catch (Exception e)
             {
-                await Forms9Patch.Debug.RequestUserHelp(e, "line = " + line);
+                //await Forms9Patch.Debug.RequestUserHelp(e, "line = " + line + ", callerName=["+callerName+"]");
+                System.Diagnostics.Debug.WriteLine("UwpWebViewExtensions.WebViewContentSizeAsync FAIL");
+                return await WebViewContentSizeAsync(webView, depth + 1, callerName);
             }
             return new SizeI(contentWidth, contentHeight);
         }

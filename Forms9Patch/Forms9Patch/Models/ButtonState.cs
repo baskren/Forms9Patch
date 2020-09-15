@@ -12,6 +12,7 @@ namespace Forms9Patch
     /// <summary>
     /// Describes the properties of a <see cref="StateButton"/> for a given state.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     [ContentProperty(nameof(HtmlText))]
     public class ButtonState : BindableObject, IButtonState

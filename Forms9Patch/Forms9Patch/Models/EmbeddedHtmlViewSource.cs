@@ -13,6 +13,7 @@ namespace Forms9Patch
     /// <summary>
     /// WebSource for EmbeddedResources
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class EmbeddedHtmlViewSource : Xamarin.Forms.HtmlWebViewSource, IDisposable
     {

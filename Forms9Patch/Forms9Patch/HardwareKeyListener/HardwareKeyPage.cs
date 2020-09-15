@@ -9,6 +9,7 @@ namespace Forms9Patch
     /// <summary>
     /// Required to enable Hardware Key Listening capability
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class HardwareKeyPage : ContentPage
     {

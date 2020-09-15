@@ -9,6 +9,7 @@ namespace Forms9Patch
     /// <summary>
     /// Data template selector: Used to match types of objects with the types of views that will be used to display them in a ListView.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class TemplateSelectorBase : Xamarin.Forms.DataTemplateSelector
     {

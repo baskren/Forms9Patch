@@ -8,6 +8,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch.Label
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     [ContentProperty(nameof(HtmlText))]
     public class Label : Xamarin.Forms.Label, ILabel, IElement //View, IFontElement

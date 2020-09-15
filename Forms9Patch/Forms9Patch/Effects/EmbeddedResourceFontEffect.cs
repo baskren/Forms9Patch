@@ -7,6 +7,7 @@ namespace Forms9Patch
     /// <summary>
     /// Enable EmbeddedResource fonts to be used with Xamarin elements
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class EmbeddedResourceFontEffect : Xamarin.Forms.RoutingEffect
     {

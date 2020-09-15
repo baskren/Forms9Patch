@@ -6,6 +6,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch StackLayout.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class StackLayout : Layout<Xamarin.Forms.StackLayout>, IElementConfiguration<Xamarin.Forms.StackLayout>
     {

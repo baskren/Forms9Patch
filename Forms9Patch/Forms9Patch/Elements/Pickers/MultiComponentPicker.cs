@@ -9,6 +9,7 @@ namespace Forms9Patch
     /// <summary>
     /// Multi component picker.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class MultiComponentPicker : Xamarin.Forms.ContentView
     {

@@ -7,6 +7,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Bubble pop-up.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class BubblePopup : PopupBase
     {

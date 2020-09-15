@@ -3,6 +3,7 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     class OverContextEffect : Xamarin.Forms.RoutingEffect
     {

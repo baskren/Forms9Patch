@@ -9,6 +9,7 @@ using SkiaSharp;
 
 namespace Forms9Patch
 {
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     class SegmentedControlBackground : SKCanvasView
     {

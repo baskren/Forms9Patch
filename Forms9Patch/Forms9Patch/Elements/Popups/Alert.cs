@@ -8,6 +8,7 @@ namespace Forms9Patch
     /// <summary>
     /// Permission popup.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class Alert : BubblePopup
     {

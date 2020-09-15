@@ -6,6 +6,7 @@ namespace Forms9Patch
     /// <summary>
     /// Null cell view: DO NOT USE.  Used internally by Forms9Patch.ListView to display null items in a ListView
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     class NullItemCellView : BaseCellView

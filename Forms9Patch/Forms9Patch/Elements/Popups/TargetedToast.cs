@@ -7,6 +7,7 @@ namespace Forms9Patch
     /// <summary>
     /// A simple toast that points to an element
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class TargetedToast : BubblePopup
     {

@@ -4,6 +4,7 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     class SegmentButton : Forms9Patch.Button, IExtendedShape
     {

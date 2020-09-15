@@ -45,6 +45,7 @@ namespace Forms9PatchDemo
             };
         }
 
+        [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
         public class TestClass
         {
             public Color BackgroundColor { get; set; }
@@ -59,6 +60,7 @@ namespace Forms9PatchDemo
             Forms9Patch.Toast.Create(null, e.Href);
         }
 
+        [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
         public class TestClassCell : ViewCell
         {
 

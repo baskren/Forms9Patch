@@ -8,6 +8,7 @@ namespace Forms9Patch
     /// <summary>
     /// A popup that enters from the side of the screen and stops at the same side.  Great for notificaitons or menus.
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class FlyoutPopup : PopupBase
     {

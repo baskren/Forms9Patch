@@ -176,17 +176,28 @@ namespace Forms9Patch.UWP
                 // Effects
                 var e1 = new EmbeddedResourceFontEffect();
                 var e2 = new SliderStepSizeEffect();
-
-                // Hardware Key Listener
-                var h1 = new HardwareKeyListenerEffect();
-                var h2 = new HardwareKeyPageRenderer();
-
-                // Popup
-                var P1 = new PopupPageRenderer();
+                var e3 = new HardwareKeyListenerEffect();
 
                 // Renderers
                 var r1 = new EnhancedListViewRenderer();
                 var r2 = new LabeLRenderer();
+                var r3 = new HardwareKeyPageRenderer();
+                var r4 = new PopupPageRenderer();
+                var r5 = new ColorGradientBoxRenderer();
+
+                var p1 = new PopupPlatformUWP();
+
+                // Services
+                var s1 = new ApplicationInfoService();
+                //var s2 = new AudioService();
+                var s3 = new DescendentBounds();
+                var s4 = new FontService();
+                //var s5 = new HapticService();
+                var s6 = new KeyboardService();
+                var s7 = new OsInfoService();
+                var s8 = new PrintService();
+                //var s9 = new ToPdfService();
+                var s10 = new ToPngService();
 
             }
         }

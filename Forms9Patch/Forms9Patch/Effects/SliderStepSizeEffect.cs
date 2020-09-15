@@ -8,6 +8,7 @@ namespace Forms9Patch
     /// <summary>
     /// Enabled StepSize control of Xamarin.Forms.Slider element
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class SliderStepSizeEffect : RoutingEffect, INotifyPropertyChanged
     {

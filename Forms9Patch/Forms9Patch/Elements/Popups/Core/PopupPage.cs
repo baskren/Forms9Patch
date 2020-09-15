@@ -10,6 +10,7 @@ namespace Forms9Patch.Elements.Popups.Core
     /// <summary>
     /// Foundation for Popups
     /// </summary>
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     public class PopupPage : Xamarin.Forms.ContentPage
     {

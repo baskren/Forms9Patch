@@ -23,6 +23,7 @@ namespace ButtonBindingSample
         }
     }
 
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class ViewModel
     {
         public ViewModel()
@@ -47,6 +48,7 @@ namespace ButtonBindingSample
     }
 
 
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class DelegateCommand : ICommand
     {
         /// <summary>

@@ -8,6 +8,7 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     class PopupLayerEffect : Xamarin.Forms.RoutingEffect
     {

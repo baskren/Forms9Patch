@@ -3,27 +3,32 @@ using Xamarin.Forms;
 using System.Text;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Xamarin.Forms.Internals;
 
 namespace Forms9PatchDemo
 {
     #region Helper Classes
 
     #region Model Classes
+    [Preserve(AllMembers = true)]
     public class Quote
     {
         public string QuoteText { get; set; }
     }
 
+    [Preserve(AllMembers = true)]
     public class ExternalQuote : Quote
     {
     }
 
+    [Preserve(AllMembers = true)]
     public class InternalQuote : Quote
     {
     }
     #endregion
 
     #region Cell Content Classes
+    [Preserve(AllMembers = true)]
     class QuoteView : Grid
     {
         public readonly Forms9Patch.Image HeadShot = new Forms9Patch.Image
@@ -59,6 +64,7 @@ namespace Forms9PatchDemo
     }
 
 
+    [Preserve(AllMembers = true)]
     class InternalQuoteView : QuoteView
     {
         public InternalQuoteView()
@@ -82,6 +88,7 @@ namespace Forms9PatchDemo
         }
     }
 
+    [Preserve(AllMembers = true)]
     class ExternalQuoteView : QuoteView
     {
         public ExternalQuoteView()
@@ -137,6 +144,7 @@ namespace Forms9PatchDemo
         }
     }
 
+    [Preserve(AllMembers = true)]
     class QuoteCellDataTemplateSelector : DataTemplateSelector
     {
         readonly DataTemplate internalTemplate;

@@ -86,6 +86,7 @@ namespace Forms9Patch.iOS
                 var e1 = new EmbeddedResourceFontEffect();
                 var e2 = new PopupLayerEffect();
                 var e3 = new SliderStepSizeEffect();
+                var e4 = new EntryClearButtonEffect();
 
                 var c1 = new ClipboardService();
                 var c2 = new MimeItemCollection();
@@ -98,10 +99,12 @@ namespace Forms9Patch.iOS
                 var s3 = new DescendentBounds();
                 var s4 = new FontService();
                 var s5 = new HapticService();
-                var s6 = new ToPngService();
-                var s7 = new KeyboardService();
-                var s8 = new OsInfoService();
-                var s9 = new PrintService();
+                var s6 = new KeyboardService();
+                var s7 = new OsInfoService();
+                var s8 = new PrintService();
+                var s9 = new ToPdfService();
+                var s10 = new ToPngService();
+
 #pragma warning restore IDE0059 // Unnecessary assignment of a value
 #pragma warning restore IDE0067 // Dispose objects before losing scope
             }

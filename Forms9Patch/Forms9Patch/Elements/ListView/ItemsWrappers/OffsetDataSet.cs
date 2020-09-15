@@ -3,6 +3,7 @@ using System.ComponentModel;
 
 namespace Forms9Patch
 {
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     internal class OffsetDataSetBase
     {
@@ -45,6 +46,7 @@ namespace Forms9Patch
         }
     }
 
+    [Preserve(AllMembers = true)]
     [DesignTimeVisible(true)]
     internal class DeepDataSet : OffsetDataSetBase
     {
