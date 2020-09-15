@@ -666,19 +666,13 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanging(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanging(propertyName));
-                return;
-            }
+                base.OnPropertyChanging(propertyName);
 
-            base.OnPropertyChanging(propertyName);
-
-
-            if (propertyName == SelectedItemProperty.PropertyName && GroupToggleBehavior == GroupToggleBehavior.Radio)
-            {
-                RemoveSelectedItem(SelectedItem);
-            }
+                if (propertyName == SelectedItemProperty.PropertyName && GroupToggleBehavior == GroupToggleBehavior.Radio)
+                    RemoveSelectedItem(SelectedItem);
+            });
         }
 
 
@@ -688,117 +682,115 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
-            {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
-            }
-
-            base.OnPropertyChanged(propertyName);
-
-            if (propertyName == "Renderer")
-            {
-                _resetScrollToSelected = true;
-                _scrollResetAt = DateTime.Now;
-            }
-
-            if (BaseItemsSource != null)
-            {
-                #region Cell decoration
-                // going to use Transparent
-                //if (propertyName == CellBackgroundColorProperty.PropertyName)
-                //    BaseItemsSource.CellBackgroundColor = CellBackgroundColor;
-                //else 
-                if (propertyName == SelectedCellBackgroundColorProperty.PropertyName)
-                    BaseItemsSource.SelectedCellBackgroundColor = SelectedCellBackgroundColor;
-                else if (propertyName == GroupHeaderRowHeightProperty.PropertyName)
-                    BaseItemsSource.RequestedGroupHeaderRowHeight = GroupHeaderRowHeight;
-                else if (propertyName == RowHeightProperty.PropertyName)
-                    // note that _listView.RowHeight is set in the below _listView!=null section
-                    BaseItemsSource.RequestedRowHeight = RowHeight;
-                #endregion
-
-                #region Data mapping and filtering
-                //else if (propertyName == SourcePropertyMapProperty.PropertyName || propertyName == VisibilityTestProperty.PropertyName || propertyName == SubGroupTypeProperty.PropertyName)
-                //    UpdateBaseItemsSource();
-                #endregion
-
-                #region Row selection properties
-                else if (propertyName == SelectedItemProperty.PropertyName && GroupToggleBehavior != GroupToggleBehavior.None)
-                    AddSelectedItem(SelectedItem);
-                // SelectedItems cannot be changed
-                #endregion
-
-
-                #region Separator Properties
-                else if (propertyName == SeparatorVisibilityProperty.PropertyName)
-                    BaseItemsSource.SeparatorVisibility = SeparatorVisibility;
-                else if (propertyName == SeparatorLeftIndentProperty.PropertyName)
-                    BaseItemsSource.SeparatorLeftIndent = SeparatorLeftIndent;
-                else if (propertyName == SeparatorRightIndentProperty.PropertyName)
-                    BaseItemsSource.SeparatorRightIndent = SeparatorRightIndent;
-                else if (propertyName == SeparatorHeightProperty.PropertyName)
-                    BaseItemsSource.RequestedSeparatorHeight = SeparatorHeight;
-                else if (propertyName == SeparatorColorProperty.PropertyName)
-                    BaseItemsSource.SeparatorColor = SeparatorColor;
-                #endregion
-            }
-
-            // Drag/Drop properties (Editable) are managed privately 
-
-            if (_listView != null)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
 
-                #region Xamarin.Forms.ListView analogs
+                base.OnPropertyChanged(propertyName);
 
-                #region Header / Footer properties
-                if (propertyName == HeaderProperty.PropertyName)
-                    _listView.Header = Header;
-                else if (propertyName == HeaderTemplateProperty.PropertyName)
-                    _listView.HeaderTemplate = HeaderTemplate;
-                else if (propertyName == FooterProperty.PropertyName)
-                    _listView.Footer = Footer;
-                else if (propertyName == FooterTemplateProperty.PropertyName)
-                    _listView.FooterTemplate = FooterTemplate;
-                #endregion
+                if (propertyName == "Renderer")
+                {
+                    _resetScrollToSelected = true;
+                    _scrollResetAt = DateTime.Now;
+                }
 
-                // SelectedItem handled above in BaseItemsSource!=null section
+                if (BaseItemsSource != null)
+                {
+                    #region Cell decoration
+                    // going to use Transparent
+                    //if (propertyName == CellBackgroundColorProperty.PropertyName)
+                    //    BaseItemsSource.CellBackgroundColor = CellBackgroundColor;
+                    //else 
+                    if (propertyName == SelectedCellBackgroundColorProperty.PropertyName)
+                        BaseItemsSource.SelectedCellBackgroundColor = SelectedCellBackgroundColor;
+                    else if (propertyName == GroupHeaderRowHeightProperty.PropertyName)
+                        BaseItemsSource.RequestedGroupHeaderRowHeight = GroupHeaderRowHeight;
+                    else if (propertyName == RowHeightProperty.PropertyName)
+                        // note that _listView.RowHeight is set in the below _listView!=null section
+                        BaseItemsSource.RequestedRowHeight = RowHeight;
+                    #endregion
 
-                #region RowHeight properties
-                else if (propertyName == RowHeightProperty.PropertyName)
-                    // note that BaseItemsSource.RowHeight is set in the above BaseItemsSource!=null section
-                    _listView.RowHeight = RowHeight;
+                    #region Data mapping and filtering
+                    //else if (propertyName == SourcePropertyMapProperty.PropertyName || propertyName == VisibilityTestProperty.PropertyName || propertyName == SubGroupTypeProperty.PropertyName)
+                    //    UpdateBaseItemsSource();
+                    #endregion
+
+                    #region Row selection properties
+                    else if (propertyName == SelectedItemProperty.PropertyName && GroupToggleBehavior != GroupToggleBehavior.None)
+                        AddSelectedItem(SelectedItem);
+                    // SelectedItems cannot be changed
+                    #endregion
 
 
-                // HasUnevenRows ... we are assuming this is always the case
-                #endregion
+                    #region Separator Properties
+                    else if (propertyName == SeparatorVisibilityProperty.PropertyName)
+                        BaseItemsSource.SeparatorVisibility = SeparatorVisibility;
+                    else if (propertyName == SeparatorLeftIndentProperty.PropertyName)
+                        BaseItemsSource.SeparatorLeftIndent = SeparatorLeftIndent;
+                    else if (propertyName == SeparatorRightIndentProperty.PropertyName)
+                        BaseItemsSource.SeparatorRightIndent = SeparatorRightIndent;
+                    else if (propertyName == SeparatorHeightProperty.PropertyName)
+                        BaseItemsSource.RequestedSeparatorHeight = SeparatorHeight;
+                    else if (propertyName == SeparatorColorProperty.PropertyName)
+                        BaseItemsSource.SeparatorColor = SeparatorColor;
+                    #endregion
+                }
 
-                #region Group behavior properties
-                else if (propertyName == GroupHeaderTemplateProperty.PropertyName)
-                    _listView.GroupHeaderTemplate = GroupHeaderTemplate;
-                else if (propertyName == IsGroupingEnabledProperty.PropertyName)
-                    _listView.IsGroupingEnabled = IsGroupingEnabled;
-                #endregion
+                // Drag/Drop properties (Editable) are managed privately 
 
-                #region Separator properties
-                // _listView.SeparatorVisibility is set to None in Init();
-                //else if (propertyName == IsSeparatorVisibleProperty.PropertyName)
-                //    _listView.SeparatorVisibility = IsSeparatorVisible ? Xamarin.Forms.SeparatorVisibility.Default : Xamarin.Forms.SeparatorVisibility.None;
-                else if (propertyName == SeparatorColorProperty.PropertyName)
-                    _listView.SeparatorColor = SeparatorColor;
-                #endregion
+                if (_listView != null)
+                {
 
-                #region Xamarin.Forms.ItemsView analogs
-                else if (propertyName == ItemsSourceProperty.PropertyName)
-                    UpdateBaseItemsSource();
-                else if (propertyName == ItemTemplatesProperty.PropertyName)
-                    _listView.ItemTemplate = ItemTemplates;
-                else if (propertyName == BackgroundColorProperty.PropertyName)
-                    _listView.BackgroundColor = BackgroundColor;
-                #endregion Xamarin.Forms.ItemsView analogs
+                    #region Xamarin.Forms.ListView analogs
 
-                #endregion Xamarin.Forms.ListView analogs
-            }
+                    #region Header / Footer properties
+                    if (propertyName == HeaderProperty.PropertyName)
+                        _listView.Header = Header;
+                    else if (propertyName == HeaderTemplateProperty.PropertyName)
+                        _listView.HeaderTemplate = HeaderTemplate;
+                    else if (propertyName == FooterProperty.PropertyName)
+                        _listView.Footer = Footer;
+                    else if (propertyName == FooterTemplateProperty.PropertyName)
+                        _listView.FooterTemplate = FooterTemplate;
+                    #endregion
+
+                    // SelectedItem handled above in BaseItemsSource!=null section
+
+                    #region RowHeight properties
+                    else if (propertyName == RowHeightProperty.PropertyName)
+                        // note that BaseItemsSource.RowHeight is set in the above BaseItemsSource!=null section
+                        _listView.RowHeight = RowHeight;
+
+
+                    // HasUnevenRows ... we are assuming this is always the case
+                    #endregion
+
+                    #region Group behavior properties
+                    else if (propertyName == GroupHeaderTemplateProperty.PropertyName)
+                        _listView.GroupHeaderTemplate = GroupHeaderTemplate;
+                    else if (propertyName == IsGroupingEnabledProperty.PropertyName)
+                        _listView.IsGroupingEnabled = IsGroupingEnabled;
+                    #endregion
+
+                    #region Separator properties
+                    // _listView.SeparatorVisibility is set to None in Init();
+                    //else if (propertyName == IsSeparatorVisibleProperty.PropertyName)
+                    //    _listView.SeparatorVisibility = IsSeparatorVisible ? Xamarin.Forms.SeparatorVisibility.Default : Xamarin.Forms.SeparatorVisibility.None;
+                    else if (propertyName == SeparatorColorProperty.PropertyName)
+                        _listView.SeparatorColor = SeparatorColor;
+                    #endregion
+
+                    #region Xamarin.Forms.ItemsView analogs
+                    else if (propertyName == ItemsSourceProperty.PropertyName)
+                        UpdateBaseItemsSource();
+                    else if (propertyName == ItemTemplatesProperty.PropertyName)
+                        _listView.ItemTemplate = ItemTemplates;
+                    else if (propertyName == BackgroundColorProperty.PropertyName)
+                        _listView.BackgroundColor = BackgroundColor;
+                    #endregion Xamarin.Forms.ItemsView analogs
+
+                    #endregion Xamarin.Forms.ListView analogs
+                }
+            });
         }
         #endregion
 
@@ -1243,10 +1235,8 @@ namespace Forms9Patch
             else
                 BaseItemsSource = null;
 
-            if (P42.Utils.Environment.IsOnMainThread)
-                Update_listViewItemsSourceAction();
-            else
-                Device.BeginInvokeOnMainThread(Update_listViewItemsSourceAction);
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(Update_listViewItemsSourceAction);
+
             _resetScrollToSelected = true;
             _scrollResetAt = DateTime.Now;
         }

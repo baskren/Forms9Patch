@@ -26,14 +26,11 @@ namespace Forms9Patch
 
         protected override void OnBindingContextChanged()
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(OnBindingContextChanged);
-                return;
-            }
-
-            base.OnBindingContextChanged();
-            HtmlText = BindingContext?.ToString();
+                base.OnBindingContextChanged();
+                HtmlText = BindingContext?.ToString();
+            });
         }
     }
 }

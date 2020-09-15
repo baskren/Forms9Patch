@@ -67,7 +67,7 @@ namespace Forms9Patch.Droid
             var decoreHeight = decoreView.Height;
             var decoreWidth = decoreView.Width;
 
-            var visibleRect = new Rect();
+            var visibleRect = new Android.Graphics.Rect();
             decoreView.GetWindowVisibleDisplayFrame(visibleRect);
 
 

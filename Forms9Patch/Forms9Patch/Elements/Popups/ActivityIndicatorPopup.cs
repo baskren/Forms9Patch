@@ -122,26 +122,23 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
-            }
+                base.OnPropertyChanged(propertyName);
 
-            base.OnPropertyChanged(propertyName);
-
-            if (propertyName == IsVisibleProperty.PropertyName)
-                Activate();
-            else if (propertyName == ScaleProperty.PropertyName)
-                _indicator.Scale = Scale;
+                if (propertyName == IsVisibleProperty.PropertyName)
+                    Activate();
+                else if (propertyName == ScaleProperty.PropertyName)
+                    _indicator.Scale = Scale;
+            });
         }
 
         void Activate()
         {
-            if (P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
+            {
                 _indicator.IsRunning = IsVisible;
-            else
-                Device.BeginInvokeOnMainThread(Activate);
+            });
         }
         #endregion
     }

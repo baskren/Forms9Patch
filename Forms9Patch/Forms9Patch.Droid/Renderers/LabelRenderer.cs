@@ -757,9 +757,27 @@ namespace Forms9Patch.Droid
             base.RequestLayout();
         }
 
+        bool invalidating = false;
+        bool pendingInvalidate = false;
         public override void Invalidate()
         {
-            base.Invalidate();
+            if (invalidating)
+            {
+                pendingInvalidate = true;
+                return;
+            }
+            invalidating = true;
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
+            {
+                base.Invalidate();
+                invalidating = false;
+                if (pendingInvalidate)
+                {
+                    pendingInvalidate = false;
+                    Invalidate();
+                }
+            });
+
         }
 
         protected override void OnLayout(bool changed, int l, int t, int r, int b)

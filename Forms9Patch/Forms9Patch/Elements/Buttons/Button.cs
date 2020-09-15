@@ -1289,6 +1289,8 @@ namespace Forms9Patch
             HandleTap();
         }
 
+        DateTime downDateTime = DateTime.Now;
+
         /// <summary>
         /// Called when button is pressed down
         /// </summary>
@@ -1296,6 +1298,9 @@ namespace Forms9Patch
         /// <param name="e"></param>
         protected virtual void OnDown(object sender, FormsGestures.DownUpEventArgs e)
         {
+            System.Diagnostics.Debug.WriteLine("DOWN");
+            downDateTime = DateTime.Now;
+
             e.Handled = IsEnabled && IsVisible;
             Opacity = 0.5;
         }
@@ -1307,6 +1312,8 @@ namespace Forms9Patch
         /// <param name="e"></param>
         protected virtual void OnUp(object sender, FormsGestures.DownUpEventArgs e)
         {
+            System.Diagnostics.Debug.WriteLine("UP: " + (DateTime.Now - downDateTime).TotalMilliseconds);
+
             /*
             var popup = new Elements.Popups.Core.PopupPage
             {
@@ -1349,6 +1356,8 @@ namespace Forms9Patch
         /// <param name="e"></param>
         protected virtual void OnTapped(object sender, FormsGestures.TapEventArgs e)
         {
+            System.Diagnostics.Debug.WriteLine("OnTapped: " + (DateTime.Now - downDateTime).TotalMilliseconds);
+
             if (IsLongPressEnabled)
                 e.Handled = HandleTap();
             else
@@ -1443,76 +1452,38 @@ namespace Forms9Patch
         /// <param name="isSegment"></param>
         protected virtual void UpdateElements(bool isSegment = false)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => UpdateElements(isSegment));
-                return;
-            }
-
-            if (this is StateButton)
-                return;
+                if (this is StateButton)
+                    return;
 
 
-            _noUpdate = true;
+                _noUpdate = true;
 
-            var enabledLabelColor = TextColor == Color.Default ? (DarkTheme ? Color.White : Color.FromHex("#000").WithAlpha(0.5)) : TextColor;
-            if (IsSelected && SelectedTextColor.A > 0)
-                enabledLabelColor = SelectedTextColor;
+                var enabledLabelColor = TextColor == Color.Default ? (DarkTheme ? Color.White : Color.FromHex("#000").WithAlpha(0.5)) : TextColor;
+                if (IsSelected && SelectedTextColor.A > 0)
+                    enabledLabelColor = SelectedTextColor;
 
-            base.OutlineWidth = OutlineWidth < 0
-                ? (BackgroundImage?.Source != null
-                    ? 0
-                    : (BackgroundColor.A > 0 ? 0 : 1))
-                : (OutlineColor == Color.Transparent
-                    ? 0
-                    : OutlineWidth);
+                base.OutlineWidth = OutlineWidth < 0
+                    ? (BackgroundImage?.Source != null
+                        ? 0
+                        : (BackgroundColor.A > 0 ? 0 : 1))
+                    : (OutlineColor == Color.Transparent
+                        ? 0
+                        : OutlineWidth);
 
-
-            if (IsEnabled)
-            {
-                InvisibleShadow = false;
-
-                _label.TextColor = enabledLabelColor;
-
-                if (IsSelected)
+                if (IsEnabled)
                 {
-                    if (SelectedBackgroundColor.A > 0)
-                        base.BackgroundColor = SelectedBackgroundColor;
-                    else
-                        base.BackgroundColor = BackgroundColor.A > 0 ? BackgroundColor.RgbHybridBlend(Color.FromHex("#000"), 0.25) : Color.FromHex(DarkTheme ? "#FFF" : "#000").WithAlpha(0.2);
-                    base.OutlineColor = BackgroundColor.A > 0 ? OutlineColor.RgbHybridBlend(Color.FromHex("#000"), 0.25) : base.BackgroundColor.A > 0 ? base.BackgroundColor : enabledLabelColor;
-                }
-                else
-                {
-                    base.BackgroundColor = BackgroundColor.A > 0 ? BackgroundColor : _label.BackgroundColor;
-                    base.OutlineColor = OutlineColor;
-                }
-                if (OutlineColor == Color.Default)
-                    base.OutlineColor = enabledLabelColor;
+                        InvisibleShadow = false;
+                        _label.TextColor = enabledLabelColor;
 
-            }
-            else
-            {
-                InvisibleShadow = HasShadow;
-
-                _label.TextColor = DarkTheme ? Color.FromHex("#FFF").WithAlpha(0.30) : Color.FromHex("#000").WithAlpha(0.26);
-                if (!isSegment)
-                {
-                    base.HasShadow = false;
-                    base.BackgroundColor = BackgroundColor.A > 0 ? OpaqueColor : TransparentColor;
-                    base.OutlineColor = OutlineColor == Color.Default || OutlineColor.A > 0 ? OpaqueColor : BackgroundColor;
-                }
-                else
-                {
-                    // the next line is already covered above
-                    base.HasShadow = BackgroundColor.A > 0 && HasShadow;
                     if (IsSelected)
                     {
                         if (SelectedBackgroundColor.A > 0)
-                            base.BackgroundColor = SelectedBackgroundColor.RgbHybridBlend(Color.FromHex("#000"), 0.25);
+                            base.BackgroundColor = SelectedBackgroundColor;
                         else
                             base.BackgroundColor = BackgroundColor.A > 0 ? BackgroundColor.RgbHybridBlend(Color.FromHex("#000"), 0.25) : Color.FromHex(DarkTheme ? "#FFF" : "#000").WithAlpha(0.2);
-                        base.OutlineColor = BackgroundColor.A > 0 ? OutlineColor.RgbHybridBlend(Color.FromHex("#000"), 0.25) : base.BackgroundColor.A > 0 ? base.BackgroundColor : enabledLabelColor; // _label.TextColor;
+                        base.OutlineColor = BackgroundColor.A > 0 ? OutlineColor.RgbHybridBlend(Color.FromHex("#000"), 0.25) : base.BackgroundColor.A > 0 ? base.BackgroundColor : enabledLabelColor;
                     }
                     else
                     {
@@ -1521,14 +1492,48 @@ namespace Forms9Patch
                     }
                     if (OutlineColor == Color.Default)
                         base.OutlineColor = enabledLabelColor;
+
+                    base.HasShadow = (base.BackgroundColor.A > 0 || BackgroundImage?.Source != null) && HasShadow;
+                    ShadowInverted = IsSelected && !isSegment;
                 }
-            }
+                else
+                {
+                    InvisibleShadow = HasShadow;
 
-            base.HasShadow = (base.BackgroundColor.A > 0 || BackgroundImage?.Source != null) && HasShadow;
-            ShadowInverted = IsSelected && !isSegment;
+                    _label.TextColor = DarkTheme ? Color.FromHex("#FFF").WithAlpha(0.30) : Color.FromHex("#000").WithAlpha(0.26);
+                    if (!isSegment)
+                    {
+                        base.HasShadow = false;
+                        base.BackgroundColor = BackgroundColor.A > 0 ? OpaqueColor : TransparentColor;
+                        base.OutlineColor = OutlineColor == Color.Default || OutlineColor.A > 0 ? OpaqueColor : BackgroundColor;
+                    }
+                    else
+                    {
+                        // the next line is already covered above
+                        base.HasShadow = BackgroundColor.A > 0 && HasShadow;
+                        if (IsSelected)
+                        {
+                            if (SelectedBackgroundColor.A > 0)
+                                base.BackgroundColor = SelectedBackgroundColor.RgbHybridBlend(Color.FromHex("#000"), 0.25);
+                            else
+                                base.BackgroundColor = BackgroundColor.A > 0 ? BackgroundColor.RgbHybridBlend(Color.FromHex("#000"), 0.25) : Color.FromHex(DarkTheme ? "#FFF" : "#000").WithAlpha(0.2);
+                            base.OutlineColor = BackgroundColor.A > 0 ? OutlineColor.RgbHybridBlend(Color.FromHex("#000"), 0.25) : base.BackgroundColor.A > 0 ? base.BackgroundColor : enabledLabelColor; // _label.TextColor;
+                        }
+                        else
+                        {
+                            base.BackgroundColor = BackgroundColor.A > 0 ? BackgroundColor : _label.BackgroundColor;
+                            base.OutlineColor = OutlineColor;
+                        }
+                        if (OutlineColor == Color.Default)
+                            base.OutlineColor = enabledLabelColor;
+                    }
+                }
+                base.HasShadow = (base.BackgroundColor.A > 0 || BackgroundImage?.Source != null) && HasShadow;
+                ShadowInverted = IsSelected && !isSegment;
 
-            UpdateIconTint();
-            _noUpdate = false;
+                UpdateIconTint();
+                _noUpdate = false;
+            });
         }
 
         Color OpaqueColor
@@ -1870,30 +1875,27 @@ namespace Forms9Patch
 
         void OnLabelPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnLabelPropertyChanged(sender, e));
-                return;
-            }
-
-            var propertyName = e.PropertyName;
-            if (propertyName == Xamarin.Forms.Label.TextProperty.PropertyName || propertyName == Label.HtmlTextProperty.PropertyName)
-            {
-                if (string.IsNullOrEmpty((string)_label) && _stackLayout.Children.Contains(_label))
-                    _stackLayout.Children.Remove(_label);
-                else if (!string.IsNullOrEmpty((string)_label) && !_stackLayout.Children.Contains(_label))
+                var propertyName = e.PropertyName;
+                if (propertyName == Xamarin.Forms.Label.TextProperty.PropertyName || propertyName == Label.HtmlTextProperty.PropertyName)
                 {
-                    if (TrailingIcon)
-                        _stackLayout.Children.Insert(0, _label);
-                    else
-                        _stackLayout.Children.Add(_label);
+                    if (string.IsNullOrEmpty((string)_label) && _stackLayout.Children.Contains(_label))
+                        _stackLayout.Children.Remove(_label);
+                    else if (!string.IsNullOrEmpty((string)_label) && !_stackLayout.Children.Contains(_label))
+                    {
+                        if (TrailingIcon)
+                            _stackLayout.Children.Insert(0, _label);
+                        else
+                            _stackLayout.Children.Add(_label);
+                    }
+                    SetOrienations();
                 }
-                SetOrienations();
-            }
-            else if (propertyName == Xamarin.Forms.Label.TextColorProperty.PropertyName)
-                UpdateIconTint();
-            else if (propertyName == Forms9Patch.Label.FittedFontSizeProperty.PropertyName || propertyName == Forms9Patch.Label.SynchronizedFontSizeProperty.PropertyName)
-                CheckIsClipped();
+                else if (propertyName == Xamarin.Forms.Label.TextColorProperty.PropertyName)
+                    UpdateIconTint();
+                else if (propertyName == Forms9Patch.Label.FittedFontSizeProperty.PropertyName || propertyName == Forms9Patch.Label.SynchronizedFontSizeProperty.PropertyName)
+                    CheckIsClipped();
+            });
         }
 
         /// <param name="propertyName">The name of the changed property.</param>
@@ -1906,210 +1908,204 @@ namespace Forms9Patch
         /// </remarks>
         protected override void OnPropertyChanging(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanging(propertyName));
-                return;
-            }
+                base.OnPropertyChanging(propertyName);
 
-            base.OnPropertyChanging(propertyName);
-
-            if (_noUpdate)
-                return;
-            if (propertyName == CommandProperty.PropertyName)
-            {
-                var command = Command;
-                if (command != null)
-                    command.CanExecuteChanged -= CommandCanExecuteChanged;
-            }
+                if (_noUpdate)
+                    return;
+                if (propertyName == CommandProperty.PropertyName)
+                {
+                    var command = Command;
+                    if (command != null)
+                        command.CanExecuteChanged -= CommandCanExecuteChanged;
+                }
+            });
         }
 
         void SetOrienations()
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(SetOrienations);
-                return;
-            }
-
-            var horzOption = HorizontalTextAlignment.ToLayoutOptions();
-            var vertOption = VerticalTextAlignment.ToLayoutOptions();
-            if (Orientation == StackOrientation.Horizontal)
-            {
-                if (string.IsNullOrEmpty(_label.Text ?? _label.HtmlText))
+                var horzOption = HorizontalTextAlignment.ToLayoutOptions();
+                var vertOption = VerticalTextAlignment.ToLayoutOptions();
+                if (Orientation == StackOrientation.Horizontal)
                 {
-                    if (_iconImage != null)
+                    if (string.IsNullOrEmpty(_label.Text ?? _label.HtmlText))
                     {
-                        _iconImage.HorizontalOptions = horzOption;
-                        _iconImage.VerticalOptions = vertOption;
+                        if (_iconImage != null)
+                        {
+                            _iconImage.HorizontalOptions = horzOption;
+                            _iconImage.VerticalOptions = vertOption;
+                        }
+                        if (_iconLabel != null)
+                        {
+                            _iconLabel.HorizontalTextAlignment = HorizontalTextAlignment;
+                            _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
+                            _iconLabel.HorizontalOptions = HorizontalTextAlignment.ToLayoutOptions(true);
+                            _iconLabel.VerticalOptions = LayoutOptions.Fill;
+                            _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
+                                ? InternalIconFontFamily
+                                : IconFontFamily;
+                            _iconLabel.FontSize = InternalIconFontSize > 0
+                                ? InternalIconFontSize
+                                : IconFontSize > 0 ? IconFontSize : FontSize;
+                        }
+                        _stackLayout.HorizontalOptions = LayoutOptions.FillAndExpand;
                     }
-                    if (_iconLabel != null)
+                    else if (HasTightSpacing)
                     {
-                        _iconLabel.HorizontalTextAlignment = HorizontalTextAlignment;
-                        _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
-                        _iconLabel.HorizontalOptions = HorizontalTextAlignment.ToLayoutOptions(true);
-                        _iconLabel.VerticalOptions = LayoutOptions.Fill;
-                        _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
-                            ? InternalIconFontFamily
-                            : IconFontFamily;
-                        _iconLabel.FontSize = InternalIconFontSize > 0
-                            ? InternalIconFontSize
-                            : IconFontSize > 0 ? IconFontSize : FontSize;
+                        if (_iconImage != null)
+                        {
+                            _iconImage.HorizontalOptions = LayoutOptions.Center;
+                            _iconImage.VerticalOptions = vertOption;
+                        }
+                        if (_iconLabel != null)
+                        {
+                            _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
+                            _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
+                            _iconLabel.HorizontalOptions = LayoutOptions.Center;
+                            _iconLabel.VerticalOptions = LayoutOptions.Fill;
+                            _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
+                                ? InternalIconFontFamily
+                                : IconFontFamily;
+                            _iconLabel.FontSize = InternalIconFontSize > 0
+                                ? InternalIconFontSize
+                                : IconFontSize > 0 ? IconFontSize : FontSize;
+                        }
+                        if (_label != null)
+                        {
+                            _label.HorizontalTextAlignment = HorizontalTextAlignment;
+                            _label.VerticalTextAlignment = VerticalTextAlignment;
+                            _label.HorizontalOptions = LayoutOptions.Start;
+                            _label.VerticalOptions = LayoutOptions.Fill;
+                            _label.MinimizeHeight = false;
+                        }
+                        _stackLayout.HorizontalOptions = horzOption;
                     }
-                    _stackLayout.HorizontalOptions = LayoutOptions.FillAndExpand;
-                }
-                else if (HasTightSpacing)
-                {
-                    if (_iconImage != null)
+                    else
                     {
-                        _iconImage.HorizontalOptions = LayoutOptions.Center;
-                        _iconImage.VerticalOptions = vertOption;
+                        if (_iconImage != null)
+                        {
+                            _iconImage.HorizontalOptions = LayoutOptions.Center;
+                            _iconImage.VerticalOptions = vertOption;
+                        }
+                        if (_iconLabel != null)
+                        {
+                            _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
+                            _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
+                            _iconLabel.HorizontalOptions = LayoutOptions.Center;
+                            _iconLabel.VerticalOptions = LayoutOptions.Fill;
+                            _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
+                                ? InternalIconFontFamily
+                                : IconFontFamily;
+                            _iconLabel.FontSize = InternalIconFontSize > 0
+                                ? InternalIconFontSize
+                                : IconFontSize > 0 ? IconFontSize : FontSize;
+                        }
+                        if (_label != null)
+                        {
+                            _label.HorizontalTextAlignment = HorizontalTextAlignment;
+                            _label.VerticalTextAlignment = VerticalTextAlignment;
+                            _label.HorizontalOptions = LayoutOptions.FillAndExpand;
+                            _label.VerticalOptions = LayoutOptions.Fill;
+                            _label.MinimizeHeight = false;
+                        }
+                        _stackLayout.HorizontalOptions = LayoutOptions.FillAndExpand;
+                        _label?.HardForceLayout();
                     }
-                    if (_iconLabel != null)
-                    {
-                        _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
-                        _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
-                        _iconLabel.HorizontalOptions = LayoutOptions.Center;
-                        _iconLabel.VerticalOptions = LayoutOptions.Fill;
-                        _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
-                            ? InternalIconFontFamily
-                            : IconFontFamily;
-                        _iconLabel.FontSize = InternalIconFontSize > 0
-                            ? InternalIconFontSize
-                            : IconFontSize > 0 ? IconFontSize : FontSize;
-                    }
-                    if (_label != null)
-                    {
-                        _label.HorizontalTextAlignment = HorizontalTextAlignment;
-                        _label.VerticalTextAlignment = VerticalTextAlignment;
-                        _label.HorizontalOptions = LayoutOptions.Start;
-                        _label.VerticalOptions = LayoutOptions.Fill;
-                        _label.MinimizeHeight = false;
-                    }
-                    _stackLayout.HorizontalOptions = horzOption;
+                    _stackLayout.VerticalOptions = LayoutOptions.FillAndExpand;
                 }
                 else
                 {
-                    if (_iconImage != null)
+                    if (string.IsNullOrEmpty(_label.Text ?? _label.HtmlText))
                     {
-                        _iconImage.HorizontalOptions = LayoutOptions.Center;
-                        _iconImage.VerticalOptions = vertOption;
+                        if (_iconImage != null)
+                        {
+                            _iconImage.HorizontalOptions = horzOption;
+                            _iconImage.VerticalOptions = vertOption;
+                        }
+                        if (_iconLabel != null)
+                        {
+                            _iconLabel.VerticalTextAlignment = TextAlignment.Center;
+                            _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
+                            _iconLabel.HorizontalOptions = horzOption;
+                            _iconLabel.VerticalOptions = vertOption;
+                            _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
+                                ? InternalIconFontFamily
+                                : IconFontFamily;
+                            _iconLabel.FontSize = InternalIconFontSize > 0
+                                ? InternalIconFontSize
+                                : IconFontSize > 0 ? IconFontSize : FontSize;
+                        }
+                        _stackLayout.HorizontalOptions = LayoutOptions.Fill;
+                        _stackLayout.VerticalOptions = VerticalTextAlignment.ToLayoutOptions(true);
                     }
-                    if (_iconLabel != null)
+                    else if (HasTightSpacing)
                     {
-                        _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
-                        _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
-                        _iconLabel.HorizontalOptions = LayoutOptions.Center;
-                        _iconLabel.VerticalOptions = LayoutOptions.Fill;
-                        _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
-                            ? InternalIconFontFamily
-                            : IconFontFamily;
-                        _iconLabel.FontSize = InternalIconFontSize > 0
-                            ? InternalIconFontSize
-                            : IconFontSize > 0 ? IconFontSize : FontSize;
+                        if (_iconImage != null)
+                        {
+                            _iconImage.HorizontalOptions = horzOption;
+                            _iconImage.VerticalOptions = LayoutOptions.Center;
+                        }
+                        if (_iconLabel != null)
+                        {
+                            _iconLabel.VerticalTextAlignment = TextAlignment.Center;
+                            _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
+                            _iconLabel.HorizontalOptions = horzOption;
+                            _iconLabel.VerticalOptions = LayoutOptions.Center;
+                            _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
+                                ? InternalIconFontFamily
+                                : IconFontFamily;
+                            _iconLabel.FontSize = InternalIconFontSize > 0
+                                ? InternalIconFontSize
+                                : IconFontSize > 0 ? IconFontSize : FontSize;
+                        }
+                        if (_label != null)
+                        {
+                            _label.VerticalTextAlignment = VerticalTextAlignment;
+                            _label.HorizontalTextAlignment = TextAlignment.Center;
+                            _label.HorizontalOptions = horzOption;
+                            _label.VerticalOptions = LayoutOptions.Center;
+                            _label.MinimizeHeight = true;
+                        }
+                        _stackLayout.HorizontalOptions = LayoutOptions.Fill;
+                        _stackLayout.VerticalOptions = VerticalTextAlignment.ToLayoutOptions(true);
                     }
-                    if (_label != null)
+                    else
                     {
-                        _label.HorizontalTextAlignment = HorizontalTextAlignment;
-                        _label.VerticalTextAlignment = VerticalTextAlignment;
-                        _label.HorizontalOptions = LayoutOptions.FillAndExpand;
-                        _label.VerticalOptions = LayoutOptions.Fill;
-                        _label.MinimizeHeight = false;
+                        if (_iconImage != null)
+                        {
+                            _iconImage.HorizontalOptions = horzOption;
+                            _iconImage.VerticalOptions = (TrailingIcon ? LayoutOptions.End : LayoutOptions.Start);
+                        }
+                        if (_iconLabel != null)
+                        {
+                            _iconLabel.VerticalTextAlignment = TextAlignment.Center;
+                            _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
+                            _iconLabel.HorizontalOptions = horzOption;
+                            _iconLabel.VerticalOptions = (TrailingIcon ? LayoutOptions.End : LayoutOptions.Start);
+                            _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
+                                ? InternalIconFontFamily
+                                : IconFontFamily;
+                            _iconLabel.FontSize = InternalIconFontSize > 0
+                                ? InternalIconFontSize
+                                : IconFontSize > 0 ? IconFontSize : FontSize;
+                        }
+                        if (_label != null)
+                        {
+                            _label.VerticalTextAlignment = HorizontalTextAlignment;
+                            _label.HorizontalTextAlignment = TextAlignment.Center;
+                            _label.HorizontalOptions = horzOption;
+                            _label.VerticalOptions = VerticalTextAlignment.ToLayoutOptions(true);
+                            _label.MinimizeHeight = true;
+                        }
+                        _stackLayout.HorizontalOptions = LayoutOptions.Fill;
+                        _stackLayout.VerticalOptions = LayoutOptions.Fill;
                     }
-                    _stackLayout.HorizontalOptions = LayoutOptions.FillAndExpand;
-                    _label?.HardForceLayout();
                 }
-                _stackLayout.VerticalOptions = LayoutOptions.FillAndExpand;
-            }
-            else
-            {
-                if (string.IsNullOrEmpty(_label.Text ?? _label.HtmlText))
-                {
-                    if (_iconImage != null)
-                    {
-                        _iconImage.HorizontalOptions = horzOption;
-                        _iconImage.VerticalOptions = vertOption;
-                    }
-                    if (_iconLabel != null)
-                    {
-                        _iconLabel.VerticalTextAlignment = TextAlignment.Center;
-                        _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
-                        _iconLabel.HorizontalOptions = horzOption;
-                        _iconLabel.VerticalOptions = vertOption;
-                        _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
-                            ? InternalIconFontFamily
-                            : IconFontFamily;
-                        _iconLabel.FontSize = InternalIconFontSize > 0
-                            ? InternalIconFontSize
-                            : IconFontSize > 0 ? IconFontSize : FontSize;
-                    }
-                    _stackLayout.HorizontalOptions = LayoutOptions.Fill;
-                    _stackLayout.VerticalOptions = VerticalTextAlignment.ToLayoutOptions(true);
-                }
-                else if (HasTightSpacing)
-                {
-                    if (_iconImage != null)
-                    {
-                        _iconImage.HorizontalOptions = horzOption;
-                        _iconImage.VerticalOptions = LayoutOptions.Center;
-                    }
-                    if (_iconLabel != null)
-                    {
-                        _iconLabel.VerticalTextAlignment = TextAlignment.Center;
-                        _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
-                        _iconLabel.HorizontalOptions = horzOption;
-                        _iconLabel.VerticalOptions = LayoutOptions.Center;
-                        _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
-                            ? InternalIconFontFamily
-                            : IconFontFamily;
-                        _iconLabel.FontSize = InternalIconFontSize > 0
-                            ? InternalIconFontSize
-                            : IconFontSize > 0 ? IconFontSize : FontSize;
-                    }
-                    if (_label != null)
-                    {
-                        _label.VerticalTextAlignment = VerticalTextAlignment;
-                        _label.HorizontalTextAlignment = TextAlignment.Center;
-                        _label.HorizontalOptions = horzOption;
-                        _label.VerticalOptions = LayoutOptions.Center;
-                        _label.MinimizeHeight = true;
-                    }
-                    _stackLayout.HorizontalOptions = LayoutOptions.Fill;
-                    _stackLayout.VerticalOptions = VerticalTextAlignment.ToLayoutOptions(true);
-                }
-                else
-                {
-                    if (_iconImage != null)
-                    {
-                        _iconImage.HorizontalOptions = horzOption;
-                        _iconImage.VerticalOptions = (TrailingIcon ? LayoutOptions.End : LayoutOptions.Start);
-                    }
-                    if (_iconLabel != null)
-                    {
-                        _iconLabel.VerticalTextAlignment = TextAlignment.Center;
-                        _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
-                        _iconLabel.HorizontalOptions = horzOption;
-                        _iconLabel.VerticalOptions = (TrailingIcon ? LayoutOptions.End : LayoutOptions.Start);
-                        _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
-                            ? InternalIconFontFamily
-                            : IconFontFamily;
-                        _iconLabel.FontSize = InternalIconFontSize > 0
-                            ? InternalIconFontSize
-                            : IconFontSize > 0 ? IconFontSize : FontSize;
-                    }
-                    if (_label != null)
-                    {
-                        _label.VerticalTextAlignment = HorizontalTextAlignment;
-                        _label.HorizontalTextAlignment = TextAlignment.Center;
-                        _label.HorizontalOptions = horzOption;
-                        _label.VerticalOptions = VerticalTextAlignment.ToLayoutOptions(true);
-                        _label.MinimizeHeight = true;
-                    }
-                    _stackLayout.HorizontalOptions = LayoutOptions.Fill;
-                    _stackLayout.VerticalOptions = LayoutOptions.Fill;
-                }
-            }
-            _stackLayout.Orientation = Orientation;
+                _stackLayout.Orientation = Orientation;
+            });
         }
 
 
@@ -2128,112 +2124,71 @@ namespace Forms9Patch
         /// </remarks>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
-            }
+                if (propertyName == SelectedBackgroundColorProperty.PropertyName && IsSelected)
+                    UpdateElements();
+                else if (propertyName == BorderColorProperty.PropertyName)
+                    OutlineColor = BorderColor;
+                else if (propertyName == BorderWidthProperty.PropertyName)
+                    OutlineWidth = BorderWidth;
 
-            if (propertyName == SelectedBackgroundColorProperty.PropertyName && IsSelected)
-                UpdateElements();
-            else if (propertyName == BorderColorProperty.PropertyName)
-                OutlineColor = BorderColor;
-            else if (propertyName == BorderWidthProperty.PropertyName)
-                OutlineWidth = BorderWidth;
+                base.OnPropertyChanged(propertyName);
 
-            base.OnPropertyChanged(propertyName);
-
-            if (_noUpdate)
-                return;
-
-            if (propertyName == HorizontalTextAlignmentProperty.PropertyName || propertyName == VerticalTextAlignmentProperty.PropertyName)
-                SetOrienations();
-            else if (propertyName == IconImageProperty.PropertyName)
-            {
-                if (_changingIconText)
+                if (_noUpdate)
                     return;
-                _changingIconImage = true;
-                if (_iconImage != null)
+
+                if (propertyName == HorizontalTextAlignmentProperty.PropertyName || propertyName == VerticalTextAlignmentProperty.PropertyName)
+                    SetOrienations();
+                else if (propertyName == IconImageProperty.PropertyName)
                 {
-                    _iconImage.SizeChanged -= OnIconImageSizeChanged;
-                    _stackLayout.Children.Remove(_iconImage);
-                }
-                if (IconImage != null)
-                {
-                    if (!IconImage.FillOrLayoutSet)
-                    {
-                        IconImage.Fill = Fill.AspectFit;
-                        IconImage.HorizontalOptions = LayoutOptions.Center;
-                        IconImage.VerticalOptions = LayoutOptions.Center;
-                    }
-                    if (_iconLabel != null)
-                    {
-                        _iconLabel.SizeChanged -= OnIconLabelSizeChanged;
-                        _stackLayout.Children.Remove(_iconLabel);
-                        _iconLabel.HtmlText = null;
-                        _iconLabel.Text = null;
-                        IconText = null;
-                    }
-                    _iconImage = IconImage;
-                    UpdateIconTint();
-                    if (_iconImage != null)
-                    {
-                        _iconImage.SizeChanged += OnIconImageSizeChanged;
-                        if (TrailingIcon)
-                            _stackLayout.Children.Add(_iconImage);
-                        else
-                            _stackLayout.Children.Insert(0, _iconImage);
-                        SetOrienations();
-                    }
-                }
-                _changingIconImage = false;
-            }
-            else if (propertyName == IconTextProperty.PropertyName)
-            {
-                if (_changingIconImage)
-                    return;
-                _changingIconText = true;
-                if (_iconLabel != null)
-                {
-                    _iconLabel.SizeChanged -= OnIconLabelSizeChanged;
-                    _stackLayout.Children.Remove(_iconLabel);
-                    _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
-                        ? InternalIconFontFamily
-                        : IconFontFamily;
-                    _iconLabel.FontSize = InternalIconFontSize > 0
-                        ? InternalIconFontSize
-                        : IconFontSize > 0 ? IconFontSize : FontSize;
-                }
-                if (IconText != null)
-                {
+                    if (_changingIconText)
+                        return;
+                    _changingIconImage = true;
                     if (_iconImage != null)
                     {
                         _iconImage.SizeChanged -= OnIconImageSizeChanged;
                         _stackLayout.Children.Remove(_iconImage);
                     }
-                    _iconLabel = new Label
+                    if (IconImage != null)
                     {
-                        HtmlText = IconText,
-                        TextColor = _label.TextColor,
-                        HorizontalTextAlignment = TextAlignment.Center,
-                        VerticalTextAlignment = TextAlignment.Center,
-                        Lines = 1,
-                        AutoFit = AutoFit.None,
-                        FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
-                            ? InternalIconFontFamily
-                            : IconFontFamily,
-                        FontSize = InternalIconFontSize > 0
-                            ? InternalIconFontSize
-                            : IconFontSize > 0 ? IconFontSize : FontSize
-                };
+                        if (!IconImage.FillOrLayoutSet)
+                        {
+                            IconImage.Fill = Fill.AspectFit;
+                            IconImage.HorizontalOptions = LayoutOptions.Center;
+                            IconImage.VerticalOptions = LayoutOptions.Center;
+                        }
+                        if (_iconLabel != null)
+                        {
+                            _iconLabel.SizeChanged -= OnIconLabelSizeChanged;
+                            _stackLayout.Children.Remove(_iconLabel);
+                            _iconLabel.HtmlText = null;
+                            _iconLabel.Text = null;
+                            IconText = null;
+                        }
+                        _iconImage = IconImage;
+                        UpdateIconTint();
+                        if (_iconImage != null)
+                        {
+                            _iconImage.SizeChanged += OnIconImageSizeChanged;
+                            if (TrailingIcon)
+                                _stackLayout.Children.Add(_iconImage);
+                            else
+                                _stackLayout.Children.Insert(0, _iconImage);
+                            SetOrienations();
+                        }
+                    }
+                    _changingIconImage = false;
+                }
+                else if (propertyName == IconTextProperty.PropertyName)
+                {
+                    if (_changingIconImage)
+                        return;
+                    _changingIconText = true;
                     if (_iconLabel != null)
                     {
-                        _iconLabel.SizeChanged += OnIconLabelSizeChanged;
-                        if (TrailingIcon)
-                            _stackLayout.Children.Add(_iconLabel);
-                        else
-                            _stackLayout.Children.Insert(0, _iconLabel);
-                        SetOrienations();
+                        _iconLabel.SizeChanged -= OnIconLabelSizeChanged;
+                        _stackLayout.Children.Remove(_iconLabel);
                         _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
                             ? InternalIconFontFamily
                             : IconFontFamily;
@@ -2241,91 +2196,129 @@ namespace Forms9Patch
                             ? InternalIconFontSize
                             : IconFontSize > 0 ? IconFontSize : FontSize;
                     }
+                    if (IconText != null)
+                    {
+                        if (_iconImage != null)
+                        {
+                            _iconImage.SizeChanged -= OnIconImageSizeChanged;
+                            _stackLayout.Children.Remove(_iconImage);
+                        }
+                        _iconLabel = new Label
+                        {
+                            HtmlText = IconText,
+                            TextColor = _label.TextColor,
+                            HorizontalTextAlignment = TextAlignment.Center,
+                            VerticalTextAlignment = TextAlignment.Center,
+                            Lines = 1,
+                            AutoFit = AutoFit.None,
+                            FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
+                                ? InternalIconFontFamily
+                                : IconFontFamily,
+                            FontSize = InternalIconFontSize > 0
+                                ? InternalIconFontSize
+                                : IconFontSize > 0 ? IconFontSize : FontSize
+                        };
+                        if (_iconLabel != null)
+                        {
+                            _iconLabel.SizeChanged += OnIconLabelSizeChanged;
+                            if (TrailingIcon)
+                                _stackLayout.Children.Add(_iconLabel);
+                            else
+                                _stackLayout.Children.Insert(0, _iconLabel);
+                            SetOrienations();
+                            _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
+                                ? InternalIconFontFamily
+                                : IconFontFamily;
+                            _iconLabel.FontSize = InternalIconFontSize > 0
+                                ? InternalIconFontSize
+                                : IconFontSize > 0 ? IconFontSize : FontSize;
+                        }
+                        UpdateIconTint();
+                    }
+                    _changingIconText = false;
+                }
+                else if (propertyName == BackgroundColorProperty.PropertyName
+                    || propertyName == BackgroundImageProperty.PropertyName
+                    || propertyName == HasShadowProperty.PropertyName
+                    || propertyName == ShadowInvertedProperty.PropertyName
+                    || propertyName == OutlineColorProperty.PropertyName
+                    || propertyName == OutlineWidthProperty.PropertyName
+                    // below line moved before base.OnPropertyChanged to fix rendering issue on UWP.
+                    //|| (propertyName == SelectedBackgroundColorProperty.PropertyName && IsSelected)
+                    || propertyName == IsSelectedProperty.PropertyName
+                    || propertyName == IsEnabledProperty.PropertyName
+                    || propertyName == DarkThemeProperty.PropertyName
+                        )
+                    UpdateElements();
+                else if (propertyName == OrientationProperty.PropertyName)
+                    SetOrienations();
+                else if (propertyName == TextColorProperty.PropertyName && !IsSelected)
+                {
+                    UpdateElements();
                     UpdateIconTint();
                 }
-                _changingIconText = false;
-            }
-            else if (propertyName == BackgroundColorProperty.PropertyName
-                || propertyName == BackgroundImageProperty.PropertyName
-                || propertyName == HasShadowProperty.PropertyName
-                || propertyName == ShadowInvertedProperty.PropertyName
-                || propertyName == OutlineColorProperty.PropertyName
-                || propertyName == OutlineWidthProperty.PropertyName
-                // below line moved before base.OnPropertyChanged to fix rendering issue on UWP.
-                //|| (propertyName == SelectedBackgroundColorProperty.PropertyName && IsSelected)
-                || propertyName == IsSelectedProperty.PropertyName
-                || propertyName == IsEnabledProperty.PropertyName
-                || propertyName == DarkThemeProperty.PropertyName
-                    )
-                UpdateElements();
-            else if (propertyName == OrientationProperty.PropertyName)
-                SetOrienations();
-            else if (propertyName == TextColorProperty.PropertyName && !IsSelected)
-            {
-                UpdateElements();
-                UpdateIconTint();
-            }
-            else if (propertyName == SelectedTextColorProperty.PropertyName && IsSelected)
-            {
-                UpdateElements();
-                UpdateIconTint();
-            }
-            else if (propertyName == TintIconProperty.PropertyName && _iconImage != null)
-                UpdateElements();
-            else if (propertyName == HasTightSpacingProperty.PropertyName)
-                SetOrienations();
-            else if (propertyName == TextProperty.PropertyName)
-                _label.Text = Text;
-            else if (propertyName == HtmlTextProperty.PropertyName)
-                _label.HtmlText = HtmlText;
+                else if (propertyName == SelectedTextColorProperty.PropertyName && IsSelected)
+                {
+                    UpdateElements();
+                    UpdateIconTint();
+                }
+                else if (propertyName == TintIconProperty.PropertyName && _iconImage != null)
+                    UpdateElements();
+                else if (propertyName == HasTightSpacingProperty.PropertyName)
+                    SetOrienations();
+                else if (propertyName == TextProperty.PropertyName)
+                    _label.Text = Text;
+                else if (propertyName == HtmlTextProperty.PropertyName)
+                    _label.HtmlText = HtmlText;
 
-            if (propertyName == IsSelectedProperty.PropertyName)
-            {
-                if (IsSelected)
+                if (propertyName == IsSelectedProperty.PropertyName)
                 {
-                    if (GroupToggleBehavior != GroupToggleBehavior.None)
-                        Command?.Execute(CommandParameter);
-                    _selected?.Invoke(this, EventArgs.Empty);
+                    if (IsSelected)
+                    {
+                        if (GroupToggleBehavior != GroupToggleBehavior.None)
+                            Command?.Execute(CommandParameter);
+                        _selected?.Invoke(this, EventArgs.Empty);
+                    }
                 }
-            }
-            else if (propertyName == LinesProperty.PropertyName)
-                _label.Lines = Lines;
-            else if (propertyName == AutoFitProperty.PropertyName)
-                _label.AutoFit = AutoFit;
-            else if (propertyName == LineBreakModeProperty.PropertyName)
-                _label.LineBreakMode = LineBreakMode;
-            else if (propertyName == MinFontSizeProperty.PropertyName)
-                _label.MinFontSize = MinFontSize;
-            else if (propertyName == FontSizeProperty.PropertyName)
-                _label.FontSize = FontSize;
-            else if (propertyName == FontAttributesProperty.PropertyName)
-                _label.FontAttributes = FontAttributes;
-            else if (propertyName == FontFamilyProperty.PropertyName)
-                _label.FontFamily = FontFamily;
-            else if (_iconLabel != null &&(propertyName == IconFontFamilyProperty.PropertyName || propertyName == InternalIconFontFamilyProperty.PropertyName))
-                _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
-                    ? InternalIconFontFamily
-                    : IconFontFamily;
-            else if (_iconLabel != null &&(propertyName == IconFontSizeProperty.PropertyName || propertyName == InternalIconFontSizeProperty.PropertyName))
-                _iconLabel.FontSize = InternalIconFontSize > 0
-                    ? InternalIconFontSize
-                    : IconFontSize > 0 ? IconFontSize : FontSize;
-            else if (propertyName == TrailingIconProperty.PropertyName && _stackLayout.Children.Contains(_label))
-            {
-                if (_label != null && _stackLayout.Children.Contains(_label))
+                else if (propertyName == LinesProperty.PropertyName)
+                    _label.Lines = Lines;
+                else if (propertyName == AutoFitProperty.PropertyName)
+                    _label.AutoFit = AutoFit;
+                else if (propertyName == LineBreakModeProperty.PropertyName)
+                    _label.LineBreakMode = LineBreakMode;
+                else if (propertyName == MinFontSizeProperty.PropertyName)
+                    _label.MinFontSize = MinFontSize;
+                else if (propertyName == FontSizeProperty.PropertyName)
+                    _label.FontSize = FontSize;
+                else if (propertyName == FontAttributesProperty.PropertyName)
+                    _label.FontAttributes = FontAttributes;
+                else if (propertyName == FontFamilyProperty.PropertyName)
+                    _label.FontFamily = FontFamily;
+                else if (_iconLabel != null && (propertyName == IconFontFamilyProperty.PropertyName || propertyName == InternalIconFontFamilyProperty.PropertyName))
+                    _iconLabel.FontFamily = !string.IsNullOrWhiteSpace(InternalIconFontFamily)
+                        ? InternalIconFontFamily
+                        : IconFontFamily;
+                else if (_iconLabel != null && (propertyName == IconFontSizeProperty.PropertyName || propertyName == InternalIconFontSizeProperty.PropertyName))
+                    _iconLabel.FontSize = InternalIconFontSize > 0
+                        ? InternalIconFontSize
+                        : IconFontSize > 0 ? IconFontSize : FontSize;
+                else if (propertyName == TrailingIconProperty.PropertyName && _stackLayout.Children.Contains(_label))
                 {
-                    _stackLayout.Children.Remove(_label);
-                    if (TrailingIcon)
-                        _stackLayout.Children.Insert(0, _label);
-                    else
-                        _stackLayout.Children.Add(_label);
+                    if (_label != null && _stackLayout.Children.Contains(_label))
+                    {
+                        _stackLayout.Children.Remove(_label);
+                        if (TrailingIcon)
+                            _stackLayout.Children.Insert(0, _label);
+                        else
+                            _stackLayout.Children.Add(_label);
+                    }
+                    SetOrienations();
                 }
-                SetOrienations();
-            }
-            else if (propertyName == SpacingProperty.PropertyName)
-                _stackLayout.Spacing = Spacing;
-            else if (propertyName == TintIconProperty.PropertyName)
-                UpdateIconTint();
+                else if (propertyName == SpacingProperty.PropertyName)
+                    _stackLayout.Spacing = Spacing;
+                else if (propertyName == TintIconProperty.PropertyName)
+                    UpdateIconTint();
+            });
         }
 
         void OnCommandChanged()

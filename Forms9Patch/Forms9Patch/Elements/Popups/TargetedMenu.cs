@@ -535,65 +535,63 @@ namespace Forms9Patch
         /// <param name="propertyName"></param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
-            }
-            base.OnPropertyChanged(propertyName);
+                base.OnPropertyChanged(propertyName);
 
-            if (propertyName == BackgroundColorProperty.PropertyName)
-                UpdateLayout();
-            else if (propertyName == TextColorProperty.PropertyName)
-                UpdateLayout();
-            else if (propertyName == FontSizeProperty.PropertyName)
-                UpdateLayout();
-            else if (propertyName == SeparatorColorProperty.PropertyName)
-                UpdateLayout();
-            else if (propertyName == SeparatorThicknessProperty.PropertyName)
-                UpdateLayout();
-            else if (propertyName == HapticEffectProperty.PropertyName)
-            {
-                foreach (VisualElement visualElement in _stackLayout.Children)
-                    if (visualElement is Button button)
-                        button.HapticEffect = HapticEffect;
-            }
-            else if (propertyName == HapticEffectModeProperty.PropertyName)
-            {
-                foreach (VisualElement visualElement in _stackLayout.Children)
-                    if (visualElement is Button button)
-                        button.HapticEffectMode = HapticEffectMode;
-            }
-            else if (propertyName == SoundEffectProperty.PropertyName)
-            {
-                foreach (VisualElement visualElement in _stackLayout.Children)
-                    if (visualElement is Button button)
-                        button.SoundEffect = SoundEffect;
-            }
-            else if (propertyName == SoundEffectModeProperty.PropertyName)
-            {
-                foreach (VisualElement visualElement in _stackLayout.Children)
-                    if (visualElement is Button button)
-                        button.SoundEffectMode = SoundEffectMode;
-            }
-            else if (propertyName == OrientationProperty.PropertyName)
-            {
-                _forewardLength = -1;
-                _backwardLength = -1;
-                UpdateOrientation();
-            }
-            else if (propertyName == IconFontFamilyProperty.PropertyName)
-            {
-                foreach (var child in _stackLayout.Children)
-                    if (child is Button button)
-                        button.IconFontFamily = IconFontFamily;
-            }
-            else if (propertyName == IconFontSizeProperty.PropertyName)
-            {
-                foreach (var child in _stackLayout.Children)
-                    if (child is Button button)
-                        button.IconFontSize = IconFontSize;
-            }
+                if (propertyName == BackgroundColorProperty.PropertyName)
+                    UpdateLayout();
+                else if (propertyName == TextColorProperty.PropertyName)
+                    UpdateLayout();
+                else if (propertyName == FontSizeProperty.PropertyName)
+                    UpdateLayout();
+                else if (propertyName == SeparatorColorProperty.PropertyName)
+                    UpdateLayout();
+                else if (propertyName == SeparatorThicknessProperty.PropertyName)
+                    UpdateLayout();
+                else if (propertyName == HapticEffectProperty.PropertyName)
+                {
+                    foreach (VisualElement visualElement in _stackLayout.Children)
+                        if (visualElement is Button button)
+                            button.HapticEffect = HapticEffect;
+                }
+                else if (propertyName == HapticEffectModeProperty.PropertyName)
+                {
+                    foreach (VisualElement visualElement in _stackLayout.Children)
+                        if (visualElement is Button button)
+                            button.HapticEffectMode = HapticEffectMode;
+                }
+                else if (propertyName == SoundEffectProperty.PropertyName)
+                {
+                    foreach (VisualElement visualElement in _stackLayout.Children)
+                        if (visualElement is Button button)
+                            button.SoundEffect = SoundEffect;
+                }
+                else if (propertyName == SoundEffectModeProperty.PropertyName)
+                {
+                    foreach (VisualElement visualElement in _stackLayout.Children)
+                        if (visualElement is Button button)
+                            button.SoundEffectMode = SoundEffectMode;
+                }
+                else if (propertyName == OrientationProperty.PropertyName)
+                {
+                    _forewardLength = -1;
+                    _backwardLength = -1;
+                    UpdateOrientation();
+                }
+                else if (propertyName == IconFontFamilyProperty.PropertyName)
+                {
+                    foreach (var child in _stackLayout.Children)
+                        if (child is Button button)
+                            button.IconFontFamily = IconFontFamily;
+                }
+                else if (propertyName == IconFontSizeProperty.PropertyName)
+                {
+                    foreach (var child in _stackLayout.Children)
+                        if (child is Button button)
+                            button.IconFontSize = IconFontSize;
+                }
+            });
         }
         #endregion
 
@@ -853,7 +851,7 @@ namespace Forms9Patch
             if (_updatingCollection)
                 return;
 
-            if (P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
                 if (Width < 0 || !IsVisible || Segments.Count < 1)
                     return;
@@ -987,9 +985,7 @@ namespace Forms9Patch
 
                 //System.Diagnostics.Debug.WriteLine("TargetedMenu" + P42.Utils.ReflectionExtensions.CallerString() + ": EXIT");
 
-            }
-            else
-                Device.BeginInvokeOnMainThread(UpdateLayout);
+            });
         }
 
         #endregion

@@ -109,18 +109,15 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanging(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanging(propertyName));
-                return;
-            }
+                base.OnPropertyChanging(propertyName);
 
-            base.OnPropertyChanging(propertyName);
-
-            if (propertyName == BindingContextProperty.PropertyName && View != null)
-                View.BindingContext = null;
-            else if (propertyName == nameof(Height))
-                _oldHeight = Height;
+                if (propertyName == BindingContextProperty.PropertyName && View != null)
+                    View.BindingContext = null;
+                else if (propertyName == nameof(Height))
+                    _oldHeight = Height;
+            });
         }
 
         /// <summary>
@@ -128,16 +125,14 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnBindingContextChanged()
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(OnBindingContextChanged);
-                return;
-            }
-            _freshHeight = true;
-            _oldHeight = -1;
-            if (View != null)
-                View.BindingContext = BindingContext;
-            base.OnBindingContextChanged();
+                _freshHeight = true;
+                _oldHeight = -1;
+                if (View != null)
+                    View.BindingContext = BindingContext;
+                base.OnBindingContextChanged();
+            });
         }
 
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)

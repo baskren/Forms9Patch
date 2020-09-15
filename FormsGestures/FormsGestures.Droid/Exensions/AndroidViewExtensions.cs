@@ -50,10 +50,10 @@ namespace FormsGestures.Droid
         }
 
 
-        public static Rect BoundsInNativeCoord(this Android.Views.View view)
+        public static Android.Graphics.Rect BoundsInNativeCoord(this Android.Views.View view)
         {
             var location = LocationInNativeCoord(view);
-            return new Rect(location.X, location.Y, view.Width, view.Height);
+            return new Android.Graphics.Rect(location.X, location.Y, view.Width, view.Height);
         }
 
         public static Rectangle BoundsInFormsCoord(this Android.Views.View view)

@@ -197,26 +197,24 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
-            }
 
-            try
-            {
-                base.OnPropertyChanged(propertyName);
-            }
-            catch (Exception) { }
+                try
+                {
+                    base.OnPropertyChanged(propertyName);
+                }
+                catch (Exception) { }
 
-            if (propertyName == IconTextProperty.PropertyName && IconTextProperty != null)
-                IconImage = null;
-            else if (propertyName == IconImageProperty.PropertyName && IconImage?.Source != null)
-                IconText = null;
-            else if (propertyName == TextProperty.PropertyName && Text != null)
-                HtmlText = null;
-            else if (propertyName == HtmlTextProperty.PropertyName && HtmlText != null)
-                Text = null;
+                if (propertyName == IconTextProperty.PropertyName && IconTextProperty != null)
+                    IconImage = null;
+                else if (propertyName == IconImageProperty.PropertyName && IconImage?.Source != null)
+                    IconText = null;
+                else if (propertyName == TextProperty.PropertyName && Text != null)
+                    HtmlText = null;
+                else if (propertyName == HtmlTextProperty.PropertyName && HtmlText != null)
+                    Text = null;
+            });
         }
         #endregion
     }

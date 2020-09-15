@@ -509,59 +509,57 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
-            }
 
-            try
-            {
-                base.OnPropertyChanged(propertyName);
-            }
-            catch (Exception) { }
+                try
+                {
+                    base.OnPropertyChanged(propertyName);
+                }
+                catch (Exception) { }
 
-            switch (propertyName)
-            {
-                case nameof(IconImage):
-                    _button.IconImage = IconImage;
-                    break;
-                case nameof(IconText):
-                    _button.IconText = IconText;
-                    break;
-                case nameof(Text):
-                    _button.Text = Text;
-                    break;
-                case nameof(HtmlText):
-                    _button.HtmlText = HtmlText;
-                    break;
-                case nameof(TextColor):
-                    _button.TextColor = TextColor;
-                    break;
-                case nameof(FontAttributes):
-                    _button.FontAttributes = FontAttributes;
-                    break;
-                case nameof(IconFontFamily):
-                    _button.InternalIconFontFamily = IconFontFamily;
-                    break;
-                case nameof(IconFontSize):
-                    _button.InternalIconFontSize = IconFontSize;
-                    break;
-                case nameof(IsEnabled):
-                    _button.IsEnabled = IsEnabled;
-                    break;
-                case nameof(IsSelected):
-                    _button.IsSelected = IsSelected;
-                    break;
-                case nameof(Orientation):
-                    _button.Orientation = Orientation;
-                    break;
-                case nameof(Command):
-                    System.Diagnostics.Debug.WriteLine("COMMAND PROPERTY CHANGED");
-                    break;
-                default:
-                    break;
-            }
+                switch (propertyName)
+                {
+                    case nameof(IconImage):
+                        _button.IconImage = IconImage;
+                        break;
+                    case nameof(IconText):
+                        _button.IconText = IconText;
+                        break;
+                    case nameof(Text):
+                        _button.Text = Text;
+                        break;
+                    case nameof(HtmlText):
+                        _button.HtmlText = HtmlText;
+                        break;
+                    case nameof(TextColor):
+                        _button.TextColor = TextColor;
+                        break;
+                    case nameof(FontAttributes):
+                        _button.FontAttributes = FontAttributes;
+                        break;
+                    case nameof(IconFontFamily):
+                        _button.InternalIconFontFamily = IconFontFamily;
+                        break;
+                    case nameof(IconFontSize):
+                        _button.InternalIconFontSize = IconFontSize;
+                        break;
+                    case nameof(IsEnabled):
+                        _button.IsEnabled = IsEnabled;
+                        break;
+                    case nameof(IsSelected):
+                        _button.IsSelected = IsSelected;
+                        break;
+                    case nameof(Orientation):
+                        _button.Orientation = Orientation;
+                        break;
+                    case nameof(Command):
+                        System.Diagnostics.Debug.WriteLine("COMMAND PROPERTY CHANGED");
+                        break;
+                    default:
+                        break;
+                }
+            });
         }
         #endregion
 

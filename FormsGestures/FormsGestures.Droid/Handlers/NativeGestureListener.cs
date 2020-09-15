@@ -251,7 +251,7 @@ namespace FormsGestures.Droid
 
         void OnTappedTimerElapsedInner()
         {
-            if (P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
                 try
                 {
@@ -274,9 +274,7 @@ namespace FormsGestures.Droid
                     }
                 }
                 catch (Exception) { }
-            }
-            else
-                Device.BeginInvokeOnMainThread(() => OnTappedTimerElapsedInner());
+            });
         }
         #endregion
 

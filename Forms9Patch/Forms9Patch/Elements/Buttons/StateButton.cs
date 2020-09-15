@@ -218,49 +218,47 @@ namespace Forms9Patch
         /// </summary>
         public void UpdateState()
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(UpdateState);
-                return;
-            }
 
-            if (IsEnabled)
-            {
-                if (IsSelected)
+                if (IsEnabled)
                 {
-                    ShowState(SelectedState ?? DefaultState);
-                    if (SelectedState == null)
-                        _label.FontAttributes = FontAttributes.Bold;
+                    if (IsSelected)
+                    {
+                        ShowState(SelectedState ?? DefaultState);
+                        if (SelectedState == null)
+                            _label.FontAttributes = FontAttributes.Bold;
+                    }
+                    else
+                        ShowState(DefaultState);
+                    Opacity = 1.0;
                 }
                 else
-                    ShowState(DefaultState);
-                Opacity = 1.0;
-            }
-            else
-            {
-                if (IsSelected)
                 {
-                    ShowState(DisabledAndSelectedState ?? SelectedState ?? DisabledState ?? DefaultState);
-                    if (DisabledAndSelectedState == null)
+                    if (IsSelected)
                     {
-                        if (SelectedState != null)
-                            Opacity = 0.75;
-                        else if (DisabledState != null)
-                            _label.FontAttributes = FontAttributes.Bold;
-                        else
+                        ShowState(DisabledAndSelectedState ?? SelectedState ?? DisabledState ?? DefaultState);
+                        if (DisabledAndSelectedState == null)
                         {
-                            Opacity = 0.75;
-                            _label.FontAttributes = FontAttributes.Bold;
+                            if (SelectedState != null)
+                                Opacity = 0.75;
+                            else if (DisabledState != null)
+                                _label.FontAttributes = FontAttributes.Bold;
+                            else
+                            {
+                                Opacity = 0.75;
+                                _label.FontAttributes = FontAttributes.Bold;
+                            }
                         }
                     }
+                    else
+                    {
+                        ShowState(DisabledState ?? DefaultState);
+                        if (DisabledState == null)
+                            Opacity = 0.75;
+                    }
                 }
-                else
-                {
-                    ShowState(DisabledState ?? DefaultState);
-                    if (DisabledState == null)
-                        Opacity = 0.75;
-                }
-            }
+            });
         }
 
         bool _showingState;
@@ -270,160 +268,157 @@ namespace Forms9Patch
         /// <param name="newState">Custom ButtonState.</param>
         public void ShowState(ButtonState newState)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => ShowState(newState));
-                return;
-            }
+                _showingState = true;
 
-            _showingState = true;
+                newState = newState ?? DefaultState;
+                if (_currentState != null)
+                    _currentState.PropertyChanged -= OnStatePropertyChanged;
+                _currentState = newState;
 
-            newState = newState ?? DefaultState;
-            if (_currentState != null)
-                _currentState.PropertyChanged -= OnStatePropertyChanged;
-            _currentState = newState;
-
-            var newBackgroundImage = _currentState.BackgroundImage ?? DefaultState.BackgroundImage;
-            if (newBackgroundImage != BackgroundImage)
-            {
-                if (newBackgroundImage != null)
-                    newBackgroundImage.Opacity = 1.0;
-                BackgroundImage = newBackgroundImage;
-            }
-            else if (_currentState == DefaultState && DefaultState.BackgroundImage == null && BackgroundImage != null)
-                DefaultState.BackgroundImage = BackgroundImage;
-            //else if (!_constructing && Device.OS == TargetPlatform.Android)
-            /*  NOTE: Commented out on 12/18/17 because was causing flicker upon button press in Android.  Tested on XamlStateButtonsPage and did not see failure to resize.
-            else if (!_constructing && Device.RuntimePlatform == Device.Android)
-            {
-                // this is a hack that compensates for a failure to resize the label when > 4 ImageButtons are on a ContentPage inside a NavigationPage
-                BackgroundImage = null;
-                if (newBackgroundImage != null)
-                    Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
-                    {
-                        _showingState = true;
-                        BackgroundImage = newBackgroundImage;
-                        _showingState = false;
-                        return false;
-                    });
-            }
-            */
-            var backgroundColor = _currentState.BackgroundColorSet ? _currentState.BackgroundColor : DefaultState.BackgroundColor;
-            SetValue(ShapeBase.BackgroundColorProperty, backgroundColor);
-
-            var newIconImage = _currentState.IconImage ?? DefaultState.IconImage;
-            var htmlText = _currentState.HtmlText ?? DefaultState.HtmlText;
-            var text = htmlText ?? _currentState.Text ?? DefaultState.Text;
-            var iconText = _currentState.IconText ?? DefaultState.IconText;
-
-            if (base.IconText == iconText && base.IconImage != newIconImage)
-                base.IconImage = newIconImage;
-            else if (base.IconText != iconText && base.IconImage == newIconImage)
-                base.IconText = iconText;
-            else if (base.IconText != iconText && base.IconImage != newIconImage)
-            {
-                if (iconText != null)
-                    base.IconText = iconText;
-                else if (newIconImage != null)
-                    base.IconImage = newIconImage;
-                else
+                var newBackgroundImage = _currentState.BackgroundImage ?? DefaultState.BackgroundImage;
+                if (newBackgroundImage != BackgroundImage)
                 {
-                    base.IconText = null;
-                    base.IconImage = null;
+                    if (newBackgroundImage != null)
+                        newBackgroundImage.Opacity = 1.0;
+                    BackgroundImage = newBackgroundImage;
                 }
-            }
+                else if (_currentState == DefaultState && DefaultState.BackgroundImage == null && BackgroundImage != null)
+                    DefaultState.BackgroundImage = BackgroundImage;
+                //else if (!_constructing && Device.OS == TargetPlatform.Android)
+                /*  NOTE: Commented out on 12/18/17 because was causing flicker upon button press in Android.  Tested on XamlStateButtonsPage and did not see failure to resize.
+                else if (!_constructing && Device.RuntimePlatform == Device.Android)
+                {
+                    // this is a hack that compensates for a failure to resize the label when > 4 ImageButtons are on a ContentPage inside a NavigationPage
+                    BackgroundImage = null;
+                    if (newBackgroundImage != null)
+                        Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
+                        {
+                            _showingState = true;
+                            BackgroundImage = newBackgroundImage;
+                            _showingState = false;
+                            return false;
+                        });
+                }
+                */
+                var backgroundColor = _currentState.BackgroundColorSet ? _currentState.BackgroundColor : DefaultState.BackgroundColor;
+                SetValue(ShapeBase.BackgroundColorProperty, backgroundColor);
 
-            base.HtmlText = htmlText;
-            if (base.HtmlText == null)
-                base.Text = text;
+                var newIconImage = _currentState.IconImage ?? DefaultState.IconImage;
+                var htmlText = _currentState.HtmlText ?? DefaultState.HtmlText;
+                var text = htmlText ?? _currentState.Text ?? DefaultState.Text;
+                var iconText = _currentState.IconText ?? DefaultState.IconText;
 
-            #region IButtonState
+                if (base.IconText == iconText && base.IconImage != newIconImage)
+                    base.IconImage = newIconImage;
+                else if (base.IconText != iconText && base.IconImage == newIconImage)
+                    base.IconText = iconText;
+                else if (base.IconText != iconText && base.IconImage != newIconImage)
+                {
+                    if (iconText != null)
+                        base.IconText = iconText;
+                    else if (newIconImage != null)
+                        base.IconImage = newIconImage;
+                    else
+                    {
+                        base.IconText = null;
+                        base.IconImage = null;
+                    }
+                }
 
-            TrailingIcon = _currentState.TrailingIconSet ? _currentState.TrailingIcon : DefaultState.TrailingIcon;
+                base.HtmlText = htmlText;
+                if (base.HtmlText == null)
+                    base.Text = text;
 
-            UpdateIconTint();
+                #region IButtonState
 
-            HasTightSpacing = _currentState.HasTightSpacingSet ? _currentState.HasTightSpacing : DefaultState.HasTightSpacing;
+                TrailingIcon = _currentState.TrailingIconSet ? _currentState.TrailingIcon : DefaultState.TrailingIcon;
 
-            Spacing = _currentState.SpacingSet ? _currentState.Spacing : DefaultState.Spacing;
+                UpdateIconTint();
 
-            Orientation = _currentState.OrientationSet ? _currentState.Orientation : DefaultState.Orientation;
+                HasTightSpacing = _currentState.HasTightSpacingSet ? _currentState.HasTightSpacing : DefaultState.HasTightSpacing;
 
-            ElementShape = _currentState.ElementShapeSet ? _currentState.ElementShape : DefaultState.ElementShape;
+                Spacing = _currentState.SpacingSet ? _currentState.Spacing : DefaultState.Spacing;
 
-            #region IBackground
+                Orientation = _currentState.OrientationSet ? _currentState.Orientation : DefaultState.Orientation;
 
-            // BackgroundImage handed above
+                ElementShape = _currentState.ElementShapeSet ? _currentState.ElementShape : DefaultState.ElementShape;
 
-            #region IShape
+                #region IBackground
 
-            // BackgroundColor handled above
+                // BackgroundImage handed above
 
-            var hasShadow = _currentState.HasShadowSet ? _currentState.HasShadow : DefaultState.HasShadow;
-            SetValue(ShapeBase.HasShadowProperty, hasShadow);
+                #region IShape
 
-            ShadowInverted = _currentState.ShadowInvertedSet ? _currentState.ShadowInverted : DefaultState.ShadowInverted;
+                // BackgroundColor handled above
 
-            var outlineColor = _currentState.OutlineColorSet ? _currentState.OutlineColor : DefaultState.OutlineColor;
-            SetValue(ShapeBase.OutlineColorProperty, outlineColor);
+                var hasShadow = _currentState.HasShadowSet ? _currentState.HasShadow : DefaultState.HasShadow;
+                SetValue(ShapeBase.HasShadowProperty, hasShadow);
 
-            OutlineRadius = _currentState.OutlineRadiusSet ? _currentState.OutlineRadius : DefaultState.OutlineRadius;
+                ShadowInverted = _currentState.ShadowInvertedSet ? _currentState.ShadowInverted : DefaultState.ShadowInverted;
 
-            var outlineWidth = _currentState.OutlineWidthSet ? _currentState.OutlineWidth : DefaultState.OutlineWidth;
-            SetValue(ShapeBase.OutlineWidthProperty, outlineWidth);
+                var outlineColor = _currentState.OutlineColorSet ? _currentState.OutlineColor : DefaultState.OutlineColor;
+                SetValue(ShapeBase.OutlineColorProperty, outlineColor);
 
-            // ExtendedElementShape is set by ElementShape setter, above
+                OutlineRadius = _currentState.OutlineRadiusSet ? _currentState.OutlineRadius : DefaultState.OutlineRadius;
 
-            #endregion IShape
+                var outlineWidth = _currentState.OutlineWidthSet ? _currentState.OutlineWidth : DefaultState.OutlineWidth;
+                SetValue(ShapeBase.OutlineWidthProperty, outlineWidth);
 
-            #endregion IBackground
+                // ExtendedElementShape is set by ElementShape setter, above
 
-            #region ILabel
+                #endregion IShape
 
-            // Text handled above
+                #endregion IBackground
 
-            // HtmlText handled above
+                #region ILabel
 
-            _label.TextColor = (_currentState.TextColorSet || _currentState.TextColor != (Color)ButtonState.TextColorProperty.DefaultValue ? _currentState.TextColor : (DefaultState.TextColorSet || DefaultState.TextColor != (Color)ButtonState.TextColorProperty.DefaultValue ? DefaultState.TextColor : (Device.RuntimePlatform == Device.iOS ? Color.Blue : Color.White)));
+                // Text handled above
 
-            HorizontalTextAlignment = _currentState.HorizontalTextAlignmentSet ? _currentState.HorizontalTextAlignment : DefaultState.HorizontalTextAlignment;
+                // HtmlText handled above
 
-            VerticalTextAlignment = _currentState.VerticalTextAlignmentSet ? _currentState.VerticalTextAlignment : DefaultState.VerticalTextAlignment;
+                _label.TextColor = (_currentState.TextColorSet || _currentState.TextColor != (Color)ButtonState.TextColorProperty.DefaultValue ? _currentState.TextColor : (DefaultState.TextColorSet || DefaultState.TextColor != (Color)ButtonState.TextColorProperty.DefaultValue ? DefaultState.TextColor : (Device.RuntimePlatform == Device.iOS ? Color.Blue : Color.White)));
 
-            LineBreakMode = _currentState.LineBreakModeSet ? _currentState.LineBreakMode : DefaultState.LineBreakMode;
+                HorizontalTextAlignment = _currentState.HorizontalTextAlignmentSet ? _currentState.HorizontalTextAlignment : DefaultState.HorizontalTextAlignment;
 
-            AutoFit = _currentState.AutoFitSet ? _currentState.AutoFit : DefaultState.AutoFit;
+                VerticalTextAlignment = _currentState.VerticalTextAlignmentSet ? _currentState.VerticalTextAlignment : DefaultState.VerticalTextAlignment;
 
-            Lines = _currentState.LinesSet ? _currentState.Lines : DefaultState.Lines;
+                LineBreakMode = _currentState.LineBreakModeSet ? _currentState.LineBreakMode : DefaultState.LineBreakMode;
 
-            MinFontSize = _currentState.MinFontSizeSet ? _currentState.MinFontSize : DefaultState.MinFontSize;
+                AutoFit = _currentState.AutoFitSet ? _currentState.AutoFit : DefaultState.AutoFit;
 
-            #region IFontElement
+                Lines = _currentState.LinesSet ? _currentState.Lines : DefaultState.Lines;
 
-            _label.FontSize = (_currentState.FontSizeSet || Math.Abs(_currentState.FontSize - (double)ButtonState.FontSizeProperty.DefaultValue) > 0.01 ? _currentState.FontSize : (DefaultState.FontSizeSet || Math.Abs(DefaultState.FontSize - (double)ButtonState.FontSizeProperty.DefaultValue) > 0.01 ? DefaultState.FontSize : Device.GetNamedSize(NamedSize.Medium, _label)));
+                MinFontSize = _currentState.MinFontSizeSet ? _currentState.MinFontSize : DefaultState.MinFontSize;
 
-            _label.FontFamily = (_currentState.FontFamilySet || _currentState.FontFamily != (string)ButtonState.FontFamilyProperty.DefaultValue ? _currentState.FontFamily : DefaultState.FontFamily);
+                #region IFontElement
 
-            _label.FontAttributes = (_currentState.FontAttributesSet || _currentState.FontAttributes != (FontAttributes)ButtonState.FontAttributesProperty.DefaultValue ? _currentState.FontAttributes : DefaultState.FontAttributes);
+                _label.FontSize = (_currentState.FontSizeSet || Math.Abs(_currentState.FontSize - (double)ButtonState.FontSizeProperty.DefaultValue) > 0.01 ? _currentState.FontSize : (DefaultState.FontSizeSet || Math.Abs(DefaultState.FontSize - (double)ButtonState.FontSizeProperty.DefaultValue) > 0.01 ? DefaultState.FontSize : Device.GetNamedSize(NamedSize.Medium, _label)));
 
-            if (_iconLabel != null)
-            {
-                _iconLabel.FontSize = (_currentState.IconFontSizeSet || Math.Abs(_currentState.IconFontSize - (double)ButtonState.IconFontSizeProperty.DefaultValue) > 0.01 ? _currentState.IconFontSize : (DefaultState.IconFontSizeSet || Math.Abs(DefaultState.IconFontSize - (double)ButtonState.FontSizeProperty.DefaultValue) > 0.01 ? DefaultState.IconFontSize : DefaultState.FontSize));
+                _label.FontFamily = (_currentState.FontFamilySet || _currentState.FontFamily != (string)ButtonState.FontFamilyProperty.DefaultValue ? _currentState.FontFamily : DefaultState.FontFamily);
 
-                _iconLabel.FontFamily = (_currentState.IconFontFamilySet || _currentState.IconFontFamily != (string)ButtonState.IconFontFamilyProperty.DefaultValue ? _currentState.IconFontFamily : DefaultState.FontFamily);
-            }
+                _label.FontAttributes = (_currentState.FontAttributesSet || _currentState.FontAttributes != (FontAttributes)ButtonState.FontAttributesProperty.DefaultValue ? _currentState.FontAttributes : DefaultState.FontAttributes);
 
-            #endregion IFontElement
+                if (_iconLabel != null)
+                {
+                    _iconLabel.FontSize = (_currentState.IconFontSizeSet || Math.Abs(_currentState.IconFontSize - (double)ButtonState.IconFontSizeProperty.DefaultValue) > 0.01 ? _currentState.IconFontSize : (DefaultState.IconFontSizeSet || Math.Abs(DefaultState.IconFontSize - (double)ButtonState.FontSizeProperty.DefaultValue) > 0.01 ? DefaultState.IconFontSize : DefaultState.FontSize));
+
+                    _iconLabel.FontFamily = (_currentState.IconFontFamilySet || _currentState.IconFontFamily != (string)ButtonState.IconFontFamilyProperty.DefaultValue ? _currentState.IconFontFamily : DefaultState.FontFamily);
+                }
+
+                #endregion IFontElement
 
 
 
-            #endregion ILabel
+                #endregion ILabel
 
-            #endregion IButtonState
+                #endregion IButtonState
 
-            _currentState.PropertyChanged += OnStatePropertyChanged;
+                _currentState.PropertyChanged += OnStatePropertyChanged;
 
-            _showingState = false;
+                _showingState = false;
+            });
         }
 
         #endregion

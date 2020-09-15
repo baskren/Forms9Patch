@@ -725,12 +725,27 @@ namespace Forms9Patch
 
 
         #region Property Change Handlers
+        bool invalidating = false;
+        bool pendingInvalidate = false;
         void Invalidate()
         {
+            if (invalidating)
+            {
+                pendingInvalidate = true;
+                System.Diagnostics.Debug.WriteLine("pending");
+                return; 
+            }
+            invalidating = true;
             Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
                 InvalidateMeasure();
                 InvalidateSurface();
+                invalidating = false;
+                if (pendingInvalidate)
+                {
+                    pendingInvalidate = false;
+                    Invalidate();
+                }
             });
         }
 
@@ -797,61 +812,58 @@ namespace Forms9Patch
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Potential Code Quality Issues", "RECS0022:A catch clause that catches System.Exception and has an empty body", Justification = "<Pending>")]
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
-            }
+                try
+                {
+                    base.OnPropertyChanged(propertyName);
+                }
+                catch (Exception) { }
 
-            try
-            {
-                base.OnPropertyChanged(propertyName);
-            }
-            catch (Exception) { }
-
-            if (propertyName == ElementShapeProperty.PropertyName)
-                ((IExtendedShape)this).ExtendedElementShape = ElementShape.ToExtendedElementShape();
-            if (propertyName == SourceProperty.PropertyName)
+                if (propertyName == ElementShapeProperty.PropertyName)
+                    ((IExtendedShape)this).ExtendedElementShape = ElementShape.ToExtendedElementShape();
+                if (propertyName == SourceProperty.PropertyName)
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                SetImageSourceAsync();
+                    SetImageSourceAsync();
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            if (
-                // VisualElement
-                propertyName == BackgroundColorProperty.PropertyName ||
-                propertyName == OpacityProperty.PropertyName ||
+                if (
+                    // VisualElement
+                    propertyName == BackgroundColorProperty.PropertyName ||
+                    propertyName == OpacityProperty.PropertyName ||
 
-                // ShapeBase
-                propertyName == ElementShapeProperty.PropertyName ||
-                propertyName == HasShadowProperty.PropertyName ||
-                propertyName == InvisibleShadowProperty.PropertyName ||
-                propertyName == OutlineColorProperty.PropertyName ||
-                propertyName == OutlineRadiusProperty.PropertyName ||
-                propertyName == OutlineWidthProperty.PropertyName ||
-                propertyName == ShadowInvertedProperty.PropertyName ||
+                    // ShapeBase
+                    propertyName == ElementShapeProperty.PropertyName ||
+                    propertyName == HasShadowProperty.PropertyName ||
+                    propertyName == InvisibleShadowProperty.PropertyName ||
+                    propertyName == OutlineColorProperty.PropertyName ||
+                    propertyName == OutlineRadiusProperty.PropertyName ||
+                    propertyName == OutlineWidthProperty.PropertyName ||
+                    propertyName == ShadowInvertedProperty.PropertyName ||
 
-                // BubbleLayout
-                propertyName == PointerAxialPositionProperty.PropertyName ||
-                propertyName == PointerCornerRadiusProperty.PropertyName ||
-                propertyName == PointerDirectionProperty.PropertyName ||
-                propertyName == PointerLengthProperty.PropertyName ||
-                propertyName == PointerTipRadiusProperty.PropertyName ||
+                    // BubbleLayout
+                    propertyName == PointerAxialPositionProperty.PropertyName ||
+                    propertyName == PointerCornerRadiusProperty.PropertyName ||
+                    propertyName == PointerDirectionProperty.PropertyName ||
+                    propertyName == PointerLengthProperty.PropertyName ||
+                    propertyName == PointerTipRadiusProperty.PropertyName ||
 
 
-                // Image
-                //propertyName == SourceProperty.PropertyName ||  // Handled by SetImageSource()
-                propertyName == TintColorProperty.PropertyName ||
-                propertyName == FillProperty.PropertyName ||
-                propertyName == CapInsetsProperty.PropertyName ||
-                propertyName == AntiAliasProperty.PropertyName ||
+                    // Image
+                    //propertyName == SourceProperty.PropertyName ||  // Handled by SetImageSource()
+                    propertyName == TintColorProperty.PropertyName ||
+                    propertyName == FillProperty.PropertyName ||
+                    propertyName == CapInsetsProperty.PropertyName ||
+                    propertyName == AntiAliasProperty.PropertyName ||
 
-                // IExtendedElementShape
-                propertyName == ExtendedElementShapeProperty.PropertyName ||
-                propertyName == ExtendedElementShapeOrientationProperty.PropertyName ||
-                propertyName == ExtendedElementSeparatorWidthProperty.PropertyName
-               )
-            {
-                Invalidate();
-            }
+                    // IExtendedElementShape
+                    propertyName == ExtendedElementShapeProperty.PropertyName ||
+                    propertyName == ExtendedElementShapeOrientationProperty.PropertyName ||
+                    propertyName == ExtendedElementSeparatorWidthProperty.PropertyName
+                   )
+                {
+                    Invalidate();
+                }
+            });
         }
         #endregion
 

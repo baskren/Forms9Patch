@@ -97,15 +97,29 @@ namespace Forms9Patch
             }
         }
 
+        bool invalidating = false;
+        bool pendingInvalidate = false;
         void Invalidate()
         {
-            if (P42.Utils.Environment.IsOnMainThread)
+            if (invalidating)
+            {
+                pendingInvalidate = true;
+                System.Diagnostics.Debug.WriteLine("pending");
+                return;
+            }
+            invalidating = true;
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
                 InvalidateMeasure();
                 InvalidateSurface();
-            }
-            else
-                Device.BeginInvokeOnMainThread(Invalidate);
+                invalidating = false;
+                if (pendingInvalidate)
+                {
+                    pendingInvalidate = false;
+                    Invalidate();
+                }
+            });
+
         }
 
 

@@ -180,24 +180,20 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
-            }
+                base.OnPropertyChanged(propertyName);
 
-            base.OnPropertyChanged(propertyName);
-
-            if (propertyName == TitleProperty.PropertyName)
-                _titleLabel.HtmlText = Title;
-            else if (propertyName == TextProperty.PropertyName)
-                _textLabel.HtmlText = Text;
-            else if (propertyName == TextColorProperty.PropertyName)
-            {
-                _textLabel.TextColor = TextColor;
-                _titleLabel.TextColor = TextColor;
-            }
-
+                if (propertyName == TitleProperty.PropertyName)
+                    _titleLabel.HtmlText = Title;
+                else if (propertyName == TextProperty.PropertyName)
+                    _textLabel.HtmlText = Text;
+                else if (propertyName == TextColorProperty.PropertyName)
+                {
+                    _textLabel.TextColor = TextColor;
+                    _titleLabel.TextColor = TextColor;
+                }
+            });
         }
         #endregion
     }

@@ -190,35 +190,32 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
-            }
+                base.OnPropertyChanged(propertyName);
 
-            base.OnPropertyChanged(propertyName);
-
-            if (propertyName == TitleProperty.PropertyName)
-                _titleLabel.HtmlText = Title;
-            else if (propertyName == TextProperty.PropertyName)
-                _textLabel.HtmlText = Text;
-            else if (propertyName == OkTextProperty.PropertyName)
-            {
-                _okButton.HtmlText = OkText;
-                if (!string.IsNullOrWhiteSpace(_okButton.HtmlText) && !((StackLayout)Content).Children.Contains(_okButton))
-                    ((StackLayout)Content).Children.Add(_okButton);
-                else if (string.IsNullOrWhiteSpace(_okButton.HtmlText) && ((StackLayout)Content).Children.Contains(_okButton))
-                    ((StackLayout)Content).Children.Remove(_okButton);
-            }
-            else if (propertyName == OkButtonColorProperty.PropertyName)
-                _okButton.BackgroundColor = OkButtonColor;
-            else if (propertyName == OkTextColorProperty.PropertyName)
-                _okButton.TextColor = OkTextColor;
-            else if (propertyName == TextColorProperty.PropertyName)
-            {
-                _titleLabel.TextColor = TextColor;
-                _textLabel.TextColor = TextColor;
-            }
+                if (propertyName == TitleProperty.PropertyName)
+                    _titleLabel.HtmlText = Title;
+                else if (propertyName == TextProperty.PropertyName)
+                    _textLabel.HtmlText = Text;
+                else if (propertyName == OkTextProperty.PropertyName)
+                {
+                    _okButton.HtmlText = OkText;
+                    if (!string.IsNullOrWhiteSpace(_okButton.HtmlText) && !((StackLayout)Content).Children.Contains(_okButton))
+                        ((StackLayout)Content).Children.Add(_okButton);
+                    else if (string.IsNullOrWhiteSpace(_okButton.HtmlText) && ((StackLayout)Content).Children.Contains(_okButton))
+                        ((StackLayout)Content).Children.Remove(_okButton);
+                }
+                else if (propertyName == OkButtonColorProperty.PropertyName)
+                    _okButton.BackgroundColor = OkButtonColor;
+                else if (propertyName == OkTextColorProperty.PropertyName)
+                    _okButton.TextColor = OkTextColor;
+                else if (propertyName == TextColorProperty.PropertyName)
+                {
+                    _titleLabel.TextColor = TextColor;
+                    _textLabel.TextColor = TextColor;
+                }
+            });
         }
         #endregion
     }

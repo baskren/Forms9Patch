@@ -31,18 +31,13 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (!P42.Utils.Environment.IsOnMainThread)
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
-                return;
-            }
+                base.OnPropertyChanged(propertyName);
 
-            base.OnPropertyChanged(propertyName);
-
-            if (propertyName == HeightRequestProperty.PropertyName)
-            {
-                _boxView.HeightRequest = HeightRequest;
-            }
+                if (propertyName == HeightRequestProperty.PropertyName)
+                    _boxView.HeightRequest = HeightRequest;
+            });
         }
     }
 
