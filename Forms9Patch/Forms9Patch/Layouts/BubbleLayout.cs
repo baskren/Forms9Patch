@@ -251,6 +251,19 @@ namespace Forms9Patch
             height -= decorativePadding.VerticalThickness;
             base.LayoutChildren(x, y, width, height);
         }
+
+        internal void InternalLayout(Rectangle rect)
+        {
+            Layout(rect);
+            var decorativePadding = DecorativePadding();
+            var shadowPadding = HasShadow ? ShapeBase.ShadowPadding(this) : new Thickness();
+            rect.X = decorativePadding.Left + Padding.Left + shadowPadding.Left;
+            rect.Y = decorativePadding.Top + Padding.Top + shadowPadding.Top;
+            rect.Width -= decorativePadding.HorizontalThickness + Padding.HorizontalThickness + shadowPadding.HorizontalThickness;
+            rect.Height -= decorativePadding.VerticalThickness + Padding.VerticalThickness + shadowPadding.VerticalThickness;
+            Content.Layout(rect);
+        }
+
         #endregion Layout management
 
 

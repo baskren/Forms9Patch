@@ -19,7 +19,7 @@ namespace Forms9Patch.UWP
     [Preserve(AllMembers = true)]
     public class PopupPageRenderer : PageRenderer
     {
-        private Rect _keyboardBounds;
+        private Windows.Foundation.Rect _keyboardBounds;
 
         internal WinPopup Container { get; private set; }
 
@@ -30,7 +30,7 @@ namespace Forms9Patch.UWP
 
         private void OnKeyboardHiding(InputPane sender, InputPaneVisibilityEventArgs args)
         {
-            _keyboardBounds = Rect.Empty;
+            _keyboardBounds = Windows.Foundation.Rect.Empty;
             UpdateElementSize();
         }
 
@@ -103,12 +103,12 @@ namespace Forms9Patch.UWP
 
         private async void UpdateElementSize()
         {
-            if (Window.Current?.Bounds is Rect windowBound
-                && ApplicationView.GetForCurrentView()?.VisibleBounds is Rect visibleBounds)
+            if (Window.Current?.Bounds is Windows.Foundation.Rect windowBound
+                && ApplicationView.GetForCurrentView()?.VisibleBounds is Windows.Foundation.Rect visibleBounds)
             {
                 await Task.Delay(50);
 
-                var keyboardHeight = _keyboardBounds != Rect.Empty ? _keyboardBounds.Height : 0;
+                var keyboardHeight = _keyboardBounds != Windows.Foundation.Rect.Empty ? _keyboardBounds.Height : 0;
 
                 var top = visibleBounds.Top - windowBound.Top;
                 var bottom = windowBound.Bottom - visibleBounds.Bottom;

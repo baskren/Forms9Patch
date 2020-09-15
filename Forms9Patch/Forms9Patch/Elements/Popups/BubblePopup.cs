@@ -617,8 +617,7 @@ namespace Forms9Patch
                     }
                     _bubbleLayout.PointerAxialPosition = tuple.Item2;
                     var newBounds = new Rectangle(bounds.X - targetPage.Padding.Left, bounds.Y - targetPage.Padding.Top, bounds.Width, bounds.Height);
-                    Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(_bubbleLayout, newBounds);
-                    _bubbleLayout.ForceLayout();
+                    _bubbleLayout.InternalLayout(newBounds);
                     _lastLayout = DateTime.Now;
                 }
 

@@ -96,7 +96,7 @@ namespace Forms9Patch.UWP
         #region Constructor
         public MimeItemCollection()
         {
-            if (Windows.ApplicationModel.DataTransfer.Clipboard.GetContent() is DataPackageView dataPackageView)
+            if (Windows.ApplicationModel.DataTransfer.Clipboard.GetContent() is Windows.ApplicationModel.DataTransfer.DataPackageView dataPackageView)
             {
                 if (dataPackageView.Contains(StandardDataFormats.Text))
                     _plainText = AsyncHelper.RunSync(() => dataPackageView.GetTextAsync().AsTask());

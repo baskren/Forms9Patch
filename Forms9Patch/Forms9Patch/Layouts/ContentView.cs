@@ -611,6 +611,7 @@ namespace Forms9Patch
                     rect.Width -= shadowPadding.HorizontalThickness;
                     rect.Height -= shadowPadding.VerticalThickness;
                 }
+                //System.Diagnostics.Debug.WriteLine(GetType() + $".LayoutChildren rect:{rect}");
                 LayoutChildIntoBoundingRegion(Content, rect);
             }
             //P42.Utils.Debug.Message(Content, "EXIT");
