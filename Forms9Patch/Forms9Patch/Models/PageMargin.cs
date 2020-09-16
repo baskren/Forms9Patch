@@ -49,7 +49,7 @@ namespace Forms9Patch
         /// <param name="top"></param>
         /// <param name="bottom"></param>
         /// <returns></returns>
-        public PageMargin CreateInInches(double left, double right, double top, double bottom)
+        public static PageMargin CreateInInches(double left, double right, double top, double bottom)
         {
             return new PageMargin
             {
@@ -66,11 +66,13 @@ namespace Forms9Patch
         /// <param name="horizontal"></param>
         /// <param name="vertical"></param>
         /// <returns></returns>
-        public PageMargin CreateInInches(double horizontal, double vertical)
+        public static PageMargin CreateInInches(double horizontal, double vertical)
             => new PageMargin
             {
-                Left = Right = horizontal * 72,
-                Top = Bottom = vertical * 72
+                Left = horizontal * 72,
+                Right = horizontal * 72,
+                Top = vertical * 72,
+                Bottom = vertical * 72
             };
 
         /// <summary>
@@ -78,10 +80,13 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="all"></param>
         /// <returns></returns>
-        public PageMargin CreateInInches(double all)
+        public static PageMargin CreateInInches(double all)
             => new PageMargin
             {
-                Left = Right = Top = Bottom = all * 72
+                Left = all * 72,
+                Right = all * 72,
+                Top = all * 72,
+                Bottom = all * 72
             };
 
         /// <summary>
@@ -92,7 +97,7 @@ namespace Forms9Patch
         /// <param name="top"></param>
         /// <param name="bottom"></param>
         /// <returns></returns>
-        public PageMargin CreateInMillimeters(double left, double right, double top, double bottom)
+        public static PageMargin CreateInMillimeters(double left, double right, double top, double bottom)
             => CreateInInches(left * 25.6, right * 25.4, top * 25.4, bottom * 25.4);
 
         /// <summary>
@@ -101,7 +106,7 @@ namespace Forms9Patch
         /// <param name="horizontal"></param>
         /// <param name="vertical"></param>
         /// <returns></returns>
-        public PageMargin CreateInMillimeters(double horizontal, double vertical)
+        public static PageMargin CreateInMillimeters(double horizontal, double vertical)
             => CreateInInches(horizontal * 25.4, vertical * 25.4);
 
         /// <summary>
@@ -109,7 +114,7 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="all"></param>
         /// <returns></returns>
-        public PageMargin CreateInMillimeters(double all)
+        public static PageMargin CreateInMillimeters(double all)
             => CreateInInches(all * 25.4);
         }
 }
