@@ -130,7 +130,7 @@ namespace Forms9Patch.Droid
                         else
                         {
                         */
-                        var loader = new AndroidX.Loader.Content.CursorLoader(Settings.Context, _uri, null, null, null, null);   // new Android.Support.V4.Content.CursorLoader(Settings.Context, _uri, null, null, null, null);
+                        var loader = new AndroidX.Loader.Content.CursorLoader(Settings.Context, _uri, null, null, null, null);   
                         _cursor = (ICursor)loader.LoadInBackground();
                         //}
                     }
