@@ -346,7 +346,8 @@ namespace Forms9Patch.Droid
                     {
                         if (analyzer.FontAttributes(file.AbsolutePath) == "Regular")
                         {
-                            var fontFamily = analyzer.FontFamily(file.AbsolutePath);
+                            var fontFamilys = analyzer.FontFamily(file.AbsolutePath);
+                            foreach (var fontFamily in fontFamilys)
                             //if (fontFamily != null && !_systemFontFiles.ContainsKey(fontFamily))
                                 results.Add(fontFamily, file.AbsolutePath);
                         }
@@ -399,7 +400,7 @@ namespace Forms9Patch.Droid
             return b1 << 8 | b2;
         }
 
-        public string FontFamily(string fontFilename)
+        public List<string> FontFamily(string fontFilename)
         {
             try
             {
@@ -447,6 +448,8 @@ namespace Forms9Patch.Droid
                         int count = GetWord(table, 2);
                         int string_offset = GetWord(table, 4);
 
+                        List<string> familyNames = new List<string>();
+
                         // Record starts from offset 6
                         for (int record = 0; record < count; record++)
                         {
@@ -458,7 +461,7 @@ namespace Forms9Patch.Droid
 
                             // Table 42 lists the valid name Identifiers. We're interested in 1 (Font Family Name) but not in Unicode encoding (for simplicity).
                             // The encoding is stored as PlatformID and we're interested in Mac encoding
-                            if (nameid_value == 1 && platformID == 1)
+                            if (platformID == 1)
                             {
                                 // We need the string offset and length, which are the word 6 and 5 respectively
                                 int name_length = GetWord(table, nameid_offset + 8);
@@ -484,10 +487,25 @@ namespace Forms9Patch.Droid
                                     System.Buffer.BlockCopy(table, name_offset, chars, 0, name_length);
                                     //var str = new string(chars);
                                     var str = System.Text.Encoding.Default.GetString(chars);
-                                    return str;
+                                    if (nameid_value == 1)
+                                    {
+                                        familyNames.Add(str);
+                                        System.Diagnostics.Debug.WriteLine(GetType() + ".FAMILY: " + str);
+                                    }
+
+                                    //return str;
+                                    if (!string.IsNullOrWhiteSpace(str) && !familyNames.Contains(str))
+                                    {
+
+                                        if (nameid_value == 18 || nameid_value == 16 || nameid_value == 4 || nameid_value == 6)
+                                            familyNames.Add(str);
+                                        System.Diagnostics.Debug.WriteLine(GetType() + ".\t\t ["+nameid_value+"]: "+str);
+                                    }
                                 }
                             }
                         }
+
+                        return familyNames;
                     }
                 }
 
@@ -594,6 +612,7 @@ namespace Forms9Patch.Droid
                                     System.Buffer.BlockCopy(table, name_offset, chars, 0, name_length);
                                     //var str = new string(chars);
                                     var str = System.Text.Encoding.Default.GetString(chars);
+                                    System.Diagnostics.Debug.WriteLine("\t\t"+GetType() + ".FontAttributes attr=" + str);
                                     return str;
                                 }
                             }

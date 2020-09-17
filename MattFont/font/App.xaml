@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="font.App">
+    <Application.Resources>
+        <OnPlatform x:TypeArguments="x:String"
+                    x:Key="CustomFont">
+            <On Platform="Android"
+                Value="Brandon_reg.ttf#Brandon Grotesque" />
+        </OnPlatform>
+        <Style x:Key="CustomStyle"
+               TargetType="Label">
+            <Setter Property="FontFamily"
+                    Value="{StaticResource CustomFont}" />
+            <Setter Property="TextColor"
+                    Value="Black" />
+            <Setter Property="FontSize"
+                    Value="22" />
+        </Style>
+    </Application.Resources>
+</Application>

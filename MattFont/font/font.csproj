@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <DebugType>pdbonly</DebugType>
+        <DebugSymbols>true</DebugSymbols>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Xamarin.Forms" Version="4.8.0.1269" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Forms9Patch\Forms9Patch\Forms9Patch.csproj" />
+      <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj" />
+      <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj" />
+      <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj" />
+      <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj" />
+    </ItemGroup>
+</Project>
