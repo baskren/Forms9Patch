@@ -360,6 +360,8 @@ namespace Forms9Patch.Droid
 
     class TTFAnalyzer
     {
+        // https://developer.apple.com/fonts/TrueType-Reference-Manual/RM06/Chap6name.html
+
 
         // Font file; must be seekable
         RandomAccessFile m_file;

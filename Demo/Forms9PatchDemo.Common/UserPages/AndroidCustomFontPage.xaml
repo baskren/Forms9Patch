@@ -8,7 +8,7 @@
         <OnPlatform x:TypeArguments="x:String"
                     x:Key="CustomFont">
             <On Platform="Android"
-                Value="airstrike.ttf#AirStrike" />
+                Value="Brandon_reg.ttf#Brandon Grotesque" />
             <On Platform="iOS"
                 Value="BlueEyesPersonalUse" />
         </OnPlatform>
