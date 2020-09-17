@@ -28,6 +28,8 @@ namespace Forms9Patch.Droid
 
         static Typeface TrySystemFont(string fontFamily)
         {
+            if (string.IsNullOrWhiteSpace(fontFamily))
+                return null;
             var fonts = FontFamiliesAndPaths();
             foreach (var kvp in fonts)
             {
@@ -74,14 +76,18 @@ namespace Forms9Patch.Droid
 
                     Typeface result;
 
-                    if (fontName.ToLower() == "monospace" && MonoSpace != null)
+                    if (fontName?.ToLower() == "monospace" && MonoSpace != null)
                         return MonoSpace;
-                    if (fontName.ToLower() == "serif" && Serif != null)
+                    if (fontName?.ToLower() == "serif" && Serif != null)
                         return Serif;
-                    if (fontName.ToLower() == "sans-serif" && DroidSans != null)
+                    if (fontName?.ToLower() == "sans-serif" && DroidSans != null)
                         return DroidSans;
 
                     result = TrySystemFont(fontName);
+                    if (result != null)
+                        return result;
+
+                    result = TrySystemFont(fontFile);
                     if (result != null)
                         return result;
 
@@ -347,7 +353,7 @@ namespace Forms9Patch.Droid
                     }
                 }
             }
-            return results.Count > 0 ? results : null;
+            return results;
         }
     }
 
