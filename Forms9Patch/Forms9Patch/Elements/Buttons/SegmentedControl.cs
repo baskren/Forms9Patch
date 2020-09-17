@@ -1310,22 +1310,34 @@ namespace Forms9Patch
             double maxSegmentHeight = 0;
             foreach (var segment in Segments)
             {
-                var size = segment._button.GetMinSize();
-                maxSegmentWidth = Math.Max(maxSegmentWidth, size.Width);
-                maxSegmentHeight = Math.Max(maxSegmentHeight, size.Height);
+                var button = segment._button;
+                var size = button.GetMinSize();
+
+                if (Segments[0].HtmlText == "Thin Carpet")
+                    System.Diagnostics.Debug.WriteLine(GetType() + ".GetMinSize ["+segment.HtmlText+"]" + " size:" + size + "  button.Width:" + button.Width );
+                maxSegmentWidth = Math.Max(maxSegmentWidth, size.Width + Math.Max(button.OutlineWidth,0) + button.Padding.HorizontalThickness + button.Margin.HorizontalThickness);
+                maxSegmentHeight = Math.Max(maxSegmentHeight, size.Height + Math.Max(button.OutlineWidth,0) + button.Padding.VerticalThickness + button.Margin.VerticalThickness);
             }
             if (Orientation == StackOrientation.Horizontal)
             {
+                maxSegmentWidth += 5;
                 maxSegmentWidth *= Segments.Count;
-                //maxSegmentWidth += (Segments.Count + 1) * outlineWidth;
             }
             else
             {
+                maxSegmentHeight += 5;
                 maxSegmentHeight *= Segments.Count;
-                //maxSegmentHeight += (Segments.Count + 1) * outlineWidth;
             }
-            maxSegmentWidth += Margin.HorizontalThickness;
-            maxSegmentHeight += Margin.VerticalThickness;
+
+            var shadowPadding = new Thickness(0);
+            if (HasShadow && BackgroundColor.A > 0 && Children.Count > 1)
+                shadowPadding = ShapeBase.ShadowPadding(this);
+
+            maxSegmentWidth += Margin.HorizontalThickness + shadowPadding.HorizontalThickness + Math.Max(OutlineWidth, 0);
+            maxSegmentHeight += Margin.VerticalThickness + shadowPadding.VerticalThickness + Math.Max(OutlineWidth, 0);
+
+
+
             return new Size(maxSegmentWidth, maxSegmentHeight);
         }
         #endregion
