@@ -29,7 +29,6 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidLinkMode>Full</AndroidLinkMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -130,6 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-xxxhdpi\" />
+    <Folder Include="Assets\Fonts\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forms9PatchDemo.Source\Forms9PatchDemo.Source.csproj">
@@ -171,6 +171,8 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\TextFile1.txt" />
+    <AndroidAsset Include="Assets\Brandon_reg.ttf" />
+    <AndroidAsset Include="Assets\Fonts\airstrike.ttf" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\TextFile2.txt" />

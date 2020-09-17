@@ -63,6 +63,13 @@ namespace Forms9PatchDemo
 
                     new TableSection("XAML") {
 
+                        new TextCell
+                        {
+                            Text = "Android Asset custom font",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(Forms9PatchDemo.AndroidCustomFontPage)
+                        },
+
 
                         new TextCell
                         {

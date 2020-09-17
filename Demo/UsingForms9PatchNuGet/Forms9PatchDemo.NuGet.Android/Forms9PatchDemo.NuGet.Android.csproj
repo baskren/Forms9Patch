@@ -124,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-xxxhdpi\" />
+    <Folder Include="Assets\Fonts\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forms9PatchDemo.NuGet\Forms9PatchDemo.NuGet.csproj">
@@ -133,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\TextFile1.txt" />
+    <AndroidAsset Include="Assets\Fonts\airstrike.ttf" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\TextFile2.txt" />

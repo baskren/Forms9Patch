@@ -36,5 +36,9 @@
 	<string>1.8</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>BlueEyes.otf</string>
+	</array>
 </dict>
 </plist>

@@ -114,6 +114,15 @@
 
 
 
+		<EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\UserPages\AndroidCustomFontPage.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>UserPages\AndroidCustomFontPage.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\AndroidCustomFontPage.xaml.cs">
+	      <DependentUpon>UserPages\AndroidCustomFontPage.xaml</DependentUpon>
+	      <Link>UserPages\AndroidCustomFontPage.xaml.cs</Link>
+	    </Compile>
+
 		<EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\UserPages\ButtonCommand.xaml">
 	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	      <Link>UserPages\ButtonCommand.xaml</Link>

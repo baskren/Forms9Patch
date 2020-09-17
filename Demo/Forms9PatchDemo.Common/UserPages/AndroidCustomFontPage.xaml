@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+             x:Class="Forms9PatchDemo.AndroidCustomFontPage">
+
+    <ContentPage.Resources>
+        <OnPlatform x:TypeArguments="x:String"
+                    x:Key="CustomFont">
+            <On Platform="Android"
+                Value="airstrike.ttf#AirStrike" />
+            <On Platform="iOS"
+                Value="BlueEyesPersonalUse" />
+        </OnPlatform>
+        <Style x:Key="CustomStyle"
+               TargetType="Label">
+            <Setter Property="FontFamily"
+                    Value="{StaticResource CustomFont}" />
+            <Setter Property="TextColor"
+                    Value="Black" />
+            <Setter Property="FontSize"
+                    Value="22" />
+        </Style>
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <!-- Place new controls here -->
+        <forms9Patch:Label Text="Welcome to Xamarin.Forms!" 
+                           Style="{StaticResource CustomStyle}"
+           HorizontalOptions="Center"
+           VerticalOptions="CenterAndExpand" />
+    </StackLayout>
+
+</ContentPage>

@@ -12,13 +12,9 @@ using Android.Content.PM;
 [assembly: Xamarin.Forms.Dependency(typeof(FontManagment))]
 namespace Forms9Patch.Droid
 {
-
     [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     class FontManagment : IFontFamilies
     {
-
-        //static string CustomFontDirRoot => Settings.Context.CacheDir.AbsolutePath;
-        //static string CustomFontDirRoot => Settings.Context.DataDir.AbsolutePath;
         static string CustomFontDirRoot
         {
             get
@@ -32,86 +28,23 @@ namespace Forms9Patch.Droid
 
         static Typeface TrySystemFont(string fontFamily)
         {
-
-            if (FontFiles.TryGetValue(fontFamily, out string fontFilePath))
+            var fonts = FontFamiliesAndPaths();
+            foreach (var kvp in fonts)
             {
-                Typeface typeface = Typeface.CreateFromFile(fontFilePath);
-                return typeface;
+                if (kvp.Key.ToLower() == fontFamily.ToLower())
+                {
+                    Typeface typeface = Typeface.CreateFromFile(kvp.Value);
+                    return typeface;
+                }
             }
             return null;
         }
 
-        //static Typeface _droidSans;
         static Typeface DroidSans => Typeface.SansSerif;
-        /*
-    {
-        get
-        {
-            if (_droidSans != null)
-                return _droidSans;
-            _droidSans = Typeface.SansSerif;
-            if (_droidSans!=null)
-                return _droidSans;
-            _droidSans = TrySystemFont("Roboto");
-            if (_droidSans != null)
-                return _droidSans;
-            _droidSans = TrySystemFont("Droid Sans");
-            if (_droidSans != null)
-                return _droidSans;
-            _droidSans = TrySystemFont("DroidSans");
-            if (_droidSans != null)
-                return _droidSans;
-            _droidSans = TrySystemFont("Roboto");
-            if (_droidSans != null)
-                return _droidSans;
-            _droidSans = TrySystemFont("sans-serif");
-            if (_droidSans != null)
-                return _droidSans;
-            _droidSans = TrySystemFont("normal");
-            if (_droidSans != null)
-                return _droidSans;
-            return _droidSans;
-        }
-    }
-    */
 
-        //static Typeface _monoSpace;
         static Typeface MonoSpace => Typeface.Monospace;
-        /*
-        {
-            get
-            {
-                if (_monoSpace != null)
-                    return _monoSpace;
-                _monoSpace = TrySystemFont("monospace");
-                if (_monoSpace != null)
-                    return _monoSpace;
-                _monoSpace = TrySystemFont("Droid Sans Mono");
-                if (_monoSpace != null)
-                    return _monoSpace;
-                return _monoSpace;
-            }
-        }
-        */
 
-        //static Typeface _serif;
         static Typeface Serif => Typeface.Serif;
-        /*
-        {
-            get
-            {
-                if (_serif != null)
-                    return _serif;
-                _serif = TrySystemFont("serif");
-                if (_serif != null)
-                    return _serif;
-                _serif = TrySystemFont("Droid Serif");
-                if (_serif != null)
-                    return _serif;
-                return _serif;
-            }
-        }
-        */
 
         public static Typeface TypefaceForFontFamily(string fontFamilys, Assembly assembly = null)
         {
@@ -126,16 +59,29 @@ namespace Forms9Patch.Droid
                     if (string.IsNullOrWhiteSpace(fontFamily))
                         continue;
 
+                    var fontPair = fontFamily.Split("#");
+                    string fontFile = null;
+                    string fontName = fontPair[0];
+                    if (fontPair[0].EndsWith(".ttf") || fontPair[0].EndsWith(".otf"))
+                    {
+                        fontFile = fontPair[0];
+                        fontName = null;
+                    }
+                    if (fontPair.Length > 1)
+                    {
+                        fontName = fontPair[1];
+                    }
+
                     Typeface result;
 
-                    if (fontFamily.ToLower() == "monospace" && MonoSpace != null)
+                    if (fontName.ToLower() == "monospace" && MonoSpace != null)
                         return MonoSpace;
-                    if (fontFamily.ToLower() == "serif" && Serif != null)
+                    if (fontName.ToLower() == "serif" && Serif != null)
                         return Serif;
-                    if (fontFamily.ToLower() == "sans-serif" && DroidSans != null)
+                    if (fontName.ToLower() == "sans-serif" && DroidSans != null)
                         return DroidSans;
 
-                    result = TrySystemFont(fontFamily);
+                    result = TrySystemFont(fontName);
                     if (result != null)
                         return result;
 
@@ -201,28 +147,35 @@ namespace Forms9Patch.Droid
                     System.Console.WriteLine("Embedded Resource font file (" + resouceId + ") could not be loaded as an Android Typeface.");
                     return null;
                 }
-                _fontFiles.Add(resouceId, cachedFontFile.AbsolutePath);
+                _resourceFontFiles.Add(resouceId, cachedFontFile.AbsolutePath);
                 return typeface;
             }
         }
 
-        public List<string> FontFamilies()
+        public static Dictionary<string,string> FontFamiliesAndPaths()
         {
-            return FontFiles.Keys.OrderBy((arg) =>
+            var loadedFonts = new Dictionary<string, string>();
+            loadedFonts.AddRange(SystemFontFiles);
+            loadedFonts.AddRange(AssetFontFiles);
+            loadedFonts.AddRange(ResourceFontFiles);
+            return loadedFonts;
+        }
+
+        public List<string> FontFamilies()
+            => FontFamiliesAndPaths().Keys.OrderBy((arg) =>
             {
                 if (arg.ToLower().Contains(".ttf") || arg.ToLower().Contains(".otf"))
                     return " " + arg;
                 return arg;
             }).ToList();
-        }
 
-        static Dictionary<string, string> _fontFiles;
-        public static Dictionary<string, string> FontFiles
+        static Dictionary<string, string> _systemFontFiles;
+        public static Dictionary<string, string> SystemFontFiles
         {
             get
             {
-                if (_fontFiles != null)
-                    return _fontFiles;
+                if (_systemFontFiles != null)
+                    return _systemFontFiles;
                 var context = Settings.Context;
                 var fontAssetFileNames = context.Assets.List("Fonts");
                 using (var cachedFontDir = new File(CustomFontDirRoot + "/AssetFonts"))
@@ -254,36 +207,147 @@ namespace Forms9Patch.Droid
                             }
                         }
                     }
-                    var fontdirs = new string[] { "/system/fonts", "/system/font", "/data/fonts", cachedFontDir.AbsolutePath };
-                    _fontFiles = new Dictionary<string, string>();
-                    var analyzer = new TTFAnalyzer();
+                    var fontdirs = new string[] { "/system/fonts", "/system/font", "/data/fonts" };
+                    _systemFontFiles = QueryFontFilesFromFontDirectories(fontdirs);
+                }
+                return _systemFontFiles.Count == 0 ? null : _systemFontFiles;
+            }
+        }
 
-                    foreach (var fontdir in fontdirs)
+
+        static Dictionary<string, string> _assetFontFiles;
+        public static Dictionary<string, string> AssetFontFiles
+        {
+            get
+            {
+                if (_assetFontFiles != null)
+                    return _assetFontFiles;
+                /*
+                var context = Settings.Context;
+                var names = context.Assets.List("");
+                var fontAssetFileNames = context.Assets.List("Fonts");
+                using (var cachedFontDir = new File(CustomFontDirRoot + "/AssetFonts"))
+                {
+                    if (!cachedFontDir.Exists())
+                        cachedFontDir.Mkdir();
+                    // move any Android Asset Fonts to the Applications CustomFontDirRoot
+                    if (fontAssetFileNames != null)
                     {
-                        using (var dir = new File(fontdir))
+                        foreach (var fontAssetFileName in fontAssetFileNames)
                         {
-                            if (!dir.Exists())
-                                continue;
-
-                            File[] files = dir.ListFiles();
-
-                            if (files == null)
-                                continue;
-
-                            foreach (var file in files)
+                            using (var cachedFontFile = new File(cachedFontDir.AbsolutePath, fontAssetFileName))
                             {
-                                if (analyzer.FontAttributes(file.AbsolutePath) == "Regular")
+                                if (!cachedFontFile.Exists())
                                 {
-                                    var fontFamily = analyzer.FontFamily(file.AbsolutePath);
-                                    if (fontFamily != null && !_fontFiles.ContainsKey(fontFamily))
-                                        _fontFiles.Add(fontFamily, file.AbsolutePath);
+                                    // copy into CustomFontDirRoot
+                                    var inputStream = context.Assets.Open("Fonts/" + fontAssetFileName);
+                                    var outputStream = new FileOutputStream(cachedFontFile);
+                                    const int bufferSize = 1024;
+                                    var buffer = new byte[bufferSize];
+                                    int length = -1;
+                                    while ((length = inputStream.Read(buffer, 0, bufferSize)) > 0)
+                                    {
+                                        outputStream.Write(buffer, 0, length);
+                                    }
+                                    inputStream.Close();
+                                    outputStream.Close();
                                 }
                             }
                         }
                     }
+                
+                    var fontdirs = new string[] { cachedFontDir.AbsolutePath };
+                    _assetFontFiles = QueryFontFilesFromFontDirectories(fontdirs);
                 }
-                return _fontFiles.Count == 0 ? null : _fontFiles;
+                */
+                BuildAssetFontFileCache();
+                using (var cachedFontDir = new File(CustomFontDirRoot + "/AssetFonts"))
+                {
+                    var fontdirs = new string[] { cachedFontDir.AbsolutePath };
+                    _assetFontFiles = QueryFontFilesFromFontDirectories(fontdirs);
+                }
+                return _assetFontFiles.Count == 0 ? null : _assetFontFiles;
             }
+        }
+
+        static void BuildAssetFontFileCache(string path = "")
+        {
+            var assetFileNames = Settings.Context.Assets.List(path);
+            using (var cachedFontDir = new File(CustomFontDirRoot + "/AssetFonts"))
+            {
+                if (!cachedFontDir.Exists())
+                    cachedFontDir.Mkdir();
+                // move any Android Asset Fonts to the Applications CustomFontDirRoot
+                if (assetFileNames != null)
+                {
+                    foreach (var assetFileName in assetFileNames)
+                    {
+                        var suffix = System.IO.Path.GetExtension(assetFileName);
+                        if (!string.IsNullOrWhiteSpace(suffix) && (suffix == ".ttf" || suffix == ".otf"))
+                        {
+                            using (var cachedFontFile = new File(cachedFontDir.AbsolutePath, assetFileName))
+                            {
+                                if (!cachedFontFile.Exists())
+                                {
+                                    // copy into CustomFontDirRoot
+                                    var assetFolder = (string.IsNullOrWhiteSpace(path) ? null : path + "/");
+                                    var inputStream = Settings.Context.Assets.Open(assetFolder + assetFileName);
+                                    var outputStream = new FileOutputStream(cachedFontFile);
+                                    const int bufferSize = 1024;
+                                    var buffer = new byte[bufferSize];
+                                    int length;
+                                    while ((length = inputStream.Read(buffer, 0, bufferSize)) > 0)
+                                    {
+                                        outputStream.Write(buffer, 0, length);
+                                    }
+                                    inputStream.Close();
+                                    outputStream.Close();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            BuildAssetFontFileCache(assetFileName);
+                        }
+                    }
+                }
+
+            }
+        }
+
+        static Dictionary<string, string> _resourceFontFiles = new Dictionary<string, string>();
+        public static Dictionary<string, string> ResourceFontFiles
+            =>  _resourceFontFiles.Count == 0 ? null : _resourceFontFiles;
+
+        static Dictionary<string, string> QueryFontFilesFromFontDirectories(string[] fontdirs)
+        {
+            var results = new Dictionary<string, string>();
+            var analyzer = new TTFAnalyzer();
+
+            foreach (var fontdir in fontdirs)
+            {
+                using (var dir = new File(fontdir))
+                {
+                    if (!dir.Exists())
+                        continue;
+
+                    File[] files = dir.ListFiles();
+
+                    if (files == null)
+                        continue;
+
+                    foreach (var file in files)
+                    {
+                        if (analyzer.FontAttributes(file.AbsolutePath) == "Regular")
+                        {
+                            var fontFamily = analyzer.FontFamily(file.AbsolutePath);
+                            //if (fontFamily != null && !_systemFontFiles.ContainsKey(fontFamily))
+                                results.Add(fontFamily, file.AbsolutePath);
+                        }
+                    }
+                }
+            }
+            return results.Count > 0 ? results : null;
         }
     }
 

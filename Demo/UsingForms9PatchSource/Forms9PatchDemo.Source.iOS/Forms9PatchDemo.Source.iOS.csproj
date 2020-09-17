@@ -206,6 +206,7 @@
     <BundleResource Include="Resources\blkbox_small.jpg" />
     <BundleResource Include="Resources\cat-fromFile.jpg" />
     <BundleResource Include="Resources\cat.jpg" />
+    <BundleResource Include="Resources\BlueEyes.otf" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Forms9Patch\Forms9Patch\Forms9Patch.csproj">
