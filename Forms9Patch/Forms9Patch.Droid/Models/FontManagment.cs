@@ -348,8 +348,8 @@ namespace Forms9Patch.Droid
                         {
                             var fontFamilys = analyzer.FontFamily(file.AbsolutePath);
                             foreach (var fontFamily in fontFamilys)
-                            //if (fontFamily != null && !_systemFontFiles.ContainsKey(fontFamily))
-                                results.Add(fontFamily, file.AbsolutePath);
+                                if (fontFamily != null && !results.ContainsKey(fontFamily))
+                                    results.Add(fontFamily, file.AbsolutePath);
                         }
                     }
                 }
