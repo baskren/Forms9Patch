@@ -21892,94 +21892,94 @@ references:
   fullName.vb: P42.Utils.CopyingExtensions.DeepValueCopy(Of T)(System.Collections.Generic.List(Of T))
   nameWithType: CopyingExtensions.DeepValueCopy<T>(List<T>)
   nameWithType.vb: CopyingExtensions.DeepValueCopy(Of T)(List(Of T))
-- uid: P42.Utils.Debug
-  name: Debug
-  href: api/P42.Utils.Debug.html
-  commentId: T:P42.Utils.Debug
-  fullName: P42.Utils.Debug
-  nameWithType: Debug
-- uid: P42.Utils.Debug.AddToCensus(System.Object)
+- uid: P42.Utils.DebugExtensions
+  name: DebugExtensions
+  href: api/P42.Utils.DebugExtensions.html
+  commentId: T:P42.Utils.DebugExtensions
+  fullName: P42.Utils.DebugExtensions
+  nameWithType: DebugExtensions
+- uid: P42.Utils.DebugExtensions.AddToCensus(System.Object)
   name: AddToCensus(Object)
-  href: api/P42.Utils.Debug.html#P42_Utils_Debug_AddToCensus_System_Object_
-  commentId: M:P42.Utils.Debug.AddToCensus(System.Object)
-  fullName: P42.Utils.Debug.AddToCensus(System.Object)
-  nameWithType: Debug.AddToCensus(Object)
-- uid: P42.Utils.Debug.AddToCensus*
+  href: api/P42.Utils.DebugExtensions.html#P42_Utils_DebugExtensions_AddToCensus_System_Object_
+  commentId: M:P42.Utils.DebugExtensions.AddToCensus(System.Object)
+  fullName: P42.Utils.DebugExtensions.AddToCensus(System.Object)
+  nameWithType: DebugExtensions.AddToCensus(Object)
+- uid: P42.Utils.DebugExtensions.AddToCensus*
   name: AddToCensus
-  href: api/P42.Utils.Debug.html#P42_Utils_Debug_AddToCensus_
-  commentId: Overload:P42.Utils.Debug.AddToCensus
+  href: api/P42.Utils.DebugExtensions.html#P42_Utils_DebugExtensions_AddToCensus_
+  commentId: Overload:P42.Utils.DebugExtensions.AddToCensus
   isSpec: "True"
-  fullName: P42.Utils.Debug.AddToCensus
-  nameWithType: Debug.AddToCensus
-- uid: P42.Utils.Debug.Census
+  fullName: P42.Utils.DebugExtensions.AddToCensus
+  nameWithType: DebugExtensions.AddToCensus
+- uid: P42.Utils.DebugExtensions.Census
   name: Census
-  href: api/P42.Utils.Debug.html#P42_Utils_Debug_Census
-  commentId: F:P42.Utils.Debug.Census
-  fullName: P42.Utils.Debug.Census
-  nameWithType: Debug.Census
-- uid: P42.Utils.Debug.CensusActiveCount
+  href: api/P42.Utils.DebugExtensions.html#P42_Utils_DebugExtensions_Census
+  commentId: F:P42.Utils.DebugExtensions.Census
+  fullName: P42.Utils.DebugExtensions.Census
+  nameWithType: DebugExtensions.Census
+- uid: P42.Utils.DebugExtensions.CensusActiveCount
   name: CensusActiveCount
-  href: api/P42.Utils.Debug.html#P42_Utils_Debug_CensusActiveCount
-  commentId: P:P42.Utils.Debug.CensusActiveCount
-  fullName: P42.Utils.Debug.CensusActiveCount
-  nameWithType: Debug.CensusActiveCount
-- uid: P42.Utils.Debug.CensusActiveCount*
+  href: api/P42.Utils.DebugExtensions.html#P42_Utils_DebugExtensions_CensusActiveCount
+  commentId: P:P42.Utils.DebugExtensions.CensusActiveCount
+  fullName: P42.Utils.DebugExtensions.CensusActiveCount
+  nameWithType: DebugExtensions.CensusActiveCount
+- uid: P42.Utils.DebugExtensions.CensusActiveCount*
   name: CensusActiveCount
-  href: api/P42.Utils.Debug.html#P42_Utils_Debug_CensusActiveCount_
-  commentId: Overload:P42.Utils.Debug.CensusActiveCount
+  href: api/P42.Utils.DebugExtensions.html#P42_Utils_DebugExtensions_CensusActiveCount_
+  commentId: Overload:P42.Utils.DebugExtensions.CensusActiveCount
   isSpec: "True"
-  fullName: P42.Utils.Debug.CensusActiveCount
-  nameWithType: Debug.CensusActiveCount
-- uid: P42.Utils.Debug.ConditionFunc
+  fullName: P42.Utils.DebugExtensions.CensusActiveCount
+  nameWithType: DebugExtensions.CensusActiveCount
+- uid: P42.Utils.DebugExtensions.ConditionFunc
   name: ConditionFunc
-  href: api/P42.Utils.Debug.html#P42_Utils_Debug_ConditionFunc
-  commentId: F:P42.Utils.Debug.ConditionFunc
-  fullName: P42.Utils.Debug.ConditionFunc
-  nameWithType: Debug.ConditionFunc
-- uid: P42.Utils.Debug.IsCensusEnabled
+  href: api/P42.Utils.DebugExtensions.html#P42_Utils_DebugExtensions_ConditionFunc
+  commentId: F:P42.Utils.DebugExtensions.ConditionFunc
+  fullName: P42.Utils.DebugExtensions.ConditionFunc
+  nameWithType: DebugExtensions.ConditionFunc
+- uid: P42.Utils.DebugExtensions.IsCensusEnabled
   name: IsCensusEnabled
-  href: api/P42.Utils.Debug.html#P42_Utils_Debug_IsCensusEnabled
-  commentId: F:P42.Utils.Debug.IsCensusEnabled
-  fullName: P42.Utils.Debug.IsCensusEnabled
-  nameWithType: Debug.IsCensusEnabled
-- uid: P42.Utils.Debug.IsMessagesEnabled
+  href: api/P42.Utils.DebugExtensions.html#P42_Utils_DebugExtensions_IsCensusEnabled
+  commentId: F:P42.Utils.DebugExtensions.IsCensusEnabled
+  fullName: P42.Utils.DebugExtensions.IsCensusEnabled
+  nameWithType: DebugExtensions.IsCensusEnabled
+- uid: P42.Utils.DebugExtensions.IsMessagesEnabled
   name: IsMessagesEnabled
-  href: api/P42.Utils.Debug.html#P42_Utils_Debug_IsMessagesEnabled
-  commentId: F:P42.Utils.Debug.IsMessagesEnabled
-  fullName: P42.Utils.Debug.IsMessagesEnabled
-  nameWithType: Debug.IsMessagesEnabled
-- uid: P42.Utils.Debug.Message(System.Object,System.String)
+  href: api/P42.Utils.DebugExtensions.html#P42_Utils_DebugExtensions_IsMessagesEnabled
+  commentId: F:P42.Utils.DebugExtensions.IsMessagesEnabled
+  fullName: P42.Utils.DebugExtensions.IsMessagesEnabled
+  nameWithType: DebugExtensions.IsMessagesEnabled
+- uid: P42.Utils.DebugExtensions.Message(System.Object,System.String)
   name: Message(Object, String)
-  href: api/P42.Utils.Debug.html#P42_Utils_Debug_Message_System_Object_System_String_
-  commentId: M:P42.Utils.Debug.Message(System.Object,System.String)
-  fullName: P42.Utils.Debug.Message(System.Object, System.String)
-  nameWithType: Debug.Message(Object, String)
-- uid: P42.Utils.Debug.Message(System.String,System.String)
+  href: api/P42.Utils.DebugExtensions.html#P42_Utils_DebugExtensions_Message_System_Object_System_String_
+  commentId: M:P42.Utils.DebugExtensions.Message(System.Object,System.String)
+  fullName: P42.Utils.DebugExtensions.Message(System.Object, System.String)
+  nameWithType: DebugExtensions.Message(Object, String)
+- uid: P42.Utils.DebugExtensions.Message(System.String,System.String)
   name: Message(String, String)
-  href: api/P42.Utils.Debug.html#P42_Utils_Debug_Message_System_String_System_String_
-  commentId: M:P42.Utils.Debug.Message(System.String,System.String)
-  fullName: P42.Utils.Debug.Message(System.String, System.String)
-  nameWithType: Debug.Message(String, String)
-- uid: P42.Utils.Debug.Message*
+  href: api/P42.Utils.DebugExtensions.html#P42_Utils_DebugExtensions_Message_System_String_System_String_
+  commentId: M:P42.Utils.DebugExtensions.Message(System.String,System.String)
+  fullName: P42.Utils.DebugExtensions.Message(System.String, System.String)
+  nameWithType: DebugExtensions.Message(String, String)
+- uid: P42.Utils.DebugExtensions.Message*
   name: Message
-  href: api/P42.Utils.Debug.html#P42_Utils_Debug_Message_
-  commentId: Overload:P42.Utils.Debug.Message
+  href: api/P42.Utils.DebugExtensions.html#P42_Utils_DebugExtensions_Message_
+  commentId: Overload:P42.Utils.DebugExtensions.Message
   isSpec: "True"
-  fullName: P42.Utils.Debug.Message
-  nameWithType: Debug.Message
-- uid: P42.Utils.Debug.RemoveFromCensus(System.Object)
+  fullName: P42.Utils.DebugExtensions.Message
+  nameWithType: DebugExtensions.Message
+- uid: P42.Utils.DebugExtensions.RemoveFromCensus(System.Object)
   name: RemoveFromCensus(Object)
-  href: api/P42.Utils.Debug.html#P42_Utils_Debug_RemoveFromCensus_System_Object_
-  commentId: M:P42.Utils.Debug.RemoveFromCensus(System.Object)
-  fullName: P42.Utils.Debug.RemoveFromCensus(System.Object)
-  nameWithType: Debug.RemoveFromCensus(Object)
-- uid: P42.Utils.Debug.RemoveFromCensus*
+  href: api/P42.Utils.DebugExtensions.html#P42_Utils_DebugExtensions_RemoveFromCensus_System_Object_
+  commentId: M:P42.Utils.DebugExtensions.RemoveFromCensus(System.Object)
+  fullName: P42.Utils.DebugExtensions.RemoveFromCensus(System.Object)
+  nameWithType: DebugExtensions.RemoveFromCensus(Object)
+- uid: P42.Utils.DebugExtensions.RemoveFromCensus*
   name: RemoveFromCensus
-  href: api/P42.Utils.Debug.html#P42_Utils_Debug_RemoveFromCensus_
-  commentId: Overload:P42.Utils.Debug.RemoveFromCensus
+  href: api/P42.Utils.DebugExtensions.html#P42_Utils_DebugExtensions_RemoveFromCensus_
+  commentId: Overload:P42.Utils.DebugExtensions.RemoveFromCensus
   isSpec: "True"
-  fullName: P42.Utils.Debug.RemoveFromCensus
-  nameWithType: Debug.RemoveFromCensus
+  fullName: P42.Utils.DebugExtensions.RemoveFromCensus
+  nameWithType: DebugExtensions.RemoveFromCensus
 - uid: P42.Utils.DictionaryExtensions
   name: DictionaryExtensions
   href: api/P42.Utils.DictionaryExtensions.html
