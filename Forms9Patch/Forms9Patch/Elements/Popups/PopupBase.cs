@@ -1,4 +1,4 @@
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -528,7 +528,7 @@ namespace Forms9Patch
         internal PopupBase(VisualElement target = null, TimeSpan popAfter = default)
         {
 
-            P42.Utils.Debug.AddToCensus(this);
+            P42.Utils.DebugExtensions.AddToCensus(this);
 
             HorizontalOptions = LayoutOptions.Center;
             VerticalOptions = LayoutOptions.Center;
@@ -588,7 +588,7 @@ namespace Forms9Patch
                 catch (Exception) { }
 #pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
 
-                P42.Utils.Debug.RemoveFromCensus(this);
+                P42.Utils.DebugExtensions.RemoveFromCensus(this);
             }
         }
 

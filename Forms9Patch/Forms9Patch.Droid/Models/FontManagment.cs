@@ -31,14 +31,22 @@ namespace Forms9Patch.Droid
             if (string.IsNullOrWhiteSpace(fontFamily))
                 return null;
             var fonts = FontFamiliesAndPaths();
+
+            var candidates = new Dictionary<string, string>();
             foreach (var kvp in fonts)
             {
-                if (kvp.Key.ToLower() == fontFamily.ToLower())
+                var fs = kvp.Key.Split("#");
+                var family = fs[0];
+                if (family.ToLower() == fontFamily.ToLower())
                 {
-                    Typeface typeface = Typeface.CreateFromFile(kvp.Value);
-                    return typeface;
+                    if (fs.Length > 1)
+                        candidates.Add(fs[1], kvp.Value);
+                    else
+                        return Typeface.CreateFromFile(kvp.Value);
                 }
             }
+            if (candidates.Values.FirstOrDefault() is string path)
+               return Typeface.CreateFromFile(path);
             return null;
         }
 
@@ -158,6 +166,7 @@ namespace Forms9Patch.Droid
             }
         }
 
+
         public static Dictionary<string,string> FontFamiliesAndPaths()
         {
             var loadedFonts = new Dictionary<string, string>();
@@ -168,12 +177,27 @@ namespace Forms9Patch.Droid
         }
 
         public List<string> FontFamilies()
+        {
+            var result = new List<string>();
+            foreach (var key in FontFamiliesAndPaths().Keys)
+            {
+                if (!string.IsNullOrWhiteSpace(key))
+                {
+                    var family = key.Split("#")[0];
+                    if (!result.Contains(family))
+                        result.Add(family);
+                }
+            }
+            return result;
+        }
+        /*
             => FontFamiliesAndPaths().Keys.OrderBy((arg) =>
             {
                 if (arg.ToLower().Contains(".ttf") || arg.ToLower().Contains(".otf"))
                     return " " + arg;
                 return arg;
             }).ToList();
+        */
 
         static Dictionary<string, string> _systemFontFiles;
         public static Dictionary<string, string> SystemFontFiles
@@ -344,19 +368,23 @@ namespace Forms9Patch.Droid
 
                     foreach (var file in files)
                     {
-                        if (analyzer.FontAttributes(file.AbsolutePath) == "Regular")
+                        if (analyzer.FontFamiliesAndStyle(file.AbsolutePath) is List<string> fontFamilies)
                         {
-                            var fontFamilys = analyzer.FontFamily(file.AbsolutePath);
-                            foreach (var fontFamily in fontFamilys)
-                                if (fontFamily != null && !results.ContainsKey(fontFamily))
-                                    results.Add(fontFamily, file.AbsolutePath);
+                            foreach (var fontFamily in fontFamilies)
+                            {
+                                if (!string.IsNullOrWhiteSpace(fontFamily))
+                                    results[fontFamily] = file.AbsolutePath;
+                            }
                         }
                     }
                 }
             }
             return results;
         }
+
     }
+
+
 
     class TTFAnalyzer
     {
@@ -402,8 +430,10 @@ namespace Forms9Patch.Droid
             return b1 << 8 | b2;
         }
 
-        public List<string> FontFamily(string fontFilename)
+        public List<string> FontFamiliesAndStyle(string fontFilename)
         {
+            string family = null;
+            string style = null;
             try
             {
                 // Parses the TTF file format.
@@ -489,20 +519,32 @@ namespace Forms9Patch.Droid
                                     System.Buffer.BlockCopy(table, name_offset, chars, 0, name_length);
                                     //var str = new string(chars);
                                     var str = System.Text.Encoding.Default.GetString(chars);
-                                    if (nameid_value == 1)
+                                    if (nameid_value == 1) // Family
                                     {
-                                        familyNames.Add(str);
-                                        System.Diagnostics.Debug.WriteLine(GetType() + ".FAMILY: " + str);
+                                        //familyNames.Add(str);
+                                        family = str;
+                                        //System.Diagnostics.Debug.WriteLine(GetType() + ".FAMILY: " + str);
                                     }
-
-                                    //return str;
-                                    if (!string.IsNullOrWhiteSpace(str) && !familyNames.Contains(str))
+                                    else if (nameid_value == 2) // Style
                                     {
-
+                                        //System.Diagnostics.Debug.WriteLine(GetType() + ".STYLE: " + str);
+                                        style = str;
+                                        if (!string.IsNullOrWhiteSpace(family))
+                                            familyNames.Add(family + "#" + style);
+                                    }
+                                    else if (!string.IsNullOrWhiteSpace(str))
+                                    {
                                         if (nameid_value == 18 || nameid_value == 16 || nameid_value == 4 || nameid_value == 6)
-                                            familyNames.Add(str);
-                                        System.Diagnostics.Debug.WriteLine(GetType() + ".\t\t ["+nameid_value+"]: "+str);
+                                        {
+                                            //familyNames.Add(str);
+                                            family = str;
+                                            if (string.IsNullOrWhiteSpace(style))
+                                                familyNames.Add(family);
+                                            else
+                                                familyNames.Add(family + "#" + style);
+                                        }
                                     }
+                                    System.Diagnostics.Debug.WriteLine(GetType() + ".\t\t [" + nameid_value + "]: " + str);
                                 }
                             }
                         }
@@ -529,7 +571,8 @@ namespace Forms9Patch.Droid
             }
         }
 
-        public string FontAttributes(string fontFilename)
+
+        public string FontAttributes_DELETEME(string fontFilename)
         {
             try
             {
@@ -571,7 +614,7 @@ namespace Forms9Patch.Droid
                         m_file.Seek(offset);
                         Read(table);
 
-                        // This is also a table. See http://developer.apple.com/fonts/ttrefman/rm06/Chap6name.html
+                        // This is also a table. See https://developer.apple.com/fonts/TrueType-Reference-Manual/RM06/Chap6name.html (was http://developer.apple.com/fonts/ttrefman/rm06/Chap6name). 
                         // According to Table 36, the total number of table records is stored in the second word, at the offset 2.
                         // Getting the count and string offset - remembering it's big endian.
                         int count = GetWord(table, 2);

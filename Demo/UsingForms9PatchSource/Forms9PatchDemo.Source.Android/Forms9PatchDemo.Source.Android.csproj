@@ -173,6 +173,8 @@
     <AndroidAsset Include="Assets\TextFile1.txt" />
     <AndroidAsset Include="Assets\Brandon_reg.ttf" />
     <AndroidAsset Include="Assets\Fonts\airstrike.ttf" />
+    <AndroidAsset Include="Assets\OpenSansBold.ttf" />
+    <AndroidAsset Include="Assets\Brandon_bld.ttf" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\TextFile2.txt" />

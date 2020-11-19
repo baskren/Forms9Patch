@@ -31,7 +31,7 @@ namespace Forms9Patch.UWP
 		/// </summary>
 		public KeyboardService()
 		{
-			P42.Utils.Debug.AddToCensus(this);
+			P42.Utils.DebugExtensions.AddToCensus(this);
 
 			InputPane.GetForCurrentView().Hiding += KeyboardService_Hiding;
 			InputPane.GetForCurrentView().Showing += KeyboardService_Showing;
@@ -101,7 +101,7 @@ namespace Forms9Patch.UWP
 					_displayInformation = null;
 				}
 
-				P42.Utils.Debug.AddToCensus(this);
+				P42.Utils.DebugExtensions.AddToCensus(this);
 
 			}
 		}

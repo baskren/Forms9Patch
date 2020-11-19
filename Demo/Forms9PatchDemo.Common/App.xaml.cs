@@ -10,7 +10,8 @@ namespace Forms9PatchDemo
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new HomePage());
+            MainPage = new NavigationPage(new AndroidCustomFontPage());
+            //MainPage = new NavigationPage(new HomePage());
             //MainPage = new VariableWidthButton();
         }
 

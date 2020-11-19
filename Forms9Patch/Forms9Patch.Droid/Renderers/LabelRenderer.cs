@@ -115,11 +115,11 @@ namespace Forms9Patch.Droid
                 || Element == null
                 || _disposed)
             {
-                //P42.Utils.Debug.Message(Element, "Size.Zero");
+                //P42.Utils.DebugExtensions.Message(Element, "Size.Zero");
                 return Size.Zero;
             }
 
-            //P42.Utils.Debug.Message(Element, "ENTER: widthConstraint:" + widthConstraint + " fontSize:" + fontSize);
+            //P42.Utils.DebugExtensions.Message(Element, "ENTER: widthConstraint:" + widthConstraint + " fontSize:" + fontSize);
             var task = Task.Run(async () =>
             {
                 await Task.Delay(5).ConfigureAwait(false);
@@ -136,7 +136,7 @@ namespace Forms9Patch.Droid
                 return new Size(_lastMeasureResult.Value.Request.Width / displayScale, _lastMeasureResult.Value.Request.Height / displayScale);
             });
             task.Wait();
-            //P42.Utils.Debug.Message(Element, "EXIT result: " + task.Result);
+            //P42.Utils.DebugExtensions.Message(Element, "EXIT result: " + task.Result);
             return task.Result;
         }
 
@@ -151,12 +151,12 @@ namespace Forms9Patch.Droid
                 || height < 0
                 )
             {
-                //P42.Utils.Debug.Message(Element, "Size.Zero");
+                //P42.Utils.DebugExtensions.Message(Element, "Size.Zero");
                 return new SizeRequest(Size.Zero);
             }
 
 
-            //P42.Utils.Debug.Message(Element, "ENTER: width:" + width + " height:" + height);
+            //P42.Utils.DebugExtensions.Message(Element, "ENTER: width:" + width + " height:" + height);
             var displayScale = (float)Resources.DisplayMetrics.DensityDpi / (float)Android.Util.DisplayMetricsDensity.Default;
             if (double.IsInfinity(width) || width > MaxDim)
                 width = MaxDim;
@@ -168,7 +168,7 @@ namespace Forms9Patch.Droid
 
             // putting the below on a background thread seemed to slow things down.
             _lastDrawResult = InternalLayout(Control, _currentDrawState);
-            //P42.Utils.Debug.Message(Element, "EXIT result: " + _lastDrawResult);
+            //P42.Utils.DebugExtensions.Message(Element, "EXIT result: " + _lastDrawResult);
             return _lastDrawResult.Value;
         }
 
@@ -201,7 +201,7 @@ namespace Forms9Patch.Droid
                 || Element == null
                 || _disposed)
             {
-                //P42.Utils.Debug.Message(Element, "Size.Zero");
+                //P42.Utils.DebugExtensions.Message(Element, "Size.Zero");
                 return new SizeRequest(Size.Zero);
             }
 
@@ -213,10 +213,10 @@ namespace Forms9Patch.Droid
                 height = MaxDim;
             if (width <= 0 || height <= 0)
             {
-                //P42.Utils.Debug.Message(Element, "Size.Zero");
+                //P42.Utils.DebugExtensions.Message(Element, "Size.Zero");
                 return new SizeRequest(Size.Zero);
             }
-            //P42.Utils.Debug.Message(Element, "ENTER: width:" + width + " height:" + height);
+            //P42.Utils.DebugExtensions.Message(Element, "ENTER: width:" + width + " height:" + height);
 
             _currentMeasureState = new TextControlState(_currentDrawState)
             {
@@ -233,7 +233,7 @@ namespace Forms9Patch.Droid
                 && _lastMeasureResult.Value.Request.Height == _currentMeasureState.AvailHeight
                 )
             {
-                //P42.Utils.Debug.Message(Element, "EXIT A _lastMeasureResult.Value: " + _lastMeasureResult.Value);
+                //P42.Utils.DebugExtensions.Message(Element, "EXIT A _lastMeasureResult.Value: " + _lastMeasureResult.Value);
                 return _lastMeasureResult.Value;
             }
 
@@ -245,16 +245,16 @@ namespace Forms9Patch.Droid
                 && _lastDrawResult.Value.Request.Width == _currentMeasureState.AvailWidth
                 && _lastDrawResult.Value.Request.Height == _currentMeasureState.AvailWidth)
             {
-                //P42.Utils.Debug.Message(Element, "EXIT _lastDrawResult.Value: " + _lastDrawResult.Value);
+                //P42.Utils.DebugExtensions.Message(Element, "EXIT _lastDrawResult.Value: " + _lastDrawResult.Value);
                 return _lastDrawResult.Value;
             }
 
-            //P42.Utils.Debug.Message(Element, _currentMeasureState.ToString());
+            //P42.Utils.DebugExtensions.Message(Element, _currentMeasureState.ToString());
             _measureControl = _measureControl ?? new F9PTextView(Settings.Context);
             // putting the below on a background thread appears to slow things down
             _lastMeasureResult = InternalLayout(_measureControl, _currentMeasureState);
             _lastMeasureState = new TextControlState(_currentMeasureState);
-            //P42.Utils.Debug.Message(Element, "EXIT _lastMeasureResult.Value: " + _lastMeasureResult.Value);
+            //P42.Utils.DebugExtensions.Message(Element, "EXIT _lastMeasureResult.Value: " + _lastMeasureResult.Value);
             return _lastMeasureResult.Value;
         }
 

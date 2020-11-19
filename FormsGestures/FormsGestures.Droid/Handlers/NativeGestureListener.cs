@@ -1,4 +1,4 @@
-using Android.Views;
+﻿using Android.Views;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -127,7 +127,7 @@ namespace FormsGestures.Droid
         readonly int _id;
         internal NativeGestureListener(Android.Views.View view, Xamarin.Forms.Element element)
         {
-            P42.Utils.Debug.AddToCensus(this);
+            P42.Utils.DebugExtensions.AddToCensus(this);
 
             _id = _instances++;
             _view = view;
@@ -149,7 +149,7 @@ namespace FormsGestures.Droid
                 _tappedTimerUpMotionEvent?.Dispose();
                 LongPressTimer?.Dispose();
                 TappedTimer?.Dispose();
-                P42.Utils.Debug.RemoveFromCensus(this);
+                P42.Utils.DebugExtensions.RemoveFromCensus(this);
             }
             base.Dispose(disposing);
         }

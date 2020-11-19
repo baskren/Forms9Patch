@@ -145,7 +145,7 @@ namespace FormsGestures.UWP
 		#region Construction / Disposal
 		public NativeGestureHandler()
 		{
-			P42.Utils.Debug.AddToCensus(this);
+			P42.Utils.DebugExtensions.AddToCensus(this);
 		}
 
 		bool _disposed;
@@ -168,7 +168,7 @@ namespace FormsGestures.UWP
 				}
 				DisconnectFrameworkEvents();
 				_listeners = null;
-				P42.Utils.Debug.RemoveFromCensus(this);
+				P42.Utils.DebugExtensions.RemoveFromCensus(this);
 			}
 		}
 		#endregion

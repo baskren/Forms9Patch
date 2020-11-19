@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using Xamarin.Forms;
 using System.Collections.Generic;
@@ -543,7 +543,7 @@ namespace Forms9Patch
 
         void Init()
         {
-            P42.Utils.Debug.AddToCensus(this);
+            P42.Utils.DebugExtensions.AddToCensus(this);
 
             Padding = 0;
             Margin = 0;
@@ -632,7 +632,7 @@ namespace Forms9Patch
 
                     _listView.Dispose();
 
-                    P42.Utils.Debug.RemoveFromCensus(this);
+                    P42.Utils.DebugExtensions.RemoveFromCensus(this);
                 }
                 _disposed = true;
             }

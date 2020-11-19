@@ -23,7 +23,7 @@ namespace FormsGestures.Droid
 
         internal OnTouchListener(NativeGestureHandler nativeGestureHandler)
         {
-            P42.Utils.Debug.AddToCensus(this);
+            P42.Utils.DebugExtensions.AddToCensus(this);
 
             _nativeGestureHandler = nativeGestureHandler;
             _nativeListener = new NativeGestureListener(_nativeGestureHandler.Renderer.View, _nativeGestureHandler.Element);
@@ -39,7 +39,7 @@ namespace FormsGestures.Droid
 
         public bool OnTouch(Android.Views.View v, MotionEvent e)
         {
-            //P42.Utils.Debug.Message("ENTER Action[" + e.Action + "] [" + e.EventTime + "]");
+            //P42.Utils.DebugExtensions.Message("ENTER Action[" + e.Action + "] [" + e.EventTime + "]");
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " e:" + e.Action + " Element:[" + _nativeGestureHandler.Element.Id + "] x:[" + e.RawX + "," + e.GetX() + "," + e.GetAxisValue(Axis.X) + "] y:[" + e.RawY + "," + e.GetY() + "," + e.GetAxisValue(Axis.Y) + "] count:" + e.PointerCount);
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " e:" + e.Action + " Element:[" + _nativeGestureHandler.Element.Id + "] x:[" + e.RawX + "," + e.GetX() + "," + e.GetAxisValue(Axis.X) + "] y:[" + e.RawY + "," + e.GetY() + "," + e.GetAxisValue(Axis.Y) + "] count:" + e.PointerCount);
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " e:" + e.Action + " " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture));
@@ -122,7 +122,7 @@ namespace FormsGestures.Droid
 
             }
             //System.Diagnostics.Debug.WriteLine(GetType() + "\t _lastEventHandled=[" + _lastEventHandled + "]");
-            //P42.Utils.Debug.Message("EXIT [" + null + "]");
+            //P42.Utils.DebugExtensions.Message("EXIT [" + null + "]");
             //_lastEventTime = e.EventTime;
             return _lastEventHandled;  // we want to be sure we get the updates to this element's events
         }
@@ -222,7 +222,7 @@ namespace FormsGestures.Droid
                 //_nativeGestureHandler?.Dispose();
                 _nativeGestureHandler = null;
 
-                P42.Utils.Debug.RemoveFromCensus(this);
+                P42.Utils.DebugExtensions.RemoveFromCensus(this);
             }
             base.Dispose(disposing);
 

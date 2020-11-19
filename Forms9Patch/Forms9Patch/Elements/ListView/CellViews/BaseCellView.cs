@@ -222,7 +222,7 @@ namespace Forms9Patch
         /// </summary>
         public BaseCellView()
         {
-            P42.Utils.Debug.AddToCensus(this);
+            P42.Utils.DebugExtensions.AddToCensus(this);
 
             InstanceId = _instances++;
             Padding = 0; // new Thickness(0,1,0,1);
@@ -316,7 +316,7 @@ namespace Forms9Patch
                 _swipeFrame3.Dispose();
                 _swipePopupStackLayout.Dispose();
 
-                P42.Utils.Debug.RemoveFromCensus(this);
+                P42.Utils.DebugExtensions.RemoveFromCensus(this);
 
             }
         }

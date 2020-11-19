@@ -14,7 +14,6 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
   </PropertyGroup>
@@ -104,7 +103,7 @@
       <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\font\font.csproj">
-      <Project>{FDD9DBE3-BBD0-48A4-BE5A-729CA69D1E78}</Project>
+      <Project>{4A4F538F-497B-4C5D-A2C7-08B4576024FF}</Project>
       <Name>font</Name>
     </ProjectReference>
   </ItemGroup>

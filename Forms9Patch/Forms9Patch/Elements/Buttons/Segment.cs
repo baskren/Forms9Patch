@@ -355,7 +355,7 @@ namespace Forms9Patch
         /// </summary>
         public Segment()
         {
-            P42.Utils.Debug.AddToCensus(this);
+            P42.Utils.DebugExtensions.AddToCensus(this);
 
             _button = new SegmentButton();
             _button.PropertyChanged += OnButtonPropertyChanged;
@@ -443,7 +443,7 @@ namespace Forms9Patch
                 IconImage?.Dispose();
                 IconImage = null;
 
-                P42.Utils.Debug.RemoveFromCensus(this);
+                P42.Utils.DebugExtensions.RemoveFromCensus(this);
             }
         }
 

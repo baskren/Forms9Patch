@@ -21,7 +21,7 @@ namespace Forms9PatchDemo
 
         public WordCroppedDemo()
         {
-            P42.Utils.Debug.IsMessagesEnabled = true;
+            P42.Utils.DebugExtensions.IsMessagesEnabled = true;
             InitializeComponent();
 
             ChiStrLabel.Text = longStr_Chi;

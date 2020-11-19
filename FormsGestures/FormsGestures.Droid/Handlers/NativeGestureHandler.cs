@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Android.Views;
@@ -125,7 +125,7 @@ namespace FormsGestures.Droid
         #region Constructor / Disposer
         NativeGestureHandler(VisualElement element)
         {
-            P42.Utils.Debug.AddToCensus(this);
+            P42.Utils.DebugExtensions.AddToCensus(this);
 
             _id = instances++;
             Element = element;
@@ -147,7 +147,7 @@ namespace FormsGestures.Droid
                 _disposed = true;
                 Deactivate();
 
-                P42.Utils.Debug.RemoveFromCensus(this);
+                P42.Utils.DebugExtensions.RemoveFromCensus(this);
             }
         }
         #endregion

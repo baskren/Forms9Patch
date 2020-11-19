@@ -59,7 +59,7 @@ namespace Forms9Patch
         /// </summary>
         protected F9PFormattedString()
         {
-            //P42.Utils.Debug.AddToCensus(this);
+            //P42.Utils.DebugExtensions.AddToCensus(this);
             Text = "";
             _spans = new ObservableCollection<Span>();
             _spans.CollectionChanged += OnCollectionChanged;
@@ -72,14 +72,14 @@ namespace Forms9Patch
         /// <param name="s">S.</param>
         protected F9PFormattedString(string s) : this()
         {
-            //P42.Utils.Debug.AddToCensus(this);
+            //P42.Utils.DebugExtensions.AddToCensus(this);
             Text = s;
         }
 
 
         public F9PFormattedString(F9PFormattedString other)
         {
-            //P42.Utils.Debug.AddToCensus(this);
+            //P42.Utils.DebugExtensions.AddToCensus(this);
             Text = other.Text;
             if (other._spans != null && other._spans.Count > 0)
             {
@@ -100,7 +100,7 @@ namespace Forms9Patch
                 _spans.Clear();
                 //foreach (var span in spans)
                 //    span.Dispose();
-                //P42.Utils.Debug.RemoveFromCensus(this);
+                //P42.Utils.DebugExtensions.RemoveFromCensus(this);
             }
         }
 

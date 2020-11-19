@@ -86,7 +86,7 @@ namespace Forms9Patch
         /// <param name="end">End.</param>
         protected Span(int start, int end)
         {
-            //P42.Utils.Debug.AddToCensus(this);
+            //P42.Utils.DebugExtensions.AddToCensus(this);
 
             _start = start;
             _end = end;
@@ -100,7 +100,7 @@ namespace Forms9Patch
             {
                 _disposed = true;
                 PropertyChanged = null;
-                P42.Utils.Debug.RemoveFromCensus(this);
+                P42.Utils.DebugExtensions.RemoveFromCensus(this);
             }
         }
 

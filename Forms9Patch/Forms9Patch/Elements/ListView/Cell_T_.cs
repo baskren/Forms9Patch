@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -72,7 +72,7 @@ namespace Forms9Patch
         /// </summary>
         public Cell()
         {
-            P42.Utils.Debug.AddToCensus(this);
+            P42.Utils.DebugExtensions.AddToCensus(this);
 
             InstanceId = _instances++;
             View = BaseCellView;
@@ -89,7 +89,7 @@ namespace Forms9Patch
                 _disposed = true;
                 BaseCellView.Dispose();
 
-                P42.Utils.Debug.RemoveFromCensus(this);
+                P42.Utils.DebugExtensions.RemoveFromCensus(this);
 
             }
         }

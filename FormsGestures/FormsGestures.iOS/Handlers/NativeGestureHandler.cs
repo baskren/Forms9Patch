@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -86,7 +86,7 @@ namespace FormsGestures.iOS
 
         NativeGestureHandler(VisualElement element)
         {
-            P42.Utils.Debug.AddToCensus(this);
+            P42.Utils.DebugExtensions.AddToCensus(this);
             _element = element;
             _element.Behaviors.Add(this);
         }
@@ -121,7 +121,7 @@ namespace FormsGestures.iOS
                         listener.PropertyChanged -= OnListenerPropertyChanged;
                     _listeners = null;
                 }
-                P42.Utils.Debug.RemoveFromCensus(this);
+                P42.Utils.DebugExtensions.RemoveFromCensus(this);
             }
         }
 

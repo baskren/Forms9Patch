@@ -23,7 +23,7 @@ namespace Forms9Patch.Droid
         public static Android.Text.StaticLayout StaticLayout(ICharSequence charSequence, Android.Text.TextPaint paint, int width, Android.Text.Layout.Alignment align, float spacingmult, float spacingadd, bool includepad)
         {
             var source = charSequence ?? new Java.Lang.String("");
-            //P42.Utils.Debug.Message(source.ToString(), "ENTER");
+            //P42.Utils.DebugExtensions.Message(source.ToString(), "ENTER");
             if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.M)
             {
                 var builder = Android.Text.StaticLayout.Builder.Obtain(source, 0, source.Length(), paint, width).SetAlignment(align).SetLineSpacing(spacingadd, spacingmult).SetIncludePad(includepad);
@@ -32,7 +32,7 @@ namespace Forms9Patch.Droid
                     builder.SetUseLineSpacingFromFallbacks(true);
                 }
                 var layout = builder.Build();
-                //P42.Utils.Debug.Message(source.ToString(), "EXIT");
+                //P42.Utils.DebugExtensions.Message(source.ToString(), "EXIT");
                 return layout;
             }
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -55,7 +55,7 @@ namespace Forms9Patch.Droid
         public static Android.Text.StaticLayout StaticLayout(string charSequence, Android.Text.TextPaint paint, int width, Android.Text.Layout.Alignment align, float spacingmult, float spacingadd, bool includepad)
         {
             var source = charSequence ?? "";
-            //P42.Utils.Debug.Message(source, "ENTER");
+            //P42.Utils.DebugExtensions.Message(source, "ENTER");
             if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.M)
             {
                 var builder = Android.Text.StaticLayout.Builder.Obtain(source, 0, source.Length, paint, width).SetAlignment(align).SetLineSpacing(spacingadd, spacingmult).SetIncludePad(includepad);
@@ -64,7 +64,7 @@ namespace Forms9Patch.Droid
                     builder.SetUseLineSpacingFromFallbacks(true);
                 }
                 var layout = builder.Build();
-                //P42.Utils.Debug.Message(source, "EXIT");
+                //P42.Utils.DebugExtensions.Message(source, "EXIT");
                 return layout;
             }
             return new Android.Text.StaticLayout(source, paint, width, align, spacingmult, spacingadd, includepad);

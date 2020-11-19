@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -776,7 +776,7 @@ namespace Forms9Patch
         static readonly BindableProperty _buttonLengthProperty = BindableProperty.Create("ButtonLength", typeof(double), typeof(TargetedMenu), -1.0);
         double ButtonLength(Button button)
         {
-            //P42.Utils.Debug.Message(button, "ENTER");
+            //P42.Utils.DebugExtensions.Message(button, "ENTER");
             //if (button.GetValue(_buttonLengthProperty) is double length && length > 11)
             //    return length;
             var size = button.Measure(double.PositiveInfinity, double.PositiveInfinity, MeasureFlags.IncludeMargins);
@@ -786,7 +786,7 @@ namespace Forms9Patch
             //if (result > 11)
             //    button.SetValue(_buttonLengthProperty, result);
             //System.Diagnostics.Debug.WriteLine("TargetedMenu" + P42.Utils.ReflectionExtensions.CallerString() + ": Length: " + result);
-            //P42.Utils.Debug.Message(button, "EXIT result:" + result);
+            //P42.Utils.DebugExtensions.Message(button, "EXIT result:" + result);
             return result;
         }
 

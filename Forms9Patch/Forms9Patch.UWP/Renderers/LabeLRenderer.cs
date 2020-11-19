@@ -14,7 +14,7 @@ namespace Forms9Patch.UWP
     {
         #region Debug support
         bool DebugCondition
-            => P42.Utils.Debug.ConditionFunc?.Invoke(Element) ?? false;
+            => P42.Utils.DebugExtensions.ConditionFunc?.Invoke(Element) ?? false;
         #endregion
 
 
@@ -427,7 +427,7 @@ namespace Forms9Patch.UWP
         {
             if (Element is Forms9Patch.Label element && Control?.Copy() is TextBlock control)
             {
-                //P42.Utils.Debug.Message(element,"ENTER widthConstraint=[" + widthConstraint + "] fontSize=[" + fontSize + "]");
+                //P42.Utils.DebugExtensions.Message(element,"ENTER widthConstraint=[" + widthConstraint + "] fontSize=[" + fontSize + "]");
 
                 control.SetAndFormatText(element, fontSize);
                 control.Measure(new Windows.Foundation.Size(widthConstraint, double.PositiveInfinity));
@@ -435,7 +435,7 @@ namespace Forms9Patch.UWP
                 var size = new Windows.Foundation.Size(control.DesiredSize.Width, control.DesiredSize.Height);
 
                 var result = new Size(size.Width, size.Height);
-                //P42.Utils.Debug.Message(element,"EXIT result=[" + result + "]");
+                //P42.Utils.DebugExtensions.Message(element,"EXIT result=[" + result + "]");
                 return result;
             }
             return new Size(10, 10);

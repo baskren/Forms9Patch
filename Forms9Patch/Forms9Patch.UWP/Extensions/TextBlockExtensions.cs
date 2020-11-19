@@ -28,7 +28,7 @@ namespace Forms9Patch.UWP
 
         public static void UpdateLineBreakMode(this TextBlock textBlock, Forms9Patch.Label label)
         {
-            //P42.Utils.Debug.Message(Element,"ENTER");
+            //P42.Utils.DebugExtensions.Message(Element,"ENTER");
             //_perfectSizeValid = false;
 
             if (textBlock != null && label != null)
@@ -65,7 +65,7 @@ namespace Forms9Patch.UWP
                         throw new ArgumentOutOfRangeException();
                 }
             }
-            //P42.Utils.Debug.Message(Element,"EXIT");
+            //P42.Utils.DebugExtensions.Message(Element,"EXIT");
         }
 
 

@@ -9,6 +9,10 @@
                     x:Key="CustomFont">
             <On Platform="Android"
                 Value="Brandon_reg.ttf#Brandon Grotesque" />
+            <!--
+            <On Platform="Android"
+                Value="OpenSansBold.ttf#Open Sans" />
+            -->
             <On Platform="iOS"
                 Value="BlueEyesPersonalUse" />
         </OnPlatform>

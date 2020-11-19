@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
@@ -542,7 +542,7 @@ namespace Forms9Patch
         /// </summary>
         public Image()
         {
-            P42.Utils.Debug.AddToCensus(this);
+            P42.Utils.DebugExtensions.AddToCensus(this);
 
             InstanceId = _instances++;
             if (Device.RuntimePlatform != Device.iOS)
@@ -589,7 +589,7 @@ namespace Forms9Patch
         /// <param name="image">Image.</param>
         public Image(Xamarin.Forms.Image image)
         {
-            P42.Utils.Debug.AddToCensus(this);
+            P42.Utils.DebugExtensions.AddToCensus(this);
 
             InstanceId = _instances++;
             Fill = image.Aspect.ToF9pFill();
@@ -625,7 +625,7 @@ namespace Forms9Patch
         /// <param name="image"></param>
         public Image(Image image)
         {
-            P42.Utils.Debug.AddToCensus(this);
+            P42.Utils.DebugExtensions.AddToCensus(this);
 
             InstanceId = _instances++;
             if (image != null)
@@ -685,7 +685,7 @@ namespace Forms9Patch
                 _f9pImageData = null;
                 _sourceRangeLists = null;
 
-                P42.Utils.Debug.RemoveFromCensus(this);
+                P42.Utils.DebugExtensions.RemoveFromCensus(this);
             }
         }
 

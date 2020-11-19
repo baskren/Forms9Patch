@@ -1,4 +1,4 @@
-using Foundation;
+﻿using Foundation;
 using System;
 using System.Linq;
 using UIKit;
@@ -13,7 +13,7 @@ namespace FormsGestures.iOS
 
         internal DownUpGestureRecognizer(Action<DownUpGestureRecognizer, UITouch[]> downAction, Action<DownUpGestureRecognizer, UITouch[]> upAction)
         {
-            P42.Utils.Debug.AddToCensus(this);
+            P42.Utils.DebugExtensions.AddToCensus(this);
             DownAction = downAction;
             UpAction = upAction;
         }
@@ -40,7 +40,7 @@ namespace FormsGestures.iOS
 
         public DownUpGestureRecognizer()
         {
-            P42.Utils.Debug.AddToCensus(this);
+            P42.Utils.DebugExtensions.AddToCensus(this);
         }
 
         bool _disposed;
@@ -51,7 +51,7 @@ namespace FormsGestures.iOS
                 _disposed = true;
                 DownAction = null;
                 UpAction = null;
-                P42.Utils.Debug.RemoveFromCensus(this);
+                P42.Utils.DebugExtensions.RemoveFromCensus(this);
             }
             base.Dispose(disposing);
         }
