@@ -159,7 +159,6 @@ namespace Forms9Patch.iOS
                     return storedUiFont;
             }
 
-
             UIFont bestAttemptFont = null;
             if (UIFont.FamilyNames.Contains(family))
             {
@@ -226,7 +225,7 @@ namespace Forms9Patch.iOS
                 //  an embedded font or a explicitly named system font?
                 bestAttemptFont = EmbeddedFont(family, size, assembly);
 
-                if (bestAttemptFont == null)
+                if (bestAttemptFont == null && !family.StartsWith(".SFUI"))
                     bestAttemptFont = UIFont.FromName(family, size);
             }
 
@@ -252,11 +251,55 @@ namespace Forms9Patch.iOS
                 return bestAttemptFont;
             }
 
-            // fall back to a system font
-            if (bold && italic)
+            UIFontWeight fontWeight = UIFontWeight.Regular;
+            if (family.StartsWith(".SFUI"))
             {
-                UIFont systemFont = UIFont.SystemFontOfSize(size);
-                var descriptor = systemFont.FontDescriptor.CreateWithTraits(UIFontDescriptorSymbolicTraits.Bold | UIFontDescriptorSymbolicTraits.Italic);
+                var parts = family.Split("-");
+                if (parts.Length > 1)
+                {
+                    var weightText = parts[1];
+                    switch (weightText)
+                    {
+                        case nameof(UIFontWeight.Black):
+                            fontWeight = UIFontWeight.Black;
+                            break;
+                        case nameof(UIFontWeight.Bold):
+                            fontWeight = UIFontWeight.Bold;
+                            break;
+                        case nameof(UIFontWeight.Heavy):
+                            fontWeight = UIFontWeight.Heavy;
+                            break;
+                        case nameof(UIFontWeight.Light):
+                            fontWeight = UIFontWeight.Light;
+                            break;
+                        case nameof(UIFontWeight.Medium):
+                            fontWeight = UIFontWeight.Medium;
+                            break;
+                        case nameof(UIFontWeight.Regular):
+                            fontWeight = UIFontWeight.Medium;
+                            break;
+                        case nameof(UIFontWeight.Semibold):
+                            fontWeight = UIFontWeight.Semibold;
+                            break;
+                        case nameof(UIFontWeight.Thin):
+                            fontWeight = UIFontWeight.Thin;
+                            break;
+                        case nameof(UIFontWeight.UltraLight):
+                            fontWeight = UIFontWeight.UltraLight;
+                            break;
+                        default:
+                            fontWeight = UIFontWeight.Regular;
+                            break;
+                    }
+                }
+                // fall back to a system font
+            }
+            // fall back to a system font
+            if (bold && italic || (fontWeight != UIFontWeight.Regular && (bold || italic)) )
+            {
+                UIFont systemFont = UIFont.SystemFontOfSize(size, fontWeight);
+                UIFontDescriptorSymbolicTraits traits = ( bold ? UIFontDescriptorSymbolicTraits.Bold : (UIFontDescriptorSymbolicTraits)0 ) | (italic ? UIFontDescriptorSymbolicTraits.Italic : (UIFontDescriptorSymbolicTraits)0);
+                var descriptor = systemFont.FontDescriptor.CreateWithTraits(traits);
                 bestAttemptFont = UIFont.FromDescriptor(descriptor, size);
             }
             if (bestAttemptFont == null && italic)
@@ -264,7 +307,7 @@ namespace Forms9Patch.iOS
             if (bestAttemptFont == null && bold)
                 bestAttemptFont = UIFont.BoldSystemFontOfSize(size);
             if (bestAttemptFont == null)
-                bestAttemptFont = UIFont.SystemFontOfSize(size);
+                bestAttemptFont = UIFont.SystemFontOfSize(size, fontWeight);
             return bestAttemptFont;
         }
 

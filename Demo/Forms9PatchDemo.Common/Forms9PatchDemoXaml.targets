@@ -122,6 +122,15 @@
 	      <DependentUpon>UserPages\AndroidCustomFontPage.xaml</DependentUpon>
 	      <Link>UserPages\AndroidCustomFontPage.xaml.cs</Link>
 	    </Compile>
+		
+		<EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\UserPages\AppleSystemFont.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>UserPages\AppleSystemFont.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\AppleSystemFont.xaml.cs">
+	      <DependentUpon>UserPages\AppleSystemFont.xaml</DependentUpon>
+	      <Link>UserPages\AppleSystemFont.xaml.cs</Link>
+	    </Compile>
 
 		<EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\UserPages\ButtonCommand.xaml">
 	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

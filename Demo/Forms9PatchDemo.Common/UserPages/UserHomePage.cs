@@ -65,6 +65,13 @@ namespace Forms9PatchDemo
 
                         new TextCell
                         {
+                            Text = "Apple System Font Test",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(Forms9LabelFontTest.MainPage)
+                        },
+
+                        new TextCell
+                        {
                             Text = "Android Asset custom font",
                             Command = navigateCommand,
                             CommandParameter = typeof(Forms9PatchDemo.AndroidCustomFontPage)

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+             x:Class="Forms9LabelFontTest.MainPage">
+  <StackLayout>
+    <Label Text="Normal: ggg"
+           FontFamily=".SFUI"
+           FontSize="40" />
+    <Label Text="Semibold: ggg"
+           FontFamily=".SFUI-Semibold"
+           FontSize="40" />
+    
+    <Forms9Patch:Label FontFamily=".SFUI"
+                       FontSize="40"
+                       Text="Normal: ggg" />
+    <Forms9Patch:Label FontFamily=".SFUI-Semibold"
+                       FontSize="40"
+                       Text="Semibold: ggg" />
+  </StackLayout>
+</ContentPage>
