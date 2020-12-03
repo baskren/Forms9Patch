@@ -171,8 +171,9 @@ namespace Forms9Patch.Droid
         {
             var loadedFonts = new Dictionary<string, string>();
             loadedFonts.AddRange(SystemFontFiles);
-            loadedFonts.AddRange(AssetFontFiles);
-            loadedFonts.AddRange(ResourceFontFiles);
+            loadedFonts.AddRange(AssetFontFiles?.Where(x => !loadedFonts.ContainsKey(x.Key)));
+            loadedFonts.AddRange(ResourceFontFiles?.Where(x => !loadedFonts.ContainsKey(x.Key)));
+
             return loadedFonts;
         }
 
