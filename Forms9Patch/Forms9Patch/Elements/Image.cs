@@ -528,6 +528,22 @@ namespace Forms9Patch
         bool DrawFill => BackgroundColor.A > 0.01;
 
         bool IsSegment => ((IExtendedShape)this).ExtendedElementShape == ExtendedElementShape.SegmentEnd || ((IExtendedShape)this).ExtendedElementShape == ExtendedElementShape.SegmentMid || ((IExtendedShape)this).ExtendedElementShape == ExtendedElementShape.SegmentStart;
+
+        #region FailAction
+        /// <summary>
+        /// Backing store for Image FailAction property
+        /// </summary>
+        public static readonly BindableProperty FailActionProperty = BindableProperty.Create(nameof(FailAction), typeof(FailAction), typeof(Image), FailAction.ShowAlert);
+        /// <summary>
+        /// controls value of Image FailAction property
+        /// </summary>
+        public FailAction FailAction
+        {
+            get => (FailAction)GetValue(FailActionProperty);
+            set => SetValue(FailActionProperty, value);
+        }
+        #endregion
+
         #endregion
 
 
@@ -769,7 +785,7 @@ namespace Forms9Patch
                 if (_xfImageSource != null)
                 {
                     _xfImageSource.PropertyChanged += OnImageSourcePropertyChanged;
-                    _f9pImageData = await _xfImageSource.FetchF9pImageData(this);
+                    _f9pImageData = await _xfImageSource.FetchF9pImageData(this, failAction: FailAction);
                     _sourceRangeLists = _f9pImageData?.RangeLists;
                 }
                 ((IImageController)this)?.SetIsLoading(false);
@@ -783,7 +799,7 @@ namespace Forms9Patch
             {
                 ((IImageController)this)?.SetIsLoading(true);
 
-                _f9pImageData = await _xfImageSource.FetchF9pImageData(this);
+                _f9pImageData = await _xfImageSource.FetchF9pImageData(this, failAction: FailAction);
                 _sourceRangeLists = _f9pImageData?.RangeLists;
                 ((IImageController)this)?.SetIsLoading(false);
                 Invalidate();

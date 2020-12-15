@@ -11,6 +11,7 @@
             <RowDefinition />
             <RowDefinition Height="60" />
             <RowDefinition Height="60" />
+            <RowDefinition Height="60" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <Label Grid.Row="0"
@@ -28,5 +29,19 @@
                     Text="F9P Button"
                     Command="{Binding F9PButtonCommand}"
                     WidthRequest="100"/>
+
+        <Button Grid.Row="3"
+                    Text="XAMARIN Button"
+                    Command="{Binding F9PButtonCommand}"
+                    WidthRequest="100">
+            <Button.ImageSource>
+                 <FontImageSource
+                                FontFamily="Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf"
+                                Glyph=""
+                                Size="44"
+                                Color="Green" />
+            </Button.ImageSource>
+        </Button>
+
     </Grid>
 </ContentPage>

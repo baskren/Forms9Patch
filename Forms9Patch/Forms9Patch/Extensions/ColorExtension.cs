@@ -179,6 +179,9 @@ namespace Forms9Patch
         /// <param name="s">the color string</param>
         public static Color ToColor(this string s)
         {
+            if (string.IsNullOrWhiteSpace(s))
+                return Color.Default;
+            s = s.Trim();
             if (s.ToLower().StartsWith("rgb(", StringComparison.OrdinalIgnoreCase))
             {
                 //var values = s.Substring(4, s.Length - 5).Split(',').Select(int.Parse).ToArray();

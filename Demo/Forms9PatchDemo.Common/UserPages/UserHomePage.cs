@@ -65,6 +65,13 @@ namespace Forms9PatchDemo
 
                         new TextCell
                         {
+                            Text = "LineHeight / color: style",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(LineHeight)
+                        },
+
+                        new TextCell
+                        {
                             Text = "Apple System Font Test",
                             Command = navigateCommand,
                             CommandParameter = typeof(Forms9LabelFontTest.MainPage)

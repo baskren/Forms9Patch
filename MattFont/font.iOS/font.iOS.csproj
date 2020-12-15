@@ -106,7 +106,7 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1269" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1687" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.iOS\Forms9Patch.iOS.csproj">
@@ -148,7 +148,7 @@
       <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\font\font.csproj">
-      <Project>{FDD9DBE3-BBD0-48A4-BE5A-729CA69D1E78}</Project>
+      <Project>{4A4F538F-497B-4C5D-A2C7-08B4576024FF}</Project>
       <Name>font</Name>
     </ProjectReference>
   </ItemGroup>

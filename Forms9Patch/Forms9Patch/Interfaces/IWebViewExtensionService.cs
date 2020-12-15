@@ -13,14 +13,14 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="webView">Web view.</param>
         /// <param name="jobName">Job name.</param>
-        Task PrintAsync(Xamarin.Forms.WebView webView, string jobName);
+        Task PrintAsync(Xamarin.Forms.WebView webView, string jobName, FailAction failAction = FailAction.ShowAlert);
 
         /// <summary>
         /// Print the specified HTML with jobName
         /// </summary>
         /// <param name="html"></param>
         /// <param name="jobName"></param>
-        Task PrintAsync(string html, string jobName);
+        Task PrintAsync(string html, string jobName, FailAction failAction = FailAction.ShowAlert);
 
         /// <summary>
         /// Cans the print.

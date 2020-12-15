@@ -35,12 +35,13 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="webview">Webview.</param>
         /// <param name="jobName">Job name.</param>
-        public static Task PrintAsync(this WebView webview, string jobName)
+        /// <param name="failAction"What to do if there is a failure.</param>
+        public static Task PrintAsync(this WebView webview, string jobName, FailAction failAction = FailAction.ShowAlert)
         {
             _service = _service ?? DependencyService.Get<IPrintService>();
             if (_service == null)
                 throw new NotSupportedException("Cannot get IWebViewService: must not be supported on this platform.");
-            return _service.PrintAsync(webview, jobName ?? ApplicationInfoService.Name);
+            return _service.PrintAsync(webview, jobName ?? ApplicationInfoService.Name, failAction);
         }
 
         /// <summary>
@@ -59,12 +60,13 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="html"></param>
         /// <param name="jobName"></param>
-        public static Task PrintAsync(this string html, string jobName)
+        /// <param name="failAction"What to do if there is a failure.</param>
+        public static Task PrintAsync(this string html, string jobName, FailAction failAction = FailAction.ShowAlert)
         {
             _service = _service ?? DependencyService.Get<IPrintService>();
             if (_service == null)
                 throw new NotSupportedException("Cannot get IWebViewService: must not be supported on this platform.");
-            return _service.PrintAsync(html, jobName ?? ApplicationInfoService.Name);
+            return _service.PrintAsync(html, jobName ?? ApplicationInfoService.Name, failAction);
         }
 
 

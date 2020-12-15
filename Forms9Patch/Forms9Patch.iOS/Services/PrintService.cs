@@ -25,7 +25,7 @@ namespace Forms9Patch.iOS
         /// </summary>
         /// <param name="viewToPrint">View to print.</param>
         /// <param name="jobName">Job name.</param>
-        public async Task PrintAsync(WebView viewToPrint, string jobName)
+        public async Task PrintAsync(WebView viewToPrint, string jobName, FailAction failAction)
         {
             var effectApplied = viewToPrint.Effects.Any(e => e is Forms9Patch.WebViewPrintEffect);
             var actualSource = viewToPrint.ActualSource() as WebViewSource;
@@ -107,12 +107,12 @@ namespace Forms9Patch.iOS
             return UIPrintInteractionController.PrintingAvailable;
         }
 
-        public Task PrintAsync(string html, string jobName)
+        public Task PrintAsync(string html, string jobName, FailAction failAction)
         {
             var webView = new Xamarin.Forms.WebView();
             WebViewPrintEffect.ApplyTo(webView);
             webView.Source = new HtmlWebViewSource{ Html = html };
-            return PrintAsync(webView, jobName);
+            return PrintAsync(webView, jobName, failAction);
         }
     }
 }

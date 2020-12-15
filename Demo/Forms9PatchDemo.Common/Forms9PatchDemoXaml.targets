@@ -171,6 +171,15 @@
 	      <Link>UserPages\ImageSourceHotSwap.xaml.cs</Link>
 	    </Compile>
 
+	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\UserPages\LineHeight.xaml">
+	      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	      <Link>UserPages\LineHeight.xaml</Link>
+	    </EmbeddedResource>
+	    <Compile Include="$(Forms9PatchDemoSourceDir)\UserPages\LineHeight.xaml.cs">
+	      <DependentUpon>UserPages\LineHeight.xaml</DependentUpon>
+	      <Link>UserPages\LineHeight.xaml.cs</Link>
+	    </Compile>
+
 
 
 	    <EmbeddedResource Include="$(Forms9PatchDemoSourceDir)\UserPages\Mfloyd.xaml">

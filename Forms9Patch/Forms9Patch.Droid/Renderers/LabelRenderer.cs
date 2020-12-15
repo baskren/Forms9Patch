@@ -51,6 +51,10 @@ namespace Forms9Patch.Droid
         TextControlState _currentDrawState;
         SizeRequest? _lastDrawResult;
         //TextControlState LastDrawState;
+
+        float _lineSpacingExtraDefault;
+        float _lineSpacingMultiplierDefault;
+
         #endregion
 
 
@@ -279,7 +283,8 @@ namespace Forms9Patch.Droid
                 control.SetSingleLine(false);
                 control.SetMaxLines(int.MaxValue / 256);
                 control.SetIncludeFontPadding(false);
-                control.SetLineSpacing(0, state.LineHeight < 0 ? 1 : state.LineHeight);
+                UpdateLineHeight(control);
+                //control.SetLineSpacing(0, state.LineHeight < 0 ? 1 : state.LineHeight);
                 control.Ellipsize = null;
 
                 double tmpHt = -1;
@@ -420,7 +425,8 @@ namespace Forms9Patch.Droid
                     control.SetSingleLine(true);
 
                 control.IsNativeDrawEnabled = true;
-                control.SetLineSpacing(0, state.LineHeight < 0 ? 1 : state.LineHeight);
+                //control.SetLineSpacing(0, state.LineHeight < 0 ? 1 : state.LineHeight);
+                UpdateLineHeight(control);
                 if (control == Control)
                 {
                     LastDrawState = new TextControlState(state)
@@ -466,8 +472,9 @@ namespace Forms9Patch.Droid
                 SyncFontSize = (float)e.NewElement.SynchronizedFontSize,
                 AvailHeight = MaxDim,
                 AvailWidth = MaxDim,
-                ElementHtmlText = Element?.HtmlText,
-                ElementText = Element?.Text
+                ElementHtmlText = e.NewElement.HtmlText,
+                ElementText = e.NewElement.Text,
+                LineHeight = (float)e.NewElement.LineHeight
             };
 
             if (e.OldElement != null)
@@ -483,6 +490,9 @@ namespace Forms9Patch.Droid
                 if (Control == null)
                 {
                     var view = new F9PTextView(Context);
+                    _lineSpacingMultiplierDefault = view.LineSpacingMultiplier;
+                    _lineSpacingExtraDefault = view.LineSpacingExtra;
+
                     InitControl(view);
                     SetNativeControl(view);
                 }
@@ -526,6 +536,7 @@ namespace Forms9Patch.Droid
                 UpdateAlignment(control);
                 UpdateColor(control);
                 UpdateText(control);
+                UpdateLineHeight(control);
             }
         }
         #endregion
@@ -578,7 +589,7 @@ namespace Forms9Patch.Droid
             }
             else if (e.PropertyName == Label.LineHeightProperty.PropertyName)
             {
-                UpdateLineHeight();
+                UpdateLineHeight(Control);
                 Layout();
             }
             else if (e.PropertyName == Label.AutoFitProperty.PropertyName)
@@ -634,12 +645,15 @@ namespace Forms9Patch.Droid
             }
         }
 
-        void UpdateLineHeight()
+        void UpdateLineHeight(F9PTextView control)
         {
-            if (Element is Forms9Patch.Label element)
+            if (control != null && Element is Forms9Patch.Label element)
             {
                 _currentDrawState.LineHeight = (float)element.LineHeight;
-                Control?.SetLineSpacing(0, _currentDrawState.LineHeight);
+                if (element.LineHeight == -1)
+                    control.SetLineSpacing(_lineSpacingExtraDefault, _lineSpacingMultiplierDefault);
+                else if (element.LineHeight >= 0)
+                    control.SetLineSpacing(0, (float)Element.LineHeight);
             }
         }
 
@@ -655,6 +669,7 @@ namespace Forms9Patch.Droid
             if (Element is Forms9Patch.Label element)
                 _currentDrawState.Lines = element.Lines;
         }
+
 
         void UpdateColor(F9PTextView control)
         {

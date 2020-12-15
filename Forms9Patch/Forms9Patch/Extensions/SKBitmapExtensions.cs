@@ -22,7 +22,7 @@ namespace Forms9Patch
 
 #pragma warning disable 1998
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0068:Use recommended dispose pattern", Justification = "<Pending>")]
-        internal static async Task<F9PImageData> FetchF9pImageData(this Xamarin.Forms.ImageSource imageSource, Image view, CancellationToken cancellationToken = new CancellationToken())
+        internal static async Task<F9PImageData> FetchF9pImageData(this Xamarin.Forms.ImageSource imageSource, Image view, CancellationToken cancellationToken = new CancellationToken(), FailAction failAction = FailAction.ShowAlert)
 #pragma warning restore 1998
         {
             F9PImageData f9pImageData = null;
@@ -58,7 +58,10 @@ namespace Forms9Patch
                             {
                                 if (stream == null)
                                 {
-                                    using (Toast.Create("Cannot find EmbeddedResource", "Cannot find EmbeddedResource with Id of [" + resourceId + "] in Assembly [" + assembly + "]")) { }
+                                    if (failAction == FailAction.ShowAlert)
+                                        using (Toast.Create("Cannot find EmbeddedResource", "Cannot find EmbeddedResource with Id of [" + resourceId + "] in Assembly [" + assembly + "]")) { }
+                                    else if (failAction == FailAction.ThrowException)
+                                        throw new Exception("Cannot find EmbeddedResource with Id of [" + resourceId + "] in Assembly [" + assembly + "]");
                                     return null;
                                 }
                                 f9pImageData = F9PImageData.Create(stream, key);

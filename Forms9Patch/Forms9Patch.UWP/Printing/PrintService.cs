@@ -28,7 +28,7 @@ namespace Forms9Patch.UWP
 			return PrintManager.IsSupported();
 		}
 
-		public Task PrintAsync(Xamarin.Forms.WebView webView, string jobName)
+		public Task PrintAsync(Xamarin.Forms.WebView webView, string jobName, FailAction failAction)
 		{
 			Device.BeginInvokeOnMainThread(async () =>
 			{
@@ -60,8 +60,11 @@ namespace Forms9Patch.UWP
 				}
 				catch (Exception e)
 				{
-					using (Forms9Patch.Toast.Create("Print Service Error", "Could not initiate print WebViewPrintHelper.  Please try again.\n\nException: " + e.Message + "\n\nInnerException: " + e.InnerException)) { }
 					Analytics.TrackException?.Invoke(e, properties);
+					if (failAction == FailAction.ShowAlert)
+						using (Forms9Patch.Toast.Create("Print Service Error", "Could not initiate print WebViewPrintHelper.  Please try again.\n\nException: " + e.Message + "\n\nInnerException: " + e.InnerException)) { }
+					else if (failAction == FailAction.ThrowException)
+						throw e;
 				}
 
 				if (printHelper != null)
@@ -77,15 +80,18 @@ namespace Forms9Patch.UWP
 					}
 					catch (Exception e)
                     {
-						using (Forms9Patch.Toast.Create("Print Service Error", "Could not Show Print UI Async.  Please try again.\n\nException: " + e.Message + "\n\nInnerException: " + e.InnerException)) { }
 						Analytics.TrackException?.Invoke(e, properties);
+						if (failAction == FailAction.ShowAlert)
+							using (Forms9Patch.Toast.Create("Print Service Error", "Could not Show Print UI Async.  Please try again.\n\nException: " + e.Message + "\n\nInnerException: " + e.InnerException)) { }
+						else if (failAction == FailAction.ThrowException)
+							throw e;
 					}
 				}
 			});
 			return Task.CompletedTask;
 		}
 
-		public Task PrintAsync(string html, string jobName)
+		public Task PrintAsync(string html, string jobName, FailAction failAction)
 		{
 			var webView = new Xamarin.Forms.WebView
 			{
@@ -95,7 +101,7 @@ namespace Forms9Patch.UWP
 				}
 			};
 			WebViewPrintEffect.ApplyTo(webView);
-			return PrintAsync(webView, jobName);
+			return PrintAsync(webView, jobName, failAction);
 		}
 	}
 }

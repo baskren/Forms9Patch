@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+             x:Class="Forms9PatchDemo.LineHeight">
+  <StackLayout>
+    <Forms9Patch:Label x:Name="htmlWithSpace" />
+    <Forms9Patch:Label x:Name="htmlWithoutSpace" />
+    
+    <Forms9Patch:Label LineHeight="2"
+                       Text="LineHeight OnAndroid not working LineHeight OnAndroid not working LineHeight OnAndroid not working LineHeight OnAndroid not working LineHeight OnAndroid not working LineHeight OnAndroid not working "
+                       x:Name="lineHeight" />
+  </StackLayout>
+</ContentPage>

@@ -139,7 +139,7 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1179" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1687" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     <PackageReference Include="Forms9Patch" Version="2.4.2" />
   </ItemGroup>
@@ -212,7 +212,7 @@
       <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
     <ProjectReference Include="..\Forms9PatchDemo.NuGet\Forms9PatchDemo.NuGet.csproj">
-      <Project>{69EF951B-37E1-48ED-812F-F9C29F7E2B32}</Project>
+      <Project>{A68E80E0-91B9-46B2-B8BF-3210E38E1432}</Project>
       <Name>Forms9PatchDemo.NuGet</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\FormsGestures\FormsGestures\FormsGestures.csproj">
