@@ -77,7 +77,7 @@
     <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1179" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1687" />
     <!--
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.1.0.1" />
     <PackageReference Include="Xamarin.AndroidX.Migration" Version="1.0.6.1" />
