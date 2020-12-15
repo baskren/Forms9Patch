@@ -78,6 +78,7 @@ namespace Forms9Patch
         /// <param name="mimeItemCollection">MIME item collection.</param>
         /// <param name="mimeType">MIME type.</param>
         /// <param name="path">File Path.</param>
+        /// <param name="failAction">What to do if the method fails</param>
         public static byte[] AddBytesFromFile(this Forms9Patch.MimeItemCollection mimeItemCollection, string mimeType, string path, FailAction failAction = FailAction.ShowAlert)
         {
             if (File.ReadAllBytes(path) is byte[] byteArray && byteArray.Length > 0)

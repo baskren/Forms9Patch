@@ -5951,6 +5951,30 @@ references:
   commentId: F:Forms9Patch.ExtendedElementShape.Square
   fullName: Forms9Patch.ExtendedElementShape.Square
   nameWithType: ExtendedElementShape.Square
+- uid: Forms9Patch.FailAction
+  name: FailAction
+  href: api/Forms9Patch.FailAction.html
+  commentId: T:Forms9Patch.FailAction
+  fullName: Forms9Patch.FailAction
+  nameWithType: FailAction
+- uid: Forms9Patch.FailAction.Ignore
+  name: Ignore
+  href: api/Forms9Patch.FailAction.html#Forms9Patch_FailAction_Ignore
+  commentId: F:Forms9Patch.FailAction.Ignore
+  fullName: Forms9Patch.FailAction.Ignore
+  nameWithType: FailAction.Ignore
+- uid: Forms9Patch.FailAction.ShowAlert
+  name: ShowAlert
+  href: api/Forms9Patch.FailAction.html#Forms9Patch_FailAction_ShowAlert
+  commentId: F:Forms9Patch.FailAction.ShowAlert
+  fullName: Forms9Patch.FailAction.ShowAlert
+  nameWithType: FailAction.ShowAlert
+- uid: Forms9Patch.FailAction.ThrowException
+  name: ThrowException
+  href: api/Forms9Patch.FailAction.html#Forms9Patch_FailAction_ThrowException
+  commentId: F:Forms9Patch.FailAction.ThrowException
+  fullName: Forms9Patch.FailAction.ThrowException
+  nameWithType: FailAction.ThrowException
 - uid: Forms9Patch.Fill
   name: Fill
   href: api/Forms9Patch.Fill.html
@@ -8638,6 +8662,25 @@ references:
   commentId: F:Forms9Patch.Image.ExtendedElementShapeProperty
   fullName: Forms9Patch.Image.ExtendedElementShapeProperty
   nameWithType: Image.ExtendedElementShapeProperty
+- uid: Forms9Patch.Image.FailAction
+  name: FailAction
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image_FailAction
+  commentId: P:Forms9Patch.Image.FailAction
+  fullName: Forms9Patch.Image.FailAction
+  nameWithType: Image.FailAction
+- uid: Forms9Patch.Image.FailAction*
+  name: FailAction
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image_FailAction_
+  commentId: Overload:Forms9Patch.Image.FailAction
+  isSpec: "True"
+  fullName: Forms9Patch.Image.FailAction
+  nameWithType: Image.FailAction
+- uid: Forms9Patch.Image.FailActionProperty
+  name: FailActionProperty
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image_FailActionProperty
+  commentId: F:Forms9Patch.Image.FailActionProperty
+  fullName: Forms9Patch.Image.FailActionProperty
+  nameWithType: Image.FailActionProperty
 - uid: Forms9Patch.Image.Fill
   name: Fill
   href: api/Forms9Patch.Image.html#Forms9Patch_Image_Fill
@@ -9351,12 +9394,12 @@ references:
   commentId: T:Forms9Patch.IMimeItemCollectionExtensions
   fullName: Forms9Patch.IMimeItemCollectionExtensions
   nameWithType: IMimeItemCollectionExtensions
-- uid: Forms9Patch.IMimeItemCollectionExtensions.AddBytesFromFile(Forms9Patch.MimeItemCollection,System.String,System.String)
-  name: AddBytesFromFile(MimeItemCollection, String, String)
-  href: api/Forms9Patch.IMimeItemCollectionExtensions.html#Forms9Patch_IMimeItemCollectionExtensions_AddBytesFromFile_Forms9Patch_MimeItemCollection_System_String_System_String_
-  commentId: M:Forms9Patch.IMimeItemCollectionExtensions.AddBytesFromFile(Forms9Patch.MimeItemCollection,System.String,System.String)
-  fullName: Forms9Patch.IMimeItemCollectionExtensions.AddBytesFromFile(Forms9Patch.MimeItemCollection, System.String, System.String)
-  nameWithType: IMimeItemCollectionExtensions.AddBytesFromFile(MimeItemCollection, String, String)
+- uid: Forms9Patch.IMimeItemCollectionExtensions.AddBytesFromFile(Forms9Patch.MimeItemCollection,System.String,System.String,Forms9Patch.FailAction)
+  name: AddBytesFromFile(MimeItemCollection, String, String, FailAction)
+  href: api/Forms9Patch.IMimeItemCollectionExtensions.html#Forms9Patch_IMimeItemCollectionExtensions_AddBytesFromFile_Forms9Patch_MimeItemCollection_System_String_System_String_Forms9Patch_FailAction_
+  commentId: M:Forms9Patch.IMimeItemCollectionExtensions.AddBytesFromFile(Forms9Patch.MimeItemCollection,System.String,System.String,Forms9Patch.FailAction)
+  fullName: Forms9Patch.IMimeItemCollectionExtensions.AddBytesFromFile(Forms9Patch.MimeItemCollection, System.String, System.String, Forms9Patch.FailAction)
+  nameWithType: IMimeItemCollectionExtensions.AddBytesFromFile(MimeItemCollection, String, String, FailAction)
 - uid: Forms9Patch.IMimeItemCollectionExtensions.AddBytesFromFile*
   name: AddBytesFromFile
   href: api/Forms9Patch.IMimeItemCollectionExtensions.html#Forms9Patch_IMimeItemCollectionExtensions_AddBytesFromFile_
@@ -9634,18 +9677,18 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.IPrintService.CanPrint
   nameWithType: IPrintService.CanPrint
-- uid: Forms9Patch.IPrintService.PrintAsync(System.String,System.String)
-  name: PrintAsync(String, String)
-  href: api/Forms9Patch.IPrintService.html#Forms9Patch_IPrintService_PrintAsync_System_String_System_String_
-  commentId: M:Forms9Patch.IPrintService.PrintAsync(System.String,System.String)
-  fullName: Forms9Patch.IPrintService.PrintAsync(System.String, System.String)
-  nameWithType: IPrintService.PrintAsync(String, String)
-- uid: Forms9Patch.IPrintService.PrintAsync(Xamarin.Forms.WebView,System.String)
-  name: PrintAsync(WebView, String)
-  href: api/Forms9Patch.IPrintService.html#Forms9Patch_IPrintService_PrintAsync_Xamarin_Forms_WebView_System_String_
-  commentId: M:Forms9Patch.IPrintService.PrintAsync(Xamarin.Forms.WebView,System.String)
-  fullName: Forms9Patch.IPrintService.PrintAsync(Xamarin.Forms.WebView, System.String)
-  nameWithType: IPrintService.PrintAsync(WebView, String)
+- uid: Forms9Patch.IPrintService.PrintAsync(System.String,System.String,Forms9Patch.FailAction)
+  name: PrintAsync(String, String, FailAction)
+  href: api/Forms9Patch.IPrintService.html#Forms9Patch_IPrintService_PrintAsync_System_String_System_String_Forms9Patch_FailAction_
+  commentId: M:Forms9Patch.IPrintService.PrintAsync(System.String,System.String,Forms9Patch.FailAction)
+  fullName: Forms9Patch.IPrintService.PrintAsync(System.String, System.String, Forms9Patch.FailAction)
+  nameWithType: IPrintService.PrintAsync(String, String, FailAction)
+- uid: Forms9Patch.IPrintService.PrintAsync(Xamarin.Forms.WebView,System.String,Forms9Patch.FailAction)
+  name: PrintAsync(WebView, String, FailAction)
+  href: api/Forms9Patch.IPrintService.html#Forms9Patch_IPrintService_PrintAsync_Xamarin_Forms_WebView_System_String_Forms9Patch_FailAction_
+  commentId: M:Forms9Patch.IPrintService.PrintAsync(Xamarin.Forms.WebView,System.String,Forms9Patch.FailAction)
+  fullName: Forms9Patch.IPrintService.PrintAsync(Xamarin.Forms.WebView, System.String, Forms9Patch.FailAction)
+  nameWithType: IPrintService.PrintAsync(WebView, String, FailAction)
 - uid: Forms9Patch.IPrintService.PrintAsync*
   name: PrintAsync
   href: api/Forms9Patch.IPrintService.html#Forms9Patch_IPrintService_PrintAsync_
@@ -14140,18 +14183,18 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.PrintService.Print
   nameWithType: PrintService.Print
-- uid: Forms9Patch.PrintService.PrintAsync(System.String,System.String)
-  name: PrintAsync(String, String)
-  href: api/Forms9Patch.PrintService.html#Forms9Patch_PrintService_PrintAsync_System_String_System_String_
-  commentId: M:Forms9Patch.PrintService.PrintAsync(System.String,System.String)
-  fullName: Forms9Patch.PrintService.PrintAsync(System.String, System.String)
-  nameWithType: PrintService.PrintAsync(String, String)
-- uid: Forms9Patch.PrintService.PrintAsync(Xamarin.Forms.WebView,System.String)
-  name: PrintAsync(WebView, String)
-  href: api/Forms9Patch.PrintService.html#Forms9Patch_PrintService_PrintAsync_Xamarin_Forms_WebView_System_String_
-  commentId: M:Forms9Patch.PrintService.PrintAsync(Xamarin.Forms.WebView,System.String)
-  fullName: Forms9Patch.PrintService.PrintAsync(Xamarin.Forms.WebView, System.String)
-  nameWithType: PrintService.PrintAsync(WebView, String)
+- uid: Forms9Patch.PrintService.PrintAsync(System.String,System.String,Forms9Patch.FailAction)
+  name: PrintAsync(String, String, FailAction)
+  href: api/Forms9Patch.PrintService.html#Forms9Patch_PrintService_PrintAsync_System_String_System_String_Forms9Patch_FailAction_
+  commentId: M:Forms9Patch.PrintService.PrintAsync(System.String,System.String,Forms9Patch.FailAction)
+  fullName: Forms9Patch.PrintService.PrintAsync(System.String, System.String, Forms9Patch.FailAction)
+  nameWithType: PrintService.PrintAsync(String, String, FailAction)
+- uid: Forms9Patch.PrintService.PrintAsync(Xamarin.Forms.WebView,System.String,Forms9Patch.FailAction)
+  name: PrintAsync(WebView, String, FailAction)
+  href: api/Forms9Patch.PrintService.html#Forms9Patch_PrintService_PrintAsync_Xamarin_Forms_WebView_System_String_Forms9Patch_FailAction_
+  commentId: M:Forms9Patch.PrintService.PrintAsync(Xamarin.Forms.WebView,System.String,Forms9Patch.FailAction)
+  fullName: Forms9Patch.PrintService.PrintAsync(Xamarin.Forms.WebView, System.String, Forms9Patch.FailAction)
+  nameWithType: PrintService.PrintAsync(WebView, String, FailAction)
 - uid: Forms9Patch.PrintService.PrintAsync*
   name: PrintAsync
   href: api/Forms9Patch.PrintService.html#Forms9Patch_PrintService_PrintAsync_
@@ -21948,6 +21991,12 @@ references:
   commentId: F:P42.Utils.DebugExtensions.IsMessagesEnabled
   fullName: P42.Utils.DebugExtensions.IsMessagesEnabled
   nameWithType: DebugExtensions.IsMessagesEnabled
+- uid: P42.Utils.DebugExtensions.IsRequestUserHelpEnabled
+  name: IsRequestUserHelpEnabled
+  href: api/P42.Utils.DebugExtensions.html#P42_Utils_DebugExtensions_IsRequestUserHelpEnabled
+  commentId: F:P42.Utils.DebugExtensions.IsRequestUserHelpEnabled
+  fullName: P42.Utils.DebugExtensions.IsRequestUserHelpEnabled
+  nameWithType: DebugExtensions.IsRequestUserHelpEnabled
 - uid: P42.Utils.DebugExtensions.Message(System.Object,System.String)
   name: Message(Object, String)
   href: api/P42.Utils.DebugExtensions.html#P42_Utils_DebugExtensions_Message_System_Object_System_String_
@@ -21980,6 +22029,43 @@ references:
   isSpec: "True"
   fullName: P42.Utils.DebugExtensions.RemoveFromCensus
   nameWithType: DebugExtensions.RemoveFromCensus
+- uid: P42.Utils.DebugExtensions.RequestHelpDelegate
+  name: RequestHelpDelegate
+  href: api/P42.Utils.DebugExtensions.html#P42_Utils_DebugExtensions_RequestHelpDelegate
+  commentId: F:P42.Utils.DebugExtensions.RequestHelpDelegate
+  fullName: P42.Utils.DebugExtensions.RequestHelpDelegate
+  nameWithType: DebugExtensions.RequestHelpDelegate
+- uid: P42.Utils.DebugExtensions.RequestUserHelp(System.Exception,System.String,System.String,System.Int32,System.String)
+  name: RequestUserHelp(Exception, String, String, Int32, String)
+  href: api/P42.Utils.DebugExtensions.html#P42_Utils_DebugExtensions_RequestUserHelp_System_Exception_System_String_System_String_System_Int32_System_String_
+  commentId: M:P42.Utils.DebugExtensions.RequestUserHelp(System.Exception,System.String,System.String,System.Int32,System.String)
+  fullName: P42.Utils.DebugExtensions.RequestUserHelp(System.Exception, System.String, System.String, System.Int32, System.String)
+  nameWithType: DebugExtensions.RequestUserHelp(Exception, String, String, Int32, String)
+- uid: P42.Utils.DebugExtensions.RequestUserHelp*
+  name: RequestUserHelp
+  href: api/P42.Utils.DebugExtensions.html#P42_Utils_DebugExtensions_RequestUserHelp_
+  commentId: Overload:P42.Utils.DebugExtensions.RequestUserHelp
+  isSpec: "True"
+  fullName: P42.Utils.DebugExtensions.RequestUserHelp
+  nameWithType: DebugExtensions.RequestUserHelp
+- uid: P42.Utils.DebugExtensions.RequestUserHelpEmailToAddress
+  name: RequestUserHelpEmailToAddress
+  href: api/P42.Utils.DebugExtensions.html#P42_Utils_DebugExtensions_RequestUserHelpEmailToAddress
+  commentId: F:P42.Utils.DebugExtensions.RequestUserHelpEmailToAddress
+  fullName: P42.Utils.DebugExtensions.RequestUserHelpEmailToAddress
+  nameWithType: DebugExtensions.RequestUserHelpEmailToAddress
+- uid: P42.Utils.DebugExtensions.RequestUserHelpMissiveMessage
+  name: RequestUserHelpMissiveMessage
+  href: api/P42.Utils.DebugExtensions.html#P42_Utils_DebugExtensions_RequestUserHelpMissiveMessage
+  commentId: F:P42.Utils.DebugExtensions.RequestUserHelpMissiveMessage
+  fullName: P42.Utils.DebugExtensions.RequestUserHelpMissiveMessage
+  nameWithType: DebugExtensions.RequestUserHelpMissiveMessage
+- uid: P42.Utils.DebugExtensions.RequestUserHelpMissiveTitle
+  name: RequestUserHelpMissiveTitle
+  href: api/P42.Utils.DebugExtensions.html#P42_Utils_DebugExtensions_RequestUserHelpMissiveTitle
+  commentId: F:P42.Utils.DebugExtensions.RequestUserHelpMissiveTitle
+  fullName: P42.Utils.DebugExtensions.RequestUserHelpMissiveTitle
+  nameWithType: DebugExtensions.RequestUserHelpMissiveTitle
 - uid: P42.Utils.DictionaryExtensions
   name: DictionaryExtensions
   href: api/P42.Utils.DictionaryExtensions.html
@@ -22684,6 +22770,15 @@ references:
   fullName.vb: P42.Utils.ICollectionExtensions.AddRange(Of T)(System.Collections.Generic.ICollection(Of T), System.Collections.Generic.IEnumerable(Of T))
   nameWithType: ICollectionExtensions.AddRange<T>(ICollection<T>, IEnumerable<T>)
   nameWithType.vb: ICollectionExtensions.AddRange(Of T)(ICollection(Of T), IEnumerable(Of T))
+- uid: P42.Utils.ICollectionExtensions.AddRange``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IDictionary{``0,``1})
+  name: AddRange<T, Q>(IDictionary<T, Q>, IDictionary<T, Q>)
+  href: api/P42.Utils.ICollectionExtensions.html#P42_Utils_ICollectionExtensions_AddRange__2_System_Collections_Generic_IDictionary___0___1__System_Collections_Generic_IDictionary___0___1__
+  commentId: M:P42.Utils.ICollectionExtensions.AddRange``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IDictionary{``0,``1})
+  name.vb: AddRange(Of T, Q)(IDictionary(Of T, Q), IDictionary(Of T, Q))
+  fullName: P42.Utils.ICollectionExtensions.AddRange<T, Q>(System.Collections.Generic.IDictionary<T, Q>, System.Collections.Generic.IDictionary<T, Q>)
+  fullName.vb: P42.Utils.ICollectionExtensions.AddRange(Of T, Q)(System.Collections.Generic.IDictionary(Of T, Q), System.Collections.Generic.IDictionary(Of T, Q))
+  nameWithType: ICollectionExtensions.AddRange<T, Q>(IDictionary<T, Q>, IDictionary<T, Q>)
+  nameWithType.vb: ICollectionExtensions.AddRange(Of T, Q)(IDictionary(Of T, Q), IDictionary(Of T, Q))
 - uid: P42.Utils.ICollectionExtensions.IsNullOrEmpty*
   name: IsNullOrEmpty
   href: api/P42.Utils.ICollectionExtensions.html#P42_Utils_ICollectionExtensions_IsNullOrEmpty_
@@ -26982,24 +27077,12 @@ references:
   commentId: T:P42.Utils.Timer
   fullName: P42.Utils.Timer
   nameWithType: Timer
-- uid: P42.Utils.Timer.#ctor(P42.Utils.TimerCallback,System.Object,System.Int64,System.Int64)
-  name: Timer(TimerCallback, Object, Int64, Int64)
-  href: api/P42.Utils.Timer.html#P42_Utils_Timer__ctor_P42_Utils_TimerCallback_System_Object_System_Int64_System_Int64_
-  commentId: M:P42.Utils.Timer.#ctor(P42.Utils.TimerCallback,System.Object,System.Int64,System.Int64)
-  fullName: P42.Utils.Timer.Timer(P42.Utils.TimerCallback, System.Object, System.Int64, System.Int64)
-  nameWithType: Timer.Timer(TimerCallback, Object, Int64, Int64)
 - uid: P42.Utils.Timer.#ctor(P42.Utils.TimerCallback,System.Object,System.TimeSpan,System.TimeSpan)
   name: Timer(TimerCallback, Object, TimeSpan, TimeSpan)
   href: api/P42.Utils.Timer.html#P42_Utils_Timer__ctor_P42_Utils_TimerCallback_System_Object_System_TimeSpan_System_TimeSpan_
   commentId: M:P42.Utils.Timer.#ctor(P42.Utils.TimerCallback,System.Object,System.TimeSpan,System.TimeSpan)
   fullName: P42.Utils.Timer.Timer(P42.Utils.TimerCallback, System.Object, System.TimeSpan, System.TimeSpan)
   nameWithType: Timer.Timer(TimerCallback, Object, TimeSpan, TimeSpan)
-- uid: P42.Utils.Timer.#ctor(P42.Utils.TimerCallback,System.Object,System.UInt32,System.UInt32)
-  name: Timer(TimerCallback, Object, UInt32, UInt32)
-  href: api/P42.Utils.Timer.html#P42_Utils_Timer__ctor_P42_Utils_TimerCallback_System_Object_System_UInt32_System_UInt32_
-  commentId: M:P42.Utils.Timer.#ctor(P42.Utils.TimerCallback,System.Object,System.UInt32,System.UInt32)
-  fullName: P42.Utils.Timer.Timer(P42.Utils.TimerCallback, System.Object, System.UInt32, System.UInt32)
-  nameWithType: Timer.Timer(TimerCallback, Object, UInt32, UInt32)
 - uid: P42.Utils.Timer.#ctor*
   name: Timer
   href: api/P42.Utils.Timer.html#P42_Utils_Timer__ctor_
@@ -27058,6 +27141,31 @@ references:
   isSpec: "True"
   fullName: P42.Utils.Timer.Dispose
   nameWithType: Timer.Dispose
+- uid: P42.Utils.Timer.StartTimer(System.TimeSpan,System.Func{System.Boolean})
+  name: StartTimer(TimeSpan, Func<Boolean>)
+  href: api/P42.Utils.Timer.html#P42_Utils_Timer_StartTimer_System_TimeSpan_System_Func_System_Boolean__
+  commentId: M:P42.Utils.Timer.StartTimer(System.TimeSpan,System.Func{System.Boolean})
+  name.vb: StartTimer(TimeSpan, Func(Of Boolean))
+  fullName: P42.Utils.Timer.StartTimer(System.TimeSpan, System.Func<System.Boolean>)
+  fullName.vb: P42.Utils.Timer.StartTimer(System.TimeSpan, System.Func(Of System.Boolean))
+  nameWithType: Timer.StartTimer(TimeSpan, Func<Boolean>)
+  nameWithType.vb: Timer.StartTimer(TimeSpan, Func(Of Boolean))
+- uid: P42.Utils.Timer.StartTimer(System.TimeSpan,System.Func{System.Threading.Tasks.Task{System.Boolean}})
+  name: StartTimer(TimeSpan, Func<Task<Boolean>>)
+  href: api/P42.Utils.Timer.html#P42_Utils_Timer_StartTimer_System_TimeSpan_System_Func_System_Threading_Tasks_Task_System_Boolean___
+  commentId: M:P42.Utils.Timer.StartTimer(System.TimeSpan,System.Func{System.Threading.Tasks.Task{System.Boolean}})
+  name.vb: StartTimer(TimeSpan, Func(Of Task(Of Boolean)))
+  fullName: P42.Utils.Timer.StartTimer(System.TimeSpan, System.Func<System.Threading.Tasks.Task<System.Boolean>>)
+  fullName.vb: P42.Utils.Timer.StartTimer(System.TimeSpan, System.Func(Of System.Threading.Tasks.Task(Of System.Boolean)))
+  nameWithType: Timer.StartTimer(TimeSpan, Func<Task<Boolean>>)
+  nameWithType.vb: Timer.StartTimer(TimeSpan, Func(Of Task(Of Boolean)))
+- uid: P42.Utils.Timer.StartTimer*
+  name: StartTimer
+  href: api/P42.Utils.Timer.html#P42_Utils_Timer_StartTimer_
+  commentId: Overload:P42.Utils.Timer.StartTimer
+  isSpec: "True"
+  fullName: P42.Utils.Timer.StartTimer
+  nameWithType: Timer.StartTimer
 - uid: P42.Utils.Timer.ToString
   name: ToString()
   href: api/P42.Utils.Timer.html#P42_Utils_Timer_ToString

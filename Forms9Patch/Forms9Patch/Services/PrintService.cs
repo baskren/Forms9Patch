@@ -35,7 +35,7 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="webview">Webview.</param>
         /// <param name="jobName">Job name.</param>
-        /// <param name="failAction"What to do if there is a failure.</param>
+        /// <param name="failAction">What to do if there is a failure.</param>
         public static Task PrintAsync(this WebView webview, string jobName, FailAction failAction = FailAction.ShowAlert)
         {
             _service = _service ?? DependencyService.Get<IPrintService>();
@@ -60,7 +60,7 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="html"></param>
         /// <param name="jobName"></param>
-        /// <param name="failAction"What to do if there is a failure.</param>
+        /// <param name="failAction">What to do if there is a failure.</param>
         public static Task PrintAsync(this string html, string jobName, FailAction failAction = FailAction.ShowAlert)
         {
             _service = _service ?? DependencyService.Get<IPrintService>();
