@@ -4578,11 +4578,11 @@
     {
       "status": {
         "can_incremental": false,
-        "details": "Cannot build incrementally because last build info is missing.",
+        "details": "Disable incremental build by force rebuild option.",
         "incrementalPhase": "build",
         "total_file_count": 0,
         "skipped_file_count": 0,
-        "full_build_reason_code": "NoAvailableBuildCache"
+        "full_build_reason_code": "ForceRebuild"
       },
       "processors": {
         "ConceptualDocumentProcessor": {
