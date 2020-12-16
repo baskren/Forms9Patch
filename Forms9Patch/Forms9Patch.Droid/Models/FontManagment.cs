@@ -372,8 +372,7 @@ namespace Forms9Patch.Droid
                         {
                             foreach (var fontFamily in fontFamilies)
                             {
-                                if (!string.IsNullOrWhiteSpace(fontFamily))
-                                    results[fontFamily] = file.AbsolutePath;
+                                AddFont(results, fontFamily, file);
                             }
                         }
                     }
@@ -382,7 +381,23 @@ namespace Forms9Patch.Droid
             return results;
         }
 
+        static void AddFont(Dictionary<string, string> results, string fontFamily, File file)
+        {
+            if (!string.IsNullOrWhiteSpace(fontFamily))
+            {
+                results[fontFamily] = file.AbsolutePath;
+                var fileName = System.IO.Path.GetFileName(file.AbsolutePath);
+                results[fileName] = file.AbsolutePath;
+                var parts = fontFamily.Split("#");
+                if (parts.Length > 1 && parts[1].Trim() is string style && !string.IsNullOrWhiteSpace(style))
+                {
+                    results[fileName + "#" + style] = file.AbsolutePath;
+                }
+            }
+        }
+
     }
+
 
 
 

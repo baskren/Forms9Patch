@@ -121,18 +121,19 @@ namespace Forms9Patch.Droid
                 {
                     try
                     {
-                        /*
-                        if (Android.OS.Build.VERSION.SdkInt < BuildVersionCodes.P)
+                        
+                        if (Android.OS.Build.VERSION.SdkInt <= BuildVersionCodes.P)
                         {
+#pragma warning disable CS0618 // Type or member is obsolete (addressed below)
                             var loader = new CursorLoader(Settings.Activity, _uri, null, null, null, null);
+#pragma warning restore CS0618 // Type or member is obsolete
                             _cursor = (ICursor)loader.LoadInBackground();
                         }
                         else
                         {
-                        */
-                        var loader = new AndroidX.Loader.Content.CursorLoader(Settings.Context, _uri, null, null, null, null);   
-                        _cursor = (ICursor)loader.LoadInBackground();
-                        //}
+                            var loader = new AndroidX.Loader.Content.CursorLoader(Settings.Context, _uri, null, null, null, null);   
+                            _cursor = (ICursor)loader.LoadInBackground();
+                        }
                     }
                     catch (Exception e)
                     {
