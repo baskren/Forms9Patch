@@ -14,25 +14,25 @@ namespace Forms9Patch.Elements.Popups.Core.Animations.Base
         /// <summary>
         /// Duration of appearing animation
         /// </summary>
-        [TypeConverter(typeof (UintTypeConverter))]
+        [TypeConverter(typeof(UintTypeConverter))]
         public uint DurationIn { get; set; } = DefaultDuration;
 
         /// <summary>
         /// Duration of disappearing animation
         /// </summary>
-        [TypeConverter(typeof (UintTypeConverter))]
+        [TypeConverter(typeof(UintTypeConverter))]
         public uint DurationOut { get; set; } = DefaultDuration;
 
         /// <summary>
         /// Motion profile for appearing animation
         /// </summary>
-        [TypeConverter(typeof(EasingTypeConverter))]
+        [TypeConverter(typeof(Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.EasingTypeConverter))]
         public Easing EasingIn { get; set; } = Easing.Linear;
 
         /// <summary>
         /// Motion profile for disappearing animation
         /// </summary>
-        [TypeConverter(typeof(EasingTypeConverter))]
+        [TypeConverter(typeof(Forms9Patch.Elements.Popups.Core.Converters.TypeConverters.EasingTypeConverter))]
         public Easing EasingOut { get; set; } = Easing.Linear;
 
         /// <summary>
