@@ -230,7 +230,7 @@ namespace Forms9Patch
 
 
         #region Event Handlers
-        internal async void OnOkButtonTappedAsync(object sender, EventArgs e)
+        protected virtual async void OnOkButtonTappedAsync(object sender, EventArgs e)
         {
             P42.Utils.BreadCrumbs.Add(GetType(), "ok");
             PermissionState = PermissionState.Ok;

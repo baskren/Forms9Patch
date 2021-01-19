@@ -170,7 +170,7 @@ namespace Forms9Patch
 
 
         #region Event Handlers
-        async void OnCancelButtonTappedAsync(object sender, EventArgs e)
+        protected virtual async void OnCancelButtonTappedAsync(object sender, EventArgs e)
         {
             P42.Utils.BreadCrumbs.Add(GetType(), "cancel");
             PermissionState = PermissionState.Rejected;

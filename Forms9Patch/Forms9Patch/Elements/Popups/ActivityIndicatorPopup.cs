@@ -37,7 +37,6 @@ namespace Forms9Patch
         {
             BackgroundColor = Color.Transparent,
             Color = Color.Blue
-
         };
 
 
