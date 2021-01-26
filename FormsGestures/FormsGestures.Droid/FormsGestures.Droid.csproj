@@ -79,7 +79,7 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.1874" />
     <!--
-    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.2.0.5" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.2.0.6" />
     <PackageReference Include="Xamarin.AndroidX.Migration" Version="1.0.8" />
     -->
   </ItemGroup>
