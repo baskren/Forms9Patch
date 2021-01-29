@@ -16,6 +16,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
+    <ReleaseVersion></ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -98,6 +99,7 @@
     <Compile Include="Effects\EntryNoUnderline.cs" />
     <Compile Include="Services\RendererResolver.cs" />
     <Compile Include="Models\FontRecord.cs" />
+    <Compile Include="Effects\EditorNoUnderline.cs" />
   </ItemGroup>
   <ItemGroup>
     <!--

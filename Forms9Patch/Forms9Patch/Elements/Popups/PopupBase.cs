@@ -549,6 +549,8 @@ namespace Forms9Patch
             IsAnimationEnabled = false;
 
             PopAfter = popAfter;
+
+            HasKeyboardOffset = true;
         }
 
 
@@ -601,7 +603,7 @@ namespace Forms9Patch
         {
             if (_isPopped || (!_isPushing && !_isPushed))
             {
-                Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(()=> Dispose(true));
+                Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() => Dispose(true));
 
                 GC.SuppressFinalize(this);
             }
@@ -869,7 +871,7 @@ namespace Forms9Patch
             IsVisible = true;
             //if (_isPushing || _isPushed)
             //    return;
-            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(async() =>
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(async () =>
             {
                 Recursion.Enter(GetType().ToString(), _id.ToString());
                 //_isPushing = true;

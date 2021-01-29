@@ -12,6 +12,7 @@
     <RootNamespace>Forms9Patch.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>Forms9Patch.iOS</AssemblyName>
+    <ReleaseVersion></ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -125,6 +126,7 @@
     <Compile Include="Effects\EntryClearButtonEffect.cs" />
     <Compile Include="Services\ToPdfService.cs" />
     <Compile Include="Services\RendererResolver.cs" />
+    <Compile Include="Effects\EntryNoOutlineEffect.cs" />
   </ItemGroup>
 
   <!-- NuGet Packages-->
