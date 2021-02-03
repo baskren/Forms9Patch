@@ -70,7 +70,8 @@ namespace Forms9Patch
         /// <param name="assembly">Assembly in which the resource can be found</param> 
         public static Xamarin.Forms.ImageSource FromMultiResource(string resourceId, Assembly assembly = null)
         {
-            assembly = EmbeddedResourceExtensions.FindAssemblyForMultiResource(resourceId, assembly);
+            if (assembly is null || assembly == typeof(Xamarin.Forms.Grid).Assembly)
+                assembly = EmbeddedResourceExtensions.FindAssemblyForMultiResource(resourceId, assembly);
             /*
             assembly = assembly ?? AssemblyExtensions.AssemblyFromResourceId(resourceId);
             if (assembly == null && Device.RuntimePlatform != Device.UWP)
@@ -248,7 +249,8 @@ namespace Forms9Patch
 
         internal static string BestEmbeddedMultiResourceMatch(string resourceId, Assembly assembly)
         {
-            assembly = EmbeddedResourceExtensions.FindAssemblyForMultiResource(resourceId, assembly);
+            if (assembly is null || assembly == typeof(Xamarin.Forms.Grid).Assembly)
+                assembly = EmbeddedResourceExtensions.FindAssemblyForMultiResource(resourceId, assembly);
             /*
             assembly = assembly ?? AssemblyExtensions.AssemblyFromResourceId(resourceId);
             if (assembly == null && Device.RuntimePlatform != Device.UWP)
