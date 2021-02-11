@@ -120,7 +120,7 @@ namespace Forms9Patch
 
 
         #region Visual Elements
-        readonly Button _cancelButton = new Button
+        protected readonly Button _cancelButton = new Button
         {
             HorizontalOptions = LayoutOptions.FillAndExpand
         };
