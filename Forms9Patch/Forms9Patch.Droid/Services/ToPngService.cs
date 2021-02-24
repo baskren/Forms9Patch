@@ -318,6 +318,7 @@ namespace Forms9Patch.Droid
         public override void OnLoadResource(Android.Webkit.WebView view, string url)
         {
             System.Diagnostics.Debug.WriteLine("WebViewCallBack" + P42.Utils.ReflectionExtensions.CallerString() + ": ");
+            Task.Delay(1000).Wait();
             base.OnLoadResource(view, url);
             Device.StartTimer(TimeSpan.FromSeconds(10), () =>
             {
