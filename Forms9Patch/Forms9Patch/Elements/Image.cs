@@ -952,7 +952,7 @@ namespace Forms9Patch
         /// <param name="e"></param>
         protected override void OnPaintSurface(SKPaintSurfaceEventArgs e)
         {
-            if (e.Surface?.Canvas == null || _disposed)
+            if (e.Surface?.Canvas == null)
                 return;
 
             e.Surface.Canvas.Clear();
@@ -1451,9 +1451,9 @@ namespace Forms9Patch
                 {
                     var mx = new[]
                     {
-                        0, 0, 0, 0, TintColor.ByteR(),
-                        0, 0, 0, 0, TintColor.ByteG(),
-                        0, 0, 0, 0, TintColor.ByteB(),
+                        0, 0, 0, 0, (float)TintColor.R,
+                        0, 0, 0, 0, (float)TintColor.G,
+                        0, 0, 0, 0, (float)TintColor.B,
                         0, 0, 0, (float)(TintColor.A * Opacity), 0
                     };
                     var cf = SKColorFilter.CreateColorMatrix(mx);
