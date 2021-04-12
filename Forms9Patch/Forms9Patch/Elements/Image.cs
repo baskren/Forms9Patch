@@ -952,7 +952,7 @@ namespace Forms9Patch
         /// <param name="e"></param>
         protected override void OnPaintSurface(SKPaintSurfaceEventArgs e)
         {
-            if (e.Surface?.Canvas == null)
+            if (e.Surface?.Canvas == null || _disposed)
                 return;
 
             e.Surface.Canvas.Clear();

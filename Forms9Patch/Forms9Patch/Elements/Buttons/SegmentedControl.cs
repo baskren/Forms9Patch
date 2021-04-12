@@ -1412,7 +1412,7 @@ namespace Forms9Patch
         {
             //if (Segments.Any(s => s.HtmlText.StartsWith("Lateral")))
             //    System.Diagnostics.Debug.WriteLine(GetType() + ".");
-            if (!UpdatingSegments)
+            if (!UpdatingSegments && !_disposed)
             {
                 LayoutChildIntoBoundingRegion(_background, new Rectangle(x, y, width, height));
                 LayoutFunction(x, y, width, height, LayoutSegment);

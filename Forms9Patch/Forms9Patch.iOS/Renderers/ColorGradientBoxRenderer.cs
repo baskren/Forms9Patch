@@ -39,6 +39,9 @@ namespace Forms9Patch.iOS
 
 		public override void Draw (CGRect rect)
 		{
+			if (_disposed)
+				return;
+
 			ContentMode = UIViewContentMode.Redraw;
 			//ContentMode = UIViewContentMode.
 
