@@ -22,5 +22,21 @@ namespace Forms9Patch
         /// I'll just sit here quietly.
         /// </summary>
         None,
+        /// <summary>
+        /// Message Received!
+        /// </summary>
+        Message,
+        /// <summary>
+        /// Alert received!
+        /// </summary>
+        Alarm,
+        /// <summary>
+        /// Alert
+        /// </summary>
+        Alert,
+        /// <summary>
+        /// Error
+        /// </summary>
+        Error
     }
 }

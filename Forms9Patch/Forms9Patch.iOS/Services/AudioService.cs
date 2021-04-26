@@ -11,6 +11,12 @@ namespace Forms9Patch.iOS
         static readonly AudioToolbox.SystemSound click = new AudioToolbox.SystemSound(1104);
         static readonly AudioToolbox.SystemSound modifier = new AudioToolbox.SystemSound(1156);
         static readonly AudioToolbox.SystemSound delete = new AudioToolbox.SystemSound(1155);
+        static readonly AudioToolbox.SystemSound message = new AudioToolbox.SystemSound(1007);
+        static readonly AudioToolbox.SystemSound alarm = new AudioToolbox.SystemSound(1005);
+        static readonly AudioToolbox.SystemSound alert = new AudioToolbox.SystemSound(1033);
+        static readonly AudioToolbox.SystemSound error = new AudioToolbox.SystemSound(1073);
+
+
 
 
         public void PlaySoundEffect(SoundEffect effect, EffectMode mode)
@@ -40,6 +46,18 @@ namespace Forms9Patch.iOS
                     break;
                 case SoundEffect.Delete:
                     delete.PlaySystemSound();
+                    break;
+                case SoundEffect.Message:
+                    message.PlayAlertSound();
+                    break;
+                case SoundEffect.Alarm:
+                    alarm.PlayAlertSound();
+                    break;
+                case SoundEffect.Alert:
+                    alert.PlayAlertSound();
+                    break;
+                case SoundEffect.Error:
+                    error.PlayAlertSound();
                     break;
             }
         }

@@ -51,7 +51,6 @@ namespace Forms9Patch
             HorizontalOptions = LayoutOptions.Fill,
             VerticalOptions = LayoutOptions.Fill,
             BackgroundColor = Color.Transparent,
-            //Color = Color.Red
         };
 
         readonly Label _titleLabel = new Label
