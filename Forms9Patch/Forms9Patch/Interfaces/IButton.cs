@@ -50,7 +50,7 @@ namespace Forms9Patch
         /// <summary>
         /// Gets/Sets the haptic mode used to determine if a HapticEffect will occur when button is clicked
         /// </summary>
-        EffectMode HapticEffectMode { get; set; }
+        FeedbackMode HapticEffectMode { get; set; }
 
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Forms9Patch
         /// <summary>
         /// Gets/Sets the sound mode used to determine if a SoundEffect  will occur when button is clicked
         /// </summary>
-        EffectMode SoundEffectMode { get; set; }
+        FeedbackMode SoundEffectMode { get; set; }
 
         /*
         /// <summary>

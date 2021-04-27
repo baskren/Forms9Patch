@@ -20,8 +20,9 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="effect"></param>
         /// <param name="mode"></param>
-        public static void Feedback(HapticEffect effect, EffectMode mode = default)
-            => Service?.Feedback(effect, mode);
+        [Obsolete("Use Forms9Patch.Feedback.PlayHaptic")]
+        public static void Feedback(HapticEffect effect, FeedbackMode mode = default)
+            => throw new Exception("OBSOLETE: Use Forms9Patch.Feedback.PlaySound");
 
     }
 }

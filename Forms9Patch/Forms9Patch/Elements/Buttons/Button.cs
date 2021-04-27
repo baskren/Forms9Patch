@@ -395,14 +395,14 @@ namespace Forms9Patch
         /// <summary>
         /// The haptic mode property.
         /// </summary>
-        public static readonly BindableProperty HapticEffectModeProperty = BindableProperty.Create(nameof(HapticEffectMode), typeof(EffectMode), typeof(Button), default(EffectMode));
+        public static readonly BindableProperty HapticEffectModeProperty = BindableProperty.Create(nameof(HapticEffectMode), typeof(FeedbackMode), typeof(Button), default(FeedbackMode));
         /// <summary>
         /// Gets or sets the haptic mode.
         /// </summary>
         /// <value>The haptic mode.</value>
-        public EffectMode HapticEffectMode
+        public FeedbackMode HapticEffectMode
         {
-            get => (EffectMode)GetValue(HapticEffectModeProperty);
+            get => (FeedbackMode)GetValue(HapticEffectModeProperty);
             set => SetValue(HapticEffectModeProperty, value);
         }
         #endregion HapticEffectMode
@@ -427,14 +427,14 @@ namespace Forms9Patch
         /// <summary>
         /// The backing store for the sound effect mode property.
         /// </summary>
-        public static readonly BindableProperty SoundEffectModeProperty = BindableProperty.Create(nameof(SoundEffectMode), typeof(EffectMode), typeof(Button), default(EffectMode));
+        public static readonly BindableProperty SoundEffectModeProperty = BindableProperty.Create(nameof(SoundEffectMode), typeof(FeedbackMode), typeof(Button), default(FeedbackMode));
         /// <summary>
         /// Gets or sets the sound effect mode.
         /// </summary>
         /// <value>The sound effect mode.</value>
-        public EffectMode SoundEffectMode
+        public FeedbackMode SoundEffectMode
         {
-            get => (EffectMode)GetValue(SoundEffectModeProperty);
+            get => (FeedbackMode)GetValue(SoundEffectModeProperty);
             set => SetValue(SoundEffectModeProperty, value);
         }
         #endregion SoundEffectMode property
@@ -1265,8 +1265,8 @@ namespace Forms9Patch
                         IsSelected = !IsSelected;
                 }
                 SendTapped();
-                Haptics.Feedback(HapticEffect, HapticEffectMode);
-                Audio.PlaySoundEffect(SoundEffect, SoundEffectMode);
+                Feedback.Play(HapticEffect, HapticEffectMode);
+                Feedback.Play(SoundEffect, SoundEffectMode);
                 return true;
             }
             return false;

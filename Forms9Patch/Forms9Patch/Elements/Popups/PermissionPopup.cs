@@ -25,7 +25,7 @@ namespace Forms9Patch
         /// <param name="cancelButtonColor">Cancel button color.</param>
         /// <param name="okTextColor">Ok text color.</param>
         /// <param name="cancelTextColor">Cancel text color.</param>
-        public static PermissionPopup Create(string title, string text, string okText = "OK", string cancelText = "Cancel", Color okButtonColor = default, Color cancelButtonColor = default, Color okTextColor = default, Color cancelTextColor = default)
+        public static PermissionPopup Create(string title, string text, string okText = "OK", string cancelText = "Cancel", Color okButtonColor = default, Color cancelButtonColor = default, Color okTextColor = default, Color cancelTextColor = default, FeedbackEffect pushedFeedback = FeedbackEffect.Inquiry)
         {
             var popup = new PermissionPopup { Title = title, Text = text, OkText = okText, CancelText = cancelText };
             if (okTextColor != default)
@@ -36,6 +36,7 @@ namespace Forms9Patch
                 popup.CancelTextColor = cancelTextColor;
             if (cancelButtonColor != default)
                 popup.CancelButtonColor = cancelButtonColor;
+            popup.PushedFeedback = pushedFeedback;
             popup.IsVisible = true;
             return popup;
         }
@@ -53,7 +54,7 @@ namespace Forms9Patch
         /// <param name="cancelButtonColor">Cancel button color.</param>
         /// <param name="okTextColor">Ok text color.</param>
         /// <param name="cancelTextColor">Cancel text color.</param>
-        public static PermissionPopup Create(VisualElement target, string title, string text, string okText = "OK", string cancelText = "Cancel", Color okButtonColor = default, Color cancelButtonColor = default, Color okTextColor = default, Color cancelTextColor = default)
+        public static PermissionPopup Create(VisualElement target, string title, string text, string okText = "OK", string cancelText = "Cancel", Color okButtonColor = default, Color cancelButtonColor = default, Color okTextColor = default, Color cancelTextColor = default, FeedbackEffect pushedFeedback = FeedbackEffect.Inquiry)
         {
             var popup = new PermissionPopup(target) { Title = title, Text = text, OkText = okText, CancelText = cancelText };
             if (okTextColor != default)
@@ -64,6 +65,7 @@ namespace Forms9Patch
                 popup.CancelTextColor = cancelTextColor;
             if (cancelButtonColor != default)
                 popup.CancelButtonColor = cancelButtonColor;
+            popup.PushedFeedback = pushedFeedback;
             popup.IsVisible = true;
             return popup;
         }

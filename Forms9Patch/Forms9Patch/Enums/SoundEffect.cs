@@ -7,6 +7,10 @@ namespace Forms9Patch
     public enum SoundEffect
     {
         /// <summary>
+        /// I'll just sit here quietly.
+        /// </summary>
+        None,
+        /// <summary>
         /// Give the system keyclick response
         /// </summary>
         KeyClick,
@@ -19,21 +23,21 @@ namespace Forms9Patch
         /// </summary>
         Delete,
         /// <summary>
-        /// I'll just sit here quietly.
+        /// Notification Received!
         /// </summary>
-        None,
+        Info,
         /// <summary>
-        /// Message Received!
+        /// Message
         /// </summary>
         Message,
-        /// <summary>
-        /// Alert received!
-        /// </summary>
-        Alarm,
         /// <summary>
         /// Alert
         /// </summary>
         Alert,
+        /// <summary>
+        /// Aarm received!
+        /// </summary>
+        Alarm,
         /// <summary>
         /// Error
         /// </summary>

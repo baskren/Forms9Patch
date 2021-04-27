@@ -11,6 +11,6 @@ namespace Forms9Patch.Interfaces
         /// </summary>
         /// <param name="sound"></param>
         /// <param name="mode"></param>
-        void PlaySoundEffect(SoundEffect sound, EffectMode mode);
+        void PlaySoundEffect(SoundEffect sound, FeedbackMode mode);
     }
 }

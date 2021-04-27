@@ -39,6 +39,21 @@
     <None Remove="Resources\ic_navigate_next_white_24px.svg" />
     <None Remove="Resources\menu_up.svg" />
     <None Remove="Resources\menu_down.svg" />
+    <None Remove="Resources\Sounds\alarm.mp3" />
+    <None Remove="Resources\Sounds\message.ogg" />
+    <None Remove="Resources\Sounds\message.m4r" />
+    <None Remove="Resources\Sounds\message.mp3" />
+    <None Remove="Resources\Sounds\notification.ogg" />
+    <None Remove="Resources\Sounds\notification.m4r" />
+    <None Remove="Resources\Sounds\notification.mp3" />
+    <None Remove="Resources\Sounds\alarm.m4r" />
+    <None Remove="Resources\Sounds\alarm.ogg" />
+    <None Remove="Resources\Sounds\alert.m4r" />
+    <None Remove="Resources\Sounds\alert.mp3" />
+    <None Remove="Resources\Sounds\alert.ogg" />
+    <None Remove="Resources\Sounds\error.m4r" />
+    <None Remove="Resources\Sounds\error.mp3" />
+    <None Remove="Resources\Sounds\error.ogg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\STIXGeneral.otf" />
@@ -46,11 +61,32 @@
     <EmbeddedResource Include="Resources\menu_right.svg" />
     <EmbeddedResource Include="Resources\menu_up.svg" />
     <EmbeddedResource Include="Resources\menu_down.svg" />
+    <EmbeddedResource Include="Resources\Sounds\alarm.mp3" />
+    <EmbeddedResource Include="Resources\Sounds\message.ogg" />
+    <EmbeddedResource Include="Resources\Sounds\message.m4r" />
+    <EmbeddedResource Include="Resources\Sounds\message.mp3" />
+    <EmbeddedResource Include="Resources\Sounds\notification.ogg" />
+    <EmbeddedResource Include="Resources\Sounds\notification.m4r" />
+    <EmbeddedResource Include="Resources\Sounds\notification.mp3" />
+    <EmbeddedResource Include="Resources\Sounds\alarm.m4r" />
+    <EmbeddedResource Include="Resources\Sounds\alarm.ogg" />
+    <EmbeddedResource Include="Resources\Sounds\alert.m4r" />
+    <EmbeddedResource Include="Resources\Sounds\alert.mp3" />
+    <EmbeddedResource Include="Resources\Sounds\alert.ogg" />
+    <!--
+    <EmbeddedResource Include="**/*" />
+    <EmbeddedResource Include="**/*" />
+    <EmbeddedResource Include="**/*" />
+    -->
+    <EmbeddedResource Include="Resources\Sounds\error.m4r" />
+    <EmbeddedResource Include="Resources\Sounds\error.mp3" />
+    <EmbeddedResource Include="Resources\Sounds\error.ogg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Elements\Popups\Core\" />
     <Folder Include="Elements\Popups\Core\Converters\" />
     <Folder Include="Elements\Popups\Core\Animations\" />
+    <Folder Include="Resources\Sounds\" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition=" '$(Configuration)'=='Release' And '$(OS)'=='Windows_NT' And '$(SolutionName)'=='Forms9Patch' ">
     <Message Text="SolutionDir = $(SolutionDir)" Importance="High" />  

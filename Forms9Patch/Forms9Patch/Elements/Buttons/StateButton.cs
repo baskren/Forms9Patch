@@ -447,8 +447,8 @@ namespace Forms9Patch
             if (IsEnabled)
             {
                 //KeyClicksService.Feedback(HapticEffect, HapticEffectMode);
-                Haptics.Feedback(HapticEffect, HapticEffectMode);
-                Audio.PlaySoundEffect(SoundEffect, SoundEffectMode);
+                Feedback.Play(HapticEffect, HapticEffectMode);
+                Feedback.Play(SoundEffect, SoundEffectMode);
 
                 //System.Diagnostics.Debug.WriteLine("tapped");
                 if (ToggleBehavior)

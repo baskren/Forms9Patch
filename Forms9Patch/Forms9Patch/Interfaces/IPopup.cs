@@ -70,5 +70,7 @@ namespace Forms9Patch
         /// Object you can set for processing, typically after popup has been acted upon.
         /// </summary>
         object Parameter { get; set; }
+
+
     }
 }

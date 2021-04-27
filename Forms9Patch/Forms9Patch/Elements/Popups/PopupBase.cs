@@ -97,7 +97,6 @@ namespace Forms9Patch
             get => (LayoutOptions)GetValue(HorizontalOptionsProperty);
             set => SetValue(HorizontalOptionsProperty, value);
         }
-
         #endregion HorizontalOptions
 
         #region VerticalOptions
@@ -181,7 +180,6 @@ namespace Forms9Patch
         }
         #endregion CancelOnBackButtonClick
 
-
         #region PopAfter property
         /// <summary>
         /// BindableProperty key for PopAfter property
@@ -197,7 +195,6 @@ namespace Forms9Patch
         }
         #endregion PopAfter property
 
-
         #region Parameter property
         /// <summary>
         /// BindableProperty key for Parameter property
@@ -212,6 +209,14 @@ namespace Forms9Patch
             set => SetValue(ParameterProperty, value);
         }
         #endregion Parameter property
+
+        #region PushedFeedback Property
+        /// <summary>         /// The PushedFeedback property backing store.         /// </summary>         public static readonly BindableProperty PushedFeedbackProperty = BindableProperty.Create(nameof(PushedFeedback), typeof(FeedbackEffect), typeof(PopupBase), default(FeedbackEffect));
+                /// <summary>         /// Gets or sets the PushedFeedback value.         /// </summary>         /// <value>The PushedFeedback.</value>         public FeedbackEffect PushedFeedback{
+            get => (FeedbackEffect)GetValue(PushedFeedbackProperty);
+            set => SetValue(PushedFeedbackProperty, value);
+        }
+        #endregion PushedFeedback Property
 
 
         #region IBackground
@@ -885,6 +890,7 @@ namespace Forms9Patch
                     _isPushing = true;
                     base.IsAnimationEnabled = IsAnimationEnabled;
                     await Navigation.PushPopupAsync(this);
+                    Feedback.Play(PushedFeedback);
                     PopupLayerEffect.ApplyTo(this);
                 }
                 try

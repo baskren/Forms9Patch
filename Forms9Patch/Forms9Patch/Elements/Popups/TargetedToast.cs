@@ -20,8 +20,8 @@ namespace Forms9Patch
         /// <param name="text"></param>
         /// <param name="popAfter"></param>
         /// <returns></returns>
-        public static TargetedToast Create(VisualElement target, string title, string text, TimeSpan popAfter = default)
-            => new TargetedToast(target) { Title = title, Text = text, PopAfter = popAfter, IsVisible = true };
+        public static TargetedToast Create(VisualElement target, string title, string text, TimeSpan popAfter = default, FeedbackEffect pushedFeedback = FeedbackEffect.Info)
+            => new TargetedToast(target) { Title = title, Text = text, PopAfter = popAfter, PushedFeedback = pushedFeedback, IsVisible = true };
 
         #endregion
 

@@ -12,6 +12,6 @@ namespace Forms9Patch.Interfaces
         /// </summary>
         /// <param name="effect"></param>
         /// <param name="mode"></param>
-        void Feedback(HapticEffect effect, EffectMode mode = EffectMode.Default);
+        void Feedback(HapticEffect effect, FeedbackMode mode = FeedbackMode.Default);
     }
 }

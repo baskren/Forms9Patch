@@ -163,13 +163,13 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for HapticEffectMode property
         /// </summary>
-        public static readonly BindableProperty HapticEffectModeProperty = BindableProperty.Create(nameof(HapticEffectMode), typeof(EffectMode), typeof(TargetedMenu), default(EffectMode));
+        public static readonly BindableProperty HapticEffectModeProperty = BindableProperty.Create(nameof(HapticEffectMode), typeof(FeedbackMode), typeof(TargetedMenu), default(FeedbackMode));
         /// <summary>
         /// Gets/Sets the HapticEffectMode property
         /// </summary>
-        public EffectMode HapticEffectMode
+        public FeedbackMode HapticEffectMode
         {
-            get => (EffectMode)GetValue(HapticEffectModeProperty);
+            get => (FeedbackMode)GetValue(HapticEffectModeProperty);
             set => SetValue(HapticEffectModeProperty, value);
         }
         #endregion HapticEffectMode property
@@ -194,14 +194,14 @@ namespace Forms9Patch
         /// <summary>
         /// The backing store for the sound effect mode property.
         /// </summary>
-        public static readonly BindableProperty SoundEffectModeProperty = BindableProperty.Create(nameof(SoundEffectMode), typeof(EffectMode), typeof(TargetedMenu), default(EffectMode));
+        public static readonly BindableProperty SoundEffectModeProperty = BindableProperty.Create(nameof(SoundEffectMode), typeof(FeedbackMode), typeof(TargetedMenu), default(FeedbackMode));
         /// <summary>
         /// Gets or sets if the sound effect is played when a menu item is tapped
         /// </summary>
         /// <value>The sound effect mode.</value>
-        public EffectMode SoundEffectMode
+        public FeedbackMode SoundEffectMode
         {
-            get => (EffectMode)GetValue(SoundEffectModeProperty);
+            get => (FeedbackMode)GetValue(SoundEffectModeProperty);
             set => SetValue(SoundEffectModeProperty, value);
         }
         #endregion SoundEffectMode property
@@ -373,12 +373,13 @@ namespace Forms9Patch
         /// <param name="target">VisualElement to target</param>
         /// <param name="htmlTexts">List of text for menu items (with optional HTML markup)</param>
         /// <returns></returns>
-        public static TargetedMenu Create(VisualElement target, List<string> htmlTexts = null)
+        public static TargetedMenu Create(VisualElement target, List<string> htmlTexts = null, FeedbackEffect pushedFeedback = FeedbackEffect.Inquiry)
         {
             var targetedMenu = new TargetedMenu(target);
             targetedMenu.SegmentsFromHtmlTexts(htmlTexts);
             targetedMenu.OutlineColor = Color.Gray;
             targetedMenu.OutlineWidth = 1;
+            targetedMenu.PushedFeedback = pushedFeedback;
             targetedMenu.IsVisible = true;
             return targetedMenu;
         }
@@ -390,12 +391,13 @@ namespace Forms9Patch
         /// <param name="point"></param>
         /// <param name="htmlTexts"></param>
         /// <returns></returns>
-        public static TargetedMenu Create(VisualElement target, Point point, List<string> htmlTexts = null)
+        public static TargetedMenu Create(VisualElement target, Point point, List<string> htmlTexts = null, FeedbackEffect pushedFeedback = FeedbackEffect.Inquiry)
         {
             var targetedMenu = new TargetedMenu(target, point);
             targetedMenu.SegmentsFromHtmlTexts(htmlTexts);
             targetedMenu.OutlineColor = Color.Gray;
             targetedMenu.OutlineWidth = 1;
+            targetedMenu.PushedFeedback = pushedFeedback;
             targetedMenu.IsVisible = true;
             return targetedMenu;
         }
@@ -406,11 +408,12 @@ namespace Forms9Patch
         /// <returns>The vertical.</returns>
         /// <param name="target">Target.</param>
         /// <param name="htmlTexts">Html texts.</param>
-        public static TargetedMenu CreateVertical(VisualElement target, List<string> htmlTexts = null)
+        public static TargetedMenu CreateVertical(VisualElement target, List<string> htmlTexts = null, FeedbackEffect pushedFeedback = FeedbackEffect.Inquiry)
         {
             var targetedMenu = new TargetedMenu(target);
             targetedMenu.SegmentsFromHtmlTexts(htmlTexts);
             targetedMenu.Orientation = StackOrientation.Vertical;
+            targetedMenu.PushedFeedback = pushedFeedback;
             targetedMenu.IsVisible = true;
             return targetedMenu;
         }
@@ -422,11 +425,12 @@ namespace Forms9Patch
         /// <param name="target">Target.</param>
         /// <param name="point">Point.</param>
         /// <param name="htmlTexts">Html texts.</param>
-        public static TargetedMenu CreateVertical(VisualElement target, Point point, List<string> htmlTexts = null)
+        public static TargetedMenu CreateVertical(VisualElement target, Point point, List<string> htmlTexts = null, FeedbackEffect pushedFeedback = FeedbackEffect.Inquiry)
         {
             var targetedMenu = new TargetedMenu(target, point);
             targetedMenu.SegmentsFromHtmlTexts(htmlTexts);
             targetedMenu.Orientation = StackOrientation.Vertical;
+            targetedMenu.PushedFeedback = pushedFeedback;
             targetedMenu.IsVisible = true;
             return targetedMenu;
         }

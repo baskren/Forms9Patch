@@ -94,15 +94,6 @@ namespace Forms9Patch
 
         public static KeyClicks KeyClicks = KeyClicks.Default;
 
-        /// <summary>
-        /// Haptic effect to use if HapticEffect = Default;
-        /// </summary>
-        public static EffectMode HapticEffectMode = EffectMode.Default;
-
-        /// <summary>
-        /// Sound effect to use if SoundEffect = Default;
-        /// </summary>
-        public static EffectMode SoundEffectMode = EffectMode.Default;
 
 
 

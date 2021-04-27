@@ -23,13 +23,14 @@ namespace Forms9Patch
         /// <param name="okText">Ok text.</param>
         /// <param name="okButtonColor">Ok button color.</param>
         /// <param name="okTextColor">Ok text color.</param>
-        public static Alert Create(string title, string text, string okText = "OK", Color okButtonColor = default, Color okTextColor = default)
+        public static Alert Create(string title, string text, string okText = "OK", Color okButtonColor = default, Color okTextColor = default, FeedbackEffect pushedFeedback = FeedbackEffect.Alert)
         {
             var popup = new Alert { Title = title, Text = text, OkText = okText };
             if (okTextColor != default)
                 popup.OkTextColor = okTextColor;
             if (okButtonColor != default)
                 popup.OkButtonColor = okButtonColor;
+            popup.PushedFeedback = pushedFeedback;
             popup.IsVisible = true;
             return popup;
         }
@@ -44,13 +45,14 @@ namespace Forms9Patch
         /// <param name="okText">Ok text.</param>
         /// <param name="okButtonColor">Ok button color.</param>
         /// <param name="okTextColor">Ok text color.</param>
-        public static Alert Create(VisualElement target, string title, string text, string okText = "OK", Color okButtonColor = default, Color okTextColor = default)
+        public static Alert Create(VisualElement target, string title, string text, string okText = "OK", Color okButtonColor = default, Color okTextColor = default, FeedbackEffect pushedFeedback = FeedbackEffect.Alert)
         {
             var popup = new Alert(target) { Title = title, Text = text, OkText = okText };
             if (okTextColor != default)
                 popup.OkTextColor = okTextColor;
             if (okButtonColor != default)
                 popup.OkButtonColor = okButtonColor;
+            popup.PushedFeedback = pushedFeedback;
             popup.IsVisible = true;
             return popup;
         }

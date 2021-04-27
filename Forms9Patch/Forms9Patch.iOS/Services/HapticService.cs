@@ -8,13 +8,14 @@ namespace Forms9Patch.iOS
     [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     public class HapticService : IHapticsService
     {
-        public void Feedback(HapticEffect effect, EffectMode mode = EffectMode.Default)
+        static readonly AudioToolbox.SystemSound vibrate = new AudioToolbox.SystemSound(4095);
+
+        public void Feedback(HapticEffect effect, FeedbackMode mode = FeedbackMode.Default)
         {
-            if (mode == EffectMode.Off
+            if (mode == FeedbackMode.Off
                 || effect == HapticEffect.None
+                || (mode == FeedbackMode.Default && Forms9Patch.Feedback.HapticMode == FeedbackMode.Off)
                 || !UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
-                return;
-            if (mode == EffectMode.Default && Forms9Patch.Settings.HapticEffectMode == EffectMode.Off)
                 return;
             switch (effect)
             {
@@ -84,6 +85,10 @@ namespace Forms9Patch.iOS
                         }
                     }
                     break;
+                case HapticEffect.Long:
+                    vibrate.PlaySystemSound();
+                    break;
+
             }
 
         }

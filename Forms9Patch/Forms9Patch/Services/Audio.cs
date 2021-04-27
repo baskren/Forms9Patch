@@ -19,8 +19,9 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="sound"></param>
         /// <param name="mode"></param>
-        public static void PlaySoundEffect(SoundEffect sound, EffectMode mode = default)
-            => Service?.PlaySoundEffect(sound, mode);
+        [Obsolete("Use Forms9Patch.Feedback.PlaySound")]
+        public static void PlaySoundEffect(SoundEffect sound, FeedbackMode mode = default)
+            => throw new Exception("OBSOLETE: Use Forms9Patch.Feedback.PlaySound");
 
     }
 }

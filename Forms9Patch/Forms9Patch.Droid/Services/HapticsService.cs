@@ -45,14 +45,15 @@ namespace Forms9Patch.Droid
             }
         }
 
-        public void Feedback(HapticEffect effect, EffectMode mode = EffectMode.Default)
+        public void Feedback(HapticEffect effect, FeedbackMode mode = FeedbackMode.Default)
         {
-            if (effect == HapticEffect.None)
+            if (effect == HapticEffect.None
+                || mode  == FeedbackMode.Off
+                || (mode == FeedbackMode.Default && Forms9Patch.Feedback.HapticMode == FeedbackMode.Off))
                 return;
-            var hapticEnabled = mode == EffectMode.On;
-            if (mode == EffectMode.Default)
-                hapticEnabled = (Forms9Patch.Settings.HapticEffectMode > EffectMode.Off)
-                    && Android.Provider.Settings.System.GetInt(Android.App.Application.Context.ContentResolver, Android.Provider.Settings.System.HapticFeedbackEnabled) != 0;
+            var hapticEnabled = true;
+            if (mode == FeedbackMode.Default)
+                hapticEnabled = Android.Provider.Settings.System.GetInt(Android.App.Application.Context.ContentResolver, Android.Provider.Settings.System.HapticFeedbackEnabled) != 0;
             if (hapticEnabled && AppEnabled)
             {
                 if (effect == HapticEffect.Selection)
@@ -80,6 +81,9 @@ namespace Forms9Patch.Droid
                         case HapticEffect.SuccessNotification:
                             droidEffect = VibrationEffect.CreateWaveform(new long[] { 0, 200, 100, 200 }, new int[] { 0, 255, 0, 196 }, -1);
                             break;
+                        case HapticEffect.Long:
+                            droidEffect = VibrationEffect.CreateOneShot(800, 255);
+                            break;
                     }
                     if (droidEffect != null)
                         _vibrator.Vibrate(droidEffect);
@@ -94,10 +98,10 @@ namespace Forms9Patch.Droid
                             _vibrator.Vibrate(200, Attributes);
                             break;
                         case HapticEffect.MediumImpact:
-                            _vibrator.Vibrate(200, Attributes);
+                            _vibrator.Vibrate(300, Attributes);
                             break;
                         case HapticEffect.HeavyImpact:
-                            _vibrator.Vibrate(200, Attributes);
+                            _vibrator.Vibrate(400, Attributes);
                             break;
                         case HapticEffect.ErrorNotification:
                             pattern = new long[] { 0, 200, 100, 200, 100, 200 };
@@ -107,6 +111,9 @@ namespace Forms9Patch.Droid
                             break;
                         case HapticEffect.SuccessNotification:
                             pattern = new long[] { 0, 200, 100, 200 };
+                            break;
+                        case HapticEffect.Long:
+                            _vibrator.Vibrate(800, Attributes);
                             break;
                     }
                     if (pattern != null)

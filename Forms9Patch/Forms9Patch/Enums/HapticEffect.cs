@@ -7,6 +7,10 @@ namespace Forms9Patch
     public enum HapticEffect
     {
         /// <summary>
+        /// I'll just sit here quietly.
+        /// </summary>
+        None,
+        /// <summary>
         /// Use this feedback generator for a selection actively changing such as picking an item from a list.
         /// </summary>
         Selection,
@@ -35,8 +39,8 @@ namespace Forms9Patch
         /// </summary>
         ErrorNotification,
         /// <summary>
-        /// I'll just sit here quietly.
+        /// Message: a longer vibration to get your attention
         /// </summary>
-        None,
+        Long,
     }
 }
