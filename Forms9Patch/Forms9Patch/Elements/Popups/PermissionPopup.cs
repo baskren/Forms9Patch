@@ -124,7 +124,8 @@ namespace Forms9Patch
         #region Visual Elements
         protected readonly Button _cancelButton = new Button
         {
-            HorizontalOptions = LayoutOptions.FillAndExpand
+            HorizontalOptions = LayoutOptions.FillAndExpand,
+            AutomationId = nameof(_cancelButton)
         };
         #endregion
 

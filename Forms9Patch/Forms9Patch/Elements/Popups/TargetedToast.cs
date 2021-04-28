@@ -128,7 +128,10 @@ namespace Forms9Patch
             TextColor = Color.Black
         };
 #pragma warning disable CC0033 // Dispose Fields Properly
-        readonly Button _okButton = new Button();
+        readonly Button _okButton = new Button
+        {
+            AutomationId = nameof(_okButton)
+        };
 #pragma warning restore CC0033 // Dispose Fields Properly
         #endregion
 

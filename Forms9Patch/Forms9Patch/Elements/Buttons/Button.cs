@@ -2341,7 +2341,7 @@ namespace Forms9Patch
         /// </summary>
         internal protected void SendTapped()
         {
-            P42.Utils.BreadCrumbs.Add(GetType(), Text ?? HtmlText);
+            P42.Utils.BreadCrumbs.Add(GetType(), Text ?? HtmlText ?? AutomationId);
             _tapped?.Invoke(this, EventArgs.Empty);
             if (GroupToggleBehavior == GroupToggleBehavior.None)
                 Command?.Execute(CommandParameter);
