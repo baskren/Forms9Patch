@@ -358,7 +358,7 @@ namespace Forms9Patch
             }
         }
 
-        void TranslateContentViewTo(double x, double y, uint milliseconds, Easing easing)
+        void TranslateContentViewTo(double x, double y, uint milliseconds, Xamarin.Forms.Easing easing)
         {
 
             ContentView.TranslateTo(x, y, milliseconds, easing);
@@ -395,7 +395,7 @@ namespace Forms9Patch
                             (_startButtons > 0 && side == Side.Start && /*_swipeFrame1.TranslationX > 210 - Width */ distance >= 210 && ((ICellSwipeMenus)ContentView)?.StartSwipeMenu != null && ((ICellSwipeMenus)ContentView).StartSwipeMenu.Count > 0 && ((ICellSwipeMenus)ContentView).StartSwipeMenu[0].IsTriggeredOnFullSwipe))
                         {
                             // execute full swipe
-                            _swipeFrame1.TranslateTo(0, 0, 250, Easing.Linear);
+                            _swipeFrame1.TranslateTo(0, 0, 250, Xamarin.Forms.Easing.Linear);
                             OnSwipeButtonTapped(_swipeButton1, EventArgs.Empty);
                             Device.StartTimer(TimeSpan.FromMilliseconds(400), () =>
                             {
@@ -623,14 +623,14 @@ namespace Forms9Patch
             if (_startButtons + _endButtons > 0)
             {
                 var parkingX = _endButtons > 0 ? Width : -Width;
-                TranslateContentViewTo(0, 0, 300, Easing.Linear);
+                TranslateContentViewTo(0, 0, 300, Xamarin.Forms.Easing.Linear);
                 if (animated)
                 {
-                    _swipeFrame1.TranslateTo(parkingX, 0, 400, Easing.Linear);
+                    _swipeFrame1.TranslateTo(parkingX, 0, 400, Xamarin.Forms.Easing.Linear);
                     if (_endButtons + _startButtons > 1)
-                        _swipeFrame2.TranslateTo(parkingX, 0, 400, Easing.Linear);
+                        _swipeFrame2.TranslateTo(parkingX, 0, 400, Xamarin.Forms.Easing.Linear);
                     if (_endButtons + _startButtons > 2)
-                        _swipeFrame3.TranslateTo(parkingX, 0, 400, Easing.Linear);
+                        _swipeFrame3.TranslateTo(parkingX, 0, 400, Xamarin.Forms.Easing.Linear);
                     //_insetFrame.TranslateTo(parkingX, 0, 400, Easing.Linear);
                     Device.StartTimer(TimeSpan.FromMilliseconds(400), () =>
                     {
