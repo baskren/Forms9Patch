@@ -20,17 +20,6 @@ namespace Forms9Patch
             => (WebViewSource)webView.GetValue(Forms9Patch.WebViewPrintEffect.ActualSourceProperty);
 
         /// <summary>
-        /// OBSOLETE: Use PrintAsync instead
-        /// </summary>
-        /// <param name="webview"></param>
-        /// <param name="jobName"></param>
-        [Obsolete("Please use PrintAsync", true)]
-        public static void Print(this WebView webview, string jobName)
-        {
-            throw new Exception("Forms9Patch.PrintService.Print is obsolete.  Please use PrintAsync");
-        }
-
-        /// <summary>
         /// Print the specified webview and jobName.
         /// </summary>
         /// <param name="webview">Webview.</param>
@@ -42,17 +31,6 @@ namespace Forms9Patch
             if (_service == null)
                 throw new NotSupportedException("Cannot get IWebViewService: must not be supported on this platform.");
             return _service.PrintAsync(webview, jobName ?? ApplicationInfoService.Name, failAction);
-        }
-
-        /// <summary>
-        /// OBSOLETE: Use PrintAsync instead
-        /// </summary>
-        /// <param name="html"></param>
-        /// <param name="jobName"></param>
-        [Obsolete("Please use PrintAsync", true)]
-        public static void Print(this string html, string jobName)
-        {
-            throw new Exception("Forms9Patch.PrintService.Print is obsolete.  Please use PrintAsync");
         }
 
         /// <summary>

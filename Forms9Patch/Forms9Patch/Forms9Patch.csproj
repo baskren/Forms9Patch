@@ -87,6 +87,7 @@
     <Folder Include="Elements\Popups\Core\Converters\" />
     <Folder Include="Elements\Popups\Core\Animations\" />
     <Folder Include="Resources\Sounds\" />
+    <Folder Include="Elements\Pages\" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition=" '$(Configuration)'=='Release' And '$(OS)'=='Windows_NT' And '$(SolutionName)'=='Forms9Patch' ">
     <Message Text="SolutionDir = $(SolutionDir)" Importance="High" />  

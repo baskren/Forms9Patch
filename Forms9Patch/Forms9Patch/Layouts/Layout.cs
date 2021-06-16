@@ -248,17 +248,6 @@ namespace Forms9Patch
     public abstract class Element<T> : BindableObject<T>, Xamarin.Forms.IElementController where T : Xamarin.Forms.Layout<View>, new()
     {
         /// <summary>
-        /// Obsolete Content Property
-        /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("USE CHILDREN INSTEAD", true)]
-        public new View Content
-        {
-            get => throw new NotSupportedException();
-            set => throw new NotSupportedException();
-        }
-
-        /// <summary>
         /// Forms9Patch.Element
         /// </summary>
         protected Element()

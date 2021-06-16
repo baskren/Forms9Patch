@@ -16,15 +16,6 @@ namespace Forms9Patch
 
         static IToPngService _platformToPngService;
 
-        /// <summary>
-        /// OBSOLETE
-        /// </summary>
-        /// <param name="html"></param>
-        /// <param name="fileName"></param>
-        /// <param name="onComplete"></param>
-        [Obsolete("Use ToPngAsync instead", true)]
-        public static void ToPng(this string html, string fileName, Action<string> onComplete)
-        { }
 
         /// <summary>
         /// Converts HTML text to PNG

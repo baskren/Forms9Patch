@@ -5,14 +5,6 @@ using Xamarin.Forms;
 namespace Forms9Patch
 {
     /// <summary>
-    /// Depricated: Use StateButton
-    /// </summary>
-    [Obsolete("Obsolete: Use Forms9Patch.StateButton", true)]
-    public class ImageButton : StateButton
-    {
-    }
-
-    /// <summary>
     /// Image button.
     /// </summary>
     [Preserve(AllMembers = true)]

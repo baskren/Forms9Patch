@@ -14,42 +14,6 @@ namespace Forms9Patch
     [ContentProperty(nameof(HtmlText))]
     public class Segment : Element, ISegment, IDisposable
     {
-        #region Obsolete Properties
-        /// <summary>
-        /// OBSOLETE: Use TextColorProperty
-        /// </summary>
-        [Obsolete("Use TextColorProperty")]
-        public static readonly BindableProperty FontColorProperty = BindableProperty.Create(nameof(FontColor), typeof(Color), typeof(Segment), Color.Default);
-        /// <summary>
-        /// OBSOLETE: Use TextColor
-        /// </summary>
-        /// <value>The color of the font.</value>
-        [Obsolete("Use TextColor")]
-        public Color FontColor
-        {
-            get { throw new NotSupportedException("Use TextColor"); }
-            set { throw new NotSupportedException("Use TextColor"); }
-        }
-
-        /// <summary>
-        /// Backing store for the Image bindable property.
-        /// </summary>
-        [Obsolete("Use IconImageProperty instead")]
-        public static BindableProperty ImageSourceProperty = BindableProperty.Create(nameof(ImageSource), typeof(Xamarin.Forms.ImageSource), typeof(Segment), null);
-        /// <summary>
-        /// Gets or sets the companion image for this this <see cref="Segment"/> - alternative to IconText.
-        /// </summary>
-        /// <value>The image.</value>
-        [Obsolete("Use IconImage instead")]
-        public Xamarin.Forms.ImageSource ImageSource
-        {
-            get { throw new NotSupportedException("Use IconImage instead"); }
-            set { throw new NotSupportedException("Use IconImage instead"); }
-        }
-
-        #endregion
-
-
         #region ISegment properties
 
         #region IconImage property

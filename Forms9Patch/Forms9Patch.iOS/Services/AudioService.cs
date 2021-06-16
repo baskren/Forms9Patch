@@ -26,11 +26,11 @@ namespace Forms9Patch.iOS
 
         static AudioService()
         {
-            var alarmPath = P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource("Forms9Patch.Resources.Sounds.alarm.mp3", typeof(Forms9Patch.Audio).Assembly);
-            var alertPath = P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource("Forms9Patch.Resources.Sounds.alert.mp3", typeof(Forms9Patch.Audio).Assembly);
-            var errorPath = P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource("Forms9Patch.Resources.Sounds.error.mp3", typeof(Forms9Patch.Audio).Assembly);
-            var messagePath = P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource("Forms9Patch.Resources.Sounds.message.mp3", typeof(Forms9Patch.Audio).Assembly);
-            var notificationPath = P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource("Forms9Patch.Resources.Sounds.notification.mp3", typeof(Forms9Patch.Audio).Assembly);
+            var alarmPath = P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource("Forms9Patch.Resources.Sounds.alarm.mp3", typeof(Forms9Patch.Feedback).Assembly);
+            var alertPath = P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource("Forms9Patch.Resources.Sounds.alert.mp3", typeof(Forms9Patch.Feedback).Assembly);
+            var errorPath = P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource("Forms9Patch.Resources.Sounds.error.mp3", typeof(Forms9Patch.Feedback).Assembly);
+            var messagePath = P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource("Forms9Patch.Resources.Sounds.message.mp3", typeof(Forms9Patch.Feedback).Assembly);
+            var notificationPath = P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource("Forms9Patch.Resources.Sounds.notification.mp3", typeof(Forms9Patch.Feedback).Assembly);
             alarmPlayer = new AVFoundation.AVAudioPlayer(NSUrl.FromFilename(alarmPath), "mp3", out NSError nSError0);
             alertPlayer = new AVFoundation.AVAudioPlayer(NSUrl.FromFilename(alertPath), "mp3", out NSError nSError1);
             errorPlayer = new AVFoundation.AVAudioPlayer(NSUrl.FromFilename(errorPath), "mp3", out NSError nSError2);

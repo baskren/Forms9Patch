@@ -8,13 +8,6 @@ using System.ComponentModel;
 
 namespace Forms9Patch
 {
-    /// <summary>
-    /// DEPRICATED: USE SegmentedControl
-    /// </summary>
-    [Obsolete("DEPRICATED: Use SegmentedControl", true)]
-    public class MaterialSegmentedControl : SegmentedControl
-    {
-    }
 
     /// <summary>
     /// Forms9Patch Material Segmented Control.
@@ -24,115 +17,6 @@ namespace Forms9Patch
     [ContentProperty(nameof(Segments))]
     public class SegmentedControl : Forms9Patch.ManualLayout, ILabelStyle, IDisposable
     {
-        #region Obsolete Properties
-        /// <summary>
-        /// Use TextColorProperty
-        /// </summary>
-        [Obsolete("Use TextColorProperty")]
-        public static readonly BindableProperty FontColorProperty = BindableProperty.Create(nameof(FontColor), typeof(Color), typeof(SegmentedControl), Color.Default, propertyChanged: (bindable, oldValue, newValue) =>
-        {
-            if (bindable is SegmentedControl control && newValue is Color color)
-                control.TextColor = color;
-        });
-        /// <summary>
-        /// OBSOLETE: Use TextColor
-        /// </summary>
-        /// <value>The color of the font.</value>
-        [Obsolete("Use TextColor")]
-        public Color FontColor
-        {
-            get { return (Color)GetValue(FontColorProperty); }
-            set { SetValue(FontColorProperty, value); }
-        }
-
-        /// <summary>
-        /// OBSOLETE: Use SelectedTextColorProperty
-        /// </summary>
-        [Obsolete("Use SelectedTextColorProperty")]
-        public static readonly BindableProperty SelectedFontColorProperty = BindableProperty.Create(nameof(SelectedFontColor), typeof(Color), typeof(SegmentedControl), Color.Default, propertyChanged: (bindable, oldValue, newValue) =>
-        {
-            if (bindable is SegmentedControl control && newValue is Color color)
-                control.SelectedTextColor = color;
-        });
-        /// <summary>
-        /// OBSOLETE: Use SelectedTextColor property
-        /// </summary>
-        /// <value>The color of the selected font.</value>
-        [Obsolete("Use SelectedTextColor")]
-        public Color SelectedFontColor
-        {
-            get { return (Color)GetValue(SelectedFontColorProperty); }
-            set { SetValue(SelectedFontColorProperty, value); }
-        }
-
-        /// <summary>
-        /// OBSOLETE: Use ToggleBehaviorProperty instead.
-        /// </summary>
-        [Obsolete("StickyBehavior property is obsolete, use ToggleBehavior instead", true)]
-        public static BindableProperty StickyBehaviorProperty;
-
-        /// <summary>
-        /// OBSOLETE: Use ToggleBehavior instead.
-        /// </summary>
-        [Obsolete("StickyBehavior property is obsolete, use ToggleBehavior instead", true)]
-        public bool StickyBehavior
-        {
-            get { throw new NotSupportedException("StickyBehavior property is obsolete, use ToggleBehavior instead"); }
-            set { throw new NotSupportedException("StickyBehavior property is obsolete, use ToggleBehavior instead"); }
-        }
-
-
-        /// <summary>
-        /// OBSOLETE: Use TrailingIconProperty
-        /// </summary>
-        [Obsolete("Use TrailingIconProperty")]
-        public static readonly BindableProperty TrailingImageProperty = BindableProperty.Create(nameof(TrailingIcon), typeof(bool), typeof(MaterialSegmentedControl), false, propertyChanged: (bindable, oldValue, newValue) =>
-        {
-            if (bindable is MaterialSegmentedControl control && newValue is bool value)
-                control.TrailingIcon = value;
-        });
-        /// <summary>
-        /// OBSOLETE: Use TrailingIcon
-        /// </summary>
-        [Obsolete("Use TrailingIcon")]
-        public bool TrailingImage
-        {
-            get { return (bool)GetValue(TrailingImageProperty); }
-            set { SetValue(TrailingImageProperty, value); }
-        }
-
-
-        /// <summary>
-        /// OBSOLETE: Use TintIconProperty
-        /// </summary>
-        [Obsolete("Use TintIconProperty", true)]
-        public static readonly BindableProperty TintImageProperty = BindableProperty.Create(nameof(TintImage), typeof(bool), typeof(MaterialSegmentedControl), false, propertyChanged: (bindable, oldValue, newValue) =>
-        {
-            if (bindable is MaterialSegmentedControl control && newValue is bool value)
-                control.TintIcon = value;
-        });
-        /// <summary>
-        /// OBSOLETE: Use TintIcon property
-        /// </summary>
-        [Obsolete("Use TintIcon", true)]
-        public bool TintImage
-        {
-            get { return (bool)GetValue(TintImageProperty); }
-            set { SetValue(TintImageProperty, value); }
-        }
-
-        /// <summary>
-        /// Do not sue!
-        /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("Use Segments", true)]
-        public VisualElement Content
-        {
-            get => throw new NotSupportedException("Forms9Patch.SegmentControl: Content is not a supported property.  Use Segments property instead");
-            set => throw new NotSupportedException("Forms9Patch.SegmentControl: Content is not a supported property.  Use Segments property instead");
-        }
-        #endregion
-
 
         #region Properties
 

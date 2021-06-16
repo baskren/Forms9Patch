@@ -18,47 +18,6 @@ namespace Forms9Patch
     public class ButtonState : BindableObject, IButtonState
     {
 
-        #region Obsolete Properties
-        /// <summary>
-        /// OBSOLETE: Use IconImageProperty
-        /// </summary>
-        [Obsolete("Use IconImageProperty")]
-        public static BindableProperty ImageProperty = BindableProperty.Create(nameof(Image), typeof(Forms9Patch.Image), typeof(ImageButtonState), null, propertyChanged: (bindable, oldValue, newValue) =>
-        {
-            if (bindable is ImageButtonState state && newValue is Image image)
-                state.IconImage = image;
-        });
-        /// <summary>
-        /// OBSOLETE: Use IconImage
-        /// </summary>
-        [Obsolete("Use IconImage")]
-        public Image Image
-        {
-            get { return (Forms9Patch.Image)GetValue(ImageProperty); }
-            set { SetValue(ImageProperty, value); }
-        }
-
-        /// <summary>
-        /// OBSOLETE: Use TextColorProperty
-        /// </summary>
-        [Obsolete("Use TextColorProperty")]
-        public static readonly BindableProperty FontColorProperty = BindableProperty.Create(nameof(FontColor), typeof(Color), typeof(ImageButtonState), Color.Default, propertyChanged: (bindable, oldValue, newValue) =>
-        {
-            if (bindable is ImageButtonState state && newValue is Color color)
-                state.TextColor = color;
-        });
-        /// <summary>
-        /// OBSOLETE: Use TextColor
-        /// </summary>
-        [Obsolete("Use TextColor")]
-        public Color FontColor
-        {
-            get { return (Color)GetValue(FontColorProperty); }
-            set { SetValue(FontColorProperty, value); }
-        }
-
-        #endregion
-
 #pragma warning disable IDE0044 // Add readonly modifier
         int _instances;
 #pragma warning restore IDE0044 // Add readonly modifier

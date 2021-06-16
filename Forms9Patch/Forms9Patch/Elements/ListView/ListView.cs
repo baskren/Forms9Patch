@@ -16,24 +16,6 @@ namespace Forms9Patch
     {
         #region Properties
 
-        #region Obsolete properties
-        /// <summary>
-        /// There is nothing to see here.  Move on.
-        /// </summary>
-        [Obsolete("Invalid property", true)]
-        public static new readonly BindableProperty ContentProperty = BindableProperty.Create(nameof(Content), typeof(View), typeof(ListView), default(View));
-        /// <summary>
-        /// There is nothing to see here.  Move on.
-        /// </summary>
-        /// <value>The content.</value>
-        [Obsolete("Invalid property", true)]
-        public new View Content
-        {
-            get => (View)GetValue(ContentProperty);
-            set => SetValue(ContentProperty, value);
-        }
-        #endregion
-
         #region Forms9Patch Cell Decoration properties
 
         #region GroupHeaderRowHeight

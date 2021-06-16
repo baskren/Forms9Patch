@@ -42,17 +42,6 @@ namespace Forms9Patch.Elements.Popups.Core
         #endregion
 
         #region Bindable Properties
-        /*
-        [Obsolete(IsAnimatingObsoleteText)]
-        public static readonly BindableProperty IsAnimatingProperty = BindableProperty.Create(nameof(IsAnimating), typeof(bool), typeof(PopupPage), true);
-
-        [Obsolete(IsAnimatingObsoleteText)]
-        public bool IsAnimating
-        {
-            get { return (bool)GetValue(IsAnimatingProperty); }
-            set { SetValue(IsAnimatingProperty, value); }
-        }
-        */
         /// <summary>
         /// BindableProperty for IsAnmiationEnabled property
         /// </summary>

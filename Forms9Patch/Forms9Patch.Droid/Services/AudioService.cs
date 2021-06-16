@@ -21,11 +21,11 @@ namespace Forms9Patch.Droid
 
         static AudioService()
         {
-            var alarmPath = P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource("Forms9Patch.Resources.Sounds.alarm.ogg", typeof(Forms9Patch.Audio).Assembly);
-            var alertPath = P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource("Forms9Patch.Resources.Sounds.alert.ogg", typeof(Forms9Patch.Audio).Assembly);
-            var errorPath = P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource("Forms9Patch.Resources.Sounds.error.ogg", typeof(Forms9Patch.Audio).Assembly);
-            var messagePath = P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource("Forms9Patch.Resources.Sounds.message.ogg", typeof(Forms9Patch.Audio).Assembly);
-            var notificationPath = P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource("Forms9Patch.Resources.Sounds.notification.ogg", typeof(Forms9Patch.Audio).Assembly);
+            var alarmPath = P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource("Forms9Patch.Resources.Sounds.alarm.ogg", typeof(Forms9Patch.Feedback).Assembly);
+            var alertPath = P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource("Forms9Patch.Resources.Sounds.alert.ogg", typeof(Forms9Patch.Feedback).Assembly);
+            var errorPath = P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource("Forms9Patch.Resources.Sounds.error.ogg", typeof(Forms9Patch.Feedback).Assembly);
+            var messagePath = P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource("Forms9Patch.Resources.Sounds.message.ogg", typeof(Forms9Patch.Feedback).Assembly);
+            var notificationPath = P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource("Forms9Patch.Resources.Sounds.notification.ogg", typeof(Forms9Patch.Feedback).Assembly);
 
             if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
             {
