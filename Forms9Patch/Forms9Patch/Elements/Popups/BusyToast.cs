@@ -69,6 +69,9 @@ namespace Forms9Patch
         public static BusyToast Create(VisualElement target, string title, string text, Color spinnerColor = default, TimeSpan popAfter = default)
             => new BusyToast(target) { Title = title, Text = text, PopAfter = popAfter, SpinnerColor = spinnerColor, IsVisible = true };
 
+        public static BusyToast Create(string title, string text, Color spinnerColor = default, TimeSpan popAfter = default)
+            => new BusyToast(null) { Title = title, Text = text, PopAfter = popAfter, SpinnerColor = spinnerColor, IsVisible = true };
+
         public BusyToast(VisualElement target) : base(target)
         {
             var scroll = new ScrollView
