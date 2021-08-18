@@ -110,7 +110,7 @@
   <!-- NUGET PACKAGES -->
   <ItemGroup>
     <PackageReference Include="SharpDX.Direct2D1">
-      <Version>4.2.0</Version>
+      <Version>4.3.0</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp">
       <Version>2.80.2</Version>
@@ -125,7 +125,7 @@
       <Version>6.2.9</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>5.0.0.2012</Version>
+      <Version>5.0.0.2083</Version>
     </PackageReference>
   </ItemGroup>
   <!-- XF Nuget Project references -->

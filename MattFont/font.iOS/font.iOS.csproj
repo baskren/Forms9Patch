@@ -106,7 +106,7 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.iOS\Forms9Patch.iOS.csproj">
