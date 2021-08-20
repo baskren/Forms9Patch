@@ -58,7 +58,7 @@ namespace Forms9Patch
         }
 
         bool _isScrolling;
-        DateTime _lastScrolling = DateTime.MinValue;
+        DateTime _lastScrolling = DateTime.MinValue.AddYears(1);
         public bool IsScrolling
         {
             get

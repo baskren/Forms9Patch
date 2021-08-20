@@ -176,7 +176,7 @@ namespace Forms9Patch
         #endregion
 
         #region FittedFontSize property
-        DateTime _lastTimeFittedFontSizeSet = DateTime.MinValue;
+        DateTime _lastTimeFittedFontSizeSet = DateTime.MinValue.AddYears(1);
 
         internal static readonly BindablePropertyKey FittedFontSizePropertyKey = BindableProperty.CreateReadOnly(nameof(FittedFontSize), typeof(double), typeof(Label), -1.0);
         /// <summary>

@@ -38,7 +38,7 @@ namespace Forms9Patch
         }
 
         //static Timer _falseFocusTimer=null;
-        static DateTime _lastFocusChangedDateTime = DateTime.MinValue;
+        static DateTime _lastFocusChangedDateTime = DateTime.MinValue.AddYears(1);
         static void OnFocusMonitorFocusedElementChanged(object wasElement, VisualElement currentElement)
         {
             //System.Diagnostics.Debug.WriteLine("Forms9Patch.HardwareKeyPage.OnFocusElementChanged (" + wasElement + ", " + currentElement + ") ");

@@ -39,7 +39,7 @@ namespace Forms9Patch
         }
 
         static VisualElement _lastFromElement;
-        static DateTime _lastFocusChangedDateTime = DateTime.MinValue;
+        static DateTime _lastFocusChangedDateTime = DateTime.MinValue.AddYears(1);
         internal static void OnVisualElementFocusChanged(object fromElement, VisualElement toElement)
         {
             //System.Diagnostics.Debug.WriteLine("Forms9Patch.FocusMonitor.OnVisualElementFocusChanged(" + fromElement + "," + toElement + ")");

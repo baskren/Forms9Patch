@@ -507,7 +507,7 @@ namespace Forms9Patch
         /// <summary>
         /// Say, when was the last time I ...
         /// </summary>
-        protected DateTime _lastLayout = DateTime.MinValue;
+        protected DateTime _lastLayout = DateTime.MinValue.AddYears(1);
         PopupPoppedEventArgs PopupPoppedEventArgs;
         #endregion
 

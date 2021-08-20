@@ -1126,7 +1126,7 @@ namespace Forms9Patch
 
 
         #region FontSize Synchronization
-        DateTime _lastFontSizeResetTime = DateTime.MinValue;
+        DateTime _lastFontSizeResetTime = DateTime.MinValue.AddYears(1);
         static int _iterations;
         bool _waitingForThingsToCalmDown;
         private void OnButtonFittedFontSizeChanged(object sender, double e)

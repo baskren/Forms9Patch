@@ -647,7 +647,7 @@ namespace Forms9Patch
         #region Collection Management
 
         bool _updatingCollection;
-        DateTime _lastUpdateComplete = DateTime.MinValue;
+        DateTime _lastUpdateComplete = DateTime.MinValue.AddYears(1);
         void OnSegmentsCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             _lastUpdateComplete = DateTime.MaxValue;
@@ -707,7 +707,7 @@ namespace Forms9Patch
 
 
         bool _updatingButtonSize;
-        DateTime _lastButtonSizeChangeComplete = DateTime.MinValue;
+        DateTime _lastButtonSizeChangeComplete = DateTime.MinValue.AddYears(1);
         private void OnButtonSizeChanged(object sender, EventArgs e)
         {
             _lastButtonSizeChangeComplete = DateTime.MaxValue;

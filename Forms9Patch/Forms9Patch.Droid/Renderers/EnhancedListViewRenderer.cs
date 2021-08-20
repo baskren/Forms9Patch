@@ -122,7 +122,7 @@ namespace Forms9Patch.Droid
             return true;
         }
 
-        DateTime _lastScrollToDateTime = DateTime.MinValue;
+        DateTime _lastScrollToDateTime = DateTime.MinValue.AddYears(1);
         int _lastScrollToOffset = 0;
         public bool ScrollTo(double offset, bool animated)
         {

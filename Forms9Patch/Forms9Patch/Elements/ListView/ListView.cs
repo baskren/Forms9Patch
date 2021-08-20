@@ -513,7 +513,7 @@ namespace Forms9Patch
         //readonly Listener _listener;
         bool _resetScrollToSelected;
         DateTime _scrollResetAt;
-        DateTime _scrollCompletedAt = DateTime.MinValue;
+        DateTime _scrollCompletedAt = DateTime.MinValue.AddYears(1);
         #endregion
 
 

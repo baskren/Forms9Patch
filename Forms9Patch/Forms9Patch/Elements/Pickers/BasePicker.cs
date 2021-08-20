@@ -150,7 +150,7 @@ namespace Forms9Patch
 
 
         #region Snap to cell
-        DateTime _lastScrollPoint = DateTime.MinValue;
+        DateTime _lastScrollPoint = DateTime.MinValue.AddYears(1);
         bool _scrolling;
         /// <summary>
         /// Used to determine when scrolling has stopped
