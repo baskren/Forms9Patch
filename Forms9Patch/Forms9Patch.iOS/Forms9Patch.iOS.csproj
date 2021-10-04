@@ -144,6 +144,9 @@
   <ItemGroup>
     <Folder Include="Popup\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent Condition=" '$(Configuration)'=='Release' And '$(OS)'=='Windows_NT' And '$(SolutionName)'=='Forms9Patch'  ">
