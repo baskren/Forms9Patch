@@ -70,7 +70,7 @@ Android developers can use NinePatch bitmaps, the drawable directory naming conv
     1.4.0: New: Clipboard supports multiple objects of same Mime type, Inter-app Data Sharing; Fixed: HardwareKeyboardListener crashes in some UWP implementations, Popups crashes in Android implementations when instantiated before Forms9Patch.RootPage is instantiated;  Eliminated need for Android "forms9patch_copy_paste_authority" string.
     1.3.3: Fixed: targeted popups (Bubble, TargetedToast, TargetedMenu) will, after the device orientation has changed, render in wrong location when pointing at an element inside of a ScrollView.
     1.3.2: New: KeyboardService.Height and KeyboardService.HeightChanged allow you to resize your layout views in response to changes in the software keyboard.
-    1.3.1: Fixed: Xamarin.Forms 3.0 UWP: Popups, Buttons, and Layouts are rendering blank.
+    1.5.1: Fixed: Xamarin.Forms 3.0 UWP: Popups, Buttons, and Layouts are rendering blank.
     1.3.0.0: New: Forms9Patch is open source!  Get it at https://1drv.ms/u/s!AkPAsLOJX3DChFJLwyOMwJgpVXfQ  Fixed: failure to build because of orphaned references to SkiaSharp.Extended.Svg;
     1.2.1.0: Fixed: Clipboard entry reading fails on iOS; Work around for SkiaSharp 1.60 Lattice bug;
     1.2.0.0: Fixed: Android crash if using custom font and app cache is cleared.  New: Clipboard and HardwareKey classes (documentation is coming!).  NOTE: You must add `&lt;string name="forms9patch_copy_paste_authority"&gt;*your_Android_app_package_name_here*.f9pcopypaste&lt;/string&gt;` to your Android project's `Resources/values/strings.xml` file.  See the GitHub Forms9PatchDemo app for an example.
@@ -160,21 +160,21 @@ Fixed: iOS HtmlMarkup underlines don't match font color, Default Android image b
         <dependencies>
             <group targetFramework="NetStandard2.0">
                 <dependency id="Xamarin.Forms" version="4.4.0.991640" />
-                <dependency id="Xamarin.Essentials" version="1.3.1" />
+                <dependency id="Xamarin.Essentials" version="1.5.1" />
                 <dependency id="Newtonsoft.Json" version="12.0.3" />
                 <dependency id="SkiaSharp.Views.Forms" version="1.68.1.1" />
                 <dependency id="SkiaSharp.Svg" version="1.60" />
             </group>
             <group targetFramework="Xamarin.iOS10">
                 <dependency id="Xamarin.Forms" version="4.4.0.991640" />
-                <dependency id="Xamarin.Essentials" version="1.3.1" />
+                <dependency id="Xamarin.Essentials" version="1.5.1" />
                 <dependency id="Newtonsoft.Json" version="12.0.3" />
                 <dependency id="SkiaSharp.Views.Forms" version="1.68.1.1" />
                 <dependency id="SkiaSharp.Svg" version="1.60" />
             </group>
             <group targetFramework="UAP10.0">
                 <dependency id="Xamarin.Forms" version="4.4.0.991640" />
-                <dependency id="Xamarin.Essentials" version="1.3.1" />
+                <dependency id="Xamarin.Essentials" version="1.5.1" />
                 <dependency id="Newtonsoft.Json" version="12.0.3" />
                 <dependency id="SkiaSharp.Views.Forms" version="1.68.1.1" />
                 <dependency id="SkiaSharp.Svg" version="1.60.0" />
@@ -185,7 +185,7 @@ Fixed: iOS HtmlMarkup underlines don't match font color, Default Android image b
             </group>
             <group targetFramework="MonoAndroid10">
                 <dependency id="Xamarin.Forms" version="4.4.0.991640" />
-                <dependency id="Xamarin.Essentials" version="1.3.1" />
+                <dependency id="Xamarin.Essentials" version="1.5.1" />
                 <dependency id="Newtonsoft.Json" version="12.0.3" />
                 <dependency id="SkiaSharp.Views.Forms" version="1.68.1.1" />
                 <dependency id="SkiaSharp.Svg" version="1.60" />
