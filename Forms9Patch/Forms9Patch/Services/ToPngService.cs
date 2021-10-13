@@ -35,6 +35,7 @@ namespace Forms9Patch
                 if (width <= 0)
                     width = (int)Math.Ceiling((PageSize.Default.Width - 0.5) * 4);
                 result = await _platformToPngService.ToPngAsync(html, fileName, width);
+                await indicator.CancelAsync();
             }
             await Task.Delay(50);
             return result;
@@ -58,6 +59,7 @@ namespace Forms9Patch
                 if (width <= 0)
                     width = (int)Math.Ceiling((PageSize.Default.Width - (12 * 25.4)) * 4);
                 result = await _platformToPngService.ToPngAsync(webView, fileName, width);
+                await indicator.CancelAsync();
             }
             await Task.Delay(50);
             return result;

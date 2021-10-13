@@ -55,6 +55,7 @@ namespace Forms9Patch
                     return new ToFileResult(true, "Page printable area (page size - margins) has zero width or height.");
 
                 result = await _platformToPdfService.ToPdfAsync(html, fileName, pageSize, margin);
+                await indicator.CancelAsync();
             }
             await Task.Delay(50);
             return result;
@@ -84,6 +85,7 @@ namespace Forms9Patch
                     return new ToFileResult(true, "Page printable area (page size - margins) has zero width or height.");
 
                 result = await _platformToPdfService.ToPdfAsync(webView, fileName, pageSize, margin);
+                await indicator.CancelAsync();
             }
             await Task.Delay(50);
             return result;
