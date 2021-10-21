@@ -70,7 +70,7 @@ namespace Forms9Patch
             public int Category;
         }
 
-        WeakEventManager _eventManager;
+        P42.Utils.WeakEventManager _eventManager;
         /// <summary>
         /// Occurs when selection changed.
         /// </summary>
@@ -79,7 +79,7 @@ namespace Forms9Patch
             add
             {
                 if (_eventManager == null)
-                    _eventManager = WeakEventManager.GetWeakEventManager(this);
+                    _eventManager = P42.Utils.WeakEventManager.GetWeakEventManager(this);
                 _eventManager.AddEventHandler(nameof(SelectionChanged), value);
             }
             remove

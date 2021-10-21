@@ -26,13 +26,13 @@ namespace Forms9Patch.Elements.Popups.Core.Animations.Base
         /// <summary>
         /// Motion profile for appearing animation
         /// </summary>
-        [TypeConverter(typeof(EasingTypeConverter))]
+        [TypeConverter(typeof(Converters.TypeConverters.EasingTypeConverter))]
         public Easing EasingIn { get; set; } = Easing.Linear;
 
         /// <summary>
         /// Motion profile for disappearing animation
         /// </summary>
-        [TypeConverter(typeof(EasingTypeConverter))]
+        [TypeConverter(typeof(Converters.TypeConverters.EasingTypeConverter))]
         public Easing EasingOut { get; set; } = Easing.Linear;
 
         /// <summary>
