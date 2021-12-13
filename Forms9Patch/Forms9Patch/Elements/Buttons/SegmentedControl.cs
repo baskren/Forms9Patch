@@ -823,6 +823,7 @@ namespace Forms9Patch
                 button.PropertyChanged += OnButtonPropertyChanged;
                 button.Tapped += OnSegmentTapped;
                 button.Selected += OnSegmentSelected;
+                button.SegmentSelectionChanged += OnSegmentSelectionChanged;
                 button.LongPressing += OnSegmentLongPressing;
                 button.LongPressed += OnSegmentLongPressed;
                 button.FittedFontSizeChanged += OnButtonFittedFontSizeChanged;
@@ -853,6 +854,7 @@ namespace Forms9Patch
             Children.Remove(button);
             button.Tapped -= OnSegmentTapped;
             button.Selected -= OnSegmentSelected;
+            button.SegmentSelectionChanged += OnSegmentSelectionChanged;
             button.LongPressing -= OnSegmentLongPressing;
             button.LongPressed -= OnSegmentLongPressed;
             button.FittedFontSizeChanged -= OnButtonFittedFontSizeChanged;
@@ -1441,9 +1443,26 @@ namespace Forms9Patch
             for (int i = 0; i < _segments.Count; i++)
             {
                 var button = _segments[i]._button;
-                if (button.Equals(sender) && button.IsSelected)
+                if (button.Equals(sender))
                 {
                     SegmentSelected?.Invoke(this, new SegmentedControlEventArgs(i, _segments[i]));
+                    return;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Occurs when one of the segments is selected.
+        /// </summary>
+        public event SegmentedControlEventHandler SegmentSelectionChanged;
+        void OnSegmentSelectionChanged(object sender, EventArgs e)
+        {
+            for (int i = 0; i < _segments.Count; i++)
+            {
+                var button = _segments[i]._button;
+                if (button.Equals(sender))
+                {
+                    SegmentSelectionChanged?.Invoke(this, new SegmentedControlEventArgs(i, _segments[i]));
                     return;
                 }
             }

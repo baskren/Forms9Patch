@@ -24,6 +24,8 @@ namespace Forms9Patch
         }
         #endregion
 
+        public event EventHandler<EventArgs> SegmentSelectionChanged;
+
         #region ExtendedElementShape property
         /// <summary>
         /// backing store for ExtendedElementShape property
@@ -68,9 +70,10 @@ namespace Forms9Patch
                     ((IExtendedShape)CurrentBackgroundImage).ExtendedElementSeparatorWidth = ((IExtendedShape)_fallbackBackgroundImage).ExtendedElementSeparatorWidth = ExtendedElementSeparatorWidth;
                 else if (propertyName == ExtendedElementShapeOrientationProperty.PropertyName)
                     ((IExtendedShape)CurrentBackgroundImage).ExtendedElementShapeOrientation = ((IExtendedShape)_fallbackBackgroundImage).ExtendedElementShapeOrientation = ExtendedElementShapeOrientation;
+                else if (propertyName == IsSelectedProperty.PropertyName)
+                    SegmentSelectionChanged?.Invoke(this, new EventArgs());
             });
         }
-
 
         protected override void UpdateElements(bool isSegment = true) => base.UpdateElements(isSegment);
     }
