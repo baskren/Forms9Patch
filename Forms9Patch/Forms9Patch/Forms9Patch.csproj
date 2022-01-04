@@ -5,7 +5,6 @@
     <AssemblyName>Forms9Patch</AssemblyName>
     <RootNamespace>Forms9Patch</RootNamespace>
     <PackageIcon>Resources\icon.png</PackageIcon>
-    <ReleaseVersion></ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;DEBUG;NETSTANDARD;NETSTANDARD2_0</DefineConstants>

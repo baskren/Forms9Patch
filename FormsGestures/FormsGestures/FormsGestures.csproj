@@ -8,7 +8,6 @@
     <Company>42nd Parallel</Company>
     <Copyright>2017, 42nd Parallel.  All Rights Reserverd</Copyright>
     <Description>Gestures library for Xamarin Forms</Description>
-    <ReleaseVersion></ReleaseVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
