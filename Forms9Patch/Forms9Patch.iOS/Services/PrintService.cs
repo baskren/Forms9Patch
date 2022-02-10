@@ -75,7 +75,10 @@ namespace Forms9Patch.iOS
                     {
                         if (result.IsError)
                         {
-                            using (var alert = Forms9Patch.Alert.Create("Print File Generation Error", result.Result)) { }
+                            using (var alert = Forms9Patch.Alert.Create("Print File Generation Error", result.Result))
+                            {
+                                await alert.WaitForPoppedAsync();
+                            }
                             return;
                         }
                         else

@@ -87,7 +87,15 @@ namespace Forms9Patch
                 return byteArray;
             }
             if (failAction == FailAction.ShowAlert)
-                using (Alert.Create(null, "Cannot access empty file [" + path + "]")) { }
+            {
+                Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    using (var toast = Alert.Create(null, "Cannot access empty file [" + path + "]"))
+                    {
+                        await toast.WaitForPoppedAsync();
+                    }
+                });
+            }
             else if (failAction == FailAction.ThrowException)
                 throw new System.Exception("Cannot access empty file [" + path + "]");
             return null;

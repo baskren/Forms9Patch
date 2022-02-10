@@ -59,7 +59,12 @@ namespace Forms9Patch
                                 if (stream == null)
                                 {
                                     if (failAction == FailAction.ShowAlert)
-                                        using (Toast.Create("Cannot find EmbeddedResource", "Cannot find EmbeddedResource with Id of [" + resourceId + "] in Assembly [" + assembly + "]")) { }
+                                    { 
+                                        using (var toast = Toast.Create("Cannot find EmbeddedResource", "Cannot find EmbeddedResource with Id of [" + resourceId + "] in Assembly [" + assembly + "]"))
+                                        {
+                                            await toast.WaitForPoppedAsync();
+                                        }
+                                    }
                                     else if (failAction == FailAction.ThrowException)
                                         throw new Exception("Cannot find EmbeddedResource with Id of [" + resourceId + "] in Assembly [" + assembly + "]");
                                     return null;

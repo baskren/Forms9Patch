@@ -49,7 +49,15 @@ namespace Forms9Patch.Droid
             catch (Exception e)
             {
                 if (failAction == FailAction.ShowAlert)
-                    using (Forms9Patch.Alert.Create("Print Failure", e.Message)) { }
+                {
+                    Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(async () =>
+                    {
+                        using (var toast = Forms9Patch.Alert.Create("Print Failure", e.Message))
+                        {
+                            await toast.WaitForPoppedAsync();
+                        }
+                    });
+                }
                 else if (failAction == FailAction.ThrowException)
                     throw e;
             }
@@ -86,7 +94,15 @@ namespace Forms9Patch.Droid
             catch (Exception e)
             {
                 if (failAction == FailAction.ShowAlert)
-                    using (Forms9Patch.Alert.Create("Print Failure", e.Message)) { }
+                {
+                    Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(async () =>
+                    {
+                        using (var toast = Forms9Patch.Alert.Create("Print Failure", e.Message))
+                        {
+                            await toast.WaitForPoppedAsync();
+                        }
+                    });
+                }
                 else if (failAction == FailAction.ThrowException)
                     throw e;
             }

@@ -84,7 +84,15 @@ namespace Forms9Patch.Droid
                     if (!retry)
                         Share(mimeItemCollection, target, true);
                     else
-                        using (Forms9Patch.Toast.Create("Sharing Failure", e.Message)) { }
+                    {
+                        Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(async () =>
+                        {
+                            using (var toast = Forms9Patch.Toast.Create("Sharing Failure", e.Message))
+                            {
+                                await toast.WaitForPoppedAsync();
+                            }
+                        });
+                    }
                 }
             }
         }
