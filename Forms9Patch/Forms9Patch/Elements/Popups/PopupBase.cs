@@ -532,9 +532,6 @@ namespace Forms9Patch
         /// <param name="popAfter">Pop after TimeSpan.</param>
         internal PopupBase(VisualElement target = null, TimeSpan popAfter = default)
         {
-
-            P42.Utils.DebugExtensions.AddToCensus(this);
-
             HorizontalOptions = LayoutOptions.Center;
             VerticalOptions = LayoutOptions.Center;
 
@@ -594,8 +591,6 @@ namespace Forms9Patch
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
                 catch (Exception) { }
 #pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
-
-                P42.Utils.DebugExtensions.RemoveFromCensus(this);
             }
         }
 

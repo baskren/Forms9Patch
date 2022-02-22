@@ -1703,30 +1703,6 @@ namespace Forms9Patch
         #endregion
 
 
-        #region Layout
-        /*
-        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
-        {
-            //P42.Utils.DebugExtensions.Message(this, "ENTER widthConstraint:" + widthConstraint + " heightConstraint:" + heightConstraint);
-            var result = base.OnMeasure(widthConstraint, heightConstraint);
-            //P42.Utils.DebugExtensions.Message(this, "EXIT result:" + result);
-            return result;
-        }
-
-        protected override void OnSizeAllocated(double width, double height)
-        {
-            //P42.Utils.DebugExtensions.Message(_label, " size:" + Bounds.Size);
-            base.OnSizeAllocated(width, height);
-        }
-
-        protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
-        {
-            //P42.Utils.DebugExtensions.Message(this, "ENTER widthConstraint:" + widthConstraint + " heightConstraint:" + heightConstraint);
-            var result = base.OnSizeRequest(widthConstraint, heightConstraint);
-            //P42.Utils.DebugExtensions.Message(this, "EXIT result:" + result);
-            return result;
-        }
-        */
 
         /// <summary>
         /// What is the smallest that this button can be rendered (in one line of text)
@@ -1778,13 +1754,11 @@ namespace Forms9Patch
             }
             return new Size(elementWidths, elementHeights);
         }
-        #endregion
 
 
         #region Change Handlers
         private void OnSizeChanged(object sender, EventArgs e)
         {
-            //P42.Utils.DebugExtensions.Message(_label, " size: " + Bounds.Size);
             IsClipped = CheckIsClipped();
         }
 
@@ -1796,7 +1770,6 @@ namespace Forms9Patch
 
         private void OnLabelSizeChanged(object sender, EventArgs e)
         {
-            //P42.Utils.DebugExtensions.Message(_label, " _label.size: " + _label.Bounds.Size);
             IsClipped = CheckIsClipped();
         }
 

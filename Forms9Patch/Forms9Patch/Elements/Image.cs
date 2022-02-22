@@ -558,8 +558,6 @@ namespace Forms9Patch
         /// </summary>
         public Image()
         {
-            P42.Utils.DebugExtensions.AddToCensus(this);
-
             InstanceId = _instances++;
             if (Device.RuntimePlatform != Device.iOS)
             {
@@ -605,8 +603,6 @@ namespace Forms9Patch
         /// <param name="image">Image.</param>
         public Image(Xamarin.Forms.Image image)
         {
-            P42.Utils.DebugExtensions.AddToCensus(this);
-
             InstanceId = _instances++;
             Fill = image.Aspect.ToF9pFill();
             FillOrLayoutSet = !image.HasDefaultAspectAndLayoutOptions();
@@ -641,8 +637,6 @@ namespace Forms9Patch
         /// <param name="image"></param>
         public Image(Image image)
         {
-            P42.Utils.DebugExtensions.AddToCensus(this);
-
             InstanceId = _instances++;
             if (image != null)
             {
@@ -700,8 +694,6 @@ namespace Forms9Patch
                 _f9pImageData?.Dispose();
                 _f9pImageData = null;
                 _sourceRangeLists = null;
-
-                P42.Utils.DebugExtensions.RemoveFromCensus(this);
             }
         }
 

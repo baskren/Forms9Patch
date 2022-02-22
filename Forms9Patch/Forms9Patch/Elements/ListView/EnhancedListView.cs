@@ -92,7 +92,6 @@ namespace Forms9Patch
         /// </summary>
         public EnhancedListView()
         {
-            P42.Utils.DebugExtensions.AddToCensus(this);
         }
 
         /// <summary>
@@ -101,7 +100,6 @@ namespace Forms9Patch
         /// <param name="cachingStrategy"></param>
         public EnhancedListView(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy)
         {
-            P42.Utils.DebugExtensions.AddToCensus(this);
         }
 
         private bool _disposed;
@@ -126,7 +124,6 @@ namespace Forms9Patch
                             disposable.Dispose();
                         }
                 }
-                P42.Utils.DebugExtensions.RemoveFromCensus(this);
             }
         }
 

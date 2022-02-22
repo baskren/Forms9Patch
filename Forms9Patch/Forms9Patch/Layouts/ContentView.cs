@@ -341,7 +341,6 @@ namespace Forms9Patch
         /// </summary>
         public ContentView()
         {
-            P42.Utils.DebugExtensions.AddToCensus(this);
             if (_baseInternalChildren is null)
             {
                 _baseInternalChildren = (ObservableCollection<Element>)P42.Utils.ReflectionExtensions.GetPropertyValue(this, "InternalChildren");
@@ -370,9 +369,6 @@ namespace Forms9Patch
 
                 _fallbackBackgroundImage.Dispose();
                 Content = null;
-
-                P42.Utils.DebugExtensions.RemoveFromCensus(this);
-
             }
         }
 
@@ -516,8 +512,6 @@ namespace Forms9Patch
             if (double.IsInfinity(widthConstraint) || double.IsNaN(widthConstraint))
                 widthConstraint = Forms9Patch.Display.Width;
 
-            //P42.Utils.DebugExtensions.Message(Content, "ENTER (" + widthConstraint + ", " + heightConstraint + ")");
-
             //var result = base.OnSizeRequest(widthConstraint, heightConstraint);
             var availWidth = widthConstraint;
             var availHeight = heightConstraint;
@@ -591,7 +585,6 @@ namespace Forms9Patch
             availWidth -= (/*Margin.HorizontalThickness + Padding.HorizontalThickness + */shadowPadding.HorizontalThickness);
             availHeight -= (/*Margin.VerticalThickness + Padding.VerticalThickness +*/ shadowPadding.VerticalThickness);
             var result = Content.Measure(availWidth, availHeight, MeasureFlags.IncludeMargins);
-            //P42.Utils.DebugExtensions.Message(Content, " Content.Measure [" + result + "]");
             if (LimitMinSizeToBackgroundImageSize && BackgroundImage != null && BackgroundImage.SourceImageSize != Size.Zero)
             {
                 var reqW = Math.Max(result.Request.Width, BackgroundImage.SourceImageSize.Width) + BackgroundImage.Margin.HorizontalThickness;
@@ -599,11 +592,9 @@ namespace Forms9Patch
                 var minW = Math.Max(result.Minimum.Width, BackgroundImage.SourceImageSize.Width) + BackgroundImage.Margin.HorizontalThickness;
                 var minH = Math.Max(result.Minimum.Height, BackgroundImage.SourceImageSize.Height) + BackgroundImage.Margin.VerticalThickness;
                 result = new SizeRequest(new Size(reqW, reqH), new Size(minW, minH));
-                //P42.Utils.DebugExtensions.Message(Content, " BackgroundImageSize [" + result + "]");
             }
             result = new SizeRequest(new Size(result.Request.Width + shadowPadding.HorizontalThickness, result.Request.Height + shadowPadding.VerticalThickness),
                                      new Size(result.Minimum.Width + shadowPadding.HorizontalThickness, result.Minimum.Height + shadowPadding.VerticalThickness));
-            //P42.Utils.DebugExtensions.Message(Content, "EXIT  result+shadow [" + result + "]");
             return result;
         }
 
@@ -616,7 +607,6 @@ namespace Forms9Patch
         /// <param name="height"></param>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            //P42.Utils.DebugExtensions.Message(Content, "ENTER (" + x + "," + y + "," + width + "," + height + ")");
             if (!(this is SegmentButton))
                 LayoutChildIntoBoundingRegion(CurrentBackgroundImage, new Rectangle(0, 0, Width, Height));
             if (Content != null)
@@ -632,7 +622,6 @@ namespace Forms9Patch
                 }
                 LayoutChildIntoBoundingRegion(Content, rect);
             }
-            //P42.Utils.DebugExtensions.Message(Content, "EXIT");
         }
 
 

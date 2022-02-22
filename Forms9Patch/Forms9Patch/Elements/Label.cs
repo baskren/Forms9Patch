@@ -251,21 +251,6 @@ namespace Forms9Patch
         static Label()
         {
             Settings.ConfirmInitialization();
-            /*
-            P42.Utils.DebugExtensions.ConditionFunc = (obj) =>
-            {
-                //if (obj is string str && str.ToLower().Trim().StartsWith("load to grain angle"))
-                //if (obj is string str && str.StartsWith("H3")) return true;
-                //if (obj is string str && str == "1‐¹/₂\u2006in") return true;
-                if (obj is string str && str == "6‐⁷/₈\u2006in") return true;
-                //if (obj is string str && str == "Blue") return true; 
-                if (obj is Label label)
-                    return P42.Utils.DebugExtensions.ConditionFunc(label.HtmlText ?? label.Text);
-                if (obj is IText textObj)
-                    return P42.Utils.DebugExtensions.ConditionFunc(textObj.Text);
-                return false;
-            };
-            */
         }
 
 
@@ -302,11 +287,6 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            //if (propertyName == WidthProperty.PropertyName)
-            //P42.Utils.DebugExtensions.Message(this, "Width: " + Width);
-            //else if (propertyName == HeightProperty.PropertyName)
-            //P42.Utils.DebugExtensions.Message(this, " Height: " + Height);
-
             Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
             {
                 if (propertyName == FittedFontSizeProperty.PropertyName)
@@ -396,11 +376,9 @@ namespace Forms9Patch
         /// <param name="fontSize">Font size.</param>
         public Size SizeForWidthAndFontSize(double width, double fontSize)
         {
-            //P42.Utils.DebugExtensions.Message(this, "ENTER width:" + width + " fontSize:" + fontSize);
             if (width <= 0)
                 return Size.Zero;
             var result = (RendererSizeForWidthAndFontSize?.Invoke(width, fontSize) ?? Size.Zero);
-            //P42.Utils.DebugExtensions.Message(this, "EXIT result:" + result);
             return result;
         }
 
@@ -416,33 +394,14 @@ namespace Forms9Patch
         {
             IsDynamicallySized = true;
             SizeRequest result;
-            //P42.Utils.DebugExtensions.Message(this, "ENTER widthConstraint:" + widthConstraint + " heightConstraint:" + heightConstraint);
-
             // the next three lines are required to get the SegmentedControl in the EmbeddedResourceFontEffectPage to render correctly in iOS
             // but it appears to be over doing it a bit on Android ... worth more evaluation
             if (!_sizeAllocated && Draw != null && Device.RuntimePlatform == Device.iOS)
                 result = Draw.Invoke(widthConstraint, heightConstraint);
             else
                 result = base.GetSizeRequest(widthConstraint, heightConstraint);
-            //P42.Utils.DebugExtensions.Message(this, "EXIT result:" + result);
             return result;
         }
-
-
-        /// <summary>
-        /// Funny you asked!
-        /// </summary>
-        /// <param name="widthConstraint"></param>
-        /// <param name="heightConstraint"></param>
-        /// <returns></returns>
-        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
-        {
-            //P42.Utils.DebugExtensions.Message(this, "ENTER widthConstraint:" + widthConstraint + " heightConstraint:" + heightConstraint);
-            var result = base.OnMeasure(widthConstraint, heightConstraint);
-            //P42.Utils.DebugExtensions.Message(this, "EXIT result:" + result);
-            return result;
-        }
-
 
 
         //bool _sizeAllocated;
@@ -453,38 +412,11 @@ namespace Forms9Patch
         /// <param name="height"></param>
         protected override void OnSizeAllocated(double width, double height)
         {
-            //P42.Utils.DebugExtensions.Message(this, "ENTER width:" + width + " height:" + height);
             base.OnSizeAllocated(width, height);
             _sizeAllocated = true;
             Draw?.Invoke(width, height);
-            //P42.Utils.DebugExtensions.Message(this, "EXIT");
         }
 
-
-#pragma warning disable CS0672 // Member overrides obsolete member
-#pragma warning disable CS0618 // Type or member is obsolete
-        /// <summary>
-        /// Just how big is this going to be?
-        /// </summary>
-        /// <param name="widthConstraint"></param>
-        /// <param name="heightConstraint"></param>
-        /// <returns></returns>
-        protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
-        {
-            //P42.Utils.DebugExtensions.Message(this, "ENTER widthConstraint:" + widthConstraint + " heightConstraint:" + heightConstraint);
-            var result = base.OnSizeRequest(widthConstraint, heightConstraint);
-            //P42.Utils.DebugExtensions.Message(this, "EXIT result:" + result);
-            return result;
-        }
-#pragma warning restore CS0618 // Type or member is obsolete
-#pragma warning restore CS0672 // Member overrides obsolete member
-
-
-        private void OnSizeChanged(object sender, EventArgs e)
-        {
-            //System.Diagnostics.Debug.WriteLine("Label" + P42.Utils.ReflectionExtensions.CallerString() + ": size=[" + Bounds.Size + "]");
-            //P42.Utils.DebugExtensions.Message(this, " size:" + Bounds.Size);
-        }
 
 
         /// <summary>

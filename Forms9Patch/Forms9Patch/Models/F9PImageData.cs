@@ -40,8 +40,6 @@ namespace Forms9Patch
 
         F9PImageData(SKBitmap skBitamp, string key)
         {
-            P42.Utils.DebugExtensions.AddToCensus(this);
-
             RangeLists = skBitamp.PatchRanges();
             if (RangeLists?.PatchesX != null && RangeLists.PatchesX.Count > 0 && RangeLists.PatchesY != null && RangeLists.PatchesY.Count > 0)
             {
@@ -58,8 +56,6 @@ namespace Forms9Patch
 
         F9PImageData(SkiaSharp.Extended.Svg.SKSvg skSvg, string key)
         {
-            P42.Utils.DebugExtensions.AddToCensus(this);
-
             _width = skSvg.CanvasSize.Width;
             _height = skSvg.CanvasSize.Height;
             SKSvg = skSvg;
@@ -188,7 +184,6 @@ namespace Forms9Patch
                 // Don't do this ... other Images may need it!
                 //SKBitmap?.Dispose();
                 SKBitmap = null;
-                P42.Utils.DebugExtensions.RemoveFromCensus(this);
             }
         }
 

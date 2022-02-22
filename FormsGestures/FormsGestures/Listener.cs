@@ -1825,8 +1825,6 @@ namespace FormsGestures
 
         private Listener(VisualElement element)
         {
-            P42.Utils.DebugExtensions.AddToCensus(this);
-
             _element = element;
             var inserted = false;
             for (int i = Listeners.Count - 1; i >= 0; i--)
@@ -1902,7 +1900,6 @@ namespace FormsGestures
                 Disposing?.Invoke(this, EventArgs.Empty);
                 Disposing = null;
 
-                P42.Utils.DebugExtensions.RemoveFromCensus(this);
             }
         }
 

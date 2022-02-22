@@ -653,8 +653,6 @@ namespace Forms9Patch
         /// </summary>
         public SegmentedControl()
         {
-            P42.Utils.DebugExtensions.AddToCensus(this);
-
             IgnoreChildren = false;
             base.Padding = new Thickness(0);
             OutlineRadius = 2;
@@ -693,8 +691,6 @@ namespace Forms9Patch
                     RemoveSegment(segment);
 
                 _segments.Clear();
-
-                P42.Utils.DebugExtensions.RemoveFromCensus(this);
             }
         }
 

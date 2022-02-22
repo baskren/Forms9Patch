@@ -72,8 +72,6 @@ namespace Forms9Patch
         /// </summary>
         public Cell()
         {
-            P42.Utils.DebugExtensions.AddToCensus(this);
-
             InstanceId = _instances++;
             View = BaseCellView;
             BaseCellView.ContentView = new TContent();
@@ -88,9 +86,6 @@ namespace Forms9Patch
             {
                 _disposed = true;
                 BaseCellView.Dispose();
-
-                P42.Utils.DebugExtensions.RemoveFromCensus(this);
-
             }
         }
 
