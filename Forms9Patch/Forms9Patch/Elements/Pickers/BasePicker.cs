@@ -44,6 +44,7 @@ namespace Forms9Patch
         }
         #endregion
 
+        
         #region Appearance
         /// <summary>
         /// The row height property.
@@ -59,7 +60,7 @@ namespace Forms9Patch
             set => SetValue(RowHeightProperty, value);
         }
         #endregion
-
+        
         #endregion
 
 
@@ -94,8 +95,11 @@ namespace Forms9Patch
             Instance = Instances++;
             IsGrouped = false;
             ItemSizingStrategy = ItemSizingStrategy.MeasureFirstItem;
-            ItemTemplate = ItemTemplates;
+            //ItemSizingStrategy = ItemSizingStrategy.MeasureAllItems;
+            //RowHeight = 40;
+            //ItemTemplate = ItemTemplates;
             SelectionMode = SelectionMode.Single;
+            //SelectionMode = ListViewSelectionMode.Single;
             BackgroundColor = Color.Transparent;
 
             Header = _upperPadding;
@@ -140,15 +144,15 @@ namespace Forms9Patch
                 }
                 else if (propertyName == SelectedItemProperty.PropertyName)
                 {
-                    if (!_scrolling && ItemsSource?.Cast<object>().ToList() is List<object> items)
-                        Index = items.IndexOf(SelectedItem);
+                    //if (!_scrolling && ItemsSource?.Cast<object>().ToList() is List<object> items)
+                    //    Index = items.IndexOf(SelectedItem);
                 }
             });
         }
 
         #endregion
 
-
+        /*
         #region Snap to cell
         DateTime _lastScrollPoint = DateTime.MinValue.AddYears(1);
         bool _scrolling;
@@ -175,6 +179,7 @@ namespace Forms9Patch
             }
         }
         #endregion
+        */
     }
 
     /// <summary>

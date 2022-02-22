@@ -172,7 +172,7 @@ namespace Forms9Patch
             public SinglePickerCellContentView()
             {
 
-                var cellHeight = (int)BasePicker.RowHeightProperty.DefaultValue;
+                var cellHeight = 40; // (int)BasePicker.RowHeightProperty.DefaultValue;
                 Padding = new Thickness(5, 1, 5, 1);
                 ColumnDefinitions = new ColumnDefinitionCollection
                 {

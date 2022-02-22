@@ -28,7 +28,8 @@ namespace Forms9Patch
                 var itemsSource = ItemsSource.Cast<object>().ToArray();
                 for (int i = 0; i < itemsSource.Length; i++)
                 {
-                    if (SelectedItems.Contains(itemsSource[i]))
+                    //if (SelectedItems.Contains(itemsSource[i]))
+                    //if (SelectedIndexes.Contains(i))
                         result.Add(i);
                 }
                 return result;
@@ -46,7 +47,7 @@ namespace Forms9Patch
         {
             PlainTextCellType = typeof(MultiPickerCellContentView);
             HtmlTextCellType = typeof(MultiPickerHtmlCellContentView);
-            SelectionMode = SelectionMode.Multiple;
+            //SelectionMode = ListViewSelectionMode.
 
             ItemTemplates.Clear();
             ItemTemplates.Add(typeof(string), PlainTextCellType);
