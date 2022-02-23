@@ -71,6 +71,8 @@ namespace Forms9Patch
         }
         #endregion
 
+        public event EventHandler LongPressed;
+
         #endregion
 
 
@@ -148,6 +150,7 @@ namespace Forms9Patch
         #region Gesture Handlers
         private async void OnListener_LongPressing(object sender, FormsGestures.LongPressEventArgs e)
         {
+            LongPressed?.Invoke(this, new EventArgs());
             using (var targetedMenu = new TargetedMenu(this) { Segments = { new Segment("Copy") } })
             {
                 targetedMenu.IsVisible = true;
