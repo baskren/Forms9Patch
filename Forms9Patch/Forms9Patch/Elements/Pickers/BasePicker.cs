@@ -14,7 +14,7 @@ namespace Forms9Patch
     /// Base picker.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public abstract class BasePicker : Xamarin.Forms.CollectionView
+    public abstract class BasePicker : Xamarin.Forms.ListView //Xamarin.Forms.CollectionView
     {
         #region Properties
 
@@ -93,13 +93,8 @@ namespace Forms9Patch
         internal BasePicker()
         {
             Instance = Instances++;
-            IsGrouped = false;
-            ItemSizingStrategy = ItemSizingStrategy.MeasureFirstItem;
-            //ItemSizingStrategy = ItemSizingStrategy.MeasureAllItems;
-            //RowHeight = 40;
-            //ItemTemplate = ItemTemplates;
-            SelectionMode = SelectionMode.Single;
-            //SelectionMode = ListViewSelectionMode.Single;
+            ItemTemplate = ItemTemplates;
+            SelectionMode = ListViewSelectionMode.Single;
             BackgroundColor = Color.Transparent;
 
             Header = _upperPadding;
@@ -203,7 +198,7 @@ namespace Forms9Patch
             var baseType = type.GetTypeInfo().BaseType;
             if (TemplateForType(baseType) is DataTemplate template1)
                 return template1;
-            return null;
+            return Templates.FirstOrDefault().Value;
         }
 
         DataTemplate TemplateForType(Type type)

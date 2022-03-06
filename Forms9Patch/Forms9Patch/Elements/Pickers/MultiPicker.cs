@@ -116,12 +116,12 @@ namespace Forms9Patch
             /// </summary>
             public MultiPickerCellContentView()
             {
-                ColumnDefinitions = new ColumnDefinitionCollection
-            {
-                new ColumnDefinition { Width = new GridLength(30,GridUnitType.Absolute)},
-                new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star)}
-            };
-                Children.Add(checkLabel, 0, 0);
+                grid.ColumnDefinitions = new ColumnDefinitionCollection
+                {
+                    new ColumnDefinition { Width = new GridLength(30,GridUnitType.Absolute)},
+                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star)}
+                };
+                grid.Children.Add(checkLabel, 0, 0);
             }
             #endregion
 

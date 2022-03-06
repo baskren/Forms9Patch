@@ -131,7 +131,7 @@ namespace Forms9Patch
         /// Contents of a SinglePicker Cell
         /// </summary>
         [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
-        protected class SinglePickerCellContentView : Xamarin.Forms.Grid, IDisposable
+        protected class SinglePickerCellContentView : ViewCell, IDisposable // Xamarin.Forms.Grid, IDisposable
         {
             #region Properties
             /// <summary>
@@ -162,6 +162,17 @@ namespace Forms9Patch
                 TextType = TextType.Text
             };
 
+            protected readonly Grid grid = new Grid
+            {
+                Padding = new Thickness(5, 1, 5, 1),
+                ColumnDefinitions = new ColumnDefinitionCollection
+                {
+                    new ColumnDefinition { Width = new GridLength(0, GridUnitType.Absolute)},
+                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star)}
+                },
+                ColumnSpacing = 0
+            };
+
             #endregion
 
 
@@ -173,19 +184,14 @@ namespace Forms9Patch
             {
 
                 var cellHeight = 40; // (int)BasePicker.RowHeightProperty.DefaultValue;
-                Padding = new Thickness(5, 1, 5, 1);
-                ColumnDefinitions = new ColumnDefinitionCollection
+                grid.RowDefinitions = new RowDefinitionCollection
                 {
-                    new ColumnDefinition { Width = new GridLength(0,GridUnitType.Absolute)},
-                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star)}
+                    new RowDefinition { Height = new GridLength(cellHeight - grid.Padding.VerticalThickness, GridUnitType.Absolute)}
                 };
-                RowDefinitions = new RowDefinitionCollection
-                {
-                    new RowDefinition { Height = new GridLength(cellHeight - Padding.VerticalThickness, GridUnitType.Absolute)}
-                };
-                ColumnSpacing = 0;
 
-                Children.Add(itemLabel, 1, 0);
+                grid.Children.Add(itemLabel, 1, 0);
+
+                View = grid;
             }
 
             private bool _disposed;
@@ -287,7 +293,7 @@ namespace Forms9Patch
 
 
                         // to address the Android fail
-                        BackgroundColor = Color.LightGray;
+                        grid.BackgroundColor = Color.LightGray;
 
                         /* or, if you want to burn some mips
                         if (VisualStateManager.GetVisualStateGroups(this).FirstOrDefault(g=>g.Name == "CommonStates") is VisualStateGroup commonStates)
@@ -302,7 +308,7 @@ namespace Forms9Patch
 
                     }
                     else
-                        BackgroundColor = Color.Transparent;
+                        grid.BackgroundColor = Color.Transparent;
                 }
             }
             #endregion
