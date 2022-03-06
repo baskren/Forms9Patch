@@ -225,7 +225,7 @@ namespace Forms9Patch.UWP
                         break;
                     default:
                     case Xamarin.Forms.TextAlignment.Center:
-                        rect.Y = (int)((finalSize.Height - childHeight) / 2);
+                        rect.Y = (int)((finalSize.Height - childHeight) / 2) - control.FontSize / 10;
                         break;
                     case Xamarin.Forms.TextAlignment.End:
                         rect.Y = finalSize.Height - childHeight;

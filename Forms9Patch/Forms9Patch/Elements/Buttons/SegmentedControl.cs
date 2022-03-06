@@ -653,6 +653,9 @@ namespace Forms9Patch
         /// </summary>
         public SegmentedControl()
         {
+            if (Xamarin.Essentials.DeviceInfo.Platform == Xamarin.Essentials.DevicePlatform.UWP)
+                Padding = new Thickness(2, 0);
+
             IgnoreChildren = false;
             base.Padding = new Thickness(0);
             OutlineRadius = 2;
