@@ -627,12 +627,24 @@ namespace FormsGestures.UWP
 			_panning = false;
 			_pinching = false;
 			_rotating = false;
-			LongPressTimerStart();
 
-			foreach (var listener in _listeners)
+			if (e.Pointer.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse)
 			{
-				if (listener.HandlesDown && UwpDownUpArgs.FireDown(FrameworkElement, e, listener))
-					return;
+				var properties = e.GetCurrentPoint(null).Properties;
+				if (properties.IsLeftButtonPressed)
+				{
+					LongPressTimerStart();
+
+					foreach (var listener in _listeners)
+					{
+						if (listener.HandlesDown && UwpDownUpArgs.FireDown(FrameworkElement, e, listener))
+							return;
+					}
+				}
+				else if (properties.IsRightButtonPressed)
+				{
+					// Right button pressed
+				}
 			}
 		}
 
