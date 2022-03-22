@@ -31,34 +31,38 @@ namespace Forms9Patch.iOS
 
         public bool IsSystemAnimationEnabled => true;
 
-        public async Task AddAsync(PopupPage page)
+        public async Task AddAsync(PopupPage ppage)
         {
-            page.Parent = Application.Current?.MainPage;
-
-            page.DescendantRemoved += HandleChildRemoved;
-
-            if (UIApplication.SharedApplication.KeyWindow.WindowLevel == UIWindowLevel.Normal)
-                UIApplication.SharedApplication.KeyWindow.WindowLevel = -1;
-
-            var renderer = page.GetOrCreateRenderer();
-
-            var window = new PopupWindow();
-
-            if (IsiOS13OrNewer)
-                _windows.Add(window);
-
-            window.BackgroundColor = Color.Transparent.ToUIColor();
-            window.RootViewController = new PopupPlatformRenderer(renderer);
-            window.RootViewController.View.BackgroundColor = Color.Transparent.ToUIColor();
-            window.WindowLevel = UIWindowLevel.Normal;
-            window.MakeKeyAndVisible();
-
-            if (!IsiOS9OrNewer)
+            if (ppage is PopupPage page)
             {
-                window.Frame = new CGRect(0, 0, UIScreen.MainScreen.Bounds.Width, UIScreen.MainScreen.Bounds.Height);
-            }
+                page.Parent = Application.Current?.MainPage;
 
-            await window.RootViewController.PresentViewControllerAsync(renderer.ViewController, false);
+                page.DescendantRemoved += HandleChildRemoved;
+
+                if (UIApplication.SharedApplication.KeyWindow.WindowLevel == UIWindowLevel.Normal)
+                    UIApplication.SharedApplication.KeyWindow.WindowLevel = -1;
+
+                if (page.GetOrCreateRenderer() is IVisualElementRenderer renderer)
+                {
+                    var window = new PopupWindow();
+
+                    if (IsiOS13OrNewer)
+                        _windows.Add(window);
+
+                    window.BackgroundColor = Color.Transparent.ToUIColor();
+                    window.RootViewController = new PopupPlatformRenderer(renderer);
+                    window.RootViewController.View.BackgroundColor = Color.Transparent.ToUIColor();
+                    window.WindowLevel = UIWindowLevel.Normal;
+                    window.MakeKeyAndVisible();
+
+                    if (!IsiOS9OrNewer)
+                    {
+                        window.Frame = new CGRect(0, 0, UIScreen.MainScreen.Bounds.Width, UIScreen.MainScreen.Bounds.Height);
+                    }
+
+                    await window.RootViewController.PresentViewControllerAsync(renderer.ViewController, false);
+                }
+            }
         }
 
         public async Task RemoveAsync(PopupPage page)
