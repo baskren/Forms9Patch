@@ -39,28 +39,32 @@ namespace Forms9Patch.iOS
 
                 page.DescendantRemoved += HandleChildRemoved;
 
-                if (UIApplication.SharedApplication.KeyWindow.WindowLevel == UIWindowLevel.Normal)
-                    UIApplication.SharedApplication.KeyWindow.WindowLevel = -1;
-
-                if (page.GetOrCreateRenderer() is IVisualElementRenderer renderer)
+                if (UIApplication.SharedApplication?.KeyWindow is UIWindow keyWindow)
                 {
-                    var window = new PopupWindow();
+                    if (keyWindow.WindowLevel == UIWindowLevel.Normal)
+                        keyWindow.WindowLevel = -1;
 
-                    if (IsiOS13OrNewer)
-                        _windows.Add(window);
-
-                    window.BackgroundColor = Color.Transparent.ToUIColor();
-                    window.RootViewController = new PopupPlatformRenderer(renderer);
-                    window.RootViewController.View.BackgroundColor = Color.Transparent.ToUIColor();
-                    window.WindowLevel = UIWindowLevel.Normal;
-                    window.MakeKeyAndVisible();
-
-                    if (!IsiOS9OrNewer)
+                    if (page.GetOrCreateRenderer() is IVisualElementRenderer renderer)
                     {
-                        window.Frame = new CGRect(0, 0, UIScreen.MainScreen.Bounds.Width, UIScreen.MainScreen.Bounds.Height);
-                    }
+                        var window = new PopupWindow();
 
-                    await window.RootViewController.PresentViewControllerAsync(renderer.ViewController, false);
+                        if (IsiOS13OrNewer)
+                            _windows.Add(window);
+
+                        window.BackgroundColor = Color.Transparent.ToUIColor();
+                        window.RootViewController = new PopupPlatformRenderer(renderer);
+                        if (window.RootViewController?.View is UIView view)
+                        {
+                            view.BackgroundColor = Color.Transparent.ToUIColor();
+                            window.WindowLevel = UIWindowLevel.Normal;
+                            window.MakeKeyAndVisible();
+
+                            if (!IsiOS9OrNewer)
+                                window.Frame = new CGRect(0, 0, UIScreen.MainScreen.Bounds.Width, UIScreen.MainScreen.Bounds.Height);
+
+                            await window.RootViewController.PresentViewControllerAsync(renderer.ViewController, false);
+                        }
+                    }
                 }
             }
         }
