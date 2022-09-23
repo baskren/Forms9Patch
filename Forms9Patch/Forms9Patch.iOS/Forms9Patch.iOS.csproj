@@ -50,12 +50,6 @@
       <Project>{8913A168-C972-4548-9FE2-B09C05F9851B}</Project>
       <Name>MimeSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\P42.Utils\P42.Utils.iOS\P42.Utils.iOS.csproj">
-      <Project>{530E21BA-A725-4714-8678-74CCA5CDBB38}</Project>
-      <Name>P42.Utils.iOS</Name>
-      <IsAppExtension>false</IsAppExtension>
-      <IsWatchApp>false</IsWatchApp>
-    </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
       <Project>{8A733CD3-9F71-4B04-9DEB-738B292941FC}</Project>
       <Name>P42.Utils</Name>
@@ -63,12 +57,6 @@
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
       <Project>{216141D7-1A9B-4707-A98E-ABCB2A249354}</Project>
       <Name>P42.NumericalMethods</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\FormsGestures.iOS\FormsGestures.iOS.csproj">
-      <Project>{48ADFBE6-0CBA-4317-8371-250A7F0647AE}</Project>
-      <Name>FormsGestures.iOS</Name>
-      <IsAppExtension>false</IsAppExtension>
-      <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
     <ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">
       <Project>{30EA6687-B534-484D-B19A-7B0E0714A7CD}</Project>
@@ -127,7 +115,6 @@
     <Compile Include="Services\RendererResolver.cs" />
     <Compile Include="Effects\EntryNoOutlineEffect.cs" />
   </ItemGroup>
-
   <!-- NuGet Packages-->
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms">
@@ -140,9 +127,7 @@
       <Version>2.88.2</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Popup\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Info.plist" />
   </ItemGroup>
