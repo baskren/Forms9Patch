@@ -116,9 +116,10 @@ namespace Forms9Patch.iOS
                     {
                         Console.WriteLine("Could load but failed to register [" + resourceId + "] font.  Error messages:");
                         Console.WriteLine("\tdescription: " + error.Description);
-                        throw new MissingMemberException("Failed to register [" + resourceId + "] font.  Error messages in console.");
+                        //throw new MissingMemberException("Failed to register [" + resourceId + "] font.  Error messages in console.");
+                        error?.Dispose();
+                        return UIFont.PreferredBody;
                     }
-                    error?.Dispose();
                 }
                 _embeddedResourceFonts.Add(resourceId, font.PostScriptName);
                 return UIFont.FromName(font.PostScriptName, size);
