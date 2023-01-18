@@ -45,7 +45,7 @@
   <!-- NuGet Packages -->
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms">
-      <Version>5.0.0.2515</Version>
+      <Version>5.0.0.2545</Version>
     </PackageReference>
   </ItemGroup>
   <!-- Files -->
@@ -80,6 +80,8 @@
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.iOS\P42.Utils.iOS.csproj">
       <Name>P42.Utils.iOS</Name>
+      <IsAppExtension>false</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

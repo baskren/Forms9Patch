@@ -69,9 +69,13 @@
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.iOS\P42.Utils.iOS.csproj">
       <Name>P42.Utils.iOS</Name>
+      <IsAppExtension>false</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.iOS\FormsGestures.iOS.csproj">
       <Name>FormsGestures.iOS</Name>
+      <IsAppExtension>false</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
   </ItemGroup>
   <!-- Source -->
@@ -125,13 +129,13 @@
   <!-- NuGet Packages-->
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms">
-      <Version>5.0.0.2515</Version>
+      <Version>5.0.0.2545</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.2</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views.Forms">
-      <Version>2.88.2</Version>
+      <Version>2.88.3</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />
