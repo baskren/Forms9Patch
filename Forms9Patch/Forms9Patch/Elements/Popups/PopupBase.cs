@@ -915,7 +915,7 @@ namespace Forms9Patch
         }
 
 
-
+        bool _cancelling;
         /// <summary>
         /// Called to Pop a popup
         /// </summary>
@@ -930,6 +930,10 @@ namespace Forms9Patch
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + ReflectionExtensions.CallerMemberName());
             if (P42.Utils.Environment.IsOnMainThread)
             {
+                if (_cancelling)
+                    return;
+                _cancelling = true;
+
                 Recursion.Enter(GetType(), _id);
 
                 IsVisible = false;
@@ -972,6 +976,7 @@ namespace Forms9Patch
                     while (/*PopupNavigation.Instance.PopupStack.Contains(this) && */!_popAnimationComplete);
 
                 Recursion.Exit(GetType(), _id);
+                _cancelling = false;
             }
             else
 #pragma warning disable RECS0165 // Asynchronous methods should return a Task instead of void
