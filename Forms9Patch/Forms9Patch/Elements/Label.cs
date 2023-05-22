@@ -326,7 +326,8 @@ namespace Forms9Patch
                 // This is crazy!  It appears that UWP is disposing the VisualElementTracker but not unsubscribing to  VisualElementTracker.OnPropertyChanged event handler;
                 try
                 {
-                    base.OnPropertyChanged(propertyName);
+                    if (propertyName != nameof(Text) || !string.IsNullOrWhiteSpace(Text))
+                        base.OnPropertyChanged(propertyName);
                 }
                 catch (Exception) { }
 

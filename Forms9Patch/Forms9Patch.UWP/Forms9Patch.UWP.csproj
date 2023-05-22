@@ -125,7 +125,7 @@
       <Version>6.2.13</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>5.0.0.2545</Version>
+      <Version>5.0.0.2578</Version>
     </PackageReference>
   </ItemGroup>
   <!-- XF Nuget Project references -->
