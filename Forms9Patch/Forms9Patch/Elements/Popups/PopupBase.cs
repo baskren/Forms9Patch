@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using P42.Utils;
 using Forms9Patch.Elements.Popups.Core;
 using System.Collections.Generic;
+using P42.Serilog.QuickLog;
 
 namespace Forms9Patch
 {
@@ -834,7 +835,9 @@ namespace Forms9Patch
             _isPopping = false;
 
             if (IsVisible && !_isPushing)
-                PushAsync().ConfigureAwait(false);
+            {
+                PushAsync().Forget();
+            }
             else
             {
                 _isPopped = true;
