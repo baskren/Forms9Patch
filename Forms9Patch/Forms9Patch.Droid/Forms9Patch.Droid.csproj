@@ -113,7 +113,7 @@
       <Version>13.0.3</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views.Forms">
-      <Version>2.88.3</Version>
+      <Version>2.88.6</Version>
     </PackageReference>
     <!--
     <PackageReference Include="Xamarin.AndroidX.Migration" Version="1.0.8" />
