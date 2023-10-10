@@ -257,9 +257,15 @@ namespace Forms9Patch.UWP
         internal static double LineHeightForFontSize(this FontMetrics metric, double fontSize)
         {
             //return lineHeightToFontSizeRatio * fontSize;
-            var result = metric.CapHeightForFontSize(fontSize) + metric.DescentForFontSize(fontSize);
+            var capHt = metric.CapHeightForFontSize(fontSize);
+            var descent = metric.DescentForFontSize(fontSize);
+
+            var result = capHt + descent;
             if (Double.IsNaN(result))
+            {
                 System.Diagnostics.Debug.WriteLine("");
+                return fontSize;
+            }
             return result;
         }
 
