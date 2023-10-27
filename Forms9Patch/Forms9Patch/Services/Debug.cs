@@ -62,7 +62,20 @@ namespace Forms9Patch
                         info += "\n\nPlatform : " + Xamarin.Essentials.DeviceInfo.Platform;
                         info += "\n\nVersion : " + Xamarin.Essentials.DeviceInfo.Version;
                         info += "\n\nVersionString : " + Xamarin.Essentials.DeviceInfo.VersionString;
-                        info += "\n\nStack Trace: " + (e?.StackTrace ?? Environment.StackTrace);
+
+                        var traceText = e?.StackTrace;
+                        if (string.IsNullOrWhiteSpace(traceText))
+                        {
+                            try
+                            {
+
+                                var stackTrace = new System.Diagnostics.StackTrace();
+                                traceText = stackTrace.ToString();
+                            }
+                            catch (Exception) { }
+                        }
+
+                        info += "\n\nStack Trace: " + traceText;// ?? Environment.StackTrace);
                         try
                         {
                             var message = new EmailMessage
