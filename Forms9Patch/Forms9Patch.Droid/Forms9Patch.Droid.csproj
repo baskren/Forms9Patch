@@ -107,7 +107,7 @@
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.3.1.1" />
     -->
     <PackageReference Include="Xamarin.Forms">
-      <Version>5.0.0.2612</Version>
+      <Version>5.0.0.2622</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.3</Version>
