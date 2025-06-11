@@ -1,3 +1,17 @@
+# OBSOLETE!!!
+
+Forms9Patch is now obsolete.  I highly recommend you take a look at the [Uno Platform](https://platform.uno) framework, as it is everything Xamarin.Forms and MAUI promised to be while at the same time being faster, more stable, and more feature complete.  If you find Uno Platform helpful, then you might want to take a look at the following projects:
+
+- [P42.Utils.Uno](https://github.com/baskren/P42.Utils)
+- [P42.Uno.Controls](https://github.com/baskren/P42.Uno.Controls)
+- [P42.Uno.HtmlExtensions](https://github.com/baskren/P42.Uno.HtmlExtensions)
+- [P42.Uno.HardwareKeys](https://github.com/baskren/P42.Uno.HardwareKeys)
+- [P42.Uno.Xamarin.Essentials](https://github.com/baskren/P42.Uno.Xamarin.Essentials)
+- [P42.Uno.AbstractScanner](https://github.com/baskren/P42.Uno.AbstractScanner) Barcode scanning for iOS Camera, iOS + Honeywell Captova, Android Camera, Zebra Android Devices, and Windows
+- [P42.VirtualKeyboard](https://github.com/baskren/P42.VirtualKeyboard) Dealing with on screen keysboards
+
+
+
 # Forms9Patch ![Alt text](./docs/logo.svg) 
 
 A suite of elements built to simplify image management, text formatting, PNG generation, PDF generation, and printing for your NetStandard, PCL, and Shared Library Xamarin.Forms iOS, Android and UWP applications.
